@@ -1,0 +1,3 @@
+<li id="choose_menu_item_title_{categorieID}" class="choose_menu_item_title_cat">
+    <p>{categorieNom}</p>
+</li>

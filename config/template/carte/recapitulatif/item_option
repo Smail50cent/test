@@ -1,0 +1,1 @@
+<li><div>{label}</div><div><select class="product_spec" id="{idselect}"></select></div></li>

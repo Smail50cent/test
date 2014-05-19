@@ -1,0 +1,1 @@
+<div id="button_ajouter_ingredient_id" onclick="{onclick}" class="btn_ajout_ingredient">{value}</div>

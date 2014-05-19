@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application>
+    <variables>
+        <variable name="serveur.clientaccess.protocol">http</variable>
+        <variable name="serveur.clientaccess.ip">localhost</variable>
+        <variable name="serveur.clientaccess.isRootApplication">false</variable>
+        <variable name="serveur.clientaccess.applicationName">precaisseclient</variable>
+        <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
+        <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
+        <variable name="serveur.clientaccess.serviceGetAllMenus">getAllMenus</variable>
+        <variable name="serveur.clientaccess.serviceGetAllIngredients">getAllIngredients</variable>
+        <variable name="serveur.clientaccess.serviceGetAllProduits">getAllProduits</variable>
+        <variable name="serveur.clientaccess.serviceGetAllSousCategories">getAllSousCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetAllTables">getAllTables</variable>
+        <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
+        <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
+        <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
+        <variable name="serveur.clientaccess.serviceGetProduitById">getProduitById</variable>
+        <variable name="serveur.clientaccess.serviceGetAllModesDeReglement">getAllModeDeReglement</variable>
+        <variable name="serveur.clientaccess.serviceGetModesDeReglementById">getModeDeReglementById</variable>
+        <variable name="serveur.clientaccess.serviceGetProduitByCategorieId">getProduitByCategorieId</variable>
+        <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
+        <variable name="tableNameEntreprise">entreprises</variable>
+        <variable name="tableNameCategorie">categories</variable>
+        <variable name="tableNameIngredient">ingredients</variable>
+        <variable name="tableNameSousCategorie">sousCategories</variable>
+        <variable name="tableNameProduit">produits</variable>
+        <variable name="tableNameMenu">menus</variable>
+        <variable name="tableNameModeDeReglement">modesDeReglement</variable>
+        <variable name="tableNameTable">tables</variable>
+        <variable name="indexedDBDatabaseName">precaisse</variable>
+        <variable name="serveur.clientaccess.serviceGetEntrepriseMaj">getEntepriseMaj</variable>
+        <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
+        <variable name="tableNameEntrepriseMaj.index.entreprise">entreprise</variable>
+    </variables>
+</application>

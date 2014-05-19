@@ -1,0 +1,6 @@
+<li id="choose_menu_item_{produitID}" class="choose_menu_item">
+  <div id="choose_menu_item_{produitID}" class="">
+    <p class="choose_menu_item_titre">{produitNom}</p>
+    <input type="button" id="choose_menu_item_button_{produitID}" onclick="chooseProductInThisMenu({produitID});" value="+"></input>
+  </div>
+</li>

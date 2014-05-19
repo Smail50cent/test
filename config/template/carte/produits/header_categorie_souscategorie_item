@@ -1,0 +1,1 @@
+<li><a onclick="sousCategorieClicked({idcat},{idSousCat});">{text}</a></li>

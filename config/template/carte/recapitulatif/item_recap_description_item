@@ -1,0 +1,1 @@
+<li><a id="{id}" class="btn_ajout" onclick="{onclick}">{aName}</a></li>

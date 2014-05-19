@@ -1,0 +1,14 @@
+
+<div id="dialog_error_id">
+<div class="calque"></div>
+<div class="dialog_error" >
+    <div id="dialog_error_header_id"  class="dialog_error_header">
+        <img onclick="closeErreurDialog('dialog_error_id');" id="dialog_error_header_pict_id" class="dialog_error_header_pict"></img>
+        <p id="dialog_error_header_titre_id" class="dialog_error_header_titre">Erreur</p>
+        <img  id="dialog_error_header_fermer_id" class="dialog_error_header_pict pict_warning"></img>
+    </div>
+    <div id="dialog_error_content_id" class="dialog_error_content">
+        <p id="dialog_error_content_message_id" class="dialog_error_content_message">{message}</p>
+    </div>
+</div>
+</div>

@@ -1,0 +1,13 @@
+<div id="info_prix_id" style="display: none;" class="info_prix">
+    <div id="info_prix_calque_id" class="info_prix_calque"></div>
+    <div id="info_prix_content_id" class="info_prix_content">
+        <div id="info_prix_content_couverts_id" class="info_prix_content_couverts">
+            <div id="info_prix_content_couverts_content_id" class="info_prix_content_couverts_content">{contentCouvert}</div>
+            <div id="info_prix_content_couverts_label_id" class="info_prix_content_couverts_label">{labelCouvert}</div>
+        </div>  
+        <div id="info_prix_content_table_id" class="info_prix_content_table">
+            <div id="info_prix_content_table_label_id" class="info_prix_content_table_label">{labelTable}</div>
+            <div id="info_prix_content_table_content_id" class="info_prix_content_table_content">{contentTable}</div>
+        </div>
+    </div>  
+</div>

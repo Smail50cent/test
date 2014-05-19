@@ -1,0 +1,15 @@
+<li class="produitcat{categorieId}_sscat{sousCategorieId} produit{produitId}" >
+    <div id="content_produit_zone_id" class="content_produit_zone">
+        <div id="content_produit_zone_left_id" class="content_produit_zone_left">
+            <div onclick="lessProduit({produitId},false);" id="content_produit_btn_left_id_{produitId}" class="content_produit_btn_left">-</div>
+        </div> 
+        <div id="content_produit_zone_right_id" class="content_produit_zone_right">
+            <div class="btn_more__left"> 
+                <div onclick="addProduit({produitId},false);" type="button" id="content_produit_btn_right_id_{produitId}"  class="content_produit_btn_right">{quantity}</div>
+            </div>
+        </div>
+        <p id="content_produit_zone_right_prix_id" class="content_produit_zone_right_prix">{produitPrix}</p>  
+        <p onclick="onTitreProduitClicked({produitId});" id="content_produit_titre_id_{produitId}" class="content_produit_titre">{produitNom}</p>       
+        <ul id="content_produit_description_id_{produitId}" style="padding:0;" class="content_produit_description"></ul>
+    </div>
+</li>

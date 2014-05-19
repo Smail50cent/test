@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+    <string key="error.suppression.interdite.ingredient">Vous ne pouvez pas supprimer cet ingrédient.</string>
+    <string key="carte.ticket.total.labelcouvertPlur">Couverts</string>
+    <string key="carte.ticket.total.labelcouvertSing">Couvert</string>
+    <string key="carte.ticket.total.labelpersonne">Par personne</string>
+    <string key="carte.ticket.total.labeltotal">TOTAL</string>
+    <string key="carte.ticket.total.labelvotretable">Votre table</string>
+    <string key="carte.ticket.total.labeltable">Table</string>
+    <string key="carte.categories.label.menus">Menus</string>
+    <string key="info.interdiction.suppression.produit">Vous ne pouvez pas supprimer ce produit.</string>
+    <string key="footer.buttonswitch.recapitulatif">Récapitulatif de votre commande</string>
+    <string key="footer.buttonswitch.lacarte">La carte</string>
+    <string key="info.interdiction.choose.min.one.produit">Vous devez choisir au moins un produit.</string>
+    <string key="info.interdiction.commande.where.paramcommande">Vous devez d'abord rentrer les informations liées votre commande. Vous allez être redirigé.</string>
+    <string key="label.choose.table.option">Faîtes votre choix</string>
+    <string key="label.choose.table.option.genreic">Table</string>
+    <string key="label.choose.table.option.personneSing">personne</string>
+    <string key="label.choose.table.option.personnePlur">personnes</string>
+    <string key="label.menu.validmenu">Valider</string>
+    <string key="label.paramcommande.question.nbcouvers">Combien de couverts pour cette commande ?</string>
+    <string key="label.paramcommande.question.choosetable">A quel table êtes-vous ?</string>
+    <string key="label.footer.recap.valider">Valider commande</string>
+    <string key="label.error.message.returnevt">Vous êtes en cours de commande.</string>
+    <string key="label.info.confirm.valider.commande">êtes-vous sûr de valider cette commande ?</string>
+    <string key="label.recapitulatif.button.ajouter.ingredient">Ajouter ingrédient</string>
+    <string key="label.categorie.souscategorie.voirtout">Voir tout</string>
+    <string key="label.error.indexedDB.acces.inpossible">Impossible d'accèder à la base de données.</string>
+    <string key="label.error.connexion.serveur">Impossible d'accèder au serveur.</string>
+    <string key="label.info.etape.suivante">Etape suivante</string>
+    <string key="label.info.confirm.etape.suivante">Etes-vous sur de vouloir passer à l'étape suivante ?</string>
+    <string key="label.mode.de.reglement.valider">Valider</string>
+    <string key="label.mode.de.reglement.titre1">Vous avez :</string>
+    <string key="label.mode.de.reglement.titre2">à régler. Avec quel mode de paiment ? </string>
+    <string key="label.choix.paiment.parpersonne">Par personnes</string>
+    <string key="label.choix.paiment.divisiontotal">Division du total</string>
+    <string key="label.choix.paiment.button.valider.paiment">Régler</string>
+    <string key="label.choix.paiment.button.valider.all">Régler la séléction</string>
+    <string key="label.selection.total.paiment">Total de votre séléction :</string>
+    <string key="label.select.one.lang">Choisisez votre langue</string>
+    <string key="label.choixPaimentPersonne.titre">Comment souhaitez-vous repartir la facture ?</string>
+    <string key="label.button.produit.non.attr.attribuer">Attribuer</string>
+    <string key="label.button.produit.non.attr.valider.selection">Valider la selection</string>
+</strings>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scripts>
+    <script for="data">database/indexedDBAcces.js</script>
+    <script for="data">database/indexedDBAccesCategorie.js</script>
+    <script for="data">database/indexedDBAccesEntreprise.js</script>
+    <script for="data">database/indexedDBAccesIngredient.js</script>
+    <script for="data">database/indexedDBAccesMenu.js</script>
+    <script for="data">database/indexedDBAccesProduit.js</script>
+    <script for="data">database/indexedDBAccesSousCategorie.js</script>
+    <script for="data">database/indexedDBAccesMenu.js</script>
+    
+    <script for="all" priority="3">index.js</script>
+    <script for="all" priority="1">toolBox.js</script>
+    <script for="all" priority="1">strings.js</script>
+    <script for="all" priority="1">templates.js</script>
+    <script for="all" priority="1">ConnexionFactory.js</script>
+    <script for="all" priority="1">bean.js</script>
+    <script for="all" priority="1">config.js</script>
+    <script for="all" priority="2">connexionLocal.js</script>
+    <script for="all" priority="2">connexionServer.js</script>
+    
+    <script for="lib">lib/jquery-1.2.6.min.js</script>
+    <script for="lib">lib/jquery.js</script>
+
+    <script for="swipe">lib/jquery.event.move.js</script>
+    <script for="swipe">lib/jquery.event.swipe.js</script>
+        
+    <script for="carte">pages/carte.js</script>
+    <script for="paramCommande">pages/paramCommande.js</script>
+    <script for="reglement">pages/reglement.js</script>
+    <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
+</scripts>
+

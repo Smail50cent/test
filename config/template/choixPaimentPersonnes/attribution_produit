@@ -1,0 +1,5 @@
+<li>
+    <input type="checkbox" id="personne_{idpers}"></input>
+    <img src="{srcImg}"></img>
+    <p>{labelPersonne}</p>
+</li>

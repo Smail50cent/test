@@ -1,0 +1,20 @@
+FICHIER = buttonAjouterIngInProduitRecap DESCRIPTION = bouton ajouter un ingrédient dans un item du récapitulatif.
+FICHIER = dialog_message_error DESCRIPTION = boite de dialog permettant d'afficher une erreur. 
+FICHIER = dialog_message_info DESCRIPTION = boite de dialog permettant d'afficher une information. 
+FICHIER = header_categorie_item DESCRIPTION = item de liste des catégories sur le header.
+FICHIER = header_categorie_souscategorie_item  DESCRIPTION = item de liste des catégories sous catégories sur le header.
+FICHIER = header_categorie_souscategorie_liste  DESCRIPTION = liste des sous catégories sur le header.
+FICHIER = item_option  DESCRIPTION = item des combo box dans le récapitulatif lorsque on affiche les options.
+FICHIER = item_recap_description_item  DESCRIPTION = item de la liste des ingrédients dans un produit du récapitulatif.
+FICHIER = recapitulatif_produit_item  DESCRIPTION = Item de la liste des produits dans le récapitulatif.
+FICHIER = test_connexion_icon_img DESCRIPTION = Image permettant d'afficher si nous sommes en mode connecté ou déconnecté.
+FICHIER = footer_where_carte DESCRIPTION = Html du footer quand il est sur la carte.
+FICHIER = footer_where_recapitulatif DESCRIPTION = Html du footer quand il est sur le récapitulatif.
+FICHIER = button_valider_in_menu DESCRIPTION = Bouton valider dans un menu.
+FICHIER = menu_detail_produit_item DESCRIPTION = Item de la liste des produits lors du détail d'un produit.
+FICHIER = menu_detail_produit_item_title DESCRIPTION = Titre d'une catégorie dans le détail d'un menu.
+FICHIER = div_slides DESCRIPTION = Div permettant le slide.
+FICHIER = div_slide DESCRIPTION = Div contenu d'un slide.
+FICHIER = content_slide_menu DESCRIPTION = Contenu de la slide menu.
+FICHIER = item_liste_menus DESCRIPTION = Item de la liste des menus.
+FICHIER = liste_recapitulatif DESCRIPTION = Liste dans le récapitulatif

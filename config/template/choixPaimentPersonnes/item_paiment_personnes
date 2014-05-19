@@ -1,0 +1,9 @@
+<li>
+    <div>
+        <input onchange="calcluerTotalSelection();" type="checkbox" name="" id="name_id_{idPersonne}" />
+        <img src="{src}"></img>
+        <p>{nomPersonne}</p>
+        <p>{prix}</p>
+        <button onclick="reglerParPersonne({idPersonne});">{valueButton}</button>
+    </div>
+</li>

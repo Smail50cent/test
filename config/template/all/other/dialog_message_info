@@ -1,0 +1,13 @@
+<div id="dialog_info_id" class="">
+<div class="calque"></div>
+<div class="dialog_info">
+    <div id="dialog_info_header_id"  class="dialog_info_header">
+        <img id="dialog_info_header_pict_id" class="dialog_info_header_pict"></img>
+        <p id="dialog_info_header_titre_id" class="dialog_info_header_titre">Info</p>
+        <img id="dialog_info_header_pict_id" onclick="hideDialogInfo();" class="dialog_error_header_pict"></img>
+    </div>
+    <div id="dialog_info_content_id" class="dialog_info_content">
+        <p id="dialog_info_content_message_id" class="dialog_info_content_message">{message}</p>
+    </div>
+</div>
+</div>

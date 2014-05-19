@@ -1,0 +1,4 @@
+<input type="button" class="btn_recapitulatif_commande btn_recapitulatif_commande_carte" id="btn_affecter_produit_personne_id" onclick="{onclick};" value="{value}"></input>
+<div id="footer_left_id" class="footer_left"></div>
+<div id="footer_left_id_trgl" class="footer_left_trgl"></div>
+<div id="footer_right_id" class="footer_right"></div>

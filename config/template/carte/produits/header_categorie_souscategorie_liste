@@ -1,0 +1,3 @@
+<ul id="categorie_sous_cat_{id}" class="sous_categorie_cat"
+    style="background-color: black; width: 150px; margin-top: 5px; display: none;">
+</ul>

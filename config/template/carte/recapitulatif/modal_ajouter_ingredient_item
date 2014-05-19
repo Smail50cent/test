@@ -1,0 +1,5 @@
+<li>
+    <div><p>{nomIngredient}<p></div>
+    <div><p>{prixProduit}<p></div>
+    <a onclick="onclickItemAjouterIngredient({produitID},{ingredientId},{qopId});">+</a>
+</li>

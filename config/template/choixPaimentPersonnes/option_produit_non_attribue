@@ -1,0 +1,4 @@
+<li id="produit_non_attribue_{idqop}" >
+    <label>{labelProduit}</label>
+    <button onclick="attribuerToPersonnes({idqop})">{labelButton}</button>
+</li>

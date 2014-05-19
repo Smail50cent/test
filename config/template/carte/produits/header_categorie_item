@@ -1,0 +1,4 @@
+<li>
+    <a class="slide_button button"  onclick="{onclick}" href="{href}">{avalue}</a>
+    {sscat}
+</li>
