@@ -101,6 +101,13 @@ function controller(entreprise) {
             };
             hideLoading();
             break;
+        case "compte":
+            method = function() {
+
+                onLoadCompte();
+            };
+            hideLoading();
+            break;
         case "":
             hideLoading();
             break;
