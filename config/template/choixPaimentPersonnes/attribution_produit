@@ -1,5 +1,5 @@
-<li>
-    <input type="checkbox" id="personne_{idpers}"></input>
-    <img src="{srcImg}"></img>
-    <p>{labelPersonne}</p>
+<li class="attribution_produit_item">
+    <input class="attribution_produit_checkbox" type="checkbox" id="personne_{idpers}"></input>
+    <img  class="attribution_produit_img" src="{srcImg}"></img>
+    <p class="attribution_produit_label">{labelPersonne}</p>
 </li>

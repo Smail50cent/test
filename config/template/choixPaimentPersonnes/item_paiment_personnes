@@ -1,9 +1,9 @@
-<li>
-    <div>
-        <input onchange="calcluerTotalSelection();" type="checkbox" name="" id="name_id_{idPersonne}" />
-        <img src="{src}"></img>
-        <p>{nomPersonne}</p>
-        <p>{prix}</p>
-        <button onclick="reglerParPersonne({idPersonne});">{valueButton}</button>
+<li class="choix_paiment_personne">
+    <div class="choix_paiment_personne_content">
+        <input class="choix_paiment_personne_select" onchange="calcluerTotalSelection();" type="checkbox" name="" id="name_id_{idPersonne}" />
+        <img class="choix_paiment_personne_img" src="{src}"></img>
+        <p class="choix_paiment_personne_nomPersonne">{nomPersonne}</p>
+        <p class="choix_paiment_personne_prix">{prix}</p>
+        <button class="choix_paiment_personne_btn_valider" onclick="reglerParPersonne({idPersonne});">{valueButton}</button>
     </div>
 </li>
