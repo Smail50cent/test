@@ -1,0 +1,19 @@
+
+<div id="socialNetwork_userinfo_id" class ="socialNetwork_userinfo">
+    <div id="socialNetwork_message_id" class="socialNetwork_message"></div>
+
+    <div id="socialNetwork_status_id" class="socialNetwork_status">
+    <img src="img/LoginWithFacebook.png" style="cursor:pointer;" onclick="FacebookLogin()"/>
+    </div>
+    
+    <div id="socialNetwork_profilPicture_id" class="socialNetwork_profilPicture"> </div>
+    <b>Name : </b><p id="socialNetwork_userName_id" class="socialNetwork_userName"></p> 
+    <b>Link : </b><p id="socialNetwork_userLink_id" class="socialNetwork_userLink"></p> 
+    <b>Email : </b><p id="socialNetwork_userEmail_id" class="socialNetwork_userEmail"></p> 
+    <b>UserName : </b><p id="socialNetwork_userUserName_id" class="socialNetwork_userUserName"></p> 
+    <b>Id : </b><p id="socialNetwork_userId_id" class="socialNetwork_userId"></p> 
+    <input type='button' value='Logout' onclick='FacebookLogout();'/>
+
+    <div id="socialNetwork_message_id" class="socialNetwork_message"></div>
+
+</div>
