@@ -12,7 +12,7 @@ class AttributCompte {
     public $id_form;
     public $valeur_champ;
     public $id_compte;
-    public $default;
+    public $defaut;
 
     public function getId_form() {
         return $this->id_form;
@@ -34,8 +34,8 @@ class AttributCompte {
         return $this->id_compte;
     }
 
-    public function getDefault() {
-        return $this->default;
+    public function getDefaut() {
+        return $this->defaut;
     }
 
     public function setId($id) {
@@ -50,8 +50,8 @@ class AttributCompte {
         $this->id_compte = $id_compte;
     }
 
-    public function setDefault($default) {
-        $this->default = $default;
+    public function setDefaut($defaut) {
+        $this->defaut = $defaut;
     }
 
 }
