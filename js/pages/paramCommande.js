@@ -45,12 +45,13 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
-    
+
     var personnes = new Array();
     personnes.push(new Personne(1, "Hamza", "Legdani"));
     personnes.push(new Personne(2, "Nicolas", "Perru"));
     personnes.push(new Personne(3, "Damien", "Chesneau"));
     createCookie("personnes.couverts", JSON.stringify(personnes), 1);
+    createCookie("type.commande", 1, 1);
     hideLoading();
 }
 function loadDataPersonnes(nbMaxPersonnes) {

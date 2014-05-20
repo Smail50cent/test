@@ -270,6 +270,8 @@ function Ticket(id, quantityOfProducts) {
     this.id = id;
     this.quantityOfProducts = quantityOfProducts;
     this.total;
+    this.table;
+    this.type_commande;
     this.setId = function(id) {
         this.id = id;
     };

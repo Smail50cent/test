@@ -1000,10 +1000,17 @@ function validerCommande() {
             }
             prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
         }
+//        table
+//        
+        var numTable = readCookie("paramCommande.numTable");
+        currentTicket.table = numTable;
+        var typecommande = readCookie("type.commande");
+        currentTicket.type_commande = typecommande;
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
-        envoyerTicketServeur(currentTicket);console.log("ok"); 
+        envoyerTicketServeur(currentTicket);
+        console.log("ok");
         createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
 //        getRedirict("./choixPaimentPersonnes.php", null);
     }

@@ -10,6 +10,8 @@ class Ticket {
     public $id;
     public $quantityOfProduct;
     public $total;
+    public $table;
+    public $typeCommande;
     
     public function getId() {
         return $this->id;
@@ -32,6 +34,20 @@ class Ticket {
 
     public function setTotal($total) {
         $this->total = $total;
+    }
+    public function getTable() {
+        return $this->table;
+    }
+
+    public function setTable($table) {
+        $this->table = $table;
+    }
+    public function getTypeCommande() {
+        return $this->typeCommande;
+    }
+
+    public function setTypeCommande($typeCommande) {
+        $this->typeCommande = $typeCommande;
     }
 
 }

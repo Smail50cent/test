@@ -48,8 +48,11 @@ function parseToTicket($toparse){
         $produit->setCategorie($categorie);
         $qop->setProduct($produit);
         $qop->setPersonne($ticketToParse->quantityOfProducts[$i]->personne);
+        
         $qops[$i] = $qop;
-    }
+    } 
+    $ticket->setTable($ticketToParse->table);
+    $ticket->setTypeCommande($ticketToParse->type_commande);
     $ticket->setQuantityOfProduct($qops);
     return $ticket;
 }

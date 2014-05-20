@@ -16,7 +16,7 @@ class TicketServiceImpl implements TicketService {
     }
 
     public function addNewTicket($ticket) {
-        
+        $this->ticketSrv->addCommande($ticket->getTable(), $ticket->getTypeCommande()); 
     }
 
 }

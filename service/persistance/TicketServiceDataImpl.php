@@ -10,8 +10,10 @@ include_once '../logique/entity/Ticket.php';
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 class TicketServiceDataImpl implements TicketServiceData {
-    public function addCommande($ticket) {
-        
+
+    public function addCommande($tableid, $type_commande) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO `commande`(`heurePriseCommande`, `id_table`, `id_type_commande`) VALUES (CURRENT_TIMESTAMP," . $tableid . "," . $type_commande . ")");
     }
 
     public function addIngredients($ingredient) {
