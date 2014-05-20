@@ -9,5 +9,4 @@ interface ProduitService {
     public function getById($id);
     public function getAll();
     public function getProduitByCategorieId($id);
-    public function addNewTicket($ticket);
 }

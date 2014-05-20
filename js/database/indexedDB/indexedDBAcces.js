@@ -81,7 +81,7 @@ myStorage.indexedDB.create = function() {
         delay = delayOnupgradeneeded;
         var db = e.target.result;
         lockedEntreprise = true;
-        setEntityFinishTo(true);
+        setEntityFinishTo(true);console.log("onupgradeneeded");
         entitysFinsh[config.getConfig("tableNameEntreprise")] = true;
         if (db.objectStoreNames.contains(config.getConfig("tableNameEntreprise"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameEntreprise"));
@@ -193,6 +193,7 @@ myStorage.indexedDB.addFistMenus = function() {
 };
 myStorage.indexedDB.addFistEntreprise = function() {
     myStorage.indexedDB.load();
+    console.log(getServicePath("serveur.clientaccess.serviceGetEntreprise"));
     var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
     request.onsuccess = function(e) {
         var db = e.target.result;

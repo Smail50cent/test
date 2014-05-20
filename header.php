@@ -10,7 +10,6 @@
         <link rel="stylesheet" href="./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.min.css" type="text/css">
         <link id="cssToApply" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="./js/lib/jquery.js" ></script>
-        <script type="text/javascript" src="./js/lib/socialNetwork.js" ></script>
         <script type="text/javascript" src="./js/toolBox.js" ></script>  
         <script src="./js/crypt.js"></script>
         <script type="text/javascript" src="./js/templates.js"></script>
