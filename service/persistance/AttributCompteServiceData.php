@@ -10,4 +10,5 @@ interface AttributCompteServiceData {
 
     public function getAll();
     public function getById($id);
+    public function addAll($id_form,$valeur_champ,$default,$id_compte);
 }
