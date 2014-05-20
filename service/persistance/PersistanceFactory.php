@@ -15,6 +15,9 @@ include_once 'MenuServiceDataImpl.php';
 include_once 'OptionServiceDataImpl.php';
 include_once 'TablesServiceDataImpl.php';
 include_once 'ModeDeReglementServiceDataImpl.php';
+include_once 'CompteServiceDataImpl.php';
+include_once 'AttributCompteServiceDataImpl.php';
+include_once 'ParamFormServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -28,6 +31,9 @@ class PersistanceFactory {
     private static $optionSrv = null;
     private static $tableSrv = null;
     private static $modeDeReglement = null;
+    private static $compteSrv = null;
+    private static $attcompteSrv = null;
+    private static $paramformSrv = null;
 
     public static function getModeDeReglementService() {
         if (PersistanceFactory::$modeDeReglement == null) {
@@ -35,7 +41,7 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$modeDeReglement;
     }
-    
+
     public static function getOptionService() {
         if (PersistanceFactory::$optionSrv == null) {
             PersistanceFactory::$optionSrv = new OptionServiceDataImpl();
@@ -49,7 +55,7 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$tableSrv;
     }
-    
+
     public static function getMenuService() {
         if (PersistanceFactory::$menuSrv == null) {
             PersistanceFactory::$menuSrv = new MenuServiceDataImpl();
@@ -97,6 +103,27 @@ class PersistanceFactory {
             PersistanceFactory::$ingredientSrv = new IngredientServiceDataImpl();
         }
         return PersistanceFactory::$ingredientSrv;
+    }
+
+    public static function getCompteService() {
+        if (PersistanceFactory::$compteSrv == null) {
+            PersistanceFactory::$compteSrv = new CompteServiceDataImpl();
+        }
+        return PersistanceFactory::$compteSrv;
+    }
+
+    public static function getAttributCompteService() {
+        if (PersistanceFactory::$attcompteSrv == null) {
+            PersistanceFactory::$attcompteSrv = new AttributCompteServiceDataImpl();
+        }
+        return PersistanceFactory::$attcompteSrv;
+    }
+
+    public static function getParamFormService() {
+        if (PersistanceFactory::$paramformSrv == null) {
+            PersistanceFactory::$paramformSrv = new ParamFormServiceDataImpl();
+        }
+        return PersistanceFactory::$paramformSrv;
     }
 
 }
