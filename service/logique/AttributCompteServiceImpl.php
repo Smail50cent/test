@@ -24,4 +24,8 @@ class AttributCompteServiceImpl implements AttributCompteService{
         $attcompte = $this->attcompteSrv->getById($id);
         return $attcompte;
     }
+    
+    public function addAll() {
+        $attcompte = $this->attcompteSrv->addAll();
+    }
 }
