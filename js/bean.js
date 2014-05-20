@@ -382,3 +382,163 @@ function Personne(id, prenom, nom) {
     this.email;
     this.urlProfileImg;
 }
+function Compte() {
+    this.id;
+    this.login;
+    this.password;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.setLogin = function(login) {
+        this.login = login;
+    };
+    this.setPassword = function(password) {
+        this.password = password;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.getLogin = function() {
+        return this.login;
+    };
+    this.getPassword = function() {
+        return this.password;
+    };
+}
+
+function ParamForm() {
+
+    this.id_form;
+    this.actif;
+    this.discrim;
+    this.code_champ;
+    this.id_label_html;
+    this.type_html;
+    this.class_html;
+    this.style_html;
+    this.ordre;
+    this.id_html;
+
+
+    this.getId_form = function() {
+        return this.id_form;
+    };
+
+    this.getActif = function() {
+        return this.actif;
+    };
+
+    this.getDiscrim = function() {
+        return this.discrim;
+    };
+
+    this.getCode_champ = function() {
+        return this.code_champ;
+    };
+
+    this.getId_label_html = function() {
+        return this.id_label_html;
+    };
+
+    this.getType_html = function() {
+        return this.type_html;
+    };
+
+    this.getClass_html = function() {
+        return this.class_html;
+    };
+
+    this.getStyle_html = function() {
+        return this.style_html;
+    };
+
+    this.getOrdre = function() {
+        return this.ordre;
+    };
+
+    this.getId_html = function() {
+        return this.id_html;
+    };
+
+    this.setId_form = function(id_form) {
+        this.id_form = id_form;
+    };
+
+    this.setActif = function(actif) {
+        this.actif = actif;
+    };
+
+    this.setDiscrim = function(discrim) {
+        this.discrim = discrim;
+    };
+
+    this.setCode_champ = function(code_champ) {
+        this.code_champ = code_champ;
+    };
+
+    this.setId_label_html = function(id_label_html) {
+        this.id_label_html = id_label_html;
+    };
+
+    this.setType_html = function(type_html) {
+        this.type_html = type_html;
+    };
+
+    this.setClass_html = function(class_html) {
+        this.class_html = class_html;
+    };
+
+    this.setStyle_html = function(style_html) {
+        this.style_html = style_html;
+    };
+
+    this.setOrdre = function(ordre) {
+        this.ordre = ordre;
+    };
+
+    this.setId_html = function(id_html) {
+        this.id_html = id_html;
+    };
+
+}
+
+function AttributCompte() {
+
+    this.id;
+    this.code_champ;
+    this.valeur_champ;
+    this.id_compte;
+    this.defaut;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.setCode_champ = function(code_champ) {
+        this.code_champ = code_champ;
+    };
+    this.setValeur_champ = function(valeur_champ) {
+        this.valeur_champ = valeur_champ;
+    };
+    this.setId_compte = function(id_compte) {
+        this.id_compte = id_compte;
+    };
+    this.setDefault = function(defaut) {
+        this.defaut = defaut;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.getCode_champ = function() {
+        return this.code_champ;
+    };
+    this.getValeur_champ = function() {
+        return this.valeur_champ;
+    };
+    this.getId_compte = function() {
+        return this.id_compte;
+    };
+    this.getDefault = function() {
+        return this.defaut;
+    };
+}
