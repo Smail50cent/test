@@ -10,5 +10,12 @@ include_once '../logique/entity/Ticket.php';
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 class TicketServiceDataImpl implements TicketServiceData {
+    public function addCommande($ticket) {
+        
+    }
+
+    public function addIngredients($ingredient) {
+        
+    }
 
 }
