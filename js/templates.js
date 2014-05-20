@@ -131,3 +131,17 @@ function getOptionProduitNonAttribue() {
 function getAttributionProduit() {
     return templates.getTemplate("choixPaimentPersonnes/attribution_produit");
 }
+function getAuthCompte() {
+    return templates.getTemplate("compte/auth_compte_form");
+}
+
+function getButtonInscriFormUser() {
+    return templates.getTemplate("compte/button_inscri_form_user");
+}
+
+function getSocialNetworkForm() {
+    return templates.getTemplate("compte/socialNetwork_compte_form");
+}
+function getImageSocialNetworkUser() {
+    return templates.getTemplate("compte/image_socialNetwork_user");
+}
