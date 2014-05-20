@@ -22,20 +22,20 @@ class ProduitServiceImpl implements ProduitService {
         $apiSrv = PersistanceFactory::getAssociationProduitIngredientService();
         $catsrv = PersistanceFactory::getCategorieService();
         $produit = $this->produitSrv->getById($id);
-            $ings = $apiSrv->getByIdProduit($produit->getId());
-            $ingredients = array();
-            $j = 0;
-            while ($ing = $ings->fetch()) {
-                $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable);
-                $j++;
-            }
-            $categorie = $catsrv->getById($produit->getCategorie());
-            if ($produit->getOptions() != 0 || $produit->getOptions() != "0") {
-                $produit->setOptions($optionSrv->getOptionByIdProduit($produit->getId()));
-            }
-            $produit->setCategorie($categorie);
-            $produit->setIngredients($ingredients);
-        
+        $ings = $apiSrv->getByIdProduit($produit->getId());
+        $ingredients = array();
+        $j = 0;
+        while ($ing = $ings->fetch()) {
+            $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable, $ing->isIngredientSup);
+            $j++;
+        }
+        $categorie = $catsrv->getById($produit->getCategorie());
+        if ($produit->getOptions() != 0 || $produit->getOptions() != "0") {
+            $produit->setOptions($optionSrv->getOptionByIdProduit($produit->getId()));
+        }
+        $produit->setCategorie($categorie);
+        $produit->setIngredients($ingredients);
+
         return $produit;
     }
 
@@ -49,7 +49,7 @@ class ProduitServiceImpl implements ProduitService {
             $ingredients = array();
             $j = 0;
             while ($ing = $ings->fetch()) {
-                $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable);
+                $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable, $ing->isIngredientSup);
                 $j++;
             }
 
@@ -73,7 +73,7 @@ class ProduitServiceImpl implements ProduitService {
             $ingredients = array();
             $j = 0;
             while ($ing = $ings->fetch()) {
-                $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable);
+                $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable, $ing->isIngredientSup);
                 $j++;
             }
 

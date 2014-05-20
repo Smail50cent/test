@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  * Description of AssociationProduitIngredients
  *
@@ -18,13 +12,15 @@ class AssociationProduitIngredients {
     public $surcout;
     public $supprimable;
     public $isAdded;
+    public $isIngredientSup;
 
-    public function __construct($produit, $ingredient, $isAdded, $surcout, $supprimable) {
+    public function __construct($produit, $ingredient, $isAdded, $surcout, $supprimable, $isIngredientSup) {
         $this->produit = $produit;
         $this->ingredient = $ingredient;
         $this->surcout = $surcout;
         $this->supprimable = $supprimable;
         $this->isAdded = $isAdded;
+        $this->isIngredientSup = $isIngredientSup;
     }
 
 }
