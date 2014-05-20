@@ -46,4 +46,7 @@ function ConnexionLocalIndexedDB() {
     this.getModeDeReglementById = function(method, id, param) {
         myStorage.indexedDB.getModeDeReglementById(method, id, param);
     };
+    this.sendTicketToServeur = function(method, ticket, param) {
+        console.log("TO DO");
+    };
 }

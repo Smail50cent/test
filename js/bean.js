@@ -370,8 +370,15 @@ function PrixParPersonne(personne, totalpersonne) {
     this.personne = personne;
     this.totalpersonne = totalpersonne;
 }
-function ProduitNonAttribue(produit,idqop) {
+function ProduitNonAttribue(produit, idqop) {
     this.type = "PRODUITNONATTRIBUE";
     this.produit = produit;
     this.idqop = idqop;
+}
+function Personne(id, prenom, nom) {
+    this.id = id;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.email;
+    this.urlProfileImg;
 }

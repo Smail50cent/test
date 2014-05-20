@@ -40,4 +40,7 @@ function ConnexionLocalWebSQL() {
     this.getAllTables = function (method){
         console.log("to do the impl");
     };
+    this.sendTicketToServeur = function(method, ticket, param) {
+        console.log("TO DO");
+    };
 }

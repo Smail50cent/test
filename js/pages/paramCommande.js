@@ -45,11 +45,7 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
-    function Personne(id, prenom, nom) {
-        this.id = id;
-        this.nom = nom;
-        this.prenom = prenom;
-    }
+    
     var personnes = new Array();
     personnes.push(new Personne(1, "Hamza", "Legdani"));
     personnes.push(new Personne(2, "Nicolas", "Perru"));

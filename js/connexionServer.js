@@ -4,8 +4,9 @@ function ConnexionServer() {
         var ret = null;
         var updated = false;
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
-        if (isLocalBddSuppored() == false || isMozilla() ) {
-            pullNewData(methodToExecuteAfter);console.log("SERVEUR");
+        if (isLocalBddSuppored() == false || isMozilla()) {
+            pullNewData(methodToExecuteAfter);
+            console.log("SERVEUR");
         } else {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
@@ -18,7 +19,7 @@ function ConnexionServer() {
                         updated = true;
                         pullNewData(methodToExecuteAfter);
                         incrementeLevelOfTable(config.getConfig("tableNameEntreprise"));
-                        
+
                     } else {
                         getImplOfConnexionLocal().getEntreprise(methodToExecuteAfter);
                     }
@@ -321,8 +322,27 @@ function ConnexionServer() {
     };
     this.getModeDeReglementById = function(method, id, param) {
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetModesDeReglementById")+"?id="+id,
+            url: getServicePath("serveur.clientaccess.serviceGetModesDeReglementById") + "?id=" + id,
             type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var mdr = new ModeDeReglements(data.id, data.nom, data.url, data.redirictUrl);
+                if (method != null) {
+                    method(mdr, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+//                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.sendTicketToServeur = function(method, ticket, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
+            type: 'GET',
+            data: ticket,
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {

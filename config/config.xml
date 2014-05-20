@@ -33,5 +33,6 @@
         <variable name="serveur.clientaccess.serviceGetEntrepriseMaj">getEntepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj.index.entreprise">entreprise</variable>
+        <variable name="serveur.clientaccess.serviceSetNewTicket">setNewTicket</variable>
     </variables>
 </application>

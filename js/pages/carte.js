@@ -1005,11 +1005,12 @@ function validerCommande() {
         }
         envoyerTicketServeur(currentTicket);
         createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
-        getRedirict("./choixPaimentPersonnes.php", null);
+//        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {
-
+    
+    console.log(ticket);
 }
 function hideDialogInfo() {
     $("#dialog_info_id").remove();
