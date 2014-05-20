@@ -9,7 +9,8 @@ class Ticket {
 
     public $id;
     public $quantityOfProduct;
-
+    public $total;
+    
     public function getId() {
         return $this->id;
     }
@@ -24,6 +25,13 @@ class Ticket {
 
     public function setQuantityOfProduct($quantityOfProduct) {
         $this->quantityOfProduct = $quantityOfProduct;
+    }
+    public function getTotal() {
+        return $this->total;
+    }
+
+    public function setTotal($total) {
+        $this->total = $total;
     }
 
 }

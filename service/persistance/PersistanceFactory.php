@@ -18,6 +18,7 @@ include_once 'ModeDeReglementServiceDataImpl.php';
 include_once 'CompteServiceDataImpl.php';
 include_once 'AttributCompteServiceDataImpl.php';
 include_once 'ParamFormServiceDataImpl.php';
+include_once 'TicketServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -34,6 +35,14 @@ class PersistanceFactory {
     private static $compteSrv = null;
     private static $attcompteSrv = null;
     private static $paramformSrv = null;
+    private static $ticketSrv = null;
+
+    public static function getTicketService() {
+        if (PersistanceFactory::$ticketSrv == null) {
+            PersistanceFactory::$ticketSrv = new TicketServiceDataImpl();
+        }
+        return PersistanceFactory::$ticketSrv;
+    }
 
     public static function getModeDeReglementService() {
         if (PersistanceFactory::$modeDeReglement == null) {

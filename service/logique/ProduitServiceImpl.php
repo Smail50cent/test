@@ -86,5 +86,4 @@ class ProduitServiceImpl implements ProduitService {
         }
         return $produits;
     }
-
 }
