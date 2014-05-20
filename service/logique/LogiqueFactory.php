@@ -13,6 +13,9 @@ include_once 'ProduitServiceImpl.php';
 include_once 'MenuServiceImpl.php';
 include_once 'TableServiceImpl.php';
 include_once 'ModeDeReglementServiceImpl.php';
+include_once 'CompteServiceImpl.php';
+include_once 'AttributCompteServiceImpl.php';
+include_once 'ParamFormServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -24,6 +27,9 @@ class LogiqueFactory {
     private static $menuSrv = null;
     private static $tableSrv = null;
     private static $modeDeReglementSrv = null;
+    private static $compteSrv = null;
+    private static $attcompteSrv = null;
+    private static $paramformSrv = null;
 
     public static function getModeDeReglementService() {
         if (LogiqueFactory::$modeDeReglementSrv == null) {
@@ -31,7 +37,7 @@ class LogiqueFactory {
         }
         return LogiqueFactory::$modeDeReglementSrv;
     }
-    
+
     public static function getTableService() {
         if (LogiqueFactory::$tableSrv == null) {
             LogiqueFactory::$tableSrv = new TableServiceImpl();
@@ -79,6 +85,27 @@ class LogiqueFactory {
             LogiqueFactory::$ingredientSrv = new IngredientServiceImpl();
         }
         return LogiqueFactory::$ingredientSrv;
+    }
+
+    public static function getCompteService() {
+        if (LogiqueFactory::$compteSrv == null) {
+            LogiqueFactory::$compteSrv = new CompteServiceImpl();
+        }
+        return LogiqueFactory::$compteSrv;
+    }
+
+    public static function getAttributCompteService() {
+        if (LogiqueFactory::$attcompteSrv == null) {
+            LogiqueFactory::$attcompteSrv = new AttributCompteServiceImpl();
+        }
+        return LogiqueFactory::$attcompteSrv;
+    }
+
+    public static function getParamFormService() {
+        if (LogiqueFactory::$paramformSrv == null) {
+            LogiqueFactory::$paramformSrv = new ParamFormServiceImpl();
+        }
+        return LogiqueFactory::$paramformSrv;
     }
 
 }
