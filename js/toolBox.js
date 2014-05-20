@@ -10,7 +10,6 @@ function decodeString(coded) {
                 chr;
     }
     return uncoded;
-    0
 }
 function encodeString(uncoded) {
     uncoded = uncoded.toUpperCase().replace(/^\s+|\s+$/g, "");

@@ -1001,16 +1001,16 @@ function validerCommande() {
             prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
         }
         for (var i = 0; i < testsQop.length; i++) {
-            prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product,testsQop[i].id));
+            prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
-        envoyerTicketServeur(currentTicket);
+        envoyerTicketServeur(currentTicket);console.log("ok"); 
         createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
 //        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {
-    
-    console.log(ticket);
+    var connexion = getConnexion();
+    connexion.sendTicketToServeur(null, ticket, null);
 }
 function hideDialogInfo() {
     $("#dialog_info_id").remove();
