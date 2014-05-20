@@ -25,7 +25,7 @@ class AttributCompteServiceImpl implements AttributCompteService{
         return $attcompte;
     }
     
-    public function addAll() {
-        $attcompte = $this->attcompteSrv->addAll();
+    public function addAll($id_form,$valeur_champ,$defaut,$id_compte) {
+        $attcompte = $this->attcompteSrv->addAll($id_form,$valeur_champ,$defaut,$id_compte);
     }
 }
