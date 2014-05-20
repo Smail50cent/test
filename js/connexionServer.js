@@ -439,4 +439,20 @@ function ConnexionServer() {
             }
         });
     };
+
+    this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAttributCompte")+"?id_form=" + id_form + "&valeur_champ=" + valeur_champ + "&defaut=" + defaut + "&id_compte=" + id_compte,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+               consol.log(textStatus);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
