@@ -16,6 +16,7 @@ include_once 'ModeDeReglementServiceImpl.php';
 include_once 'CompteServiceImpl.php';
 include_once 'AttributCompteServiceImpl.php';
 include_once 'ParamFormServiceImpl.php';
+include_once 'TicketServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -30,12 +31,19 @@ class LogiqueFactory {
     private static $compteSrv = null;
     private static $attcompteSrv = null;
     private static $paramformSrv = null;
+    private static $ticketSrv = null;
 
     public static function getModeDeReglementService() {
         if (LogiqueFactory::$modeDeReglementSrv == null) {
             LogiqueFactory::$modeDeReglementSrv = new ModeDeReglementServiceImpl();
         }
         return LogiqueFactory::$modeDeReglementSrv;
+    }
+    public static function getTicketService() {
+        if (LogiqueFactory::$ticketSrv == null) {
+            LogiqueFactory::$ticketSrv = new TicketServiceImpl();
+        }
+        return LogiqueFactory::$ticketSrv;
     }
 
     public static function getTableService() {
