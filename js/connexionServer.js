@@ -359,4 +359,84 @@ function ConnexionServer() {
             }
         });
     };
+    this.getAllComptes = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllComptes"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var comptes = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var compte = new Compte();
+                    compte.setId(data[i].id);
+                    compte.setLogin(data[i].login);
+                    compte.setPassword(data[i].password);
+                    comptes.push(compte);
+                }
+                method(comptes);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllParamForms = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllParamForms"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var paramforms = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var paramform = new ParamForm();
+                    paramform.setId_form(data[i].id_form);
+                    paramform.setActif(data[i].actif);
+                    paramform.setDiscrim(data[i].discrim);
+                    paramform.setCode_champ(data[i].code_champ);
+                    paramform.setId_label_html(data[i].id_label_html);
+                    paramform.setType_html(data[i].type_html);
+                    paramform.setClass_html(data[i].class_html);
+                    paramform.setStyle_html(data[i].style_html);
+                    paramform.setOrdre(data[i].ordre);
+                    paramform.setId_html(data[i].id_html);
+                    paramforms.push(paramform);
+                }
+                method(paramforms);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllAttributsComptes = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var paramforms = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var paramform = new AttributCompte();
+                    paramform.setId(data[i].id);
+                    paramform.setCode_champ(data[i].code_champ);
+                    paramform.setValeur_champ(data[i].valeur_champ);
+                    paramform.setDefault(data[i].default);
+                    paramform.setId_compte(data[i].id_compte);
+                    paramforms.push(paramform);
+                }
+                method(paramforms);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
