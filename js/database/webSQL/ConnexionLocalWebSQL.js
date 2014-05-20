@@ -34,13 +34,22 @@ function ConnexionLocalWebSQL() {
     this.getMenuById = function(method, id, param) {
         console.log("to do the impl");
     };
-    this.updateEntreprise= function (method, entrprise){
+    this.updateEntreprise = function(method, entrprise) {
         console.log("to do the impl");
     };
-    this.getAllTables = function (method){
+    this.getAllTables = function(method) {
         console.log("to do the impl");
     };
     this.sendTicketToServeur = function(method, ticket, param) {
+        console.log("TO DO");
+    };
+    this.getAllComptes = function(method) {
+        console.log("TO DO");
+    };
+    this.getAllParamForms = function(method) {
+        console.log("TO DO");
+    };
+    this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
 }
