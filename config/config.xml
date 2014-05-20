@@ -13,6 +13,9 @@
         <variable name="serveur.clientaccess.serviceGetAllProduits">getAllProduits</variable>
         <variable name="serveur.clientaccess.serviceGetAllSousCategories">getAllSousCategories</variable>
         <variable name="serveur.clientaccess.serviceGetAllTables">getAllTables</variable>
+        <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
+        <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
+        <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
         <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
@@ -20,6 +23,9 @@
         <variable name="serveur.clientaccess.serviceGetAllModesDeReglement">getAllModeDeReglement</variable>
         <variable name="serveur.clientaccess.serviceGetModesDeReglementById">getModeDeReglementById</variable>
         <variable name="serveur.clientaccess.serviceGetProduitByCategorieId">getProduitByCategorieId</variable>
+        <variable name="serveur.clientaccess.serviceGetCompteById">getCompteById</variable>
+        <variable name="serveur.clientaccess.serviceGetParamFormById">getParamFormById</variable>
+        <variable name="serveur.clientaccess.serviceGetAttributCompteById">getAttributCompteById</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>
@@ -29,6 +35,9 @@
         <variable name="tableNameMenu">menus</variable>
         <variable name="tableNameModeDeReglement">modesDeReglement</variable>
         <variable name="tableNameTable">tables</variable>
+        <variable name="tableNameCompte">comptes</variable>
+        <variable name="tableNameParamForm">paramforms</variable>
+        <variable name="tableNameAttributCompte">attributscomptes</variable>
         <variable name="indexedDBDatabaseName">precaisse</variable>
         <variable name="serveur.clientaccess.serviceGetEntrepriseMaj">getEntepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
