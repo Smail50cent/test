@@ -339,19 +339,21 @@ function ConnexionServer() {
         });
     };
     this.sendTicketToServeur = function(method, ticket, param) {
+        var monTicket = JSON.stringify(ticket);
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
-            type: 'GET',
-            data: ticket,
-            dataType: 'json',
+            type: 'POST',
+            data: {ticket: monTicket},
             async: true,
             success: function(data, textStatus, xhr) {
-                var mdr = new ModeDeReglements(data.id, data.nom, data.url, data.redirictUrl);
+                console.log("data=" + data);
                 if (method != null) {
-                    method(mdr, param);
+                    method(param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr);
+                console.log(textStatus);
                 console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }

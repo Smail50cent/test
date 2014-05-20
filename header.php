@@ -26,7 +26,6 @@
         <script type="text/javascript" src="./js/database/indexedDB/indexedDBAcces.js"></script>
         <script type="text/javascript" src="./js/findInLoaded.js" defer ></script>
         <script type="text/javascript" src="./js/ConnexionFactory.js" defer ></script>
-        <script type="text/javascript" src="./js/connexionLocal.js" defer></script>
         <script type="text/javascript" src="./js/connexionServer.js" defer ></script>
         <script type="text/javascript" src="./js/database/indexedDB/ConnexionLocalIndexedDB.js" defer ></script>
         <script type="text/javascript" src="./js/database/webSQL/ConnexionLocalWebSQL.js" defer ></script>
