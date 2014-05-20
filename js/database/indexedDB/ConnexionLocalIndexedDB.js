@@ -49,4 +49,13 @@ function ConnexionLocalIndexedDB() {
     this.sendTicketToServeur = function(method, ticket, param) {
         console.log("TO DO");
     };
+    this.getAllComptes = function(method) {
+        console.log("TO DO");
+    };
+    this.getAllParamForms = function(method) {
+        console.log("TO DO");
+    };
+    this.getAllAttributsComptes = function(method) {
+        console.log("TO DO");
+    };
 }
