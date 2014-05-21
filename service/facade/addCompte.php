@@ -1,7 +1,8 @@
 <?php
 
-if (isset($_GET["password"])) {
+if (isset($_POST["password"])) {
+    echo "post received";
     include_once '../logique/LogiqueFactory.php';
     $attcompteSrv = LogiqueFactory::getCompteService();
-    $attcompteSrv->addAll($_GET["password"]);
+    $attcompteSrv->addAll($_POST["password"]);
 }

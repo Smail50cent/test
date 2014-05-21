@@ -22,6 +22,7 @@
     <script for="lib">lib/jquery-1.2.6.min.js</script>
     <script for="lib">lib/jquery.js</script>
     <script for="lib.social">lib/socialNetwork.js</script>
+    <script for="lib.enEN">lib/all.js</script>
     
     <script for="swipe">lib/jquery.event.move.js</script>
     <script for="swipe">lib/jquery.event.swipe.js</script>
