@@ -24,4 +24,10 @@ class CompteServiceImpl implements CompteService{
         $compte = $this->compteSrv->getById($id);
         return $compte;
     }
+
+    public function addAll($password) {
+        $compte = $this->compteSrv->addAll($password);
+        
+    }
+
 }
