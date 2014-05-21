@@ -11,7 +11,8 @@ class ConnexionBDD {
     private $databaseType = "mysql";
     private $database = "precaisse";
     private $user = "preCaisse";
-    private $password = "alfa"; 
+    private $password = "alfa";
+    public $lastInsertId;
 
     private function getDatabasesInfo() {
         $ret = array();
@@ -44,6 +45,7 @@ class ConnexionBDD {
         $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $selection = $acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
+        $this->lastInsertId = $acces->lastInsertId(); // get Inserted ID of Current Row
         $acces = null;
         return $selection;
     }
@@ -59,7 +61,11 @@ class ConnexionBDD {
     private function executeExec($query) {
         $acces = $this->getConnexion();
         $acces->exec($query);
+        $this->lastInsertId = $acces->lastInsertId(); // get Inserted ID of Current Row
         $acces = null;
+    }
+    public function getLastInsertId() {
+        return $this->lastInsertId;
     }
 
 }
