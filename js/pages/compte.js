@@ -49,7 +49,9 @@ function getHtmlFormInscription() {
 
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
-        FacebookLogin();
+       window.setTimeout(function (){
+           FacebookLogin();
+       },500);       
     });
 }
 function twitterAuth() {
