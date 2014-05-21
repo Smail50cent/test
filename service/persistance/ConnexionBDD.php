@@ -38,6 +38,7 @@ class ConnexionBDD {
         $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $selection = $acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
+        $this->lastInsertId = $acces->lastInsertId(); // get Inserted ID of Current Row
         $acces = null;
         return $selection;
     }
@@ -63,6 +64,9 @@ class ConnexionBDD {
         $id = $acces->lastInsertId();
         $acces = null;
         return $id;
+    }
+    public function getLastInsertId() {
+        return $this->lastInsertId;
     }
 
 }
