@@ -441,13 +441,13 @@ function ConnexionServer() {
     };
 
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
+        console.log("ok");
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddAttributCompte")+"?id_form=" + id_form + "&valeur_champ=" + valeur_champ + "&defaut=" + defaut + "&id_compte=" + id_compte,
+            url: getServicePath("serveur.clientaccess.serviceAddAttributCompte")+"?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
-            dataType: 'json',
             async: true,
-            success: function(data, textStatus, xhr) {
-               consol.log(textStatus);
+            success: function(data) {
+               console.log(data);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
