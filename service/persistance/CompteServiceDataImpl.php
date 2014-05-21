@@ -43,8 +43,7 @@ class CompteServiceDataImpl implements CompteServiceData {
 
     public function addAll($password) {
         $bdd = new ConnexionBDD();
-        $encryptedpasswd = hash("sha256", $password);
-        $bdd->executeGeneric(" INSERT INTO compte(password) VALUES('$encryptedpasswd') ");
+        echo $bdd->executeGeneric(" INSERT INTO compte(password) VALUES('$password') ");
     }
     
 }
