@@ -49,11 +49,11 @@ function getHtmlFormInscription() {
 }
 
 function facebookAuth() {
-    
-    $('#auth_popup_id').dialog("open");
-    var html = getSocialNetworkForm();
-    $('#auth_popup_id').html(html);
-
+    scripts.loadScripts("lib.social", function() {
+        $('#auth_popup_id').dialog("open");
+        var html = getSocialNetworkForm();
+        $('#auth_popup_id').html(html);
+    });
 }
 function twitterAuth() {
 
