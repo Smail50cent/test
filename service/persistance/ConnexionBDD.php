@@ -38,19 +38,11 @@ class ConnexionBDD {
         $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $selection = $acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
-        $this->lastInsertId = $acces->lastInsertId(); // get Inserted ID of Current Row
         $acces = null;
         return $selection;
     }
 
     public function executeGeneric($query) {
-//        if(strpos($query, 'INSERT') == F ){
-//            return $this->executeExec($query);
-//        }else if(strpos($query, 'insert') == TRUE){
-//            return $this->executeExec($query);
-//        }else{
-//            return $this->executeQuery($query);
-//        }
         if (strpos($query, 'INSERT') !== false || strpos($query, 'insert') !== false) {
             return $this->executeExec($query);
         } else {
@@ -64,9 +56,6 @@ class ConnexionBDD {
         $id = $acces->lastInsertId();
         $acces = null;
         return $id;
-    }
-    public function getLastInsertId() {
-        return $this->lastInsertId;
     }
 
 }
