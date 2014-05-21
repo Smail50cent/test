@@ -4,7 +4,7 @@
 
 function onLoadCompte() {
 
-    $('#auth_popup_id').dialog({autoOpen: false, modal: true});
+    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
     var html = getAuthCompte();
     $('#auth_compte_id').html(html);
 }
@@ -37,7 +37,6 @@ function authenCompte() {
 function InscriCompte() {
 
     getHtmlFormInscription();
-
 }
 function getHtmlFormInscription() {
 
@@ -50,9 +49,7 @@ function getHtmlFormInscription() {
 
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
-        $('#auth_popup_id').dialog("open");
-        var html = getSocialNetworkForm();
-        $('#auth_popup_id').html(html);
+        FacebookLogin();
     });
 }
 function twitterAuth() {
