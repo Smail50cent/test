@@ -54,7 +54,9 @@ function getFacebookUserInfo() {
         $('#socialNetwork_userId_id').html(response.id);
         $('#socialNetwork_userEmail_id').html(response.email);
         getFacebookPhoto();
+        console.log("connexion");
         var connexion = getConnexion();
+        
         connexion.addAttributCompte(7,response.email,1,1);
     });
 }
