@@ -7,25 +7,19 @@
  */
 class ConnexionBDD {
 
-    private $ip = "192.168.170.61";
-    private $databaseType = "mysql";
-    private $database = "precaisse";
-    private $user = "preCaisse";
-    private $password = "alfa"; 
-
     private function getDatabasesInfo() {
         $ret = array();
-        $ret[0] = array("192.168.170.61","mysql","precaisse","preCaisse","alfa");
-        $ret[1] = array("192.168.170.61","mysql","bar","preCaisse","alfa");
+        $ret[0] = array("192.168.170.61", "mysql", "precaisse", "preCaisse", "alfa");
+        $ret[1] = array("192.168.170.61", "mysql", "bar", "preCaisse", "alfa");
         return $ret;
     }
 
     private function getCurrentDatabaseInfo() {
-       $t=   $this->getDatabasesInfo();
+        $t = $this->getDatabasesInfo();
         return $t[0];
     }
- 
-    private function getConnexion() {
+
+    public function getConnexion() {
         $databaseInfo = $this->getCurrentDatabaseInfo();
         try {
             $path = $databaseInfo[1] . ':host=' . $databaseInfo[0] . ';dbname=' . $databaseInfo[2];
@@ -49,17 +43,26 @@ class ConnexionBDD {
     }
 
     public function executeGeneric($query) {
-        if (strpos($query, 'INSERT') == TRUE || strpos($query, 'insert') == TRUE) {
+//        if(strpos($query, 'INSERT') == F ){
+//            return $this->executeExec($query);
+//        }else if(strpos($query, 'insert') == TRUE){
+//            return $this->executeExec($query);
+//        }else{
+//            return $this->executeQuery($query);
+//        }
+        if (strpos($query, 'INSERT') !== false || strpos($query, 'insert') !== false) {
             return $this->executeExec($query);
         } else {
             return $this->executeQuery($query);
         }
     }
 
-    private function executeExec($query) {
+    public function executeExec($query) {
         $acces = $this->getConnexion();
         $acces->exec($query);
+        $id = $acces->lastInsertId();
         $acces = null;
+        return $id;
     }
 
 }

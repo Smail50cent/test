@@ -12,7 +12,7 @@ class Ticket {
     public $total;
     public $table;
     public $typeCommande;
-    
+
     public function getId() {
         return $this->id;
     }
@@ -28,6 +28,7 @@ class Ticket {
     public function setQuantityOfProduct($quantityOfProduct) {
         $this->quantityOfProduct = $quantityOfProduct;
     }
+
     public function getTotal() {
         return $this->total;
     }
@@ -35,6 +36,7 @@ class Ticket {
     public function setTotal($total) {
         $this->total = $total;
     }
+
     public function getTable() {
         return $this->table;
     }
@@ -42,6 +44,7 @@ class Ticket {
     public function setTable($table) {
         $this->table = $table;
     }
+
     public function getTypeCommande() {
         return $this->typeCommande;
     }

@@ -16,7 +16,12 @@ class TicketServiceImpl implements TicketService {
     }
 
     public function addNewTicket($ticket) {
-        $this->ticketSrv->addCommande($ticket->getTable(), $ticket->getTypeCommande()); 
+        $id = $this->ticketSrv->addCommande($ticket->getTable(), $ticket->getTypeCommande());
+        $qop = $ticket->getQuantityOfProduct();
+        $max = sizeof($qop);
+        for ($i = 0; $i < count($qop); $i++) {
+             $this->ticketSrv->addPersonneCommande($qop[$i]->getPersonne(), $id, "FALSE");
+        } 
     }
 
 }
