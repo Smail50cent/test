@@ -100,9 +100,10 @@ function verifyEmail(email) {
 
     var connexion = getConnexion();
     connexion.getAllAttributsComptes(verfEmail);
-    
-    found = false;
+
+
     function verfEmail(attcomptes) {
+        found = false;
         for (var i = 0; i < attcomptes.length; i++) {
             if (attcomptes[i].valeur_champ === email) {
                 found = true;
@@ -110,6 +111,5 @@ function verifyEmail(email) {
             }
         }
     }
-    alert(found);
     return found;
 }
