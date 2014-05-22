@@ -370,7 +370,6 @@ function ConnexionServer() {
                 for (var i = 0; i < data.length; i++) {
                     var compte = new Compte();
                     compte.setId(data[i].id);
-                    compte.setLogin(data[i].login);
                     compte.setPassword(data[i].password);
                     comptes.push(compte);
                 }
@@ -419,13 +418,13 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var paramforms = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var paramform = new AttributCompte();
                     paramform.setId(data[i].id);
-                    paramform.setCode_champ(data[i].code_champ);
+                    paramform.setId_form(data[i].id_form);
                     paramform.setValeur_champ(data[i].valeur_champ);
                     paramform.setDefault(data[i].default);
                     paramform.setId_compte(data[i].id_compte);
@@ -441,7 +440,7 @@ function ConnexionServer() {
     };
 
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
-        console.log("ok");
+        console.log("ok GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
@@ -456,14 +455,16 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(password) {
-        console.log("ok");
+    this.addCompte = function(method,password) {
+        console.log("ok POST");
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddCompte") ,
+            url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
+            data : { password : password},
             async: true,
             success: function(data) {
                 console.log("data : " + data);
+                method(data);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
