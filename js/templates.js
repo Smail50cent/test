@@ -138,10 +138,18 @@ function getAuthCompte() {
 function getButtonInscriFormUser() {
     return templates.getTemplate("compte/button_inscri_form_user");
 }
-
 function getSocialNetworkForm() {
     return templates.getTemplate("compte/socialNetwork_compte_form");
 }
 function getImageSocialNetworkUser() {
     return templates.getTemplate("compte/image_socialNetwork_user");
+}
+function getButtonFacebookAuth() {
+    return templates.getTemplate("compte/button_facebook_auth_form_user");
+}
+function getButtonTwitterAuth() {
+    return templates.getTemplate("compte/button_twitter_auth_form_user");
+}
+function getButtonGoogleAuth() {
+    return templates.getTemplate("compte/button_googleplus_auth_form_user");
 }

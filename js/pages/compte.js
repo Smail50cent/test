@@ -7,6 +7,7 @@ function onLoadCompte() {
     $('#auth_popup_id').dialog({autoOpen: true, modal: true});
     var html = getAuthCompte();
     $('#auth_form_id').html(html);
+    socialNetworkButtonAuth();
 }
 function authenCompte() {
 
@@ -49,9 +50,9 @@ function getHtmlFormInscription() {
 
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
-       window.setTimeout(function (){
-           FacebookLogin();
-       },500);       
+        window.setTimeout(function() {
+            FacebookLogin();
+        }, 500);
     });
 }
 function twitterAuth() {
@@ -61,4 +62,20 @@ function twitterAuth() {
 function googleAuth() {
 
 
+}
+
+function socialNetworkButtonAuth() {
+
+    var connexion = getConnexion();
+    connexion.getAllParamApps(enableButton);
+
+    function enableButton(paramapps) {
+        for (var i = 0; i < paramapps.length; i++) {
+            if (paramapps[i].valeur_parametre === true) {
+                alert(paramapps[i].nom_parametre);
+                var html = (paramapps[i].nom_parametre)();
+                $('auth_form_id').append(html);
+            }
+        }
+    }
 }

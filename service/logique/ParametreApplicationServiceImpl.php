@@ -12,7 +12,7 @@ class ParametreApplicationServiceImpl implements ParametreApplicationService{
     private $paramappSrv;
     
     function __construct() {
-        $this->paramappSrv = PersistanceFactory::getCompteService();
+        $this->paramappSrv = PersistanceFactory::getParamAppService();
     }
     
     public function getAll() {

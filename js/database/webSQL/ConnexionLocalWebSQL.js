@@ -52,4 +52,5 @@ function ConnexionLocalWebSQL() {
     this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
+    
 }
