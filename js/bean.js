@@ -386,23 +386,16 @@ function Personne(id, prenom, nom) {
 }
 function Compte() {
     this.id;
-    this.login;
     this.password;
 
     this.setId = function(id) {
         this.id = id;
-    };
-    this.setLogin = function(login) {
-        this.login = login;
     };
     this.setPassword = function(password) {
         this.password = password;
     };
     this.getId = function() {
         return this.id;
-    };
-    this.getLogin = function() {
-        return this.login;
     };
     this.getPassword = function() {
         return this.password;
@@ -508,7 +501,7 @@ function ParamForm() {
 function AttributCompte() {
 
     this.id;
-    this.code_champ;
+    this.id_form;
     this.valeur_champ;
     this.id_compte;
     this.defaut;
@@ -516,8 +509,8 @@ function AttributCompte() {
     this.setId = function(id) {
         this.id = id;
     };
-    this.setCode_champ = function(code_champ) {
-        this.code_champ = code_champ;
+    this.setId_form = function(id_form) {
+        this.id_form = id_form;
     };
     this.setValeur_champ = function(valeur_champ) {
         this.valeur_champ = valeur_champ;
@@ -531,8 +524,8 @@ function AttributCompte() {
     this.getId = function() {
         return this.id;
     };
-    this.getCode_champ = function() {
-        return this.code_champ;
+    this.getId_form = function() {
+        return this.id_form;
     };
     this.getValeur_champ = function() {
         return this.valeur_champ;

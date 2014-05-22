@@ -370,7 +370,6 @@ function ConnexionServer() {
                 for (var i = 0; i < data.length; i++) {
                     var compte = new Compte();
                     compte.setId(data[i].id);
-                    compte.setLogin(data[i].login);
                     compte.setPassword(data[i].password);
                     comptes.push(compte);
                 }
@@ -425,7 +424,7 @@ function ConnexionServer() {
                 for (var i = 0; i < data.length; i++) {
                     var paramform = new AttributCompte();
                     paramform.setId(data[i].id);
-                    paramform.setCode_champ(data[i].code_champ);
+                    paramform.setId_form(data[i].id_form);
                     paramform.setValeur_champ(data[i].valeur_champ);
                     paramform.setDefault(data[i].default);
                     paramform.setId_compte(data[i].id_compte);

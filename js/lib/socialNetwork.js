@@ -48,33 +48,29 @@ function FacebookLogin()
 function getFacebookUserInfo() {
     FB.api('/me', function(response) {
 
-        //$('#socialNetwork_userName_id').html(response.name);
-        //$('#socialNetwork_userLink_id').html(response.link);
-        //$('#socialNetwork_userUserName_id').html(response.username);
-        //$('#socialNetwork_userId_id').html(response.id);
-        //$('#socialNetwork_userEmail_id').html(response.email);
-
         var fullname = response.name;
-        var name = fullname.split(' ');
-        alert(getFacebookPhoto());
-        console.log("connexion");
-        
-        var connexion = getConnexion();
-        connexion.addCompte(InsertFromLastId, "AUFB");
+        var name = fullname.split(' '); // get Last and First Name
 
-        function InsertFromLastId(LastId) {
-            
-            connexion.addAttributCompte(1, response.gender, 1, LastId);
-            connexion.addAttributCompte(2, name[1], 1, LastId);
-            connexion.addAttributCompte(3, name[0], 1, LastId);
-            connexion.addAttributCompte(7, response.email, 1, LastId);
-            connexion.addAttributCompte(8, getFacebookPhoto(), 1, LastId);
+        var connexion = getConnexion();
+
+        if (!verifyEmail(response.email)) {
+            connexion.addCompte(InsertFromLastId, "AUFB");
+
+            function InsertFromLastId(LastId) {
+
+                connexion.addAttributCompte(1, response.gender, 1, LastId);
+                connexion.addAttributCompte(2, name[1], 1, LastId);
+                connexion.addAttributCompte(3, name[0], 1, LastId);
+                connexion.addAttributCompte(7, response.email, 1, LastId);
+                connexion.addAttributCompte(8, getFacebookPhoto(), 1, LastId);
+            }
         }
+
     });
 }
 function getFacebookPhoto()
-{   
-    
+{
+
     FB.api('/me/picture?type=normal', function(response) {
         imgurl = response.data.url;
     });
@@ -100,3 +96,18 @@ function FacebookLogout()
 //    ref.parentNode.insertBefore(js, ref);
 }(document));
 
+function verifyEmail(email) {
+
+    var connexion = getConnexion();
+    connexion.getAllAttributsComptes(verfEmail);
+    
+    found = false;
+    function verfEmail(attcomptes) {
+        for (var i = 0; i < attcomptes.length; i++) {
+            if (attcomptes[i].valeur_champ === email) {
+                found = true;
+            }
+        }
+    }
+    return found;
+}
