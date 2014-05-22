@@ -441,7 +441,7 @@ function ConnexionServer() {
     };
 
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
-        console.log("ok");
+        console.log("ok GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
@@ -456,14 +456,16 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(password) {
-        console.log("ok");
+    this.addCompte = function(method,password) {
+        console.log("ok POST");
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddCompte") ,
+            url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
+            data : { password : password},
             async: true,
             success: function(data) {
                 console.log("data : " + data);
+                method(data);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
