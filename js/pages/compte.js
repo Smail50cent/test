@@ -73,7 +73,7 @@ function socialNetworkButtonAuth() {
 
         for (var i = 0; i < paramapps.length; i++) {
             if (paramapps[i].valeur_parametre) {
-                var html = (paramapps[i].nom_parametre)();
+                var html = paramapps[i].nom_parametre;
                 $('auth_form_id').append(html);
             }
         }

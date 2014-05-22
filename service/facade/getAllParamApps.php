@@ -1,7 +1,7 @@
 <?php
 
 include_once '../logique/LogiqueFactory.php';
-$compteSrv = LogiqueFactory::getParamAppService();
-$result = $compteSrv->getAll();
+$paramappSrv = LogiqueFactory::getParamAppService();
+$result = $paramappSrv->getAll();
 echo json_encode($result);
 
