@@ -651,6 +651,7 @@ function etapeSuivante() {
         html = paramValue(html, "onclick", "validerCommande();");
         $("#footer_id").html(html);
     }
+    console.log(currentTicket);
 }
 /**
  * Print the "racapitulatif"
@@ -740,7 +741,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             function appendItem(ingredient, param) {
                 var itemIngredient = htmlItem;
                 itemIngredient = paramValue(itemIngredient, "aName", ingredient.getNom());
-                itemIngredient = paramValue(itemIngredient, "onclick", "blockIngredient(" + produitID + "," + ingredient.getId() + ");");
+                itemIngredient = paramValue(itemIngredient, "onclick", "blockIngredient(" + produitID + "," + ingredient.getId() + "," + qopid + ");");
                 itemIngredient = paramValue(itemIngredient, "id", "ing_" + ingredient.getId() + "_prod_" + produitID);
                 $("#content_produit_description_recap_id_" + qopid).append(itemIngredient);
             }
@@ -771,7 +772,7 @@ function memoryIng(prod, ing) {
 /*
  * A REFAIRE
  */
-function blockIngredient(produitID, ingID) {
+function blockIngredient(produitID, ingID, qopId) {
     var find = false;
     for (var i = 0; i < memoryIngBlok.length; i++) {
         if (memoryIngBlok[i].prod == produitID && memoryIngBlok[i].ing == ingID) {
@@ -793,13 +794,35 @@ function blockIngredient(produitID, ingID) {
             if (ing.supprimable) {
                 $("#ing_" + ingID + "_prod_" + produitID).css("text-decoration", "line-through");
                 memoryIngBlok.push(new memoryIng(produitID, ingID));
+                for (var i = 0; i < currentTicket.getQuantityOfProduct().length; i++) {
+                    if (parseInt(currentTicket.getQuantityOfProduct()[i].id) == parseInt(qopId)) {
+                        for(var j = 0 ; j< currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length ; j++){
+                            if(currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID){
+                                currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].isAdded = false;
+                                break;
+                            }
+                        }
+                        
+                    }
+                }
             } else {
                 showInfoMessage(strings.getString("error.suppression.interdite.ingredient"));
             }
         }
     } else {
+        for (var i = 0; i < currentTicket.getQuantityOfProduct().length; i++) {
+                    if (parseInt(currentTicket.getQuantityOfProduct()[i].id) == parseInt(qopId)) {
+                        for(var j = 0 ; j< currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length ; j++){
+                            if(currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID){
+                                currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].isAdded = true;
+                                break;
+                            }
+                        }
+                    }
+                }
         $("#ing_" + ingID + "_prod_" + produitID).css("text-decoration", "none");
     }
+
 }
 var idProduitTITRE = "";
 
@@ -847,7 +870,6 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
         if (qops[i].getId() == qopid) {
             for (var j = 0; j < qops[i].product.ids_ingredients.length; j++) {
                 if (qops[i].product.ids_ingredients[j].ingredient == ingredientid) {
-//                    lessQuantityById(qopid);
                     var prod = qops[i].product;
                     if (qops[i].getQuantity() > 1) {
                         var clondedProduct = new Produit();
@@ -870,7 +892,7 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
                         whereIngredientAddedAddOfpItem(qopid, newQop);
                     } else {
                         qops[i].product.ids_ingredients[j].isAdded = true;
-                        var connexion = new ConnexionLocal();
+                        var connexion = getConnexion();
                         var ing = connexion.getIngredientById(addIng, qops[i].product.ids_ingredients[j].ingredient, new Param(produitID, ingredientid));
                         function Param(produitID, ingredientid) {
                             this.produitID = produitID;
@@ -1000,8 +1022,6 @@ function validerCommande() {
             }
             prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
         }
-//        table
-//        
         var numTable = readCookie("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = readCookie("type.commande");
@@ -1010,7 +1030,7 @@ function validerCommande() {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
         envoyerTicketServeur(currentTicket);
-        console.log("ok");
+        console.log(currentTicket);
         createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
 //        getRedirict("./choixPaimentPersonnes.php", null);
     }

@@ -969,7 +969,7 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         right:3%;
     }
 
-    .btn_ajout_ingredient {
+/*     {
         background: linear-gradient(#74A81F, #17722D) repeat scroll 0 0 rgba(0, 0, 0, 0);
         border: 2px solid #FFFFFF;
         border-radius: 10px;
@@ -985,14 +985,14 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         width: 85%;
         z-index: 951;
         background:#74a81f;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d");  Pour IE seulement et mode gradient ? linear 
         background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
         background: -webkit-linear-gradient(#74a81f, #17722d);
         background: -moz-linear-gradient(#74a81f, #17722d);
         background: -o-linear-gradient(#74a81f, #17722d); 
         background: -ms-linear-gradient(#74a81f, #17722d); 
         background: linear-gradient(#74a81f, #17722d);
-    }
+    }*/
     /*-----------------------------------------------------------------PAGE MENU----------------------------------------------------------------------*/
 
     .menu_content {

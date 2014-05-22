@@ -23,4 +23,52 @@ class AssociationProduitIngredients {
         $this->isIngredientSup = $isIngredientSup;
     }
 
+    public function getProduit() {
+        return $this->produit;
+    }
+
+    public function setProduit($produit) {
+        $this->produit = $produit;
+    }
+
+    public function getIngredient() {
+        return $this->ingredient;
+    }
+
+    public function setIngredient($ingredient) {
+        $this->ingredient = $ingredient;
+    }
+
+    public function getSurcout() {
+        return $this->ingredient;
+    }
+
+    public function setSurcout($surcout) {
+        $this->surcout = $surcout;
+    }
+
+    public function isSupprimable() {
+        return $this->supprimable;
+    }
+
+    public function setSupprimable($supprimable) {
+        $this->supprimable = $supprimable;
+    }
+
+    public function isAdded() {
+        return $this->isAdded;
+    }
+
+    public function setIsAdded($isAdded) {
+        $this->isAdded = $isAdded;
+    }
+    
+    public function isIngredientSup() {
+        return $this->isIngredientSup;
+    }
+
+    public function setIngredientSup($isingredientsup) {
+        $this->isIngredientSup= $isingredientsup;
+    }
+
 }

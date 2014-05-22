@@ -7,8 +7,6 @@
  */
 class ConnexionBDD {
 
-    public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "precaisse", "preCaisse", "alfa");
@@ -40,7 +38,7 @@ class ConnexionBDD {
         $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $selection = $acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
-        $acces = null;
+//        $acces = null;
         return $selection;
     }
 
@@ -56,7 +54,7 @@ class ConnexionBDD {
         $acces = $this->getConnexion();
         $acces->exec($query);
         $id = $acces->lastInsertId();
-        $acces = null;
+//        $acces = null;
         return $id;
     }
 
