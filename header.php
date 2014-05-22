@@ -30,6 +30,7 @@
         <script type="text/javascript" src="./js/database/indexedDB/ConnexionLocalIndexedDB.js" defer ></script>
         <script type="text/javascript" src="./js/database/webSQL/ConnexionLocalWebSQL.js" defer ></script>
         <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesMenu.js" defer ></script>
+        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesPendingDatas.js" defer ></script>
         <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesEntreprise.js" defer ></script>
         <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesEntrepriseMaj.js" defer ></script>
         <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesSousCategorie.js" defer ></script>

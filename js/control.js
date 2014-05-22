@@ -215,3 +215,9 @@ function getRedirict(page, args) {
     }
 }
 
+function log(message){
+    var isDev = true;
+    if(isDev){
+        console.log(message);
+    }
+}

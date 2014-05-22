@@ -69,7 +69,6 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
                 var result = e.target.result;
                 if (result != null) {
                     var produit = new Produit();
-                    
                     produit.setNom(result.value.nom);
                     produit.setId(result.value.id);
                     produit.setPrix(parseFloat(result.value.prix));
@@ -77,15 +76,12 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
-                    console.log("bdd");
-                    console.log(result.value);
                     categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
                     produit.setSousCategorie(result.value.souscategorie);
                     produit.setIdsIngredients(result.value.ingredients);
                     produit.setOptions(result.value.options);
                     produitsByCategorie.push(produit);
-                    
                     result.continue();
                 }
             };
