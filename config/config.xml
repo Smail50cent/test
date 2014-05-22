@@ -45,5 +45,8 @@
         <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj.index.entreprise">entreprise</variable>
         <variable name="serveur.clientaccess.serviceSetNewTicket">setNewTicket</variable>
+        <variable name="connexion.rs.facebook.appId">1496340477251539</variable>
+        
+        
     </variables>
 </application>
