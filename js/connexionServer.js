@@ -437,7 +437,6 @@ function ConnexionServer() {
     };
 
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
-        console.log("ok GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
@@ -453,7 +452,6 @@ function ConnexionServer() {
     };
 
     this.addCompte = function(method, password) {
-        console.log("ok POST");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
@@ -461,6 +459,30 @@ function ConnexionServer() {
             async: true,
             success: function(data) {
                 method(data);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllParamApps = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
+            type: 'GET',
+            data: {password: password},
+            async: true,
+            success: function(data) {
+                var paramapps = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var paramapp = new ParamApp();
+                    paramapp.setId(data[i].id);
+                    paramapp.setNom_parametre(data[i].nom_parametre);
+                    paramapp.setValeur_parametre(data[i].valeur_parametre);
+                    paramapps.push(paramapp);
+                }
+                method(paramapps);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);

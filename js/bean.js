@@ -416,10 +416,10 @@ function ParamForm() {
     this.id_html;
     this.file_template_html;
 
-    this.getFile_template_html = function(){
+    this.getFile_template_html = function() {
         return this.file_template_html;
     };
-    
+
     this.getId_form = function() {
         return this.id_form;
     };
@@ -499,8 +499,8 @@ function ParamForm() {
     this.setId_html = function(id_html) {
         this.id_html = id_html;
     };
-    
-    this.setFile_template_html = function (file_template_html){
+
+    this.setFile_template_html = function(file_template_html) {
         this.file_template_html = file_template_html;
     };
 }
@@ -542,5 +542,36 @@ function AttributCompte() {
     };
     this.getDefault = function() {
         return this.defaut;
+    };
+}
+
+function ParamApp() {
+
+    this.id;
+    this.nom_parametre;
+    this.valeur_parametre;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+
+    this.setNom_parametre = function(nom_parametre) {
+        this.nom_parametre = nom_parametre;
+    };
+
+    this.setValeur_parametre = function(valeur_parametre) {
+        this.valeur_parametre = valeur_parametre;
+    };
+
+    this.getId = function() {
+        return this.id;
+    };
+
+    this.getNom_parametre = function() {
+        return this.nom_parametre;
+    };
+
+    this.getValeur_parametre = function() {
+        return this.valeur_parametre;
     };
 }
