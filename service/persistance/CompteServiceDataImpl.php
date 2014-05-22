@@ -45,5 +45,5 @@ class CompteServiceDataImpl implements CompteServiceData {
         $bdd = new ConnexionBDD();
         echo $bdd->executeGeneric(" INSERT INTO compte(password) VALUES('$password') ");
     }
-    
+
 }

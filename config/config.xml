@@ -27,6 +27,7 @@
         <variable name="serveur.clientaccess.serviceGetParamFormById">getParamFormById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteById">getAttributCompteById</variable>
         <variable name="serveur.clientaccess.serviceAddAttributCompte">addAttributCompte</variable>
+        <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>

@@ -56,8 +56,8 @@ function getFacebookUserInfo() {
         getFacebookPhoto();
         console.log("connexion");
         var connexion = getConnexion();
-        
-        connexion.addAttributCompte(7,response.email,1,1);
+        var idcompte = connexion.addCompte("AUFB");
+        connexion.addAttributCompte(7,response.email,1,idcompte);
     });
 }
 function getFacebookPhoto()
@@ -87,7 +87,7 @@ function FacebookLogout()
     js = d.createElement('script');
     js.id = id;
     js.async = true;
-    js.src = "//connect.facebook.net/en_US/all.js";
+    js.src = "./js/lib/all.js";
     ref.parentNode.insertBefore(js, ref);
 }(document));
 
