@@ -11,7 +11,7 @@ class ConnexionBDD {
 
     private function getDatabasesInfo() {
         $ret = array();
-        $ret[0] = array("192.168.170.61", "mysql", "precaisse", "preCaisse", "alfa");
+        $ret[0] = array("192.168.170.61", "mysql", "appcaisse", "preCaisse", "alfa");
         $ret[1] = array("192.168.170.61", "mysql", "bar", "preCaisse", "alfa");
         return $ret;
     }

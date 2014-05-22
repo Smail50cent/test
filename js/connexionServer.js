@@ -346,15 +346,11 @@ function ConnexionServer() {
             data: {ticket: monTicket},
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log("data=" + data);
                 if (method != null) {
                     method(param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(xhr);
-                console.log(textStatus);
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -456,12 +452,12 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(method,password) {
+    this.addCompte = function(method, password) {
         console.log("ok POST");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
-            data : { password : password},
+            data: {password: password},
             async: true,
             success: function(data) {
                 method(data);

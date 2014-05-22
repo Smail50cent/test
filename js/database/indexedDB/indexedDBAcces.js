@@ -52,11 +52,6 @@ function verifyFinish() {
     } else if (entitysFinsh[config.getConfig("tableNameTable")] == true) {
         finish = true;
     }
-//    if (finish) {
-////        showLoading();
-//    } else {
-////        hideLoading(); 
-//    }
     return finish;
 }
 function printOrNorLoading() {
@@ -81,7 +76,7 @@ myStorage.indexedDB.create = function() {
         delay = delayOnupgradeneeded;
         var db = e.target.result;
         lockedEntreprise = true;
-        setEntityFinishTo(true);console.log("onupgradeneeded");
+        setEntityFinishTo(true);
         entitysFinsh[config.getConfig("tableNameEntreprise")] = true;
         if (db.objectStoreNames.contains(config.getConfig("tableNameEntreprise"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameEntreprise"));
@@ -140,6 +135,12 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameModeDeReglement"), {keyPath: "id", autoIncrement: true});
         myStorage.indexedDB.addFistModesDeReglement();
+
+        if (db.objectStoreNames.contains(config.getConfig("tableNamePendingData"))) {
+            var storeReq = db.deleteObjectStore(config.getConfig("tableNamePendingData"));
+        }
+        var store = db.createObjectStore(config.getConfig("tableNamePendingData"), {keyPath: "id", autoIncrement: true});
+
         processOnupgradeneeded = false;
         delay = 0;
     };
