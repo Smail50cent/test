@@ -6,7 +6,7 @@ function onLoadCompte() {
 
     $('#auth_popup_id').dialog({autoOpen: true, modal: true});
     var html = getAuthCompte();
-    $('#auth_compte_id').html(html);
+    $('#auth_form_id').html(html);
 }
 function authenCompte() {
 
@@ -41,9 +41,9 @@ function InscriCompte() {
 function getHtmlFormInscription() {
 
     $.get('./service/generatedForm/InscriptionForm.php', function(data) {
-        $('#auth_compte_id').html(data);
+        $('#auth_form_id').html(data);
         var buttonValider = getButtonInscriFormUser();
-        $('#auth_compte_id').append(buttonValider);
+        $('#auth_form_id').append(buttonValider);
     }, "text");
 }
 

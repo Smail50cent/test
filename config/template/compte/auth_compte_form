@@ -16,4 +16,6 @@
     <div id="button_authen_compte_id" class="button_authen_compte"> <input type="submit" value="Login" onclick="authenCompte()"> </div>
 
     <div id="button_inscri_compte_id" class="button_inscri_compte"> <input type="submit" value="Inscription" onclick="InscriCompte()"> </div>
+
+    <div id="vclient_id" class="vclient"> <input type="text" id="client_name_id" class="client_name"> </div>
 </div>
