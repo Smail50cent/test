@@ -464,7 +464,6 @@ function ConnexionServer() {
             data : { password : password},
             async: true,
             success: function(data) {
-                console.log("data : " + data);
                 method(data);
             },
             error: function(xhr, textStatus, errorThrown) {
