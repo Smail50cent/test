@@ -28,7 +28,15 @@ class TicketServiceImpl implements TicketService {
                 if ($ingredients[$j]->isAdded() == true && $ingredients[$j]->isIngredientSup() == true) {
                     $this->ticketSrv->addAddedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
                 } else if ($ingredients[$j]->isAdded() == false && $ingredients[$j]->isIngredientSup() == false) {
-                   $this->ticketSrv->addDeletedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                    $this->ticketSrv->addDeletedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                }
+            }
+            $options = $qop[$i]->getProduct()->getOptions();
+            for ($j = 0; $j < count($options); $j++) {
+                if (is_array($options[$j]->possibilites)) {
+                    $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites[0]->id, $idCommandeProduit);
+                } else {
+                    $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites, $idCommandeProduit);
                 }
             }
         }

@@ -726,11 +726,26 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             for (var i = 0; i < produit.options.length; i++) {
                 var optionItem = optionHtml;
                 optionItem = paramValue(optionItem, "label", produit.options[i].label);
+                optionItem = paramValue(optionItem, "optionId", produit.options[i].id);
+                optionItem = paramValue(optionItem, "qopId", qopid);
                 optionItem = paramValue(optionItem, "idselect", "option_id_" + produit.options[i].id + "_produit_" + produit.id);
                 description.append(optionItem);
+                var id = "option_id_" + produit.options[i].id + "_produit_" + produit.id;
                 for (var j = 0; j < produit.options[i].possibilites.length; j++) {
-                    $("#option_id_" + produit.options[i].id + "_produit_" + produit.id).append("<option>" + produit.options[i].possibilites[j] + "</option>");
+                    $("#" + id).append("<option value=\"" + produit.options[i].possibilites[j].id + "\">" + produit.options[i].possibilites[j].nom + "</option>");
                 }
+                $("#" + id).change(function() {
+                    var idItemSelected = $(this).val();
+                    var optionId = $(this).attr("optionId");
+                    var qopId = $(this).attr("qopId");
+                    for (var x = 0; x < currentTicket.getQuantityOfProduct().length; x++) {
+                        for (var y = 0; y < currentTicket.getQuantityOfProduct()[x].product.options.length; y++) {
+                            if (parseInt(currentTicket.getQuantityOfProduct()[x].product.options[y].id) == parseInt(optionId)) {
+                                currentTicket.getQuantityOfProduct()[x].product.options[y].possibilites = idItemSelected;
+                            }
+                        }
+                    }
+                });
             }
             for (var i = 0; i < inngredientArray.length; i++) {
                 if (inngredientArray[i].isAdded == true) {
@@ -796,13 +811,13 @@ function blockIngredient(produitID, ingID, qopId) {
                 memoryIngBlok.push(new memoryIng(produitID, ingID));
                 for (var i = 0; i < currentTicket.getQuantityOfProduct().length; i++) {
                     if (parseInt(currentTicket.getQuantityOfProduct()[i].id) == parseInt(qopId)) {
-                        for(var j = 0 ; j< currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length ; j++){
-                            if(currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID){
+                        for (var j = 0; j < currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length; j++) {
+                            if (currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID) {
                                 currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].isAdded = false;
                                 break;
                             }
                         }
-                        
+
                     }
                 }
             } else {
@@ -811,15 +826,15 @@ function blockIngredient(produitID, ingID, qopId) {
         }
     } else {
         for (var i = 0; i < currentTicket.getQuantityOfProduct().length; i++) {
-                    if (parseInt(currentTicket.getQuantityOfProduct()[i].id) == parseInt(qopId)) {
-                        for(var j = 0 ; j< currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length ; j++){
-                            if(currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID){
-                                currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].isAdded = true;
-                                break;
-                            }
-                        }
+            if (parseInt(currentTicket.getQuantityOfProduct()[i].id) == parseInt(qopId)) {
+                for (var j = 0; j < currentTicket.getQuantityOfProduct()[i].product.ids_ingredients.length; j++) {
+                    if (currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].ingredient == ingID) {
+                        currentTicket.getQuantityOfProduct()[i].product.ids_ingredients[j].isAdded = true;
+                        break;
                     }
                 }
+            }
+        }
         $("#ing_" + ingID + "_prod_" + produitID).css("text-decoration", "none");
     }
 

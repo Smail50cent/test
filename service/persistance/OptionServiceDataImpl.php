@@ -8,6 +8,7 @@
 include_once 'OptionServiceData.php';
 include_once 'ConnexionBDD.php';
 include_once '../logique/entity/Option.php';
+include_once '../logique/entity/OptionPossibilite.php';
 
 class OptionServiceDataImpl implements OptionServiceData {
 
@@ -45,7 +46,10 @@ class OptionServiceDataImpl implements OptionServiceData {
         $ret = array();
         $i = 0;
         while ($ligne = $retour->fetch()) {
-            $ret[$i] = $ligne->nom;
+            $opPos = new OptionPossibilite();
+            $opPos->setId($ligne->id);
+            $opPos->setNom($ligne->nom);
+            $ret[$i] = $opPos;
             $i++;
         }
         return $ret;
