@@ -418,7 +418,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var paramforms = new Array();
                 for (var i = 0; i < data.length; i++) {

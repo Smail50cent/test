@@ -106,8 +106,10 @@ function verifyEmail(email) {
         for (var i = 0; i < attcomptes.length; i++) {
             if (attcomptes[i].valeur_champ === email) {
                 found = true;
+                break;
             }
         }
     }
+    alert(found);
     return found;
 }
