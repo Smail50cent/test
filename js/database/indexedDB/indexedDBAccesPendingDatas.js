@@ -53,8 +53,8 @@ myStorage.indexedDB.getAllPendingsDatas = function(method, param) {
             result.continue();
         };
         trans.oncomplete = function(e) {
-            if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
-                methodToExecuteAfter(pendingsData, param);
+            if (method != null) {//Nous avons besoin de l'executer.
+                method(pendingsData, param);
             }
             db.close();
         };

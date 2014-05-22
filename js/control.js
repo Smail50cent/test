@@ -24,6 +24,7 @@ $(document).ready(function() {// thread connexion
                 if(isLocalBddSuppored()){
                     var connexionLoc = getImplOfConnexionLocal();
                     connexionLoc.getAllPendingMethods(function (pending){
+                        alert("false");
                         alert("ok len="+pending.length);
                     },null);
                 }
