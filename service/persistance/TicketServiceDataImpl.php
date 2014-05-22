@@ -16,13 +16,23 @@ class TicketServiceDataImpl implements TicketServiceData {
         return $bdd->executeGeneric("INSERT INTO `commande`(`heurePriseCommande`, `id_table`, `id_type_commande`) VALUES (CURRENT_TIMESTAMP," . $tableid . "," . $type_commande . ")");
     }
 
-    public function addIngredients($ingredient) {
-        
+    public function addAddedIngredients($ingredient, $idCommandeProduit) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO `commande_produits_ingredients`(`id_ingredient`, `added`, `id_commande_produit`) VALUES (" . $ingredient . ",1," . $idCommandeProduit . ")");
+    }
+    public function addDeletedIngredients($ingredient, $idCommandeProduit) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO `commande_produits_ingredients`(`id_ingredient`, `deleted`, `id_commande_produit`) VALUES (" . $ingredient . ",1," . $idCommandeProduit . ")");
     }
 
     public function addPersonneCommande($personneId, $idCommande, $havePay) {
         $bdd = new ConnexionBDD();
-        print_r($bdd->executeGeneric("INSERT INTO `commande_personne`(`id_commande`, `id_compte`, `heurePriseCommande`) VALUES (".$idCommande.",".$personneId.",CURRENT_TIMESTAMP)"));
+        $bdd->executeGeneric("INSERT INTO `commande_personne`(`id_commande`, `id_compte`, `heurePriseCommande`) VALUES (" . $idCommande . "," . $personneId . ",CURRENT_TIMESTAMP)");
+    }
+
+    public function addCommandeProduit($produit, $idCommande) {
+        $bdd = new ConnexionBDD();
+        return $bdd->executeGeneric("INSERT INTO `commande_produits`(`id_commande`, `id_produit`,`heure_envoie`) VALUES (" . $idCommande . "," . $produit->getId() . ",0)");
     }
 
 }

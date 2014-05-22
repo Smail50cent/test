@@ -20,13 +20,21 @@ class TicketServiceImpl implements TicketService {
         $personnesInTiciket = array();
         $id = $this->ticketSrv->addCommande($ticket->getTable(), $ticket->getTypeCommande());
         $qop = $ticket->getQuantityOfProduct();
-
         for ($i = 0; $i < count($qop); $i++) {
-            $this->setPersonneInTicketToBdd($qop[$i]->getPersonne(),$id);
+            $this->setPersonneInTicketToBdd($qop[$i]->getPersonne(), $id);
+            $idCommandeProduit = $this->ticketSrv->addCommandeProduit($qop[$i]->getProduct(), $id);
+            $ingredients = $qop[$i]->getProduct()->getIngredients();
+            for ($j = 0; $j < count($ingredients); $j++) {
+                if ($ingredients[$j]->isAdded() == true && $ingredients[$j]->isIngredientSup() == true) {
+                    $this->ticketSrv->addAddedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                } else if ($ingredients[$j]->isAdded() == false && $ingredients[$j]->isIngredientSup() == false) {
+                   $this->ticketSrv->addDeletedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                }
+            }
         }
     }
 
-    private function setPersonneInTicketToBdd($personne,$id) {
+    private function setPersonneInTicketToBdd($personne, $id) {
         $find = false;
         $coutPersonnes = count($this->personnesInTiciket);
         if ($coutPersonnes == 0) {
