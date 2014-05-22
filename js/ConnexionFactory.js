@@ -1,6 +1,6 @@
 function getConnexion() {
-    if (isConnected) {
-//    if (false) {
+//    if (isConnected) {
+    if (false) {
         return getConnexionServeur();
     } else {
         if (isLocalBddSuppored()) {
