@@ -1045,9 +1045,8 @@ function validerCommande() {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
         envoyerTicketServeur(currentTicket);
-        console.log(currentTicket);
         createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
-//        getRedirict("./choixPaimentPersonnes.php", null);
+        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {
