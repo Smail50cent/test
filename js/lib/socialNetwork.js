@@ -55,25 +55,24 @@ function getFacebookUserInfo() {
 
         if (!verifyEmail(response.email)) {
             connexion.addCompte(InsertFromLastId, "AUFB");
-
             function InsertFromLastId(LastId) {
-
                 connexion.addAttributCompte(1, response.gender, 1, LastId);
                 connexion.addAttributCompte(2, name[1], 1, LastId);
                 connexion.addAttributCompte(3, name[0], 1, LastId);
                 connexion.addAttributCompte(7, response.email, 1, LastId);
-                connexion.addAttributCompte(8, getFacebookPhoto(), 1, LastId);
+                FB.api('/me/picture?type=normal', function(response) {
+                    connexion.addAttributCompte(8, response.data.url, 1, LastId);
+                });
             }
         }
 
     });
+
 }
 function getFacebookPhoto()
 {
     var imgurl;
-    FB.api('/me/picture?type=normal', function(response) {
-        imgurl = response.data.url;
-    });
+
     return imgurl;
 }
 function FacebookLogout()
