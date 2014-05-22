@@ -407,15 +407,19 @@ function ParamForm() {
     this.id_form;
     this.actif;
     this.discrim;
-    this.code_champ;
+    this.label;
     this.id_label_html;
     this.type_html;
     this.class_html;
     this.style_html;
     this.ordre;
     this.id_html;
+    this.file_template_html;
 
-
+    this.getFile_template_html = function(){
+        return this.file_template_html;
+    };
+    
     this.getId_form = function() {
         return this.id_form;
     };
@@ -428,8 +432,8 @@ function ParamForm() {
         return this.discrim;
     };
 
-    this.getCode_champ = function() {
-        return this.code_champ;
+    this.getLabel = function() {
+        return this.label;
     };
 
     this.getId_label_html = function() {
@@ -468,8 +472,8 @@ function ParamForm() {
         this.discrim = discrim;
     };
 
-    this.setCode_champ = function(code_champ) {
-        this.code_champ = code_champ;
+    this.setLabel = function(label) {
+        this.label = label;
     };
 
     this.setId_label_html = function(id_label_html) {
@@ -495,7 +499,10 @@ function ParamForm() {
     this.setId_html = function(id_html) {
         this.id_html = id_html;
     };
-
+    
+    this.setFile_template_html = function (file_template_html){
+        this.file_template_html = file_template_html;
+    };
 }
 
 function AttributCompte() {

@@ -1,5 +1,6 @@
 
 window.fbAsyncInit = function() {
+    
     var appId = parseInt(config.getConfig("connexion.rs.facebook.appId"));
     FB.init({
         appId: appId, // App ID
@@ -8,7 +9,6 @@ window.fbAsyncInit = function() {
         cookie: true, // enable cookies to allow the server to access the session
         xfbml: true  // parse XFBML
     });
-
 
     FB.Event.subscribe('auth.authResponseChange', function(response)
     {
@@ -61,6 +61,7 @@ function getFacebookUserInfo() {
                 connexion.addAttributCompte(2, name[1], 1, LastId);
                 connexion.addAttributCompte(3, name[0], 1, LastId);
                 connexion.addAttributCompte(7, response.email, 1, LastId);
+                // get Facebook profil picture
                 FB.api('/me/picture?type=normal', function(response) {
                     connexion.addAttributCompte(8, response.data.url, 1, LastId);
                 });
@@ -70,12 +71,7 @@ function getFacebookUserInfo() {
     });
 
 }
-function getFacebookPhoto()
-{
-    var imgurl;
 
-    return imgurl;
-}
 function FacebookLogout()
 {
     FB.logout(function() {
@@ -83,24 +79,10 @@ function FacebookLogout()
     });
 }
 
-// Load the SDK asynchronously
-(function(d) {
-//    var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-//    if (d.getElementById(id)) {
-//        return;
-//    }
-//    js = d.createElement('script');
-//    js.id = id;
-//    js.async = true;
-//    js.src = "//connect.facebook.net/en_US/all.js";
-//    ref.parentNode.insertBefore(js, ref);
-}(document));
-
 function verifyEmail(email) {
 
     var connexion = getConnexion();
     connexion.getAllAttributsComptes(verfEmail);
-
 
     function verfEmail(attcomptes) {
         found = false;

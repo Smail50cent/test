@@ -391,13 +391,14 @@ function ConnexionServer() {
                     paramform.setId_form(data[i].id_form);
                     paramform.setActif(data[i].actif);
                     paramform.setDiscrim(data[i].discrim);
-                    paramform.setCode_champ(data[i].code_champ);
+                    paramform.setFile_template_html(data[i].file_template_html);
                     paramform.setId_label_html(data[i].id_label_html);
                     paramform.setType_html(data[i].type_html);
                     paramform.setClass_html(data[i].class_html);
                     paramform.setStyle_html(data[i].style_html);
                     paramform.setOrdre(data[i].ordre);
                     paramform.setId_html(data[i].id_html);
+                    paramform.setFile_template_html(data[i].file_template_html);
                     paramforms.push(paramform);
                 }
                 method(paramforms);
@@ -459,7 +460,6 @@ function ConnexionServer() {
             data: {password: password},
             async: true,
             success: function(data) {
-                console.log("data : " + data);
                 method(data);
             },
             error: function(xhr, textStatus, errorThrown) {
