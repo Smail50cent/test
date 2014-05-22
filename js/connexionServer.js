@@ -468,13 +468,13 @@ function ConnexionServer() {
     };
 
     this.getAllParamApps = function(method) {
-        console.log("before GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
             type: 'GET',
             datatype: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
+                console.log(data[0].valeur_parametre);
                 var paramapps = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var paramapp = new ParamApp();
@@ -484,6 +484,32 @@ function ConnexionServer() {
                     paramapps.push(paramapp);
                 }
                 method(paramapps);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllAttributsComptes = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                var paramforms = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var paramform = new AttributCompte();
+                    paramform.setId(data[i].id);
+                    paramform.setId_form(data[i].id_form);
+                    paramform.setValeur_champ(data[i].valeur_champ);
+                    paramform.setDefault(data[i].default);
+                    paramform.setId_compte(data[i].id_compte);
+                    paramforms.push(paramform);
+                }
+                method(paramforms);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
