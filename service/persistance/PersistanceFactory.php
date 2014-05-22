@@ -19,6 +19,7 @@ include_once 'CompteServiceDataImpl.php';
 include_once 'AttributCompteServiceDataImpl.php';
 include_once 'ParamFormServiceDataImpl.php';
 include_once 'TicketServiceDataImpl.php';
+include_once 'ParametreApplicationServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -36,6 +37,7 @@ class PersistanceFactory {
     private static $attcompteSrv = null;
     private static $paramformSrv = null;
     private static $ticketSrv = null;
+    private static $paramappSrv = null;
 
     public static function getTicketService() {
         if (PersistanceFactory::$ticketSrv == null) {
@@ -133,6 +135,13 @@ class PersistanceFactory {
             PersistanceFactory::$paramformSrv = new ParamFormServiceDataImpl();
         }
         return PersistanceFactory::$paramformSrv;
+    }
+
+    public static function getParamAppService() {
+        if (PersistanceFactory::$paramappSrv == null) {
+            PersistanceFactory::$paramappSrv = new ParametreApplicationServiceDataImpl();
+        }
+        return PersistanceFactory::$paramappSrv;
     }
 
 }
