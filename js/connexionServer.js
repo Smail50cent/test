@@ -468,12 +468,13 @@ function ConnexionServer() {
     };
 
     this.getAllParamApps = function(method) {
+        console.log("before GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
             type: 'GET',
-            data: {password: password},
+            datatype: 'json',
             async: true,
-            success: function(data) {
+            success: function(data, textStatus, xhr) {
                 var paramapps = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var paramapp = new ParamApp();

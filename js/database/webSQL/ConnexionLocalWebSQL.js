@@ -52,4 +52,7 @@ function ConnexionLocalWebSQL() {
     this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
+    this.getAllParamApps = function(method) {
+        console.log("to do the impl");
+    };
 }
