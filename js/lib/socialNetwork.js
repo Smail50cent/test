@@ -70,7 +70,7 @@ function getFacebookUserInfo() {
 }
 function getFacebookPhoto()
 {
-
+    var imgurl;
     FB.api('/me/picture?type=normal', function(response) {
         imgurl = response.data.url;
     });
