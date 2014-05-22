@@ -20,6 +20,7 @@ class TicketServiceDataImpl implements TicketServiceData {
         $bdd = new ConnexionBDD();
         $bdd->executeGeneric("INSERT INTO `commande_produits_ingredients`(`id_ingredient`, `added`, `id_commande_produit`) VALUES (" . $ingredient . ",1," . $idCommandeProduit . ")");
     }
+
     public function addDeletedIngredients($ingredient, $idCommandeProduit) {
         $bdd = new ConnexionBDD();
         $bdd->executeGeneric("INSERT INTO `commande_produits_ingredients`(`id_ingredient`, `deleted`, `id_commande_produit`) VALUES (" . $ingredient . ",1," . $idCommandeProduit . ")");
@@ -33,6 +34,11 @@ class TicketServiceDataImpl implements TicketServiceData {
     public function addCommandeProduit($produit, $idCommande) {
         $bdd = new ConnexionBDD();
         return $bdd->executeGeneric("INSERT INTO `commande_produits`(`id_commande`, `id_produit`,`heure_envoie`) VALUES (" . $idCommande . "," . $produit->getId() . ",0)");
+    }
+
+    public function addOptionCommande($idOption, $idOptionValue, $idCommandeProduit) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO `commande_produit_options`( `id_option`, `id_option_value`, `id_commande_produits`) VALUES (" . $idOption . ", " . $idOptionValue . "," . $idCommandeProduit . ")");
     }
 
 }
