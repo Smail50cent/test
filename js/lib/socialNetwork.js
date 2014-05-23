@@ -32,23 +32,28 @@ window.fbAsyncInit = function() {
 
 function FacebookLogin()
 {
-
     FB.login(function(response) {
         if (response.authResponse)
         {
-            getFacebookUserInfo();
+            getFacebookUserInfo(info);
+            function info(personne) {
+                localStorage.setItem(personne.nom+" email", personne.email);
+                localStorage.setItem(personne.nom+" id", personne.id);
+                localStorage.setItem(personne.nom+" nom", personne.nom);
+                localStorage.setItem(personne.nom+" prenom", personne.prenom);
+            }
+
         } else
         {
             console.log('User cancelled login or did not fully authorize.');
         }
     }, {scope: 'email,user_photos,user_videos'});
-
-
+    
 }
 
-function getFacebookUserInfo() {
-    
-    var personne;
+function getFacebookUserInfo(infopersonne) {
+
+
     FB.api('/me', function(response) {
 
         var fullname = response.name;
@@ -58,27 +63,21 @@ function getFacebookUserInfo() {
         personne = new Personne();
 
         if (!verifyEmail(response.email)) {
-            connexion.addCompte(InsertFromLastId, "AUFB");
+            connexion.addCompte(InsertFromLastId, "AVFB");
             function InsertFromLastId(LastId) {
                 connexion.addAttributCompte(1, response.gender, 1, LastId);
                 connexion.addAttributCompte(2, name[1], 1, LastId);
                 connexion.addAttributCompte(3, name[0], 1, LastId);
                 connexion.addAttributCompte(7, response.email, 1, LastId);
-                // Personne Info
-                personne.setId(response.id);
-                personne.setNom(name[0]);
-                personne.setPrenom(name[1]);
-                personne.setEmail(response.email);
-                // get Facebook profil picture
-                FB.api('/me/picture?type=normal', function(response) {
-                    connexion.addAttributCompte(8, response.data.url, 1, LastId);
-                    personne.setUrlProfileImg(response.data.url);
-                });
+                getFacebookPhoto(connexion, LastId);
             }
         }
-        
+        personne.setId(response.id);
+        personne.setNom(name[0]);
+        personne.setPrenom(name[1]);
+        personne.setEmail(response.email);
+        infopersonne(personne);
     });
-    return personne;
 }
 
 function FacebookLogout()
@@ -103,4 +102,12 @@ function verifyEmail(email) {
         }
     }
     return found;
+}
+
+function getFacebookPhoto(connexion, lastId) {
+
+    FB.api('/me/picture?type=normal', function(response) {
+        connexion.addAttributCompte(8, response.data.url, 1, lastId);
+        imageUrl(response.data.url);
+    });
 }
