@@ -52,7 +52,7 @@ function facebookAuth() {
     
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
-            FacebookLogin();
+            SNLogin("AVFB");
         }, 500);
     });
 }
@@ -69,7 +69,7 @@ function socialNetworkButtonAuth() {
 
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
-
+    console.log("before");
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) {
             if (paramapps[i].valeur_parametre == 1) {

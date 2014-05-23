@@ -10,7 +10,7 @@ class ParametreApplication {
 
     public $id;
     public $nom_parametre;
-    public $valeur_paramtre;
+    public $valeur_parametre;
 
     public function getId() {
         return $this->id;
@@ -20,8 +20,8 @@ class ParametreApplication {
         return $this->nom_parametre;
     }
 
-    public function getValeur_paramtre() {
-        return $this->valeur_paramtre;
+    public function getValeur_parametre() {
+        return $this->valeur_parametre;
     }
 
     public function setId($id) {
@@ -32,8 +32,8 @@ class ParametreApplication {
         $this->nom_parametre = $nom_parametre;
     }
 
-    public function setValeur_paramtre($valeur_paramtre) {
-        $this->valeur_paramtre = $valeur_paramtre;
+    public function setValeur_parametre($valeur_parametre) {
+        $this->valeur_parametre = $valeur_parametre;
     }
 
 }

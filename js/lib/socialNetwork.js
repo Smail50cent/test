@@ -5,34 +5,62 @@ function addPersonne(personne, dicriminent) {
         connexion.addCompte(InsertFromLastId, dicriminent);
         function InsertFromLastId(LastId) {
             connexion.addAttributCompte(1, personne.gender, 1, LastId);
-            connexion.addAttributCompte(2, personne[1], 1, LastId);
-            connexion.addAttributCompte(3, name[0], 1, LastId);
+            connexion.addAttributCompte(2, personne.nom, 1, LastId);
+            connexion.addAttributCompte(3, personne.prenom, 1, LastId);
             connexion.addAttributCompte(7, personne.email, 1, LastId);
             getFacebookPhoto(connexion, LastId);
         }
     }
-    infopersonne(personne);
 }
 var listePersonnes = new Array();
-function rsLogin(typeRs,param) {
-    FB.login(function(response) {
-        if (response.authResponse)
-        {
-            getFacebookUserInfo(info);
-            function info(personne) {
-                listePersonnes.push(personne);
-                if (i == nbCouverts) {
-                    $('#auth_popup_id').dialog("close");
-                } else {
-                    reopendialog(personne+i);
-                }
+function SNLogin(typeRs) {
+    switch (typeRs) {
+        case ("AVFB") :
+            {
+                FB.login(function(response) {
+                    if (response.authResponse)
+                    {
+                        getFacebookUserInfo();
+//                        function info(personne) {
+//                            listePersonnes.push(personne);
+//                            if (i == nbCouverts) {
+//                                $('#auth_popup_id').dialog("close");
+//                            } else {
+//                                reopendialog(personne + i);
+//                            }
+//                        }
+                    } else
+                    {
+                        console.log('User cancelled login or did not fully authorize.');
+                    }
+                }, {scope: 'email,user_photos,user_videos'});
             }
-        } else
-        {
-            console.log('User cancelled login or did not fully authorize.');
-        }
-    }, {scope: 'email,user_photos,user_videos'});
+    }
+
 }
+
+function getFacebookUserInfo() {
+    
+    FB.api('/me', function(response) {
+        var fullname = response.name;
+        var name = fullname.split(' '); // get Last and First Name
+        var personne = new Personne();
+        personne.setId(response.id);
+        personne.setNom(name[0]);
+        personne.setPrenom(name[1]);
+        personne.setEmail(response.email);
+        personne.setGender(response.gender);
+        addPersonne(personne, "AVFB");
+    });
+}
+
+function getFacebookPhoto(connexion, lastId) {
+
+    FB.api('/me/picture?type=normal', function(response) {
+        connexion.addAttributCompte(8, response.data.url, 1, lastId);
+    });
+}
+
 window.fbAsyncInit = function() {
 
     var appId = parseInt(config.getConfig("connexion.rs.facebook.appId"));
@@ -62,19 +90,6 @@ window.fbAsyncInit = function() {
         }
     });
 };
-function getFacebookUserInfo(infopersonne) {
-    FB.api('/me', function(response) {
-        var fullname = response.name;
-        var name = fullname.split(' '); // get Last and First Name
-        var personne = new Personne();
-        personne.setId(response.id);
-        personne.setNom(name[0]);
-        personne.setPrenom(name[1]);
-        personne.setEmail(response.email);
-        addPersonne(personne, "AVFB");
-    });
-}
-
 
 function FacebookLogout()
 {
@@ -98,11 +113,4 @@ function verifyEmail(email) {
         }
     }
     return found;
-}
-
-function getFacebookPhoto(connexion, lastId) {
-
-    FB.api('/me/picture?type=normal', function(response) {
-        connexion.addAttributCompte(8, response.data.url, 1, lastId);
-    });
 }
