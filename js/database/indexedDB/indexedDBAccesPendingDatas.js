@@ -19,6 +19,7 @@ myStorage.indexedDB.addTicketToBdd = function(method, ticket, param) {
             "type": type
         });
         trans.oncomplete = function(e) {
+            
             db.close();
         };
         request.onerror = function(e) {
