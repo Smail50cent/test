@@ -9,7 +9,7 @@
             value="{quantity}" class="content_produit_btn_right"/></div>
         <div id="content_produit_id" class="content_produit">
             <p onclick="onRecapitulatifProduitClicked({qopProduiID},{qopID});" id="content_produit_titre_id_{qopProduiID}"
-            class="content_produit_titre">{qopProduitNom}</p>
+            class="content_produit_titre content_produit_titre_personnes">{qopProduitNom}</p>
             <div class="boutonInfoInItemRecapitulatif"></div>
         <ul id="content_produit_description_recap_id_{qopID}" class="content_produit_description"></ul>       
     </div>    

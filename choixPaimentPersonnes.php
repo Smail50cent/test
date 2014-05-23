@@ -3,8 +3,8 @@
 
     <div id="choix_mode_calcul_id" class="choix_mode_calcul">
         <p id="choix_mode_calcul_titre_id"></p>
-        <button id="btn_choix_mode_calcul_division" onclick="divisionTotal();"/>
-        <button id="btn_choix_mode_calcul_part"  onclick="parPersonne();"/>
+        <button id="btn_choix_mode_calcul_division" class="btn_choix_mode_calcul_division_class" onclick="divisionTotal();"/>
+        <button id="btn_choix_mode_calcul_part" class="btn_choix_mode_calcul_part_class" onclick="parPersonne();"/>
     </div>
     <div id="content_paiment_personne_id">
         <div id="produits_non_attr">
@@ -18,7 +18,7 @@
         </ul>
 
         <p id="total_selection_id"></p>
-        <input onclick="validerPaimentSelection();" type="button" id="content_paiment_personne_button_valider_id"></input>
+        <input class="validerPaimentSelection_class" onclick="validerPaimentSelection();" type="button" id="content_paiment_personne_button_valider_id"></input>
     </div>
 </div>
 
