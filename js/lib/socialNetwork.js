@@ -37,10 +37,11 @@ function FacebookLogin()
         {
             getFacebookUserInfo(info);
             function info(personne) {
-                localStorage.setItem(personne.nom+" email", personne.email);
-                localStorage.setItem(personne.nom+" id", personne.id);
-                localStorage.setItem(personne.nom+" nom", personne.nom);
-                localStorage.setItem(personne.nom+" prenom", personne.prenom);
+                localStorage.setItem(personne.nom + " id", personne.id);
+                localStorage.setItem(personne.nom + " nom", personne.nom);
+                localStorage.setItem(personne.nom + " prenom", personne.prenom);
+                localStorage.setItem(personne.nom + " email", personne.email);
+                $('#auth_popup_id').dialog("close");
             }
 
         } else
@@ -48,7 +49,8 @@ function FacebookLogin()
             console.log('User cancelled login or did not fully authorize.');
         }
     }, {scope: 'email,user_photos,user_videos'});
-    
+
+
 }
 
 function getFacebookUserInfo(infopersonne) {
@@ -108,6 +110,5 @@ function getFacebookPhoto(connexion, lastId) {
 
     FB.api('/me/picture?type=normal', function(response) {
         connexion.addAttributCompte(8, response.data.url, 1, lastId);
-        imageUrl(response.data.url);
     });
 }

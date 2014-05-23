@@ -17,8 +17,9 @@
             </select>
         </li>
     </ul>
-    <div id="auth_popup_id" class="auth_popup" title="Login">
-        <div id="auth_form_id" class="auth_form"></div>  
+    
+    <?php include_once './compte.php'; ?>
+        
     </div>
 </div>
 <?php

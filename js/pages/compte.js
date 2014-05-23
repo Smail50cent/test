@@ -3,11 +3,11 @@
  */
 
 function onLoadCompte() {
-
-    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
-    var html = getAuthCompte();
-    $('#auth_form_id').html(html);
-    socialNetworkButtonAuth();
+    
+        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+        var html = getAuthCompte();
+        $('#auth_form_id').html(html);
+        socialNetworkButtonAuth();
 }
 function authenCompte() {
 
@@ -74,13 +74,13 @@ function socialNetworkButtonAuth() {
             if (paramapps[i].valeur_parametre == 1) {
                 if (paramapps[i].nom_parametre === "Facebook") {
                     var html = getButtonFacebookAuth();
-                    $('#auth_form_id').append(html);
+                    $('#button_facebook_id').html(html);
                 } else if (paramapps[i].nom_parametre === "Twitter") {
                     var html = getButtonTwitterAuth();
-                    $('#auth_form_id').append(html);
+                    $('#button_twitter_id').html(html);
                 } else if (paramapps[i].nom_parametre === "Google+") {
                     var html = getButtonGoogleAuth();
-                    $('#auth_form_id').append(html);
+                    $('#button_googleplus_id').html(html);
                 }
 
             }

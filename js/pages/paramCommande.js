@@ -37,7 +37,7 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#nbPersonnes").change(function() {
             //startCommande($("#numTable").val(), $("#nbPersonnes").val());
             scripts.loadScripts("compte", function () {
-                onLoadCompte();
+                    onLoadCompte();
             });
         });
     } else {
