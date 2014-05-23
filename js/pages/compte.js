@@ -49,6 +49,7 @@ function getHtmlFormInscription() {
 }
 
 function facebookAuth() {
+    
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
             FacebookLogin();
