@@ -1,7 +1,7 @@
 /*
  * 
  */
-
+var listePersonnes = new Array();
 function onLoadCompte() {
     
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});

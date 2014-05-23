@@ -12,7 +12,7 @@ function addPersonne(personne, dicriminent) {
         }
     }
 }
-var listePersonnes = new Array();
+
 function SNLogin(typeRs) {
     switch (typeRs) {
         case ("AVFB") :
@@ -20,15 +20,20 @@ function SNLogin(typeRs) {
                 FB.login(function(response) {
                     if (response.authResponse)
                     {
-                        getFacebookUserInfo();
-//                        function info(personne) {
-//                            listePersonnes.push(personne);
-//                            if (i == nbCouverts) {
-//                                $('#auth_popup_id').dialog("close");
-//                            } else {
-//                                reopendialog(personne + i);
-//                            }
-//                        }
+                        getFacebookUserInfo(Infopersonne);
+                        $('#auth_popup_id').dialog("close");
+                        function Infopersonne(personne) {
+                            listePersonnes.push(personne);
+                            console.log(listePersonnes.length);
+                            if (listePersonnes.length == $("#nbPersonnes").val()) {
+                                startCommande($("#numTable").val(), $("#nbPersonnes").val());
+                            } else {
+                                window.setTimeout(function (){
+                                    $('#auth_popup_id').dialog("open");
+                                },500);
+                                
+                            }
+                        }
                     } else
                     {
                         console.log('User cancelled login or did not fully authorize.');
@@ -36,11 +41,10 @@ function SNLogin(typeRs) {
                 }, {scope: 'email,user_photos,user_videos'});
             }
     }
-
 }
 
-function getFacebookUserInfo() {
-    
+function getFacebookUserInfo(infopersonne) {
+
     FB.api('/me', function(response) {
         var fullname = response.name;
         var name = fullname.split(' '); // get Last and First Name
@@ -51,6 +55,8 @@ function getFacebookUserInfo() {
         personne.setEmail(response.email);
         personne.setGender(response.gender);
         addPersonne(personne, "AVFB");
+
+        infopersonne(personne);
     });
 }
 
