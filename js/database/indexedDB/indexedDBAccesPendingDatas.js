@@ -20,8 +20,6 @@ myStorage.indexedDB.addTicketToBdd = function(method, ticket, param) {
         });
         trans.oncomplete = function(e) {
             db.close();
-            alert("PUT");
-
         };
         request.onerror = function(e) {
             showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
