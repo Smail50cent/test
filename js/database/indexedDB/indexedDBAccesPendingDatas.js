@@ -20,6 +20,8 @@ myStorage.indexedDB.addTicketToBdd = function(method, ticket, param) {
         });
         trans.oncomplete = function(e) {
             db.close();
+            alert("PUT");
+
         };
         request.onerror = function(e) {
             showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
@@ -28,7 +30,7 @@ myStorage.indexedDB.addTicketToBdd = function(method, ticket, param) {
     request.onerror = myStorage.indexedDB.onerror;
 };
 myStorage.indexedDB.getAllPendingsDatas = function(method, param) {
-    function PendingData(){
+    function PendingData() {
         this.value;
         this.type;
     }
@@ -40,21 +42,21 @@ myStorage.indexedDB.getAllPendingsDatas = function(method, param) {
         var store = trans.objectStore(config.getConfig("tableNamePendingData"));
         var keyRange = IDBKeyRange.lowerBound(0);
         var cursorRequest = store.openCursor(keyRange);
-        var pendingsData = new Array();
+        var pendingsDatas = new Array();
         cursorRequest.onsuccess = function(e) {
             var result = e.target.result;
             if (!!result == false) {
                 return;
             }
             var pendingData = new PendingData();
-            pendingData.setNom(result.value.value);
-            pendingData.setId(result.value.type);
-            pendingsData.push(pendingData);
+            pendingData.value = JSON.parse(result.value.value);
+            pendingData.type = (result.value.type);
+            pendingsDatas.push(pendingData);
             result.continue();
         };
         trans.oncomplete = function(e) {
             if (method != null) {//Nous avons besoin de l'executer.
-                method(pendingsData, param);
+                method(pendingsDatas);
             }
             db.close();
         };

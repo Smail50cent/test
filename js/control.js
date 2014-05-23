@@ -21,12 +21,18 @@ $(document).ready(function() {// thread connexion
     function testConnexion() {
         if (window.navigator.onLine) {
             if (isConnected == false) {
-                if(isLocalBddSuppored()){
+                if (isLocalBddSuppored()) {
                     var connexionLoc = getImplOfConnexionLocal();
-                    connexionLoc.getAllPendingMethods(function (pending){
-                        alert("false");
-                        alert("ok len="+pending.length);
-                    },null);
+                    connexionLoc.getAllPendingMethods(function(pending) {
+                        var connexionSrv = getConnexionServeur();
+                        var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
+                        for (var i = 0; i < pending.length; i++) {
+                            if (pending[i].type === ticketTableDisc) {
+                                    var ticket = (pending[i].value);
+                                    connexionSrv.sendTicketToServeur(null, ticket, null);
+                            }
+                        }
+                    }, null);
                 }
             }
             isConnected = true;
@@ -44,7 +50,7 @@ $(document).ready(function() {// thread connexion
         window.setTimeout(function() {
             testConnexion();
             thread();
-        }, 1000);
+        }, 100);
     }
 });
 function getParameterByName(name) {
