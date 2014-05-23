@@ -1,6 +1,6 @@
 
 window.fbAsyncInit = function() {
-    
+
     var appId = parseInt(config.getConfig("connexion.rs.facebook.appId"));
     FB.init({
         appId: appId, // App ID
@@ -47,12 +47,15 @@ function FacebookLogin()
 }
 
 function getFacebookUserInfo() {
+    
+    var personne;
     FB.api('/me', function(response) {
 
         var fullname = response.name;
         var name = fullname.split(' '); // get Last and First Name
 
         var connexion = getConnexion();
+        personne = new Personne();
 
         if (!verifyEmail(response.email)) {
             connexion.addCompte(InsertFromLastId, "AUFB");
@@ -61,15 +64,21 @@ function getFacebookUserInfo() {
                 connexion.addAttributCompte(2, name[1], 1, LastId);
                 connexion.addAttributCompte(3, name[0], 1, LastId);
                 connexion.addAttributCompte(7, response.email, 1, LastId);
+                // Personne Info
+                personne.setId(response.id);
+                personne.setNom(name[0]);
+                personne.setPrenom(name[1]);
+                personne.setEmail(response.email);
                 // get Facebook profil picture
                 FB.api('/me/picture?type=normal', function(response) {
                     connexion.addAttributCompte(8, response.data.url, 1, LastId);
+                    personne.setUrlProfileImg(response.data.url);
                 });
             }
         }
-
+        
     });
-
+    return personne;
 }
 
 function FacebookLogout()

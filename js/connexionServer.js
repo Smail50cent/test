@@ -468,20 +468,18 @@ function ConnexionServer() {
     };
 
     this.getAllParamApps = function(method) {
-        console.log("before GET");
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
             type: 'GET',
-            datatype: 'json',
+            dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log(data[0].valeur_parametre);
                 var paramapps = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var paramapp = new ParamApp();
                     paramapp.setId(data[i].id);
                     paramapp.setNom_parametre(data[i].nom_parametre);
-                    paramapp.setValeur_parametre(data[i].valeur_parametre);
+                    paramapp.setValeur_parametre(data[i].valeur_paramtre);
                     paramapps.push(paramapp);
                 }
                 method(paramapps);

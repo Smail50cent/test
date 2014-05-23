@@ -70,11 +70,19 @@ function socialNetworkButtonAuth() {
     connexion.getAllParamApps(enableButton);
 
     function enableButton(paramapps) {
-
         for (var i = 0; i < paramapps.length; i++) {
-            if (paramapps[i].valeur_parametre) {
-                var html = paramapps[i].nom_parametre;
-                $('auth_form_id').append(html);
+            if (paramapps[i].valeur_parametre == 1) {
+                if (paramapps[i].nom_parametre === "Facebook") {
+                    var html = getButtonFacebookAuth();
+                    $('#auth_form_id').append(html);
+                } else if (paramapps[i].nom_parametre === "Twitter") {
+                    var html = getButtonTwitterAuth();
+                    $('#auth_form_id').append(html);
+                } else if (paramapps[i].nom_parametre === "Google+") {
+                    var html = getButtonGoogleAuth();
+                    $('#auth_form_id').append(html);
+                }
+
             }
         }
     }
