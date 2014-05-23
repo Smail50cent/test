@@ -52,8 +52,8 @@ function ConnexionLocalWebSQL() {
     this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
-    this.getAllParamApps = function(method) {
+    this.getAllPendingMethods = function(method,param) {
         console.log("TO DO");
     };
-
+    
 }

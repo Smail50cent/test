@@ -20,6 +20,15 @@ $(document).ready(function() {// thread connexion
     testConnexion();
     function testConnexion() {
         if (window.navigator.onLine) {
+            if (isConnected == false) {
+                if(isLocalBddSuppored()){
+                    var connexionLoc = getImplOfConnexionLocal();
+                    connexionLoc.getAllPendingMethods(function (pending){
+                        alert("false");
+                        alert("ok len="+pending.length);
+                    },null);
+                }
+            }
             isConnected = true;
             var html = htmlTestConnexion;
             html = paramValue(html, "class", "greenIcon");
@@ -215,9 +224,20 @@ function getRedirict(page, args) {
     }
 }
 
-function log(message){
+function log(message) {
     var isDev = true;
-    if(isDev){
+    if (isDev) {
         console.log(message);
     }
+}
+String.prototype.hashCode = function() {
+    var hash = 0;
+    if (this.length == 0)
+        return hash;
+    for (i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
 }

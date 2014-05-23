@@ -61,4 +61,8 @@ function ConnexionLocalIndexedDB() {
     this.getAllParamApps = function(method) {
         console.log("TO DO");
     };
+    this.getAllPendingMethods = function(method, param) {
+        myStorage.indexedDB.getAllPendingsDatas(method, param);
+    };
+    
 }
