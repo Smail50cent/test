@@ -1051,7 +1051,7 @@ function validerCommande() {
 }
 function envoyerTicketServeur(ticket) {
     var connexion = getConnexion();
-    connexion.sendTicketToServeur(null, ticket, null);
+    connexion.sendTicketToServeur(null, (ticket), null);
 }
 function hideDialogInfo() {
     $("#dialog_info_id").remove();

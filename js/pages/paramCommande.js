@@ -35,22 +35,29 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            startCommande($("#numTable").val(), $("#nbPersonnes").val());
+            //startCommande($("#numTable").val(), $("#nbPersonnes").val());
+            scripts.loadScripts("compte", function () {
+                    onLoadCompte();
+            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
         $("#numeroTable_item").hide();
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
-            startCommande(tables, $("#nbPersonnes").val());
+            // TO DO *
+            alert('hello');
+            var personnes = new Array();
+            personnes.push(new Personne(1, "Hamza", "Legdani"));
+            personnes.push(new Personne(2, "Nicolas", "Perru"));
+            personnes.push(new Personne(3, "Damien", "Chesneau"));
+            createCookie("personnes.couverts", JSON.stringify(personnes), 1);
+
+           // startCommande(tables, $("#nbPersonnes").val());
         });
     }
 
-    var personnes = new Array();
-    personnes.push(new Personne(1, "Hamza", "Legdani"));
-    personnes.push(new Personne(2, "Nicolas", "Perru"));
-    personnes.push(new Personne(3, "Damien", "Chesneau"));
-    createCookie("personnes.couverts", JSON.stringify(personnes), 1);
+
     createCookie("type.commande", 1, 1);
     hideLoading();
 }

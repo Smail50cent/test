@@ -20,6 +20,21 @@ $(document).ready(function() {// thread connexion
     testConnexion();
     function testConnexion() {
         if (window.navigator.onLine) {
+            if (isConnected == false) {
+                if (isLocalBddSuppored()) {
+                    var connexionLoc = getImplOfConnexionLocal();
+                    connexionLoc.getAllPendingMethods(function(pending) {
+                        var connexionSrv = getConnexionServeur();
+                        var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
+                        for (var i = 0; i < pending.length; i++) {
+                            if (pending[i].type === ticketTableDisc) {
+                                    var ticket = (pending[i].value);
+                                    connexionSrv.sendTicketToServeur(null, ticket, null);
+                            }
+                        }
+                    }, null);
+                }
+            }
             isConnected = true;
             var html = htmlTestConnexion;
             html = paramValue(html, "class", "greenIcon");
@@ -35,7 +50,7 @@ $(document).ready(function() {// thread connexion
         window.setTimeout(function() {
             testConnexion();
             thread();
-        }, 1000);
+        }, 100);
     }
 });
 function getParameterByName(name) {
@@ -215,9 +230,20 @@ function getRedirict(page, args) {
     }
 }
 
-function log(message){
+function log(message) {
     var isDev = true;
-    if(isDev){
+    if (isDev) {
         console.log(message);
     }
+}
+String.prototype.hashCode = function() {
+    var hash = 0;
+    if (this.length == 0)
+        return hash;
+    for (i = 0; i < this.length; i++) {
+        char = this.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash; // Convert to 32bit integer
+    }
+    return hash;
 }

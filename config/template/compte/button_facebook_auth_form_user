@@ -1,0 +1,3 @@
+<div id="facebook_auth_compte_id" class="facebook_auth_compte">
+    <button type="submit" onclick="facebookAuth()"><img src="img/facebook.gif"></button>
+</div>

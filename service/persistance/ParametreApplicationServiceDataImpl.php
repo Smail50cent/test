@@ -21,7 +21,7 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
             $paramapp = new ParametreApplication();
             $paramapp->setId(intval($ligne->id));
             $paramapp->setNom_parametre($ligne->nom_parametre);
-            $paramapp->setValeur_paramtre($ligne->valeur_parametre);
+            $paramapp->setValeur_parametre($ligne->valeur_parametre);
             $paramapps[$i] = $paramapp;
             $i++;
         }
@@ -36,7 +36,7 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         $ligne = $retour->fetch();
         $paramapp->setId(intval($ligne->id));
         $paramapp->setNom_parametre($ligne->nom_parametre);
-        $paramapp->setValeur_paramtre($ligne->valeur_parametre);
+        $paramapp->setValeur_parametre($ligne->valeur_parametre);
 
         return $paramapp;
     }

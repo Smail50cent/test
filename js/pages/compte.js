@@ -3,10 +3,11 @@
  */
 
 function onLoadCompte() {
-
-    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
-    var html = getAuthCompte();
-    $('#auth_form_id').html(html);
+    
+        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+        var html = getAuthCompte();
+        $('#auth_form_id').html(html);
+        socialNetworkButtonAuth();
 }
 function authenCompte() {
 
@@ -48,10 +49,11 @@ function getHtmlFormInscription() {
 }
 
 function facebookAuth() {
+    
     scripts.loadScripts("lib.social", function() {
-       window.setTimeout(function (){
-           FacebookLogin();
-       },500);       
+        window.setTimeout(function() {
+            SNLogin("AVFB");
+        }, 500);
     });
 }
 function twitterAuth() {
@@ -61,4 +63,28 @@ function twitterAuth() {
 function googleAuth() {
 
 
+}
+
+function socialNetworkButtonAuth() {
+
+    var connexion = getConnexion();
+    connexion.getAllParamApps(enableButton);
+    console.log("before");
+    function enableButton(paramapps) {
+        for (var i = 0; i < paramapps.length; i++) {
+            if (paramapps[i].valeur_parametre == 1) {
+                if (paramapps[i].nom_parametre === "Facebook") {
+                    var html = getButtonFacebookAuth();
+                    $('#button_facebook_id').html(html);
+                } else if (paramapps[i].nom_parametre === "Twitter") {
+                    var html = getButtonTwitterAuth();
+                    $('#button_twitter_id').html(html);
+                } else if (paramapps[i].nom_parametre === "Google+") {
+                    var html = getButtonGoogleAuth();
+                    $('#button_googleplus_id').html(html);
+                }
+
+            }
+        }
+    }
 }

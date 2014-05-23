@@ -58,4 +58,11 @@ function ConnexionLocalIndexedDB() {
     this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
+    this.getAllParamApps = function(method) {
+        console.log("TO DO");
+    };
+    this.getAllPendingMethods = function(method, param) {
+        myStorage.indexedDB.getAllPendingsDatas(method, param);
+    };
+    
 }

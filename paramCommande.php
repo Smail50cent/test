@@ -17,6 +17,10 @@
             </select>
         </li>
     </ul>
+    
+    <?php include_once './compte.php'; ?>
+        
+    </div>
 </div>
 <?php
 include_once './footer.php';

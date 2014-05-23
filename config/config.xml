@@ -16,6 +16,7 @@
         <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
+        <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
         <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
@@ -40,7 +41,8 @@
         <variable name="tableNameCompte">comptes</variable>
         <variable name="tableNameParamForm">paramforms</variable>
         <variable name="tableNameAttributCompte">attributscomptes</variable>
-        <variable name="indexedDBDatabaseName">precaisse</variable>
+        <variable name="indexedDBDatabaseName">appcaisse</variable>
+        <variable name="tableNameParametreApplication">parametresapplications</variable>
         <variable name="serveur.clientaccess.serviceGetEntrepriseMaj">getEntepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj.index.entreprise">entreprise</variable>
