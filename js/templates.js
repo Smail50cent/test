@@ -155,6 +155,7 @@ function getButtonGoogleAuth() {
 }
 function getGeneratedInscriForm() {
     return templates.getTemplate("compte/generated_form_inscription");
+}
 function getOptionPersonnes() {
     return templates.getTemplate("choixEnvoieCuisine/option_personnes");
 }
