@@ -46,15 +46,16 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
             // TO DO *
-            var personnes = new Array();
-            personnes.push(new Personne(1, "Hamza", "Legdani"));
-            personnes.push(new Personne(2, "Nicolas", "Perru"));
-            personnes.push(new Personne(3, "Damien", "Chesneau"));
-            setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
+
             console.log("passage");
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
+    var personnes = new Array();
+    personnes.push(new Personne(1, "Hamza", "Legdani"));
+    personnes.push(new Personne(2, "Nicolas", "Perru"));
+    personnes.push(new Personne(3, "Damien", "Chesneau"));
+    setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
     setLocalStorageValue("type.commande", 1);
     hideLoading();
 }

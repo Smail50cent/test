@@ -718,10 +718,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             var inngredientArray = produit.getIdsIngredients();
             $("#content_produit_description_recap_id_" + qopid).html("");
             var description = $("#content_produit_description_recap_id_" + qopid);
-            var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
-            htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
-            htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
-            $("#content_produit_zone_recap_id_" + qopid).append(htmlButtonAjouter);
+
             var optionHtml = getItemOption();
             for (var i = 0; i < produit.options.length; i++) {
                 var optionItem = optionHtml;
@@ -747,10 +744,21 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                     }
                 });
             }
+            function MyParam(i, len) {
+                this.i = i;
+                this.len = len;
+            }
             for (var i = 0; i < inngredientArray.length; i++) {
                 if (inngredientArray[i].isAdded == true) {
                     var connexion = getConnexion();
                     connexion.getIngredientById(appendItem, inngredientArray[i].ingredient, 0);
+                }
+                console.log(i+ "=="+ inngredientArray.length);
+                if ((i+1) == inngredientArray.length) {
+                    var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
+                    htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
+                    htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
+                    $("#content_produit_description_recap_id_" + qopid).append(htmlButtonAjouter);
                 }
             }
             function appendItem(ingredient, param) {
@@ -759,6 +767,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                 itemIngredient = paramValue(itemIngredient, "onclick", "blockIngredient(" + produitID + "," + ingredient.getId() + "," + qopid + ");");
                 itemIngredient = paramValue(itemIngredient, "id", "ing_" + ingredient.getId() + "_prod_" + produitID);
                 $("#content_produit_description_recap_id_" + qopid).append(itemIngredient);
+                
             }
         }
         function printProduits(menu) {

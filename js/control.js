@@ -65,8 +65,6 @@ function controller(entreprise) {
         case "carte":
             method = function() {
                 var nbpersonne = getLocalStorageValue("paramCommande.nbPersonne");
-                alert(nbpersonne);
-
                 if (nbpersonne != null) {
                     printProduits(0);
                     var connexion = getConnexion();
