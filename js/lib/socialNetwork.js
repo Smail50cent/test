@@ -27,6 +27,7 @@ function SNLogin(typeRs) {
                             listePersonnes.push(personne);
 
                             if (listePersonnes.length == $("#nbPersonnes").val()) {
+                                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 startCommande($("#numTable").val(), $("#nbPersonnes").val());
                             } else {
                                 window.setTimeout(function() {
