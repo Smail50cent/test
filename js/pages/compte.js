@@ -1,7 +1,7 @@
 /*
  * 
  */
-
+var listePersonnes = new Array();
 function onLoadCompte() {
     
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});
@@ -51,7 +51,7 @@ function getHtmlFormInscription() {
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
-            FacebookLogin();
+            SNLogin("AVFB");
         }, 500);
     });
 }
