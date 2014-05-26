@@ -21,7 +21,11 @@ function parPersonne() {
     if (prixparPersonnes != null) {
         for (var i = 0; i < prixparPersonnes.length; i++) {
             if (prixparPersonnes[i].type == "PRIXPARPERSONNE") {
-                printItem(html, prixparPersonnes[i].personne.prenom + " " + prixparPersonnes[i].personne.nom, prixparPersonnes[i].totalpersonne, prixparPersonnes[i].personne.id,"./img/picto_sansimg.jpg");
+                var imgpersonne = prixparPersonnes[i].personne.urlProfileImg;
+                if (imgpersonne == null) {
+                    imgpersonne = "./img/picto_sansimg.jpg";
+                }
+                printItem(html, prixparPersonnes[i].personne.prenom + " " + prixparPersonnes[i].personne.nom, prixparPersonnes[i].totalpersonne, prixparPersonnes[i].personne.id, imgpersonne);
             } else if (prixparPersonnes[i].type == "PRODUITNONATTRIBUE") {
                 var myHtmlOptionProduitnnAttr = htmlOptionProduitnnAttr;
                 myHtmlOptionProduitnnAttr = paramValue(myHtmlOptionProduitnnAttr, "idqop", prixparPersonnes[i].idqop);
@@ -47,7 +51,11 @@ function divisionTotal() {
     var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
     var partParPersonnes = total / (personnes.length);
     for (var i = 0; i < personnes.length; i++) {
-        printItem(html, personnes[i], partParPersonnes, personnes[i].id,"./img/picto_sansimg.jpg");
+        var imgpersonne = personnes[i].urlProfileImg;
+        if (imgpersonne == null) {
+            imgpersonne = "./img/picto_sansimg.jpg";
+        }
+        printItem(html, personnes[i].prenom + " " + personnes[i].nom, partParPersonnes, personnes[i].id, imgpersonne);
     }
     $("#content_paiment_personne_id").show();
 }
@@ -67,10 +75,10 @@ function calculerTotalTicket() {
     return total;
 }
 
-function printItem(html, personne, prix, idpersonne,img) {
+function printItem(html, personne, prix, idpersonne, img) {
     var newHtml = html;
     console.log(img);
-    newHtml = paramValue(newHtml, "nomPersonne", personne.prenom + " " + personne.nom);
+    newHtml = paramValue(newHtml, "nomPersonne", personne);
     newHtml = paramValue(newHtml, "prix", fntp(prix));
     newHtml = paramValue(newHtml, "src", img);
     newHtml = paramValue(newHtml, "idPersonne", idpersonne);
@@ -210,7 +218,7 @@ function reglerParPersonne(idpersonne) {
         case "PAR_PERSONNE":
             var personnes = calculerTotalParPersonne();
             for (var i = 0; i < personnes.length; i++) {
-                if(personnes[i].personne.id == idpersonne){
+                if (personnes[i].personne.id == idpersonne) {
                     pay(personnes[i].totalpersonne);
                     break;
                 }

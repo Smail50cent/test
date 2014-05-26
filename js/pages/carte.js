@@ -753,8 +753,8 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                     var connexion = getConnexion();
                     connexion.getIngredientById(appendItem, inngredientArray[i].ingredient, 0);
                 }
-                console.log(i+ "=="+ inngredientArray.length);
-                if ((i+1) == inngredientArray.length) {
+                console.log(i + "==" + inngredientArray.length);
+                if ((i + 1) == inngredientArray.length) {
                     var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
                     htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
                     htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
@@ -767,7 +767,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                 itemIngredient = paramValue(itemIngredient, "onclick", "blockIngredient(" + produitID + "," + ingredient.getId() + "," + qopid + ");");
                 itemIngredient = paramValue(itemIngredient, "id", "ing_" + ingredient.getId() + "_prod_" + produitID);
                 $("#content_produit_description_recap_id_" + qopid).append(itemIngredient);
-                
+
             }
         }
         function printProduits(menu) {
@@ -1026,7 +1026,10 @@ function showDialogInfoPrix(total) {
         }, showTime * 1000);
     }
 }
-
+function PersonneProduits(personne, produits) {
+    this.personne = personne;
+    this.produits = produits;
+}
 function validerCommande() {
     var ask = confirm(strings.getString("label.info.confirm.valider.commande"));
     if (ask) {
@@ -1034,16 +1037,22 @@ function validerCommande() {
         var prixparPersonnes = new Array();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
+        var personnesProduitsListe = new Array();
         for (var i = 0; i < personnes.length; i++) {
+            var personne =null;
+            var produits = new Array();
             var totalPersonne = 0;
             for (var j = 0; j < (currentTicket.getQuantityOfProduct().length); j++) {
-
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
+                    personne = personnes[i];
+                    produits.push(currentTicket.getQuantityOfProduct()[j].product);
                     totalPersonne += currentTicket.getQuantityOfProduct()[j].product.prix;
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
             }
+            var personneProduit= new PersonneProduits(personne,produits);
+            personnesProduitsListe.push(personneProduit);
             prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
         }
         var numTable = getLocalStorageValue("paramCommande.numTable");
@@ -1053,7 +1062,8 @@ function validerCommande() {
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
-        envoyerTicketServeur(currentTicket);
+
+        setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
         getRedirict("./choixPaimentPersonnes.php", null);
     }

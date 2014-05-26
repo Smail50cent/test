@@ -108,13 +108,25 @@ function controller(entreprise) {
             break;
         case "compte":
             method = function() {
-
                 onLoadCompte();
             };
             hideLoading();
             break;
+        case "choixEnvoieCuisine":
+            method = function() {
+                onChoixEnvoieCuisineLoaded(0);
+                hideLoading();
+            };
+            break;
         case "":
-            hideLoading();
+            method = function() {
+                hideLoading();
+            };
+            break;
+        default :
+            method = function() {
+                hideLoading();
+            };
             break;
     }
     scripts.loadScripts(nom, method);

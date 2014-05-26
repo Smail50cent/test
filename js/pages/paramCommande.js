@@ -35,10 +35,27 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-//            startCommande($("#numTable").val(), $("#nbPersonnes").val());
-            scripts.loadScripts("compte", function () {
-                    onLoadCompte();
-            });
+            var personnes = new Array();
+            var p1 = new Personne();
+            p1.setId(1);
+            p1.setPrenom("Hamza");
+            p1.setNom("Legdani");
+            personnes.push(p1);
+            var p2 = new Personne();
+            p2.setId(2);
+            p2.setPrenom("Nicolas");
+            p2.setNom("Perru");
+            personnes.push(p2);
+            var p3 = new Personne();
+            p3.setId(3);
+            p3.setPrenom("Damien");
+            p3.setNom("Chesneau")
+            personnes.push(p3);
+            setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
+            startCommande($("#numTable").val(), $("#nbPersonnes").val());
+//            scripts.loadScripts("compte", function() {
+////                onLoadCompte();
+//            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
@@ -51,13 +68,8 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
-    var personnes = new Array();
-    personnes.push(new Personne(1, "Hamza", "Legdani"));
-    personnes.push(new Personne(2, "Nicolas", "Perru"));
-    personnes.push(new Personne(3, "Damien", "Chesneau"));
-    setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
-    
-    
+
+
     setLocalStorageValue("type.commande", 1);
     hideLoading();
 }

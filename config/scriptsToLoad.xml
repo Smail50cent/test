@@ -32,5 +32,6 @@
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
     <script for="compte">pages/compte.js</script>
+    <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
 </scripts>
 
