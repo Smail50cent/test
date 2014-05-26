@@ -45,14 +45,11 @@ function getHtmlFormInscription() {
     $('#auth_form_id').html(insciform);
     var buttonValider = getButtonInscriFormUser();
     $('#auth_form_id').append(buttonValider);
-//    $.get('./service/generatedForm/InscriptionForm.php', function(data) {
-//        $('#auth_form_id').html(data);
-//        var buttonValider = getButtonInscriFormUser();
-//        $('#auth_form_id').append(buttonValider);
-//    }, "text");
+    
 }
 function ValiderInscri() {
-    alert('HIIIIII');
+    
+    alert($('#prenom_user_id').val());
 }
 function AjoutVisiteur() {
 
