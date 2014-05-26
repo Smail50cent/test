@@ -7,7 +7,7 @@
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
-    var nbpersonne = parseInt(readCookie("paramCommande.nbPersonne"));
+    var nbpersonne = parseInt(getLocalStorageValue("paramCommande.nbPersonne"));
     if (nbpersonne != null) {
         if (nbpersonne > 1) {
             $('#footer_tarif_nbCouvert_label_id').html(strings.getString("carte.ticket.total.labelcouvertPlur"));
@@ -18,7 +18,7 @@ function gestionAffichageTVA(total) {
         $('#footer_tarif_totalparPersonne_label_id').html(strings.getString("carte.ticket.total.labelpersonne"));
         $('#footer_tarif_totalparPersonne_value_id').html(fntp(total / nbpersonne));
     }
-    var numTable = readCookie("paramCommande.numTable");
+    var numTable = getLocalStorageValue("paramCommande.numTable");
     if (numTable != null) {
         $('#footer_tarif_votreTable_label_id').html(strings.getString("carte.ticket.total.labeltable"));
         $('#footer_tarif_votreTable_value_id').html(numTable);
@@ -623,7 +623,7 @@ function etapeSuivante() {
     if (ask) {
         var optionSelectItem = getOptionInSelectItem();
         var selectInItemHtml = getSelectInItem();
-        var personnes = JSON.parse(readCookie("personnes.couverts"));
+        var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         for (var i = 0; i < qop.length; i++) {
             $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
             $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
@@ -988,8 +988,8 @@ function onTitreProduitClicked(produitID) {
 }
 
 function showDialogInfoPrix(total) {
-    var nbCouverts = readCookie("paramCommande.nbPersonne");
-    var numTable = readCookie("paramCommande.numTable");
+    var nbCouverts = getLocalStorageValue("paramCommande.nbPersonne");
+    var numTable = getLocalStorageValue("paramCommande.numTable");
     var showTime = 2;// secondes
     if ($("#info_prix_id").length) {
         $("#info_prix_content_couverts_content_id").html(nbCouverts);
@@ -1023,7 +1023,7 @@ function validerCommande() {
     if (ask) {
         window.onbeforeunload = null;
         var prixparPersonnes = new Array();
-        var personnes = JSON.parse(readCookie("personnes.couverts"));
+        var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
         for (var i = 0; i < personnes.length; i++) {
             var totalPersonne = 0;
@@ -1037,15 +1037,15 @@ function validerCommande() {
             }
             prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
         }
-        var numTable = readCookie("paramCommande.numTable");
+        var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
-        var typecommande = readCookie("type.commande");
+        var typecommande = getLocalStorageValue("type.commande");
         currentTicket.type_commande = typecommande;
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
         envoyerTicketServeur(currentTicket);
-        createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
+        setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
 //        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }

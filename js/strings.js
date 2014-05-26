@@ -6,14 +6,14 @@ if (navigator.browserLanguage) {
     language = navigator.language;
 }
 var cookieLangName="language";
-if(readCookie(cookieLangName)==null){
-    createCookie(cookieLangName,getLangagesSupported()[0][0],2);
+if(getLocalStorageValue(cookieLangName)==null){
+    setLocalStorageValue(cookieLangName,getLangagesSupported()[0][0]);
 }
 function setLanguage(lang){
-    createCookie(cookieLangName,lang,2);
+    setLocalStorageValue(cookieLangName,lang);
 }
 function getLanguage(){
-    return readCookie(cookieLangName);
+    return getLocalStorageValue(cookieLangName);
 }
 function getLangagesSupported(){
     var ret = new Array();

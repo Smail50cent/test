@@ -34,7 +34,7 @@ function parPersonne() {
     }
 }
 function calculerTotalParPersonne() {
-    var personnes = JSON.parse(readCookie("reste.personnes.paiment"));
+    var personnes = JSON.parse(getLocalStorageValue("reste.personnes.paiment"));
     return personnes;
 }
 function divisionTotal() {
@@ -44,7 +44,7 @@ function divisionTotal() {
     removeChoix();
     var html = getItemPaimentPersonnes();
     var total = calculerTotalTicket();
-    var personnes = JSON.parse(readCookie("personnes.couverts"));
+    var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
     var partParPersonnes = total / (personnes.length);
     for (var i = 0; i < personnes.length; i++) {
         printItem(html, personnes[i].prenom + " " + personnes[i].nom, partParPersonnes, personnes[i].id);
@@ -82,14 +82,14 @@ function removeChoix() {
 var total = 0;
 
 function calcluerTotalSelection() {
-    var personnes = JSON.parse(readCookie("personnes.couverts"));
+    var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
     var personnesAreChoosed = recupererPersonneChoisi();
     caclulerTotal(personnesAreChoosed);
     $("#total_selection_id").text(strings.getString("label.selection.total.paiment") + " " + fntp(total));
 }
 function recupererPersonneChoisi() {
     var personnesAreChoosed = new Array();
-    var personnes = JSON.parse(readCookie("personnes.couverts"));
+    var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
     for (var i = 0; i < personnes.length; i++) {
         var isChecked = $("#name_id_" + personnes[i].id).is(':checked');
         if (isChecked) {
@@ -100,7 +100,7 @@ function recupererPersonneChoisi() {
 }
 function caclulerTotal(personnesAreChoosed) {
     total = 0;
-    var totalParPersonne = JSON.parse(readCookie("reste.personnes.paiment"));
+    var totalParPersonne = JSON.parse(getLocalStorageValue("reste.personnes.paiment"));
     for (var i = 0; i < personnesAreChoosed.length; i++) {
         for (var j = 0; j < totalParPersonne.length; j++) {
             if (totalParPersonne[j].type != "PRODUITNONATTRIBUE") {
@@ -123,11 +123,11 @@ function validerPaimentSelection() {
             }
         }
     }
-    createCookie("reste.personnes.paiment", JSON.stringify(totalParPersonnes), 1);
+    setLocalStorageValue("reste.personnes.paiment", JSON.stringify(totalParPersonnes));
     pay(total);
 }
 function pay(total) {
-    createCookie("reste.a.regler", total.toString(), 1);
+    setLocalStorageValue("reste.a.regler", total.toString());
     getRedirict("reglement.php", new Array(total.toString()));
 }
 var qopProduitToAttrib = "";
@@ -136,7 +136,7 @@ function attribuerToPersonnes(idqop) {
     qopProduitToAttrib = idqop;
     $("#valider_selection_utilisateurs").text(strings.getString("label.button.produit.non.attr.valider.selection"));
     var htmlItem = getAttributionProduit();
-    var personnes = JSON.parse(readCookie("personnes.couverts"));
+    var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
     $("#liste_utilisateurs_to_choose_id").html("");
     for (var i = 0; i < personnes.length; i++) {
         var item = htmlItem;
@@ -196,13 +196,13 @@ function updateTheCookie(restePersonnes, produit) {
             }
         }
     }
-    createCookie("reste.personnes.paiment", JSON.stringify(restePersonnes), 1);
+    setLocalStorageValue("reste.personnes.paiment", JSON.stringify(restePersonnes));
 }
 function reglerParPersonne(idpersonne) {
     switch (disc) {
         case "DIVISION_TOTAL":
             var total = calculerTotalTicket();
-            var personnes = JSON.parse(readCookie("personnes.couverts"));
+            var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
             var partParPersonnes = total / (personnes.length);
             pay(partParPersonnes);
             break;

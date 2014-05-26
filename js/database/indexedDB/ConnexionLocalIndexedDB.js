@@ -64,5 +64,8 @@ function ConnexionLocalIndexedDB() {
     this.getAllPendingMethods = function(method, param) {
         myStorage.indexedDB.getAllPendingsDatas(method, param);
     };
-    
+    this.deletePendingDataById = function(method, id, param) {
+        myStorage.indexedDB.deletePendingData(method, id, param);
+    };
+
 }

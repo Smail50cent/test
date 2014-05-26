@@ -85,10 +85,12 @@ myStorage.indexedDB.create = function() {
         myStorage.indexedDB.addFistEntreprise();
 
         entitysFinsh[config.getConfig("tableNameTable")] = true;
+       
         if (db.objectStoreNames.contains(config.getConfig("tableNameTable"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameTable"));
         }
         var store = db.createObjectStore(config.getConfig("tableNameTable"), {keyPath: "id", autoIncrement: true});
+        
         myStorage.indexedDB.addFistTables();
 
         entitysFinsh[config.getConfig("tableNameEntrepriseMaj")] = true;

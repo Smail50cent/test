@@ -80,10 +80,10 @@ function isWebSQLImlemented() {
     return false;
 }
 function setUpdateLevelOfTable(table, level) {
-    createCookie(table, level, 999);
+    setLocalStorageValue(table, level);
 }
 function getUpdateLevelOfTable(table) {
-    return parseInt(readCookie(table));
+    return parseInt(getLocalStorageValue(table));
 }
 function incrementeLevelOfTable(table) {
     var level = getUpdateLevelOfTable(table);
@@ -93,5 +93,5 @@ function incrementeLevelOfTable(table) {
         level = parseInt(level);
     }
     level += (1);
-    createCookie(table, level, 999);
+    setLocalStorageValue(table, level);
 }
