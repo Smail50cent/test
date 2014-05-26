@@ -22,16 +22,18 @@ function SNLogin(typeRs) {
                     {
                         getFacebookUserInfo(Infopersonne);
                         $('#auth_popup_id').dialog("close");
+
                         function Infopersonne(personne) {
                             listePersonnes.push(personne);
-                            console.log(listePersonnes.length);
+
                             if (listePersonnes.length == $("#nbPersonnes").val()) {
                                 startCommande($("#numTable").val(), $("#nbPersonnes").val());
                             } else {
-                                window.setTimeout(function (){
+                                window.setTimeout(function() {
+                                    FacebookLogout();
                                     $('#auth_popup_id').dialog("open");
-                                },500);
-                                
+                                }, 500);
+
                             }
                         }
                     } else
@@ -100,7 +102,8 @@ window.fbAsyncInit = function() {
 function FacebookLogout()
 {
     FB.logout(function() {
-        document.location.reload();
+        //document.location.reload();
+        console.log('LOGOUT');
     });
 }
 
