@@ -153,3 +153,6 @@ function getButtonTwitterAuth() {
 function getButtonGoogleAuth() {
     return templates.getTemplate("compte/button_googleplus_auth_form_user");
 }
+function getGeneratedInscriForm() {
+    return templates.getTemplate("compte/generated_form_inscription");
+}
