@@ -35,10 +35,10 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            startCommande($("#numTable").val(), $("#nbPersonnes").val());
-//            scripts.loadScripts("compte", function () {
-//                    onLoadCompte();
-//            });
+//            startCommande($("#numTable").val(), $("#nbPersonnes").val());
+            scripts.loadScripts("compte", function () {
+                    onLoadCompte();
+            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
