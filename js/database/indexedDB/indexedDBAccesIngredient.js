@@ -19,7 +19,7 @@ myStorage.indexedDB.getIngredientById = function(method, id, param) {
                 var ingredient = new Ingredient();
                 ingredient.setNom(result.nom);
                 ingredient.setId(result.id);
-                if (method != null) { //Nous avons besoin de l'executer.
+                if (method != null) { 
                     method(ingredient, param);
                 }
             };

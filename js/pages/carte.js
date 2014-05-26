@@ -1055,7 +1055,7 @@ function validerCommande() {
         }
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-//        getRedirict("./choixPaimentPersonnes.php", null);
+        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {
