@@ -35,10 +35,10 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            //startCommande($("#numTable").val(), $("#nbPersonnes").val());
-            scripts.loadScripts("compte", function () {
-                    onLoadCompte();
-            });
+            startCommande($("#numTable").val(), $("#nbPersonnes").val());
+//            scripts.loadScripts("compte", function () {
+//                    onLoadCompte();
+//            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
@@ -46,19 +46,17 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
             // TO DO *
-            alert('hello');
-            var personnes = new Array();
-            personnes.push(new Personne(1, "Hamza", "Legdani"));
-            personnes.push(new Personne(2, "Nicolas", "Perru"));
-            personnes.push(new Personne(3, "Damien", "Chesneau"));
-            createCookie("personnes.couverts", JSON.stringify(personnes), 1);
 
-           // startCommande(tables, $("#nbPersonnes").val());
+            console.log("passage");
+            startCommande(tables, $("#nbPersonnes").val());
         });
     }
-
-
-    createCookie("type.commande", 1, 1);
+    var personnes = new Array();
+    personnes.push(new Personne(1, "Hamza", "Legdani"));
+    personnes.push(new Personne(2, "Nicolas", "Perru"));
+    personnes.push(new Personne(3, "Damien", "Chesneau"));
+    setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
+    setLocalStorageValue("type.commande", 1);
     hideLoading();
 }
 function loadDataPersonnes(nbMaxPersonnes) {
@@ -97,7 +95,7 @@ function loadDataTables(tables) {
     }
 }
 function startCommande(numTable, nbPersonne) {
-    createCookie("paramCommande.nbPersonne", nbPersonne, 3);
-    createCookie("paramCommande.numTable", numTable, 3);
+    setLocalStorageValue("paramCommande.nbPersonne", nbPersonne);
+    setLocalStorageValue("paramCommande.numTable", numTable);
     document.location.href = "carte.php";
 }

@@ -1,7 +1,7 @@
 /*
  * 
  */
-var listePersonnes = new Array();
+
 function onLoadCompte() {
     
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});
@@ -49,10 +49,9 @@ function getHtmlFormInscription() {
 }
 
 function facebookAuth() {
-    
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
-            SNLogin("AVFB");
+            FacebookLogin();
         }, 500);
     });
 }
@@ -69,7 +68,7 @@ function socialNetworkButtonAuth() {
 
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
-    console.log("before");
+
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) {
             if (paramapps[i].valeur_parametre == 1) {

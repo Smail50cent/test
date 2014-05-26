@@ -377,13 +377,12 @@ function ProduitNonAttribue(produit, idqop) {
     this.produit = produit;
     this.idqop = idqop;
 }
-function Personne() {
-    this.id;
-    this.nom;
-    this.prenom;
-    this.email;
-    this.urlProfileImg;
-    this.gender;
+function Personne(id, prenom, nom, email, urlProfileImg) {
+    this.id = id;
+    this.nom = nom;
+    this.prenom = prenom;
+    this.email = email;
+    this.urlProfileImg = urlProfileImg;
 
     this.setId = function(id) {
         this.id = id;
@@ -400,9 +399,6 @@ function Personne() {
     this.setUrlProfileImg = function(urlProfileImg) {
         this.urlProfileImg = urlProfileImg;
     };
-    this.setGender = function(gender) {
-        this.gender = gender;
-    };
     this.getId = function() {
         return this.id;
     };
@@ -417,9 +413,6 @@ function Personne() {
     };
     this.getUrlProfileImg = function() {
         return this.urlProfileImg;
-    };
-    this.getGender = function() {
-        return this.genderf;
     };
 }
 function Compte() {

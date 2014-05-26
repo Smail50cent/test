@@ -55,5 +55,7 @@ function ConnexionLocalWebSQL() {
     this.getAllPendingMethods = function(method,param) {
         console.log("TO DO");
     };
-    
+    this.deletePendingDataById = function(method, id, param) {
+        console.log("TO DO");
+    };
 }
