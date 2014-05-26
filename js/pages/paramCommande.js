@@ -46,6 +46,8 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
             // TO DO *
+
+            console.log("passage");
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
