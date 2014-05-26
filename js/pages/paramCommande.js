@@ -35,10 +35,10 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            startCommande($("#numTable").val(), $("#nbPersonnes").val());
-//            scripts.loadScripts("compte", function () {
-//                    onLoadCompte();
-//            });
+//            startCommande($("#numTable").val(), $("#nbPersonnes").val());
+            scripts.loadScripts("compte", function () {
+                    onLoadCompte();
+            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
@@ -46,8 +46,6 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
             // TO DO *
-
-            console.log("passage");
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
