@@ -3,11 +3,11 @@
  */
 var listePersonnes = new Array();
 function onLoadCompte() {
-    
-        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
-        var html = getAuthCompte();
-        $('#auth_form_id').html(html);
-        socialNetworkButtonAuth();
+
+    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+    var html = getAuthCompte();
+    $('#auth_form_id').html(html);
+    socialNetworkButtonAuth();
 }
 function authenCompte() {
 
@@ -40,15 +40,19 @@ function InscriCompte() {
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
-
-    $.get('./service/generatedForm/InscriptionForm.php', function(data) {
-        $('#auth_form_id').html(data);
-        var buttonValider = getButtonInscriFormUser();
-        $('#auth_form_id').append(buttonValider);
-    }, "text");
-}
-function AjoutVisiteur(){
     
+    var insciform = getGeneratedInscriForm();
+    $('#auth_form_id').html(insciform);
+    var buttonValider = getButtonInscriFormUser();
+    $('#auth_form_id').append(buttonValider);
+    
+}
+function ValiderInscri() {
+    
+    alert($('#prenom_user_id').val());
+}
+function AjoutVisiteur() {
+
     var fullname = $('input[id^="client_name_id"]').val();
     setLocalStorageValue("personnes.couverts", JSON.stringify(fullname));
     startCommande($("#numTable").val(), $("#nbPersonnes").val());
