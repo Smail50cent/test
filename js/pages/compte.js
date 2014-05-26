@@ -47,10 +47,16 @@ function getHtmlFormInscription() {
         $('#auth_form_id').append(buttonValider);
     }, "text");
 }
-
+function AjoutVisiteur(){
+    
+    var fullname = $('input[id^="client_name_id"]').val();
+    setLocalStorageValue("personnes.couverts", JSON.stringify(fullname));
+    startCommande($("#numTable").val(), $("#nbPersonnes").val());
+}
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
+            FacebookLogout();
             SNLogin("AVFB");
         }, 500);
     });
