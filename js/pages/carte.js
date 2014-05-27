@@ -1039,7 +1039,7 @@ function validerCommande() {
         var testsQop = clone(currentTicket.getQuantityOfProduct());
         var personnesProduitsListe = new Array();
         for (var i = 0; i < personnes.length; i++) {
-            var personne =null;
+            var personne = null;
             var produits = new Array();
             var totalPersonne = 0;
             for (var j = 0; j < (currentTicket.getQuantityOfProduct().length); j++) {
@@ -1051,9 +1051,12 @@ function validerCommande() {
                     testsQop.splice(index, 1);
                 }
             }
-            var personneProduit= new PersonneProduits(personne,produits);
-            personnesProduitsListe.push(personneProduit);
-            prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
+            if (personne != null) {
+                var personneProduit = new PersonneProduits(personne, produits);
+                personnesProduitsListe.push(personneProduit);
+                prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
+            }
+
         }
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;

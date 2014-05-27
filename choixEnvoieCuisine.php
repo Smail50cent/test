@@ -9,5 +9,6 @@
     <div id="div_liste_produit_user_id" class="div_liste_produit_user">
         <ul id="liste_produit_user_id" class="liste_produit_user">
         </ul>
+        <button id="valider_produit_user_id" onclick="validerEnvoieCuisine();"></button>
     </div>
 </div>

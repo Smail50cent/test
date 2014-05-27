@@ -5,6 +5,7 @@
 
 
 function onChoixEnvoieCuisineLoaded(toLoad) {
+    $("#valider_produit_user_id").text(strings.getString("label.envoie.cuisine.valider"));
     $(function() {
         $("#liste_produit_user_id").sortable({
             revert: true
@@ -19,8 +20,7 @@ function onChoixEnvoieCuisineLoaded(toLoad) {
     var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
     console.log(personnesProduits);
     $("#select_user_id").change(function() {
-        $(this);
-        remplirWithProduit()
+        remplirWithProduit($(this).val());
     });
     var htmlOption = getOptionPersonnes();
     for (var i = 0; i < personnesProduits.length; i++) {
@@ -38,7 +38,7 @@ function remplirWithProduit(id) {
     var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
     var produits;
     for (var i = 0; i < personnesProduits.length; i++) {
-        if(personnesProduits[i].personne.id == id){
+        if (personnesProduits[i].personne.id == id) {
             produits = personnesProduits[i].produits;
         }
     }
@@ -49,4 +49,7 @@ function remplirWithProduit(id) {
         itemLiProduit = paramValue(itemLiProduit, "id_produit", "item_produit_user_" + produits[j].id);
         $("#liste_produit_user_id").append(itemLiProduit);
     }
+}
+function validerEnvoieCuisine() {
+
 }
