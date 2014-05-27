@@ -8,11 +8,6 @@
     </div>
     <div id="div_liste_produit_user_id" class="div_liste_produit_user">
         <ul id="liste_produit_user_id" class="liste_produit_user">
-                <li class="ui-state-default">Item 1</li>
-                <li class="ui-state-default">Item 2</li>
-                <li class="ui-state-default">Item 3</li>
-                <li class="ui-state-default">Item 4</li>
-                <li class="ui-state-default">Item 5</li>
         </ul>
     </div>
 </div>
