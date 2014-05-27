@@ -61,7 +61,7 @@ function ValiderInscri() {
                 connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
                 connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
                 connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
-                
+
                 var personne = new Personne();
                 personne.setGender($('#sexe_user_id').val());
                 personne.setNom($('#nom_user_id').val());
@@ -69,9 +69,10 @@ function ValiderInscri() {
                 personne.getUrlProfileImg($('#photo_user_id').val());
                 personne.setEmail($('#email_user_id').val());
                 listePersonnes.push(personne);
-                
+
                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                startCommande($("#numTable").val(), $("#nbPersonnes").val());
+                $('#auth_popup_id').dialog("close");
+               
             }
         }
     });
@@ -81,15 +82,16 @@ function AjoutVisiteur() {
     var fullname = $('input[id^="client_name_id"]').val();
     var personne = new Personne();
     personne.setNom(fullname);
+    personne.setPrenom(fullname);
     listePersonnes.push(personne);
-    
+
     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-    startCommande($("#numTable").val(), $("#nbPersonnes").val());
+    $('#auth_popup_id').dialog("close");
+  
 }
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
-            FacebookLogout();
             SNLogin("AVFB");
         }, 500);
     });
@@ -124,5 +126,17 @@ function socialNetworkButtonAuth() {
 
             }
         }
+    }
+}
+
+function AuthToCommande() {
+    
+    if (listePersonnes.length == $("#nbPersonnes").val()) {
+        startCommande($("#numTable").val(), $("#nbPersonnes").val());
+    } else {
+        window.setTimeout(function() {
+            $('#auth_popup_id').dialog("open");
+        }, 500);
+
     }
 }

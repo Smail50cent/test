@@ -57,7 +57,11 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             
             scripts.loadScripts("compte", function() {
                 onLoadCompte();
+                $('div#auth_popup_id').bind('dialogclose', function(event) {
+                    AuthToCommande();
+                });
             });
+
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
