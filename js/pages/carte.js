@@ -1075,9 +1075,7 @@ function validerCommande() {
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
         currentTicket.type_commande = typecommande;
-        window.setTimeout(function() {
-            envoyerTicketServeur(currentTicket);
-        }, 100);
+        envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
 
