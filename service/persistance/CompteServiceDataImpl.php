@@ -20,7 +20,6 @@ class CompteServiceDataImpl implements CompteServiceData {
         while ($ligne = $return->fetch()) {
             $compte = new Compte();
             $compte->setId(intval($ligne->id));
-            $compte->setLogin($ligne->login);
             $compte->setPassword($ligne->password);
             $comptes[$i] = $compte;
             $i++;
@@ -35,7 +34,6 @@ class CompteServiceDataImpl implements CompteServiceData {
         $compte = new Compte();
         $ligne = $retour->fetch();
         $compte->setId(intval($ligne->id));
-        $compte->setLogin($ligne->login);
         $compte->setPassword($ligne->password);
 
         return $compte;
