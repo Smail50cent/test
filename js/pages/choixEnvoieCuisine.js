@@ -51,5 +51,5 @@ function remplirWithProduit(id) {
     }
 }
 function validerEnvoieCuisine() {
-
+    getRedirict("choixPaimentPersonnes.php",null);
 }

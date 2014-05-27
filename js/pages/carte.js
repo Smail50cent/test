@@ -1068,7 +1068,7 @@ function validerCommande() {
 
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-        getRedirict("./choixPaimentPersonnes.php", null);
+        getRedirict("./choixEnvoieCuisine.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {
