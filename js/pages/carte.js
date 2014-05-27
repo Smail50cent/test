@@ -7,7 +7,7 @@
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
-    var nbpersonne = parseInt(readCookie("paramCommande.nbPersonne"));
+    var nbpersonne = parseInt(getLocalStorageValue("paramCommande.nbPersonne"));
     if (nbpersonne != null) {
         if (nbpersonne > 1) {
             $('#footer_tarif_nbCouvert_label_id').html(strings.getString("carte.ticket.total.labelcouvertPlur"));
@@ -18,7 +18,7 @@ function gestionAffichageTVA(total) {
         $('#footer_tarif_totalparPersonne_label_id').html(strings.getString("carte.ticket.total.labelpersonne"));
         $('#footer_tarif_totalparPersonne_value_id').html(fntp(total / nbpersonne));
     }
-    var numTable = readCookie("paramCommande.numTable");
+    var numTable = getLocalStorageValue("paramCommande.numTable");
     if (numTable != null) {
         $('#footer_tarif_votreTable_label_id').html(strings.getString("carte.ticket.total.labeltable"));
         $('#footer_tarif_votreTable_value_id').html(numTable);
@@ -623,7 +623,7 @@ function etapeSuivante() {
     if (ask) {
         var optionSelectItem = getOptionInSelectItem();
         var selectInItemHtml = getSelectInItem();
-        var personnes = JSON.parse(readCookie("personnes.couverts"));
+        var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         for (var i = 0; i < qop.length; i++) {
             $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
             $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
@@ -718,10 +718,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             var inngredientArray = produit.getIdsIngredients();
             $("#content_produit_description_recap_id_" + qopid).html("");
             var description = $("#content_produit_description_recap_id_" + qopid);
-            var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
-            htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
-            htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
-            $("#content_produit_zone_recap_id_" + qopid).append(htmlButtonAjouter);
+
             var optionHtml = getItemOption();
             for (var i = 0; i < produit.options.length; i++) {
                 var optionItem = optionHtml;
@@ -747,10 +744,21 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                     }
                 });
             }
+            function MyParam(i, len) {
+                this.i = i;
+                this.len = len;
+            }
             for (var i = 0; i < inngredientArray.length; i++) {
                 if (inngredientArray[i].isAdded == true) {
                     var connexion = getConnexion();
                     connexion.getIngredientById(appendItem, inngredientArray[i].ingredient, 0);
+                }
+                console.log(i + "==" + inngredientArray.length);
+                if ((i + 1) == inngredientArray.length) {
+                    var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
+                    htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
+                    htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
+                    $("#content_produit_description_recap_id_" + qopid).append(htmlButtonAjouter);
                 }
             }
             function appendItem(ingredient, param) {
@@ -759,6 +767,7 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                 itemIngredient = paramValue(itemIngredient, "onclick", "blockIngredient(" + produitID + "," + ingredient.getId() + "," + qopid + ");");
                 itemIngredient = paramValue(itemIngredient, "id", "ing_" + ingredient.getId() + "_prod_" + produitID);
                 $("#content_produit_description_recap_id_" + qopid).append(itemIngredient);
+
             }
         }
         function printProduits(menu) {
@@ -988,8 +997,8 @@ function onTitreProduitClicked(produitID) {
 }
 
 function showDialogInfoPrix(total) {
-    var nbCouverts = readCookie("paramCommande.nbPersonne");
-    var numTable = readCookie("paramCommande.numTable");
+    var nbCouverts = getLocalStorageValue("paramCommande.nbPersonne");
+    var numTable = getLocalStorageValue("paramCommande.numTable");
     var showTime = 2;// secondes
     if ($("#info_prix_id").length) {
         $("#info_prix_content_couverts_content_id").html(nbCouverts);
@@ -1017,36 +1026,49 @@ function showDialogInfoPrix(total) {
         }, showTime * 1000);
     }
 }
-
+function PersonneProduits(personne, produits) {
+    this.personne = personne;
+    this.produits = produits;
+}
 function validerCommande() {
     var ask = confirm(strings.getString("label.info.confirm.valider.commande"));
     if (ask) {
         window.onbeforeunload = null;
         var prixparPersonnes = new Array();
-        var personnes = JSON.parse(readCookie("personnes.couverts"));
+        var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
+        var personnesProduitsListe = new Array();
         for (var i = 0; i < personnes.length; i++) {
+            var personne = null;
+            var produits = new Array();
             var totalPersonne = 0;
             for (var j = 0; j < (currentTicket.getQuantityOfProduct().length); j++) {
-
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
+                    personne = personnes[i];
+                    produits.push(currentTicket.getQuantityOfProduct()[j].product);
                     totalPersonne += currentTicket.getQuantityOfProduct()[j].product.prix;
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
             }
-            prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
+            if (personne != null) {
+                var personneProduit = new PersonneProduits(personne, produits);
+                personnesProduitsListe.push(personneProduit);
+                prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
+            }
+
         }
-        var numTable = readCookie("paramCommande.numTable");
+        var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
-        var typecommande = readCookie("type.commande");
+        var typecommande = getLocalStorageValue("type.commande");
         currentTicket.type_commande = typecommande;
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
-        envoyerTicketServeur(currentTicket);
-        createCookie("reste.personnes.paiment", JSON.stringify(prixparPersonnes), 1);
-//        getRedirict("./choixPaimentPersonnes.php", null);
+
+        setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
+        setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
+        getRedirict("./choixPaimentPersonnes.php", null);
     }
 }
 function envoyerTicketServeur(ticket) {

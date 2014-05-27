@@ -22,17 +22,7 @@ $(document).ready(function() {// thread connexion
         if (window.navigator.onLine) {
             if (isConnected == false) {
                 if (isLocalBddSuppored()) {
-                    var connexionLoc = getImplOfConnexionLocal();
-                    connexionLoc.getAllPendingMethods(function(pending) {
-                        var connexionSrv = getConnexionServeur();
-                        var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
-                        for (var i = 0; i < pending.length; i++) {
-                            if (pending[i].type === ticketTableDisc) {
-                                    var ticket = (pending[i].value);
-                                    connexionSrv.sendTicketToServeur(null, ticket, null);
-                            }
-                        }
-                    }, null);
+                    sendPendingsDatas();
                 }
             }
             isConnected = true;
@@ -74,7 +64,7 @@ function controller(entreprise) {
     switch (nom) {
         case "carte":
             method = function() {
-                var nbpersonne = readCookie("paramCommande.nbPersonne");
+                var nbpersonne = getLocalStorageValue("paramCommande.nbPersonne");
                 if (nbpersonne != null) {
                     printProduits(0);
                     var connexion = getConnexion();
@@ -103,27 +93,38 @@ function controller(entreprise) {
             break;
         case "reglement":
             method = function() {
-                var total = readCookie("reste.a.regler");
+                var total = getLocalStorageValue("reste.a.regler");
                 onReglementLoadStart(parseFloat(total));
             };
             hideLoading();
             break;
         case "choixPaimentPersonnes":
             method = function() {
-                var ticket = readCookie("ticket");
-                var nbCouverts = parseInt(readCookie("nbCouverts"));
+                var ticket = getLocalStorageValue("ticket");
+                var nbCouverts = parseInt(getLocalStorageValue("nbCouverts"));
                 onChoixPaimentPersonnesStart(nbCouverts, ticket);
             };
             hideLoading();
             break;
         case "compte":
             method = function() {
-
                 onLoadCompte();
             };
             hideLoading();
             break;
+        case "choixEnvoieCuisine":
+            method = function() {
+                onChoixEnvoieCuisineLoaded(0);
+                hideLoading();
+            };
+            break;
         case "":
+            hideLoading();
+            break;
+        case "index":
+            hideLoading();
+            break;
+        default :
             hideLoading();
             break;
     }
@@ -246,4 +247,18 @@ String.prototype.hashCode = function() {
         hash = hash & hash; // Convert to 32bit integer
     }
     return hash;
+};
+function sendPendingsDatas() {
+    var connexionLoc = getImplOfConnexionLocal();
+    connexionLoc.getAllPendingMethods(function(pending) {
+        var connexionSrv = getConnexionServeur();
+        var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
+        for (var i = 0; i < pending.length; i++) {
+            if (pending[i].type === ticketTableDisc) {
+                var ticket = (pending[i].value);
+                connexionSrv.sendTicketToServeur(null, ticket, null);
+                connexionSrv.deletePendingDataById(null, pending[i].id, null);
+            }
+        }
+    }, null);
 }

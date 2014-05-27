@@ -1,0 +1,7 @@
+<input type="file" class="photo_user" id="photo_user_id"><select id="sexe_user_id" class="sexe_user">
+    <option value="male">male</option>
+    <option value="female">female</option>
+</select><input type="text" class="prenom_user" id="prenom_user_id"><input type="text" class="nom_user" id="nom_user_id"><input type="date" class="datenaissance_user" id="datenaissance_user_id"><input type="email" class="email_user" id="email_user_id">
+<input type="password" class="password_user" id="password_user_id"><textarea rows="10" cols="50" id="adresse_user_id" class="adresse_user">
+value
+</textarea><input type="tel" class="tel_user" id="tel_user_id">

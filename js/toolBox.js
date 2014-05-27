@@ -73,3 +73,16 @@ function clone(obj) {
     }
     return copy;
 }
+function setLocalStorageValue(key, value) {
+    localStorage.setItem(key, value);
+}
+function getLocalStorageValue(key) {
+    if (key in localStorage) {
+        return localStorage.getItem(key);
+    } else {
+        return null;
+    }
+}
+function removeLocalStorageItem(key) {
+    localStorage.removeItem(key);
+}

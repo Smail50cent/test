@@ -419,7 +419,7 @@ function Personne() {
         return this.urlProfileImg;
     };
     this.getGender = function() {
-        return this.genderf;
+        return this.gender;
     };
 }
 function Compte() {

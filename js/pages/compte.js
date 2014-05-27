@@ -1,13 +1,13 @@
 /*
  * 
  */
-
+var listePersonnes = new Array();
 function onLoadCompte() {
-    
-        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
-        var html = getAuthCompte();
-        $('#auth_form_id').html(html);
-        socialNetworkButtonAuth();
+
+    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+    var html = getAuthCompte();
+    $('#auth_form_id').html(html);
+    socialNetworkButtonAuth();
 }
 function authenCompte() {
 
@@ -41,35 +41,73 @@ function InscriCompte() {
 }
 function getHtmlFormInscription() {
 
-    $.get('./service/generatedForm/InscriptionForm.php', function(data) {
-        $('#auth_form_id').html(data);
-        var buttonValider = getButtonInscriFormUser();
-        $('#auth_form_id').append(buttonValider);
-    }, "text");
-}
+    var insciform = getGeneratedInscriForm();
+    $('#auth_form_id').html(insciform);
+    var buttonValider = getButtonInscriFormUser();
+    $('#auth_form_id').append(buttonValider);
 
-function facebookAuth() {
+}
+function ValiderInscri() {
+    scripts.loadScripts("lib.social", function() {
+        var connexion = getConnexion();
+        if (!verifyEmail($('#email_user_id').val())) {
+            connexion.addCompte(InsertFromLastId, $('#password_user_id').val());
+            function InsertFromLastId(LastId) {
+                connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(3, $('#prenom_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(4, $('#datenaissance_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
+                connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
+                
+                var personne = new Personne();
+                personne.setGender($('#sexe_user_id').val());
+                personne.setNom($('#nom_user_id').val());
+                personne.setPrenom($('#prenom_user_id').val());
+                personne.getUrlProfileImg($('#photo_user_id').val());
+                personne.setEmail($('#email_user_id').val());
+                listePersonnes.push(personne);
+                
+                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                startCommande($("#numTable").val(), $("#nbPersonnes").val());
+            }
+        }
+    });
+}
+function AjoutVisiteur() {
+
+    var fullname = $('input[id^="client_name_id"]').val();
+    var personne = new Personne();
+    personne.setNom(fullname);
+    listePersonnes.push(personne);
     
+    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+    startCommande($("#numTable").val(), $("#nbPersonnes").val());
+}
+function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {
+            FacebookLogout();
             SNLogin("AVFB");
         }, 500);
     });
 }
-function twitterAuth() {
-
-
-}
-function googleAuth() {
-
-
-}
+//function twitterAuth() {
+//
+//
+//}
+//function googleAuth() {
+//
+//
+//}
 
 function socialNetworkButtonAuth() {
 
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
-    console.log("before");
+
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) {
             if (paramapps[i].valeur_parametre == 1) {

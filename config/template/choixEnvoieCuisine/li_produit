@@ -1,0 +1,3 @@
+<li id="{id_produit}">
+   <p>{label_produit}</p>
+</li>

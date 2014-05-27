@@ -41,4 +41,5 @@
     <string key="label.choixPaimentPersonne.titre">How would you start the invoice ?</string>
     <string key="label.button.produit.non.attr.attribuer">Assign</string>
     <string key="label.button.produit.non.attr.valider.selection">Confirm the selection</string>
+    <string key="label.envoie.cuisine.valider">Confirm</string>
 </strings>

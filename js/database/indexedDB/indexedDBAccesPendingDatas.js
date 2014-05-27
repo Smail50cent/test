@@ -66,3 +66,23 @@ myStorage.indexedDB.getAllPendingsDatas = function(method, param) {
     request.onerror = myStorage.indexedDB.onerror;
 
 };
+myStorage.indexedDB.deletePendingData = function(method,id,param) {
+    myStorage.indexedDB.load();
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    request.onsuccess = function(e) {
+        var db = e.target.result;
+        var trans = db.transaction([config.getConfig("tableNamePendingData")], myStorage.IDBTransactionModes.READ_WRITE);
+        var store = trans.objectStore(config.getConfig("tableNamePendingData"));
+        var request = store.delete(id);
+        trans.oncomplete = function(e) {
+            db.close();
+            if(method!=null){
+                method(param);
+            }
+        };
+        request.onerror = function(e) {
+            showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+        };
+    };
+    request.onerror = myStorage.indexedDB.onerror;
+};

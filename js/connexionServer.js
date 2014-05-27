@@ -483,7 +483,6 @@ function ConnexionServer() {
                     paramapps.push(paramapp);
                 }
                 method(paramapps);
-                
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
