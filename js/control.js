@@ -119,14 +119,13 @@ function controller(entreprise) {
             };
             break;
         case "":
-            method = function() {
-                hideLoading();
-            };
+            hideLoading();
+            break;
+        case "index":
+            hideLoading();
             break;
         default :
-            method = function() {
-                hideLoading();
-            };
+            hideLoading();
             break;
     }
     scripts.loadScripts(nom, method);
