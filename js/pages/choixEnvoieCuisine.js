@@ -2,8 +2,6 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-
-
 function onChoixEnvoieCuisineLoaded(toLoad) {
     $("#valider_produit_user_id").text(strings.getString("label.envoie.cuisine.valider"));
     $(function() {
@@ -46,11 +44,27 @@ function remplirWithProduit(id) {
     for (var j = 0; j < produits.length; j++) {
         var itemLiProduit = htmlLiProduit;
         itemLiProduit = paramValue(itemLiProduit, "label_produit", produits[j].nom);
+        itemLiProduit = paramValue(itemLiProduit, "idProduit", produits[j].id);
         itemLiProduit = paramValue(itemLiProduit, "id_produit", "item_produit_user_" + produits[j].id);
         $("#liste_produit_user_id").append(itemLiProduit);
     }
 }
+function setPriorityForCurrentList() {
+
+}
 function validerEnvoieCuisine() {
+    var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
     getLocalStorageValue("id.last.created.ticket");
+    var liste = $("#liste_produit_user_id").sortable("widget");
+    var id = $("#select_user_id").val();
+    for (var i = 0; i < personnesProduits.length; i++) {
+        if (personnesProduits[i].personne.id == id) {
+            for (var j = 0; j < personnesProduits[i].produits.length; j++) {
+                
+            }
+            break;
+        }
+    }
+    console.log(liste);
     getRedirict("choixPaimentPersonnes.php",null);
 }

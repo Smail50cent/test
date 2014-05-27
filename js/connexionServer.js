@@ -344,7 +344,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
             type: 'POST',
             data: {ticket: monTicket},
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 data = JSON.parse(data);
                 setLocalStorageValue("id.last.created.ticket",data.id);
