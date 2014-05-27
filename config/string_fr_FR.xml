@@ -41,4 +41,5 @@
     <string key="label.choixPaimentPersonne.titre">Comment souhaitez-vous repartir la facture ?</string>
     <string key="label.button.produit.non.attr.attribuer">Attribuer</string>
     <string key="label.button.produit.non.attr.valider.selection">Valider la selection</string>
+    <string key="label.envoie.cuisine.valider">Valider</string>
 </strings>
