@@ -8,14 +8,24 @@ include_once '../logique/entity/SousCategorie.php';
 include_once '../logique/entity/Categorie.php';
 include_once '../logique/LogiqueFactory.php';
 $ticketSrv = LogiqueFactory::getTicketService();
+
+class ToEncode {
+    public $id;
+    public function __construct($id) {
+        $this->id =$id;
+    }
+}
+
 if (isset($_POST["ticket"])) {
     $ticketToParse = json_decode($_POST["ticket"]);
     $ticket = parseToTicket($ticketToParse);
-    $ticketSrv->addNewTicket($ticket);
+    $id = $ticketSrv->addNewTicket($ticket);
+    echo json_encode(new ToEncode($id));
 } else {
     echo 'ERROR';
 }
-function parseToTicket($toparse){
+
+function parseToTicket($toparse) {
     $ticketToParse = $toparse;
     $ticket = new Ticket();
     $ticket->setId($ticketToParse->id);
@@ -35,7 +45,6 @@ function parseToTicket($toparse){
         $produit->setIngredients($ingredients);
         $produit->setNom($produitToParse->nom);
         $produit->setOptions($produitToParse->options);
-        print_r($produitToParse->options);
         $produit->setPrix($produitToParse->prix);
         $sousCategorie = new SousCategorie();
         $sousCategorie->setId($produitToParse->id_sousCategorie->id);
@@ -50,10 +59,11 @@ function parseToTicket($toparse){
         $qop->setProduct($produit);
         $qop->setPersonne($ticketToParse->quantityOfProducts[$i]->personne);
         $qops[$i] = $qop;
-    } 
+    }
     $ticket->setTable($ticketToParse->table);
     $ticket->setTypeCommande($ticketToParse->type_commande);
     $ticket->setQuantityOfProduct($qops);
     return $ticket;
 }
+
 ?>
