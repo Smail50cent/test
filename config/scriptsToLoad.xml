@@ -23,6 +23,7 @@
     <script for="lib">lib/jquery.js</script>
     <script for="lib.social" priority="1">lib/socialNetwork.js</script>
     <script for="lib.social" priority="2">lib/all.js</script>
+    <script for="lib.crypt">lib/SHA512.js</script>
     
     <script for="swipe">lib/jquery.event.move.js</script>
     <script for="swipe">lib/jquery.event.swipe.js</script>
