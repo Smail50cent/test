@@ -39,7 +39,7 @@ function remplirWithProduit(id) {
     var produits;
     for (var i = 0; i < personnesProduits.length; i++) {
         if (personnesProduits[i].personne.id == id) {
-            produits = personnesProduits[i].produits;
+            produits = personnesProduits[i].produitspriotite.produits;
         }
     }
     var htmlLiProduit = getLiProduit();
@@ -51,5 +51,6 @@ function remplirWithProduit(id) {
     }
 }
 function validerEnvoieCuisine() {
-
+    getLocalStorageValue("id.last.created.ticket");
+    getRedirict("choixPaimentPersonnes.php",null);
 }

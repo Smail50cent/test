@@ -7,7 +7,9 @@
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
-    var nbpersonne = parseInt(getLocalStorageValue("paramCommande.nbPersonne"));
+//    var nbpersonne = parseInt(personnes.couvertsgetLocalStorageValue("paramCommande.nbPersonne"));
+    var nbpersonne = JSON.parse(getLocalStorageValue("personnes.couverts"));
+    nbpersonne = parseInt(nbpersonne.length);
     if (nbpersonne != null) {
         if (nbpersonne > 1) {
             $('#footer_tarif_nbCouvert_label_id').html(strings.getString("carte.ticket.total.labelcouvertPlur"));
@@ -15,6 +17,7 @@ function gestionAffichageTVA(total) {
             $('#footer_tarif_nbCouvert_label_id').html(strings.getString("carte.ticket.total.labelcouvertSing"));
         }
         $('#footer_tarif_nbCouvert_value_id').html(nbpersonne);
+
         $('#footer_tarif_totalparPersonne_label_id').html(strings.getString("carte.ticket.total.labelpersonne"));
         $('#footer_tarif_totalparPersonne_value_id').html(fntp(total / nbpersonne));
     }
@@ -997,7 +1000,8 @@ function onTitreProduitClicked(produitID) {
 }
 
 function showDialogInfoPrix(total) {
-    var nbCouverts = getLocalStorageValue("paramCommande.nbPersonne");
+    var nbCouverts = JSON.parse(getLocalStorageValue("personnes.couverts"));
+    nbCouverts = parseInt(nbCouverts.length);
     var numTable = getLocalStorageValue("paramCommande.numTable");
     var showTime = 2;// secondes
     if ($("#info_prix_id").length) {
@@ -1026,18 +1030,24 @@ function showDialogInfoPrix(total) {
         }, showTime * 1000);
     }
 }
-function PersonneProduits(personne, produits) {
+function PersonneProduits(personne, produitspriotite) {
     this.personne = personne;
+    this.produitspriotite = produitspriotite;
+}
+function ProduitPriorite(produits, priorite) {
     this.produits = produits;
+    this.priorite = priorite;
 }
 function validerCommande() {
     var ask = confirm(strings.getString("label.info.confirm.valider.commande"));
     if (ask) {
         window.onbeforeunload = null;
+
         var prixparPersonnes = new Array();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
         var personnesProduitsListe = new Array();
+
         for (var i = 0; i < personnes.length; i++) {
             var personne = null;
             var produits = new Array();
@@ -1052,23 +1062,27 @@ function validerCommande() {
                 }
             }
             if (personne != null) {
-                var personneProduit = new PersonneProduits(personne, produits);
+                var personneProduit = new PersonneProduits(personne, new ProduitPriorite(produits, 0));
                 personnesProduitsListe.push(personneProduit);
                 prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
             }
+        }
 
+        for (var i = 0; i < testsQop.length; i++) {
+            prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
         currentTicket.type_commande = typecommande;
-        for (var i = 0; i < testsQop.length; i++) {
-            prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
-        }
-
+        window.setTimeout(function() {
+            envoyerTicketServeur(currentTicket);
+        }, 100);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-        getRedirict("./choixPaimentPersonnes.php", null);
+
+        getRedirict("./choixEnvoieCuisine.php", null);
+
     }
 }
 function envoyerTicketServeur(ticket) {

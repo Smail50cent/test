@@ -215,7 +215,6 @@ function postRedirict(url, args) {
 function getRedirict(page, args) {
     var param = "?";
     if (args != null) {
-        console.log("len= " + args.length);
         for (var i = 0; i < args.length; i++) {
             if (i >= 1) {
                 param += "&";

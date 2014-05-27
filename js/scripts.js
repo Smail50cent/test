@@ -45,9 +45,9 @@ scripts.loadScripts = function(forpage, method) {
             scriptsLoaded[i] = abonements[i].url;
             $.getScript("./js/" + abonements[i].url, function(data, textStatus, jqxhr) {
                 if (jqxhr.status != 200) {
-                    console.log("Error load script =" + $(this).attr('url'));
+//                    console.log("Error load script =" + $(this).attr('url'));
                 } else {
-                    console.log("Valid load script =" + $(this).attr('url'));
+//                    console.log("Valid load script =" + $(this).attr('url'));
                     for (var j = 0; j < scriptsLoaded.length; j++) {
                         if (($(this).attr('url').indexOf(scriptsLoaded[j]) != -1)) {
                             scriptsLoaded [j] = "ok";
@@ -65,7 +65,7 @@ scripts.loadScripts = function(forpage, method) {
                         if (method != null) {
                             method();
                         } else {
-                            console.log('method == null');
+//                            console.log('method == null');
                         }
                     }
 

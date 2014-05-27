@@ -346,6 +346,8 @@ function ConnexionServer() {
             data: {ticket: monTicket},
             async: true,
             success: function(data, textStatus, xhr) {
+                data = JSON.parse(data);
+                setLocalStorageValue("id.last.created.ticket",data.id);
                 if (method != null) {
                     method(param);
                 }
