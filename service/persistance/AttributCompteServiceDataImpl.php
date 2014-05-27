@@ -48,10 +48,25 @@ class AttributCompteServiceDataImpl implements AttributCompteServiceData {
         return $attcompte;
     }
 
-    public function addAll($id_form,$valeur_champ,$defaut,$id_compte) {
-        
+    public function addAll($id_form, $valeur_champ, $defaut, $id_compte) {
+
         $bdd = new ConnexionBDD();
-        $bdd->executeGeneric(" INSERT INTO attribut_compte(id_form,valeur_champ,defaut,id_compte) VALUES (". $id_form .",". $valeur_champ .",". $defaut .",". $id_compte .")");          
+        $bdd->executeGeneric(" INSERT INTO attribut_compte(id_form,valeur_champ,defaut,id_compte) VALUES (" . $id_form . "," . $valeur_champ . "," . $defaut . "," . $id_compte . ")");
+    }
+
+    public function getAllByIdCompte($id) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM attribut_compte WHERE id_compte=" . $id);
+        $attcompte = new AttributCompte();
+
+        $ligne = $retour->fetch();
+        $attcompte->setId(intval($ligne->id));
+        $attcompte->setId_form($ligne->id_form);
+        $attcompte->setValeur_champ($ligne->valeur_champ);
+        $attcompte->setDefaut($ligne->defaut);
+        $attcompte->setId_compte(intval($ligne->id_compte));
+
+        return $attcompte;
     }
 
 }
