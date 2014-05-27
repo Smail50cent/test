@@ -630,6 +630,13 @@ color: white;
         border-radius: 10px;
         padding: 3px;
     }
+    
+    .ui-widget {
+        position: relative;
+        width: 300px;
+        top: -420px;
+        margin: auto;
+    }
 
         /*-------------------------------------------------------------------------------------------*/
 
