@@ -2,47 +2,37 @@
  * 
  */
 var listePersonnes = new Array();
-function onLoadCompte() {
 
+function onLoadCompte() {
     $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
     var html = getAuthCompte();
     $('#auth_form_id').html(html);
     socialNetworkButtonAuth();
 }
 function authenCompte() {
-
     var logval = $('input[id^="compte_login_id"]').val();
     var passval = $('input[id^="compte_pass_id"]').val();
-
     var connexion = getConnexion();
     connexion.getAllAttributsComptesEmails(fromEmail);
     var personne = new Personne();
 
     function fromEmail(attcompte) {
-
         for (var i = 0; i < attcompte.length; i++) {
             if (attcompte[i].valeur_champ === logval) {
                 connexion.getCompteById(verifpass, attcompte[i].id_compte);
-
                 function verifpass(comptes) {
                     if (comptes.password === passval) {
                         connexion.getAttributCompteByIdCompte(allinfos, attcompte[i].id_compte);
-
                         function allinfos(data) {
                             for (var j = 0; j < data.length; j++) {
                                 if (data[j].id_form == 1) {
                                     personne.setGender(data[j].valeur_champ);
-
-
                                 } else if (data[j].id_form == 2) {
                                     personne.setPrenom(data[j].valeur_champ);
-
                                 } else if (data[j].id_form == 3) {
                                     personne.setNom(data[j].valeur_champ);
-
                                 } else if (data[j].id_form == 7) {
                                     personne.setEmail(data[j].valeur_champ);
-
                                 }
                             }
                             listePersonnes.push(personne);
@@ -56,7 +46,7 @@ function authenCompte() {
             break;
         }
     }
-    
+
 }
 
 function InscriCompte() {
@@ -66,18 +56,16 @@ function InscriCompte() {
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
-    
-    $.get("../service/generatedForm/InscriptionForm.php", function (){
-            var insciform = getGeneratedInscriForm();
-    $('#auth_form_id').html(insciform);
-    var buttonValider = getButtonInscriFormUser();
-    $('#auth_form_id').append(buttonValider);
-    var buttonretour = getButtonBackToAuth();
-    $('#auth_form_id').append(buttonretour);
+    $.get("../service/generatedForm/InscriptionForm.php", function() {
+        var insciform = getGeneratedInscriForm();
+        $('#auth_form_id').html(insciform);
+        var buttonValider = getButtonInscriFormUser();
+        $('#auth_form_id').append(buttonValider);
+        var buttonretour = getButtonBackToAuth();
+        $('#auth_form_id').append(buttonretour);
     });
 }
-function RetourAuth(){
-    
+function RetourAuth() {
     onLoadCompte();
 }
 function ValiderInscri() {
@@ -114,13 +102,11 @@ function ValiderInscri() {
     });
 }
 function AjoutVisiteur() {
-
     var fullname = $('input[id^="client_name_id"]').val();
     var personne = new Personne();
     personne.setNom(fullname);
     personne.setPrenom(fullname);
     listePersonnes.push(personne);
-
     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
     $('#auth_popup_id').dialog("close");
 
@@ -142,10 +128,8 @@ function facebookAuth() {
 //}
 
 function socialNetworkButtonAuth() {
-
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
-
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) {
             if (paramapps[i].valeur_parametre == 1) {
@@ -156,7 +140,7 @@ function socialNetworkButtonAuth() {
                 } else if (paramapps[i].nom_parametre === "Twitter") {
                     var html = getButtonTwitterAuth();
                     $('#button_twitter_id').html(html);
-                     $('#button_twitter_id').show();
+                    $('#button_twitter_id').show();
                 } else if (paramapps[i].nom_parametre === "Google+") {
                     var html = getButtonGoogleAuth();
                     $('#button_googleplus_id').html(html);
@@ -169,13 +153,11 @@ function socialNetworkButtonAuth() {
 }
 
 function AuthToCommande() {
-
     if (listePersonnes.length == $("#nbPersonnes").val()) {
         startCommande($("#numTable").val(), $("#nbPersonnes").val());
     } else {
         window.setTimeout(function() {
             $('#auth_popup_id').dialog("open");
         }, 500);
-
     }
 }
