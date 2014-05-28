@@ -60,11 +60,11 @@ function validerEnvoieCuisine() {
     for (var i = 0; i < personnesProduits.length; i++) {
         if (personnesProduits[i].personne.id == id) {
             for (var j = 0; j < personnesProduits[i].produits.length; j++) {
-                
+
             }
             break;
         }
     }
     console.log(liste);
-    getRedirict("choixPaimentPersonnes.php",null);
+    getRedirict("choixPaimentPersonnes.php", null);
 }
