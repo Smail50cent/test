@@ -4,7 +4,7 @@
 var listePersonnes = new Array();
 function onLoadCompte() {
 
-    $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+    $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
     var html = getAuthCompte();
     $('#auth_form_id').html(html);
     socialNetworkButtonAuth();
@@ -64,11 +64,14 @@ function InscriCompte() {
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
-
-    var insciform = getGeneratedInscriForm();
+    
+    $.get("../service/generatedForm/InscriptionForm.php", function (){
+            var insciform = getGeneratedInscriForm();
     $('#auth_form_id').html(insciform);
     var buttonValider = getButtonInscriFormUser();
     $('#auth_form_id').append(buttonValider);
+    });
+
 
 }
 function ValiderInscri() {
