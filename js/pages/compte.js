@@ -40,6 +40,7 @@ function authenCompte() {
                                         personne.setEmail(data[j].valeur_champ);
                                     }
                                 }
+                                personne.setId(idcompte);
                                 listePersonnes.push(personne);
                                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 $('#auth_popup_id').dialog("close");
@@ -110,9 +111,7 @@ function AjoutVisiteur() {
     var nom = $('input[id^="client_nom_id"]').val();
     var prenom = $('input[id^="client_prenom_id"]').val();
     var personne = new Personne();
-    personne.setNom(nom);
-    personne.setPrenom(prenom);
-    listePersonnes.push(personne);
+
     scripts.loadScripts("lib.social", function() {
         var connexion = getConnexion();
         if (!verifyEmail(personne.email)) {
@@ -120,6 +119,10 @@ function AjoutVisiteur() {
             function InsertFromLastId(LastId) {
                 connexion.addAttributCompte(2, personne.nom, 1, LastId);
                 connexion.addAttributCompte(3, personne.prenom, 1, LastId);
+                personne.setId(LastId);
+                personne.setNom(nom);
+                personne.setPrenom(prenom);
+                listePersonnes.push(personne);
                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                 $('#auth_popup_id').dialog("close");
             }
