@@ -1,5 +1,4 @@
 function ConnexionServer() {
-
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
@@ -14,7 +13,7 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
+//                    console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
                     if (parseInt(data.level) > parseInt(clientLevel)) {
                         updated = true;
                         pullNewData(methodToExecuteAfter);
