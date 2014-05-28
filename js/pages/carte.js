@@ -1067,7 +1067,6 @@ function validerCommande() {
                 prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
             }
         }
-
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
@@ -1078,9 +1077,7 @@ function validerCommande() {
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-
         getRedirict("./choixEnvoieCuisine.php", null);
-
     }
 }
 function envoyerTicketServeur(ticket) {
