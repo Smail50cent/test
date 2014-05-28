@@ -73,4 +73,7 @@ function ConnexionLocalIndexedDB() {
     this.getAttributCompteByIdCompte = function(method, id) {
         console.log("TO DO");
     };
+    this.sendPersonnePriority = function(method, personnePriority, param) {
+        myStorage.indexedDB.addPendingData(method, personnePriority, config.getConfig("tablePendingDataTypeProduitPriorite"), param);
+    };
 }

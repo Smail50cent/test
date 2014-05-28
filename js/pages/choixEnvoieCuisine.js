@@ -16,8 +16,8 @@ function onChoixEnvoieCuisineLoaded(toLoad) {
         $("ul, li").disableSelection();
     });
     var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
-    console.log(personnesProduits);
     $("#select_user_id").change(function() {
+        setPriorityForCurrentList();
         remplirWithProduit($(this).val());
     });
     var htmlOption = getOptionPersonnes();
@@ -37,34 +37,43 @@ function remplirWithProduit(id) {
     var produits;
     for (var i = 0; i < personnesProduits.length; i++) {
         if (personnesProduits[i].personne.id == id) {
-            produits = personnesProduits[i].produitspriotite.produits;
+            produits = personnesProduits[i].produitspriotite;
         }
     }
     var htmlLiProduit = getLiProduit();
     for (var j = 0; j < produits.length; j++) {
         var itemLiProduit = htmlLiProduit;
-        itemLiProduit = paramValue(itemLiProduit, "label_produit", produits[j].nom);
-        itemLiProduit = paramValue(itemLiProduit, "idProduit", produits[j].id);
-        itemLiProduit = paramValue(itemLiProduit, "id_produit", "item_produit_user_" + produits[j].id);
+        itemLiProduit = paramValue(itemLiProduit, "label_produit", produits[j].produit.nom);
+        itemLiProduit = paramValue(itemLiProduit, "idProduit", produits[j].produit.id);
+        itemLiProduit = paramValue(itemLiProduit, "id_produit", "item_produit_user_" + produits[j].produit.id);
         $("#liste_produit_user_id").append(itemLiProduit);
     }
 }
 function setPriorityForCurrentList() {
-
+    var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
+    var liste = $("#liste_produit_user_id").sortable("widget");
+    var id = $("#select_user_id").val();
+    for (var i = 0; i < liste.prevObject[0].childNodes.length; i++) {
+        var idpro = parseInt(liste.prevObject[0].childNodes[i].attributes[1].value);
+        for (var j = 0; j < personnesProduits.length; j++) {
+            if (id == personnesProduits[j].personne.id) {
+                for (var x = 0; x < personnesProduits[j].produitspriotite.length; x++) {
+                    if (personnesProduits[j].produitspriotite[x].produit.id == idpro) {
+                        personnesProduits[j].produitspriotite[x].priorite = (i + 1);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduits));
 }
 function validerEnvoieCuisine() {
     var personnesProduits = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
-    getLocalStorageValue("id.last.created.ticket");
-    var liste = $("#liste_produit_user_id").sortable("widget");
-    var id = $("#select_user_id").val();
-    for (var i = 0; i < personnesProduits.length; i++) {
-        if (personnesProduits[i].personne.id == id) {
-            for (var j = 0; j < personnesProduits[i].produits.length; j++) {
-
-            }
-            break;
-        }
-    }
-    console.log(liste);
+    setPriorityForCurrentList();
+    var lastTicketId = getLocalStorageValue("id.last.created.ticket");
+    var connexion = getConnexion();
+    connexion.sendPersonnePriority(null, {"ticketid": lastTicketId, "personneProduits": personnesProduits}, null);
     getRedirict("choixPaimentPersonnes.php", null);
 }
