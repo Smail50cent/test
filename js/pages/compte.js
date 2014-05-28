@@ -60,7 +60,9 @@ function authenCompte() {
 }
 
 function InscriCompte() {
-
+    $('#button_facebook_id').hide();
+    $('#button_twitter_id').hide();
+    $('#button_googleplus_id').hide();
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
@@ -70,9 +72,13 @@ function getHtmlFormInscription() {
     $('#auth_form_id').html(insciform);
     var buttonValider = getButtonInscriFormUser();
     $('#auth_form_id').append(buttonValider);
+    var buttonretour = getButtonBackToAuth();
+    $('#auth_form_id').append(buttonretour);
     });
-
-
+}
+function RetourAuth(){
+    
+    onLoadCompte();
 }
 function ValiderInscri() {
     scripts.loadScripts("lib.social", function() {
@@ -146,12 +152,15 @@ function socialNetworkButtonAuth() {
                 if (paramapps[i].nom_parametre === "Facebook") {
                     var html = getButtonFacebookAuth();
                     $('#button_facebook_id').html(html);
+                    $('#button_facebook_id').show();
                 } else if (paramapps[i].nom_parametre === "Twitter") {
                     var html = getButtonTwitterAuth();
                     $('#button_twitter_id').html(html);
+                     $('#button_twitter_id').show();
                 } else if (paramapps[i].nom_parametre === "Google+") {
                     var html = getButtonGoogleAuth();
                     $('#button_googleplus_id').html(html);
+                    $('#button_googleplus_id').show();
                 }
 
             }

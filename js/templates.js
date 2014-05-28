@@ -159,7 +159,9 @@ function getGeneratedInscriForm() {
 function getOptionPersonnes() {
     return templates.getTemplate("choixEnvoieCuisine/option_personnes");
 }
-
 function getLiProduit() {
     return templates.getTemplate("choixEnvoieCuisine/li_produit");
+}
+function getButtonBackToAuth() {
+    return templates.getTemplate("compte/Button_back_to_auth_form");
 }
