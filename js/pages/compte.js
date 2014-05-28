@@ -10,43 +10,48 @@ function onLoadCompte() {
     socialNetworkButtonAuth();
 }
 function authenCompte() {
-    var logval = $('input[id^="compte_login_id"]').val();
-    var passval = $('input[id^="compte_pass_id"]').val();
-    var connexion = getConnexion();
-    connexion.getAllAttributsComptesEmails(fromEmail);
-    var personne = new Personne();
 
-    function fromEmail(attcompte) {
-        for (var i = 0; i < attcompte.length; i++) {
-            if (attcompte[i].valeur_champ === logval) {
-                connexion.getCompteById(verifpass, attcompte[i].id_compte);
-                function verifpass(comptes) {
-                    if (comptes.password === passval) {
-                        connexion.getAttributCompteByIdCompte(allinfos, attcompte[i].id_compte);
-                        function allinfos(data) {
-                            for (var j = 0; j < data.length; j++) {
-                                if (data[j].id_form == 1) {
-                                    personne.setGender(data[j].valeur_champ);
-                                } else if (data[j].id_form == 2) {
-                                    personne.setPrenom(data[j].valeur_champ);
-                                } else if (data[j].id_form == 3) {
-                                    personne.setNom(data[j].valeur_champ);
-                                } else if (data[j].id_form == 7) {
-                                    personne.setEmail(data[j].valeur_champ);
+    scripts.loadScripts("lib.crypt", function() {
+        var logval = $('input[id^="compte_login_id"]').val();
+        var passval = $('input[id^="compte_pass_id"]').val();
+        var cryptedpass = SHA512(passval);
+
+        var connexion = getConnexion();
+        connexion.getAllAttributsComptesEmails(fromEmail);
+        var personne = new Personne();
+
+        function fromEmail(attcompte) {
+            for (var i = 0; i < attcompte.length; i++) {
+                if (attcompte[i].valeur_champ === logval) {
+                    var idcompte = attcompte[i].id_compte;
+                    connexion.getCompteById(verifpass, idcompte);
+                    function verifpass(comptes) {
+                        if (comptes.password === cryptedpass) {
+                            connexion.getAttributCompteByIdCompte(allinfos, idcompte);
+                            function allinfos(data) {
+                                for (var j = 0; j < data.length; j++) {
+                                    if (data[j].id_form == 1) {
+                                        personne.setGender(data[j].valeur_champ);
+                                    } else if (data[j].id_form == 2) {
+                                        personne.setPrenom(data[j].valeur_champ);
+                                    } else if (data[j].id_form == 3) {
+                                        personne.setNom(data[j].valeur_champ);
+                                    } else if (data[j].id_form == 7) {
+                                        personne.setEmail(data[j].valeur_champ);
+                                    }
                                 }
+                                listePersonnes.push(personne);
+                                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                                $('#auth_popup_id').dialog("close");
                             }
-                            listePersonnes.push(personne);
-                            setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                            $('#auth_popup_id').dialog("close");
+                        } else {
+                            alert("Incorrect Login or Password");
                         }
-
                     }
                 }
             }
-            break;
         }
-    }
-
+    });
 }
 
 function InscriCompte() {
@@ -102,14 +107,24 @@ function ValiderInscri() {
     });
 }
 function AjoutVisiteur() {
-    var fullname = $('input[id^="client_name_id"]').val();
+    var nom = $('input[id^="client_nom_id"]').val();
+    var prenom = $('input[id^="client_prenom_id"]').val();
     var personne = new Personne();
-    personne.setNom(fullname);
-    personne.setPrenom(fullname);
+    personne.setNom(nom);
+    personne.setPrenom(prenom);
     listePersonnes.push(personne);
-    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-    $('#auth_popup_id').dialog("close");
-
+    scripts.loadScripts("lib.social", function() {
+        var connexion = getConnexion();
+        if (!verifyEmail(personne.email)) {
+            connexion.addCompte(InsertFromLastId, "Visiteur");
+            function InsertFromLastId(LastId) {
+                connexion.addAttributCompte(2, personne.nom, 1, LastId);
+                connexion.addAttributCompte(3, personne.prenom, 1, LastId);
+                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                $('#auth_popup_id').dialog("close");
+            }
+        }
+    });
 }
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
