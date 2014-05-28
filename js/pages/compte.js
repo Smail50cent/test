@@ -19,7 +19,7 @@ function authenCompte() {
         var connexion = getConnexion();
         connexion.getAllAttributsComptesEmails(fromEmail);
         var personne = new Personne();
-        
+
         function fromEmail(attcompte) {
             for (var i = 0; i < attcompte.length; i++) {
                 if (attcompte[i].valeur_champ === logval) {
@@ -44,9 +44,9 @@ function authenCompte() {
                                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 $('#auth_popup_id').dialog("close");
                             }
-                        }else {
+                        } else {
                             alert("Incorrect Login or Password");
-                        } 
+                        }
                     }
                 }
             }
@@ -107,14 +107,24 @@ function ValiderInscri() {
     });
 }
 function AjoutVisiteur() {
-    var fullname = $('input[id^="client_name_id"]').val();
+    var nom = $('input[id^="client_nom_id"]').val();
+    var prenom = $('input[id^="client_prenom_id"]').val();
     var personne = new Personne();
-    personne.setNom(fullname);
-    personne.setPrenom(fullname);
+    personne.setNom(nom);
+    personne.setPrenom(prenom);
     listePersonnes.push(personne);
-    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-    $('#auth_popup_id').dialog("close");
-
+    scripts.loadScripts("lib.social", function() {
+        var connexion = getConnexion();
+        if (!verifyEmail(personne.email)) {
+            connexion.addCompte(InsertFromLastId, "Visiteur");
+            function InsertFromLastId(LastId) {
+                connexion.addAttributCompte(2, personne.nom, 1, LastId);
+                connexion.addAttributCompte(3, personne.prenom, 1, LastId);
+                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                $('#auth_popup_id').dialog("close");
+            }
+        }
+    });
 }
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
