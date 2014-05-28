@@ -501,10 +501,8 @@ function ConnexionServer() {
             async: true,
             success: function(data, textStatus, xhr) {
                 var compte = new Compte();
-
                 compte.setId(data.id);
                 compte.setPassword(data.password);
-
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(compte);
                 }
