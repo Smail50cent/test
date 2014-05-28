@@ -89,16 +89,16 @@ function clone(obj) {
     }
     return copy;
 }
-var encode = false;
+var encode = true;
 function setLocalStorageValue(key, value) {
-    if (encode) {
+    if (encode==true) {
         key = encodeString(key);
         value = encodeString(value);
     }
     localStorage.setItem(key, value);
 }
 function getLocalStorageValue(key) {
-    if (encode) {
+    if (encode==true) {
         key = encodeString(key);
     }
     if (key in localStorage) {

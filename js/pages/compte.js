@@ -61,7 +61,7 @@ function InscriCompte() {
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
-    $.get("../service/generatedForm/InscriptionForm.php", function() {
+    $.get("./service/generatedForm/InscriptionForm.php", function() {
         var insciform = getGeneratedInscriForm();
         $('#auth_form_id').html(insciform);
         var buttonValider = getButtonInscriFormUser();
@@ -89,7 +89,6 @@ function ValiderInscri() {
                     connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
                     connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
                     connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
-
                     var personne = new Personne();
                     personne.setGender($('#sexe_user_id').val());
                     personne.setNom($('#nom_user_id').val());
@@ -97,7 +96,6 @@ function ValiderInscri() {
                     personne.getUrlProfileImg($('#photo_user_id').val());
                     personne.setEmail($('#email_user_id').val());
                     listePersonnes.push(personne);
-
                     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                     $('#auth_popup_id').dialog("close");
 
