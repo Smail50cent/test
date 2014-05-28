@@ -11,28 +11,52 @@ function onLoadCompte() {
 }
 function authenCompte() {
 
-    $("input[type='text']").each(function() {
-        var connexion = getConnexion();
-        connexion.getAllComptes(verifCompte);
+    var logval = $('input[id^="compte_login_id"]').val();
+    var passval = $('input[id^="compte_pass_id"]').val();
 
-        var logval = $('input[id^="compte_login_id"]').val();
-        var passval = $('input[id^="compte_pass_id"]').val();
+    var connexion = getConnexion();
+    connexion.getAllAttributsComptesEmails(fromEmail);
+    var personne = new Personne();
 
-        find = false;
-        function verifCompte(comptes) {
-            for (var i = 0; i < comptes.length; i++) {
-                if (comptes[i].login === logval && comptes[i].password === passval) {
-                    find = true;
+    function fromEmail(attcompte) {
+
+        for (var i = 0; i < attcompte.length; i++) {
+            if (attcompte[i].valeur_champ === logval) {
+                connexion.getCompteById(verifpass, attcompte[i].id_compte);
+
+                function verifpass(comptes) {
+                    if (comptes.password === passval) {
+                        connexion.getAttributCompteByIdCompte(allinfos, attcompte[i].id_compte);
+
+                        function allinfos(data) {
+                            for (var j = 0; j < data.length; j++) {
+                                if (data[j].id_form == 1) {
+                                    personne.setGender(data[j].valeur_champ);
+
+
+                                } else if (data[j].id_form == 2) {
+                                    personne.setPrenom(data[j].valeur_champ);
+
+                                } else if (data[j].id_form == 3) {
+                                    personne.setNom(data[j].valeur_champ);
+
+                                } else if (data[j].id_form == 7) {
+                                    personne.setEmail(data[j].valeur_champ);
+
+                                }
+                            }
+                            listePersonnes.push(personne);
+                            setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                            $('#auth_popup_id').dialog("close");
+                        }
+
+                    }
                 }
             }
-            if (find) {
-                alert("Bienvenue");
-            } else {
-                alert("Login ou Mot de passe erroné !!!")
-            }
+            break;
         }
-    });
-
+    }
+    
 }
 
 function InscriCompte() {

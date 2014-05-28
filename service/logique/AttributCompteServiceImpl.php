@@ -29,9 +29,14 @@ class AttributCompteServiceImpl implements AttributCompteService {
         $attcompte = $this->attcompteSrv->addAll($id_form, $valeur_champ, $defaut, $id_compte);
     }
 
-    public function getAllByIdCompte($id) {
-        $attcompte = $this->attcompteSrv->getAllByIdCompte($id);
+    public function getAllEmails() {
+        $attcompte = $this->attcompteSrv->getAllEmails();
         return $attcompte;
+    }
+
+    public function getByIdCompte($id) {
+        $attcompte = $this->attcompteSrv->getByIdCompte($id);
+        return $attcompte;        
     }
 
 }

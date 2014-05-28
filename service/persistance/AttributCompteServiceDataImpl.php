@@ -54,19 +54,44 @@ class AttributCompteServiceDataImpl implements AttributCompteServiceData {
         $bdd->executeGeneric(" INSERT INTO attribut_compte(id_form,valeur_champ,defaut,id_compte) VALUES (" . $id_form . "," . $valeur_champ . "," . $defaut . "," . $id_compte . ")");
     }
 
-    public function getAllByIdCompte($id) {
+    public function getAllEmails() {
+        $attcomptes = array();
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM attribut_compte WHERE id_compte=" . $id);
-        $attcompte = new AttributCompte();
+        $return = $bdd->executeGeneric("SELECT * FROM attribut_compte where id_form=7 ");
+        $i = 0;
 
-        $ligne = $retour->fetch();
-        $attcompte->setId(intval($ligne->id));
-        $attcompte->setId_form($ligne->id_form);
-        $attcompte->setValeur_champ($ligne->valeur_champ);
-        $attcompte->setDefaut($ligne->defaut);
-        $attcompte->setId_compte(intval($ligne->id_compte));
+        while ($ligne = $return->fetch()) {
 
-        return $attcompte;
+            $attcompte = new AttributCompte();
+            $attcompte->setId(intval($ligne->id));
+            $attcompte->setId_form($ligne->id_form);
+            $attcompte->setValeur_champ($ligne->valeur_champ);
+            $attcompte->setDefaut($ligne->defaut);
+            $attcompte->setId_compte(intval($ligne->id_compte));
+            $attcomptes[$i] = $attcompte;
+            $i++;
+        }
+        return $attcomptes;
+    }
+
+    public function getByIdCompte($id) {
+        $attcomptes = array();
+        $bdd = new ConnexionBDD();
+        $return = $bdd->executeGeneric("SELECT * FROM attribut_compte where id_compte=".$id);
+        $i = 0;
+
+        while ($ligne = $return->fetch()) {
+
+            $attcompte = new AttributCompte();
+            $attcompte->setId(intval($ligne->id));
+            $attcompte->setId_form($ligne->id_form);
+            $attcompte->setValeur_champ($ligne->valeur_champ);
+            $attcompte->setDefaut($ligne->defaut);
+            $attcompte->setId_compte(intval($ligne->id_compte));
+            $attcomptes[$i] = $attcompte;
+            $i++;
+        }
+        return $attcomptes;
     }
 
 }

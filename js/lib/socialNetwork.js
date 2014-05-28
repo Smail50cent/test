@@ -44,8 +44,8 @@ function getFacebookUserInfo(infopersonne) {
         var name = fullname.split(' '); // get Last and First Name
         var personne = new Personne();
         personne.setId(response.id);
-        personne.setNom(name[0]);
-        personne.setPrenom(name[1]);
+        personne.setNom(name[1]);
+        personne.setPrenom(name[0]);
         personne.setEmail(response.email);
         personne.setGender(response.gender);
         addPersonne(personne, "AVFB");

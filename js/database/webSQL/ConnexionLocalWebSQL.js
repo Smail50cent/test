@@ -52,10 +52,16 @@ function ConnexionLocalWebSQL() {
     this.getAllAttributsComptes = function(method) {
         console.log("TO DO");
     };
-    this.getAllPendingMethods = function(method,param) {
+    this.getAllPendingMethods = function(method, param) {
         console.log("TO DO");
     };
     this.deletePendingDataById = function(method, id, param) {
         console.log("TO DO");
     };
+    this.getCompteById = function(method, id) {
+        console.log("TO DO");
+    };
+    this.getAttributCompteByIdCompte = function(method, id) {
+        console.log("TO DO");
+    };    
 }
