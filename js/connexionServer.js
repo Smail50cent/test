@@ -567,4 +567,7 @@ function ConnexionServer() {
             }
         });
     };
+    this.sendPersonnePriority = function (method,personnePriority,param){
+        console.log("TO DO");
+    };
 }

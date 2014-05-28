@@ -64,4 +64,7 @@ function ConnexionLocalWebSQL() {
     this.getAttributCompteByIdCompte = function(method, id) {
         console.log("TO DO");
     };    
+    this.sendPersonnePriority = function (method,personnePriority,param){
+        console.log("TO DO");
+    };
 }

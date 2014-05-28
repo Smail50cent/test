@@ -52,5 +52,6 @@
         <variable name="connexion.rs.facebook.appId">1496340477251539</variable>
         <variable name="tableNamePendingData">pendingdatas</variable>
         <variable name="tablePendingDataTypeTicket">TICKET</variable>
+        <variable name="tablePendingDataTypeProduitPriorite">PRODUIT_PRIORITY</variable>
     </variables>
 </application>
