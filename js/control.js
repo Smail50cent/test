@@ -269,22 +269,3 @@ function sendPendingsDatas() {
         }
     }, null);
 }
-
-
-
-
-//function sendPendingsDatas() {
-//    var connexionLoc = getImplOfConnexionLocal();
-//    connexionLoc.getAllPendingMethods(function(pendings) {
-//        var connexionSrv = getConnexionServeur();
-//        var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
-//        for (var i = 0; i < pendings.length; i++) {
-//            
-//            if (pendings[i].type === ticketTableDisc) {
-//                var ticket = (pendings[i].value);
-//                connexionSrv.sendTicketToServeur(null, ticket, null);
-//                connexionSrv.deletePendingDataById(null, pendings[i].id, null);
-//            }
-//        }
-//    }, null);
-//}
