@@ -16,6 +16,7 @@
         <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
+        <variable name="serveur.clientaccess.serviceGetAllAttributsComptesEmails">getAllAttributsComptesEmails</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
@@ -27,6 +28,7 @@
         <variable name="serveur.clientaccess.serviceGetCompteById">getCompteById</variable>
         <variable name="serveur.clientaccess.serviceGetParamFormById">getParamFormById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteById">getAttributCompteById</variable>
+        <variable name="serveur.clientaccess.serviceGetAttributCompteByIdCompte">getAttributCompteByIdCompte</variable>
         <variable name="serveur.clientaccess.serviceAddAttributCompte">addAttributCompte</variable>
         <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
@@ -50,5 +52,7 @@
         <variable name="connexion.rs.facebook.appId">1496340477251539</variable>
         <variable name="tableNamePendingData">pendingdatas</variable>
         <variable name="tablePendingDataTypeTicket">TICKET</variable>
+        <variable name="tablePendingDataTypeProduitPriorite">PRODUIT_PRIORITY</variable>
+        <variable name="serveur.clientaccess.setPersonnePriority">setPersonnePriority</variable>
     </variables>
 </application>

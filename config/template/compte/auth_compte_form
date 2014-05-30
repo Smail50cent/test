@@ -1,11 +1,16 @@
 <div id="auth_compte_id" class="auth_compte" >
+    <div id="client_form_id" class="client_form">
     <p id="label_login_connexion_id" class="label_login_connexion">Login</p>  <input type="text" name="login" id="compte_login_id" class="compte_login" required>
     <p id="label_password_connexion_id" class="label_password_connexion">Mot de passe</p>  <input type="password" name="password" id="compte_pass_id" class="compte_pass" required>
     
     <div id="button_authen_compte_id" class="button_authen_compte"> <input type="submit" value="Login" onclick="authenCompte()"> </div>
-
     <div id="button_inscri_compte_id" class="button_inscri_compte"> <input type="submit" value="Inscription" onclick="InscriCompte()"> </div>
+    </div>
 
-    <div id="vclient_id" class="vclient"> <p id="label_vclient_ajout_id" class="label_vclient_ajout">Nom Visiteur </p> <input type="text" id="client_name_id" class="client_name"> </div>
+    <div id="vclient_form_id" class="vclient_form"> 
+    <p id="label_vclient_ajout_id" class="label_vclient_ajout">Nom Visiteur </p> 
+    <label id="prenom_visiteur_id" class="prenom_visiteur">Prenom</label><input type="text" id="client_prenom_id" class="client_prenom">
+    <label id="nom_visiteur_id" class="nom_visiteur">Nom</label><input type="text" id="client_nom_id" class="client_nom">
+     </div>
     <div id="button_ajout_vclient_id" class="button_ajout_vclient"> <input type="submit" value="Valider" onclick="AjoutVisiteur()"> </div>
 </div>

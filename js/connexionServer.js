@@ -1,5 +1,4 @@
 function ConnexionServer() {
-
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
@@ -14,7 +13,7 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
+//                    console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
                     if (parseInt(data.level) > parseInt(clientLevel)) {
                         updated = true;
                         pullNewData(methodToExecuteAfter);
@@ -344,10 +343,10 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
             type: 'POST',
             data: {ticket: monTicket},
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 data = JSON.parse(data);
-                setLocalStorageValue("id.last.created.ticket",data.id);
+                setLocalStorageValue("id.last.created.ticket", data.id);
                 if (method != null) {
                     method(param);
                 }
@@ -425,7 +424,7 @@ function ConnexionServer() {
                     paramform.setId(data[i].id);
                     paramform.setId_form(data[i].id_form);
                     paramform.setValeur_champ(data[i].valeur_champ);
-                    paramform.setDefault(data[i].default);
+                    paramform.setDefaut(data[i].defaut);
                     paramform.setId_compte(data[i].id_compte);
                     paramforms.push(paramform);
                 }
@@ -488,6 +487,97 @@ function ConnexionServer() {
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getCompteById = function(method, id) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetCompteById") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var compte = new Compte();
+                compte.setId(data.id);
+                compte.setPassword(data.password);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(compte);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllAttributsComptesEmails = function(method) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptesEmails"),
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                var paramforms = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var paramform = new AttributCompte();
+                    paramform.setId(data[i].id);
+                    paramform.setId_form(data[i].id_form);
+                    paramform.setValeur_champ(data[i].valeur_champ);
+                    paramform.setDefaut(data[i].defaut);
+                    paramform.setId_compte(data[i].id_compte);
+                    paramforms.push(paramform);
+                }
+                method(paramforms);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAttributCompteByIdCompte = function(method, id) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var attcomptes = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var attcompte = new AttributCompte();
+                    attcompte.setId(data[i].id);
+                    attcompte.setId_compte(data[i].id_compte);
+                    attcompte.setId_form(data[i].id_form);
+                    attcompte.setDefaut(data[i].defaut);
+                    attcompte.setValeur_champ(data[i].valeur_champ);
+                    attcomptes.push(attcompte);
+                }
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(attcomptes);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.sendPersonnePriority = function(method, personnePriority, param) {
+        var personnePriority2 = JSON.stringify(personnePriority);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.setPersonnePriority"),
+            type: 'POST',
+            data: {personnePriority: personnePriority2},
+            async: false,
+            success: function(data, textStatus, xhr) {
+                console.log(data);
+                if (method != null) {
+                    method(param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

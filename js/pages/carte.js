@@ -1034,8 +1034,8 @@ function PersonneProduits(personne, produitspriotite) {
     this.personne = personne;
     this.produitspriotite = produitspriotite;
 }
-function ProduitPriorite(produits, priorite) {
-    this.produits = produits;
+function ProduitPriorite(produit, priorite) {
+    this.produit = produit;
     this.priorite = priorite;
 }
 function validerCommande() {
@@ -1055,19 +1055,18 @@ function validerCommande() {
             for (var j = 0; j < (currentTicket.getQuantityOfProduct().length); j++) {
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
                     personne = personnes[i];
-                    produits.push(currentTicket.getQuantityOfProduct()[j].product);
+                    produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
                     totalPersonne += currentTicket.getQuantityOfProduct()[j].product.prix;
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
             }
             if (personne != null) {
-                var personneProduit = new PersonneProduits(personne, new ProduitPriorite(produits, 0));
+                var personneProduit = new PersonneProduits(personne, produits);
                 personnesProduitsListe.push(personneProduit);
                 prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
             }
         }
-
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
@@ -1075,14 +1074,10 @@ function validerCommande() {
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
         currentTicket.type_commande = typecommande;
-        window.setTimeout(function() {
-            envoyerTicketServeur(currentTicket);
-        }, 100);
+        envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-
         getRedirict("./choixEnvoieCuisine.php", null);
-
     }
 }
 function envoyerTicketServeur(ticket) {

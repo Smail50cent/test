@@ -196,7 +196,6 @@ myStorage.indexedDB.addFistMenus = function() {
 };
 myStorage.indexedDB.addFistEntreprise = function() {
     myStorage.indexedDB.load();
-    console.log(getServicePath("serveur.clientaccess.serviceGetEntreprise"));
     var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
     request.onsuccess = function(e) {
         var db = e.target.result;

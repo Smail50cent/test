@@ -249,15 +249,23 @@ String.prototype.hashCode = function() {
 };
 function sendPendingsDatas() {
     var connexionLoc = getImplOfConnexionLocal();
-    connexionLoc.getAllPendingMethods(function(pending) {
+    connexionLoc.getAllPendingMethods(function(pendings) {
         var connexionSrv = getConnexionServeur();
+        var produitPriorite = config.getConfig("tablePendingDataTypeProduitPriorite");
         var ticketTableDisc = config.getConfig("tablePendingDataTypeTicket");
-        for (var i = 0; i < pending.length; i++) {
-            if (pending[i].type === ticketTableDisc) {
-                var ticket = (pending[i].value);
-                connexionSrv.sendTicketToServeur(null, ticket, null);
-                connexionSrv.deletePendingDataById(null, pending[i].id, null);
+        for (var i = 0; i < pendings.length; i++) {
+            switch (pendings[i].type) {
+                case ticketTableDisc:
+                    var ticket = (pendings[i].value);
+                    connexionSrv.sendTicketToServeur(null, ticket, null);
+                    break;
+                case produitPriorite:
+                    var prodPrio = (pendings[i].value);
+                    connexionSrv.sendPersonnePriority(null, prodPrio, null);
+                    break;
+
             }
+            connexionSrv.deletePendingDataById(null, pendings[i].id, null);
         }
     }, null);
 }

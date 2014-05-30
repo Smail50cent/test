@@ -19,7 +19,7 @@ myStorage.indexedDB.addTicketToBdd = function(method, ticket, param) {
             "type": type
         });
         trans.oncomplete = function(e) {
-            
+
             db.close();
         };
         request.onerror = function(e) {
@@ -66,7 +66,7 @@ myStorage.indexedDB.getAllPendingsDatas = function(method, param) {
     request.onerror = myStorage.indexedDB.onerror;
 
 };
-myStorage.indexedDB.deletePendingData = function(method,id,param) {
+myStorage.indexedDB.deletePendingData = function(method, id, param) {
     myStorage.indexedDB.load();
     var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
     request.onsuccess = function(e) {
@@ -76,9 +76,32 @@ myStorage.indexedDB.deletePendingData = function(method,id,param) {
         var request = store.delete(id);
         trans.oncomplete = function(e) {
             db.close();
-            if(method!=null){
+            if (method != null) {
                 method(param);
             }
+        };
+        request.onerror = function(e) {
+            showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+        };
+    };
+    request.onerror = myStorage.indexedDB.onerror;
+};
+myStorage.indexedDB.addPendingData = function(method, data, type, param) {
+    myStorage.indexedDB.load();
+    var id = JSON.stringify(data).hashCode();
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    request.onsuccess = function(e) {
+        var db = e.target.result;
+        var trans = db.transaction([config.getConfig("tableNamePendingData")], myStorage.IDBTransactionModes.READ_WRITE);
+        var store = trans.objectStore(config.getConfig("tableNamePendingData"));
+        var request;
+        request = store.put({
+            "id": id,
+            "value": JSON.stringify(data),
+            "type": type
+        });
+        trans.oncomplete = function(e) {
+            db.close();
         };
         request.onerror = function(e) {
             showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));

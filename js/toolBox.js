@@ -1,28 +1,44 @@
-var key = "SXGWLZPDOKFIVUHJYTQBNMACERxswgzldpkoifuvjhtybqmncare";
-function decodeString(coded) {
-    coded = decodeURIComponent(coded);
-    var uncoded = "";
-    var chr;
-    for (var i = coded.length - 1; i >= 0; i--) {
-        chr = coded.charAt(i);
-        uncoded += (chr >= "a" && chr <= "z" || chr >= "A" && chr <= "Z") ?
-                String.fromCharCode(65 + key.indexOf(chr) % 26) :
-                chr;
+String.prototype.toEncodedString = function() {
+    var ostr = this.toString().replace(/\s+/g, '');
+    var x, nstr = '', len = ostr.length;
+    for (x = 0; x < len; ++x) {
+        nstr += (255 - ostr.charCodeAt(x)).toString(36).toUpperCase().toPaddedString(2, '0');
     }
-    return uncoded;
-}
-function encodeString(uncoded) {
-    uncoded = uncoded.toUpperCase().replace(/^\s+|\s+$/g, "");
-    var coded = "";
-    var chr;
-    for (var i = uncoded.length - 1; i >= 0; i--) {
-        chr = uncoded.charCodeAt(i);
-        coded += (chr >= 65 && chr <= 90) ?
-                key.charAt(chr - 65 + 26 * Math.floor(Math.random() * 2)) :
-                String.fromCharCode(chr);
+    return nstr;
+};
+String.prototype.fromEncodedString = function() {
+    var ostr = this.toString();
+    var x, nstr = '', len = ostr.length;
+    for (x = 0; x < len; x += 2) {
+        nstr += String.fromCharCode(255 - parseInt(ostr.substr(x, 2), 36));
     }
-    return encodeURIComponent(coded);
+    return nstr;
+};
+Number.prototype.toPaddedString = function(len, pad) {
+    len = (len) ? Number(len) : 2;
+    var dflt = (isNaN(this.toString())) ? " " : "0";
+    pad = (pad) ? pad.toString().substr(0, 1) : dflt;
+    var str = this.toString();
+    if (dflt == "0") {
+        while (str.length < len)
+            str = pad + str;
+    }
+    else {
+        while (str.length < len)
+            str += pad;
+    }
+    return str;
+};
+String.prototype.toPaddedString = Number.prototype.toPaddedString;
+
+function encodeString(toencode) {
+    toencode = toencode.toString();
+    return toencode.toEncodedString();
 }
+function decodeString(encoded) {
+    return encoded.fromEncodedString();
+}
+
 function createCookie(name, value, days) {
 //    value = encode(value);
     if (days) {
@@ -73,12 +89,23 @@ function clone(obj) {
     }
     return copy;
 }
+function toEncoded() {
+    return true;
+}
 function setLocalStorageValue(key, value) {
+//    if (toEncoded()) {
+//        key = encodeString(key);
+//        value = encodeString(value);
+//    }
     localStorage.setItem(key, value);
 }
 function getLocalStorageValue(key) {
+//    if (toEncoded()) {
+//        key = encodeString(key);
+//    }
     if (key in localStorage) {
-        return localStorage.getItem(key);
+//        return decodeString(localStorage.getItem(key));
+        return (localStorage.getItem(key));
     } else {
         return null;
     }

@@ -563,7 +563,7 @@ function AttributCompte() {
     this.setId_compte = function(id_compte) {
         this.id_compte = id_compte;
     };
-    this.setDefault = function(defaut) {
+    this.setDefaut = function(defaut) {
         this.defaut = defaut;
     };
     this.getId = function() {
@@ -578,7 +578,7 @@ function AttributCompte() {
     this.getId_compte = function() {
         return this.id_compte;
     };
-    this.getDefault = function() {
+    this.getDefaut = function() {
         return this.defaut;
     };
 }
