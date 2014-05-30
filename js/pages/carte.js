@@ -751,13 +751,16 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
                 this.i = i;
                 this.len = len;
             }
+            var haveIngSup = false;
             for (var i = 0; i < inngredientArray.length; i++) {
+                if(inngredientArray[i].isIngredientSup == true){
+                    haveIngSup=true;
+                }
                 if (inngredientArray[i].isAdded == true) {
                     var connexion = getConnexion();
                     connexion.getIngredientById(appendItem, inngredientArray[i].ingredient, 0);
                 }
-                console.log(i + "==" + inngredientArray.length);
-                if ((i + 1) == inngredientArray.length) {
+                if ((i + 1) == inngredientArray.length && haveIngSup == true) {
                     var htmlButtonAjouter = getButtonAjouterIngInProduitRecap();
                     htmlButtonAjouter = paramValue(htmlButtonAjouter, "onclick", "ajouterIngredient(" + produitID + "," + qopid + ");");
                     htmlButtonAjouter = paramValue(htmlButtonAjouter, "value", strings.getString("label.recapitulatif.button.ajouter.ingredient"));
