@@ -18,4 +18,6 @@ interface TicketServiceData {
     public function addDeletedIngredients($ingredient, $idCommandeProduit);
 
     public function addOptionCommande($idOption, $idOptionValue, $idCommandeProduit);
+    
+    public function updatePriorite($priorite,$idProduit,$idCommande);
 }

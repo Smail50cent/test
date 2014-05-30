@@ -75,5 +75,5 @@ function validerEnvoieCuisine() {
     var lastTicketId = getLocalStorageValue("id.last.created.ticket");
     var connexion = getConnexion();
     connexion.sendPersonnePriority(null, {"ticketid": lastTicketId, "personneProduits": personnesProduits}, null);
-//    getRedirict("choixPaimentPersonnes.php", null);
+    getRedirict("choixPaimentPersonnes.php", null);
 }
