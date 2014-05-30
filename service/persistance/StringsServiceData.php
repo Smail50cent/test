@@ -10,4 +10,5 @@ interface StringsServiceData{
     
     public function getAll();
     public function getById($id);
+    public function getByLang($lang);
 }

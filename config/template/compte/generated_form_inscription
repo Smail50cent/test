@@ -1,4 +1,5 @@
 <div id="1_sexe_user_id" class="1_sexe_user"><select id="sexe_user_id" class="sexe_user">
+    <option value="Sexe" selected disabled>Sexe</option>
     <option value="male">male</option>
     <option value="female">female</option>
 </select></div><div id="3_prenom_user_id" class="3_prenom_user"><input type="text" class="prenom_user" id="prenom_user_id" placeholder="Prenom"></div><div id="2_nom_user_id" class="2_nom_user"><input type="text" class="nom_user" id="nom_user_id" placeholder="Nom"></div><div id="4_datenaissance_user_id" class="4_datenaissance_user"><input type="date" class="datenaissance_user" id="datenaissance_user_id"></div><div id="7_email_user_id" class="7_email_user"><input type="email" class="email_user" id="email_user_id" placeholder="Email">

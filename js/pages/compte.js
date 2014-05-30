@@ -60,7 +60,8 @@ function InscriCompte() {
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
-    $.get("./service/generatedForm/InscriptionForm.php", function() {
+    var langselect = getLocalStorageValue("language");
+    $.get("./service/generatedForm/InscriptionForm.php?lang=",{lang : langselect}, function() {
         var insciform = getGeneratedInscriForm();
         $('#auth_form_id').html(insciform);
         var buttonValider = getButtonInscriFormUser();

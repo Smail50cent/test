@@ -43,4 +43,21 @@ class StringsServiceDataImpl implements StringsServiceData {
         return $strings;
     }
 
+    public function getByLang($lang) {
+        $stringss = array();
+        $bdd = new ConnexionBDD();
+        $return = $bdd->executeGeneric("SELECT * FROM strings WHERE lang='".$lang."'");
+        $i = 0;
+        while ($ligne = $return->fetch()) {
+            $strings = new Strings();
+            $strings->setId(intval($ligne->id));
+            $strings->setLang($ligne->lang);
+            $strings->setValue($ligne->value);
+            $strings->setKey_lang($ligne->key_lang);
+            $stringss[$i] = $strings;
+            $i++;
+        }
+        return $stringss;
+    }
+
 }
