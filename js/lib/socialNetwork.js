@@ -8,7 +8,7 @@ function addPersonne(personne, dicriminent) {
             connexion.addAttributCompte(2, personne.nom, 1, LastId);
             connexion.addAttributCompte(3, personne.prenom, 1, LastId);
             connexion.addAttributCompte(7, personne.email, 1, LastId);
-            getFacebookPhoto(connexion, LastId);
+            getFacebookPhoto();
         }
     }
 }
@@ -25,7 +25,7 @@ function SNLogin(typeRs) {
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                             FacebookLogout();
-                            $('#auth_popup_id').dialog("close");
+                            //$('#auth_popup_id').dialog("close");
                         }
                     } else
                     {
@@ -53,10 +53,11 @@ function getFacebookUserInfo(infopersonne) {
     });
 }
 
-function getFacebookPhoto(connexion, lastId) {
+function getFacebookPhoto() {
 
     FB.api('/me/picture?type=normal', function(response) {
-        connexion.addAttributCompte(8, response.data.url, 1, lastId);
+        console.log(response.data);
+        //connexion.addAttributCompte(8, response.data, 1, lastId);
     });
 }
 

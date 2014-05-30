@@ -17,10 +17,17 @@
             </select>
         </li>
     </ul>
-    
-    <?php include_once './compte.php'; ?>
-        
+    <div id="auth_popup_id" class="auth_popup" title="Login">
+
+        <div id="auth_form_id" class="auth_form"></div>
+        <div id="all_snbutton_id" class="all_snbutton">
+            <div id ="button_facebook_id" class ="button_facebook"></div>
+            <div id ="button_twitter_id" class ="button_twitter"></div>
+            <div id ="button_googleplus_id" class ="button_googleplus"></div>
+        </div>
     </div>
+
+</div>
 </div>
 <?php
 include_once './footer.php';
