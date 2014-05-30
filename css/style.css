@@ -380,7 +380,7 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         text-align:center;
     }
 
-    .select, .product_spec, select#select_lang, .btn_choix_mode_calcul_division_class, .btn_choix_mode_calcul_part_class, .validerPaimentSelection_class, .choix_paiment_personne_btn_valider, .select_item_etape_class, .button_authen_compte, .button_inscri_compte, .button_ajout_vclient{
+    .select, .product_spec, select#select_lang, .btn_choix_mode_calcul_division_class, .btn_choix_mode_calcul_part_class, .validerPaimentSelection_class, .choix_paiment_personne_btn_valider, .select_item_etape_class, .button_authen_compte, .button_inscri_compte, .button_ajout_vclient, .datenaissance_user, .photo_user, .sexe_user, .class_button_inscri_user{
         width:150px;
         margin: 0.5em auto 0.8em auto;
         -moz-box-shadow: 0 1px 0 1px #666666;
@@ -408,6 +408,10 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         padding:6px 4px;
         text-decoration:none;
         text-shadow:1px 1px 16px #ffffff;
+    }
+
+    .photo_user {
+        border:none;
     }
     
     .auth_compte {
@@ -579,13 +583,24 @@ color: white;
         color:white;
     }
 
-    .button_authen_compte input, .button_ajout_vclient input, .button_inscri_compte input{
-        width:90px;
-        margin: 0 30px;
+    .button_authen_compte input, .button_ajout_vclient input, .button_inscri_compte input {
+        width:150px;
         border: none;
         background: none;
         font-weight: 700;
         color:#565656;
+    }
+
+    .datenaissance_user, .photo_user, .sexe_user, .class_button_inscri_user {
+        margin: 0 30px;
+        font-weight: 700;
+        color:#565656;
+        font-size: 13px !important;
+    }   
+
+    input.photo_user {
+        border:none;
+        background: none;
     }
 
     .auth_popup {
@@ -636,6 +651,10 @@ color: white;
         width: 300px;
         top: -420px;
         margin: auto;
+    }
+
+    .adresse_user {
+        max-width: 250px;
     }
 
         /*-------------------------------------------------------------------------------------------*/

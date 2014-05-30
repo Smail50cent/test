@@ -89,20 +89,23 @@ function clone(obj) {
     }
     return copy;
 }
-var encode = true;
+function toEncoded() {
+    return true;
+}
 function setLocalStorageValue(key, value) {
-    if (encode==true) {
-        key = encodeString(key);
-        value = encodeString(value);
-    }
+//    if (toEncoded()) {
+//        key = encodeString(key);
+//        value = encodeString(value);
+//    }
     localStorage.setItem(key, value);
 }
 function getLocalStorageValue(key) {
-    if (encode==true) {
-        key = encodeString(key);
-    }
+//    if (toEncoded()) {
+//        key = encodeString(key);
+//    }
     if (key in localStorage) {
-        return decodeString(localStorage.getItem(key));
+//        return decodeString(localStorage.getItem(key));
+        return (localStorage.getItem(key));
     } else {
         return null;
     }
