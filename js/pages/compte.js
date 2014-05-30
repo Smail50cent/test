@@ -56,9 +56,7 @@ function authenCompte() {
 }
 
 function InscriCompte() {
-    $('#button_facebook_id').hide();
-    $('#button_twitter_id').hide();
-    $('#button_googleplus_id').hide();
+    $('#all_snbutton_id').hide();
     getHtmlFormInscription();
 }
 function getHtmlFormInscription() {
@@ -134,15 +132,6 @@ function facebookAuth() {
         }, 500);
     });
 }
-//function twitterAuth() {
-//
-//
-//}
-//function googleAuth() {
-//
-//
-//}
-
 function socialNetworkButtonAuth() {
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
@@ -152,22 +141,19 @@ function socialNetworkButtonAuth() {
                 if (paramapps[i].nom_parametre === "Facebook") {
                     var html = getButtonFacebookAuth();
                     $('#button_facebook_id').html(html);
-                    $('#button_facebook_id').show();
                 } else if (paramapps[i].nom_parametre === "Twitter") {
                     var html = getButtonTwitterAuth();
                     $('#button_twitter_id').html(html);
-                    $('#button_twitter_id').show();
                 } else if (paramapps[i].nom_parametre === "Google+") {
                     var html = getButtonGoogleAuth();
                     $('#button_googleplus_id').html(html);
-                    $('#button_googleplus_id').show();
                 }
 
             }
         }
+        $('#all_snbutton_id').show();
     }
 }
-
 function AuthToCommande() {
     if (listePersonnes.length == $("#nbPersonnes").val()) {
         startCommande($("#numTable").val(), $("#nbPersonnes").val());
