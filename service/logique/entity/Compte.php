@@ -11,7 +11,6 @@ class Compte {
     public $id;
     public $password;
     
-    
     public function getId() {
         return $this->id;
     }
@@ -27,7 +26,5 @@ class Compte {
     public function setPassword($passwd) {
         $this->password = $passwd;
     }
-
-
 
 }
