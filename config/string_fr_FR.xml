@@ -42,4 +42,12 @@
     <string key="label.button.produit.non.attr.attribuer">Attribuer</string>
     <string key="label.button.produit.non.attr.valider.selection">Valider la selection</string>
     <string key="label.envoie.cuisine.valider">Valider</string>
+    <string key="label.sexe">Sexe</string>
+    <string key="label.prenom">Prenom</string>
+    <string key="label.nom">Nom</string>
+    <string key="label.email">Email</string>
+    <string key="label.tel">Téléphone</string>
+    <string key="label.adresse">Adresse</string>
+    <string key="label.password">Mot de passe</string>
+    <string key="error.ajout.visiteur">Remplissez les champs Nom et Prenom avant de valider !</string>
 </strings>

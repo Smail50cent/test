@@ -21,7 +21,6 @@ function SNLogin(typeRs) {
                     if (response.authResponse)
                     {
                         getFacebookUserInfo(Infopersonne);
-
                         function Infopersonne(personne) {
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
