@@ -572,7 +572,6 @@ function ConnexionServer() {
             data: {personnePriority: personnePriority2},
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log(data);
                 if (method != null) {
                     method(param);
                 }

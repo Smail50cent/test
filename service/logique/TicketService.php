@@ -8,4 +8,6 @@
 interface TicketService {
 
     public function addNewTicket($ticket);
+    
+    public function setPrioriteProduits($personnePriorite);
 }
