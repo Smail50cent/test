@@ -53,5 +53,6 @@
         <variable name="tableNamePendingData">pendingdatas</variable>
         <variable name="tablePendingDataTypeTicket">TICKET</variable>
         <variable name="tablePendingDataTypeProduitPriorite">PRODUIT_PRIORITY</variable>
+        <variable name="serveur.clientaccess.setPersonnePriority">setPersonnePriority</variable>
     </variables>
 </application>

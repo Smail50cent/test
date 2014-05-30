@@ -564,7 +564,22 @@ function ConnexionServer() {
             }
         });
     };
-    this.sendPersonnePriority = function (method,personnePriority,param){
-        console.log("TO DO");
+    this.sendPersonnePriority = function(method, personnePriority, param) {
+        var personnePriority2 = JSON.stringify(personnePriority);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.setPersonnePriority"),
+            type: 'POST',
+            data: {personnePriority: personnePriority2},
+            async: false,
+            success: function(data, textStatus, xhr) {
+                console.log(data);
+                if (method != null) {
+                    method(param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
     };
 }
