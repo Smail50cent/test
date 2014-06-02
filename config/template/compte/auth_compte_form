@@ -13,7 +13,7 @@
     <p id="label_vclient_ajout_id" class="label_vclient_ajout">Visiteur </p> 
     <input type="text" id="vclient_prenom_id" class="vclient_prenom" placeholder="Prenom">
     <input type="text" id="vclient_nom_id" class="vclient_nom" placeholder="Nom">
-     </div>
     <div id="button_ajout_vclient_id" class="button_ajout_vclient"> <input type="submit" value="Valider" onclick="AjoutVisiteur()"> </div>
+    </div>
 </div>
 
