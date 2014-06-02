@@ -90,7 +90,6 @@ function loadDataPersonnes(nbMaxPersonnes) {
         } else {
             itemOptionPersonnes = paramValue(itemOptionPersonnes, "OptionName", (i + 1) + " " + strings.getString("label.choose.table.option.personneSing"));
         }
-
         itemOptionPersonnes = paramValue(itemOptionPersonnes, "OptionValue", (i + 1));
         $("#nbPersonnes").append(itemOptionPersonnes);
     }

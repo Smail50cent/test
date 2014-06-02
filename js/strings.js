@@ -17,8 +17,8 @@ function getLanguage(){
 }
 function getLangagesSupported(){
     var ret = new Array();
-    ret.push(new Array("fr_FR","Français"));
-    ret.push(new Array("en-US","English"));
+    ret.push(new Array("fr_FR","Français","./config/string_fr_FR.xml"));
+    ret.push(new Array("en-US","English","./config/string_en_US.xml"));
     return ret;
 }
 strings.getString = function(key) {
