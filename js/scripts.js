@@ -84,9 +84,7 @@ scripts.loadScripts = function(forpage, method) {
     }
 };
 function init() {
-    console.log("support");
     if (isIndexedDBSupported()) {
-
         myStorage.indexedDB.create(); // open displays the data previously saved
     }
     $.getScript("./js/control.js");
