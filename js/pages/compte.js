@@ -14,44 +14,46 @@ function authenCompte() {
         scripts.loadScripts("lib.crypt", function() {
             var logval = $('input[id^="compte_login_id"]').val();
             var passval = $('input[id^="compte_pass_id"]').val();
-            var cryptedpass = SHA512(passval);
+            //var cryptedpass = SHA512(passval);
 
             var connexion = getConnexion();
-            connexion.getAllAttributsComptesEmails(fromEmail);
-            var personne = new Personne();
-
-            function fromEmail(attcompte) {
-                for (var i = 0; i < attcompte.length; i++) {
-                    if (attcompte[i].valeur_champ === logval) {
-                        var idcompte = attcompte[i].id_compte;
-                        connexion.getCompteById(verifpass, idcompte);
-                        function verifpass(comptes) {
-                            if (comptes.password === cryptedpass) {
-                                connexion.getAttributCompteByIdCompte(allinfos, idcompte);
-                                function allinfos(data) {
-                                    for (var j = 0; j < data.length; j++) {
-                                        if (data[j].id_form == 1) {
-                                            personne.setGender(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 2) {
-                                            personne.setPrenom(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 3) {
-                                            personne.setNom(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 7) {
-                                            personne.setEmail(data[j].valeur_champ);
-                                        }
-                                    }
-                                    personne.setId(idcompte);
-                                    listePersonnes.push(personne);
-                                    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                                    $('#auth_popup_id').dialog("close");
-                                }
-                            } else {
-                                alert("Incorrect Login or Password");
-                            }
-                        }
-                    }
-                }
+            connexion.getAllAttributsComptesByEmail(fromEmail,logval);
+            //var personne = new Personne();
+            function fromEmail(result){
+                console.log("result : "+result);
             }
+//            function fromEmail(attcompte) {
+//                for (var i = 0; i < attcompte.length; i++) {
+//                    if (attcompte[i].valeur_champ === logval) {
+//                        var idcompte = attcompte[i].id_compte;
+//                        connexion.getCompteById(verifpass, idcompte);
+//                        function verifpass(comptes) {
+//                            if (comptes.password === cryptedpass) {
+//                                connexion.getAttributCompteByIdCompte(allinfos, idcompte);
+//                                function allinfos(data) {
+//                                    for (var j = 0; j < data.length; j++) {
+//                                        if (data[j].id_form == 1) {
+//                                            personne.setGender(data[j].valeur_champ);
+//                                        } else if (data[j].id_form == 2) {
+//                                            personne.setPrenom(data[j].valeur_champ);
+//                                        } else if (data[j].id_form == 3) {
+//                                            personne.setNom(data[j].valeur_champ);
+//                                        } else if (data[j].id_form == 7) {
+//                                            personne.setEmail(data[j].valeur_champ);
+//                                        }
+//                                    }
+//                                    personne.setId(idcompte);
+//                                    listePersonnes.push(personne);
+//                                    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+//                                    $('#auth_popup_id').dialog("close");
+//                                }
+//                            } else {
+//                                alert("Incorrect Login or Password");
+//                            }
+//                        }
+//                    }
+//                }
+//            }
         });
     }
 

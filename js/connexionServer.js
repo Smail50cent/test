@@ -511,7 +511,7 @@ function ConnexionServer() {
             }
         });
     };
-
+    //delete
     this.getAllAttributsComptesEmails = function(method) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptesEmails"),
@@ -574,6 +574,29 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 if (method != null) {
                     method(param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllAttributsComptesByEmail = function(method, email) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?email=" + email,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                    var attcompte = new AttributCompte();
+                    attcompte.setId(data[i].id);
+                    attcompte.setId_compte(data[i].id_compte);
+                    attcompte.setId_form(data[i].id_form);
+                    attcompte.setDefaut(data[i].defaut);
+                    attcompte.setValeur_champ(data[i].valeur_champ);
+
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(attcompte);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
