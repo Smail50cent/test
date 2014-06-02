@@ -26,6 +26,7 @@
     <string key="label.recapitulatif.button.ajouter.ingredient">Ajouter ingrédient</string>
     <string key="label.categorie.souscategorie.voirtout">Voir tout</string>
     <string key="label.error.indexedDB.acces.inpossible">Impossible d'accèder à la base de données.</string>
+    <string key="label.error.email.exist">Ce compte n'existe pas !</string>
     <string key="label.error.connexion.serveur">Impossible d'accèder au serveur.</string>
     <string key="label.info.etape.suivante">Etape suivante</string>
     <string key="label.info.confirm.etape.suivante">Etes-vous sur de vouloir passer à l'étape suivante ?</string>

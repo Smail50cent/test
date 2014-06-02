@@ -8,6 +8,7 @@ function addPersonne(connexion,personne,discriminent){
                 connexion.addAttributCompte(3, personne.prenom, 1, LastId);
                 connexion.addAttributCompte(7, personne.email, 1, LastId);
                 connexion.addAttributCompte(8, personne.getUrlProfileImg(), 1, LastId);
+                personne.setId(LastId);
             }
         }
     
@@ -42,7 +43,6 @@ function getFacebookUserInfo(infopersonne) {
         var name = fullname.split(' '); // get Last and First Name
         var personne = new Personne();
 
-        personne.setId(response.id);
         personne.setNom(name[1]);
         personne.setPrenom(name[0]);
         personne.setEmail(response.email);
@@ -54,7 +54,7 @@ function getFacebookUserInfo(infopersonne) {
 
         window.setTimeout(function(){
            infopersonne(personne); 
-        },700);
+        },300);
         
     });
 }
