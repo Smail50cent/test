@@ -4,10 +4,12 @@
 var listePersonnes = new Array();
 
 function onLoadCompte() {
-    $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
-    var html = getAuthCompte();
-    $('#auth_form_id').html(html);
-    socialNetworkButtonAuth();
+    scripts.loadScripts("lib.dialog", function() {
+        $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
+        var html = getAuthCompte();
+        $('#auth_form_id').html(html);
+        socialNetworkButtonAuth();
+    });
 }
 function authenCompte() {
     if (!TestEmptyFields("#client_form_id")) {

@@ -78,4 +78,8 @@ class TicketServiceImpl implements TicketService {
         }
     }
 
+    public function setHaveIfPay($havePay) {
+        
+    }
+
 }

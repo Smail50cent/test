@@ -1,28 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scripts>
-    <script for="data">database/indexedDBAcces.js</script>
-    <script for="data">database/indexedDBAccesCategorie.js</script>
-    <script for="data">database/indexedDBAccesEntreprise.js</script>
-    <script for="data">database/indexedDBAccesIngredient.js</script>
-    <script for="data">database/indexedDBAccesMenu.js</script>
-    <script for="data">database/indexedDBAccesProduit.js</script>
-    <script for="data">database/indexedDBAccesSousCategorie.js</script>
-    <script for="data">database/indexedDBAccesMenu.js</script>
+    <script for="data.indexeddb" priority="1">database/indexedDB/ConnexionLocalIndexedDB.js</script>
+    <script for="data.indexeddb" priority="2">database/indexedDB/indexedDBAcces.js</script>
+    <script for="data.indexeddb" priority="13">database/indexedDB/indexedDBAccesCategorie.js</script>
+    <script for="data.indexeddb" priority="4">database/indexedDB/indexedDBAccesEntreprise.js</script>
+    <script for="data.indexeddb" priority="5">database/indexedDB/indexedDBAccesEntrepriseMaj.js</script>
+    <script for="data.indexeddb" priority="6">database/indexedDB/indexedDBAccesIngredient.js</script>
+    <script for="data.indexeddb" priority="7">database/indexedDB/indexedDBAccesMenu.js</script>
+    <script for="data.indexeddb" priority="8">database/indexedDB/indexedDBAccesModeDeReglement.js</script>
+    <script for="data.indexeddb" priority="9">database/indexedDB/indexedDBAccesPendingDatas.js</script>
+    <script for="data.indexeddb" priority="10">database/indexedDB/indexedDBAccesProduit.js</script>
+    <script for="data.indexeddb" priority="11">database/indexedDB/indexedDBAccesSousCategorie.js</script>
+    <script for="data.indexeddb" priority="12">database/indexedDB/indexedDBAccesTables.js</script>
     
-    <script for="all" priority="3">index.js</script>
+    <script for="data.websql">database/webSQL/ConnexionLocalWebSQL.js</script>
+
     <script for="all" priority="1">toolBox.js</script>
-    <script for="all" priority="1">strings.js</script>
     <script for="all" priority="1">templates.js</script>
-    <script for="all" priority="1">ConnexionFactory.js</script>
-    <script for="all" priority="1">bean.js</script>
+    <script for="all" priority="1">strings.js</script>
     <script for="all" priority="1">config.js</script>
-    <script for="all" priority="2">connexionLocal.js</script>
+    <script for="all" priority="1">bean.js</script>
+    <script for="all" priority="1">findInLoaded.js</script>
+    <script for="all" priority="1">ConnexionFactory.js</script>
     <script for="all" priority="2">connexionServer.js</script>
-    
-    <script for="lib">lib/jquery-1.2.6.min.js</script>
-    <script for="lib">lib/jquery.js</script>
-    <script for="lib.social" priority="1">lib/socialNetwork.js</script>
-    <script for="lib.social" priority="2">lib/all.js</script>
+
+    <script for="lib" priority="2">lib/jquery-1.2.6.min.js</script>
+    <script for="lib" priority="1">lib/jquery.js</script>
+    <script for="lib.dialog" priority="1">lib/jqueryui/js/jquery-ui-1.10.4.custom.js</script>
+    <script for="lib.social" priority="2">lib/socialNetwork.js</script>
+    <script for="lib.social" priority="3">lib/all.js</script>
     <script for="lib.crypt">lib/SHA512.js</script>
     
     <script for="swipe">lib/jquery.event.move.js</script>
@@ -35,4 +41,3 @@
     <script for="compte">pages/compte.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
 </scripts>
-
