@@ -1,18 +1,18 @@
 
-function addPersonne(personne, dicriminent) {
-    var connexion = getConnexion();
+function addPersonne(connexion,personne,discriminent){
     if (!verifyEmail(personne.email)) {
-        connexion.addCompte(InsertFromLastId, dicriminent);
-        function InsertFromLastId(LastId) {
-            connexion.addAttributCompte(1, personne.gender, 1, LastId);
-            connexion.addAttributCompte(2, personne.nom, 1, LastId);
-            connexion.addAttributCompte(3, personne.prenom, 1, LastId);
-            connexion.addAttributCompte(7, personne.email, 1, LastId);
-            getFacebookPhoto();
+            connexion.addCompte(InsertFromLastId,discriminent );
+            function InsertFromLastId(LastId) {
+                connexion.addAttributCompte(1, personne.gender, 1, LastId);
+                connexion.addAttributCompte(2, personne.nom, 1, LastId);
+                connexion.addAttributCompte(3, personne.prenom, 1, LastId);
+                connexion.addAttributCompte(7, personne.email, 1, LastId);
+                connexion.addAttributCompte(8, personne.getUrlProfileImg(), 1, LastId);
+                personne.setId(LastId);
+            }
         }
-    }
+    
 }
-
 function SNLogin(typeRs) {
     switch (typeRs) {
         case ("AVFB") :
@@ -25,7 +25,7 @@ function SNLogin(typeRs) {
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                             FacebookLogout();
-                            //$('#auth_popup_id').dialog("close");
+                            $('#auth_popup_id').dialog("close");
                         }
                     } else
                     {
@@ -42,22 +42,27 @@ function getFacebookUserInfo(infopersonne) {
         var fullname = response.name;
         var name = fullname.split(' '); // get Last and First Name
         var personne = new Personne();
-        personne.setId(response.id);
+
         personne.setNom(name[1]);
         personne.setPrenom(name[0]);
         personne.setEmail(response.email);
         personne.setGender(response.gender);
-        addPersonne(personne, "AVFB");
 
-        infopersonne(personne);
+        var connexion = getConnexion();
+        getFacebookPhoto(personne);
+        addPersonne(connexion,personne,"AVFB");
+
+        window.setTimeout(function(){
+           infopersonne(personne); 
+        },300);
+        
     });
 }
 
-function getFacebookPhoto() {
+function getFacebookPhoto(personne) {
 
     FB.api('/me/picture?type=normal', function(response) {
-        console.log(response.data);
-        //connexion.addAttributCompte(8, response.data, 1, lastId);
+        personne.setUrlProfileImg(response.data.url);
     });
 }
 

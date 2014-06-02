@@ -19,38 +19,33 @@ function authenCompte() {
             var cryptedpass = SHA512(passval);
 
             var connexion = getConnexion();
-            connexion.getAllAttributsComptesEmails(fromEmail);
+            connexion.getAttributsComptesByEmail(fromEmail, logval);
             var personne = new Personne();
-
-            function fromEmail(attcompte) {
-                for (var i = 0; i < attcompte.length; i++) {
-                    if (attcompte[i].valeur_champ === logval) {
-                        var idcompte = attcompte[i].id_compte;
-                        connexion.getCompteById(verifpass, idcompte);
-                        function verifpass(comptes) {
-                            if (comptes.password === cryptedpass) {
-                                connexion.getAttributCompteByIdCompte(allinfos, idcompte);
-                                function allinfos(data) {
-                                    for (var j = 0; j < data.length; j++) {
-                                        if (data[j].id_form == 1) {
-                                            personne.setGender(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 2) {
-                                            personne.setPrenom(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 3) {
-                                            personne.setNom(data[j].valeur_champ);
-                                        } else if (data[j].id_form == 7) {
-                                            personne.setEmail(data[j].valeur_champ);
-                                        }
-                                    }
-                                    personne.setId(idcompte);
-                                    listePersonnes.push(personne);
-                                    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                                    $('#auth_popup_id').dialog("close");
+            function fromEmail(data) {
+                var idcompte = data.id_compte;
+                connexion.getCompteById(verifpass, data.id_compte);
+                function verifpass(compte) {
+                    if (compte.password === cryptedpass) {
+                        connexion.getAttributCompteByIdCompte(allinfos, idcompte);
+                        function allinfos(infos) {
+                            for (var j = 0; j < infos.length; j++) {
+                                if (infos[j].id_form == 1) {
+                                    personne.setGender(infos[j].valeur_champ);
+                                } else if (infos[j].id_form == 2) {
+                                    personne.setPrenom(infos[j].valeur_champ);
+                                } else if (infos[j].id_form == 3) {
+                                    personne.setNom(infos[j].valeur_champ);
+                                } else if (infos[j].id_form == 7) {
+                                    personne.setEmail(infos[j].valeur_champ);
                                 }
-                            } else {
-                                alert("Incorrect Login or Password");
                             }
+                            personne.setId(idcompte);
+                            listePersonnes.push(personne);
+                            setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                            $('#auth_popup_id').dialog("close"); 
                         }
+                    }else{
+                        alert("Incorrect Login or Password");
                     }
                 }
             }

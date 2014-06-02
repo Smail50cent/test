@@ -9,7 +9,7 @@
 interface AttributCompteService {
 
     public function getAll();
-    public function getAllEmails();
+    public function getAllByEmail($email);
     public function getById($id);
     public function getByIdCompte($id);
     public function addAll($id_form,$valeur_champ,$default,$id_compte);
