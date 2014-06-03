@@ -109,11 +109,12 @@ function ValiderInscri() {
 }
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {
-        var nom = $('input[id^="client_nom_id"]').val();
-        var prenom = $('input[id^="client_prenom_id"]').val();
-        var personne = new Personne();
+
 
         scripts.loadScripts("lib.social", function() {
+            var nom = $('input[id^="vclient_nom_id"]').val();
+            var prenom = $('input[id^="vclient_prenom_id"]').val();
+            var personne = new Personne();
             var connexion = getConnexion();
             connexion.addCompte(InsertFromLastId, "Visiteur");
             function InsertFromLastId(LastId) {
