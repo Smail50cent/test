@@ -417,7 +417,6 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
     .auth_compte {
         margin: 4px 0 -7px 0;
         padding: 6px 0;
-        background-color: #a0a0a0;
         border-radius: 5px;
         color: white;
     }
@@ -645,7 +644,13 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         border-radius: 10px;
         padding: 3px;
     }
-    
+     .auth_compte .client_form , .auth_compte .vclient_form{
+        background-color: rgb(160, 160, 160);
+        width: 98%;
+        margin: 19px auto 0 auto;
+        border-radius: 10px;
+        padding: 3px;
+    }   
     .ui-widget {
         position: relative;
         width: 300px;

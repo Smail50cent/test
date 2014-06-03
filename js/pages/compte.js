@@ -42,9 +42,9 @@ function authenCompte() {
                             personne.setId(idcompte);
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                            $('#auth_popup_id').dialog("close"); 
+                            $('#auth_popup_id').dialog("close");
                         }
-                    }else{
+                    } else {
                         alert("Incorrect Login or Password");
                     }
                 }
@@ -57,6 +57,7 @@ function authenCompte() {
 function InscriCompte() {
     $('#all_snbutton_id').hide();
     getHtmlFormInscription();
+
 }
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
@@ -64,9 +65,10 @@ function getHtmlFormInscription() {
         var insciform = getGeneratedInscriForm();
         $('#auth_form_id').html(insciform);
         var buttonValider = getButtonInscriFormUser();
-        $('#vclient_form_id').append(buttonValider);
+        $('#auth_form_id').append(buttonValider);
         var buttonretour = getButtonBackToAuth();
         $('#auth_form_id').append(buttonretour);
+        // Event for input File
     });
 }
 function RetourAuth() {
@@ -88,8 +90,9 @@ function ValiderInscri() {
                         connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(8, getImageName($('#photo_user_id').val()), 1, LastId);
                         var personne = new Personne();
+                        personne.setId(LastId);
                         personne.setGender($('#sexe_user_id').val());
                         personne.setNom($('#nom_user_id').val());
                         personne.setPrenom($('#prenom_user_id').val());
@@ -98,7 +101,6 @@ function ValiderInscri() {
                         listePersonnes.push(personne);
                         setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                         $('#auth_popup_id').dialog("close");
-
                     }
                 }
             });
@@ -181,3 +183,4 @@ function TestEmptyFields(field) {
     }
     return empty;
 }
+
