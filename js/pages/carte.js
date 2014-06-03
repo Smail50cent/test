@@ -7,7 +7,6 @@
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
-//    var nbpersonne = parseInt(personnes.couvertsgetLocalStorageValue("paramCommande.nbPersonne"));
     var nbpersonne = JSON.parse(getLocalStorageValue("personnes.couverts"));
     nbpersonne = parseInt(nbpersonne.length);
     if (nbpersonne != null) {
@@ -883,7 +882,7 @@ function startDialogForAjouterIngredient(produitID, qopid) {
                 htmlItem = paramValue(htmlItem, "ingredientId", ingredient.getId());
                 htmlItem = paramValue(htmlItem, "qopId", qopid);
                 htmlItem = paramValue(htmlItem, "nomIngredient", ingredient.getNom());
-                htmlItem = paramValue(htmlItem, "prixProduit", fntp(parseInt(param.surcout)));
+                htmlItem = paramValue(htmlItem, "prixProduit", fntp(parseFloat(param.surcout)));
                 ul.append(htmlItem);
             }
         }
@@ -900,6 +899,7 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
         if (qops[i].getId() == qopid) {
             for (var j = 0; j < qops[i].product.ids_ingredients.length; j++) {
                 if (qops[i].product.ids_ingredients[j].ingredient == ingredientid) {
+                    
                     var prod = qops[i].product;
                     if (qops[i].getQuantity() > 1) {
                         var clondedProduct = new Produit();
@@ -921,7 +921,15 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
                         qopid = newQop.getId();
                         whereIngredientAddedAddOfpItem(qopid, newQop);
                     } else {
+                        var surcout = parseFloat(qops[i].product.ids_ingredients[j].surcout);
                         qops[i].product.ids_ingredients[j].isAdded = true;
+                        for(var x = 0 ; x < currentTicket.getQuantityOfProduct().length ; x++){
+                            if(parseInt(currentTicket.quantityOfProducts[x].id) == parseInt(qops[i].id)){
+                                currentTicket.quantityOfProducts[x].product.prix += surcout;
+                                $("#content_produit_zone_right_prix_id_"+qops[i].id).text(fntp(currentTicket.quantityOfProducts[x].product.prix));
+                                break;
+                            }
+                        }
                         var connexion = getConnexion();
                         var ing = connexion.getIngredientById(addIng, qops[i].product.ids_ingredients[j].ingredient, new Param(produitID, ingredientid));
                         function Param(produitID, ingredientid) {
