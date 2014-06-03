@@ -10,10 +10,10 @@
     </div>
 
     <div id="vclient_form_id" class="vclient_form"> 
-    <p id="label_vclient_ajout_id" class="label_vclient_ajout">Nom Visiteur </p> 
-    <label id="prenom_visiteur_id" class="prenom_visiteur">Prenom</label><input type="text" id="client_prenom_id" class="client_prenom">
-    <label id="nom_visiteur_id" class="nom_visiteur">Nom</label><input type="text" id="client_nom_id" class="client_nom">
-     </div>
+    <p id="label_vclient_ajout_id" class="label_vclient_ajout">Visiteur </p> 
+    <input type="text" id="vclient_prenom_id" class="vclient_prenom" placeholder="Prenom">
+    <input type="text" id="vclient_nom_id" class="vclient_nom" placeholder="Nom">
     <div id="button_ajout_vclient_id" class="button_ajout_vclient"> <input type="submit" value="Valider" onclick="AjoutVisiteur()"> </div>
+    </div>
 </div>
 

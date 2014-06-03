@@ -64,7 +64,7 @@ function getHtmlFormInscription() {
         var insciform = getGeneratedInscriForm();
         $('#auth_form_id').html(insciform);
         var buttonValider = getButtonInscriFormUser();
-        $('#auth_form_id').append(buttonValider);
+        $('#vclient_form_id').append(buttonValider);
         var buttonretour = getButtonBackToAuth();
         $('#auth_form_id').append(buttonretour);
     });

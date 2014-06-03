@@ -441,7 +441,7 @@ function ConnexionServer() {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
-            async: true,
+            async: false,
             success: function(data) {
                 console.log(data);
             },
