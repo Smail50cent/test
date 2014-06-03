@@ -110,7 +110,6 @@ function ValiderInscri() {
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {
 
-
         scripts.loadScripts("lib.social", function() {
             var nom = $('input[id^="vclient_nom_id"]').val();
             var prenom = $('input[id^="vclient_prenom_id"]').val();
