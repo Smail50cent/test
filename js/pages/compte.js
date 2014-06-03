@@ -42,9 +42,9 @@ function authenCompte() {
                             personne.setId(idcompte);
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                            $('#auth_popup_id').dialog("close"); 
+                            $('#auth_popup_id').dialog("close");
                         }
-                    }else{
+                    } else {
                         alert("Incorrect Login or Password");
                     }
                 }
@@ -107,11 +107,12 @@ function ValiderInscri() {
 }
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {
-        var nom = $('input[id^="client_nom_id"]').val();
-        var prenom = $('input[id^="client_prenom_id"]').val();
-        var personne = new Personne();
+
 
         scripts.loadScripts("lib.social", function() {
+            var nom = $('input[id^="vclient_nom_id"]').val();
+            var prenom = $('input[id^="vclient_prenom_id"]').val();
+            var personne = new Personne();
             var connexion = getConnexion();
             connexion.addCompte(InsertFromLastId, "Visiteur");
             function InsertFromLastId(LastId) {
