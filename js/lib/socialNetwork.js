@@ -1,17 +1,22 @@
+/**
+ *
+ * @author Hamza Legdani <hamza.legdani@gmail.com>
+ */
 
-function addPersonne(connexion,personne,discriminent){
+function addPersonne(connexion, personne, discriminent, infoper) {
     if (!verifyEmail(personne.email)) {
-            connexion.addCompte(InsertFromLastId,discriminent );
-            function InsertFromLastId(LastId) {
-                connexion.addAttributCompte(1, personne.gender, 1, LastId);
-                connexion.addAttributCompte(2, personne.nom, 1, LastId);
-                connexion.addAttributCompte(3, personne.prenom, 1, LastId);
-                connexion.addAttributCompte(7, personne.email, 1, LastId);
-                connexion.addAttributCompte(8, personne.getUrlProfileImg(), 1, LastId);
-                personne.setId(LastId);
-            }
+        connexion.addCompte(InsertFromLastId, discriminent,infoper);
+        function InsertFromLastId(LastId,param) {
+            connexion.addAttributCompte(1, personne.gender, 1, LastId);
+            connexion.addAttributCompte(2, personne.nom, 1, LastId);
+            connexion.addAttributCompte(3, personne.prenom, 1, LastId);
+            connexion.addAttributCompte(7, personne.email, 1, LastId);
+            connexion.addAttributCompte(8, personne.getUrlProfileImg(), 1, LastId);
+            personne.setId(LastId);
+            param(personne);
         }
-    
+    }
+
 }
 function SNLogin(typeRs) {
     switch (typeRs) {
@@ -50,12 +55,7 @@ function getFacebookUserInfo(infopersonne) {
 
         var connexion = getConnexion();
         getFacebookPhoto(personne);
-        addPersonne(connexion,personne,"AVFB");
-
-        window.setTimeout(function(){
-           infopersonne(personne); 
-        },300);
-        
+        addPersonne(connexion, personne, "AVFB",infopersonne);
     });
 }
 

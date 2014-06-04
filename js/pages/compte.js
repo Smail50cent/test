@@ -1,5 +1,6 @@
-/*
- * 
+/**
+ *
+ * @author Hamza Legdani <hamza.legdani@gmail.com>
  */
 var listePersonnes = new Array();
 
@@ -58,6 +59,9 @@ function InscriCompte() {
     $('#all_snbutton_id').hide();
     getHtmlFormInscription();
 
+}
+function stringPlaceholder(){
+    
 }
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
