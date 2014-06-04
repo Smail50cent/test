@@ -38,6 +38,8 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#nbPersonnes").change(function() {
             scripts.loadScripts("compte", function() {
                 onLoadCompte();
+                var person = strings.getString("label.personne.auth");
+                $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
                 $('div#auth_popup_id').bind('dialogclose', function(event) {
                     AuthToCommande();
                 });

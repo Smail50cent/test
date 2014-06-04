@@ -60,8 +60,8 @@ function InscriCompte() {
     getHtmlFormInscription();
 
 }
-function stringPlaceholder(){
-    
+function stringPlaceholder() {
+
 }
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
@@ -167,7 +167,10 @@ function AuthToCommande() {
     if (listePersonnes.length == $("#nbPersonnes").val()) {
         startCommande($("#numTable").val(), $("#nbPersonnes").val());
     } else {
+        $('#auth_compte_id input[type="text"] , #auth_compte_id input[type="password"], #auth_form_id input[type="text"], #auth_form_id input[type="date"], #auth_form_id input[type="file"], #auth_form_id input[type="email"], #auth_form_id input[type="tel"], #auth_form_id textarea, #auth_form_id input[type="password"]').val('');
         window.setTimeout(function() {
+            var person = strings.getString("label.personne.auth");
+            $('#nbr_personne_id').html(person+" n° "+(listePersonnes.length+1));
             $('#auth_popup_id').dialog("open");
         }, 500);
     }
@@ -180,7 +183,6 @@ function TestEmptyFields(field) {
         {
             empty = true;
         }
-
     });
     if (empty) {
         alert("Remplissez tout les champs avant de valider !");
