@@ -11,5 +11,7 @@ interface SousCategorieServiceData {
 
     public function getByIdCategortie($id);
     
+    public function getByIdParseObj($id);
+    
     public function getById($id);
 }

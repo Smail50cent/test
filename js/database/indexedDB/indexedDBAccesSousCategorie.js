@@ -24,6 +24,7 @@ myStorage.indexedDB.getSousCategorieById = function(id, methodToExecuteAfter) {
                 sousCategorie.setCategorie(result.categorie);
                 sousCategorie.setNom(result.nom);
                 sousCategorie.setPriorite(result.priorite);
+                sousCategorie.setTauxTva(result.taux_tva);
                 sousCategorie.setId(result.id);
                 if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
                     methodToExecuteAfter(e);

@@ -12,7 +12,9 @@ class TauxTvaServiceImpl implements TauxTvaService {
 
     public function getById($id) {
         $bdd = new ConnexionBDD();
-        $bdd->executeGeneric("SELECT * FROM `taux_tva` WHERE `id_tva` = ".$id);
+        $rep = $bdd->executeGeneric("SELECT * FROM `taux_tva` WHERE `id_tva` = ".$id);
+        $ligne = $rep->fetch();
+        return $ligne->taux_tva;
     }
 
 }

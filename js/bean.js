@@ -97,6 +97,8 @@ function SousCategorie() {
     this.categorie;
     this.nom;
     this.priorite;
+    this.taux_tva;
+    
     this.setId = function(id) {
         this.id = id;
     };
@@ -120,6 +122,12 @@ function SousCategorie() {
     };
     this.getPriorite = function() {
         return this.priorite;
+    };
+    this.setTauxTva = function(taux_tva) {
+        this.taux_tva = taux_tva;
+    };
+    this.getTauxTva = function() {
+        return this.taux_tva;
     };
 }
 function Ingredient() {
@@ -148,6 +156,7 @@ function Produit() {
     this.ids_ingredients; // ARRAY
     this.demanderCuisson = false;//BOOL
     this.options;
+    this.associationPrixProduit;
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
         this.setId(id);
@@ -202,6 +211,13 @@ function Produit() {
     this.getCategorie = function() {
         return this.id_categorie;
     };
+    this.setAssociationPrixProduit = function(associationPrixProduit) {
+        this.associationPrixProduit = associationPrixProduit;
+    };
+    this.getAssociationPrixProduit = function() {
+        return this.associationPrixProduit;
+    };
+    
 }
 ;
 function Menu(id, produits, prix, nom) {
@@ -299,9 +315,11 @@ function Ticket(id, quantityOfProducts) {
         this.total = 0;
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
-                var prix = qop[y].getProduit().getPrix();
+                var prixHT = qop[y].getProduit().getPrix();
                 var quantity = qop[y].getQuantity();
-                this.total += prix * quantity;
+                var tauxTVA = qop[y].getProduit().id_sousCategorie.tauxTva;
+                var totalTTC = calculPrixWithTVA(prixHT, tauxTVA);
+                this.total += totalTTC * quantity;
             }
         } else {
             showErrorMessage("qop == null");

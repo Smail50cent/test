@@ -14,6 +14,7 @@ class Produit {
     public $souscategorie;
     public $options; //array
     public $ingredients; // ARRAY
+    public $associationPrixProduit;
 
     public function setId($id) {
         $this->id = $id;
@@ -69,6 +70,14 @@ class Produit {
 
     public function getCategorie() {
         return $this->categorie;
+    }
+
+    public function setAssociationProduitPrix($aspp) {
+        $this->associationPrixProduit = $aspp;
+    }
+
+    public function getAssociationProduitPrix() {
+        return $this->associationPrixProduit;
     }
 
 }

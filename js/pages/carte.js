@@ -3,7 +3,6 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 
-
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
@@ -574,13 +573,19 @@ function printProduits(index) {
                     } else {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
+                    var prixHT = produit.getPrix();
+                    if (produit.id == 40) {
+                        console.log(produit);
+                        prixHT = getPrixHtInAssociation(produit.associationPrixProduit);
+                    }
+                    var prixTTC = calculPrixWithTVA(prixHT, produit.id_sousCategorie.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
-                    itemProduit = paramValue(itemProduit, "produitPrix", fntp(produit.getPrix()));
+                    itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
                     itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
                     $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
                 }
                 if (derniere != "" && categorie.getId() == derniere) {
-//si on a fini de charger les produits on charge les scripts de swipe
+                    //si on a fini de charger les produits on charge les scripts de swipe
                     scripts.loadScripts("swipe");
                     hideLoading();
                 }
@@ -588,6 +593,45 @@ function printProduits(index) {
             connexion.getProduitByIdCategorieForPrintProduits(printProduitByCategorie, categorie.getId());
         }
     }
+}
+function getPrixHtInAssociation(associationPrixProduit) {
+    var prixHt = 0;
+    if (associationPrixProduit.length != 0) {
+        if (associationPrixProduit.length == 1) {
+            prixHt = parseFloat(associationPrixProduit[0].prixHt.prix);
+        } else {
+            var currentDate = new Date().getTime();
+            console.log("currentDate", (currentDate));
+            var priorityPrix = null;
+            for (var i = 0; i < associationPrixProduit.length; i++) {
+                console.log(new Date(associationPrixProduit[i].heureFin));
+                var startTime = new Date(associationPrixProduit[i].heureDebut).getTime();
+                var endTime = new Date(associationPrixProduit[i].heureFin).getTime();
+                console.log("startTime", startTime);
+                console.log("endTime", endTime);
+                if (startTime == 0 && endTime == 0) {
+                    console.log("no");
+                    priorityPrix = associationPrixProduit[i];
+                } else if (currentDate > startTime && currentDate < endTime) {
+                    console.log("indate=", associationPrixProduit[i]);
+                    priorityPrix = associationPrixProduit[i];
+                }else if (currentDate > startTime ) {
+                    if(currentDate > endTime){
+                        console.log("DATE ENTRE");
+                    }
+                    console.log("cur>start=", associationPrixProduit[i]);
+                    priorityPrix = associationPrixProduit[i];
+                }
+//                console.log(startTime);
+            }
+            prixHt = priorityPrix.prixHt.prix;
+//            console.log(new Date(associationPrixProduit[2].heureDebut));
+        }
+    } else {
+        prixHt = 0;
+    }
+    console.log(prixHt);
+    return parseFloat(prixHt);
 }
 /**
  * Allows to show the "recapitulatif" or hide 
@@ -752,8 +796,8 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             }
             var haveIngSup = false;
             for (var i = 0; i < inngredientArray.length; i++) {
-                if(inngredientArray[i].isIngredientSup == true){
-                    haveIngSup=true;
+                if (inngredientArray[i].isIngredientSup == true) {
+                    haveIngSup = true;
                 }
                 if (inngredientArray[i].isAdded == true) {
                     var connexion = getConnexion();
@@ -899,7 +943,7 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
         if (qops[i].getId() == qopid) {
             for (var j = 0; j < qops[i].product.ids_ingredients.length; j++) {
                 if (qops[i].product.ids_ingredients[j].ingredient == ingredientid) {
-                    
+
                     var prod = qops[i].product;
                     if (qops[i].getQuantity() > 1) {
                         var clondedProduct = new Produit();
@@ -923,10 +967,10 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
                     } else {
                         var surcout = parseFloat(qops[i].product.ids_ingredients[j].surcout);
                         qops[i].product.ids_ingredients[j].isAdded = true;
-                        for(var x = 0 ; x < currentTicket.getQuantityOfProduct().length ; x++){
-                            if(parseInt(currentTicket.quantityOfProducts[x].id) == parseInt(qops[i].id)){
+                        for (var x = 0; x < currentTicket.getQuantityOfProduct().length; x++) {
+                            if (parseInt(currentTicket.quantityOfProducts[x].id) == parseInt(qops[i].id)) {
                                 currentTicket.quantityOfProducts[x].product.prix += surcout;
-                                $("#content_produit_zone_right_prix_id_"+qops[i].id).text(fntp(currentTicket.quantityOfProducts[x].product.prix));
+                                $("#content_produit_zone_right_prix_id_" + qops[i].id).text(fntp(currentTicket.quantityOfProducts[x].product.prix));
                                 break;
                             }
                         }

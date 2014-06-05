@@ -85,12 +85,12 @@ myStorage.indexedDB.create = function() {
         myStorage.indexedDB.addFistEntreprise();
 
         entitysFinsh[config.getConfig("tableNameTable")] = true;
-       
+
         if (db.objectStoreNames.contains(config.getConfig("tableNameTable"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameTable"));
         }
         var store = db.createObjectStore(config.getConfig("tableNameTable"), {keyPath: "id", autoIncrement: true});
-        
+
         myStorage.indexedDB.addFistTables();
 
         entitysFinsh[config.getConfig("tableNameEntrepriseMaj")] = true;
@@ -296,7 +296,7 @@ myStorage.indexedDB.addFistSousCategories = function() {
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameSousCategorie"));
             var request;
-            request = store.put({"id": parseInt(souscategorie.ID), "nom": souscategorie.NOM, "categorie": souscategorie.categorie_id, "priorite": souscategorie.priorite});
+            request = store.put({"id": parseInt(souscategorie.ID), "tauxTva": parseFloat(souscategorie.taux_tva), "nom": souscategorie.NOM, "categorie": souscategorie.categorie_id, "priorite": souscategorie.priorite});
             trans.oncomplete = function(e) {
                 entitysFinsh[config.getConfig("tableNameSousCategorie")] = false;
                 db.close();
@@ -316,10 +316,12 @@ myStorage.indexedDB.addFistProduits = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
+                console.log(data[i]);
                 addProduit(data[i]);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
+            console.log(errorThrown);
             showErrorMessage(strings.getString("label.error.connexion.serveur"));
         }
     });
@@ -336,9 +338,10 @@ myStorage.indexedDB.addFistProduits = function() {
                 "nom": produit.nom,
                 "prix": produit.prix,
                 "categorie": (produit.categorie),
-                "souscategorie": parseInt(produit.souscategorie),
+                "souscategorie": (produit.souscategorie),
                 "options": produit.options,
-                "ingredients": produit.ingredients
+                "ingredients": produit.ingredients,
+                "associationPrixProduit": produit.associationPrixProduit
             });
             trans.oncomplete = function(e) {
                 db.close();

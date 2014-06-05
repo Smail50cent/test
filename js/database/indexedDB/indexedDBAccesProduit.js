@@ -26,9 +26,9 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 categorie.setPriorite(result.categorie.priorite);
                 categorie.setSousCategorie(result.categorie.souscategorie);
                 produit.setCategorie(categorie);
-                produit.setSousCategorie(result.categorie);
                 produit.setIdsIngredients(result.ingredients);
                 produit.setOptions(result.options);
+                produit.setAssociationPrixProduit(result.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
@@ -46,15 +46,15 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
-myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,idcat) {
+myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
-            impl(method,idcat);
+            impl(method, idcat);
         } else {
-            myStorage.indexedDB.getProduitByIdCategorieForPrintProduits(method,idcat);
+            myStorage.indexedDB.getProduitByIdCategorieForPrintProduits(method, idcat);
         }
     }, delay);
-    function impl(method,idcat) {
+    function impl(method, idcat) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -78,6 +78,7 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
                     categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
+                    produit.setAssociationPrixProduit(result.associationPrixProduit);
                     produit.setSousCategorie(result.value.souscategorie);
                     produit.setIdsIngredients(result.value.ingredients);
                     produit.setOptions(result.value.options);
@@ -87,7 +88,6 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
             };
             trans.oncomplete = function(e) {
                 if (method != null) {//Nous avons besoin de l'executer.
-                    
                     method(produitsByCategorie);
                 }
                 db.close();
@@ -100,12 +100,12 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
-myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
+myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
             impl();
         } else {
-            myStorage.indexedDB.getProduitByIdGeneric(method,produitID,param);
+            myStorage.indexedDB.getProduitByIdGeneric(method, produitID, param);
         }
     }, delay);
     function impl() {
@@ -130,9 +130,12 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
                 produit.setCategorie(categorie);
                 produit.setSousCategorie(result.categorie);
                 produit.setOptions(result.options);
+                produit.setAssociationPrixProduit(result.associationPrixProduit);
+                //                produit.setSousCategorie();
+                console.log(result);
                 produit.setIdsIngredients(result.ingredients);
-                if (method != null ) {//Nous avons besoin de l'executer.
-                    method(produit,param);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(produit, param);
                 }
             };
             trans.oncomplete = function(e) {

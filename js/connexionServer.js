@@ -143,6 +143,7 @@ function ConnexionServer() {
                 produit.setSousCategorie(data.categorie);
                 produit.setIdsIngredients(data.ingredients);
                 produit.setOptions(data.options);
+                produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
@@ -180,6 +181,7 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
+        
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
             type: 'GET',
@@ -198,7 +200,8 @@ function ConnexionServer() {
                     categorie.setPriorite(data[i].categorie.priorite);
                     categorie.setSousCategorie(data[i].categorie.souscategorie);
                     produit.setCategorie(categorie);
-                    produit.setSousCategorie(parseInt(data[i].souscategorie));
+                    produit.setSousCategorie(data[i].souscategorie);
+                    produit.setAssociationPrixProduit(data[i].associationPrixProduit);
                     produit.setIdsIngredients(data[i].ingredients);
                     produit.setOptions(data[i].options);
                     produits.push(produit);
@@ -248,8 +251,9 @@ function ConnexionServer() {
                 categorie.setPriorite(data.categorie.priorite);
                 categorie.setSousCategorie(data.categorie.souscategorie);
                 produit.setCategorie(categorie);
-                produit.setSousCategorie(data.categorie);
+                produit.setSousCategorie(data.souscategorie);
                 produit.setIdsIngredients(data.ingredients);
+                produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produit.setOptions(data.options);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(produit, param);

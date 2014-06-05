@@ -269,3 +269,7 @@ function sendPendingsDatas() {
         }
     }, null);
 }
+function calculPrixWithTVA(prixHT, tauxTVA) {
+    var tauxTVA = parseFloat(tauxTVA);
+    return ((tauxTVA / 100) * prixHT) + prixHT;
+}
