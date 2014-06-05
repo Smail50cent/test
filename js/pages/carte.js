@@ -575,7 +575,6 @@ function printProduits(index) {
                     }
                     var prixHT = produit.getPrix();
                     if (produit.id == 40) {
-                        console.log(produit);
                         prixHT = getPrixHtInAssociation(produit.associationPrixProduit);
                     }
                     var prixTTC = calculPrixWithTVA(prixHT, produit.id_sousCategorie.tauxTva);
@@ -599,39 +598,62 @@ function getPrixHtInAssociation(associationPrixProduit) {
     if (associationPrixProduit.length != 0) {
         if (associationPrixProduit.length == 1) {
             prixHt = parseFloat(associationPrixProduit[0].prixHt.prix);
-        } else {
+        } else {//Système de priorité
+            var table = JSON.parse(getLocalStorageValue("paramCommande.numTable"));
             var currentDate = new Date().getTime();
-            console.log("currentDate", (currentDate));
             var priorityPrix = null;
             for (var i = 0; i < associationPrixProduit.length; i++) {
-                console.log(new Date(associationPrixProduit[i].heureFin));
-                var startTime = new Date(associationPrixProduit[i].heureDebut).getTime();
-                var endTime = new Date(associationPrixProduit[i].heureFin).getTime();
-                console.log("startTime", startTime);
-                console.log("endTime", endTime);
-                if (startTime == 0 && endTime == 0) {
-                    console.log("no");
+                var startDate = new Date(associationPrixProduit[i].dateDebut).getTime();
+                var endDate = new Date(associationPrixProduit[i].dateFin).getTime();
+                if (startDate == 0 && endDate == 0) {
                     priorityPrix = associationPrixProduit[i];
-                } else if (currentDate > startTime && currentDate < endTime) {
-                    console.log("indate=", associationPrixProduit[i]);
+                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin)) {
                     priorityPrix = associationPrixProduit[i];
-                }else if (currentDate > startTime ) {
-                    if(currentDate > endTime){
-                        console.log("DATE ENTRE");
-                    }
-                    console.log("cur>start=", associationPrixProduit[i]);
+                } else if (associationPrixProduit[i].zone_table_id == table.zone) {
                     priorityPrix = associationPrixProduit[i];
                 }
-//                console.log(startTime);
             }
             prixHt = priorityPrix.prixHt.prix;
-//            console.log(new Date(associationPrixProduit[2].heureDebut));
         }
     } else {
         prixHt = 0;
     }
-    console.log(prixHt);
     return parseFloat(prixHt);
+}
+function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, minutesFin) {
+    var ret = false;
+    var currentDate = new Date().getTime();
+    var startDate = new Date(dateDebut).getTime();
+    var endDate = new Date(dateFin).getTime();
+    if (currentDate > startDate && currentDate < endDate) {
+        var currentTime = new Date();
+        if (currentTime.getHours() >= heureDebut) {
+            var startOk = true;
+            if (currentTime.getHours() > heureDebut) {
+                startOk = true;
+            } else {
+                if (currentTime.getHours() == heureDebut && currentTime.getMinutes() >= minutesDebut) {
+                    startOk = true;
+                } else {
+                    startOk = false;
+                }
+            }
+            var endOk = true;
+            if (startOk == true) {
+                if (currentTime.getHours() <= heureFin) {
+                    if (currentTime.getHours() == heureFin && currentTime.getMinutes() <= minutesFin) {
+                        endOk = true;
+                    } else {
+                        endOk = false;
+                    }
+                }
+            }
+            if (endOk) {
+                ret = true;
+            }
+        }
+    }
+    return ret;
 }
 /**
  * Allows to show the "recapitulatif" or hide 

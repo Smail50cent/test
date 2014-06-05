@@ -98,7 +98,7 @@ function SousCategorie() {
     this.nom;
     this.priorite;
     this.taux_tva;
-    
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -217,7 +217,7 @@ function Produit() {
     this.getAssociationPrixProduit = function() {
         return this.associationPrixProduit;
     };
-    
+
 }
 ;
 function Menu(id, produits, prix, nom) {
@@ -351,9 +351,10 @@ function AssociationProduitIngredients(produit, ingredient, inStart, surcout, su
     this.supprimable = supprimable;
     this.isAdded = false;
 }
-function Table(id, numero) {
+function Table(id, numero, zone) {
     this.id = id;
     this.numero = numero;
+    this.zone = zone;
 }
 function ModeDeReglements(id, nom, url, redirictUrl) {
     this.id = id;

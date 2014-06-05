@@ -21,12 +21,37 @@ class AssociationProduitPrixServiceDataImpl implements AssociationProduitPrixSer
         while ($ligne = $retBdd->fetch()) {
             $associationProduitPrix = new AssociationProduitPrix();
             $associationProduitPrix->setId($ligne->id);
-            $dateDebut = new DateTime($ligne->heureDebut);
-            $dateDebut = $dateDebut->format('Y-m-d H:i:s');
-            $dateFin = new DateTime($ligne->heureDebut);
-            $dateFin = $dateFin->format('Y-m-d H:i:s');
-            $associationProduitPrix->setHeureDebut($dateDebut);
-            $associationProduitPrix->setHeureFin($dateFin);
+            $dateDebut = null;
+            $dateFin = null;
+            $heureDebut = null;
+            $heureFin = null;
+            $minutesDebut = null;
+            $minutesFin = null;
+            if ($ligne->heureDebut != null) {
+                $dateDebut = new DateTime($ligne->heureDebut);
+                $dateDebut = $dateDebut->format('Y-m-d H:i:s');
+
+                $heureDebut = new DateTime($ligne->heureDebut);
+                $heureDebut = intval($heureDebut->format('H'));
+
+                $minutesDebut = new DateTime($ligne->heureDebut);
+                $minutesDebut = intval($minutesDebut->format('i'));
+                
+                $dateFin = new DateTime($ligne->heureFin);
+                $dateFin = $dateFin->format('Y-m-d');
+                
+                $minutesFin = new DateTime($ligne->heureFin);
+                $minutesFin = intval($minutesFin->format('i'));
+                
+                $heureFin = new DateTime($ligne->heureFin);
+                $heureFin = intval($heureFin->format('H'));
+            }
+            $associationProduitPrix->setMinutesDebut($minutesDebut);
+            $associationProduitPrix->setMinutesFin($minutesFin);
+            $associationProduitPrix->setDateDebut($dateDebut);
+            $associationProduitPrix->setHeureDebut($heureDebut);
+            $associationProduitPrix->setDateFin($dateFin);
+            $associationProduitPrix->setHeureFin($heureFin);
             $prixHT = new PrixHT();
             $prixHT->setId($ligne->prixht_id);
             $prixHT->setPrix($ligne->prix);

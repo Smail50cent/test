@@ -14,8 +14,12 @@
 class AssociationProduitPrix {
 
     public $id;
+    public $dateDebut;
     public $heureDebut;
+    public $minutesDebut;
+    public $dateFin;
     public $heureFin;
+    public $minutesFin;
     public $prixHt;
     public $zoneTable;
 
@@ -57,6 +61,38 @@ class AssociationProduitPrix {
 
     public function setPrixHt($prixHT) {
         $this->prixHt = $prixHT;
+    }
+
+    public function getDateDebut() {
+        return $this->dateDebut;
+    }
+
+    public function setDateDebut($dateDebut) {
+        $this->dateDebut = $dateDebut;
+    }
+
+    public function getDateFin() {
+        return $this->dateFin;
+    }
+
+    public function setDateFin($dateFin) {
+        $this->dateFin = $dateFin;
+    }
+    
+    public function getMinutesDebut() {
+        return $this->minutesDebut;
+    }
+
+    public function setMinutesDebut($minutesDebut) {
+        $this->minutesDebut = $minutesDebut;
+    }
+
+    public function getMinutesFin() {
+        return $this->minutesFin;
+    }
+
+    public function setMinutesFin($minutesFin) {
+        $this->minutesFin = $minutesFin;
     }
 
 }

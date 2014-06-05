@@ -26,7 +26,7 @@ myStorage.indexedDB.addFistTables = function() {
             var trans = db.transaction([config.getConfig("tableNameTable")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameTable"));
             var request;
-            request = store.put({"id": (table.id), "numero": table.numero});
+            request = store.put({"id": (table.id), "numero": table.numero,"zone": table.zone} );
             trans.oncomplete = function(e) {
                 entitysFinsh[config.getConfig("tableNameTable")] = false;
                 db.close();
@@ -61,7 +61,7 @@ myStorage.indexedDB.getAllTables = function(method) {
                 if (!!result == false) {
                     return;
                 }
-                var table = new Table(result.value.id,result.value.numero);
+                var table = new Table(result.value.id,result.value.numero,result.value.zone);
                 tables.push(table);
                 result.continue();
             };

@@ -294,7 +294,7 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var tables = new Array();
                 for (var i = 0; i < data.length; i++) {
-                    tables.push(new Table(data[i].id, data[i].numero));
+                    tables.push(new Table(data[i].id, data[i].numero,data[i].zone));
                 }
                 method(tables);
             },
