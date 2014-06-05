@@ -42,11 +42,5 @@
     <string key="label.button.produit.non.attr.attribuer">Assign</string>
     <string key="label.button.produit.non.attr.valider.selection">Confirm the selection</string>
     <string key="label.envoie.cuisine.valider">Confirm</string>
-    <string key="label.sexe">Gender</string>
-    <string key="label.prenom">Name</string>
-    <string key="label.nom">Last name</string>
-    <string key="label.email">Email</string>
-    <string key="label.tel">Phone number</string>
-    <string key="label.adresse">Adress</string>
-    <string key="label.password">Password</string>
+    <string key="label.personne.auth">Person</string>
 </strings>

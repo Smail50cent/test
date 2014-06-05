@@ -1,1 +1,1 @@
-<option value="{OptionValue}" class="option_in_choose_table">{OptionName}</option>
+<option value="{OptionValue}" class="option_in_choose_table option_in_choose_table_structure option_in_choose_table_personalize">{OptionName}</option>

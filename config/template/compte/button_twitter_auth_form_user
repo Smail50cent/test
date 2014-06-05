@@ -1,1 +1,3 @@
-<button type="submit" onclick="twitterAuth()"><img src="img/twitter.png"></button>
+<div id="twitter_auth_compte_id" class="twitter_auth_compte twitter_auth_compte_structure twitter_auth_compte_personalize">
+    <button type="submit" onclick="twitterAuth()"><img src="img/twitter.png"></button>
+</div>

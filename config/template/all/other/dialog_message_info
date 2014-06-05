@@ -1,13 +1,13 @@
 <div id="dialog_info_id" class="">
-<div class="calque"></div>
-<div class="dialog_info">
-    <div id="dialog_info_header_id"  class="dialog_info_header">
-        <img id="dialog_info_header_pict_id" class="dialog_info_header_pict"></img>
-        <p id="dialog_info_header_titre_id" class="dialog_info_header_titre">Info</p>
-        <img id="dialog_info_header_pict_id" onclick="hideDialogInfo();" class="dialog_error_header_pict"></img>
+<div class="calque calque_structure calque_personalize"></div>
+<div class="dialog_info dialog_info_structure dialog_info_personalize">
+    <div id="dialog_info_header_id"  class="dialog_info_header dialog_info_header_structure dialog_info_header_personalize">
+        <img id="dialog_info_header_pict_id" class="dialog_info_header_pict dialog_info_header_pict_structure dialog_info_header_pict_personalize"></img>
+        <p id="dialog_info_header_titre_id" class="dialog_info_header_titre dialog_info_header_titre_structure dialog_info_header_titre_personalize">Info</p>
+        <img id="dialog_info_header_pict_id" onclick="hideDialogInfo();" class="dialog_error_header_pict dialog_error_header_pict_structure dialog_error_header_pict_personalize"></img>
     </div>
-    <div id="dialog_info_content_id" class="dialog_info_content">
-        <p id="dialog_info_content_message_id" class="dialog_info_content_message">{message}</p>
+    <div id="dialog_info_content_id" class="dialog_info_content dialog_info_content_structure dialog_info_content_personalize">
+        <p id="dialog_info_content_message_id" class="dialog_info_content_message dialog_info_content_message_structure dialog_info_content_message_personalize">{message}</p>
     </div>
 </div>
 </div>

@@ -1,4 +1,4 @@
-<li id="produit_non_attribue_{idqop}" class="option_produit_non_attribue_item">
-    <label  class="option_produit_non_attribue_label">{labelProduit}</label>
-    <button class="option_produit_non_attribue_button" onclick="attribuerToPersonnes({idqop})">{labelButton}</button>
+<li id="produit_non_attribue_{idqop}" class="option_produit_non_attribue_item option_produit_non_attribue_item_structure option_produit_non_attribue_item_personalize">
+    <label  class="option_produit_non_attribue_label option_produit_non_attribue_label_structure option_produit_non_attribue_label_personalize">{labelProduit}</label>
+    <button class="option_produit_non_attribue_button option_produit_non_attribue_button_structure option_produit_non_attribue_button_personalize" onclick="attribuerToPersonnes({idqop})">{labelButton}</button>
 </li>

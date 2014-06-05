@@ -1,16 +1,16 @@
 <li id="ticket_item_{qopID}">
-    <div id="content_produit_zone_recap_id_{qopID}" class="content_produit_zone">
-        <div id="content_produit_zone_left_id_{qopID}" class="content_produit_zone_left">
+    <div id="content_produit_zone_recap_id_{qopID}" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
+        <div id="content_produit_zone_left_id_{qopID}" class="content_produit_zone_left content_produit_zone_left_structure content_produit_zone_left_personalize">
             <input onclick="lessProduit({qopID},true);" value="-" type="button"
-                id="content_produit_btn_left_id_recap_{qopProduiID}" class="content_produit_btn_left"/></div>
-        <div id="content_produit_zone_right_qop_{qopID}" class="content_produit_zone_right">
-            <p id="content_produit_zone_right_prix_id_{qopID}" class="content_produit_zone_right_prix">{prix}</p>
+                id="content_produit_btn_left_id_recap_{qopProduiID}" class="content_produit_btn_left content_produit_btn_left_structure content_produit_btn_left_personalize"/></div>
+        <div id="content_produit_zone_right_qop_{qopID}" class="content_produit_zone_right content_produit_zone_right_structure content_produit_zone_right_personalize">
+            <p id="content_produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize">{prix}</p>
             <input onclick="addProduit({qopID},true);" type="button" id="content_produit_btn_right_id_recap_{qopID}"
-            value="{quantity}" class="content_produit_btn_right"/></div>
-        <div id="content_produit_id" class="content_produit">
+            value="{quantity}" class="content_produit_btn_right content_produit_btn_right_structure content_produit_btn_right_personalize"/></div>
+        <div id="content_produit_id" class="content_produit_structure content_produit content_produit_personalize">
             <p onclick="onRecapitulatifProduitClicked({qopProduiID},{qopID});" id="content_produit_titre_id_{qopProduiID}"
-            class="content_produit_titre content_produit_titre_personnes">{qopProduitNom}</p>
-            <div class="boutonInfoInItemRecapitulatif"></div>
-        <ul id="content_produit_description_recap_id_{qopID}" class="content_produit_description"></ul>       
+            class="content_produit_titre content_produit_titre_structure content_produit_titre_personalize content_produit_titre_personnes content_produit_titre_personnes_structure content_produit_titre_personnes_personalize">{qopProduitNom}</p>
+            <div class="boutonInfoInItemRecapitulatif boutonInfoInItemRecapitulatif_structure boutonInfoInItemRecapitulatif_personalize"></div>
+        <ul id="content_produit_description_recap_id_{qopID}" class="content_produit_description content_produit_description_structure content_produit_description_personalize"></ul>       
     </div>    
 </li>

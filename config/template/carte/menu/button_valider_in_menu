@@ -1,1 +1,1 @@
-<button id="{id}" onclick="addMenuToTicket({idparam});" class="choose_menu_valider_menu">{buttonValue}</button>
+<button id="{id}" onclick="addMenuToTicket({idparam});" class="choose_menu_valider_menu choose_menu_valider_menu_structure choose_menu_valider_menu_personalize">{buttonValue}</button>

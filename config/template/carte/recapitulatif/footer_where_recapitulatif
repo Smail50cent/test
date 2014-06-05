@@ -1,24 +1,24 @@
-<div class="footer_tarif">
-    <div id="footer_tarif_total_id" class="footer_tarif_total">
-        <div id="footer_tarif_total_label_id" class="footer_tarif_total_label"></div>
-        <div id="footer_tarif_total_value_id" class="footer_tarif_total_value"></div>
+<div class="footer_tarif footer_tarif_structure footer_tarif_personalize">
+    <div id="footer_tarif_total_id" class="footer_tarif_total footer_tarif_total_structure footer_tarif_total_personalize">
+        <div id="footer_tarif_total_label_id" class="footer_tarif_total_label footer_tarif_total_label_structure footer_tarif_total_label_personalize"></div>
+        <div id="footer_tarif_total_value_id" class="footer_tarif_total_value footer_tarif_total_value_structure footer_tarif_total_value_personalize"></div>
     </div>
-    <div id="footer_tarif_nbCouvert_id" class="footer_tarif_nbCouvert">
-        <div id="footer_tarif_nbCouvert_label_id" class="footer_tarif_nbCouvert_label"></div>
-        <div id="footer_tarif_nbCouvert_value_id" class="footer_tarif_nbCouvert_value"></div>
+    <div id="footer_tarif_nbCouvert_id" class="footer_tarif_nbCouvert footer_tarif_nbCouvert_structure footer_tarif_nbCouvert_personalize">
+        <div id="footer_tarif_nbCouvert_label_id" class="footer_tarif_nbCouvert_label footer_tarif_nbCouvert_label_structure footer_tarif_nbCouvert_label_personalize"></div>
+        <div id="footer_tarif_nbCouvert_value_id" class="footer_tarif_nbCouvert_value footer_tarif_nbCouvert_value_structure footer_tarif_nbCouvert_value_personalize"></div>
     </div>
-    <div id="footer_tarif_totalparPersonne_id" class="footer_tarif_totalparPersonne">
-        <div id="footer_tarif_totalparPersonne_label_id" class="footer_tarif_totalparPersonne_label"></div>
-        <div id="footer_tarif_totalparPersonne_value_id" class="footer_tarif_totalparPersonne_value"></div>
+    <div id="footer_tarif_totalparPersonne_id" class="footer_tarif_totalparPersonne footer_tarif_totalparPersonne_structure footer_tarif_totalparPersonne_personalize">
+        <div id="footer_tarif_totalparPersonne_label_id" class="footer_tarif_totalparPersonne_label footer_tarif_totalparPersonne_label_structure footer_tarif_totalparPersonne_label_personalize"></div>
+        <div id="footer_tarif_totalparPersonne_value_id" class="footer_tarif_totalparPersonne_value footer_tarif_totalparPersonne_value_structure footer_tarif_totalparPersonne_value_personalize"></div>
     </div>
-    <div id="footer_tarif_votreTable_id" class="footer_tarif_votreTable">
-        <div id="footer_tarif_votreTable_label_id" class="footer_tarif_votreTable_label"></div>
-        <div id="footer_tarif_votreTable_value_id" class="footer_tarif_votreTable_value"></div>
+    <div id="footer_tarif_votreTable_id" class="footer_tarif_votreTable footer_tarif_votreTable_structure footer_tarif_votreTable_personalize">
+        <div id="footer_tarif_votreTable_label_id" class="footer_tarif_votreTable_label footer_tarif_votreTable_label_structure footer_tarif_votreTable_label_personalize"></div>
+        <div id="footer_tarif_votreTable_value_id" class="footer_tarif_votreTable_value footer_tarif_votreTable_value_structure footer_tarif_votreTable_value_personalize"></div>
     </div>
 </div>
-<input type="button"  class="btn_recapitulatif_commande btn_recapitulatif_commande_recapitulatif" id="btn_recapitulatif_commande_id" onclick="recapitulatifClick();" value="Recapitulatif de votre commande"/>
-<input type="button"  style="margin-left: 50%;" class="btn_valider_commande btn_valider_commande_recap" id="btn_valider_commande_id" onclick="{onclick}" value="{valueValider}"/>
-<p id="footer_adresse_id" class="footer_adresse"></p>
-<div id="footer_left_id" class="footer_left"></div>
-<div id="footer_left_id_trgl" class="footer_left"></div>
-<div id="footer_right_id" class="footer_right"></div>
+<input type="button"  class="btn_recapitulatif_commande btn_recapitulatif_commande_structure btn_recapitulatif_commande_personalize btn_recapitulatif_commande_recapitulatif btn_recapitulatif_commande_recapitulatif_structure btn_recapitulatif_commande_recapitulatif_personalize" id="btn_recapitulatif_commande_id" onclick="recapitulatifClick();" value="Recapitulatif de votre commande"/>
+<input type="button"  style="margin-left: 50%;" class="btn_valider_commande btn_valider_commande_structure btn_valider_commande_personalize btn_valider_commande_recap btn_valider_commande_recap_structure btn_valider_commande_recap_personalize" id="btn_valider_commande_id" onclick="{onclick}" value="{valueValider}"/>
+<p id="footer_adresse_id" class="footer_adresse footer_adresse_structure footer_adresse_personalize "></p>
+<div id="footer_left_id" class="footer_left footer_left_structure footer_left_personalize"></div>
+<div id="footer_left_id_trgl" class="footer_left footer_left_structure footer_left_personalize"></div>
+<div id="footer_right_id" class="footer_right footer_right_structure footer_right_personalize"></div>

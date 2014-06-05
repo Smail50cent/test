@@ -415,11 +415,11 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
     }
     
     .auth_compte {
-        margin: 4px 0 -7px 0;
-        padding: 6px 0;
-        background-color: #a0a0a0;
-        border-radius: 5px;
-        color: white;
+margin: 4px 0 -7px 0;
+padding: 6px 0;
+background-color: #a0a0a0;
+border-radius: 5px;
+color: white;
     }
 
     .select_item_etape_class {
@@ -618,7 +618,7 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         margin-top: 10px;
     }
 
-    .auth_compte  .compte_login , .auth_compte .compte_pass , .auth_compte .client_name , .auth_compte .vclient_nom , .auth_compte .vclient_prenom {
+    .auth_compte  .compte_login , .auth_compte .compte_pass , .auth_compte .client_name  {
         box-shadow: 1px 1px 0px 0px grey inset;
         width:158px;
         margin:0 51px;
@@ -638,7 +638,7 @@ p.dialog_error_header_titre, .dialog_info_header_titre{
         vertical-align: middle;
     }
 
-    .all_snbutton{
+    .button_facebook {
         background-color: rgb(160, 160, 160);
         width: 98%;
         margin: 19px auto 0 auto;

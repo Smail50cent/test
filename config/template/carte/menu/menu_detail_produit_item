@@ -1,6 +1,6 @@
-<li id="choose_menu_item_{produitID}" class="choose_menu_item">
-  <div id="choose_menu_item_{produitID}" class="">
-    <p class="choose_menu_item_titre">{produitNom}</p>
-    <input type="button" id="choose_menu_item_button_{produitID}" onclick="chooseProductInThisMenu({produitID});" value="+"></input>
+<li id="choose_menu_item_{produitID}" class="choose_menu_item choose_menu_item_structure choose_menu_item_personalize">
+  <div id="choose_menu_item_{produitID}" class="div_choose_menu_item div_choose_menu_item_structure div_choose_menu_item_personalize">
+    <p class="choose_menu_item_titre choose_menu_item_titre_structure choose_menu_item_titre_personalize">{produitNom}</p>
+    <input type="button" id="choose_menu_item_button_{produitID}" class="choose_menu_item_button_structure choose_menu_item_button_personalize" onclick="chooseProductInThisMenu({produitID});" value="+"></input>
   </div>
 </li>

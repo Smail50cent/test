@@ -1,5 +1,6 @@
-/*
- * 
+/**
+ *
+ * @author Hamza Legdani <hamza.legdani@gmail.com>
  */
 var listePersonnes = new Array();
 
@@ -57,6 +58,10 @@ function authenCompte() {
 function InscriCompte() {
     $('#all_snbutton_id').hide();
     getHtmlFormInscription();
+
+}
+function stringPlaceholder() {
+
 }
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
@@ -64,9 +69,10 @@ function getHtmlFormInscription() {
         var insciform = getGeneratedInscriForm();
         $('#auth_form_id').html(insciform);
         var buttonValider = getButtonInscriFormUser();
-        $('#vclient_form_id').append(buttonValider);
+        $('#auth_form_id').append(buttonValider);
         var buttonretour = getButtonBackToAuth();
         $('#auth_form_id').append(buttonretour);
+        // Event for input File
     });
 }
 function RetourAuth() {
@@ -90,6 +96,7 @@ function ValiderInscri() {
                         connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
                         var personne = new Personne();
+                        personne.setId(LastId);
                         personne.setGender($('#sexe_user_id').val());
                         personne.setNom($('#nom_user_id').val());
                         personne.setPrenom($('#prenom_user_id').val());
@@ -98,7 +105,6 @@ function ValiderInscri() {
                         listePersonnes.push(personne);
                         setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                         $('#auth_popup_id').dialog("close");
-
                     }
                 }
             });
@@ -107,7 +113,6 @@ function ValiderInscri() {
 }
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {
-
 
         scripts.loadScripts("lib.social", function() {
             var nom = $('input[id^="vclient_nom_id"]').val();
@@ -162,7 +167,10 @@ function AuthToCommande() {
     if (listePersonnes.length == $("#nbPersonnes").val()) {
         startCommande($("#numTable").val(), $("#nbPersonnes").val());
     } else {
+        $('#auth_compte_id input[type="text"] , #auth_compte_id input[type="password"], #auth_form_id input[type="text"], #auth_form_id input[type="date"], #auth_form_id input[type="file"], #auth_form_id input[type="email"], #auth_form_id input[type="tel"], #auth_form_id textarea, #auth_form_id input[type="password"]').val('');
         window.setTimeout(function() {
+            var person = strings.getString("label.personne.auth");
+            $('#nbr_personne_id').html(person+" n° "+(listePersonnes.length+1));
             $('#auth_popup_id').dialog("open");
         }, 500);
     }
@@ -175,10 +183,10 @@ function TestEmptyFields(field) {
         {
             empty = true;
         }
-
     });
     if (empty) {
         alert("Remplissez tout les champs avant de valider !");
     }
     return empty;
 }
+

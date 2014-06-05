@@ -1,1 +1,1 @@
-<div id="{id}" style="{style}" class="img_slide slide genreicClassSlide {classToAdd}"></div>
+<div id="{id}" style="{style}" class="img_slide img_slide_structure img_slide_personalize slide slide_structure slide_personalize genreicClassSlide genreicClassSlide_structure genreicClassSlide_personalize {classToAdd}"></div>

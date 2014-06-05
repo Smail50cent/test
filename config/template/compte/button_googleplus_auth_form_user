@@ -1,1 +1,3 @@
-<button type="submit" onclick="googleplusAuth()"><img src="img/googleplus.png"></button>
+<div id="google_auth_compte_id" class="google_auth_compte google_auth_compte_structure google_auth_compte_personalize">
+    <button type="submit" onclick="googleplusAuth()"><img src="img/googleplus.png"></button>
+</div>

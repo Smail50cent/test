@@ -456,14 +456,14 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(method, password) {
+    this.addCompte = function(method, password, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
             data: {password: password},
             async: true,
             success: function(data) {
-                method(data);
+                method(data,param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);

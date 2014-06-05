@@ -1,19 +1,19 @@
 
-<div id="socialNetwork_userinfo_id" class ="socialNetwork_userinfo">
-    <div id="socialNetwork_message_id" class="socialNetwork_message"></div>
+<div id="socialNetwork_userinfo_id" class ="socialNetwork_userinfo socialNetwork_userinfo_structure socialNetwork_userinfo_personalize">
+    <div id="socialNetwork_message_id" class="socialNetwork_message socialNetwork_message_structure socialNetwork_message_personalize"></div>
 
-    <div id="socialNetwork_status_id" class="socialNetwork_status">
+    <div id="socialNetwork_status_id" class="socialNetwork_status socialNetwork_status_structure socialNetwork_status_personalize">
     <img src="img/LoginWithFacebook.png" style="cursor:pointer;" onclick="FacebookLogin()"/>
     </div>
     
-    <div id="socialNetwork_profilPicture_id" class="socialNetwork_profilPicture"> </div>
-    <b>Name : </b><p id="socialNetwork_userName_id" class="socialNetwork_userName"></p> 
-    <b>Link : </b><p id="socialNetwork_userLink_id" class="socialNetwork_userLink"></p> 
-    <b>Email : </b><p id="socialNetwork_userEmail_id" class="socialNetwork_userEmail"></p> 
-    <b>UserName : </b><p id="socialNetwork_userUserName_id" class="socialNetwork_userUserName"></p> 
-    <b>Id : </b><p id="socialNetwork_userId_id" class="socialNetwork_userId"></p> 
+    <div id="socialNetwork_profilPicture_id" class="socialNetwork_profilPicture socialNetwork_profilPicture_structure socialNetwork_profilPicture_personalize"> </div>
+    <b>Name : </b><p id="socialNetwork_userName_id" class="socialNetwork_userName socialNetwork_userName_structure socialNetwork_userName_personalize"></p> 
+    <b>Link : </b><p id="socialNetwork_userLink_id" class="socialNetwork_userLink socialNetwork_userLink_structure socialNetwork_userLink_personalize"></p> 
+    <b>Email : </b><p id="socialNetwork_userEmail_id" class="socialNetwork_userEmail socialNetwork_userEmail_structure socialNetwork_userEmail_personalize"></p> 
+    <b>UserName : </b><p id="socialNetwork_userUserName_id" class="socialNetwork_userUserName socialNetwork_userUserName_structure socialNetwork_userUserName_personalize"></p> 
+    <b>Id : </b><p id="socialNetwork_userId_id" class="socialNetwork_userId socialNetwork_userId_structure socialNetwork_userId_personalize"></p> 
     <input type='button' value='Logout' onclick='FacebookLogout();'/>
 
-    <div id="socialNetwork_message_id" class="socialNetwork_message"></div>
+    <div id="socialNetwork_message_id" class="socialNetwork_message socialNetwork_message_structure socialNetwork_message_personalize"></div>
 
 </div>

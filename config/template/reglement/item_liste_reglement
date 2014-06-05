@@ -1,7 +1,7 @@
-<li class="mode_de_reglement_item">
-    <div class="mode_de_reglement_item_content">
-        <input class="mode_de_reglement_item_radio" id="radio_mode_reglement_{id}" value="{id}" type="radio" name="reglement" checked/>
-        <img class="mode_de_reglement_item_pict" style="height: 30px; width: 30px;" modeReglementID="{id}" src="{imgSrc}"/>
-        <p class="mode_de_reglement_item_label" modeReglementID="{id}">{nom}</p>
+<li class="mode_de_reglement_item mode_de_reglement_item_structure mode_de_reglement_item_personalize">
+    <div class="mode_de_reglement_item_content_structure mode_de_reglement_item_content_personalize">
+        <input class="mode_de_reglement_item_radio mode_de_reglement_item_radio_structure mode_de_reglement_item_radio_personalize" id="radio_mode_reglement_{id}" value="{id}" type="radio" name="reglement" checked/>
+        <img class="mode_de_reglement_item_pict mode_de_reglement_item_pict_structure mode_de_reglement_item_pict_personalize" style="height: 30px; width: 30px;" modeReglementID="{id}" src="{imgSrc}"/>
+        <p class="mode_de_reglement_item_label mode_de_reglement_item_label_structure mode_de_reglement_item_label_personalize" modeReglementID="{id}">{nom}</p>
     </div>
 </li>
