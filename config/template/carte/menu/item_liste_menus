@@ -1,9 +1,9 @@
-<li id="menu_item_id_{menuId}" class="menu_item"> 
-    <div id="menu_content_id_{menuId}" class="menu_content">
-        <div class="menu_content_add_button" id="menu_content_add_{menuId}" onclick="detailMenu({menuId})"></div>
-        <img id="menu_content_photo_id" class="menu_content_photo"/>
-        <p id="menu_content_titre_id" class="menu_content_titre">{menuNom}</p>
-        <p id="menu_content_prix_id" class="menu_content_prix">{prixMenu}</p>
-        <ul id="choose_menu_item_produits_{menuId}" class="choose_menu_item_produits"></ul>
+<li id="menu_item_id_{menuId}" class="menu_item menu_item_structure menu_item_personalize"> 
+    <div id="menu_content_id_{menuId}" class="menu_content menu_content_structure menu_content_personalize">
+        <div class="menu_content_add_button menu_content_add_button_structure menu_content_add_button_personalize" id="menu_content_add_{menuId}" onclick="detailMenu({menuId})"></div>
+        <img id="menu_content_photo_id" class="menu_content_photo menu_content_photo_structure menu_content_photo_personalize"/>
+        <p id="menu_content_titre_id" class="menu_content_titre menu_content_titre_structure menu_content_titre_personalize">{menuNom}</p>
+        <p id="menu_content_prix_id" class="menu_content_prix menu_content_prix_structure menu_content_prix_personalize">{prixMenu}</p>
+        <ul id="choose_menu_item_produits_{menuId}" class="choose_menu_item_produits choose_menu_item_produits_structure choose_menu_item_produits_personalize"></ul>
    </div>
 </li>

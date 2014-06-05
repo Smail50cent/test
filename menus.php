@@ -1,6 +1,6 @@
 <?php include_once './header.php'; ?>
 
-<ul id="menus_id" class="menus">
+<ul id="menus_id" class="menus menus_structure menus_personalize">
     <!--li id="menu_item_id" class="menu_item">
         <div id="menu_content_id" class="menu_content">
             <img id="menu_content_photo_id" class="menu_content_photo"/>
@@ -9,8 +9,8 @@
         </div>
     </li-->
 </ul>
-<div id="choose_menu_id" class="choose_menu">
-    <ul id="choose_menu_items_id" class="choose_menu_items">
+<div id="choose_menu_id" class="choose_menu choose_menu_structure choose_menu_personalize">
+    <ul id="choose_menu_items_id" class="choose_menu_items choose_menu_items_structure choose_menu_items_personalize ">
         <!--li id="choose_menu_item_id" class="choose_menu_item">
             <div id="">
                 <p class="choose_menu_item_titre"></p>

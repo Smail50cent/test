@@ -1,13 +1,13 @@
-<div id="info_prix_id" style="display: none;" class="info_prix">
-    <div id="info_prix_calque_id" class="info_prix_calque"></div>
-    <div id="info_prix_content_id" class="info_prix_content">
-        <div id="info_prix_content_couverts_id" class="info_prix_content_couverts">
-            <div id="info_prix_content_couverts_content_id" class="info_prix_content_couverts_content">{contentCouvert}</div>
-            <div id="info_prix_content_couverts_label_id" class="info_prix_content_couverts_label">{labelCouvert}</div>
+<div id="info_prix_id" style="display: none;" class="info_prix info_prix_structure info_prix_personalize">
+    <div id="info_prix_calque_id" class="info_prix_calque info_prix_calque_structure info_prix_calque_personalize"></div>
+    <div id="info_prix_content_id" class="info_prix_content info_prix_content_structure info_prix_content_personalize">
+        <div id="info_prix_content_couverts_id" class="info_prix_content_couverts info_prix_content_couverts_structure info_prix_content_couverts_personalize">
+            <div id="info_prix_content_couverts_content_id" class="info_prix_content_couverts_content info_prix_content_couverts_content_structure info_prix_content_couverts_content_personalize">{contentCouvert}</div>
+            <div id="info_prix_content_couverts_label_id" class="info_prix_content_couverts_label info_prix_content_couverts_label_structure info_prix_content_couverts_label_personalize">{labelCouvert}</div>
         </div>  
-        <div id="info_prix_content_table_id" class="info_prix_content_table">
-            <div id="info_prix_content_table_label_id" class="info_prix_content_table_label">{labelTable}</div>
-            <div id="info_prix_content_table_content_id" class="info_prix_content_table_content">{contentTable}</div>
+        <div id="info_prix_content_table_id" class="info_prix_content_table info_prix_content_table_structure info_prix_content_table_personalize">
+            <div id="info_prix_content_table_label_id" class="info_prix_content_table_label info_prix_content_table_label_structure info_prix_content_table_label_personalize">{labelTable}</div>
+            <div id="info_prix_content_table_content_id" class="info_prix_content_table_content info_prix_content_table_content_structure info_prix_content_table_content_personalize">{contentTable}</div>
         </div>
     </div>  
 </div>

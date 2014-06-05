@@ -1,1 +1,1 @@
-<img class="socialNetwork_userPicture" id="socialNetwork_userPicture_id" src="{pic_url}" alt="profile">
+<img class="socialNetwork_userPicture socialNetwork_userPicture_structure socialNetwork_userPicture_personalize" id="socialNetwork_userPicture_id" src="{pic_url}" alt="profile">

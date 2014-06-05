@@ -1,14 +1,14 @@
 
-<div id="dialog_error_id">
-<div class="calque"></div>
-<div class="dialog_error" >
-    <div id="dialog_error_header_id"  class="dialog_error_header">
-        <img onclick="closeErreurDialog('dialog_error_id');" id="dialog_error_header_pict_id" class="dialog_error_header_pict"></img>
-        <p id="dialog_error_header_titre_id" class="dialog_error_header_titre">Erreur</p>
-        <img  id="dialog_error_header_fermer_id" class="dialog_error_header_pict pict_warning"></img>
+<div id="dialog_error_id" class=" dialog_error_structure dialog_error_personalize">
+<div class="calque calque_structure calque_personalize"></div>
+<div class="dialog_error dialog_error_structure dialog_error_personalize" >
+    <div id="dialog_error_header_id"  class="dialog_error_header dialog_error_header_structure dialog_error_header_personalize">
+        <img onclick="closeErreurDialog('dialog_error_id');" id="dialog_error_header_pict_id" class="dialog_error_header_pict dialog_error_header_pict_structure dialog_error_header_pict_personalize"></img>
+        <p id="dialog_error_header_titre_id" class="dialog_error_header_titre dialog_error_header_titre_structure dialog_error_header_titre_personalize">Erreur</p>
+        <img  id="dialog_error_header_fermer_id" class="dialog_error_header_pict pict_warning dialog_error_header_pict pict_warning_structure dialog_error_header_pict pict_warning_personalize"></img>
     </div>
-    <div id="dialog_error_content_id" class="dialog_error_content">
-        <p id="dialog_error_content_message_id" class="dialog_error_content_message">{message}</p>
+    <div id="dialog_error_content_id" class="dialog_error_content dialog_error_content_structure dialog_error_content_personalize">
+        <p id="dialog_error_content_message_id" class="dialog_error_content_message dialog_error_content_message_structure dialog_error_content_message_personalize">{message}</p>
     </div>
 </div>
 </div>

@@ -1,4 +1,4 @@
-<div id="modal_add_ingredient">
-    <ul id="modal_add_liste" class="ajouter_ingredient_box"></ul>
+<div id="modal_add_ingredient" class="modal_add_ingredient modal_add_ingredient_structure modal_add_ingredient_personalize">
+    <ul id="modal_add_liste" class="ajouter_ingredient_box ajouter_ingredient_box_structure ajouter_ingredient_box_structure"></ul>
     <a onclick="fermerAjouterIngredients();">Fermer</a>
 </div>

@@ -1,1 +1,1 @@
-<li><div>{label}</div><div><select class="product_spec" id="{idselect}" qopId="{qopId}" optionId="{optionId}"></select></div></li>
+<li><div>{label}</div><div><select class="product_spec product_spec_structure product_spec_personalize" id="{idselect}" qopId="{qopId}" optionId="{optionId}"></select></div></li>

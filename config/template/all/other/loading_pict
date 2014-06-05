@@ -1,4 +1,4 @@
-<div id="loading_pict_id" class="loading_pict">
+<div id="loading_pict_id" class="loading_pict loading_pict_structure loading_pict_personalize">
     <div class="calque" style=" position: fixed;
 top: 0%;
 left: 0%;
@@ -7,31 +7,11 @@ height: 100%;
 background-color: black;
 z-index: 100;
 opacity: 0.98;"></div>
-    <div class="spinner" style="
+    <img class="loading_pict_img" style="
+width: 55%;
 margin: 0 22.5%;
 position: fixed;
-margin-right: 50%;
-margin-left: 50%;
 z-index: 2500;
 top: 40%;
-">
-            <div class="spinner-container container1">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container2">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-            <div class="spinner-container container3">
-                <div class="circle1"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-        </div>
+" src="img/loading.gif"/>
 </div>

@@ -1,3 +1,3 @@
-<li id="choose_menu_item_title_{categorieID}" class="choose_menu_item_title_cat">
+<li id="choose_menu_item_title_{categorieID}" class="choose_menu_item_title_cat choose_menu_item_title_cat_structure choose_menu_item_title_cat_personalize">
     <p>{categorieNom}</p>
 </li>

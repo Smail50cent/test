@@ -1,5 +1,5 @@
-<li class="attribution_produit_item">
-    <input class="attribution_produit_checkbox" type="checkbox" id="personne_{idpers}"></input>
-    <img  class="attribution_produit_img" src="{srcImg}"></img>
-    <p class="attribution_produit_label">{labelPersonne}</p>
+<li class="attribution_produit_item attribution_produit_item_structure attribution_produit_item_personalize">
+    <input class="attribution_produit_checkbox attribution_produit_checkbox_structure attribution_produit_checkbox_personalize" type="checkbox" id="personne_{idpers}"></input>
+    <img  class="attribution_produit_img attribution_produit_img_structure attribution_produit_img_personalize" src="{srcImg}"></img>
+    <p class="attribution_produit_label attribution_produit_label_structure attribution_produit_label_personalize">{labelPersonne}</p>
 </li>

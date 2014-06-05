@@ -1,15 +1,15 @@
-<li class="produitcat{categorieId}_sscat{sousCategorieId} produit{produitId}" >
-    <div id="content_produit_zone_id" class="content_produit_zone">
-        <div id="content_produit_zone_left_id" class="content_produit_zone_left">
-            <div onclick="lessProduit({produitId},false);" id="content_produit_btn_left_id_{produitId}" class="content_produit_btn_left">-</div>
+<li class="produitcat{categorieId}_sscat{sousCategorieId} produit{produitId} produit_cat_structure produit_cat_personalize " >
+    <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
+        <div id="content_produit_zone_left_id" class="content_produit_zone_left content_produit_zone_left_structure content_produit_zone_left_personalize">
+            <div onclick="lessProduit({produitId},false);" id="content_produit_btn_left_id_{produitId}" class="content_produit_btn_left content_produit_btn_left_structure content_produit_btn_left_personalize">-</div>
         </div> 
-        <div id="content_produit_zone_right_id" class="content_produit_zone_right">
-            <div class="btn_more__left"> 
-                <div onclick="addProduit({produitId},false);" type="button" id="content_produit_btn_right_id_{produitId}"  class="content_produit_btn_right">{quantity}</div>
+        <div id="content_produit_zone_right_id" class="content_produit_zone_right content_produit_zone_right_structure content_produit_zone_right_personalize">
+            <div class="btn_more__left btn_more__left_structure btn_more__left_personalize"> 
+                <div onclick="addProduit({produitId},false);" type="button" id="content_produit_btn_right_id_{produitId}"  class="content_produit_btn_right content_produit_btn_right_structure content_produit_btn_right_personalize">{quantity}</div>
             </div>
         </div>
-        <p id="content_produit_zone_right_prix_id" class="content_produit_zone_right_prix">{produitPrix}</p>  
-        <p onclick="onTitreProduitClicked({produitId});" id="content_produit_titre_id_{produitId}" class="content_produit_titre">{produitNom}</p>       
-        <ul id="content_produit_description_id_{produitId}" style="padding:0;" class="content_produit_description"></ul>
+        <p id="content_produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize">{produitPrix}</p>  
+        <p onclick="onTitreProduitClicked({produitId});" id="content_produit_titre_id_{produitId}" class="content_produit_titre content_produit_titre_structure content_produit_titre_personalize">{produitNom}</p>       
+        <ul id="content_produit_description_id_{produitId}" style="padding:0;" class="content_produit_description content_produit_description_structure content_produit_description_personalize"></ul>
     </div>
 </li>
