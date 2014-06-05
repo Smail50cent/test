@@ -42,4 +42,5 @@
     <string key="label.button.produit.non.attr.attribuer">Assign</string>
     <string key="label.button.produit.non.attr.valider.selection">Confirm the selection</string>
     <string key="label.envoie.cuisine.valider">Confirm</string>
+    <string key="label.personne.auth">Person</string>
 </strings>

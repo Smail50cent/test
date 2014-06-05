@@ -44,8 +44,6 @@ class TicketServiceImpl implements TicketService {
         }
         return $id;
     }
-    
-
 
     private function setPersonneInTicketToBdd($personne, $id) {
         $find = false;
@@ -64,6 +62,24 @@ class TicketServiceImpl implements TicketService {
         if ($find == true) {
             $this->personnesInTiciket[count($this->personnesInTiciket)] = $personne;
         }
+    }
+
+    public function setPrioriteProduits($ticketPersonnes) {
+        $commandeId = $ticketPersonnes->getTicketId();
+        $personneProduits = $ticketPersonnes->getPersonneProduit();
+        for ($i = 0; $i < count($personneProduits); $i++) {
+            $personneId = $personneProduits[$i]->getPersonneId();
+            $produitsPriorite = $personneProduits[$i]->getProduits();
+            for($j = 0 ; $j < count($produitsPriorite) ; $j++){
+                $produitID = $produitsPriorite[$j]->getProduitId();
+                $priorite = $produitsPriorite[$j]->getPriorite();
+                $this->ticketSrv->updatePriorite($priorite, $produitID, $commandeId);
+            }
+        }
+    }
+
+    public function setHaveIfPay($havePay) {
+        
     }
 
 }

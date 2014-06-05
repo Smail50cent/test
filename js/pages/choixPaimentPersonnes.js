@@ -77,7 +77,6 @@ function calculerTotalTicket() {
 
 function printItem(html, personne, prix, idpersonne, img) {
     var newHtml = html;
-    console.log(img);
     newHtml = paramValue(newHtml, "nomPersonne", personne);
     newHtml = paramValue(newHtml, "prix", fntp(prix));
     newHtml = paramValue(newHtml, "src", img);

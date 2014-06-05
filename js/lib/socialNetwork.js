@@ -1,18 +1,23 @@
+/**
+ *
+ * @author Hamza Legdani <hamza.legdani@gmail.com>
+ */
 
-function addPersonne(personne, dicriminent) {
-    var connexion = getConnexion();
+function addPersonne(connexion, personne, discriminent, infoper) {
     if (!verifyEmail(personne.email)) {
-        connexion.addCompte(InsertFromLastId, dicriminent);
-        function InsertFromLastId(LastId) {
+        connexion.addCompte(InsertFromLastId, discriminent,infoper);
+        function InsertFromLastId(LastId,param) {
             connexion.addAttributCompte(1, personne.gender, 1, LastId);
             connexion.addAttributCompte(2, personne.nom, 1, LastId);
             connexion.addAttributCompte(3, personne.prenom, 1, LastId);
             connexion.addAttributCompte(7, personne.email, 1, LastId);
-            getFacebookPhoto(connexion, LastId);
+            connexion.addAttributCompte(8, personne.getUrlProfileImg(), 1, LastId);
+            personne.setId(LastId);
+            param(personne);
         }
     }
-}
 
+}
 function SNLogin(typeRs) {
     switch (typeRs) {
         case ("AVFB") :
@@ -21,7 +26,6 @@ function SNLogin(typeRs) {
                     if (response.authResponse)
                     {
                         getFacebookUserInfo(Infopersonne);
-
                         function Infopersonne(personne) {
                             listePersonnes.push(personne);
                             setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
@@ -43,21 +47,22 @@ function getFacebookUserInfo(infopersonne) {
         var fullname = response.name;
         var name = fullname.split(' '); // get Last and First Name
         var personne = new Personne();
-        personne.setId(response.id);
+
         personne.setNom(name[1]);
         personne.setPrenom(name[0]);
         personne.setEmail(response.email);
         personne.setGender(response.gender);
-        addPersonne(personne, "AVFB");
 
-        infopersonne(personne);
+        var connexion = getConnexion();
+        getFacebookPhoto(personne);
+        addPersonne(connexion, personne, "AVFB",infopersonne);
     });
 }
 
-function getFacebookPhoto(connexion, lastId) {
+function getFacebookPhoto(personne) {
 
     FB.api('/me/picture?type=normal', function(response) {
-        connexion.addAttributCompte(8, response.data.url, 1, lastId);
+        personne.setUrlProfileImg(response.data.url);
     });
 }
 

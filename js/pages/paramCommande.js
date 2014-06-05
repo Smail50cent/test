@@ -5,6 +5,7 @@
 
 $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbcouvers"));
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
+$('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
     if (!chooseLang) {
         $("#choose_lang_id").hide();
@@ -35,28 +36,10 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-//            var personnes = new Array();
-//            var p1 = new Personne();
-//            p1.setId(1);
-//            p1.setPrenom("Hamza");
-//            p1.setNom("Legdani");
-//            personnes.push(p1);
-//            var p2 = new Personne();
-//            p2.setId(2);
-//            p2.setPrenom("Nicolas");
-//            p2.setNom("Perru");
-//            personnes.push(p2);
-//            var p3 = new Personne();
-//            p3.setId(3);
-//            p3.setPrenom("Damien");
-//            p3.setNom("Chesneau")
-//            personnes.push(p3);
-//            setLocalStorageValue("personnes.couverts", JSON.stringify(personnes));
-//            startCommande($("#numTable").val(), $("#nbPersonnes").val());
-//            
-            
             scripts.loadScripts("compte", function() {
                 onLoadCompte();
+                var person = strings.getString("label.personne.auth");
+                $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
                 $('div#auth_popup_id').bind('dialogclose', function(event) {
                     AuthToCommande();
                 });
@@ -90,7 +73,6 @@ function loadDataPersonnes(nbMaxPersonnes) {
         } else {
             itemOptionPersonnes = paramValue(itemOptionPersonnes, "OptionName", (i + 1) + " " + strings.getString("label.choose.table.option.personneSing"));
         }
-
         itemOptionPersonnes = paramValue(itemOptionPersonnes, "OptionValue", (i + 1));
         $("#nbPersonnes").append(itemOptionPersonnes);
     }

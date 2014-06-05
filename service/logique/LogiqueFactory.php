@@ -18,6 +18,7 @@ include_once 'AttributCompteServiceImpl.php';
 include_once 'ParamFormServiceImpl.php';
 include_once 'TicketServiceImpl.php';
 include_once 'ParametreApplicationServiceImpl.php';
+include_once 'StringsServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -34,6 +35,7 @@ class LogiqueFactory {
     private static $paramformSrv = null;
     private static $ticketSrv = null;
     private static $paramappSrv = null;
+    private static $stringsSrv = null;
 
     public static function getModeDeReglementService() {
         if (LogiqueFactory::$modeDeReglementSrv == null) {
@@ -124,6 +126,13 @@ class LogiqueFactory {
             LogiqueFactory::$paramappSrv = new ParametreApplicationServiceImpl();
         }
         return LogiqueFactory::$paramappSrv;
+    }
+
+    public static function getStringsService() {
+        if (LogiqueFactory::$stringsSrv == null) {
+            LogiqueFactory::$stringsSrv = new StringsServiceImpl();
+        }
+        return LogiqueFactory::$stringsSrv;
     }
 
 }

@@ -15,44 +15,7 @@
         <link rel="stylesheet" type="text/css" href="./css/appli_caisse_pizza_personalize.css">
         
         <script type="text/javascript" src="./js/lib/jquery.js" ></script>
-        <script type="text/javascript" src="./js/toolBox.js" ></script>  
-        <script src="./js/crypt.js"></script>
-        <script type="text/javascript" src="./js/templates.js"></script>
-        <script>
-            showLoading();
-        </script>
         <script type="text/javascript" src="./js/scripts.js"></script>
-        <script type="text/javascript" src="./js/strings.js" ></script>
-        <script type="text/javascript" src="./js/config.js"  ></script>
-        <script type="text/javascript" src="./js/bean.js" defer></script>
-        <script type="text/javascript" src="./js/lib/jqueryui/js/jquery-ui-1.10.4.custom.js" defer></script>
-        <script type="text/javascript" src="./js/bean.js" defer></script>
-        <script type="text/javascript" src="./js/bean.js" defer></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAcces.js"></script>
-        <script type="text/javascript" src="./js/findInLoaded.js" defer ></script>
-        <script type="text/javascript" src="./js/ConnexionFactory.js" defer ></script>
-        <script type="text/javascript" src="./js/connexionServer.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/ConnexionLocalIndexedDB.js" defer ></script>
-        <script type="text/javascript" src="./js/database/webSQL/ConnexionLocalWebSQL.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesMenu.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesPendingDatas.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesEntreprise.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesEntrepriseMaj.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesSousCategorie.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesModeDeReglement.js" defer ></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesProduit.js" defer></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesTables.js" defer></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesCategorie.js" defer></script>
-        <script type="text/javascript" src="./js/database/indexedDB/indexedDBAccesIngredient.js" defer></script>  
-        <script type="text/javascript" defer >
-            function init() {
-                if (isIndexedDBSupported()) {
-                    myStorage.indexedDB.create(); // open displays the data previously saved
-                }
-                $.getScript("./js/control.js");
-            }
-            window.addEventListener("DOMContentLoaded", init, false);
-        </script>
     </head>
     <body>
         <div id="header_id" class="header header_structure header_personalize">

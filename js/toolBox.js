@@ -93,16 +93,16 @@ function toEncoded() {
     return true;
 }
 function setLocalStorageValue(key, value) {
-//    if (toEncoded()) {
-//        key = encodeString(key);
+    if (toEncoded()) {
+        key = encodeString(key);
 //        value = encodeString(value);
-//    }
+    }
     localStorage.setItem(key, value);
 }
 function getLocalStorageValue(key) {
-//    if (toEncoded()) {
-//        key = encodeString(key);
-//    }
+    if (toEncoded()) {
+        key = encodeString(key);
+    }
     if (key in localStorage) {
 //        return decodeString(localStorage.getItem(key));
         return (localStorage.getItem(key));

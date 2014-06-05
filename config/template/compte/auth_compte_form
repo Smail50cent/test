@@ -1,11 +1,16 @@
-<div id="auth_compte_id" class="auth_compte auth_compte_structure auth_compte_personalize" >
-    <p id="label_login_connexion_id" class="label_login_connexion label_login_connexion_structure label_login_connexion-personalize">Login</p>  <input type="text" name="login" id="compte_login_id" class="compte_login compte_login_structure compte_login_personalize" required>
-    <p id="label_password_connexion_id" class="label_password_connexion label_password_connexion_structure label_password_connexion_personalize">Mot de passe</p>  <input type="password" name="password" id="compte_pass_id" class="compte_pass compte_pass_structure compte_pass_personalize" required>
+
+
+<div id="auth_compte_id" class="auth_compte" >
+    <div id="client_form_id" class="client_form">
+    <p id="label_login_connexion_id" class="label_login_connexion">Login</p>  <input type="text" name="login" id="compte_login_id" class="compte_login" required>
+    <p id="label_password_connexion_id" class="label_password_connexion">Mot de passe</p>  <input type="password" name="password" id="compte_pass_id" class="compte_pass" required>
     
     <div id="button_authen_compte_id" class="button_authen_compte button_authen_compte_structure button_authen_compte_personalize"> <input type="submit" value="Login" onclick="authenCompte()"> </div>
 
-    <div id="button_inscri_compte_id" class="button_inscri_compte button_inscri_compte_structure button_inscri_compte_personalize"> <input type="submit" value="Inscription" onclick="InscriCompte()"> </div>
-
-    <div id="vclient_id" class="vclient vclient_structure vclient_personalize"> <p id="label_vclient_ajout_id" class="label_vclient_ajout label_vclient_ajout_structure label_vclient_ajout_personalize">Nom Visiteur </p> <input type="text" id="client_name_id" class="client_name client_name_structure client_name_personalize"> </div>
-    <div id="button_ajout_vclient_id" class="button_ajout_vclient button_ajout_vclient_structure button_ajout_vclient_personalize"> <input type="submit" value="Valider" onclick="AjoutVisiteur()"> </div>
+    <div id="vclient_form_id" class="vclient_form"> 
+    <p id="label_vclient_ajout_id" class="label_vclient_ajout">Visiteur </p> 
+    <input type="text" id="vclient_prenom_id" class="vclient_prenom" placeholder="Prenom">
+    <input type="text" id="vclient_nom_id" class="vclient_nom" placeholder="Nom">
+    <div id="button_ajout_vclient_id" class="button_ajout_vclient"> <input type="submit" value="Valider" onclick="AjoutVisiteur()"> </div>
+    </div>
 </div>

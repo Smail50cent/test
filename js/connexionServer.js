@@ -441,7 +441,7 @@ function ConnexionServer() {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
             type: 'GET',
-            async: true,
+            async: false,
             success: function(data) {
                 console.log(data);
             },
@@ -452,14 +452,14 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(method, password) {
+    this.addCompte = function(method, password, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
             data: {password: password},
             async: true,
             success: function(data) {
-                method(data);
+                method(data,param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -512,32 +512,6 @@ function ConnexionServer() {
         });
     };
 
-    this.getAllAttributsComptesEmails = function(method) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptesEmails"),
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data, textStatus, xhr) {
-                var paramforms = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var paramform = new AttributCompte();
-                    paramform.setId(data[i].id);
-                    paramform.setId_form(data[i].id_form);
-                    paramform.setValeur_champ(data[i].valeur_champ);
-                    paramform.setDefaut(data[i].defaut);
-                    paramform.setId_compte(data[i].id_compte);
-                    paramforms.push(paramform);
-                }
-                method(paramforms);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
-    };
-
     this.getAttributCompteByIdCompte = function(method, id) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,
@@ -572,13 +546,36 @@ function ConnexionServer() {
             data: {personnePriority: personnePriority2},
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log(data);
                 if (method != null) {
                     method(param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAttributsComptesByEmail = function(method, email) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAttributsComptesByEmail") + "?email=" + email,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                    var attcompte = new AttributCompte();
+                    attcompte.setId(data.id);
+                    attcompte.setId_compte(data.id_compte);
+                    attcompte.setId_form(data.id_form);
+                    attcompte.setDefaut(data.defaut);
+                    attcompte.setValeur_champ(data.valeur_champ);
+
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(attcompte);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                //showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                alert("Incorrect Login or Password");
             }
         });
     };

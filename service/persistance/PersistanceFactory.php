@@ -20,6 +20,8 @@ include_once 'AttributCompteServiceDataImpl.php';
 include_once 'ParamFormServiceDataImpl.php';
 include_once 'TicketServiceDataImpl.php';
 include_once 'ParametreApplicationServiceDataImpl.php';
+include_once 'StringsServiceDataImpl.php';
+include_once 'TauxTvaServiceImpl.php';
 
 class PersistanceFactory {
 
@@ -38,7 +40,16 @@ class PersistanceFactory {
     private static $paramformSrv = null;
     private static $ticketSrv = null;
     private static $paramappSrv = null;
+    private static $stringsSrv = null;
+    private static $tauxTvaSrv = null;
 
+    public static function getTauxTvaService() {
+        if (PersistanceFactory::$tauxTvaSrv == null) {
+            PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceImpl();
+        }
+        return PersistanceFactory::$tauxTvaSrv;
+    }
+    
     public static function getTicketService() {
         if (PersistanceFactory::$ticketSrv == null) {
             PersistanceFactory::$ticketSrv = new TicketServiceDataImpl();
@@ -143,5 +154,12 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$paramappSrv;
     }
+    
+    public static function getStringsService() {
+        if (PersistanceFactory::$stringsSrv == null) {
+            PersistanceFactory::$stringsSrv = new StringsServiceDataImpl();
+        }
+        return PersistanceFactory::$stringsSrv;
+    }    
 
 }

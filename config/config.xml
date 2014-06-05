@@ -16,7 +16,7 @@
         <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
-        <variable name="serveur.clientaccess.serviceGetAllAttributsComptesEmails">getAllAttributsComptesEmails</variable>
+        <variable name="serveur.clientaccess.serviceGetAttributsComptesByEmail">getAttributsComptesByEmail</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
