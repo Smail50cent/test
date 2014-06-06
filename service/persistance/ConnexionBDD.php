@@ -40,7 +40,7 @@ class ConnexionBDD {
         $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $selection = $acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
-        $acces = null;
+//        $acces = null;
         return $selection;
     }
 
@@ -56,7 +56,7 @@ class ConnexionBDD {
         $acces = $this->getConnexion();
         $acces->exec($query);
         $id = $acces->lastInsertId();
-        $acces = null;
+//        $acces = null;
         return $id;
     }
 

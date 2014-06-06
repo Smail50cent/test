@@ -19,10 +19,10 @@ function gestionAffichageTVA(total) {
         $('#footer_tarif_totalparPersonne_label_id').html(strings.getString("carte.ticket.total.labelpersonne"));
         $('#footer_tarif_totalparPersonne_value_id').html(fntp(total / nbpersonne));
     }
-    var numTable = getLocalStorageValue("paramCommande.numTable");
+    var numTable = JSON.parse(getLocalStorageValue("paramCommande.numTable"));
     if (numTable != null) {
         $('#footer_tarif_votreTable_label_id').html(strings.getString("carte.ticket.total.labeltable"));
-        $('#footer_tarif_votreTable_value_id').html(numTable);
+        $('#footer_tarif_votreTable_value_id').html(numTable.numero);
     }
 }
 function calcHeight(nbItem) {
@@ -574,9 +574,9 @@ function printProduits(index) {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
                     var prixHT = produit.getPrix();
-                    if (produit.id == 40) {
+//                    if (produit.id == 40) {
                         prixHT = getPrixHtInAssociation(produit.associationPrixProduit);
-                    }
+//                    }
                     var prixTTC = calculPrixWithTVA(prixHT, produit.id_sousCategorie.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
                     itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
@@ -601,17 +601,30 @@ function getPrixHtInAssociation(associationPrixProduit) {
         } else {//Système de priorité
             var table = JSON.parse(getLocalStorageValue("paramCommande.numTable"));
             var currentDate = new Date().getTime();
-            var priorityPrix = null;
+            var priorityPrix = new Array();
             for (var i = 0; i < associationPrixProduit.length; i++) {
                 var startDate = new Date(associationPrixProduit[i].dateDebut).getTime();
                 var endDate = new Date(associationPrixProduit[i].dateFin).getTime();
-                if (startDate == 0 && endDate == 0) {
-                    priorityPrix = associationPrixProduit[i];
-                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin)) {
-                    priorityPrix = associationPrixProduit[i];
-                } else if (associationPrixProduit[i].zone_table_id == table.zone) {
-                    priorityPrix = associationPrixProduit[i];
+                if (startDate == 0 && endDate == 0 && (associationPrixProduit[i].zoneTable.id) == null) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 4});
+                } else if (startDate == 0 && endDate == 0 && associationPrixProduit[i].zoneTable.id == table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 3});
+                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin) && associationPrixProduit[i].zone_table_id != table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 2});
+                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin) && associationPrixProduit[i].zone_table_id == table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 1});
                 }
+            }
+            if (priorityPrix.length != 0) {
+                function compare(a, b) {
+                    if (a.priority < b.priority)
+                        return -1;
+                    if (a.priority > b.priority)
+                        return 1;
+                    return 0;
+                }
+                priorityPrix = priorityPrix.sort(compare);
+                priorityPrix = priorityPrix[0].value;
             }
             prixHt = priorityPrix.prixHt.prix;
         }
@@ -641,11 +654,16 @@ function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, 
             var endOk = true;
             if (startOk == true) {
                 if (currentTime.getHours() <= heureFin) {
-                    if (currentTime.getHours() == heureFin && currentTime.getMinutes() <= minutesFin) {
-                        endOk = true;
-                    } else {
-                        endOk = false;
+                    endOk = true;
+                    if (currentTime.getHours() == heureFin) {
+                        if (currentTime.getMinutes() <= minutesFin) {
+                            endOk = true;
+                        } else {
+                            endOk = false;
+                        }
                     }
+                } else {
+                    endOk = false;
                 }
             }
             if (endOk) {

@@ -57,7 +57,7 @@ class AssociationProduitPrixServiceDataImpl implements AssociationProduitPrixSer
             $prixHT->setPrix($ligne->prix);
             $associationProduitPrix->setPrixHt($prixHT);
             $zoneTable = new ZoneTable();
-            $zoneTable->setId($ligne->zoneTable);
+            $zoneTable->setId($ligne->zone_table_id);
             $zoneTable->setNom($ligne->nom);
             $associationProduitPrix->setZoneTable($zoneTable);
             $ret[$i] = $associationProduitPrix;
