@@ -318,11 +318,11 @@ function Ticket(id, quantityOfProducts) {
                 var prixHT = qop[y].getProduit().getPrix();
                 var quantity = qop[y].getQuantity();
                 var tauxTVA = qop[y].getProduit().id_sousCategorie.tauxTva;
-                var totalTTC = calculPrixWithTVA(prixHT, tauxTVA);
+                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit,qop[y].getProduit().id_sousCategorie.tauxTva);
                 this.total += totalTTC * quantity;
             }
         } else {
-            showErrorMessage("qop == null");
+            showErrorMessage("Aucun produit");
         }
         return this.total;
     };

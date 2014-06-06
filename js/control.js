@@ -273,3 +273,83 @@ function calculPrixWithTVA(prixHT, tauxTVA) {
     var tauxTVA = parseFloat(tauxTVA);
     return ((tauxTVA / 100) * prixHT) + prixHT;
 }
+function getPrixHtInAssociation(associationPrixProduit,tauxTva) {
+    var prixHt = 0;
+    if (associationPrixProduit.length != 0) {
+        if (associationPrixProduit.length == 1) {
+            prixHt = parseFloat(associationPrixProduit[0].prixHt.prix);
+        } else {
+            var table = JSON.parse(getLocalStorageValue("paramCommande.numTable"));
+            var currentDate = new Date().getTime();
+            var priorityPrix = new Array();
+            for (var i = 0; i < associationPrixProduit.length; i++) {
+                var startDate = new Date(associationPrixProduit[i].dateDebut).getTime();
+                var endDate = new Date(associationPrixProduit[i].dateFin).getTime();
+                if (startDate == 0 && endDate == 0 && (associationPrixProduit[i].zoneTable.id) == null) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 4});
+                } else if (startDate == 0 && endDate == 0 && associationPrixProduit[i].zoneTable.id == table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 3});
+                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin) && associationPrixProduit[i].zone_table_id != table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 2});
+                } else if (isInCurentDate(associationPrixProduit[i].dateDebut, associationPrixProduit[i].heureDebut, associationPrixProduit[i].minutesDebut, associationPrixProduit[i].dateFin, associationPrixProduit[i].heureFin, associationPrixProduit[i].minutesFin) && associationPrixProduit[i].zone_table_id == table.zone) {
+                    priorityPrix.push({"value": associationPrixProduit[i], "priority": 1});
+                }
+            }
+            if (priorityPrix.length != 0) {
+                function compare(a, b) {
+                    if (a.priority < b.priority)
+                        return -1;
+                    if (a.priority > b.priority)
+                        return 1;
+                    return 0;
+                }
+                priorityPrix = priorityPrix.sort(compare);
+                priorityPrix = priorityPrix[0].value;
+            }
+            prixHt = priorityPrix.prixHt.prix;
+        }
+    } else {
+        prixHt = 0;
+    }
+    return calculPrixWithTVA(parseFloat(prixHt), tauxTva);
+}
+function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, minutesFin) {
+    var ret = false;
+    var currentDate = new Date().getTime();
+    var startDate = new Date(dateDebut).getTime();
+    var endDate = new Date(dateFin).getTime();
+    if (currentDate > startDate && currentDate < endDate) {
+        var currentTime = new Date();
+        if (currentTime.getHours() >= heureDebut) {
+            var startOk = true;
+            if (currentTime.getHours() > heureDebut) {
+                startOk = true;
+            } else {
+                if (currentTime.getHours() == heureDebut && currentTime.getMinutes() >= minutesDebut) {
+                    startOk = true;
+                } else {
+                    startOk = false;
+                }
+            }
+            var endOk = true;
+            if (startOk == true) {
+                if (currentTime.getHours() <= heureFin) {
+                    endOk = true;
+                    if (currentTime.getHours() == heureFin) {
+                        if (currentTime.getMinutes() <= minutesFin) {
+                            endOk = true;
+                        } else {
+                            endOk = false;
+                        }
+                    }
+                } else {
+                    endOk = false;
+                }
+            }
+            if (endOk) {
+                ret = true;
+            }
+        }
+    }
+    return ret;
+}
