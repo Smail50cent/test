@@ -150,7 +150,6 @@ function Ingredient() {
 function Produit() {
     this.id;
     this.nom;
-    this.prix;
     this.id_categorie;
     this.id_sousCategorie;
     this.ids_ingredients; // ARRAY
@@ -168,12 +167,6 @@ function Produit() {
     };
     this.setNom = function(nom) {
         this.nom = nom;
-    };
-    this.setPrix = function(prix) {
-        this.prix = prix;
-    };
-    this.getPrix = function() {
-        return this.prix;
     };
     this.getNom = function() {
         return this.nom;

@@ -9,7 +9,6 @@ class Produit {
 
     public $id;
     public $nom;
-    public $prix;
     public $categorie;
     public $souscategorie;
     public $options; //array
@@ -22,14 +21,6 @@ class Produit {
 
     public function setNom($nom) {
         $this->nom = $nom;
-    }
-
-    public function setPrix($prix) {
-        $this->prix = $prix;
-    }
-
-    public function getPrix() {
-        return $this->prix;
     }
 
     public function setOptions($optons) {

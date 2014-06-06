@@ -133,7 +133,6 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
-                produit.setPrix(parseFloat(data.prix));
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);
@@ -193,7 +192,6 @@ function ConnexionServer() {
                     var produit = new Produit();
                     produit.setNom(data[i].nom);
                     produit.setId(data[i].id);
-                    produit.setPrix(parseFloat(data[i].prix));
                     var categorie = new Categorie();
                     categorie.setNom(data[i].categorie.nom);
                     categorie.setId(data[i].categorie.id);
@@ -244,7 +242,6 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
-                produit.setPrix(parseFloat(data.prix));
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);

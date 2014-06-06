@@ -22,7 +22,6 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             $produit->setCategorie(intval($ligne->CATEGORIE_ID));
             $produit->setId(intval($ligne->ID));
             $produit->setNom($ligne->NOM);
-            $produit->setPrix($ligne->PRIX);
             $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
             $produit->setOptions(intval($ligne->options));
             $ret[$i] = $produit;
@@ -41,7 +40,6 @@ class ProduitServiceDataImpl implements ProduitServiceData {
         $produit->setCategorie(intval($ligne->CATEGORIE_ID));
         $produit->setId(intval($ligne->ID));
         $produit->setNom($ligne->NOM);
-        $produit->setPrix($ligne->PRIX);
         $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
         $produit->setOptions(intval($ligne->options));
         return $produit;
@@ -58,7 +56,6 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             $produit->setCategorie(intval($ligne->CATEGORIE_ID));
             $produit->setId(intval($ligne->ID));
             $produit->setNom($ligne->NOM);
-            $produit->setPrix($ligne->PRIX);
             $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
             $produit->setOptions(intval($ligne->options));
             $ret[$i] = $produit;

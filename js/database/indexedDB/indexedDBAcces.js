@@ -336,7 +336,6 @@ myStorage.indexedDB.addFistProduits = function() {
             request = store.put({
                 "id": parseInt(produit.id),
                 "nom": produit.nom,
-                "prix": produit.prix,
                 "categorie": (produit.categorie),
                 "souscategorie": (produit.souscategorie),
                 "options": produit.options,
