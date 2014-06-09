@@ -6,12 +6,13 @@ myStorage.indexedDB.getIngredientById = function(method, id, param) {
             myStorage.indexedDB.getSousCategorieByIdForContentSousCat(method, id, param);
         }
     }, delay);
-    function impl(method, id,param) {
+    function impl(method, id, param) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
-            var trans = db.transaction([config.getConfig("tableNameIngredient")], myStorage.IDBTransactionModes.READ_ONLY);
+            var trans = db.transaction([config.getConfig("tableNameIngredient")],
+            myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameIngredient"));
             var request = store.get(id);
             request.onsuccess = function(e) {
@@ -19,11 +20,10 @@ myStorage.indexedDB.getIngredientById = function(method, id, param) {
                 var ingredient = new Ingredient();
                 ingredient.setNom(result.nom);
                 ingredient.setId(result.id);
-                if (method != null) { 
+                if (method != null) {
                     method(ingredient, param);
                 }
             };
-
             trans.oncomplete = function(e) {
                 db.close();
             };
