@@ -3,7 +3,6 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 
-
 function gestionAffichageTVA(total) {
     $('#footer_tarif_total_label_id').html(strings.getString("carte.ticket.total.labeltotal"));
     $('#footer_tarif_total_value_id').html(fntp(total));
@@ -20,10 +19,10 @@ function gestionAffichageTVA(total) {
         $('#footer_tarif_totalparPersonne_label_id').html(strings.getString("carte.ticket.total.labelpersonne"));
         $('#footer_tarif_totalparPersonne_value_id').html(fntp(total / nbpersonne));
     }
-    var numTable = getLocalStorageValue("paramCommande.numTable");
+    var numTable = JSON.parse(getLocalStorageValue("paramCommande.numTable"));
     if (numTable != null) {
         $('#footer_tarif_votreTable_label_id').html(strings.getString("carte.ticket.total.labeltable"));
-        $('#footer_tarif_votreTable_value_id').html(numTable);
+        $('#footer_tarif_votreTable_value_id').html(numTable.numero);
     }
 }
 function calcHeight(nbItem) {
@@ -574,13 +573,14 @@ function printProduits(index) {
                     } else {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
+                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
-                    itemProduit = paramValue(itemProduit, "produitPrix", fntp(produit.getPrix()));
+                    itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
                     itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
                     $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
                 }
                 if (derniere != "" && categorie.getId() == derniere) {
-//si on a fini de charger les produits on charge les scripts de swipe
+                    //si on a fini de charger les produits on charge les scripts de swipe
                     scripts.loadScripts("swipe");
                     hideLoading();
                 }
@@ -589,6 +589,7 @@ function printProduits(index) {
         }
     }
 }
+
 /**
  * Allows to show the "recapitulatif" or hide 
  * @returns {undefined}
@@ -677,7 +678,7 @@ function addTicketItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
     item = paramValue(item, "qopProduiID", qop.getProduit().getId());
-    item = paramValue(item, "prix", fntp(qop.getProduit().getPrix()));
+    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit,qop.getProduit().id_sousCategorie.tauxTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
     $('#recapitulatif_liste_id').append(item);
@@ -752,8 +753,8 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             }
             var haveIngSup = false;
             for (var i = 0; i < inngredientArray.length; i++) {
-                if(inngredientArray[i].isIngredientSup == true){
-                    haveIngSup=true;
+                if (inngredientArray[i].isIngredientSup == true) {
+                    haveIngSup = true;
                 }
                 if (inngredientArray[i].isAdded == true) {
                     var connexion = getConnexion();
@@ -899,7 +900,7 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
         if (qops[i].getId() == qopid) {
             for (var j = 0; j < qops[i].product.ids_ingredients.length; j++) {
                 if (qops[i].product.ids_ingredients[j].ingredient == ingredientid) {
-                    
+
                     var prod = qops[i].product;
                     if (qops[i].getQuantity() > 1) {
                         var clondedProduct = new Produit();
@@ -923,10 +924,10 @@ function onclickItemAjouterIngredient(produitID, ingredientid, qopid) {
                     } else {
                         var surcout = parseFloat(qops[i].product.ids_ingredients[j].surcout);
                         qops[i].product.ids_ingredients[j].isAdded = true;
-                        for(var x = 0 ; x < currentTicket.getQuantityOfProduct().length ; x++){
-                            if(parseInt(currentTicket.quantityOfProducts[x].id) == parseInt(qops[i].id)){
+                        for (var x = 0; x < currentTicket.getQuantityOfProduct().length; x++) {
+                            if (parseInt(currentTicket.quantityOfProducts[x].id) == parseInt(qops[i].id)) {
                                 currentTicket.quantityOfProducts[x].product.prix += surcout;
-                                $("#content_produit_zone_right_prix_id_"+qops[i].id).text(fntp(currentTicket.quantityOfProducts[x].product.prix));
+                                $("#content_produit_zone_right_prix_id_" + qops[i].id).text(fntp(currentTicket.quantityOfProducts[x].product.prix));
                                 break;
                             }
                         }
@@ -1067,7 +1068,7 @@ function validerCommande() {
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
                     personne = personnes[i];
                     produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
-                    totalPersonne += currentTicket.getQuantityOfProduct()[j].product.prix;
+                    totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit,currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }

@@ -17,7 +17,7 @@ if (isset($_GET["lang"])) {
             fwrite($myform, "<div id=\"" . $result[$i]->id_form . "_" . $result[$i]->id_html . "\" class=\"" . $result[$i]->id_form . "_" . $result[$i]->class_html . "\">");
             for ($j = 0; $j < sizeof($resultStr); $j++) {
                 if ($result[$i]->label == $resultStr[$j]->key_lang) {
-                    $str = $val->paramValue($str, "val_key", $resultStr[$j]->value);
+                    $str = $val->paramValue($str, "val_key", "{".$resultStr[$j]->key_lang."}");
                 }
             }
             fwrite($myform, $str);

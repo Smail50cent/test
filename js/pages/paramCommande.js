@@ -7,6 +7,7 @@ $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbc
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
 $('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
+    
     if (!chooseLang) {
         $("#choose_lang_id").hide();
     } else {
@@ -86,6 +87,7 @@ function loadDataTables(tables) {
     var connexion = getConnexion();
     connexion.getAllTables(printTables);
     function printTables(tables) {
+    setLocalStorageValue("tables", JSON.stringify(tables));
         for (var i = 0; i < tables.length; i++) {
             var itemOptionTable = htmlOptionTable;
             itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + tables[i].numero);
@@ -96,6 +98,11 @@ function loadDataTables(tables) {
 }
 function startCommande(numTable, nbPersonne) {
     setLocalStorageValue("paramCommande.nbPersonne", nbPersonne);
-    setLocalStorageValue("paramCommande.numTable", numTable);
+    var tables = (JSON.parse(getLocalStorageValue("tables")));
+    for(var i = 0 ; i < tables.length ; i++){
+        if(tables[i].id == numTable){
+            setLocalStorageValue("paramCommande.numTable", JSON.stringify(tables[i]));
+        }
+    }
     document.location.href = "carte.php";
 }

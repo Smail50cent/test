@@ -8,7 +8,17 @@ function onLoadCompte() {
     scripts.loadScripts("lib.dialog", function() {
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});
         var html = getAuthCompte();
-        $('#auth_form_id').html(html);
+        
+        var htmllang = paramValue(html,"pseudo",strings.getString("label.auth.pseudo"));
+        htmllang = paramValue(htmllang,"mdp",strings.getString("label.password"));
+        htmllang = paramValue(htmllang,"connect",strings.getString("label.auth.login"));
+        htmllang = paramValue(htmllang,"subscribe",strings.getString("label.auth.inscription"));
+        htmllang = paramValue(htmllang,"visitor",strings.getString("label.auth.visitor"));
+        htmllang = paramValue(htmllang,"prenomv",strings.getString("label.prenom"));
+        htmllang = paramValue(htmllang,"nomv",strings.getString("label.nom"));
+        htmllang = paramValue(htmllang,"valider",strings.getString("label.valider"));
+        
+        $('#auth_form_id').html(htmllang);
         socialNetworkButtonAuth();
     });
 }
@@ -67,19 +77,33 @@ function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
     $.get("./service/generatedForm/InscriptionForm.php?lang=", {lang: langselect}, function() {
         var insciform = getGeneratedInscriForm();
-        $('#auth_form_id').html(insciform);
+        
+        var inscriformhtml = paramValue(insciform, "label.password",strings.getString("label.password"));
+        inscriformhtml = paramValue(inscriformhtml,"label.sexe",strings.getString("label.sexe"));
+        inscriformhtml = paramValue(inscriformhtml,"label.nom",strings.getString("label.nom"));
+        inscriformhtml = paramValue(inscriformhtml,"label.prenom",strings.getString("label.prenom"));
+        inscriformhtml = paramValue(inscriformhtml,"label.adresse",strings.getString("label.adresse"));
+        inscriformhtml = paramValue(inscriformhtml,"label.email",strings.getString("label.email"));
+        inscriformhtml = paramValue(inscriformhtml,"label.tel",strings.getString("label.tel"));
+        
+        $('#auth_form_id').html(inscriformhtml);
         var buttonValider = getButtonInscriFormUser();
         $('#auth_form_id').append(buttonValider);
         var buttonretour = getButtonBackToAuth();
         $('#auth_form_id').append(buttonretour);
         // Event for input File
+        scripts.loadScripts("upload", function(){
+           $('#photo_user_id').change(function(){
+                onChooseImage();
+           }); 
+        });
     });
 }
 function RetourAuth() {
     onLoadCompte();
 }
 function ValiderInscri() {
-    if (!TestEmptyFields("#auth_form_id")) {
+//    if (!TestEmptyFields("#auth_form_id")) {
         scripts.loadScripts("lib.social", function() {
             var connexion = getConnexion();
             scripts.loadScripts("lib.crypt", function() {
@@ -87,13 +111,13 @@ function ValiderInscri() {
                 if (!verifyEmail($('#email_user_id').val())) {
                     connexion.addCompte(InsertFromLastId, cryptedpass);
                     function InsertFromLastId(LastId) {
-                        connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(3, $('#prenom_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(4, $('#datenaissance_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(3, $('#prenom_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(4, $('#datenaissance_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
+//                        connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
                         var personne = new Personne();
                         personne.setId(LastId);
@@ -109,7 +133,19 @@ function ValiderInscri() {
                 }
             });
         });
-    }
+//    }
+}
+function uploadImage(){
+        $.ajax({
+        url: './service/generatedForm/uploadimg/processupload.php'+ queryFile,
+        type: 'POST',
+        data: {queryFile: arrayFile},
+        dataType: 'text',
+        timeout: 1000,
+        error: function() {
+            setNewErrorMessageListeProjets("Une erreur est survenu.");
+        },
+    });
 }
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {

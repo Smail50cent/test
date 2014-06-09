@@ -51,11 +51,11 @@ class SousCategorie {
         return $this->nom;
     }
   
-   public function setTauxTva($nom) {
-        $this->nom = $nom;
+   public function setTauxTva($taux) {
+        $this->tauxTva = $taux;
     }
 
     public function getTauxTva() {
-        return $this->nom;
+        return $this->tauxTva;
     }
 }

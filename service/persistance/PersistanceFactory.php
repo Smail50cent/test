@@ -22,6 +22,7 @@ include_once 'TicketServiceDataImpl.php';
 include_once 'ParametreApplicationServiceDataImpl.php';
 include_once 'StringsServiceDataImpl.php';
 include_once 'TauxTvaServiceImpl.php';
+include_once 'AssociationProduitPrixServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -42,7 +43,15 @@ class PersistanceFactory {
     private static $paramappSrv = null;
     private static $stringsSrv = null;
     private static $tauxTvaSrv = null;
+    private static $associationProduitPrixSrv = null;
 
+    public static function getAssociationProduitPrixService() {
+        if (PersistanceFactory::$associationProduitPrixSrv == null) {
+            PersistanceFactory::$associationProduitPrixSrv = new AssociationProduitPrixServiceDataImpl();
+        }
+        return PersistanceFactory::$associationProduitPrixSrv;
+    }
+    
     public static function getTauxTvaService() {
         if (PersistanceFactory::$tauxTvaSrv == null) {
             PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceImpl();

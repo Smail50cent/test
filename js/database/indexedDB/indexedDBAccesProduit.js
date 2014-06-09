@@ -19,16 +19,15 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 var produit = new Produit();
                 produit.setNom(result.nom);
                 produit.setId(result.id);
-                produit.setPrix(result.prix);
                 var categorie = new Categorie();
                 categorie.setNom(result.categorie.nom);
                 categorie.setId(result.categorie.id);
                 categorie.setPriorite(result.categorie.priorite);
                 categorie.setSousCategorie(result.categorie.souscategorie);
                 produit.setCategorie(categorie);
-                produit.setSousCategorie(result.categorie);
                 produit.setIdsIngredients(result.ingredients);
                 produit.setOptions(result.options);
+                produit.setAssociationPrixProduit(result.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
@@ -46,15 +45,15 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
-myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,idcat) {
+myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
-            impl(method,idcat);
+            impl(method, idcat);
         } else {
-            myStorage.indexedDB.getProduitByIdCategorieForPrintProduits(method,idcat);
+            myStorage.indexedDB.getProduitByIdCategorieForPrintProduits(method, idcat);
         }
     }, delay);
-    function impl(method,idcat) {
+    function impl(method, idcat) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -71,13 +70,13 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
                     var produit = new Produit();
                     produit.setNom(result.value.nom);
                     produit.setId(result.value.id);
-                    produit.setPrix(parseFloat(result.value.prix));
                     var categorie = new Categorie();
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
                     categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
+                    produit.setAssociationPrixProduit(result.associationPrixProduit);
                     produit.setSousCategorie(result.value.souscategorie);
                     produit.setIdsIngredients(result.value.ingredients);
                     produit.setOptions(result.value.options);
@@ -87,7 +86,6 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
             };
             trans.oncomplete = function(e) {
                 if (method != null) {//Nous avons besoin de l'executer.
-                    
                     method(produitsByCategorie);
                 }
                 db.close();
@@ -100,20 +98,21 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method,id
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
-myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
+myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
-            impl();
+            impl(method, produitID, param);
         } else {
-            myStorage.indexedDB.getProduitByIdGeneric(method,produitID,param);
+            myStorage.indexedDB.getProduitByIdGeneric(method, produitID, param);
         }
     }, delay);
-    function impl() {
+    function impl(method, produitID, param) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
-            var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_ONLY);
+            var trans = db.transaction([config.getConfig("tableNameProduit")], 
+            myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
             var request = store.get(produitID);
             request.onsuccess = function(e) {
@@ -121,7 +120,6 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
                 var produit = new Produit();
                 produit.setNom(result.nom);
                 produit.setId(result.id);
-                produit.setPrix(parseFloat(result.prix));
                 var categorie = new Categorie();
                 categorie.setNom(result.categorie.nom);
                 categorie.setId(result.categorie.id);
@@ -130,9 +128,11 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
                 produit.setCategorie(categorie);
                 produit.setSousCategorie(result.categorie);
                 produit.setOptions(result.options);
+                produit.setAssociationPrixProduit(result.associationPrixProduit);
+                console.log(result);
                 produit.setIdsIngredients(result.ingredients);
-                if (method != null ) {//Nous avons besoin de l'executer.
-                    method(produit,param);
+                if (method != null) {
+                    method(produit, param);
                 }
             };
             trans.oncomplete = function(e) {
@@ -146,3 +146,4 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method,produitID,param) {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
+

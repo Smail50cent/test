@@ -13,11 +13,11 @@ class ProduitServiceImpl implements ProduitService {
     private $produitSrv;
 
     function __construct() {
-
         $this->produitSrv = PersistanceFactory::getProduitService();
     }
 
     public function getById($id) {
+        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
         $optionSrv = PersistanceFactory::getOptionService();
         $apiSrv = PersistanceFactory::getAssociationProduitIngredientService();
         $catsrv = PersistanceFactory::getCategorieService();
@@ -29,17 +29,19 @@ class ProduitServiceImpl implements ProduitService {
             $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable, $ing->isIngredientSup);
             $j++;
         }
+
         $categorie = $catsrv->getById($produit->getCategorie());
         if ($produit->getOptions() != 0 || $produit->getOptions() != "0") {
             $produit->setOptions($optionSrv->getOptionByIdProduit($produit->getId()));
         }
+        $produit->setAssociationProduitPrix($associationProduitPrixSrv->getByProduit($id));
         $produit->setCategorie($categorie);
         $produit->setIngredients($ingredients);
-
         return $produit;
     }
 
     public function getAll() {
+        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
         $optionSrv = PersistanceFactory::getOptionService();
         $apiSrv = PersistanceFactory::getAssociationProduitIngredientService();
         $catsrv = PersistanceFactory::getCategorieService();
@@ -57,6 +59,7 @@ class ProduitServiceImpl implements ProduitService {
             if ($produits[$i]->getOptions() != 0 || $produits[$i]->getOptions() != "0") {
                 $produits[$i]->setOptions($optionSrv->getOptionByIdProduit($produits[$i]->getId()));
             }
+            $produits[$i]->setAssociationProduitPrix($associationProduitPrixSrv->getByProduit($produits[$i]->getId()));
             $produits[$i]->setCategorie($categorie);
             $produits[$i]->setIngredients($ingredients);
         }
@@ -64,6 +67,7 @@ class ProduitServiceImpl implements ProduitService {
     }
 
     public function getProduitByCategorieId($id) {
+        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
         $optionSrv = PersistanceFactory::getOptionService();
         $apiSrv = PersistanceFactory::getAssociationProduitIngredientService();
         $catsrv = PersistanceFactory::getCategorieService();
@@ -76,11 +80,11 @@ class ProduitServiceImpl implements ProduitService {
                 $ingredients[$j] = new AssociationProduitIngredients(intval($ing->id_produit), intval($ing->id_ingredient), $ing->isAdded, $ing->surcout, $ing->supprimable, $ing->isIngredientSup);
                 $j++;
             }
-
             $categorie = $catsrv->getById($produits[$i]->getCategorie());
             if ($produits[$i]->getOptions() != 0 || $produits[$i]->getOptions() != "0") {
                 $produits[$i]->setOptions($optionSrv->getOptionByIdProduit($produits[$i]->getId()));
             }
+            $produits[$i]->setAssociationProduitPrix($associationProduitPrixSrv->getByProduit($produits[$i]->getId()));
             $produits[$i]->setCategorie($categorie);
             $produits[$i]->setIngredients($ingredients);
         }

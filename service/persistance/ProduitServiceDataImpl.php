@@ -12,6 +12,7 @@ include_once '../logique/entity/Produit.php';
 class ProduitServiceDataImpl implements ProduitServiceData {
 
     public function getAll() {
+        $sousCatSrv = PersistanceFactory::getSousCategorieService();
         $ret = array();
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM produit");
@@ -21,8 +22,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             $produit->setCategorie(intval($ligne->CATEGORIE_ID));
             $produit->setId(intval($ligne->ID));
             $produit->setNom($ligne->NOM);
-            $produit->setPrix($ligne->PRIX);
-            $produit->setSousCategorie($ligne->sousCategorie);
+            $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
             $produit->setOptions(intval($ligne->options));
             $ret[$i] = $produit;
             $i++;
@@ -31,6 +31,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
     }
 
     public function getById($id) {
+        $sousCatSrv = PersistanceFactory::getSousCategorieService();
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM produit WHERE ID = " . $id);
         $i = 0;
@@ -39,13 +40,13 @@ class ProduitServiceDataImpl implements ProduitServiceData {
         $produit->setCategorie(intval($ligne->CATEGORIE_ID));
         $produit->setId(intval($ligne->ID));
         $produit->setNom($ligne->NOM);
-        $produit->setPrix($ligne->PRIX);
-        $produit->setSousCategorie($ligne->sousCategorie);
+        $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
         $produit->setOptions(intval($ligne->options));
         return $produit;
     }
 
     public function getProduitByCategorieId($id) {
+        $sousCatSrv = PersistanceFactory::getSousCategorieService();
         $ret = array();
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM produit WHERE CATEGORIE_ID = " . $id);
@@ -55,8 +56,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             $produit->setCategorie(intval($ligne->CATEGORIE_ID));
             $produit->setId(intval($ligne->ID));
             $produit->setNom($ligne->NOM);
-            $produit->setPrix($ligne->PRIX);
-            $produit->setSousCategorie($ligne->sousCategorie);
+            $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
             $produit->setOptions(intval($ligne->options));
             $ret[$i] = $produit;
             $i++;

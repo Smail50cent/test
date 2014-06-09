@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of Table
  *
@@ -8,6 +9,7 @@ class Table {
 
     public $id;
     public $numero;
+    public $zone;
 
     public function getId() {
         return $this->id;
@@ -23,6 +25,14 @@ class Table {
 
     public function setNumero($numero) {
         $this->numero = $numero;
+    }
+
+    public function getZone() {
+        return $this->zone;
+    }
+
+    public function setZone($zone) {
+        $this->zone = $zone;
     }
 
 }

@@ -20,6 +20,7 @@ class TablesServiceDataImpl implements TableServiceData {
             $table = new Table();
             $table->setId(intval($ligne->id));
             $table->setNumero(intval($ligne->numero));
+            $table->setZone(intval($ligne->zone_table_ke));
             $tables[$i] = $table;
             $i++;
         }

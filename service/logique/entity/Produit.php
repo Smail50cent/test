@@ -9,11 +9,11 @@ class Produit {
 
     public $id;
     public $nom;
-    public $prix;
     public $categorie;
     public $souscategorie;
     public $options; //array
     public $ingredients; // ARRAY
+    public $associationPrixProduit;
 
     public function setId($id) {
         $this->id = $id;
@@ -21,14 +21,6 @@ class Produit {
 
     public function setNom($nom) {
         $this->nom = $nom;
-    }
-
-    public function setPrix($prix) {
-        $this->prix = $prix;
-    }
-
-    public function getPrix() {
-        return $this->prix;
     }
 
     public function setOptions($optons) {
@@ -69,6 +61,14 @@ class Produit {
 
     public function getCategorie() {
         return $this->categorie;
+    }
+
+    public function setAssociationProduitPrix($aspp) {
+        $this->associationPrixProduit = $aspp;
+    }
+
+    public function getAssociationProduitPrix() {
+        return $this->associationPrixProduit;
     }
 
 }

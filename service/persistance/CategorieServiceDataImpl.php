@@ -36,9 +36,7 @@ class CategorieServiceDataImpl implements CategorieServiceData {
         $categorie->setId(intval($ligne->id));
         $categorie->setNom($ligne->nom);
         $categorie->setPriorite(intval($ligne->priorite));
-//            echo "GETNOM=".$categorie->getNom();
         return $categorie;
-        
     }
 
 }

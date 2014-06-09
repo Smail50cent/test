@@ -97,6 +97,8 @@ function SousCategorie() {
     this.categorie;
     this.nom;
     this.priorite;
+    this.taux_tva;
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -121,6 +123,12 @@ function SousCategorie() {
     this.getPriorite = function() {
         return this.priorite;
     };
+    this.setTauxTva = function(taux_tva) {
+        this.taux_tva = taux_tva;
+    };
+    this.getTauxTva = function() {
+        return this.taux_tva;
+    };
 }
 function Ingredient() {
     this.id;
@@ -142,12 +150,12 @@ function Ingredient() {
 function Produit() {
     this.id;
     this.nom;
-    this.prix;
     this.id_categorie;
     this.id_sousCategorie;
     this.ids_ingredients; // ARRAY
     this.demanderCuisson = false;//BOOL
     this.options;
+    this.associationPrixProduit;
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
         this.setId(id);
@@ -159,12 +167,6 @@ function Produit() {
     };
     this.setNom = function(nom) {
         this.nom = nom;
-    };
-    this.setPrix = function(prix) {
-        this.prix = prix;
-    };
-    this.getPrix = function() {
-        return this.prix;
     };
     this.getNom = function() {
         return this.nom;
@@ -202,6 +204,13 @@ function Produit() {
     this.getCategorie = function() {
         return this.id_categorie;
     };
+    this.setAssociationPrixProduit = function(associationPrixProduit) {
+        this.associationPrixProduit = associationPrixProduit;
+    };
+    this.getAssociationPrixProduit = function() {
+        return this.associationPrixProduit;
+    };
+
 }
 ;
 function Menu(id, produits, prix, nom) {
@@ -299,12 +308,14 @@ function Ticket(id, quantityOfProducts) {
         this.total = 0;
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
-                var prix = qop[y].getProduit().getPrix();
+                var prixHT = qop[y].getProduit().getPrix();
                 var quantity = qop[y].getQuantity();
-                this.total += prix * quantity;
+                var tauxTVA = qop[y].getProduit().id_sousCategorie.tauxTva;
+                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit,qop[y].getProduit().id_sousCategorie.tauxTva);
+                this.total += totalTTC * quantity;
             }
         } else {
-            showErrorMessage("qop == null");
+            showErrorMessage("Aucun produit");
         }
         return this.total;
     };
@@ -333,9 +344,10 @@ function AssociationProduitIngredients(produit, ingredient, inStart, surcout, su
     this.supprimable = supprimable;
     this.isAdded = false;
 }
-function Table(id, numero) {
+function Table(id, numero, zone) {
     this.id = id;
     this.numero = numero;
+    this.zone = zone;
 }
 function ModeDeReglements(id, nom, url, redirictUrl) {
     this.id = id;

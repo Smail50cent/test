@@ -5,7 +5,9 @@
     <p id="label_login_connexion_id" class="label_login_connexion label_login_connexion_structure label_login_connexion_personalize">Login</p>  <input type="text" name="login" id="compte_login_id" class="compte_login compte_login_structure compte_login_personalize" required>
     <p id="label_password_connexion_id" class="label_password_connexion label_password_connexion_structure label_password_connexion_personalize">Mot de passe</p>  <input type="password" name="password" id="compte_pass_id" class="compte_pass compte_pass_structure compte_pass_personalize" required>
     
-    <div id="button_authen_compte_id" class="button_authen_compte button_authen_compte_structure button_authen_compte_personalize"> <input type="submit" value="Login" onclick="authenCompte()"> </div>
+    <div id="button_authen_compte_id" class="button_authen_compte button_authen_compte_structure button_authen_compte_personalize"> <input type="submit" value="{connect}" onclick="authenCompte()"> </div>
+    <div id="button_inscri_compte_id" class="button_inscri_compte"> <input type="submit" value="{subscribe}" onclick="InscriCompte()"> </div>
+    </div>
 
     <div id="vclient_form_id" class="vclient_form vclient_form_structure vclient_form_personalize"> 
     <p id="label_vclient_ajout_id" class="label_vclient_ajout label_vclient_ajout_structure label_vclient_ajout_personalize">Visiteur </p> 
