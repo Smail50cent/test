@@ -45,7 +45,7 @@ function parseToTicket($toparse) {
         $produit->setIngredients($ingredients);
         $produit->setNom($produitToParse->nom);
         $produit->setOptions($produitToParse->options);
-        $produit->setPrix($produitToParse->prix);
+//        $produit->setPrix($produitToParse->prix); A REFAIRE
         $sousCategorie = new SousCategorie();
         $sousCategorie->setId($produitToParse->id_sousCategorie->id);
         $sousCategorie->setNom($produitToParse->id_sousCategorie->nom);

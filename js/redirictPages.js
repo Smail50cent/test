@@ -43,7 +43,6 @@ function getPage(page) {
         success: function(xml) {
             var unit = $(xml).find('pages').find("page[key='" + page + "']");
             ret = unit.text();
-            console.log(ret);
         }
     });
     return ret;
@@ -69,4 +68,13 @@ function goClientReservation() {
 }
 function redirictWhereFinishParamCommande() {
     redirct(new RedirictPages("carte"), null, null, null);
+}
+function redirictWhereFinishCarte() {
+    redirct(new RedirictPages("choixEnvoieCuisine"), null, null, null);
+}
+function redirictWhereFinishChoixEnvoieCuisine() {
+    redirct(new RedirictPages("choixPaimentPersonnes"), null, null, null);
+}
+function redirictPay() {
+    redirct(new RedirictPages("reglement"), null, null, null);
 }
