@@ -10,6 +10,82 @@
 
 }
 
+
+ /*____________________________POP UP FB ______________________________*/
+
+    .auth_form_structure {
+
+    }
+
+    .ui-dialog_structure .ui-dialog-title_structure {
+
+    }
+
+    .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input{
+        width:90px;
+        margin: 0 30px;
+    }
+
+    .auth_popup_structure {
+
+    }
+
+    .label_login_connexion_structure, .label_password_connexion_structure, .label_vclient_ajout_structure {
+        margin-bottom: 5px;
+    }
+
+    .label_password_connexion_structure {
+        margin-top: 7px;
+    }
+
+
+
+    .auth_compte_structure .compte_login_structure, .auth_compte_structure .compte_pass_structure, .auth_compte_structure .client_name_structure, .vclient_prenom_structure, .vclient_nom_structure {
+        width:58%;
+        margin:0 20%;
+    }
+
+    .vclient_prenom_structure {
+        margin-bottom: 0.4em;
+    }
+
+    .ui-dialog-titlebar_structure {
+    }
+
+    .facebook_auth_compte_structure button {
+        vertical-align: middle;
+    }
+
+    .button_facebook_structure {
+        width: 98%;
+        margin: 19px auto 0 auto;
+        padding: 3px;
+    }
+    
+    .ui-widget_structure {
+        position: relative;
+        width: 300px;
+        top: -420px;
+        margin: auto;
+    }
+
+        .ui-dialog{
+        position:relative !important;
+        width: 50% !important;
+        min-width: 275px !important;
+        margin: 0 auto !important;
+        top: -17em !important;
+        display: block !important;
+        max-width: 350px;
+    }
+
+
+        .all_snbutton {
+            margin-top:1em;
+            padding: 0.2em 0.1em;
+        }
+
+    
 /*_____________________________SPINNER___________________________'*/
 
 .spinner {
@@ -138,7 +214,7 @@
     max-width: 400px;
     position: fixed;
     z-index: 1001;
-    top: 0;
+    top: 22%;
 }
 
 img.pict_warning_structure {
@@ -282,8 +358,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
 
-@media all and (max-width: 980px) /*and (max-device-width: 980px)*/
-{
+@media all and (min-width: 320px)  {
     html {
         width:100%;
     }
@@ -533,58 +608,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
 
-    /*____________________________POP UP FB ______________________________*/
-
-    .auth_form_structure {
-
-    }
-
-    .ui-dialog_structure .ui-dialog-title_structure {
-
-    }
-
-    .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input{
-        width:90px;
-        margin: 0 30px;
-    }
-
-    .auth_popup_structure {
-
-    }
-
-    .label_login_connexion_structure, .label_password_connexion_structure, .label_vclient_ajout_structure {
-        margin-bottom: 5px;
-    }
-
-    .label_password_connexion_structure {
-        margin-top: 10px;
-    }
-
-    .auth_compte_structure .compte_login_structure, .auth_compte_structure .compte_pass_structure, .auth_compte_structure .client_name_structure   {
-        width:158px;
-        margin:0 auto;
-    }
-
-    .ui-dialog-titlebar_structure {
-    }
-
-    .facebook_auth_compte_structure button {
-        vertical-align: middle;
-    }
-
-    .button_facebook_structure {
-        width: 98%;
-        margin: 19px auto 0 auto;
-        padding: 3px;
-    }
     
-    .ui-widget_structure {
-        position: relative;
-        width: 300px;
-        top: -420px;
-        margin: auto;
-    }
-
         /*-------------------------------------------------------------------------------------------*/
 
         /*                                                   FOOTER                                                       */
@@ -1418,7 +1442,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .notransition,.notransition .slide,.notransition .tab,.notransition .popdown,.notransition .dropdown,.notransition .layer,.notransition .tip{-webkit-transition-duration:0!important;-moz-transition-duration:0!important;-ms-transition-duration:0!important;transition-duration:0!important;-webkit-transition-delay:0!important;-moz-transition-delay:0!important;-ms-transition-delay:0!important;transition-delay:0!important}
     // SWIPE DON'T REMOVE ! 
 
-}
+
 
 .content_titre_structure {
     display:block;
@@ -1443,6 +1467,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     height: 10px;
     margin-top: -1.3em;
     padding-bottom: 3em;
+}
 }
 
 
@@ -1497,7 +1522,61 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         float:right;
     }
 }
-@media all and (min-width: 320px) and (max-width: 640px) {
 
+@media all and (min-width: 980px) {
+
+.header_structure, .content_structure {
+        width: 980px;
+        margin: 0 auto;
+}
+
+.header_structure {
+        position: relative;
+		height: 90px;
+}
+
+.content_personalize ul li {
+	   width: 300px;
+	   margin: 2em auto;	
+       padding: 1em 0.5em;
+}
+
+.header_right_logo_slogan_structure {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+}
+
+
+
+.header_left_logo_structure {
+        z-index: 4500;
+        width: 100%;
+        position: absolute;
+        top: 1em;
+        left: 31em;
+}
+
+
+/*________________________MESSAGE D'ERREUR________________________*/
+
+.calque_structure {
+
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        z-index: 5000;
+}
+
+
+.dialog_error_structure {
+        margin: 0 auto;
+        width: 70%;
+        z-index: 5001;
+        position: relative;
+}
 
 }
+

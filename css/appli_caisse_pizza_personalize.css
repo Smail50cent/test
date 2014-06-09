@@ -10,59 +10,6 @@
 
 }
 
-/*____________________________POP UP FB ______________________________*/
-
-    .auth_form_personalize {
-        color: #565656;
-    }
-
-    .ui-dialog_personalize .ui-dialog-title_personalize {
-        color:white;
-    }
-
-    .button_authen_compte_personalize input, .button_ajout_vclient_personalize input, .button_inscri_compte_personalize input{
-        border: none;
-        background: none;
-        font-weight: 700;
-        color:#565656;
-        box-shadow: none;
-    }
-
-    .auth_popup_personalize {
-        background-color: white !important;
-    }
-
-    .label_login_connexion_personalize, .label_password_connexion_personalize, .label_vclient_ajout_personalize {
-        text-align:center;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-size: 1em;
-    }
-
-
-    /*.auth_compte_personalize  .compte_login_personalize , .auth_compte_personalize .compte_pass_personalize , .auth_compte_personalize .client_name_personalize, .vclient_prenom_structure, .vclient_nom_structure  {
-        box-shadow: 1px 1px 0px 0px grey inset;
-    }*/
-
-    .ui-dialog-titlebar {
-        background: -webkit-linear-gradient(#066819 16px, #bed536 150px);
-        background: -moz-linear-gradient (#066819 16px, #bed536 150px);
-        background: -ms-linear-gradient (#066819 16px, #bed536 150px);
-        background: -o-linear-gradient (#066819 16px, #bed536 150px);
-        background: linear-gradient(#066819 16px, #bed536 150px); 
-    }
-
-    .facebook_auth_compte_personalize button {
-        border: none;
-        border-radius:8px;
-    }
-
-    .button_facebook_personalize {
-        background-color: rgb(160, 160, 160);
-        border-radius: 10px;
-    }
-    
-    .ui-widget_personalize {
-    }
 
 
 /*_____________________________MESSAGE D'ERREUR___________________________*/
@@ -201,7 +148,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
-@media all and (min-width: 320px) /*and (max-device-width: 980px)*/
+@media all and (max-width: 980px) /*and (max-device-width: 980px)*/
 {
     html {
         overflow: hidden;
@@ -253,7 +200,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .content_personalize  {
-	
 }
 
     .choose_lang_personalize {
@@ -265,7 +211,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .content_personalize ul  {
         list-style-type:none; 
         padding : 0 0.4em 0 0;
-        margin: 7em auto;
+
+        /* margin:0 0 2em 0;*/
         /*margin-right: -1em;*/
 }
 
@@ -286,7 +233,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .btn_choice_personalize li {
-        background-color: #C90912;
+        background-image: linear-gradient(#066819 57px, #bed536 150px);
 }
 
     .btn_choice_personalize, .choix_mode_calcul_personalize  {
@@ -343,7 +290,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         text-shadow:1px 1px 16px #ffffff;
     }
     
-    .auth_compte_personalize, .all_snbutton {
+    .auth_compte_personalize {
         background-color: #a0a0a0;
         border-radius: 5px;
         color: white;
@@ -424,9 +371,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         color:white;
     }
 
-    .header_left_logo_id_personalize{
-
-    }
+    .header_left_logo_id_personalize
 
     .header_right_personalize {
         text-align: right;
@@ -441,6 +386,62 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     }
 
+
+    /*____________________________POP UP FB ______________________________*/
+
+    .auth_form_personalize {
+        color: #565656;
+    }
+
+    .ui-dialog_personalize .ui-dialog-title_personalize {
+        color:white;
+    }
+
+    .button_authen_compte_personalize input, .button_ajout_vclient_personalize input, .button_inscri_compte_personalize input{
+        border: none;
+        background: none;
+        font-weight: 700;
+        color:#565656;
+        box-shadow: none;
+    }
+
+    .auth_popup_personalize {
+        background-color: white !important;
+    }
+
+    .label_login_connexion_personalize, .label_password_connexion_personalize, .label_vclient_ajout_personalize {
+        text-align:center;
+        font-family: "Trebuchet MS",Verdana,sans_serif;
+        font-size: 1em;
+    }
+
+
+    }
+
+    .auth_compte_personalize  .compte_login_personalize , .auth_compte_personalize .compte_pass_personalize , .auth_compte_personalize .client_name_personalize  {
+        box-shadow: 1px 1px 0px 0px grey inset;
+    }
+
+    .ui-dialog-titlebar {
+        background: -webkit-linear-gradient(#066819 16px, #bed536 150px);
+        background: -moz-linear-gradient (#066819 16px, #bed536 150px);
+        background: -ms-linear-gradient (#066819 16px, #bed536 150px);
+        background: -o-linear-gradient (#066819 16px, #bed536 150px);
+        background: linear-gradient(#066819 16px, #bed536 150px); 
+    }
+
+    .facebook_auth_compte_personalize button {
+        border: none;
+        border-radius:8px;
+    }
+
+    .button_facebook_personalize {
+        background-color: rgb(160, 160, 160);
+        border-radius: 10px;
+    }
+    
+    .ui-widget_personalize {
+    }
 
         /*-------------------------------------------------------------------------------------------*/
 
@@ -660,14 +661,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             -ms-user-select: all;
             user-select: all;
         }
-
         p.content_produit_zone_right_prix, .choose_menu_item_prix, .menu_content_prix  {
             color: #FFFFFF;
             font-family: "Trebuchet MS",Verdana,sans_serif;
             font-style: italic;
             font-weight: bold;
         }
-
         p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
 
         }
@@ -701,8 +700,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_produit_zone_left_personalize{
             border-style: none;
             background-repeat: no-repeat;
-            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTBBQTY2NUFCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTBBQTY2NUJCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MEFBNjY1OEIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MEFBNjY1OUIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkw34ZoAAAD+SURBVHja3NNJDsIwEARA0+LClQ8HvserCDcIWbzM0h1LlrzMdFSKfHnd7lMp5VnEB+b5mOd0Bkg5AwZfa2kMFntZDFbOJDHYOJfDYOdOCoODexkMKmokMKiso8egoZYag8Z6Wgw6eigx6Oyjw2CglwqDwX4aDAwyKDAwyknHwDArFQPjvDQMHDJTMHDKDcfAMTsUA+f8MAwCvhGCQdCfd8cg8D26YiIhrphoiBsmA+KCyYKYYzIhpphsiBmGAWKCYYEMY5ggQxg2SDeGEdKFYYU0Y5ghTRh2SDVGAVKFUYEcYpQguxg1yCZGEbKKUYX8YZQhP5hr0R8fTHkLMAAFFzKbOkEH9QAAAABJRU5ErkJggg==);        
-        }
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTBBQTY2NUFCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTBBQTY2NUJCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MEFBNjY1OEIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MEFBNjY1OUIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkw34ZoAAAD+SURBVHja3NNJDsIwEARA0+LClQ8HvserCDcIWbzM0h1LlrzMdFSKfHnd7lMp5VnEB+b5mOd0Bkg5AwZfa2kMFntZDFbOJDHYOJfDYOdOCoODexkMKmokMKiso8egoZYag8Z6Wgw6eigx6Oyjw2CglwqDwX4aDAwyKDAwyknHwDArFQPjvDQMHDJTMHDKDcfAMTsUA+f8MAwCvhGCQdCfd8cg8D26YiIhrphoiBsmA+KCyYKYYzIhpphsiBmGAWKCYYEMY5ggQxg2SDeGEdKFYYU0Y5ghTRh2SDVGAVKFUYEcYpQguxg1yCZGEbKKUYX8YZQhP5hr0R8fTHkLMAAFFzKbOkEH9QAAAABJRU5ErkJggg==);        }
 
         .content_produit_zone_right_personalize{
             border-style: none;
@@ -977,12 +975,21 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     background-size: 9px;
     background-repeat: no-repeat;
 }
-}
 
 
 @media all and (min-width: 768px) and (max-width: 979px) {
 
-   
+    body {
+background: #000000; /* Old browsers */
+background: -moz-linear-gradient(left, #000000 0%, #6e095f 33%, #6e095f 69%, #000000 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#000000), color-stop(33%,#6e095f), color-stop(69%,#6e095f), color-stop(100%,#000000)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left, #000000 0%,#6e095f 33%,#6e095f 69%,#000000 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left, #000000 0%,#6e095f 33%,#6e095f 69%,#000000 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left, #000000 0%,#6e095f 33%,#6e095f 69%,#000000 100%); /* IE10+ */
+background: linear-gradient(to right, #000000 0%,#6e095f 33%,#6e095f 69%,#000000 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#000000',GradientType=1 ); /* IE6-9 */
+    }
+
     .content_globlal_zone_personalize{
  
     }
@@ -1017,29 +1024,4 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
-
-
-@media all and (min-width: 980px) {
-
-
-
-.header_structure {
-
-}
-
-.header_left_personalize {
-    border-top: 90px solid #C90912;
-    border-left: 0px solid transparent;
-    width: 150px;
-    border-right: 77px solid transparent;
-}
-
-/*________________________MESSAGE D'ERREUR________________________*/
-
-.calque_structure {
-    width: 100%;
-    height: 100%;
-}
-
-
-}
+/*@media all and (min-width: 320px) and (max-width: 640px) {}*/

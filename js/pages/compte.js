@@ -6,7 +6,7 @@ var listePersonnes = new Array();
 
 function onLoadCompte() {
     scripts.loadScripts("lib.dialog", function() {
-        $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
+        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
         var html = getAuthCompte();
         $('#auth_form_id').html(html);
         socialNetworkButtonAuth();
