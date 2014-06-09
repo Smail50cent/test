@@ -357,7 +357,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.getAllComptes = function(method) {
+    this.getAllComptes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllComptes"),
             type: 'GET',
@@ -371,16 +371,15 @@ function ConnexionServer() {
                     compte.setPassword(data[i].password);
                     comptes.push(compte);
                 }
-                method(comptes);
+                method(comptes, param);
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
 
-    this.getAllParamForms = function(method) {
+    this.getAllParamForms = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamForms"),
             type: 'GET',
@@ -403,16 +402,15 @@ function ConnexionServer() {
                     paramform.setFile_template_html(data[i].file_template_html);
                     paramforms.push(paramform);
                 }
-                method(paramforms);
+                method(paramforms, param);
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
 
-    this.getAllAttributsComptes = function(method) {
+    this.getAllAttributsComptes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
             type: 'GET',
@@ -429,10 +427,9 @@ function ConnexionServer() {
                     paramform.setId_compte(data[i].id_compte);
                     paramforms.push(paramform);
                 }
-                method(paramforms);
+                method(paramforms, param);
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -447,7 +444,6 @@ function ConnexionServer() {
                 console.log(data);
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -469,7 +465,7 @@ function ConnexionServer() {
         });
     };
 
-    this.getAllParamApps = function(method) {
+    this.getAllParamApps = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
             type: 'GET',
@@ -484,7 +480,7 @@ function ConnexionServer() {
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
                     paramapps.push(paramapp);
                 }
-                method(paramapps);
+                method(paramapps, param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -493,7 +489,7 @@ function ConnexionServer() {
         });
     };
 
-    this.getCompteById = function(method, id) {
+    this.getCompteById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetCompteById") + "?id=" + id,
             type: 'GET',
@@ -504,7 +500,7 @@ function ConnexionServer() {
                 compte.setId(data.id);
                 compte.setPassword(data.password);
                 if (method != null) {//Nous avons besoin de l'executer.
-                    method(compte);
+                    method(compte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -513,7 +509,7 @@ function ConnexionServer() {
         });
     };
 
-    this.getAttributCompteByIdCompte = function(method, id) {
+    this.getAttributCompteByIdCompte = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,
             type: 'GET',
@@ -531,7 +527,7 @@ function ConnexionServer() {
                     attcomptes.push(attcompte);
                 }
                 if (method != null) {//Nous avons besoin de l'executer.
-                    method(attcomptes);
+                    method(attcomptes, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
