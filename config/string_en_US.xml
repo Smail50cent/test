@@ -56,4 +56,5 @@
     <string key="label.auth.inscription">Subscribe</string>
     <string key="label.auth.pseudo">Login</string>
     <string key="label.auth.visitor">Visitor</string>
+    <string key="label.error.redirict.statut.incorrect">Unable to retrieve the type of command</string>
 </strings>

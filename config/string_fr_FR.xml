@@ -58,4 +58,5 @@
     <string key="label.auth.inscription">S'inscrire</string>
     <string key="label.auth.pseudo">Login</string>
     <string key="label.auth.visitor">Visiteur</string>
+    <string key="label.error.redirict.statut.incorrect">Impossible de récupérer le type de commande</string>
 </strings>
