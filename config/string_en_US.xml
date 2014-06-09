@@ -43,4 +43,17 @@
     <string key="label.button.produit.non.attr.valider.selection">Confirm the selection</string>
     <string key="label.envoie.cuisine.valider">Confirm</string>
     <string key="label.personne.auth">Person</string>
+    <string key="label.sexe">Gender</string>
+    <string key="label.nom">Last Name</string>
+    <string key="label.prenom">First Name</string>
+    <string key="label.adresse">Address</string>
+    <string key="label.email">Email</string>
+    <string key="label.tel">Phone Number</string>
+    <string key="label.password">Password</string>
+    <string key="label.retour">Back</string>
+    <string key="label.valider">Submit</string>
+    <string key="label.auth.login">Connect</string>
+    <string key="label.auth.inscription">Subscribe</string>
+    <string key="label.auth.pseudo">Login</string>
+    <string key="label.auth.visitor">Visitor</string>
 </strings>

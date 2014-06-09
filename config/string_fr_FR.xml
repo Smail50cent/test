@@ -45,4 +45,18 @@
     <string key="label.envoie.cuisine.valider">Valider</string>
     <string key="label.personne.auth">Personne</string>
     <string key="error.ajout.visiteur">Remplissez les champs Nom et Prenom avant de valider !</string>
+    <string key="label.sexe">Sexe</string>
+    <string key="label.nom">Nom</string>
+    <string key="label.prenom">Prénom</string>
+    <string key="label.adresse">Adresse</string>
+    <string key="label.email">Email</string>
+    <string key="label.tel">Téléphone</string>
+    <string key="label.password">Mot de passe</string>
+    <string key="label.retour">Retour</string>
+    <string key="label.valider">Valider</string>
+    <string key="label.auth.login">Se connecter</string>
+    <string key="label.auth.inscription">S'inscrire</string>
+    <string key="label.auth.pseudo">Login</string>
+    <string key="label.auth.visitor">Visiteur</string>
+    
 </strings>
