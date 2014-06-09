@@ -308,15 +308,11 @@ function Ticket(id, quantityOfProducts) {
         this.total = 0;
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
-                var prixHT = qop[y].getProduit().getPrix();
                 var quantity = qop[y].getQuantity();
-                var tauxTVA = qop[y].getProduit().id_sousCategorie.tauxTva;
                 var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit,qop[y].getProduit().id_sousCategorie.tauxTva);
                 this.total += totalTTC * quantity;
             }
-        } else {
-            showErrorMessage("Aucun produit");
-        }
+        } 
         return this.total;
     };
 }
