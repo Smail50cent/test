@@ -58,5 +58,9 @@
     <string key="label.auth.inscription">S'inscrire</string>
     <string key="label.auth.pseudo">Login</string>
     <string key="label.auth.visitor">Visiteur</string>
-    <string key="label.error.redirict.statut.incorrect">Impossible de récupérer le type de commande</string>
+    <string key="label.error.redirict.statut.incorrect">Impossible de récupérer le type de commande</string>  
+    <string key="label.index.li.surplace">Passer commande sur place</string>
+    <string key="label.index.li.aemporter">Commande à emporter</string>
+    <string key="label.index.li.livraison">Se faire livrer</string>
+    <string key="label.index.li.reservation">Réserver une table</string>
 </strings>

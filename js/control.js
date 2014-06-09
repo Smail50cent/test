@@ -119,15 +119,28 @@ function controller(entreprise) {
             };
             break;
         case "":
+            nom = "index";
+            method = function (){
+                onIndexLoaded();
+            };
             hideLoading();
             break;
         case "index":
+            nom = "index";
+            method = function (){
+                onIndexLoaded();
+            };
             hideLoading();
             break;
         default :
+            nom = "index";
+            method = function (){
+                onIndexLoaded();
+            };
             hideLoading();
             break;
     }
+
     scripts.loadScripts(nom, method);
 }
 // TEST IF THE CACHE ARE UP TO DATE
@@ -273,7 +286,7 @@ function calculPrixWithTVA(prixHT, tauxTVA) {
     var tauxTVA = parseFloat(tauxTVA);
     return ((tauxTVA / 100) * prixHT) + prixHT;
 }
-function getPrixHtInAssociation(associationPrixProduit,tauxTva) {
+function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
     var prixHt = 0;
     if (associationPrixProduit.length != 0) {
         if (associationPrixProduit.length == 1) {

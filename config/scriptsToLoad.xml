@@ -43,4 +43,5 @@
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
     <script for="compte">pages/compte.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
+    <script for="index">pages/index.js</script>
 </scripts>
