@@ -44,5 +44,5 @@
     <string key="label.button.produit.non.attr.valider.selection">Valider la selection</string>
     <string key="label.envoie.cuisine.valider">Valider</string>
     <string key="label.personne.auth">Personne</string>
-    <string key="error.ajout.visiteur">Remplissez les champs Nom et Prenom avant de valider !</string>
+    <string key="error.ajout.visiteur">Remplissez les champs nom et prénom avant de valider !</string>
 </strings>

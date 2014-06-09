@@ -113,3 +113,19 @@ function getLocalStorageValue(key) {
 function removeLocalStorageItem(key) {
     localStorage.removeItem(key);
 }
+function ajax(method, path, type,param) {
+    $.ajax({
+        url: path,
+        type: 'GET',
+        dataType: 'json',
+        async: true,
+        success: function(data, textStatus, xhr) {
+            if(method!=null){
+                method(data,param);
+            }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        }
+    });
+}

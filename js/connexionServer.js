@@ -180,7 +180,7 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-        
+
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
             type: 'GET',
@@ -291,7 +291,7 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var tables = new Array();
                 for (var i = 0; i < data.length; i++) {
-                    tables.push(new Table(data[i].id, data[i].numero,data[i].zone));
+                    tables.push(new Table(data[i].id, data[i].numero, data[i].zone));
                 }
                 method(tables);
             },
@@ -460,7 +460,7 @@ function ConnexionServer() {
             data: {password: password},
             async: true,
             success: function(data) {
-                method(data,param);
+                method(data, param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -556,27 +556,25 @@ function ConnexionServer() {
             }
         });
     };
-    this.getAttributsComptesByEmail = function(method, email) {
+    this.getAttributsComptesByEmail = function(method, email, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributsComptesByEmail") + "?email=" + email,
             type: 'GET',
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                    var attcompte = new AttributCompte();
-                    attcompte.setId(data.id);
-                    attcompte.setId_compte(data.id_compte);
-                    attcompte.setId_form(data.id_form);
-                    attcompte.setDefaut(data.defaut);
-                    attcompte.setValeur_champ(data.valeur_champ);
-
+                var attcompte = new AttributCompte();
+                attcompte.setId(data.id);
+                attcompte.setId_compte(data.id_compte);
+                attcompte.setId_form(data.id_form);
+                attcompte.setDefaut(data.defaut);
+                attcompte.setValeur_champ(data.valeur_champ);
                 if (method != null) {//Nous avons besoin de l'executer.
-                    method(attcompte);
+                    method(attcompte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                //showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                alert("Incorrect Login or Password");
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
