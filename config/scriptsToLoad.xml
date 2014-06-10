@@ -24,6 +24,7 @@
     <script for="all" priority="1">findInLoaded.js</script>
     <script for="all" priority="1">ConnexionFactory.js</script>
     <script for="all" priority="2">connexionServer.js</script>
+    <script for="all" priority="1">popupAuth.js</script>
     
 
     <script for="lib" priority="2">lib/jquery-1.2.6.min.js</script>
@@ -41,7 +42,6 @@
     <script for="paramCommande">pages/paramCommande.js</script>
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
-    <script for="compte">pages/compte.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
     <script for="index">pages/index.js</script>
 </scripts>
