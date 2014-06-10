@@ -340,6 +340,7 @@ function ConnexionServer() {
     };
     this.sendTicketToServeur = function(method, ticket, param) {
         var monTicket = JSON.stringify(ticket);
+        console.log(monTicket);
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
             type: 'POST',

@@ -1080,7 +1080,6 @@ function validerCommande() {
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
-        console.log("ok");
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
@@ -1088,7 +1087,7 @@ function validerCommande() {
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-        redirictWhereFinishCarte();
+//        redirictWhereFinishCarte();
     }
 }
 function envoyerTicketServeur(ticket) {
