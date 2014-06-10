@@ -165,3 +165,6 @@ function getLiProduit() {
 function getButtonBackToAuth() {
     return templates.getTemplate("compte/Button_back_to_auth_form");
 }
+function getInscriFormUser() {
+    return templates.getTemplate("compte/inscri_form_user");
+}

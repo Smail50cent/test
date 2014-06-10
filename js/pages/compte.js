@@ -8,16 +8,16 @@ function onLoadCompte() {
     scripts.loadScripts("lib.dialog", function() {
         $('#auth_popup_id').dialog({autoOpen: true, modal: true, position: 'top'});
         var html = getAuthCompte();
-        
-        var htmllang = paramValue(html,"pseudo",strings.getString("label.auth.pseudo"));
-        htmllang = paramValue(htmllang,"mdp",strings.getString("label.password"));
-        htmllang = paramValue(htmllang,"connect",strings.getString("label.auth.login"));
-        htmllang = paramValue(htmllang,"subscribe",strings.getString("label.auth.inscription"));
-        htmllang = paramValue(htmllang,"visitor",strings.getString("label.auth.visitor"));
-        htmllang = paramValue(htmllang,"prenomv",strings.getString("label.prenom"));
-        htmllang = paramValue(htmllang,"nomv",strings.getString("label.nom"));
-        htmllang = paramValue(htmllang,"valider",strings.getString("label.valider"));
-        
+
+        var htmllang = paramValue(html, "pseudo", strings.getString("label.auth.pseudo"));
+        htmllang = paramValue(htmllang, "mdp", strings.getString("label.password"));
+        htmllang = paramValue(htmllang, "connect", strings.getString("label.auth.login"));
+        htmllang = paramValue(htmllang, "subscribe", strings.getString("label.auth.inscription"));
+        htmllang = paramValue(htmllang, "visitor", strings.getString("label.auth.visitor"));
+        htmllang = paramValue(htmllang, "prenomv", strings.getString("label.prenom"));
+        htmllang = paramValue(htmllang, "nomv", strings.getString("label.nom"));
+        htmllang = paramValue(htmllang, "valider", strings.getString("label.valider"));
+
         $('#auth_form_id').html(htmllang);
         socialNetworkButtonAuth();
     });
@@ -70,32 +70,31 @@ function InscriCompte() {
     getHtmlFormInscription();
 
 }
-function stringPlaceholder() {
-
-}
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
     $.get("./service/generatedForm/InscriptionForm.php?lang=", {lang: langselect}, function() {
-        var insciform = getGeneratedInscriForm();
+        var generform = getGeneratedInscriForm();
+
+        var generformhtml = paramValue(generform, "label.password", strings.getString("label.password"));
+        generformhtml = paramValue(generformhtml, "label.sexe", strings.getString("label.sexe"));
+        generformhtml = paramValue(generformhtml, "label.nom", strings.getString("label.nom"));
+        generformhtml = paramValue(generformhtml, "label.prenom", strings.getString("label.prenom"));
+        generformhtml = paramValue(generformhtml, "label.adresse", strings.getString("label.adresse"));
+        generformhtml = paramValue(generformhtml, "label.email", strings.getString("label.email"));
+        generformhtml = paramValue(generformhtml, "label.tel", strings.getString("label.tel"));
         
-        var inscriformhtml = paramValue(insciform, "label.password",strings.getString("label.password"));
-        inscriformhtml = paramValue(inscriformhtml,"label.sexe",strings.getString("label.sexe"));
-        inscriformhtml = paramValue(inscriformhtml,"label.nom",strings.getString("label.nom"));
-        inscriformhtml = paramValue(inscriformhtml,"label.prenom",strings.getString("label.prenom"));
-        inscriformhtml = paramValue(inscriformhtml,"label.adresse",strings.getString("label.adresse"));
-        inscriformhtml = paramValue(inscriformhtml,"label.email",strings.getString("label.email"));
-        inscriformhtml = paramValue(inscriformhtml,"label.tel",strings.getString("label.tel"));
-        
-        $('#auth_form_id').html(inscriformhtml);
+        var inscriform = getInscriFormUser(); 
+        $('#auth_form_id').html(inscriform);
+        $('#inscription_form_id').html(generformhtml);
         var buttonValider = getButtonInscriFormUser();
         $('#auth_form_id').append(buttonValider);
         var buttonretour = getButtonBackToAuth();
         $('#auth_form_id').append(buttonretour);
         // Event for input File
-        scripts.loadScripts("upload", function(){
-           $('#photo_user_id').change(function(){
+        scripts.loadScripts("upload", function() {
+            $('#photo_user_id').change(function() {
                 onChooseImage();
-           }); 
+            });
         });
     });
 }
@@ -103,7 +102,7 @@ function RetourAuth() {
     onLoadCompte();
 }
 function ValiderInscri() {
-//    if (!TestEmptyFields("#auth_form_id")) {
+    if (!TestEmptyFields("#auth_form_id")) {
         scripts.loadScripts("lib.social", function() {
             var connexion = getConnexion();
             scripts.loadScripts("lib.crypt", function() {
@@ -111,20 +110,21 @@ function ValiderInscri() {
                 if (!verifyEmail($('#email_user_id').val())) {
                     connexion.addCompte(InsertFromLastId, cryptedpass);
                     function InsertFromLastId(LastId) {
-//                        connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(3, $('#prenom_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(4, $('#datenaissance_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
-//                        connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
-                        connexion.addAttributCompte(8, $('#photo_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(3, $('#prenom_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(4, $('#datenaissance_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(5, $('#adresse_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(6, $('#tel_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(7, $('#email_user_id').val(), 1, LastId);
+                        connexion.addAttributCompte(8, $('#photo_user_id')[0].files[0].name, 1, LastId);
+                        uploadImage();
                         var personne = new Personne();
                         personne.setId(LastId);
                         personne.setGender($('#sexe_user_id').val());
                         personne.setNom($('#nom_user_id').val());
                         personne.setPrenom($('#prenom_user_id').val());
-                        personne.getUrlProfileImg($('#photo_user_id').val());
+                        personne.setUrlProfileImg($('#photo_user_id')[0].files[0].name);
                         personne.setEmail($('#email_user_id').val());
                         listePersonnes.push(personne);
                         setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
@@ -133,18 +133,18 @@ function ValiderInscri() {
                 }
             });
         });
-//    }
+    }
 }
-function uploadImage(){
-        $.ajax({
-        url: './service/generatedForm/uploadimg/processupload.php'+ queryFile,
-        type: 'POST',
-        data: {queryFile: arrayFile},
-        dataType: 'text',
-        timeout: 1000,
-        error: function() {
-            setNewErrorMessageListeProjets("Une erreur est survenu.");
-        },
+function uploadImage() {
+    var fd = new FormData(document.getElementById("inscription_form_id"));
+    fd.append("label", "WEBUPLOAD");
+    $.ajax({
+        url: "./service/generatedForm/uploadimg/processupload.php",
+        type: "POST",
+        data: fd,
+        enctype: 'multipart/form-data',
+        processData: false, // tell jQuery not to process the data
+        contentType: false   // tell jQuery not to set contentType
     });
 }
 function AjoutVisiteur() {
@@ -206,7 +206,7 @@ function AuthToCommande() {
         $('#auth_compte_id input[type="text"] , #auth_compte_id input[type="password"], #auth_form_id input[type="text"], #auth_form_id input[type="date"], #auth_form_id input[type="file"], #auth_form_id input[type="email"], #auth_form_id input[type="tel"], #auth_form_id textarea, #auth_form_id input[type="password"]').val('');
         window.setTimeout(function() {
             var person = strings.getString("label.personne.auth");
-            $('#nbr_personne_id').html(person+" n° "+(listePersonnes.length+1));
+            $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
             $('#auth_popup_id').dialog("open");
         }, 500);
     }
