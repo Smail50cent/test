@@ -136,7 +136,7 @@ function validerPaimentSelection() {
 }
 function pay(total) {
     setLocalStorageValue("reste.a.regler", total.toString());
-    getRedirict("reglement.php", new Array(total.toString()));
+    redirictPay();
 }
 var qopProduitToAttrib = "";
 

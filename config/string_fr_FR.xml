@@ -44,7 +44,7 @@
     <string key="label.button.produit.non.attr.valider.selection">Valider la selection</string>
     <string key="label.envoie.cuisine.valider">Valider</string>
     <string key="label.personne.auth">Personne</string>
-    <string key="error.ajout.visiteur">Remplissez les champs Nom et Prenom avant de valider !</string>
+    <string key="error.ajout.visiteur">Remplissez les champs nom et prénom avant de valider !</string>
     <string key="label.sexe">Sexe</string>
     <string key="label.nom">Nom</string>
     <string key="label.prenom">Prénom</string>
@@ -58,5 +58,9 @@
     <string key="label.auth.inscription">S'inscrire</string>
     <string key="label.auth.pseudo">Login</string>
     <string key="label.auth.visitor">Visiteur</string>
-    
+    <string key="label.error.redirict.statut.incorrect">Impossible de récupérer le type de commande</string>  
+    <string key="label.index.li.surplace">Passer commande sur place</string>
+    <string key="label.index.li.aemporter">Commande à emporter</string>
+    <string key="label.index.li.livraison">Se faire livrer</string>
+    <string key="label.index.li.reservation">Réserver une table</string>
 </strings>

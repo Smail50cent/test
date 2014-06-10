@@ -180,7 +180,7 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-        
+
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
             type: 'GET',
@@ -291,7 +291,7 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var tables = new Array();
                 for (var i = 0; i < data.length; i++) {
-                    tables.push(new Table(data[i].id, data[i].numero,data[i].zone));
+                    tables.push(new Table(data[i].id, data[i].numero, data[i].zone));
                 }
                 method(tables);
             },
@@ -346,6 +346,7 @@ function ConnexionServer() {
             data: {ticket: monTicket},
             async: false,
             success: function(data, textStatus, xhr) {
+                console.log(data);
                 data = JSON.parse(data);
                 setLocalStorageValue("id.last.created.ticket", data.id);
                 if (method != null) {
@@ -456,7 +457,7 @@ function ConnexionServer() {
             data: {password: password},
             async: true,
             success: function(data) {
-                method(data,param);
+                method(data, param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(errorThrown);
@@ -559,13 +560,12 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                    var attcompte = new AttributCompte();
-                    attcompte.setId(data.id);
-                    attcompte.setId_compte(data.id_compte);
-                    attcompte.setId_form(data.id_form);
-                    attcompte.setDefaut(data.defaut);
-                    attcompte.setValeur_champ(data.valeur_champ);
-
+                var attcompte = new AttributCompte();
+                attcompte.setId(data.id);
+                attcompte.setId_compte(data.id_compte);
+                attcompte.setId_form(data.id_form);
+                attcompte.setDefaut(data.defaut);
+                attcompte.setValeur_champ(data.valeur_champ);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(attcompte, param);
                 }

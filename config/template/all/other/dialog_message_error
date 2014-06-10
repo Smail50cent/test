@@ -1,5 +1,5 @@
 
-<div id="dialog_error_id" class=" dialog_error_structure dialog_error_personalize">
+<div id="dialog_error_id">
 <div class="calque calque_structure calque_personalize"></div>
 <div class="dialog_error dialog_error_structure dialog_error_personalize" >
     <div id="dialog_error_header_id"  class="dialog_error_header dialog_error_header_structure dialog_error_header_personalize">

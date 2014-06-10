@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages>
+    <page key="carte">carte.php</page>
+    <page key="paramCommande">paramCommande.php</page>
+    <page key="choixEnvoieCuisine">./choixEnvoieCuisine.php</page>
+    <page key="choixPaimentPersonnes">choixPaimentPersonnes.php</page>
+    <page key="reglement">reglement.php</page>
+</pages>

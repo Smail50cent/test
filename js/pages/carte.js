@@ -678,7 +678,7 @@ function addTicketItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
     item = paramValue(item, "qopProduiID", qop.getProduit().getId());
-    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit,qop.getProduit().id_sousCategorie.tauxTva)));
+    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().id_sousCategorie.tauxTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
     $('#recapitulatif_liste_id').append(item);
@@ -1054,12 +1054,10 @@ function validerCommande() {
     var ask = confirm(strings.getString("label.info.confirm.valider.commande"));
     if (ask) {
         window.onbeforeunload = null;
-
         var prixparPersonnes = new Array();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
         var personnesProduitsListe = new Array();
-
         for (var i = 0; i < personnes.length; i++) {
             var personne = null;
             var produits = new Array();
@@ -1068,7 +1066,7 @@ function validerCommande() {
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
                     personne = personnes[i];
                     produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
-                    totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit,currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
+                    totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
@@ -1082,6 +1080,7 @@ function validerCommande() {
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
+        console.log("ok");
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
@@ -1089,7 +1088,7 @@ function validerCommande() {
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-        getRedirict("./choixEnvoieCuisine.php", null);
+        redirictWhereFinishCarte();
     }
 }
 function envoyerTicketServeur(ticket) {

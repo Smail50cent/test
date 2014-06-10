@@ -104,5 +104,6 @@ function startCommande(numTable, nbPersonne) {
             setLocalStorageValue("paramCommande.numTable", JSON.stringify(tables[i]));
         }
     }
-    document.location.href = "carte.php";
+//    document.location.href = "carte.php";
+    redirictWhereFinishParamCommande();
 }
