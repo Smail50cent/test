@@ -23,6 +23,7 @@ include_once 'ParametreApplicationServiceDataImpl.php';
 include_once 'StringsServiceDataImpl.php';
 include_once 'TauxTvaServiceImpl.php';
 include_once 'AssociationProduitPrixServiceDataImpl.php';
+include_once 'CompteRoleServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -44,21 +45,28 @@ class PersistanceFactory {
     private static $stringsSrv = null;
     private static $tauxTvaSrv = null;
     private static $associationProduitPrixSrv = null;
+    private static $compteRoleSrv = null;
 
+    public static function getCompteRoleService() {
+        if (PersistanceFactory::$compteRoleSrv == null) {
+            PersistanceFactory::$compteRoleSrv = new CompteRoleServiceDataImpl();
+        }
+        return PersistanceFactory::$compteRoleSrv;
+    }
     public static function getAssociationProduitPrixService() {
         if (PersistanceFactory::$associationProduitPrixSrv == null) {
             PersistanceFactory::$associationProduitPrixSrv = new AssociationProduitPrixServiceDataImpl();
         }
         return PersistanceFactory::$associationProduitPrixSrv;
     }
-    
+
     public static function getTauxTvaService() {
         if (PersistanceFactory::$tauxTvaSrv == null) {
             PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceImpl();
         }
         return PersistanceFactory::$tauxTvaSrv;
     }
-    
+
     public static function getTicketService() {
         if (PersistanceFactory::$ticketSrv == null) {
             PersistanceFactory::$ticketSrv = new TicketServiceDataImpl();
@@ -163,12 +171,12 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$paramappSrv;
     }
-    
+
     public static function getStringsService() {
         if (PersistanceFactory::$stringsSrv == null) {
             PersistanceFactory::$stringsSrv = new StringsServiceDataImpl();
         }
         return PersistanceFactory::$stringsSrv;
-    }    
+    }
 
 }

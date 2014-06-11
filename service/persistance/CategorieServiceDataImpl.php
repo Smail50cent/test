@@ -39,4 +39,11 @@ class CategorieServiceDataImpl implements CategorieServiceData {
         return $categorie;
     }
 
+    public function addData() {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO dupappcaisse.categorie (nom,priorite) "
+                . " SELECT FP.FA_LIBELLE, FP.FA_ORDRE "
+                . " FROM prod_bacchus.BAR_FAMILLE_PRODUIT FP ");
+    }
+
 }

@@ -1087,7 +1087,7 @@ function validerCommande() {
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
-//        redirictWhereFinishCarte();
+        redirictWhereFinishCarte();
     }
 }
 function envoyerTicketServeur(ticket) {

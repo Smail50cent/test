@@ -8,10 +8,8 @@
 interface SousCategorieServiceData {
 
     public function getAll();
-
     public function getByIdCategortie($id);
-    
     public function getByIdParseObj($id);
-    
     public function getById($id);
+    public function addData();
 }

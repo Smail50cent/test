@@ -33,7 +33,7 @@ class TicketServiceDataImpl implements TicketServiceData {
 
     public function addCommandeProduit($produit, $idCommande) {
         $bdd = new ConnexionBDD();
-        return $bdd->executeGeneric("INSERT INTO `commande_produits`(`id_commande`, `id_produit`,`heure_envoie`) VALUES (" . $idCommande . "," . $produit->getId() . ",0)");
+        return $bdd->executeGeneric("INSERT INTO `commande_produits`(`id_commande`, `id_produit`,`heure_envoie`,`prix_ttc_retenu`) VALUES (" . $idCommande . "," . $produit->getId() . ",0,".$produit->getPrix().")");
     }
 
     public function addOptionCommande($idOption, $idOptionValue, $idCommandeProduit) {
