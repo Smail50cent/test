@@ -12,3 +12,5 @@
         <button id="valider_produit_user_id"  class="valider_produit_user valider_produit_user_structure valider_produit_user_personalize " onclick="validerEnvoieCuisine();"></button>
     </div>
 </div>
+</body>
+</html> 

@@ -7,4 +7,5 @@
         <li><a id="indexLiClientReservation" onclick="goClientReservation();"></a></li>
     </ul>
 </div>
-<?php include_once './footer.php'; ?>
+</body>
+</html> 
