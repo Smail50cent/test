@@ -20,6 +20,7 @@ include_once 'TicketServiceImpl.php';
 include_once 'ParametreApplicationServiceImpl.php';
 include_once 'StringsServiceImpl.php';
 include_once 'AssociationProduitPrixServiceImpl.php';
+include_once 'CompteRoleServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -38,12 +39,19 @@ class LogiqueFactory {
     private static $paramappSrv = null;
     private static $stringsSrv = null;
     private static $associationProduitPrixService = null;
+    private static $compteRoleService = null;
 
     public static function getAssociationProduitPrixService() {
         if (LogiqueFactory::$associationProduitPrixService == null) {
             LogiqueFactory::$associationProduitPrixService = new AssociationProduitPrixServiceImpl();
         }
         return LogiqueFactory::$associationProduitPrixService;
+    }
+    public static function getCompteRoleService() {
+        if (LogiqueFactory::$compteRoleService== null) {
+            LogiqueFactory::$compteRoleService = new CompteRoleServiceImpl();
+        }
+        return LogiqueFactory::$compteRoleService;
     }
     
     public static function getModeDeReglementService() {
