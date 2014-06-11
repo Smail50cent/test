@@ -10,19 +10,15 @@ include_once '../logique/LogiqueFactory.php';
 $ticketSrv = LogiqueFactory::getTicketService();
 
 class ToEncode {
-
     public $id;
-
     public function __construct($id) {
         $this->id = $id;
     }
-
 }
 
-if (isset($_GET["ticket"])) {
-    $ticketToParse = json_decode($_GET["ticket"]);
+if (isset($_POST["ticket"])) {
+    $ticketToParse = json_decode($_POST["ticket"]);
     $ticket = parseToTicket($ticketToParse);
-    print_r($ticket);
     $id = $ticketSrv->addNewTicket($ticket);
     echo json_encode(new ToEncode($id));
 } else {
