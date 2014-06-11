@@ -27,7 +27,6 @@ class CompteServiceImpl implements CompteService{
 
     public function addAll($password) {
         $compte = $this->compteSrv->addAll($password);
-        
     }
 
 }

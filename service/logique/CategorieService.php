@@ -9,4 +9,5 @@
 interface CategorieService {
 
     public function getAll();
+    public function addData();
 }

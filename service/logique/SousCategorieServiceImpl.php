@@ -21,4 +21,9 @@ class SousCategorieServiceImpl implements SousCategorieService {
     public function getById($id){
         return $this->categorieSrv->getById($id);
     }
+
+    public function addData() {
+        $this->categorieSrv->addData();
+    }
+
 }
