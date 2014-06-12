@@ -108,7 +108,7 @@ function ValiderInscri() {
             scripts.loadScripts("lib.crypt", function() {
                 var cryptedpass = SHA512($('#password_user_id').val());
                 if (!verifyEmail($('#email_user_id').val())) {
-                    connexion.addCompte(InsertFromLastId, cryptedpass);
+                    connexion.addCompte(InsertFromLastId, cryptedpass,4);
                     function InsertFromLastId(LastId) {
                         connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
@@ -155,7 +155,7 @@ function AjoutVisiteur() {
             var prenom = $('input[id^="vclient_prenom_id"]').val();
             var personne = new Personne();
             var connexion = getConnexion();
-            connexion.addCompte(InsertFromLastId, "Visiteur");
+            connexion.addCompte(InsertFromLastId, "Visiteur",3);
             function InsertFromLastId(LastId) {
                 connexion.addAttributCompte(2, nom, 1, LastId);
                 connexion.addAttributCompte(3, prenom, 1, LastId);
