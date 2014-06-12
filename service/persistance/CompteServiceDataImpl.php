@@ -9,6 +9,7 @@
 include_once 'CompteServiceData.php';
 include_once 'ConnexionBDD.php';
 include_once '../logique/entity/Compte.php';
+include_once '../logique/entity/CompteRole.php';
 
 class CompteServiceDataImpl implements CompteServiceData {
 
@@ -28,20 +29,36 @@ class CompteServiceDataImpl implements CompteServiceData {
     }
 
     public function getById($id) {
-
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM compte WHERE id=" . $id);
-        $compte = new Compte();
-        $ligne = $retour->fetch();
-        $compte->setId(intval($ligne->id));
-        $compte->setPassword($ligne->password);
-
-        return $compte;
+        $retour = $bdd->executeGeneric("SELECT * FROM  `compte` LEFT JOIN compte_role ON compte_role.id = compte.id_role WHERE id=" . $id);
+        return parseCompte($retour);
     }
 
     public function addAll($password) {
         $bdd = new ConnexionBDD();
         echo $bdd->executeGeneric(" INSERT INTO compte(password) VALUES('$password') ");
+    }
+
+    private function parseCompte($resultSet) {
+        $liste = array();
+        $ret;
+        while ($ligne = $resultSet->fetch()) {
+            $compte = new Compte();
+            $compteRole = new CompteRole();
+            $compte->setId(intval($ligne->id));
+            $compte->setPassword($ligne->password);
+            $compteRole->setId($ligne->id_role);
+            $compteRole->setLevel($ligne->level);
+            $compteRole->setLibelle($ligne->libelle);
+            $compte->setRole($compteRole);
+            array_push($liste, $compte);
+        }
+        if (count($liste) == 1) {
+            $ret = $liste[0];
+        } else {
+            $ret = $liste;
+        }
+        return $ret;
     }
 
 }

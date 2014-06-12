@@ -69,16 +69,15 @@ class CompteServiceImpl implements CompteService {
                     case 8://photo
                         $compteUser->setPhoto($ligne->valeur_champ);
                         break;
-                    case 9://password
-                        $compteUser->se($ligne->valeur_champ);
-                        break;
                 }
             }
             $compteUser->setAdresses($adresses);
             $compteUser->setTelephones($telephones);
+            $ret = $compteUser;
         } else {
             $ret = "ERRORPASSWORD";
         }
+        return $ret;
     }
 
     public function add($compte) {
