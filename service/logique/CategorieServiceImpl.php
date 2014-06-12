@@ -30,4 +30,8 @@ class CategorieServiceImpl implements CategorieService {
         return $categories;
     }
 
+    public function addData() {
+        $this->categorieSrv->addData();
+    }
+
 }

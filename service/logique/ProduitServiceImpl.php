@@ -91,4 +91,8 @@ class ProduitServiceImpl implements ProduitService {
         return $produits;
     }
 
+    public function addData() {
+        $this->produitSrv->addData();
+    }
+
 }

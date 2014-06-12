@@ -10,5 +10,5 @@ interface CompteServiceData{
     
     public function getAll();
     public function getById($id);
-    public function addAll($password);
+    public function addAll($password,$role);
 }

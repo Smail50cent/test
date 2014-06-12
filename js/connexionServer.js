@@ -451,11 +451,11 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(method, password, param) {
+    this.addCompte = function(method, password, id_role, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
-            data: {password: password},
+            data: {password: password , id_role : id_role},
             async: true,
             success: function(data) {
                 method(data, param);
