@@ -1,5 +1,5 @@
 <?php
-
+include_once '../logique/LogiqueFactory.php';
 if (isset($_GET['email']) && isset($_GET['password'])) {
     extract($_GET);
     $compteSrv = LogiqueFactory::getCompteService();

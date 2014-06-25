@@ -5,7 +5,6 @@ function ConnexionServer() {
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
-            console.log("SERVEUR");
         } else {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
@@ -18,7 +17,6 @@ function ConnexionServer() {
                         updated = true;
                         pullNewData(methodToExecuteAfter);
                         incrementeLevelOfTable(config.getConfig("tableNameEntreprise"));
-
                     } else {
                         getImplOfConnexionLocal().getEntreprise(methodToExecuteAfter);
                     }

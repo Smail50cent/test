@@ -39,6 +39,7 @@
     <script for="swipe">lib/jquery.event.swipe.js</script>
         
     <script for="carte">pages/carte.js</script>
+    <script for="choixDateHeure">pages/choixDateHeure.js</script>
     <script for="paramCommande">pages/paramCommande.js</script>
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
