@@ -61,4 +61,9 @@
     <string key="label.index.li.aemporter">Order takeaway</string>
     <string key="label.index.li.livraison">Take delivery</string>
     <string key="label.index.li.reservation">Book a table</string>
+    <string key="label.connexion.serveur.titre">Please log in to access the order taking</string>
+    <string key="label.connexion.error.login">Login you entered is not correct.</string>
+    <string key="label.connexion.error.mdp">Password you entered is not correct.</string>
+    <string key="label.index.li.accesserveur">Server access</string>
+    <string key="label.interfaceventeacces.newCommande">New order</string>
 </strings>

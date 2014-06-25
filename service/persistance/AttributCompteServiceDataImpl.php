@@ -1,9 +1,9 @@
 <?php
 
-
 include_once $path.'service/persistance/AttributCompteServiceData.php';
 include_once $path.'service/persistance/ConnexionBDD.php';
 include_once $path.'service/logique/entity/AttributCompte.php';
+
 
 class AttributCompteServiceDataImpl implements AttributCompteServiceData {
 
@@ -49,12 +49,15 @@ class AttributCompteServiceDataImpl implements AttributCompteServiceData {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM attribut_compte where id_form=7 AND valeur_champ='" . $email . "'");
         $ligne = $retour->fetch();
-        $attcompte = new AttributCompte();
-        $attcompte->setId(intval($ligne->id));
-        $attcompte->setId_form($ligne->id_form);
-        $attcompte->setValeur_champ($ligne->valeur_champ);
-        $attcompte->setDefaut($ligne->defaut);
-        $attcompte->setId_compte(intval($ligne->id_compte));
+        $attcompte = null;
+        if ($retour->rowCount() >= 1) {
+            $attcompte = new AttributCompte();
+            $attcompte->setId(intval($ligne->id));
+            $attcompte->setId_form($ligne->id_form);
+            $attcompte->setValeur_champ($ligne->valeur_champ);
+            $attcompte->setDefaut($ligne->defaut);
+            $attcompte->setId_compte(intval($ligne->id_compte));
+        }
         return $attcompte;
     }
 

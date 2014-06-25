@@ -148,7 +148,9 @@ function getAttributionProduit() {
 function getAuthCompte() {
     return templates.getTemplate("compte/auth_compte_form");
 }
-
+function getDialogAccesCompte() {
+    return templates.getTemplate("compte/dialog_acces_compte");
+}
 function getButtonInscriFormUser() {
     return templates.getTemplate("compte/button_inscri_form_user");
 }

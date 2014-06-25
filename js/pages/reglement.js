@@ -28,9 +28,11 @@ function validerReglement() {
             idModeDeReglement = btn[i].value;
         }
     }
+    redrictWhereHavePay();
     var connexion = getConnexion();
     connexion.getModeDeReglementById(retirictToPage, idModeDeReglement, null);
     function retirictToPage(modeDeReglement) {
         document.location.href = "./service/" + modeDeReglement.redirictUrl;
     }
+    
 }

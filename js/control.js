@@ -118,23 +118,35 @@ function controller(entreprise) {
                 hideLoading();
             };
             break;
+        case "pageConnexionServeur":
+            method = function() {
+                onLoadPageConnexionServeur();
+                hideLoading();
+            };
+            break;
+        case "interfaceVenteAcces":
+            method = function() {
+                onLoadInterfaceVenteAcces();
+                hideLoading();
+            };
+            break;
         case "":
             nom = "index";
-            method = function (){
+            method = function() {
                 onIndexLoaded();
             };
             hideLoading();
             break;
         case "index":
             nom = "index";
-            method = function (){
+            method = function() {
                 onIndexLoaded();
             };
             hideLoading();
             break;
         default :
             nom = "index";
-            method = function (){
+            method = function() {
                 onIndexLoaded();
             };
             hideLoading();
