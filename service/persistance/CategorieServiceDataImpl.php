@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'CategorieServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Categorie.php';
+include_once $path.'service/persistance/CategorieServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Categorie.php';
 
 class CategorieServiceDataImpl implements CategorieServiceData {
 

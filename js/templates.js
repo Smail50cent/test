@@ -14,6 +14,20 @@ templates.getTemplate = function(name) {
     });
     return ret;
 };
+templates.getIHMTemplate = function(name) {
+    var ret = null;
+    var url = "service/IHM/Vue/" + name;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "text",
+        async: false,
+        success: function(text) {
+            ret = text;
+        }
+    });
+    return ret;
+};
 function paramValue(string, paramName, value) {
     var ret = true;
     while (ret) {
@@ -167,4 +181,14 @@ function getButtonBackToAuth() {
 }
 function getInscriFormUser() {
     return templates.getTemplate("compte/inscri_form_user");
+}
+// IHM TEMPLATE
+function getGestionProdForm() {
+    return templates.getIHMTemplate("gestion_produit_form");
+}
+function getModifProdForm() {
+    return templates.getIHMTemplate("modif_produit_form");
+}
+function getButtonRetourGestion() {
+    return templates.getIHMTemplate("button_retour_gestion_produit_form");
 }

@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-include_once 'ParamFormServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/ParamForm.php';
+include_once $path.'service/persistance/ParamFormServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/ParamForm.php';
 
 class ParamFormServiceDataImpl implements ParamFormServiceData {
 

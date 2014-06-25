@@ -1,6 +1,6 @@
 <?php
 
-include_once 'ConnexionBDD.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
 
 $bdd = new ConnexionBDD();
 $lignes = $bdd->executeGeneric("SELECT `ID`,`PRIX` FROM `produit`");

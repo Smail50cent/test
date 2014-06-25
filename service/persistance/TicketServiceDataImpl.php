@@ -1,8 +1,8 @@
 <?php
 
-include_once 'TicketServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Ticket.php';
+include_once $path.'service/persistance/TicketServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Ticket.php';
 
 /**
  * Description of TablesServiceImpl

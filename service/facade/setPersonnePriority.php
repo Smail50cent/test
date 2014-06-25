@@ -1,9 +1,9 @@
 <?php
 
-include_once '../logique/entity/AssociationTicketPersonneProduit.php';
-include_once '../logique/entity/PersonneProduits.php';
-include_once '../logique/entity/ProduitPriorite.php';
-include_once '../logique/LogiqueFactory.php';
+include_once $path.'service/logique/entity/AssociationTicketPersonneProduit.php';
+include_once $path.'service/logique/entity/PersonneProduits.php';
+include_once $path.'service/logique/entity/ProduitPriorite.php';
+include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
 
 if (isset($_POST["personnePriority"])) {
     $ticketSrv = LogiqueFactory::getTicketService();

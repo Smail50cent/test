@@ -5,8 +5,8 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'ConnexionBDD.php';
-include_once 'EntrepriseServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/persistance/EntrepriseServiceData.php';
 class EntrepriseServiceDataImpl implements EntrepriseServiceData{
 
     

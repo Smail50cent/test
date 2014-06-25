@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'SousCategorieServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/SousCategorie.php';
+include_once $path.'service/persistance/SousCategorieServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/SousCategorie.php';
 
 class SousCategorieServiceDataImpl implements SousCategorieServiceData {
 

@@ -5,22 +5,23 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'CategorieServiceImpl.php';
-include_once 'EntrepriseServiceImpl.php';
-include_once 'IngredientServiceImpl.php';
-include_once 'SousCategorieServiceImpl.php';
-include_once 'ProduitServiceImpl.php';
-include_once 'MenuServiceImpl.php';
-include_once 'TableServiceImpl.php';
-include_once 'ModeDeReglementServiceImpl.php';
-include_once 'CompteServiceImpl.php';
-include_once 'AttributCompteServiceImpl.php';
-include_once 'ParamFormServiceImpl.php';
-include_once 'TicketServiceImpl.php';
-include_once 'ParametreApplicationServiceImpl.php';
-include_once 'StringsServiceImpl.php';
-include_once 'AssociationProduitPrixServiceImpl.php';
-include_once 'CompteRoleServiceImpl.php';
+include_once $path.'service/logique/CategorieServiceImpl.php';
+include_once $path.'service/logique/EntrepriseServiceImpl.php';
+include_once $path.'service/logique/IngredientServiceImpl.php';
+include_once $path.'service/logique/SousCategorieServiceImpl.php';
+include_once $path.'service/logique/ProduitServiceImpl.php';
+include_once $path.'service/logique/MenuServiceImpl.php';
+include_once $path.'service/logique/TableServiceImpl.php';
+include_once $path.'service/logique/ModeDeReglementServiceImpl.php';
+include_once $path.'service/logique/CompteServiceImpl.php';
+include_once $path.'service/logique/AttributCompteServiceImpl.php';
+include_once $path.'service/logique/ParamFormServiceImpl.php';
+include_once $path.'service/logique/TicketServiceImpl.php';
+include_once $path.'service/logique/ParametreApplicationServiceImpl.php';
+include_once $path.'service/logique/StringsServiceImpl.php';
+include_once $path.'service/logique/AssociationProduitPrixServiceImpl.php';
+include_once $path.'service/logique/CompteRoleServiceImpl.php';
+include_once $path.'service/logique/ProdtestServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -40,6 +41,7 @@ class LogiqueFactory {
     private static $stringsSrv = null;
     private static $associationProduitPrixService = null;
     private static $compteRoleService = null;
+    private static $prodtestSrv = null;
 
     public static function getAssociationProduitPrixService() {
         if (LogiqueFactory::$associationProduitPrixService == null) {
@@ -150,6 +152,13 @@ class LogiqueFactory {
             LogiqueFactory::$stringsSrv = new StringsServiceImpl();
         }
         return LogiqueFactory::$stringsSrv;
+    }
+    
+    public static function getProdtestService() {
+        if (LogiqueFactory::$prodtestSrv == null) {
+            LogiqueFactory::$prodtestSrv = new ProdtestServiceImpl();
+        }
+        return LogiqueFactory::$prodtestSrv;
     }
 
 }

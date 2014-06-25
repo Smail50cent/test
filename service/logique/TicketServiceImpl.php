@@ -1,6 +1,6 @@
 <?php
 
-include_once 'TicketService.php';
+include_once $path.'service/logique/TicketService.php';
 
 /**
  * Description of TableServiceImpl

@@ -1,8 +1,8 @@
 <?php
 
-include_once 'TableServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Table.php';
+include_once $path.'service/persistance/TableServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Table.php';
 
 /**
  * Description of TablesServiceImpl

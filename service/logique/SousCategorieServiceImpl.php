@@ -1,6 +1,6 @@
 <?php
 
-include_once 'SousCategorieService.php';
+include_once $path.'service/logique/SousCategorieService.php';
 
 /**
  * Description of CategorieServiceImpl

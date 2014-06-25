@@ -44,5 +44,6 @@
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
+    <script for="produit">pages/produit.js</script>
     <script for="index">pages/index.js</script>
 </scripts>
