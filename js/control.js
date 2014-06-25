@@ -124,6 +124,12 @@ function controller(entreprise) {
                 hideLoading();
             };
             break;
+        case "interfaceVenteAcces":
+            method = function() {
+                onLoadInterfaceVenteAcces();
+                hideLoading();
+            };
+            break;
         case "":
             nom = "index";
             method = function() {

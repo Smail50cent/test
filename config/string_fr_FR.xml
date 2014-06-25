@@ -64,4 +64,8 @@
     <string key="label.index.li.livraison">Se faire livrer</string>
     <string key="label.index.li.reservation">Réserver une table</string>
     <string key="label.connexion.serveur.titre">Connectez-vous pour accèder à la prise de commande</string>
+    <string key="label.connexion.error.login">Le login entré n'est pas le bon.</string>
+    <string key="label.connexion.error.mdp">Le mot de passe entré n'est pas le bon.</string>
+    <string key="label.index.li.accesserveur">Accès serveur</string>
+    <string key="label.interfaceventeacces.newCommande">Nouvelle commande</string>
 </strings>

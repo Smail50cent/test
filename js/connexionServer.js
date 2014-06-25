@@ -453,7 +453,7 @@ function ConnexionServer() {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
-            data: {password: password , id_role : id_role},
+            data: {password: password, id_role: id_role},
             async: true,
             success: function(data) {
                 method(data, param);
@@ -504,6 +504,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -559,17 +560,21 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                var attcompte = new AttributCompte();
-                attcompte.setId(data.id);
-                attcompte.setId_compte(data.id_compte);
-                attcompte.setId_form(data.id_form);
-                attcompte.setDefaut(data.defaut);
-                attcompte.setValeur_champ(data.valeur_champ);
+                var attcompte = null;
+                if (data != null) {
+                    attcompte = new AttributCompte();
+                    attcompte.setId(data.id);
+                    attcompte.setId_compte(data.id_compte);
+                    attcompte.setId_form(data.id_form);
+                    attcompte.setDefaut(data.defaut);
+                    attcompte.setValeur_champ(data.valeur_champ);
+                }
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(attcompte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

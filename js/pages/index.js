@@ -8,4 +8,5 @@ function onIndexLoaded() {
     $("#indexLiClientEmporter").text(strings.getString("label.index.li.aemporter"));
     $("#indexLiClientLivraison").text(strings.getString("label.index.li.livraison"));
     $("#indexLiClientsurplace").text(strings.getString("label.index.li.surplace"));
+    $("#indexLiServeurConnexion").text(strings.getString("label.index.li.accesserveur"));
 }

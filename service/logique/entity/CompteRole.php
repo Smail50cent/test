@@ -17,12 +17,9 @@ class CompteRole {
     public $libelle;
     public $level;
 
-    function __construct($id,$libelle,$level) {
-        $this->id = $id;
-        $this->libelle = $libelle;
-        $this->level= $level;
+    public function __construct() {
+        
     }
-
     public function setId($id) {
         $this->id = $id;
     }
@@ -40,7 +37,7 @@ class CompteRole {
     }
 
     public function setLevel($level) {
-        $this->level= $level;
+        $this->level = $level;
     }
 
     public function getLevel() {

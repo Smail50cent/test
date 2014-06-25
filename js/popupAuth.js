@@ -3,11 +3,12 @@
  * @author Hamza Legdani <hamza.legdani@gmail.com>
  */
 var listePersonnes = new Array();
-
-function onLoadCompte(showVisiteurs, titre, topvalue) {
+var methodToLoadAfter;
+function onLoadCompte(showVisiteurs, titre, topvalue, method) {//To DO an object
+    methodToLoadAfter = method;
     var htmlDialog = getDialogAccesCompte();
     $("body").append(htmlDialog);
-    $("head").append("<style>.ui-dialog{        top: "+topvalue+"em !important;  }</style>");
+    $("head").append("<style>.ui-dialog{        top: " + topvalue + "em !important;  }</style>");
     scripts.loadScripts("lib.dialog", function() {
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});
         var html = getAuthCompte();
@@ -39,32 +40,42 @@ function authenCompte() {
             connexion.getAttributsComptesByEmail(fromEmail, logval);
             var personne = new Personne();
             function fromEmail(data) {
-                var idcompte = data.id_compte;
-                connexion.getCompteById(verifpass, data.id_compte);
-                function verifpass(compte) {
-                    if (compte.password === cryptedpass) {
-                        connexion.getAttributCompteByIdCompte(allinfos, idcompte);
-                        function allinfos(infos) {
-                            for (var j = 0; j < infos.length; j++) {
-                                if (infos[j].id_form == 1) {
-                                    personne.setGender(infos[j].valeur_champ);
-                                } else if (infos[j].id_form == 2) {
-                                    personne.setPrenom(infos[j].valeur_champ);
-                                } else if (infos[j].id_form == 3) {
-                                    personne.setNom(infos[j].valeur_champ);
-                                } else if (infos[j].id_form == 7) {
-                                    personne.setEmail(infos[j].valeur_champ);
+                if (data != null) {
+                    var idcompte = data.id_compte;
+                    connexion.getCompteById(verifpass, data.id_compte);
+                    function verifpass(compte) {
+                        if (compte.password === cryptedpass) {
+                            connexion.getAttributCompteByIdCompte(allinfos, idcompte);
+                            function allinfos(infos) {
+                                for (var j = 0; j < infos.length; j++) {
+                                    if (infos[j].id_form == 1) {
+                                        personne.setGender(infos[j].valeur_champ);
+                                    } else if (infos[j].id_form == 2) {
+                                        personne.setPrenom(infos[j].valeur_champ);
+                                    } else if (infos[j].id_form == 3) {
+                                        personne.setNom(infos[j].valeur_champ);
+                                    } else if (infos[j].id_form == 7) {
+                                        personne.setEmail(infos[j].valeur_champ);
+                                    }
                                 }
+                                personne.setId(idcompte);
+                                listePersonnes.push(personne);
+                                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                                if(methodToLoadAfter !=null){
+                                    methodToLoadAfter();
+                                }
+                                $('#auth_popup_id').dialog("close");
+                                $("#auth_popup_id").remove();
+
                             }
-                            personne.setId(idcompte);
-                            listePersonnes.push(personne);
-                            setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                            $('#auth_popup_id').dialog("close");
+                        } else {
+                            showErrorMessage(strings.getString("label.connexion.error.mdp"));
                         }
-                    } else {
-                        alert("Incorrect Login or Password");
                     }
+                } else {
+                    showErrorMessage(strings.getString("label.connexion.error.login"));
                 }
+
             }
         });
     }
@@ -73,13 +84,12 @@ function authenCompte() {
 function InscriCompte() {
     $('#all_snbutton_id').hide();
     getHtmlFormInscription();
-
 }
+
 function getHtmlFormInscription() {
     var langselect = getLocalStorageValue("language");
     $.get("./service/generatedForm/InscriptionForm.php?lang=", {lang: langselect}, function() {
         var generform = getGeneratedInscriForm();
-
         var generformhtml = paramValue(generform, "label.password", strings.getString("label.password"));
         generformhtml = paramValue(generformhtml, "label.sexe", strings.getString("label.sexe"));
         generformhtml = paramValue(generformhtml, "label.nom", strings.getString("label.nom"));
@@ -87,7 +97,6 @@ function getHtmlFormInscription() {
         generformhtml = paramValue(generformhtml, "label.adresse", strings.getString("label.adresse"));
         generformhtml = paramValue(generformhtml, "label.email", strings.getString("label.email"));
         generformhtml = paramValue(generformhtml, "label.tel", strings.getString("label.tel"));
-
         var inscriform = getInscriFormUser();
         $('#auth_form_id').html(inscriform);
         $('#inscription_form_id').html(generformhtml);
@@ -154,7 +163,6 @@ function uploadImage() {
 }
 function AjoutVisiteur() {
     if (!TestEmptyFields("#vclient_form_id")) {
-
         scripts.loadScripts("lib.social", function() {
             var nom = $('input[id^="vclient_nom_id"]').val();
             var prenom = $('input[id^="vclient_prenom_id"]').val();
@@ -230,4 +238,25 @@ function TestEmptyFields(field) {
     }
     return empty;
 }
-
+/**
+ *  personne.setId(personne.id);
+    personne.setGender(personne.sexe);
+    personne.setNom(personne.nom);
+    personne.setPrenom(personne.prenom);
+    personne.setUrlProfileImg(personne.imgprof);
+    personne.setAdresse(personne.adresse);
+    personne.setAdresse(personne.tel);
+    personne.setEmail(personne.email);
+ * @param {type} personne
+ * @returns {undefined}
+ */
+function genericParse(personne) {
+    personne.setId(personne.id);
+    personne.setGender(personne.sexe);
+    personne.setNom(personne.nom);
+    personne.setPrenom(personne.prenom);
+    personne.setUrlProfileImg(personne.imgprof);
+    personne.setAdresse(personne.adresse);
+    personne.setAdresse(personne.tel);
+    personne.setEmail(personne.email);
+}

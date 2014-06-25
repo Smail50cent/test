@@ -46,4 +46,5 @@
     <script for="index">pages/index.js</script>
     <script for="pageConnexionServeur" priority="2">pages/pageConnexionServeur.js</script>
     <script for="pageConnexionServeur" priority="1">popupAuth.js</script>
+    <script for="interfaceVenteAcces" >pages/interfaceVenteAcces.js</script>
 </scripts>

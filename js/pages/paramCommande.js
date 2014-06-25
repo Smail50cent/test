@@ -37,7 +37,7 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            onLoadCompte(true, null,"-17");
+            onLoadCompte(true, null, "-17", null);
             var person = strings.getString("label.personne.auth");
             $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
             $('div#auth_popup_id').bind('dialogclose', function(event) {
@@ -55,7 +55,6 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
-    setLocalStorageValue("type.commande", 1);
     hideLoading();
 }
 function loadDataPersonnes(nbMaxPersonnes) {
