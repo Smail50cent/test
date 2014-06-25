@@ -5,7 +5,8 @@
         <li><a id="indexLiClientEmporter" onclick="goClientAEmporter();"></a></li>
         <li><a id="indexLiClientLivraison" onclick="goClientLivraison();"></a></li>
         <li><a id="indexLiClientReservation" onclick="goClientReservation();"></a></li>
-    </ul>
+        <li><a id="indexLiServeurConnexion" onclick="connexionDunServeur();"></a></li>
+    </ul>  
 </div>
 </body>
 </html> 

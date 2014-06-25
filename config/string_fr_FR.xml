@@ -63,4 +63,5 @@
     <string key="label.index.li.aemporter">Commande à emporter</string>
     <string key="label.index.li.livraison">Se faire livrer</string>
     <string key="label.index.li.reservation">Réserver une table</string>
+    <string key="label.connexion.serveur.titre">Connectez-vous pour accèder à la prise de commande</string>
 </strings>

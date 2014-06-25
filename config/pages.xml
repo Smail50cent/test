@@ -5,4 +5,5 @@
     <page key="choixEnvoieCuisine">./choixEnvoieCuisine.php</page>
     <page key="choixPaimentPersonnes">choixPaimentPersonnes.php</page>
     <page key="reglement">reglement.php</page>
+    <page key="pageConnexionServeur">pageConnexionServeur.php</page>
 </pages>

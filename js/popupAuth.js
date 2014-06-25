@@ -4,11 +4,16 @@
  */
 var listePersonnes = new Array();
 
-function onLoadCompte() {
+function onLoadCompte(showVisiteurs, titre, topvalue) {
+    var htmlDialog = getDialogAccesCompte();
+    $("body").append(htmlDialog);
+    $("head").append("<style>.ui-dialog{        top: "+topvalue+"em !important;  }</style>");
     scripts.loadScripts("lib.dialog", function() {
         $('#auth_popup_id').dialog({autoOpen: true, modal: true});
         var html = getAuthCompte();
-
+        if (titre != null) {
+            $('#nbr_personne_id').html(titre);
+        }
         var htmllang = paramValue(html, "pseudo", strings.getString("label.auth.pseudo"));
         htmllang = paramValue(htmllang, "mdp", strings.getString("label.password"));
         htmllang = paramValue(htmllang, "connect", strings.getString("label.auth.login"));
@@ -17,8 +22,10 @@ function onLoadCompte() {
         htmllang = paramValue(htmllang, "prenomv", strings.getString("label.prenom"));
         htmllang = paramValue(htmllang, "nomv", strings.getString("label.nom"));
         htmllang = paramValue(htmllang, "valider", strings.getString("label.valider"));
-
         $('#auth_form_id').html(htmllang);
+        if (showVisiteurs == false) {
+            $("#vclient_form_id").remove();
+        }
         socialNetworkButtonAuth();
     });
 }
@@ -28,7 +35,6 @@ function authenCompte() {
             var logval = $('input[id^="compte_login_id"]').val();
             var passval = $('input[id^="compte_pass_id"]').val();
             var cryptedpass = SHA512(passval);
-
             var connexion = getConnexion();
             connexion.getAttributsComptesByEmail(fromEmail, logval);
             var personne = new Personne();
@@ -62,7 +68,6 @@ function authenCompte() {
             }
         });
     }
-
 }
 
 function InscriCompte() {
@@ -82,8 +87,8 @@ function getHtmlFormInscription() {
         generformhtml = paramValue(generformhtml, "label.adresse", strings.getString("label.adresse"));
         generformhtml = paramValue(generformhtml, "label.email", strings.getString("label.email"));
         generformhtml = paramValue(generformhtml, "label.tel", strings.getString("label.tel"));
-        
-        var inscriform = getInscriFormUser(); 
+
+        var inscriform = getInscriFormUser();
         $('#auth_form_id').html(inscriform);
         $('#inscription_form_id').html(generformhtml);
         var buttonValider = getButtonInscriFormUser();
@@ -108,7 +113,7 @@ function ValiderInscri() {
             scripts.loadScripts("lib.crypt", function() {
                 var cryptedpass = SHA512($('#password_user_id').val());
                 if (!verifyEmail($('#email_user_id').val())) {
-                    connexion.addCompte(InsertFromLastId, cryptedpass,4);
+                    connexion.addCompte(InsertFromLastId, cryptedpass, 4);
                     function InsertFromLastId(LastId) {
                         connexion.addAttributCompte(1, $('#sexe_user_id').val(), 1, LastId);
                         connexion.addAttributCompte(2, $('#nom_user_id').val(), 1, LastId);
@@ -155,7 +160,7 @@ function AjoutVisiteur() {
             var prenom = $('input[id^="vclient_prenom_id"]').val();
             var personne = new Personne();
             var connexion = getConnexion();
-            connexion.addCompte(InsertFromLastId, "Visiteur",3);
+            connexion.addCompte(InsertFromLastId, "Visiteur", 3);
             function InsertFromLastId(LastId) {
                 connexion.addAttributCompte(2, nom, 1, LastId);
                 connexion.addAttributCompte(3, prenom, 1, LastId);

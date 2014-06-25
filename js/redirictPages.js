@@ -3,11 +3,12 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 
-function RedirictPages(surplace, aemporter, livraison, reservation) {
+function RedirictPages(surplace, aemporter, livraison, reservation, serveur) {
     this.surplace = surplace;
     this.aemporter = aemporter;
     this.livraison = livraison;
     this.reservation = reservation;
+    this.serveur = serveur;
 }
 function getTypeSequence() {
     return parseInt(getLocalStorageValue("type.commande"));
@@ -52,29 +53,37 @@ function setIdTypeCommande(id) {
 }
 function goClientSurPlace() {
     setIdTypeCommande(1);
-    redirct(new RedirictPages(("paramCommande"), null, null, null));
+    redirct(new RedirictPages(("paramCommande"), null, null, null, null));
 }
 function goClientAEmporter() {
     setIdTypeCommande(2);
-    redirct(new RedirictPages(null, ("paramCommande"), null, null));
+    redirct(new RedirictPages(null, ("paramCommande"), null, null, null));
 }
 function goClientLivraison() {
     setIdTypeCommande(3);
-    redirct(new RedirictPages(null, null, ("paramCommande"), null));
+    redirct(new RedirictPages(null, null, ("paramCommande"), null, null));
 }
 function goClientReservation() {
     setIdTypeCommande(4);
-    redirct(new RedirictPages(null, null, null, ("paramCommande")));
+    redirct(new RedirictPages(null, null, null, ("paramCommande"), null));
+}
+function connexionDunServeur() {
+    setIdTypeCommande(5);
+    redirct(new RedirictPages(null, null, null, null, ("pageConnexionServeur")));
 }
 function redirictWhereFinishParamCommande() {
-    redirct(new RedirictPages("carte"), null, null, null);
+    redirct(new RedirictPages("carte"), null, null, null, null);
 }
 function redirictWhereFinishCarte() {
-    redirct(new RedirictPages("choixEnvoieCuisine"), null, null, null);
+    redirct(new RedirictPages("choixEnvoieCuisine"), null, null, null, null);
 }
 function redirictWhereFinishChoixEnvoieCuisine() {
-    redirct(new RedirictPages("choixPaimentPersonnes"), null, null, null);
+    redirct(new RedirictPages("choixPaimentPersonnes"), null, null, null, null);
+}
+function goServeurAcces() {
+    setIdTypeCommande(5);
+    redirct(new RedirictPages(("paramCommande"), null, null, null, null));
 }
 function redirictPay() {
-    redirct(new RedirictPages("reglement"), null, null, null);
+    redirct(new RedirictPages("reglement"), null, null, null, null);
 }
