@@ -522,9 +522,8 @@ function printFavorite() {
         m2HtmlItem = paramValue(m2HtmlItem, "value", 2);
         $("#select_favori_id").append(m2HtmlItem);
         loadDataWithSelectValue(1);
-        $("#select_favori_id").change(function (){
+        $("#select_favori_id").change(function() {
             var value = $(this).val();
-            console.log("valchange",value);
             loadDataWithSelectValue(parseInt(value));
         });
     }
@@ -550,7 +549,7 @@ function getProduitsSuggerer() {
 }
 
 function printProduitFavorite(cpfs, param) {
-     $('#favorite_id').html("");
+    $('#favorite_id').html("");
     var htmlProduitItem = getContentProduitItem();
     for (var x = 0; x < cpfs.length; x++) {
         var produit = cpfs[x].produit;
