@@ -24,58 +24,58 @@
 
 /*____________________________POP UP FB ______________________________*/
 
-.auth_form_personalize {
-    color: #565656;
-}
+    .auth_form_personalize {
+        color: #565656;
+    }
 
-.ui-dialog_personalize .ui-dialog-title_personalize {
-    color:white;
-}
+    .ui-dialog_personalize .ui-dialog-title_personalize {
+        color:white;
+    }
 
     .button_authen_compte_personalize input, .button_ajout_vclient_personalize input, .button_inscri_compte_personalize input, .button_inscri_compte input{
         border: none;
         background: none;
         font-weight: 700;
         color:#565656;
-        box-shadow: none;
+        box-shadow: none;;
         cursor: pointer;
     }
 
-.auth_popup_personalize {
-    background-color: white !important;
-}
+    .auth_popup_personalize {
+        background-color: white !important;
+    }
 
-.label_login_connexion_personalize, .label_password_connexion_personalize, .label_vclient_ajout_personalize {
-    text-align:center;
-    font-family: "Trebuchet MS",Verdana,sans_serif;
-    font-size: 1em;
-}
+    .label_login_connexion_personalize, .label_password_connexion_personalize, .label_vclient_ajout_personalize {
+        text-align:center;
+        font-family: "Trebuchet MS",Verdana,sans_serif;
+        font-size: 1em;
+    }
 
 
-/*.auth_compte_personalize  .compte_login_personalize , .auth_compte_personalize .compte_pass_personalize , .auth_compte_personalize .client_name_personalize, .vclient_prenom_structure, .vclient_nom_structure  {
-    box-shadow: 1px 1px 0px 0px grey inset;
-}*/
+    /*.auth_compte_personalize  .compte_login_personalize , .auth_compte_personalize .compte_pass_personalize , .auth_compte_personalize .client_name_personalize, .vclient_prenom_structure, .vclient_nom_structure  {
+        box-shadow: 1px 1px 0px 0px grey inset;
+    }*/
 
-.ui-dialog-titlebar {
-    background: -webkit-linear-gradient(#066819 16px, #bed536 150px);
-    background: -moz-linear-gradient (#066819 16px, #bed536 150px);
-    background: -ms-linear-gradient (#066819 16px, #bed536 150px);
-    background: -o-linear-gradient (#066819 16px, #bed536 150px);
-    background: linear-gradient(#066819 16px, #bed536 150px); 
-}
+    .ui-dialog-titlebar {
+        background: -webkit-linear-gradient(#066819 16px, #bed536 150px);
+        background: -moz-linear-gradient (#066819 16px, #bed536 150px);
+        background: -ms-linear-gradient (#066819 16px, #bed536 150px);
+        background: -o-linear-gradient (#066819 16px, #bed536 150px);
+        background: linear-gradient(#066819 16px, #bed536 150px); 
+    }
 
-.facebook_auth_compte_personalize button {
-    border: none;
-    border-radius:8px;
-}
+    .facebook_auth_compte_personalize button {
+        border: none;
+        border-radius:8px;
+    }
 
-.button_facebook_personalize {
-    background-color: rgb(160, 160, 160);
-    border-radius: 10px;
-}
-
-.ui-widget_personalize {
-}
+    .button_facebook_personalize {
+        background-color: rgb(160, 160, 160);
+        border-radius: 10px;
+    }
+    
+    .ui-widget_personalize {
+    }
 
 
 /*_____________________________MESSAGE D'ERREUR___________________________*/
@@ -253,34 +253,34 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         border-top: 66px solid #C90912;
         border-left: 0px solid transparent;
         border-right: 43px solid transparent;
-    }
+}
 
     .header_left_logo_personalize { 
         background-repeat: no-repeat;
         background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAAnCAYAAABHeLXLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUREMURFNkJBRTkzMTFFMzlGNkU5NTk2NTE3NDUxM0QiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUREMURFNkNBRTkzMTFFMzlGNkU5NTk2NTE3NDUxM0QiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBREQxREU2OUFFOTMxMUUzOUY2RTk1OTY1MTc0NTEzRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBREQxREU2QUFFOTMxMUUzOUY2RTk1OTY1MTc0NTEzRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkzref0AAAQ4SURBVHja7Foxb9UwEH6uGgmFLSthYEKpxIZU8xPCb0hnhFjIQvkBLO7AjyCIESaYw4AEAysVA4+BDix0QWVhCI44S8f1fLb78h7kiZNOTZ/ti/P57nx3thqGYfGXKLd8yfLpYia0s+H3FZYby+MK3bF8aHkJwP37NGrWBjizbIbf1MH/4+8F/NZsaB4r8UU0S1muLLegFQOw9vQvLX+0/MDykeUDyz9JnxtzUKzdxP4jSC/h+Z7lm2BCIyAnnv4f4Pmz5Yek/Tb8/bpNZqjAVJzJqIgx1fAnlYxpOqrmYIaxHU2ib6FAtYLMPhL8WYClEz8qJ0AtmXFa0LgpNpN8HfJiOjrSkebaE7A0A+YS2uqJgSqR7GpqeaHODfromNVqCVC9AKZZg6ksExc3SV6oM9aSUN9iOE8VAapDsZZaI1hLFMtNJi/UeUgAqxe0ahNAORPXEwF1Tl4KWHnEJsBpVYaAauay811kNzQRPkAR28ZahR2knitIsenOC/T8zHLG9Nm3fI38ZiAd+mL5jeXLlt8uZk4qUKIZ88AnUCkY6SlUC36g9k8MWCO9tnzX8nFkvrkPKVNJgHVtjt6j3HJsuwJjRnoHeaqv4uHoO8hwZaIFlIpkeZGxk2Eico18ETXB1BiH+rzME75Q30nbCmbuGrmCHs25ZsaK8lIDtNYDkJTWpKRTbrf0xTo0NuuEmC4n7RoBSKmLkLdSPathXpoJuaKOjM9KIcfMhbbCkyXQeC9j0rEsIG8lsLgdsI0wMw7MzqM5SojIaVstAKUDJl8F5K0Mlk7QKty/SPBVtWAStE15gGoDi2wC8hSe01RapSPBLYg5+DQgF0xCqpN1no/mQHZmLbmBGs9rCq3qIsbUzEcboYzjM82cpFWtMK8i4BtrpkrSMkm/uihYVBtiE9aemFkZWE2fUx+Ed6eYX4/CCp+8ltbafGZWEM5IMpxSDi4ZDfGtZiGYtxbaqoD/bBmtkzaQinPy+IPMkEaxgachZlF5VpPTWuUBUXLqTaDE3TDgU3mdbzfk/EkBLzGBALQKVBEq5gM6Zot2WYJh2tzke2ahuDYpFsMLIMlTPrCkepWO1DIHXEbSDGd+yuN3CnQAmxOwKmjvmd2xFNqcy6iZeZaeeVB53hKNQR+cI4QbJt9zGtdFALj0hBQ9kbtE7zWMjNxTXMQn2y0Z47RZSpUkeV6w3CrQiRr4PRd2Ro3GOg6ZZ0U+SHnyuYZM3o3rPYcg+HpAGdjpQvJYDpVo5koZXBlwpaNbU9TTdhbbSY8QUEdTFR63UbNKqNC6+xXXmYso/8FiKrdXPRdWtt4Mc1Ia5ug+8VMnU05gZ0amdWb5G1xj4mi8H/YYng/WcUCyOyOw8GEDpdryK3jeizwk2VrNwuZ0Sk5sDAB1BEdux+uaxJzA2oOjuNEcO7ii+dxyDyAdoiO6tdAvAQYAABxKrYEM2nYAAAAASUVORK5CYII=);
-    }
+}
 
 
     .header_left_logo p {    
-        /*#display:none afin de retirer "pizzeria" , mais devant être utilisable pour un quelconque texte sous le logo*/
-    }
+      /*#display:none afin de retirer "pizzeria" , mais devant être utilisable pour un quelconque texte sous le logo*/
+}
 
     .content_personalize  {
-
-    }
+	
+}
 
     .choose_lang_personalize {
-    }
+}
 
     .choose_lang_personalize p {
-    }
+}
 
     .content_list_categorie_personalize ul  {
         list-style-type:none; 
         padding : 0 0.4em 0 0;
         margin: 0em auto 7em auto;
         /*margin-right: -1em;*/
-    }
+}
 
     .btn_choice_personalize li, .choix_mode_calcul_personalize  {
         font-family:  "Trebuchet MS", Verdana, Sans serif;
@@ -295,7 +295,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         box-shadow: 0 2px 4px #000000;
         line-height: 128%;
         /* text-shadow: 0 1px 1px #000000;*/
-    }
+}
 
     .btn_choice_personalize>li:first-child {
         background-color: #C90912;
@@ -310,10 +310,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .btn_choice_personalize, .choix_mode_calcul_personalize  {
-    }
+}
 
     .btn_choice_personalize li p, .choix_mode_calcul_personalize p {
-    }
+}
 
     .btn_choice_personalize li a:link{
         color:white;
@@ -370,7 +370,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         background:-o-linear-gradient(top, #E9F9FA 5%, #BDE9F7 100%);
         background:-ms-linear-gradient(top, #E9F9FA 5%, #BDE9F7 100%);
     }
-
+    
     .auth_compte_personalize, .all_snbutton {
         background-color: #a0a0a0;
         border-radius: 5px;
@@ -470,41 +470,38 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
 
-    /*-------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------*/
 
-    /*                                                   FOOTER                                                       */
+        /*                                                   FOOTER                                                       */
 
-    /*-------------------------------------------------------------------------------------------*/
+        /*-------------------------------------------------------------------------------------------*/
 
-    .footer_personalize {
-        background-color: #C90912;
-        box-sizing: border-box;
-        border-top:1px solid white;
-        box-shadow: 0px -3px 19px #000; 
-    } 
+        .footer_personalize {
+            background-color: #C90912;
+            box-sizing: border-box;
+            border-top:1px solid white;
+            box-shadow: 0px -3px 19px #000; 
+        } 
 
-    .footer_adresse_personalize {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-size: 0.7em;
-        font-style: italic;
-        font-weight: bold;
-    }
+        .footer_adresse_personalize {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-size: 0.7em;
+            font-style: italic;
+            font-weight: bold;
+        }
 
-    .footer_left_personalize {
-        background-image: linear-gradient(#BED536, #279B3E);
-        border-bottom: 1px solid #FFFFFF;
-    }
+        .footer_left_personalize {
+            background-image: linear-gradient(#BED536, #279B3E);
+            border-bottom: 1px solid #FFFFFF;
+        }
 
-    .footer_left_personalize {
-        border-bottom: 57px solid rgba(0, 0, 0, 0);
-        border-right: 46px solid #C90912;
-        border-top: 0 solid rgba(0, 0, 0, 0);
-    }
-    /*#content_list_categorie_id li :active {
-            color: #473117;
-            background-color: #efdbc2;
-        }*/
+        .footer_left_personalize {
+            border-bottom: 57px solid rgba(0, 0, 0, 0);
+            border-right: 46px solid #C90912;
+            border-top: 0 solid rgba(0, 0, 0, 0);
+        }
+
         /*-----------------------------------------------NAVIGATION-------------------------------------------*/
        
         .content_list_categorie_personalize     {
@@ -514,30 +511,23 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             box-shadow:0px 3px 5px #000000;
         }
 
-    .content_list_categorie_personalize     {
-        border-top: 1px solid #efdbc2;
-        border-bottom: 1px solid #efdbc2;
-        background-color: #473117;
-        box-shadow:3px 3px 5px #000000;
-        margin-top: 0;
-    }
+        .content_personalize .sous_categorie_cat_personalize {
+            background-color: #5A442A;
+            opacity:0.9;
+        }
 
-    .content_personalize .sous_categorie_cat_personalize {
-        background-color: #5A442A;
-        opacity:0.9;
-    }
+        .content_personalize .sous_categorie_cat_personalize li{     
+            border-left: none;
+            text-align: left;
+            border-bottom: 1px solid white;
+        }
 
-    .content_personalize .sous_categorie_cat_personalize li{     
-        border-left: none;
-        text-align: left;
-        border-bottom: 1px solid white;
-    }
+        .content_personalize .sous_categorie_cat_personalize li:last-child {
+            border-bottom: none;
+        }
 
-    .content_personalize .sous_categorie_cat_personalize li:last-child {
-        border-bottom: none;
-    }
-
-    .content_personalize  .sous_categorie_cat_personalize li a{
+        .content_personalize  .sous_categorie_cat_personalize li a{
+        }
 
         .content_list_categorie_personalize li {
             text-align:center;  
@@ -549,20 +539,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
              transition: all .5s ease; 
         }
 
-    .content_list_categorie_personalize li {
-        text-align:center;  
-        cursor: pointer;
-    }
-
-    .content_list_categorie_personalize li:link {
-        color: #473117;
-        background-color: #efdbc2;
-    }
-
-    .content_list_categorie_personalize li :hover {
-        color: #473117;
-        background-color: #efdbc2;
-    }
+           /*#content_list_categorie_id li :active {
+            color: #473117;
+            background-color: #efdbc2;
+        }*/
 
         .content_list_categorie_personalize li a {
             font-family:'Lobster', cursive, Trebuchet MS, Verdana, Sans serif;
@@ -572,369 +552,354 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 
 
-    .content_list_categorie_personalize li a {
-        font-family:'Lobster', cursive, Trebuchet MS, Verdana, Sans serif;
-        color:white;
-        text-decoration: none;
-    }
+        .content_list_categorie_personalize li+li{
+            border-left:1px solid #efdbc2;
+        }
 
-    .content_list_categorie_personalize li+li{
-        border-left:1px solid #efdbc2;
-    }
+        /*-----------------------------------------------PAGE A LA CARTE-----------------------------------------------------*/
+        .scrooll{
 
-    /*-----------------------------------------------PAGE A LA CARTE-----------------------------------------------------*/
-    .scrooll{
+        }
 
-    }
+        .content_globlal_zone_personalize, .recapitulatif_liste_personalize {
 
-    .content_globlal_zone_personalize, .recapitulatif_liste_personalize {
+        }
 
-    }
+        .content_titre_categorie_center_personalize {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-size: 1.4em;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            text-shadow: 0px 2px 3px #000;
+        }
 
-    .content_titre_categorie_center_personalize {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-size: 1.4em;
-        font-style: italic;
-        font-weight: bold;
-        text-align: center;
-        text-shadow: 0px 2px 3px #000;
-    }
+        .selectCuisson{
+        }
 
-    .selectCuisson{
-    }
+        .content_produit_description_personalize span{
+        }
 
-    .content_produit_description_personalize span{
-    }
+        .content_globlal_zone_personalize .content_globlal_zone_personalize li,.content_globlal_zone_personalize .content_produit_titre_personalize, .choose_menu_item_titre_personalize, .menu_content_titre_personalize, .content_produit_personalize p, .info_prix_content_couverts_content_personalize, .info_prix_content_couverts_label_personalize, .info_prix_content_table_label_personalize, .info_prix_content_table_content_personalize, .btn_ajout_personalize {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-size:0.8em;
+            font-style: italic;
+            font-weight: bold;
+            text-align: left;
+        }
 
-    .content_globlal_zone_personalize .content_globlal_zone_personalize li,.content_globlal_zone_personalize .content_produit_titre_personalize, .choose_menu_item_titre_personalize, .menu_content_titre_personalize, .content_produit_personalize p, .info_prix_content_couverts_content_personalize, .info_prix_content_couverts_label_personalize, .info_prix_content_table_label_personalize, .info_prix_content_table_content_personalize, .btn_ajout_personalize {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-size:0.8em;
-        font-style: italic;
-        font-weight: bold;
-        text-align: left;
-    }
+        .recapitulatif_liste_choice_personnes_personalize  {
+            text-align: center;
+        }
 
-    .recapitulatif_liste_choice_personnes_personalize  {
-        text-align: center;
-    }
+        .btn_ajout_personalize {
+            font-style: normal;
+            font-size: 0.75em;
+        }
 
-    .btn_ajout_personalize {
-        font-style: normal;
-        font-size: 0.75em;
-    }
+        .content_produit_description_personalize .btn_ajout_personalize {
+        }
 
-    .content_produit_description_personalize .btn_ajout_personalize {
-    }
+        .menu_item_personalize {
+        }
 
-    .menu_item_personalize {
-    }
+        .content_produit_description_personalize {
+            line-height: 25px;
+            color: white;
+        }
 
-    .content_produit_description_personalize {
-        line-height: 25px;
-        color: white;
-    }
+        .content_produit_description_personalize li div {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-size:0.8em;
+            text-align: center;
+        }
 
-    .content_produit_description_personalize li div {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-size:0.8em;
-        text-align: center;
-    }
+        .content_produit_description_personalize li a {
+            text-align: center;
+        }
 
-    .content_produit_description_personalize li a {
-        text-align: center;
-    }
+        .content_produit_description_personalize li:first-child {
+            border-top: 1px dotted white;
+        }
 
-    .content_produit_description_personalize li:first-child {
-        border-top: 1px dotted white;
-    }
+        .content_globlal_zone_personalize>li:last-child {
 
-    .content_globlal_zone_personalize>li:last-child {
+        }
 
-    }
+        .recapitulatif_liste_personalize .content_produit_description_personalize li:first-child {
 
-    .recapitulatif_liste_personalize .content_produit_description_personalize li:first-child {
+        }
 
-    }
+        .content_produit_titre_personalize {
 
-    .content_produit_titre_personalize {
+        }
 
-    }
+        .content_produit_description_personalize p {   
+            font-size: 0.6em;
+            font-weight: 600;
+        }
 
-    .content_produit_description_personalize p {   
-        font-size: 0.6em;
-        font-weight: 600;
-    }
+        .content_produit_personalize {
 
-    .content_produit_personalize {
+        }
 
-    }
+        .choose_menu_item_produits_personalize p, .content_globlal_zone_personalize, .content_produit_titre_personalize, .content_produit_zone_personalize p{
+            /*font-size: 0.8em; __________________TEST 03062014*/
+            text-align:left;
+        }
 
-    .choose_menu_item_produits_personalize p, .content_globlal_zone_personalize, .content_produit_titre_personalize, .content_produit_zone_personalize p{
-        /*font-size: 0.8em; __________________TEST 03062014*/
-        text-align:left;
-    }
+        .content_produit_description_personalize {
 
-    .content_produit_description_personalize {
+        }
 
-    }
+        .content_produit_description_personalize li {
 
-    .content_produit_description_personalize li {
+        }
 
-    }
+        .choose_menu_item_produits_personalize p{
 
-    .choose_menu_item_produits_personalize p{
+        }
 
-    }
+        .content_produit_zone_personalize, .menu_item_personalize {
+            background-color: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 3px 5px #000000;
+            border-radius: 5px;
+        }
 
-    .content_produit_zone_personalize, .menu_item_personalize {
-        background-color: rgba(0, 0, 0, 0.6);
-        box-shadow: 0 3px 5px #000000;
-        border-radius: 5px;
-    }
+        .menu_item_personalize:nth-child(even) {
 
-    .menu_item_personalize:nth-child(even) {
+        }
 
-    }
+        .btn_more__left_personalize {
+                     /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
+        }
 
-    .btn_more__left_personalize {
-        /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
-    }
+        .content_produit_zone_right_personalize {
+            -khtml-user-select: all;
+            -webkit-user-select: none;
+            -moz-user-select: -moz-all;
+            -ms-user-select: all;
+            user-select: all;
+        }
 
-    .content_produit_zone_right_personalize {
-        -khtml-user-select: all;
-        -webkit-user-select: none;
-        -moz-user-select: -moz-all;
-        -ms-user-select: all;
-        user-select: all;
-    }
+        p.content_produit_zone_right_prix, .choose_menu_item_prix, .menu_content_prix  {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-style: italic;
+            font-weight: bold;
+        }
 
-    p.content_produit_zone_right_prix, .choose_menu_item_prix, .menu_content_prix  {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-style: italic;
-        font-weight: bold;
-    }
+        p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
 
-    p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
+        }
 
-    }
+        .recapitulatif_commande_personalize li {
+            list-style-type: none;
+        }
 
-    .recapitulatif_commande_personalize li {
-        list-style-type: none;
-    }
-
-    .menu_content_prix_personalize  {
-
-    }
-
-
-    /*-----------------------------------------------------------RECAPITULATIF DE COMMANDE---------------------------------------------------------------------*/
-
-    .recapitulatif_commande_personalize  p.content_produit_zone_right_prix_personalize {
-        text-align:right;
-    }
-
-    /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-
-    .recapitulatif_commande_personalize li:first-child {
-
-    }
-
-    /*.content_produit_zone_left, .content_produit_zone_right{
-        border-style: none;
-        display:inline-block;    
-    }*/
-
-    .content_produit_zone_left_personalize{
-        border-style: none;
-        background-repeat: no-repeat;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTBBQTY2NUFCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTBBQTY2NUJCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MEFBNjY1OEIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MEFBNjY1OUIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkw34ZoAAAD+SURBVHja3NNJDsIwEARA0+LClQ8HvserCDcIWbzM0h1LlrzMdFSKfHnd7lMp5VnEB+b5mOd0Bkg5AwZfa2kMFntZDFbOJDHYOJfDYOdOCoODexkMKmokMKiso8egoZYag8Z6Wgw6eigx6Oyjw2CglwqDwX4aDAwyKDAwyknHwDArFQPjvDQMHDJTMHDKDcfAMTsUA+f8MAwCvhGCQdCfd8cg8D26YiIhrphoiBsmA+KCyYKYYzIhpphsiBmGAWKCYYEMY5ggQxg2SDeGEdKFYYU0Y5ghTRh2SDVGAVKFUYEcYpQguxg1yCZGEbKKUYX8YZQhP5hr0R8fTHkLMAAFFzKbOkEH9QAAAABJRU5ErkJggg==);        
-    }
-
-    .content_produit_zone_right_personalize{
-        border-style: none;
-        background-repeat: no-repeat;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDk5NEZFNjZCMzMyMTFFM0EyN0NGNjlBMDE3ODRGNTMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDk5NEZFNjdCMzMyMTFFM0EyN0NGNjlBMDE3ODRGNTMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0OTk0RkU2NEIzMzIxMUUzQTI3Q0Y2OUEwMTc4NEY1MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0OTk0RkU2NUIzMzIxMUUzQTI3Q0Y2OUEwMTc4NEY1MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsoLsL0AAAD/SURBVHja3NNZDsIwDARQM+IsHIVrAQfgztA/li5J6mWmkSo1jj3RU9XT9Xm5m9nNxBfezwR5HAFiR8Dg410ag5+9LAYzNUkMFupyGKycSWGwcS6DQUOPBAaNffQYdPRSY9DZT4vBwAwlBoNzdBjsmKXCYOc8DQYOGRQYOOWUY+CYVYqBc14ZBgGZJRgE5aZjEJidikFwfhoGCXekYJD05cMxSPwfQzGZkFBMNiQMUwEJwVRB3DGVEFdMNcQNwwBxwbBAdmOYILswbJBhDCNkCMMK6cYwQ7ow7JBmjAKkCaMC2cQoQVYxapBFjCJkFqMK+cMoQ74wZ9NfE8ZeAgwASq8zDnvP+NEAAAAASUVORK5CYII=);
-    }
-
-    .content_globlal_zone_personalize .content_produit_btn_left_personalize, .content_globlal_zone_personalize .content_produit_btn_right_personalize, .recapitulatif_liste_personalize .content_produit_btn_left_personalize,  .recapitulatif_liste_personalize .content_produit_zone_right_personalize {
-        font-family:"Trebuchet MS",Verdana,sans_serif;
-        background:transparent;
-        border-style:none;
-        color:white;
-        font-weight:bold;
-        font-style:italic;
-    }
+        .menu_content_prix_personalize  {
+
+        }
+
+
+        /*-----------------------------------------------------------RECAPITULATIF DE COMMANDE---------------------------------------------------------------------*/
+
+        .recapitulatif_commande_personalize  p.content_produit_zone_right_prix_personalize {
+            text-align:right;
+        }
+
+        /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+        .recapitulatif_commande_personalize li:first-child {
+
+        }
+
+        /*.content_produit_zone_left, .content_produit_zone_right{
+            border-style: none;
+            display:inline-block;    
+        }*/
+
+        .content_produit_zone_left_personalize{
+            border-style: none;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NTBBQTY2NUFCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NTBBQTY2NUJCMzMyMTFFM0EzRDNBQTE2MTlCMjYzRDIiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1MEFBNjY1OEIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo1MEFBNjY1OUIzMzIxMUUzQTNEM0FBMTYxOUIyNjNEMiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkw34ZoAAAD+SURBVHja3NNJDsIwEARA0+LClQ8HvserCDcIWbzM0h1LlrzMdFSKfHnd7lMp5VnEB+b5mOd0Bkg5AwZfa2kMFntZDFbOJDHYOJfDYOdOCoODexkMKmokMKiso8egoZYag8Z6Wgw6eigx6Oyjw2CglwqDwX4aDAwyKDAwyknHwDArFQPjvDQMHDJTMHDKDcfAMTsUA+f8MAwCvhGCQdCfd8cg8D26YiIhrphoiBsmA+KCyYKYYzIhpphsiBmGAWKCYYEMY5ggQxg2SDeGEdKFYYU0Y5ghTRh2SDVGAVKFUYEcYpQguxg1yCZGEbKKUYX8YZQhP5hr0R8fTHkLMAAFFzKbOkEH9QAAAABJRU5ErkJggg==);        
+        }
+
+        .content_produit_zone_right_personalize{
+            border-style: none;
+            background-repeat: no-repeat;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDk5NEZFNjZCMzMyMTFFM0EyN0NGNjlBMDE3ODRGNTMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDk5NEZFNjdCMzMyMTFFM0EyN0NGNjlBMDE3ODRGNTMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0OTk0RkU2NEIzMzIxMUUzQTI3Q0Y2OUEwMTc4NEY1MyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0OTk0RkU2NUIzMzIxMUUzQTI3Q0Y2OUEwMTc4NEY1MyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsoLsL0AAAD/SURBVHja3NNZDsIwDARQM+IsHIVrAQfgztA/li5J6mWmkSo1jj3RU9XT9Xm5m9nNxBfezwR5HAFiR8Dg410ag5+9LAYzNUkMFupyGKycSWGwcS6DQUOPBAaNffQYdPRSY9DZT4vBwAwlBoNzdBjsmKXCYOc8DQYOGRQYOOWUY+CYVYqBc14ZBgGZJRgE5aZjEJidikFwfhoGCXekYJD05cMxSPwfQzGZkFBMNiQMUwEJwVRB3DGVEFdMNcQNwwBxwbBAdmOYILswbJBhDCNkCMMK6cYwQ7ow7JBmjAKkCaMC2cQoQVYxapBFjCJkFqMK+cMoQ74wZ9NfE8ZeAgwASq8zDnvP+NEAAAAASUVORK5CYII=);
+        }
+
+        .content_globlal_zone_personalize .content_produit_btn_left_personalize, .content_globlal_zone_personalize .content_produit_btn_right_personalize, .recapitulatif_liste_personalize .content_produit_btn_left_personalize,  .recapitulatif_liste_personalize .content_produit_zone_right_personalize {
+            font-family:"Trebuchet MS",Verdana,sans_serif;
+            background:transparent;
+            border-style:none;
+            color:white;
+            font-weight:bold;
+            font-style:italic;
+        }
 
-    .recapitulatif_liste .content_produit_btn_left_personalize, .recapitulatif_liste .content_produit_btn_right_personalize{
-        background: transparent;
-        border-style: none;
-        color:white;
-        font-weight: bold;
-        font-style:italic;
-    }
-
-    .content_produit_btn_left_personalize {
-        cursor: pointer;
-
-    }
-
-
-    .content_produit_btn_right_personalize {
-        cursor: pointer;
-    }
-
-    .btn_recapitulatif_commande_personalize, .btn_valider_commande_personalize {
-        background: linear-gradient(#74A81F, #17722D) repeat scroll 0 0 rgba(0, 0, 0, 0);
-        border: 2px solid #FFFFFF;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px #343434;
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-weight: 900;
-        text-align: center;
-        background:#74a81f;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
-        background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
-        background: -webkit-linear-gradient(#74a81f, #17722d);
-        background: -moz-linear-gradient(#74a81f, #17722d);
-        background: -o-linear-gradient(#74a81f, #17722d); 
-        background: -ms-linear-gradient(#74a81f, #17722d); 
-        background: linear-gradient(#74a81f, #17722d);
-    }
-
-    .btn_recapitulatif_commande_recapitulatif_personalize{
-
-    }
-
-    .btn_valider_commande_recap_personalize{
-
-    }
-
-    .btn_ajout_ingredient_personalize {
-        background: linear-gradient(#74A81F, #17722D) repeat scroll 0 0 rgba(0, 0, 0, 0);
-        border: 2px solid #FFFFFF;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px #343434;
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-weight: 100;
-        font-size: 0.8em;
-        text-align: center;
-        background:#74a81f;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
-        background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
-        background: -webkit-linear-gradient(#74a81f, #17722d);
-        background: -moz-linear-gradient(#74a81f, #17722d);
-        background: -o-linear-gradient(#74a81f, #17722d); 
-        background: -ms-linear-gradient(#74a81f, #17722d); 
-        background: linear-gradient(#74a81f, #17722d);
-    }
-
-    /*-----------------------------------------------------------------PAGE MENU----------------------------------------------------------------------*/
-
-    .menu_content_personalize {
-        /*background-color:#C90912;*/
-    }
-
-    .menu_content_titre_personalize {
-        border-radius:3px  ;
-        color:black;
-        font-size: 1.15em;
-        text-align: justify;
-    } 
-
-    .menu_content_prix_personalize {
-        font-size: 1.3em;
-    }
-
-    .choose_menu_item_produits_personalize {
-    }
-
-    .choose_menu_item_produits_personalize li:last-child {
-    }
-
-    .menu_or_card_personalize, .recapitulatif_commande_personalize {
-    }
-
-    .recapitulatif_commande_personalize {
-    }
-
-    li.choose_menu_item_personalize{
-
-    }
-
-    li.choose_menu_item_personalize input{
-        background: transparent;
-        border-style: none;
-        color:white;
-        background-color:#468D26;
-        border-radius: 5px; 
-        border: 2px solid white;
-    }
-
-    .menus .menu_or_card .menu_content_titre_personalize {
-        font-size: 1.3em;
-        color: #efdbc2;
-    }
-
-    .menus .menu_or_card .choose_menu_item_close_personalize{               /*___________________________A VERIFIER___________________________*/
-        background: transparent;
-        background-color:#C90912;
-    }
-
-    .choose_menu_valider_menu_personalize{
-        background: transparent;
-        border:white 1px solid;;
-        border-radius: 10px;
-        box-shadow: 0 3px 10px #343434;
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-weight: 900;
-        background:#74a81f;
-        text-align: center;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
-        background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
-        background: -webkit-linear-gradient(#74a81f, #17722d);
-        background: -moz-linear-gradient(#74a81f, #17722d);
-        background: -o-linear-gradient(#74a81f, #17722d); 
-        background: -ms-linear-gradient(#74a81f, #17722d); 
-        background: linear-gradient(#74a81f, #17722d);
-    }
-
-    /*#choose_menu_valider_menu {
-        top: 100%;
-        left: 0px;
-        right: 0px;
-        margin: 0 auto;
-        margin-top: -10%;
-    }*/
-
-    .menus_personalize {
-    }
-
-    /*#categorieMenu.slide{
-        padding-top: 18px;
-        /*margin-top: -2p
-    }*/
-
-
-    /*#categorieMenu.active {
-        padding-top: 0;
-        margin-top: 1em;
-    }*/
-
-
-
-    .choose_menu_item_produits_personalize p {
-        color: #FFFFFF;
-        font-family: "Trebuchet MS",Verdana,sans_serif;
-        font-style: italic;
-        font-weight: bold;
-    }
+        .recapitulatif_liste .content_produit_btn_left_personalize, .recapitulatif_liste .content_produit_btn_right_personalize{
+            background: transparent;
+            border-style: none;
+            color:white;
+            font-weight: bold;
+            font-style:italic;
+        }
+
+        .content_produit_btn_left_personalize {
+            cursor: pointer;
+
+        }
+
+
+        .content_produit_btn_right_personalize {
+            cursor: pointer;
+        }
+
+        .btn_recapitulatif_commande_personalize, .btn_valider_commande_personalize {
+            background: linear-gradient(#74A81F, #17722D) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            border: 2px solid #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #343434;
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-weight: 900;
+            text-align: center;
+            background:#74a81f;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
+            background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
+            background: -webkit-linear-gradient(#74a81f, #17722d);
+            background: -moz-linear-gradient(#74a81f, #17722d);
+            background: -o-linear-gradient(#74a81f, #17722d); 
+            background: -ms-linear-gradient(#74a81f, #17722d); 
+            background: linear-gradient(#74a81f, #17722d);
+        }
+
+        .btn_recapitulatif_commande_recapitulatif_personalize{
+
+        }
+
+        .btn_valider_commande_recap_personalize{
+
+        }
+
+        .btn_ajout_ingredient_personalize {
+            background: linear-gradient(#74A81F, #17722D) repeat scroll 0 0 rgba(0, 0, 0, 0);
+            border: 2px solid #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #343434;
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-weight: 100;
+            font-size: 0.8em;
+            text-align: center;
+            background:#74a81f;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
+            background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
+            background: -webkit-linear-gradient(#74a81f, #17722d);
+            background: -moz-linear-gradient(#74a81f, #17722d);
+            background: -o-linear-gradient(#74a81f, #17722d); 
+            background: -ms-linear-gradient(#74a81f, #17722d); 
+            background: linear-gradient(#74a81f, #17722d);
+        }
+
+        /*-----------------------------------------------------------------PAGE MENU----------------------------------------------------------------------*/
+
+        .menu_content_personalize {
+            /*background-color:#C90912;*/
+        }
+
+        .menu_content_titre_personalize {
+            border-radius:3px  ;
+            color:black;
+            font-size: 1.15em;
+            text-align: justify;
+        } 
+
+        .menu_content_prix_personalize {
+            font-size: 1.3em;
+        }
+
+        .choose_menu_item_produits_personalize {
+        }
+
+        .choose_menu_item_produits_personalize li:last-child {
+        }
+
+        .menu_or_card_personalize, .recapitulatif_commande_personalize {
+        }
+
+        .recapitulatif_commande_personalize {
+        }
+
+        li.choose_menu_item_personalize{
+
+        }
+
+        li.choose_menu_item_personalize input{
+            background: transparent;
+            border-style: none;
+            color:white;
+            background-color:#468D26;
+            border-radius: 5px; 
+            border: 2px solid white;
+        }
+
+        .menus .menu_or_card .menu_content_titre_personalize {
+            font-size: 1.3em;
+            color: #efdbc2;
+        }
+
+        .menus .menu_or_card .choose_menu_item_close_personalize{               /*___________________________A VERIFIER___________________________*/
+            background: transparent;
+            background-color:#C90912;
+        }
+
+        .choose_menu_valider_menu_personalize{
+            background: transparent;
+            border:white 1px solid;;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px #343434;
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-weight: 900;
+            background:#74a81f;
+            text-align: center;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
+            background: -webkit-gradient(linear, left top, left bottom, from(#74a81f), to(#17722d));
+            background: -webkit-linear-gradient(#74a81f, #17722d);
+            background: -moz-linear-gradient(#74a81f, #17722d);
+            background: -o-linear-gradient(#74a81f, #17722d); 
+            background: -ms-linear-gradient(#74a81f, #17722d); 
+            background: linear-gradient(#74a81f, #17722d);
+        }
+
+        /*#choose_menu_valider_menu {
+            top: 100%;
+            left: 0px;
+            right: 0px;
+            margin: 0 auto;
+            margin-top: -10%;
+        }*/
+
+        .menus_personalize {
+        }
+
+        /*#categorieMenu.slide{
+            padding-top: 18px;
+            /*margin-top: -2p
+        }*/
+
+
+        /*#categorieMenu.active {
+            padding-top: 0;
+            margin-top: 1em;
+        }*/
 
         .content_list_categorie_personalize li:link {
             color: #473117;
@@ -959,34 +924,48 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
              transition: background-color .5s ease;
         }
 
-    .img_slide_personalize {
+        .choose_menu_item_produits_personalize p {
+            color: #FFFFFF;
+            font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-style: italic;
+            font-weight: bold;
+        }
 
-    }
-    .categorieMenu_personalize {
+        .menu_content_personalize p:not([class="choose_menu_item_titre"]) {
+            font-size: 1.3em;  
+            color: #efdbc2;
+        }
 
-    }
+        /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/        
 
-    .categorieMenu_personalize .menu_content_prix_personalize {
-        font-size: 1.15em;
-    }
+        .img_slide_personalize {
 
+        }
+        .categorieMenu_personalize {
 
+        }
 
-    /* @media  all and (max-width: 420px) {*/
+        .categorieMenu_personalize .menu_content_prix_personalize {
+            font-size: 1.15em;
+        }
+    
+    
 
-    .content_list_categorie_personalize .slide_button:nth-child(3) {
+   /* @media  all and (max-width: 420px) {*/
 
-    }
-    .content_list_categorie_personalize .slide_button:nth-child(4) {
+        .content_list_categorie_personalize .slide_button:nth-child(3) {
+   
+        }
+        .content_list_categorie_personalize .slide_button:nth-child(4) {
 
-    }
-    .content_list_categorie_personalize .slide_button:nth-child(5) {
+        }
+        .content_list_categorie_personalize .slide_button:nth-child(5) {
 
-    }
+        }
 
-    .content_list_categorie_personalize li a{
-        font-size:0.9em;    
-    }
+        .content_list_categorie_personalize li a{
+            font-size:0.9em;    
+        }
 
     .ajouter_ingredient_box_personalize ul{
 
@@ -1010,6 +989,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .recapitulatif_liste_personalize{
 
     }
+    
 
     .content_titre_personalize {
         font-family: cursive, Trebuchet MS, Verdana, Sans serif;
@@ -1051,9 +1031,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 @media all and (min-width: 768px) and (max-width: 979px) {
 
-
+   
     .content_globlal_zone_personalize{
-
+ 
     }
     .choose_menu_item_personalize{
 
@@ -1095,16 +1075,16 @@ body {
     background-size: cover;
 }
 
-    .header_structure {
+.header_structure {
 
-    }
+}
 
-    .header_left_personalize {
-        border-top: 90px solid #C90912;
-        border-left: 0px solid transparent;
-        width: 150px;
-        border-right: 77px solid transparent;
-    }
+.header_left_personalize {
+    border-top: 90px solid #C90912;
+    border-left: 0px solid transparent;
+    width: 150px;
+    border-right: 77px solid transparent;
+}
 
 /*________________________NAVIGATION________________________*/
 
@@ -1116,10 +1096,10 @@ body {
 
 /*________________________MESSAGE D'ERREUR________________________*/
 
-    .calque_structure {
-        width: 100%;
-        height: 100%;
-    }
+.calque_structure {
+    width: 100%;
+    height: 100%;
+}
 
 /*______________________Content_____________________*/
 

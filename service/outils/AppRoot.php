@@ -9,8 +9,8 @@
 class AppRoot {
     
     
-    public $isAppRoot = false;
-    public $NameApp = "appcaisse";
+    public $isAppRoot = true;
+    public $NameApp = "appcaisse_TEST_03062014";
     
     public function getPATH() {
         if ($this->isAppRoot) {

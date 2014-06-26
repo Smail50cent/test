@@ -382,8 +382,8 @@ function testIfIsServeurConnected() {
     var isConnected = false;
     var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
     var typeCommande = getLocalStorageValue("type.commande");
-    if (parseInt(serveur.role.level) == 2 && typeCommande == 5) {
+    /*if (parseInt(serveur.role.level) == 2 && typeCommande == 5) {
         isConnected = true;
-    }
+    }*/
     return isConnected;
 }
