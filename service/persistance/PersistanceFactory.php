@@ -25,6 +25,8 @@ include_once $path.'service/persistance/AssociationProduitPrixServiceDataImpl.ph
 include_once $path.'service/persistance/CompteRoleServiceDataImpl.php';
 include_once $path.'service/persistance/ProdtestServiceDataImpl.php';
 include_once $path.'service/persistance/CompteProduitFavoriServiceDataImpl.php';
+include_once $path.'service/persistance/OptionServiceDataImpl.php';
+include_once $path.'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
 
 class PersistanceFactory {
 
