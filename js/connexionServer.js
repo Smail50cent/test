@@ -498,13 +498,13 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var compte = new Compte();
                 compte.setId(data.id);
+                compte.setRole(data.role);
                 compte.setPassword(data.password);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(compte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -578,5 +578,8 @@ function ConnexionServer() {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
+    };
+    this.getAllProduitFavoriteByIdServeur = function (method,id,param) {
+        
     };
 }

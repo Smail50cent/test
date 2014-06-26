@@ -32,6 +32,14 @@ function calcHeight(nbItem) {
 function onCarteLoadFinish(categories) {
     var html = getHeaderCategorieItem();
     var htmlSousCategorie = getHeaderCategorieSousCategorieListe();
+    if (testIfIsServeurConnected()) {
+        var menuItem2 = (html);
+        menuItem2 = paramValue(menuItem2, "onclick", "onClickCategorie('favori');");
+        menuItem2 = paramValue(menuItem2, "href", "#categorieFavori");
+        menuItem2 = paramValue(menuItem2, "avalue", strings.getString("label.menu.favori"));
+        menuItem2 = paramValue(menuItem2, "sscat", "");
+        $('#content_list_categorie_id').append(menuItem2);
+    }
     if (useMenus) {
         var menuItem = (html);
         menuItem = paramValue(menuItem, "onclick", "onClickCategorie(1555555555555555555);");
@@ -103,6 +111,7 @@ function sousCategorieClicked(idCat, idSousCat) {
 }
 var catAreShow = "";
 function onClickCategorie(idCategorie) {
+    console.log(idCategorie);
     if (inRecapitulatif) {
         if (catAreShow != "") {
             $("#categorie_sous_cat_" + catAreShow).hide();
@@ -135,6 +144,7 @@ function hideFooter() {
     $("#footer_id").hide();
     $("#btn_recapitulatif_commande_id").hide();
 }
+
 /**
  * Add a product in the ticket 
  * @param {int} id
@@ -491,6 +501,39 @@ function lessMenu(id) {
     choosePrintFooter();
 
 }
+function printFavorite() {
+    if (testIfIsServeurConnected()) {
+        var connexion = getConnexion();
+        var htmlDivSlide = getDivSlide();
+        var menuDivSlide = htmlDivSlide;
+        menuDivSlide = paramValue(menuDivSlide, "style", "width: 100%;");
+        menuDivSlide = paramValue(menuDivSlide, "classToAdd", "");
+        menuDivSlide = paramValue(menuDivSlide, "id", "categorieFavori");
+        $("#slides_wrap_id").append(menuDivSlide);
+        var htmlContentSlideFavorite = getContentSlideFavorite();
+        $("#categorieFavori").append(htmlContentSlideFavorite);
+        connexion.getAllProduitFavoriteByIdServeur(printProduitFavorite, id, null); //BDDDDDDDDDDDD
+    }
+}
+function printProduitFavorite(produits, param) {
+    var htmlProduitItem = getContentProduitItem();
+    for (var x = 0; x < produits.length; x++) {
+        var produit = produits[x];
+        var itemProduit = htmlProduitItem;
+        itemProduit = paramValue(itemProduit, "produitId", produit.getId());
+        itemProduit = paramValue(itemProduit, "categorieId", categorie.getId());
+        if (produit.id_sousCategorie instanceof  Object) {
+            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie().id);
+        } else {
+            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
+        }
+        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
+        itemProduit = paramValue(itemProduit, "quantity", quantity);
+        itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
+        itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
+        $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
+    }
+}
 /**
  * this function allows to print products for slide animation
  * @param {int} index of first categorie to show
@@ -504,6 +547,7 @@ function printProduits(index) {
     $("#menu_or_card").html(htmlDivSlides);
     var htmlDivSlide = getDivSlide();
     var connexion = getConnexion();
+    printFavorite();
     if (useMenus) {
         var menuDivSlide = htmlDivSlide;
         menuDivSlide = paramValue(menuDivSlide, "style", "width: 100%;");

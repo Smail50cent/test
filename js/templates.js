@@ -170,3 +170,6 @@ function getButtonBackToAuth() {
 function getInscriFormUser() {
     return templates.getTemplate("compte/inscri_form_user");
 }
+function getContentSlideFavorite(){
+    return templates.getTemplate("carte/menu/content_slide_favorite");
+}
