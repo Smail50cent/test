@@ -1,7 +1,0 @@
-<div id="modifier_produit_form_id" class="modifier_produit_form">
-
-<p id="label_nom_produit_id" class="label_nom_produit"> Nom Produit </p> <select id="nom_produit_id" class="nom_produit">
-    <option value="val_id" disabled>val_name</option>
-</select>
-
-</div>

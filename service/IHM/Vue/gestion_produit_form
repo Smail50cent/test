@@ -1,4 +1,0 @@
-<div id="gestion_produit_form_id" class="gestion_produit_form">
-<input type="submit" value="Ajouter" id="button_ajout_produit_id" class="button_ajout_produit" onclick="ajoutProduit()">
-<input type="submit" value="Modifier"  id="button_modif_produit_id" class="button_modif_produit" onclick="modifProduit()">
-</div>

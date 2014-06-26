@@ -1,1 +1,0 @@
-<input value="Retour" type="submit" id="retour_gestion_produit_id" class="retour_gestion_produit" onclick="retourGestion()">
