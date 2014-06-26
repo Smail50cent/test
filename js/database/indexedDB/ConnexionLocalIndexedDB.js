@@ -76,4 +76,7 @@ function ConnexionLocalIndexedDB() {
     this.sendPersonnePriority = function(method, personnePriority, param) {
         myStorage.indexedDB.addPendingData(method, personnePriority, config.getConfig("tablePendingDataTypeProduitPriorite"), param);
     };
+    this.getAllProduitFavoriteByIdServeur = function (method,id,param) {
+        console.log("TO DO");
+    };
 }

@@ -5,23 +5,24 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once $path.'service/logique/CategorieServiceImpl.php';
-include_once $path.'service/logique/EntrepriseServiceImpl.php';
-include_once $path.'service/logique/IngredientServiceImpl.php';
-include_once $path.'service/logique/SousCategorieServiceImpl.php';
-include_once $path.'service/logique/ProduitServiceImpl.php';
-include_once $path.'service/logique/MenuServiceImpl.php';
-include_once $path.'service/logique/TableServiceImpl.php';
-include_once $path.'service/logique/ModeDeReglementServiceImpl.php';
-include_once $path.'service/logique/CompteServiceImpl.php';
-include_once $path.'service/logique/AttributCompteServiceImpl.php';
-include_once $path.'service/logique/ParamFormServiceImpl.php';
-include_once $path.'service/logique/TicketServiceImpl.php';
-include_once $path.'service/logique/ParametreApplicationServiceImpl.php';
-include_once $path.'service/logique/StringsServiceImpl.php';
-include_once $path.'service/logique/AssociationProduitPrixServiceImpl.php';
-include_once $path.'service/logique/CompteRoleServiceImpl.php';
-include_once $path.'service/logique/ProdtestServiceImpl.php';
+include_once $path . 'service/logique/CategorieServiceImpl.php';
+include_once $path . 'service/logique/EntrepriseServiceImpl.php';
+include_once $path . 'service/logique/IngredientServiceImpl.php';
+include_once $path . 'service/logique/SousCategorieServiceImpl.php';
+include_once $path . 'service/logique/ProduitServiceImpl.php';
+include_once $path . 'service/logique/MenuServiceImpl.php';
+include_once $path . 'service/logique/TableServiceImpl.php';
+include_once $path . 'service/logique/ModeDeReglementServiceImpl.php';
+include_once $path . 'service/logique/CompteServiceImpl.php';
+include_once $path . 'service/logique/AttributCompteServiceImpl.php';
+include_once $path . 'service/logique/ParamFormServiceImpl.php';
+include_once $path . 'service/logique/TicketServiceImpl.php';
+include_once $path . 'service/logique/ParametreApplicationServiceImpl.php';
+include_once $path . 'service/logique/StringsServiceImpl.php';
+include_once $path . 'service/logique/AssociationProduitPrixServiceImpl.php';
+include_once $path . 'service/logique/CompteRoleServiceImpl.php';
+include_once $path . 'service/logique/ProdtestServiceImpl.php';
+include_once $path . 'service/logique/CompteProduitFavoriServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -42,20 +43,29 @@ class LogiqueFactory {
     private static $associationProduitPrixService = null;
     private static $compteRoleService = null;
     private static $prodtestSrv = null;
+    private static $compteProduitFavoriSrv = null;
 
+    public static function getCompteProduitFavoriService() {
+        if (LogiqueFactory::$compteProduitFavoriSrv == null) {
+            LogiqueFactory::$compteProduitFavoriSrv = new CompteProduitFavoriServiceImpl();
+        }
+        return LogiqueFactory::$compteProduitFavoriSrv;
+    }
+    
     public static function getAssociationProduitPrixService() {
         if (LogiqueFactory::$associationProduitPrixService == null) {
             LogiqueFactory::$associationProduitPrixService = new AssociationProduitPrixServiceImpl();
         }
         return LogiqueFactory::$associationProduitPrixService;
     }
+
     public static function getCompteRoleService() {
-        if (LogiqueFactory::$compteRoleService== null) {
+        if (LogiqueFactory::$compteRoleService == null) {
             LogiqueFactory::$compteRoleService = new CompteRoleServiceImpl();
         }
         return LogiqueFactory::$compteRoleService;
     }
-    
+
     public static function getModeDeReglementService() {
         if (LogiqueFactory::$modeDeReglementSrv == null) {
             LogiqueFactory::$modeDeReglementSrv = new ModeDeReglementServiceImpl();
@@ -153,7 +163,7 @@ class LogiqueFactory {
         }
         return LogiqueFactory::$stringsSrv;
     }
-    
+
     public static function getProdtestService() {
         if (LogiqueFactory::$prodtestSrv == null) {
             LogiqueFactory::$prodtestSrv = new ProdtestServiceImpl();

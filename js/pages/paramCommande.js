@@ -7,7 +7,6 @@ $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbc
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
 $('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
-
     if (!chooseLang) {
         $("#choose_lang_id").hide();
     } else {
@@ -49,9 +48,6 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#numeroTable_item").hide();
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
-            // TO DO *
-
-            console.log("passage");
             startCommande(tables, $("#nbPersonnes").val());
         });
     }

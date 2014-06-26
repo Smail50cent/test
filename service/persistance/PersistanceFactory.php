@@ -18,10 +18,15 @@ include_once $path.'service/persistance/AttributCompteServiceDataImpl.php';
 include_once $path.'service/persistance/ParamFormServiceDataImpl.php';
 include_once $path.'service/persistance/TicketServiceDataImpl.php';
 include_once $path.'service/persistance/ParametreApplicationServiceDataImpl.php';
+include_once $path.'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
 include_once $path.'service/persistance/StringsServiceDataImpl.php';
+include_once $path.'service/persistance/OptionServiceDataImpl.php';
 include_once $path.'service/persistance/AssociationProduitPrixServiceDataImpl.php';
 include_once $path.'service/persistance/CompteRoleServiceDataImpl.php';
 include_once $path.'service/persistance/ProdtestServiceDataImpl.php';
+include_once $path.'service/persistance/CompteProduitFavoriServiceDataImpl.php';
+include_once $path.'service/persistance/OptionServiceDataImpl.php';
+include_once $path.'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -45,7 +50,15 @@ class PersistanceFactory {
     private static $associationProduitPrixSrv = null;
     private static $compteRoleSrv = null;
     private static $prodtestSrv = null;
+    private static $compteProduitFavoriSrv = null;
 
+    public static function getCompteProduitFavoriService() {
+        if (PersistanceFactory::$compteProduitFavoriSrv == null) {
+            PersistanceFactory::$compteProduitFavoriSrv = new CompteProduitFavoriServiceDataImpl();
+        }
+        return PersistanceFactory::$compteProduitFavoriSrv;
+    }
+    
     public static function getCompteRoleService() {
         if (PersistanceFactory::$compteRoleSrv == null) {
             PersistanceFactory::$compteRoleSrv = new CompteRoleServiceDataImpl();

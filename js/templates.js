@@ -184,13 +184,9 @@ function getButtonBackToAuth() {
 function getInscriFormUser() {
     return templates.getTemplate("compte/inscri_form_user");
 }
-// IHM TEMPLATE
-function getGestionProdForm() {
-    return templates.getIHMTemplate("gestion_produit_form");
+function getContentSlideFavorite(){
+    return templates.getTemplate("carte/menu/content_slide_favorite");
 }
-function getModifProdForm() {
-    return templates.getIHMTemplate("modif_produit_form");
-}
-function getButtonRetourGestion() {
-    return templates.getIHMTemplate("button_retour_gestion_produit_form");
+function getItemSelectFavorite(){
+    return templates.getTemplate("carte/menu/item_select_type_favorite");
 }

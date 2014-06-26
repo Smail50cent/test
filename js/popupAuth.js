@@ -4,7 +4,9 @@
  */
 var listePersonnes = new Array();
 var methodToLoadAfter;
-function onLoadCompte(showVisiteurs, titre, topvalue, method) {//To DO an object
+var isServeur;
+function onLoadCompte(showVisiteurs, titre, topvalue, method,isServeusr) {//To DO an object
+    isServeur = isServeusr;
     methodToLoadAfter = method;
     var htmlDialog = getDialogAccesCompte();
     $("body").append(htmlDialog);
@@ -58,10 +60,15 @@ function authenCompte() {
                                         personne.setEmail(infos[j].valeur_champ);
                                     }
                                 }
+                                personne.setRole(compte.role);
                                 personne.setId(idcompte);
                                 listePersonnes.push(personne);
-                                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                                if(methodToLoadAfter !=null){
+                                if(isServeur){
+                                    setLocalStorageValue("personnes.serveur", JSON.stringify(personne));
+                                }else{
+                                    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                                }
+                                if (methodToLoadAfter != null) {
                                     methodToLoadAfter();
                                 }
                                 $('#auth_popup_id').dialog("close");
@@ -240,13 +247,13 @@ function TestEmptyFields(field) {
 }
 /**
  *  personne.setId(personne.id);
-    personne.setGender(personne.sexe);
-    personne.setNom(personne.nom);
-    personne.setPrenom(personne.prenom);
-    personne.setUrlProfileImg(personne.imgprof);
-    personne.setAdresse(personne.adresse);
-    personne.setAdresse(personne.tel);
-    personne.setEmail(personne.email);
+ personne.setGender(personne.sexe);
+ personne.setNom(personne.nom);
+ personne.setPrenom(personne.prenom);
+ personne.setUrlProfileImg(personne.imgprof);
+ personne.setAdresse(personne.adresse);
+ personne.setAdresse(personne.tel);
+ personne.setEmail(personne.email);
  * @param {type} personne
  * @returns {undefined}
  */

@@ -66,4 +66,7 @@
     <string key="label.connexion.error.mdp">Password you entered is not correct.</string>
     <string key="label.index.li.accesserveur">Server access</string>
     <string key="label.interfaceventeacces.newCommande">New order</string>
+    <string key="label.menu.favori">Favorite</string>
+    <string key="label.menu.favori.select.itemfacorite">Your favorite</string>
+    <string key="label.menu.favori.select.itemsuggestion">Products suggest</string>
 </strings>

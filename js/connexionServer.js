@@ -498,13 +498,13 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var compte = new Compte();
                 compte.setId(data.id);
+                compte.setRole(data.role);
                 compte.setPassword(data.password);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(compte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -575,6 +575,44 @@ function ConnexionServer() {
             },
             error: function(xhr, textStatus, errorThrown) {
                 console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllProduitFavoriteByIdServeur = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var cpfs = new Array();
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var cpf = new CompteProduitFavori();
+                        cpf.setId(data.id);
+                        var produit = new Produit();
+                        produit.setNom(data.produit.nom);
+                        produit.setId(data.produit.id);
+                        var categorie = new Categorie();
+                        categorie.setNom(data.produit.categorie.nom);
+                        categorie.setId(data.produit.categorie.id);
+                        categorie.setPriorite(data.produit.categorie.priorite);
+                        categorie.setSousCategorie(data.produit.categorie.souscategorie);
+                        produit.setCategorie(categorie);
+                        produit.setSousCategorie(data.produit.souscategorie);
+                        produit.setIdsIngredients(data.produit.ingredients);
+                        produit.setAssociationPrixProduit(data.produit.associationPrixProduit);
+                        produit.setOptions(data.produit.options);
+                        cpf.setProduit(produit);
+                        cpfs.push(cpf);
+                    }
+                }
+                if (method != null) {
+                    method(cpfs, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

@@ -309,10 +309,10 @@ function Ticket(id, quantityOfProducts) {
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
                 var quantity = qop[y].getQuantity();
-                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit,qop[y].getProduit().id_sousCategorie.tauxTva);
+                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
                 this.total += totalTTC * quantity;
             }
-        } 
+        }
         return this.total;
     };
 }
@@ -392,7 +392,7 @@ function Personne() {
     this.email;
     this.urlProfileImg;
     this.gender;
-
+    this.role;
     this.setId = function(id) {
         this.id = id;
     };
@@ -429,11 +429,17 @@ function Personne() {
     this.getGender = function() {
         return this.gender;
     };
+    this.setRole = function(role) {
+        this.role = role;
+    };
+    this.getRole = function() {
+        return this.role;
+    };
 }
 function Compte() {
     this.id;
     this.password;
-
+    this.role;
     this.setId = function(id) {
         this.id = id;
     };
@@ -445,6 +451,12 @@ function Compte() {
     };
     this.getPassword = function() {
         return this.password;
+    };
+    this.setRole = function(role) {
+        this.role = role;
+    };
+    this.getRole = function() {
+        this.role;
     };
 }
 
@@ -619,5 +631,33 @@ function ParamApp() {
 
     this.getValeur_parametre = function() {
         return this.valeur_parametre;
+    };
+
+}
+function CompteProduitFavori() {
+
+    this.id;
+    this.personneId;
+    this.produit;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setPersonneId = function(personneId) {
+        this.personneId = personneId;
+    };
+    this.getPersonneId = function() {
+        return this.valeur_parametre;
+    };
+
+    this.getProduit = function() {
+        return this.produit;
+    };
+
+    this.setProduit = function(produit) {
+        this.produit = produit;
     };
 }
