@@ -1,7 +1,7 @@
 <?php
 
-include_once 'CompteRoleService.php';
-include_once '../logique/entity/CompteRole.php';
+include_once $path.'service/logique/CompteRoleService.php';
+include_once $path.'service/logique/entity/CompteRole.php';
 
 /**
  * Description of CompteRoleServiceDataImpl

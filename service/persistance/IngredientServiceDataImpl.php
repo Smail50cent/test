@@ -1,7 +1,7 @@
 <?php
 
-include_once 'ConnexionBDD.php';
-include_once 'IngredientServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/persistance/IngredientServiceData.php';
 
 /**
  * Description of IngredientServiceImpl

@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-include_once 'ParametreApplicationServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/ParametreApplication.php';
+include_once $path.'service/persistance/ParametreApplicationServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/ParametreApplication.php';
 
 class ParametreApplicationServiceDataImpl implements ParametreApplicationServiceData {
 

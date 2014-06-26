@@ -1,7 +1,7 @@
 <?php
 
-include_once 'ProduitService.php';
-include_once 'entity/AssociationProduitIngredients.php';
+include_once $path.'service/logique/ProduitService.php';
+include_once $path.'service/logique/entity/AssociationProduitIngredients.php';
 
 /**
  * Description of CategorieServiceImpl

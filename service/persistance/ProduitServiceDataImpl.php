@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'ProduitServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Produit.php';
+include_once $path.'service/persistance/ProduitServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Produit.php';
 
 class ProduitServiceDataImpl implements ProduitServiceData {
 

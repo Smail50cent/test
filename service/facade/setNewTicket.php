@@ -1,12 +1,12 @@
 <?php
 
-include_once '../logique/entity/Ticket.php';
-include_once '../logique/entity/QuantityOfProduct.php';
-include_once '../logique/entity/AssociationProduitIngredients.php';
-include_once '../logique/entity/Produit.php';
-include_once '../logique/entity/SousCategorie.php';
-include_once '../logique/entity/Categorie.php';
-include_once '../logique/LogiqueFactory.php';
+include_once $path.'service/logique/entity/Ticket.php';
+include_once $path.'service/logique/entity/QuantityOfProduct.php';
+include_once $path.'service/logique/entity/AssociationProduitIngredients.php';
+include_once $path.'service/logique/entity/Produit.php';
+include_once $path.'service/logique/entity/SousCategorie.php';
+include_once $path.'service/logique/entity/Categorie.php';
+include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
 $ticketSrv = LogiqueFactory::getTicketService();
 
 class ToEncode {

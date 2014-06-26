@@ -1,7 +1,7 @@
 <?php
 
-include_once '../logique/entity/Compte.php';
-include_once 'CompteService.php';
+include_once $path.'service/logique/entity/Compte.php';
+include_once $path.'service/logique/CompteService.php';
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates

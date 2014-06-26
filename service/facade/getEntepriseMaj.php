@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-include_once '../logique/LogiqueFactory.php';
+include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
 $entrepriseSrv = LogiqueFactory::getEntrepriseService();
 $result = $entrepriseSrv->getMaj();
 $ligne = $result->fetch();

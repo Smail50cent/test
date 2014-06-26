@@ -6,10 +6,10 @@
  * and open the template in the editor.
  */
 
-include_once 'CompteServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Compte.php';
-include_once '../logique/entity/CompteRole.php';
+include_once $path.'service/persistance/CompteServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Compte.php';
+include_once $path.'service/logique/entity/CompteRole.php';
 
 class CompteServiceDataImpl implements CompteServiceData {
 

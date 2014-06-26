@@ -14,6 +14,20 @@ templates.getTemplate = function(name) {
     });
     return ret;
 };
+templates.getIHMTemplate = function(name) {
+    var ret = null;
+    var url = "service/IHM/Vue/" + name;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "text",
+        async: false,
+        success: function(text) {
+            ret = text;
+        }
+    });
+    return ret;
+};
 function paramValue(string, paramName, value) {
     var ret = true;
     while (ret) {

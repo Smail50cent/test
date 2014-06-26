@@ -1,10 +1,10 @@
 <?php
 
-include_once 'AssociationProduitPrixServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/AssociationProduitPrix.php';
-include_once '../logique/entity/PrixHT.php';
-include_once '../logique/entity/ZoneTable.php';
+include_once $path.'service/persistance/AssociationProduitPrixServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/AssociationProduitPrix.php';
+include_once $path.'service/logique/entity/PrixHT.php';
+include_once $path.'service/logique/entity/ZoneTable.php';
 
 /**
  * Description of AssociationProduitPrixServiceDataImpl

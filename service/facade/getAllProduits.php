@@ -6,7 +6,7 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 //header('Content-Type: text/json; charset=utf-8');
-include_once '../logique/LogiqueFactory.php';
+include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
 $produitSrv = LogiqueFactory::getProduitService();
 $result = $produitSrv->getAll();
 $total = count($result);
