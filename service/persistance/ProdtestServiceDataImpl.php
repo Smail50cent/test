@@ -15,7 +15,7 @@ class ProdtestServiceDataImpl implements ProdtestServiceData {
     public function getAll() {
         $produits = array();
         $bdd = new ConnexionBDD();
-        $return = $bdd->executeGeneric("SELECT * FROM produit LIMIT 0,10");
+        $return = $bdd->executeGeneric("SELECT * FROM produit");
         $i = 0;
         while ($ligne = $return->fetch()) {
             $produit = new Prodtest();
