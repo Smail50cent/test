@@ -23,6 +23,7 @@ include_once $path . 'service/logique/AssociationProduitPrixServiceImpl.php';
 include_once $path . 'service/logique/CompteRoleServiceImpl.php';
 include_once $path . 'service/logique/ProdtestServiceImpl.php';
 include_once $path . 'service/logique/CompteProduitFavoriServiceImpl.php';
+include_once $path . 'service/logique/ProduitSuggereriServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -44,6 +45,14 @@ class LogiqueFactory {
     private static $compteRoleService = null;
     private static $prodtestSrv = null;
     private static $compteProduitFavoriSrv = null;
+    private static $produitSuggererSrv = null;
+
+    public static function getProduitSuggererService() {
+        if (LogiqueFactory::$produitSuggererSrv == null) {
+            LogiqueFactory::$produitSuggererSrv = new ProduitSuggererServiceImpl();
+        }
+        return LogiqueFactory::$produitSuggererSrv;
+    }
 
     public static function getCompteProduitFavoriService() {
         if (LogiqueFactory::$compteProduitFavoriSrv == null) {
@@ -51,7 +60,7 @@ class LogiqueFactory {
         }
         return LogiqueFactory::$compteProduitFavoriSrv;
     }
-    
+
     public static function getAssociationProduitPrixService() {
         if (LogiqueFactory::$associationProduitPrixService == null) {
             LogiqueFactory::$associationProduitPrixService = new AssociationProduitPrixServiceImpl();

@@ -70,4 +70,7 @@ function ConnexionLocalWebSQL() {
     this.getAllProduitFavoriteByIdServeur = function(method, id, param) {
         console.log("TO DO");
     };
+    this.getAllProduitSuggerer = function(method, param) {
+        console.log("TO DO");
+    };
 }

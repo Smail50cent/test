@@ -504,7 +504,6 @@ function lessMenu(id) {
 }
 function printFavorite() {
     if (testIfIsServeurConnected()) {
-        console.log("printFavori");
         var htmlDivSlide = getDivSlide();
         var favoriDivSlide = htmlDivSlide;
         favoriDivSlide = paramValue(favoriDivSlide, "style", "width: 100%;");
@@ -523,6 +522,11 @@ function printFavorite() {
         m2HtmlItem = paramValue(m2HtmlItem, "value", 2);
         $("#select_favori_id").append(m2HtmlItem);
         loadDataWithSelectValue(1);
+        $("#select_favori_id").change(function (){
+            var value = $(this).val();
+            console.log("valchange",value);
+            loadDataWithSelectValue(parseInt(value));
+        });
     }
 }
 function loadDataWithSelectValue(valueSelect) {
@@ -541,9 +545,12 @@ function getProduitsFavorite() {
     connexion.getAllProduitFavoriteByIdServeur(printProduitFavorite, serveur.id, null);
 }
 function getProduitsSuggerer() {
-
+    var connexion = getConnexion();
+    connexion.getAllProduitSuggerer(printProduitFavorite, null);
 }
+
 function printProduitFavorite(cpfs, param) {
+     $('#favorite_id').html("");
     var htmlProduitItem = getContentProduitItem();
     for (var x = 0; x < cpfs.length; x++) {
         var produit = cpfs[x].produit;
