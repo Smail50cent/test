@@ -69,4 +69,5 @@
     <string key="label.menu.favori">Favorite</string>
     <string key="label.menu.favori.select.itemfacorite">Your favorite</string>
     <string key="label.menu.favori.select.itemsuggestion">Products suggest</string>
+    <string key="label.titre.carte">To map</string>
 </strings>

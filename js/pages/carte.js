@@ -30,6 +30,7 @@ function calcHeight(nbItem) {
 }
 
 function onCarteLoadFinish(categories) {
+    $("#content_titre_id").text(strings.getString("label.titre.carte"));
     var html = getHeaderCategorieItem();
     var htmlSousCategorie = getHeaderCategorieSousCategorieListe();
     if (testIfIsServeurConnected()) {
