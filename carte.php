@@ -1,9 +1,9 @@
 <?php include_once './header.php'; ?>
 <div id="content_id" class="content content_structure content_personalize">
-    <p id="content_titre_id" class="content_titre content_titre_structure content_titre_personalize">A la carte</p>
     <ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize">
         <!--li><button></button></li-->
     </ul>
+    <p id="content_titre_id" class="content_titre content_titre_structure content_titre_personalize">A la carte</p>
     <div id="content_titre_categorie_id" class="content_titre_categorie content_titre_categorie_structure content_titre_categorie_personalize">
         <div id="content_titre_categorie_left_id" class="content_titre_categorie_left content_titre_categorie_left_structure content_titre_categorie_left_personalize"></div>
         <div id="content_titre_categorie_center_id" class="content_titre_categorie_center content_titre_categorie_center_structure content_titre_categorie_center_personalize"><p id="titre_categorie_id"></p></div>

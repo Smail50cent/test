@@ -21,7 +21,7 @@
 
     }
 
-    .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input{
+    .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input, .button_inscri_compte input{
         width:90px;
         margin: 0 30px;
     }
@@ -308,6 +308,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     float: left;
 }
 
+
+
 /*________________________________RECAP TOTAL DANS LE HEADER______________________________*/
 
 .info_prix_structure {
@@ -358,7 +360,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
 
-@media all and (min-width: 320px)  {
+@media all and (min-width: 310px)  {
+
     html {
         width:100%;
     }
@@ -420,7 +423,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .content_structure  {
         width: 100%;
-        margin-top: 1.9em;
+        margin-top: 3.9em;
         position:relative;
         height:auto;
 }
@@ -442,7 +445,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
     .btn_choice_structure li,.choix_mode_calcul_structure  {
-        width:250px;
+        max-width:250px;
         display:block;
         margin:1em auto 3% auto;
         vertical-align:middle;
@@ -478,7 +481,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         text-align:center;
     }
 
-    .select_structure, .product_spec_structure, .select_lang_structure, .btn_choix_mode_calcul_division_structure, .btn_choix_mode_calcul_part_structure, .validerPaimentSelection_structure, .choix_paiment_personne_btn_valider_structure, .select_item_etape_structure, .button_authen_compte_structure, .button_inscri_compte_structure, .button_ajout_vclient_structure, .auth_form_structure input{
+    .select_structure, .product_spec_structure, .select_lang_structure, .btn_choix_mode_calcul_division_structure, .btn_choix_mode_calcul_part_structure, .validerPaimentSelection_structure, .choix_paiment_personne_btn_valider_structure, .select_item_etape_structure, .button_authen_compte_structure, .button_inscri_compte_structure, .button_ajout_vclient_structure, .auth_form_structure input, .button_inscri_compte{
         width:150px;
         margin: 0.5em auto 0.8em auto;
         display:block;
@@ -663,6 +666,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         .content_structure .sous_categorie_cat_structure {
             float: none;
             opacity:0.9;
+            position: relative;
+            z-index: 1000;
         }
 
         .content_structure .sous_categorie_cat li{
@@ -683,20 +688,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             height:29px;
         }
 
-        .content_list_categorie_structure li:link {
-            color: #473117;
-            background-color: #efdbc2;
-        }
 
-        .content_list_categorie_structure li :hover {
-            color: #473117;
-            background-color: #efdbc2;
-        }
-
-        /*#content_list_categorie_id li :active {
-            color: #473117;
-            background-color: #efdbc2;
-        }*/
 
         .content_list_categorie_structure li a {
             padding-top: 0.4em;
@@ -738,6 +730,16 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             display: inline;
             position: relative;
             width: 100%;
+        }
+
+        .content_titre_structure{
+            width: 40%;
+            display: block;
+            position: relative;
+            padding-bottom: 0.3em;
+            padding-top: 2.5em;
+            margin: 0 auto;
+            z-index: 999;
         }
 
         .content_globlal_zone_structure .content_produit_titre  {
@@ -861,13 +863,14 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             min-height: 50px;
             margin-top: 0px;
             padding-bottom: 1em;
+            float:left;
             /* display: inline-table; */
             width: 100%;
             /* overflow: auto; */
         }
 
         .menu_item_structure:nth-child(even) {
-            float:right;
+            float:left;
         }
 
         .btn_more__left_structure {
@@ -1023,7 +1026,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .menu_or_card_structure, .recapitulatif_commande_structure {
-            margin-top:1em;
+            margin-top:-2em;
             height: auto;
             position: relative;
             float:left;
@@ -1523,7 +1526,16 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 }
 
+
+
+
 @media all and (min-width: 980px) {
+
+
+
+body {
+        background-size: initial;
+}
 
 .header_structure, .content_structure {
         width: 980px;
@@ -1532,13 +1544,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
 .header_structure {
         position: relative;
-		height: 90px;
-}
-
-.content_personalize ul li {
-	   width: 300px;
-	   margin: 2em auto;	
-       padding: 1em 0.5em;
+		height: 91px;
 }
 
 .header_right_logo_slogan_structure {
@@ -1547,14 +1553,11 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         right: 0;
 }
 
-
-
 .header_left_logo_structure {
         z-index: 4500;
         width: 100%;
         position: absolute;
-        top: 1em;
-        left: 31em;
+        top: 1em;      
 }
 
 
@@ -1578,5 +1581,73 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         position: relative;
 }
 
+/*________________________________________________________________*/
+
+
+/*_________________titre______________________*/
+
+.content_titre_structure {
+    margin-bottom: -1.5em;
+    padding-top: 2em;
 }
+
+
+/*Navigation*/
+
+
+.content_list_categorie_structure {
+    width: 974px;
+}
+
+.content_list_categorie_structure {
+    position: initial;
+}
+
+/*.content_list_categorie_structure li {
+    padding: 0 0.5em;
+}*/
+
+ul#categorie_sous_cat_1 {
+    width: 175px !important;
+}
+
+.content_structure .sous_categorie_cat li {
+    width: 104%;
+}
+
+.content_titre_structure {
+    padding-top: 0em;
+}
+
+/*Items*/
+
+.produit_cat_personalize {
+    width: 470px;
+    display: inline-table;
+}
+
+.produit_cat_personalize:nth-child(even) {
+    margin-left:20px;
+}
+
+
+/*FOOTER*/
+
+.btn_recapitulatif_commande_structure {
+    margin: 0 29%;
+    width: 42%;
+
+}
+
+.menu_or_card_structure, .recapitulatif_commande_structure {
+    padding-top: 6em;
+    margin-top: -3.5em;
+}
+
+.header_right_logo_structure p {
+right: 0em;
+bottom: -1.4em;
+}
+}
+
 
