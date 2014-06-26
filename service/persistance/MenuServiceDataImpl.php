@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'MenuServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Menu.php';
+include_once $path.'service/persistance/MenuServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Menu.php';
 
 class MenuServiceDataImpl implements MenuServiceData {
 

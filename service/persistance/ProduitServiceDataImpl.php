@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'ProduitServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Produit.php';
+include_once $path.'service/persistance/ProduitServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Produit.php';
 
 class ProduitServiceDataImpl implements ProduitServiceData {
 
@@ -62,6 +62,14 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             $i++;
         }
         return $ret;
+    }
+
+    public function addData() {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO dupappcaisse.produit (NOM, CATEGORIE_ID, Produit_simple, Famille_comptable, TVA) "
+                . " SELECT BP.PR_LIBELLE, DC.id, BP.PR_PRODUIT_SIMPLE, BP.PR_FAMILLE_COMPTABLE, BP.PR_TVA  "
+                . " FROM prod_bacchus.BAR_PRODUIT BP ,dupappcaisse.categorie DC ,prod_bacchus.BAR_FAMILLE_PRODUIT FP"
+                . " WHERE DC.nom = FP.FA_LIBELLE AND FP.FA_CODE = BP.PR_CODE_FAMILLE");
     }
 
 }

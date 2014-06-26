@@ -9,4 +9,5 @@
 interface SousCategorieService {
 
     public function getAll();
+    public function addData();
 }

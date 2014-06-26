@@ -7,7 +7,6 @@ $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbc
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
 $('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
-    
     if (!chooseLang) {
         $("#choose_lang_id").hide();
     } else {
@@ -37,28 +36,21 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            scripts.loadScripts("compte", function() {
-                onLoadCompte();
-                var person = strings.getString("label.personne.auth");
-                $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
-                $('div#auth_popup_id').bind('dialogclose', function(event) {
-                    AuthToCommande();
-                });
+            onLoadCompte(true, null, "-17", null);
+            var person = strings.getString("label.personne.auth");
+            $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
+            $('div#auth_popup_id').bind('dialogclose', function(event) {
+                AuthToCommande();
             });
-
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
         $("#numeroTable_item").hide();
         $("#numTable").val(tables);
         $("#nbPersonnes").change(function() {
-            // TO DO *
-
-            console.log("passage");
             startCommande(tables, $("#nbPersonnes").val());
         });
     }
-    setLocalStorageValue("type.commande", 1);
     hideLoading();
 }
 function loadDataPersonnes(nbMaxPersonnes) {
@@ -87,7 +79,7 @@ function loadDataTables(tables) {
     var connexion = getConnexion();
     connexion.getAllTables(printTables);
     function printTables(tables) {
-    setLocalStorageValue("tables", JSON.stringify(tables));
+        setLocalStorageValue("tables", JSON.stringify(tables));
         for (var i = 0; i < tables.length; i++) {
             var itemOptionTable = htmlOptionTable;
             itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + tables[i].numero);
@@ -99,10 +91,10 @@ function loadDataTables(tables) {
 function startCommande(numTable, nbPersonne) {
     setLocalStorageValue("paramCommande.nbPersonne", nbPersonne);
     var tables = (JSON.parse(getLocalStorageValue("tables")));
-    for(var i = 0 ; i < tables.length ; i++){
-        if(tables[i].id == numTable){
+    for (var i = 0; i < tables.length; i++) {
+        if (tables[i].id == numTable) {
             setLocalStorageValue("paramCommande.numTable", JSON.stringify(tables[i]));
         }
     }
-    document.location.href = "carte.php";
+    redirictWhereFinishParamCommande();
 }

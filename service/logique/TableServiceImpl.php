@@ -1,6 +1,6 @@
 <?php
 
-include_once 'TableService.php';
+include_once $path.'service/logique/TableService.php';
 
 /**
  * Description of TableServiceImpl

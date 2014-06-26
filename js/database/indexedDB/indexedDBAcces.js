@@ -316,7 +316,6 @@ myStorage.indexedDB.addFistProduits = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
                 addProduit(data[i]);
             }
         },

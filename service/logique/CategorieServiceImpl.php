@@ -1,6 +1,6 @@
 <?php
 
-include_once 'CategorieService.php';
+include_once $path.'service/logique/CategorieService.php';
 
 /**
  * Description of CategorieServiceImpl
@@ -28,6 +28,10 @@ class CategorieServiceImpl implements CategorieService {
             $categories[$i]->setSousCategories($souscategories);
         }
         return $categories;
+    }
+
+    public function addData() {
+        $this->categorieSrv->addData();
     }
 
 }

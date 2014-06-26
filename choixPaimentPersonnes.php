@@ -10,11 +10,11 @@
         <div id="produits_non_attr" class="produits_non_attr produits_non_attr_structure produits_non_attr_personalize">
             <p id="liste_produit_non_attribue" class=" liste_produit_non_attribue liste_produit_non_attribue_structure liste_produit_non_attribue_personalize"></p>
             <ul id="liste_prod_non_attribue_id"class="liste_prod_non_attribue liste_prod_non_attribue_structure liste_prod_non_attribue_personalize" >
-                
+
             </ul>
         </div> 
         <ul id="content_paiment_personne_liste_id" class="content_paiment_personne_liste content_paiment_personne_liste_structure content_paiment_personne_liste_personalize">
-            
+
         </ul>
 
         <p id="total_selection_id"></p>
@@ -25,7 +25,7 @@
 <div id="dialog_attribution_produit" class="dialog_attribution_produit dialog_attribution_produit_structure dialog_attribution_produit_personalize" style="display: none;">
     <p id="titre_rappel_produit" class="titre_rappel_produit titre_rappel_produit_structure titre_rappel_produit_personalize"></p>
     <ul id="liste_utilisateurs_to_choose_id" class="liste_utilisateurs_to_choose liste_utilisateurs_to_choose_structure liste_utilisateurs_to_choose_personalize">
-        
+
     </ul>
     <button id="valider_selection_utilisateurs" class="valider_selection_utilisateurs valider_selection_utilisateurs_structure valider_selection_utilisateurs_personalize" onclick="attributionNouveauProduit();"></button>
 </div>
@@ -45,3 +45,5 @@
         height: 20px;
     }
 </style>
+</body>
+</html> 

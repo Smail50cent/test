@@ -1,8 +1,8 @@
 <?php
 
-include_once 'ModeDeReglementServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/ModeDeReglement.php';
+include_once $path.'service/persistance/ModeDeReglementServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/ModeDeReglement.php';
 
 /**
  * Description of TablesServiceImpl

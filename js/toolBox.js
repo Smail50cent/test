@@ -90,7 +90,7 @@ function clone(obj) {
     return copy;
 }
 function toEncoded() {
-    return true;
+    return false;
 }
 function setLocalStorageValue(key, value) {
     if (toEncoded()) {

@@ -14,7 +14,8 @@ class Produit {
     public $options; //array
     public $ingredients; // ARRAY
     public $associationPrixProduit;
-
+    public $prix;
+    
     public function setId($id) {
         $this->id = $id;
     }
@@ -69,6 +70,13 @@ class Produit {
 
     public function getAssociationProduitPrix() {
         return $this->associationPrixProduit;
+    }
+    public function setPrix($prix) {
+        $this->prix = $prix;
+    }
+
+    public function getPrix() {
+        return $this->prix;
     }
 
 }

@@ -5,7 +5,6 @@ function ConnexionServer() {
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
-            console.log("SERVEUR");
         } else {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
@@ -18,7 +17,6 @@ function ConnexionServer() {
                         updated = true;
                         pullNewData(methodToExecuteAfter);
                         incrementeLevelOfTable(config.getConfig("tableNameEntreprise"));
-
                     } else {
                         getImplOfConnexionLocal().getEntreprise(methodToExecuteAfter);
                     }
@@ -340,12 +338,14 @@ function ConnexionServer() {
     };
     this.sendTicketToServeur = function(method, ticket, param) {
         var monTicket = JSON.stringify(ticket);
+        console.log(monTicket);
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
             type: 'POST',
             data: {ticket: monTicket},
             async: false,
             success: function(data, textStatus, xhr) {
+                console.log(data);
                 data = JSON.parse(data);
                 setLocalStorageValue("id.last.created.ticket", data.id);
                 if (method != null) {
@@ -449,11 +449,11 @@ function ConnexionServer() {
         });
     };
 
-    this.addCompte = function(method, password, param) {
+    this.addCompte = function(method, password, id_role, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
             type: 'POST',
-            data: {password: password},
+            data: {password: password, id_role: id_role},
             async: true,
             success: function(data) {
                 method(data, param);
@@ -498,6 +498,7 @@ function ConnexionServer() {
             success: function(data, textStatus, xhr) {
                 var compte = new Compte();
                 compte.setId(data.id);
+                compte.setRole(data.role);
                 compte.setPassword(data.password);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(compte, param);
@@ -559,19 +560,26 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                var attcompte = new AttributCompte();
-                attcompte.setId(data.id);
-                attcompte.setId_compte(data.id_compte);
-                attcompte.setId_form(data.id_form);
-                attcompte.setDefaut(data.defaut);
-                attcompte.setValeur_champ(data.valeur_champ);
+                var attcompte = null;
+                if (data != null) {
+                    attcompte = new AttributCompte();
+                    attcompte.setId(data.id);
+                    attcompte.setId_compte(data.id_compte);
+                    attcompte.setId_form(data.id_form);
+                    attcompte.setDefaut(data.defaut);
+                    attcompte.setValeur_champ(data.valeur_champ);
+                }
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(attcompte, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
+    };
+    this.getAllProduitFavoriteByIdServeur = function (method,id,param) {
+        
     };
 }

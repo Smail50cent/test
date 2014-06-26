@@ -118,16 +118,41 @@ function controller(entreprise) {
                 hideLoading();
             };
             break;
+        case "pageConnexionServeur":
+            method = function() {
+                onLoadPageConnexionServeur();
+                hideLoading();
+            };
+            break;
+        case "interfaceVenteAcces":
+            method = function() {
+                onLoadInterfaceVenteAcces();
+                hideLoading();
+            };
+            break;
         case "":
+            nom = "index";
+            method = function() {
+                onIndexLoaded();
+            };
             hideLoading();
             break;
         case "index":
+            nom = "index";
+            method = function() {
+                onIndexLoaded();
+            };
             hideLoading();
             break;
         default :
+            nom = "index";
+            method = function() {
+                onIndexLoaded();
+            };
             hideLoading();
             break;
     }
+
     scripts.loadScripts(nom, method);
 }
 // TEST IF THE CACHE ARE UP TO DATE
@@ -273,7 +298,7 @@ function calculPrixWithTVA(prixHT, tauxTVA) {
     var tauxTVA = parseFloat(tauxTVA);
     return ((tauxTVA / 100) * prixHT) + prixHT;
 }
-function getPrixHtInAssociation(associationPrixProduit,tauxTva) {
+function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
     var prixHt = 0;
     if (associationPrixProduit.length != 0) {
         if (associationPrixProduit.length == 1) {
@@ -352,4 +377,13 @@ function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, 
         }
     }
     return ret;
+}
+function testIfIsServeurConnected() {
+    var isConnected = false;
+    var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+    var typeCommande = getLocalStorageValue("type.commande");
+    if (parseInt(serveur.role.level) == 2 && typeCommande == 5) {
+        isConnected = true;
+    }
+    return isConnected;
 }

@@ -1,6 +1,6 @@
 <?php
 
-include_once 'MenuService.php';
+include_once $path.'service/logique/MenuService.php';
 
 /**
  * Description of CategorieServiceImpl

@@ -14,7 +14,8 @@
     <script for="data.indexeddb" priority="12">database/indexedDB/indexedDBAccesTables.js</script>
     
     <script for="data.websql">database/webSQL/ConnexionLocalWebSQL.js</script>
-
+    
+    <script for="all" priority="1">redirictPages.js</script>
     <script for="all" priority="1">toolBox.js</script>
     <script for="all" priority="1">templates.js</script>
     <script for="all" priority="1">strings.js</script>
@@ -23,8 +24,7 @@
     <script for="all" priority="1">findInLoaded.js</script>
     <script for="all" priority="1">ConnexionFactory.js</script>
     <script for="all" priority="2">connexionServer.js</script>
-    
-
+   
     <script for="lib" priority="2">lib/jquery-1.2.6.min.js</script>
     <script for="lib" priority="1">lib/jquery.js</script>
     <script for="lib.dialog" priority="1">lib/jqueryui/js/jquery-ui-1.10.4.custom.js</script>
@@ -37,9 +37,15 @@
     <script for="swipe">lib/jquery.event.swipe.js</script>
         
     <script for="carte">pages/carte.js</script>
-    <script for="paramCommande">pages/paramCommande.js</script>
+    <script for="choixDateHeure">pages/choixDateHeure.js</script>
+    <script for="paramCommande" priority="2">pages/paramCommande.js</script>
+    <script for="paramCommande" priority="1">popupAuth.js</script>
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
-    <script for="compte">pages/compte.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
+    <script for="produit">pages/produit.js</script>
+    <script for="index">pages/index.js</script>
+    <script for="pageConnexionServeur" priority="2">pages/pageConnexionServeur.js</script>
+    <script for="pageConnexionServeur" priority="1">popupAuth.js</script>
+    <script for="interfaceVenteAcces" >pages/interfaceVenteAcces.js</script>
 </scripts>

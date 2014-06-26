@@ -60,7 +60,6 @@ function getFacebookUserInfo(infopersonne) {
 }
 
 function getFacebookPhoto(personne) {
-
     FB.api('/me/picture?type=normal', function(response) {
         personne.setUrlProfileImg(response.data.url);
     });

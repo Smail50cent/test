@@ -5,10 +5,10 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'OptionServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Option.php';
-include_once '../logique/entity/OptionPossibilite.php';
+include_once $path.'service/persistance/OptionServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Option.php';
+include_once $path.'service/logique/entity/OptionPossibilite.php';
 
 class OptionServiceDataImpl implements OptionServiceData {
 

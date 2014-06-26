@@ -1,1 +1,1 @@
-<input id="id_button_inscri_user" class="class_button_inscri_user class_button_inscri_user_structure class_button_inscri_user_personalize" type="submit" value="Valider" onclick="ValiderInscri()">
+<input type="button" id="id_button_inscri_user" class="class_button_inscri_user class_button_inscri_user_structure class_button_inscri_user_personalize" value="Valider" onclick="ValiderInscri()">

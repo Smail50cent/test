@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-include_once 'StringsServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Strings.php';
+include_once $path.'service/persistance/StringsServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Strings.php';
 
 class StringsServiceDataImpl implements StringsServiceData {
 

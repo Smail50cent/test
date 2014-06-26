@@ -1,6 +1,6 @@
 <?php
 
-include_once 'ModeDeReglementService.php';
+include_once $path.'service/logique/ModeDeReglementService.php';
 
 /**
  * Description of TableServiceImpl

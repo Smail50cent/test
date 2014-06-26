@@ -13,6 +13,7 @@ class ConnexionBDD {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse", "preCaisse", "alfa");
         $ret[1] = array("192.168.170.61", "mysql", "bar", "preCaisse", "alfa");
+        $ret[2] = array("192.168.170.61", "mysql", "dupappcaisse", "preCaisse", "alfa");
         return $ret;
     }
 

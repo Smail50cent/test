@@ -14,6 +14,20 @@ templates.getTemplate = function(name) {
     });
     return ret;
 };
+templates.getIHMTemplate = function(name) {
+    var ret = null;
+    var url = "service/IHM/Vue/" + name;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "text",
+        async: false,
+        success: function(text) {
+            ret = text;
+        }
+    });
+    return ret;
+};
 function paramValue(string, paramName, value) {
     var ret = true;
     while (ret) {
@@ -134,7 +148,9 @@ function getAttributionProduit() {
 function getAuthCompte() {
     return templates.getTemplate("compte/auth_compte_form");
 }
-
+function getDialogAccesCompte() {
+    return templates.getTemplate("compte/dialog_acces_compte");
+}
 function getButtonInscriFormUser() {
     return templates.getTemplate("compte/button_inscri_form_user");
 }
@@ -164,4 +180,10 @@ function getLiProduit() {
 }
 function getButtonBackToAuth() {
     return templates.getTemplate("compte/Button_back_to_auth_form");
+}
+function getInscriFormUser() {
+    return templates.getTemplate("compte/inscri_form_user");
+}
+function getContentSlideFavorite(){
+    return templates.getTemplate("carte/menu/content_slide_favorite");
 }

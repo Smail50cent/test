@@ -5,24 +5,23 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'EntrepriseServiceDataImpl.php';
-include_once 'CategorieServiceDataImpl.php';
-include_once 'IngredientServiceDataImpl.php';
-include_once 'SousCategorieServiceDataImpl.php';
-include_once 'ProduitServiceDataImpl.php';
-include_once 'AssociationProduitIngredientServiceDataImpl.php';
-include_once 'MenuServiceDataImpl.php';
-include_once 'OptionServiceDataImpl.php';
-include_once 'TablesServiceDataImpl.php';
-include_once 'ModeDeReglementServiceDataImpl.php';
-include_once 'CompteServiceDataImpl.php';
-include_once 'AttributCompteServiceDataImpl.php';
-include_once 'ParamFormServiceDataImpl.php';
-include_once 'TicketServiceDataImpl.php';
-include_once 'ParametreApplicationServiceDataImpl.php';
-include_once 'StringsServiceDataImpl.php';
-include_once 'TauxTvaServiceImpl.php';
-include_once 'AssociationProduitPrixServiceDataImpl.php';
+include_once $path.'service/persistance/CategorieServiceDataImpl.php';
+include_once $path.'service/persistance/EntrepriseServiceDataImpl.php';
+include_once $path.'service/persistance/IngredientServiceDataImpl.php';
+include_once $path.'service/persistance/SousCategorieServiceDataImpl.php';
+include_once $path.'service/persistance/ProduitServiceDataImpl.php';
+include_once $path.'service/persistance/MenuServiceDataImpl.php';
+include_once $path.'service/persistance/TablesServiceDataImpl.php';
+include_once $path.'service/persistance/ModeDeReglementServiceDataImpl.php';
+include_once $path.'service/persistance/CompteServiceDataImpl.php';
+include_once $path.'service/persistance/AttributCompteServiceDataImpl.php';
+include_once $path.'service/persistance/ParamFormServiceDataImpl.php';
+include_once $path.'service/persistance/TicketServiceDataImpl.php';
+include_once $path.'service/persistance/ParametreApplicationServiceDataImpl.php';
+include_once $path.'service/persistance/StringsServiceDataImpl.php';
+include_once $path.'service/persistance/AssociationProduitPrixServiceDataImpl.php';
+include_once $path.'service/persistance/CompteRoleServiceDataImpl.php';
+include_once $path.'service/persistance/ProdtestServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -44,21 +43,29 @@ class PersistanceFactory {
     private static $stringsSrv = null;
     private static $tauxTvaSrv = null;
     private static $associationProduitPrixSrv = null;
+    private static $compteRoleSrv = null;
+    private static $prodtestSrv = null;
 
+    public static function getCompteRoleService() {
+        if (PersistanceFactory::$compteRoleSrv == null) {
+            PersistanceFactory::$compteRoleSrv = new CompteRoleServiceDataImpl();
+        }
+        return PersistanceFactory::$compteRoleSrv;
+    }
     public static function getAssociationProduitPrixService() {
         if (PersistanceFactory::$associationProduitPrixSrv == null) {
             PersistanceFactory::$associationProduitPrixSrv = new AssociationProduitPrixServiceDataImpl();
         }
         return PersistanceFactory::$associationProduitPrixSrv;
     }
-    
+
     public static function getTauxTvaService() {
         if (PersistanceFactory::$tauxTvaSrv == null) {
             PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceImpl();
         }
         return PersistanceFactory::$tauxTvaSrv;
     }
-    
+
     public static function getTicketService() {
         if (PersistanceFactory::$ticketSrv == null) {
             PersistanceFactory::$ticketSrv = new TicketServiceDataImpl();
@@ -163,12 +170,18 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$paramappSrv;
     }
-    
+
     public static function getStringsService() {
         if (PersistanceFactory::$stringsSrv == null) {
             PersistanceFactory::$stringsSrv = new StringsServiceDataImpl();
         }
         return PersistanceFactory::$stringsSrv;
-    }    
-
+    }
+    
+    public static function getProdtestService() {
+        if (PersistanceFactory::$prodtestSrv == null) {
+            PersistanceFactory::$prodtestSrv = new ProdtestServiceDataImpl();
+        }
+        return PersistanceFactory::$prodtestSrv;
+    }
 }

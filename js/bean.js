@@ -308,14 +308,10 @@ function Ticket(id, quantityOfProducts) {
         this.total = 0;
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
-                var prixHT = qop[y].getProduit().getPrix();
                 var quantity = qop[y].getQuantity();
-                var tauxTVA = qop[y].getProduit().id_sousCategorie.tauxTva;
-                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit,qop[y].getProduit().id_sousCategorie.tauxTva);
+                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
                 this.total += totalTTC * quantity;
             }
-        } else {
-            showErrorMessage("Aucun produit");
         }
         return this.total;
     };
@@ -396,7 +392,7 @@ function Personne() {
     this.email;
     this.urlProfileImg;
     this.gender;
-
+    this.role;
     this.setId = function(id) {
         this.id = id;
     };
@@ -433,11 +429,17 @@ function Personne() {
     this.getGender = function() {
         return this.gender;
     };
+    this.setRole = function(role) {
+        this.role = role;
+    };
+    this.getRole = function() {
+        return this.role;
+    };
 }
 function Compte() {
     this.id;
     this.password;
-
+    this.role;
     this.setId = function(id) {
         this.id = id;
     };
@@ -449,6 +451,12 @@ function Compte() {
     };
     this.getPassword = function() {
         return this.password;
+    };
+    this.setRole = function(role) {
+        this.role = role;
+    };
+    this.getRole = function() {
+        this.role;
     };
 }
 

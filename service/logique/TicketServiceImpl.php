@@ -1,6 +1,6 @@
 <?php
 
-include_once 'TicketService.php';
+include_once $path.'service/logique/TicketService.php';
 
 /**
  * Description of TableServiceImpl
@@ -18,7 +18,7 @@ class TicketServiceImpl implements TicketService {
 
     public function addNewTicket($ticket) {
         $personnesInTiciket = array();
-        $id = $this->ticketSrv->addCommande($ticket->getTable(), $ticket->getTypeCommande());
+        $id = $this->ticketSrv->addCommande($ticket->getTable()->id, $ticket->getTypeCommande());
         $qop = $ticket->getQuantityOfProduct();
         for ($i = 0; $i < count($qop); $i++) {
             $this->setPersonneInTicketToBdd($qop[$i]->getPersonne(), $id);

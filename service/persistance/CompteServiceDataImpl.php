@@ -6,9 +6,10 @@
  * and open the template in the editor.
  */
 
-include_once 'CompteServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Compte.php';
+include_once $path.'service/persistance/CompteServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Compte.php';
+include_once $path.'service/logique/entity/CompteRole.php';
 
 class CompteServiceDataImpl implements CompteServiceData {
 
@@ -27,21 +28,37 @@ class CompteServiceDataImpl implements CompteServiceData {
         return $comptes;
     }
 
-    public function getById($id) {
-
-        $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM compte WHERE id=" . $id);
-        $compte = new Compte();
-        $ligne = $retour->fetch();
-        $compte->setId(intval($ligne->id));
-        $compte->setPassword($ligne->password);
-
-        return $compte;
+    private function parseCompte($resultSet) {
+        $liste = array();
+        $ret;
+        while ($ligne = $resultSet->fetch()) {
+            $compte = new Compte();
+            $compteRole = new CompteRole();
+            $compte->setId(intval($ligne->id));
+            $compte->setPassword($ligne->password);
+            $compteRole->setId($ligne->id_role);
+            $compteRole->setLevel($ligne->level);
+            $compteRole->setLibelle($ligne->libelle);
+            $compte->setRole($compteRole);
+            array_push($liste, $compte);
+        }
+        if (count($liste) == 1) {
+            $ret = $liste[0];
+        } else {
+            $ret = $liste;
+        }
+        return $ret;
     }
 
-    public function addAll($password) {
+    public function getById($id) {
         $bdd = new ConnexionBDD();
-        echo $bdd->executeGeneric(" INSERT INTO compte(password) VALUES('$password') ");
+        $retour = $bdd->executeGeneric("SELECT * FROM  `compte` LEFT JOIN compte_role ON compte_role.id = compte.id_role WHERE compte.id=" . $id);
+        return $this->parseCompte($retour);
+    }
+
+    public function addAll($password, $role) {
+        $bdd = new ConnexionBDD();
+        echo $bdd->executeGeneric(" INSERT INTO compte(password,id_role) VALUES('$password','$role') ");
     }
 
 }

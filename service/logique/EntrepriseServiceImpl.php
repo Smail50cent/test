@@ -1,7 +1,7 @@
 <?php
 
-include_once 'EntrepriseService.php';
-include_once '../persistance/PersistanceFactory.php';
+include_once $path.'service/logique/EntrepriseService.php';
+include_once $path.'service/persistance/PersistanceFactory.php';
 
 /**
  *

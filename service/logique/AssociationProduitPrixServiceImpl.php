@@ -1,6 +1,6 @@
 <?php
-include_once 'AssociationProduitPrixService.php';
-include_once '../persistance/PersistanceFactory.php';
+include_once $path.'service/logique/AssociationProduitPrixService.php';
+include_once $path.'service/persistance/PersistanceFactory.php';
 /**
  * Description of AssociationProduitPrixServiceDataImpl
  *

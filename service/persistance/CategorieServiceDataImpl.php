@@ -5,9 +5,9 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once 'CategorieServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/Categorie.php';
+include_once $path.'service/persistance/CategorieServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/Categorie.php';
 
 class CategorieServiceDataImpl implements CategorieServiceData {
 
@@ -37,6 +37,13 @@ class CategorieServiceDataImpl implements CategorieServiceData {
         $categorie->setNom($ligne->nom);
         $categorie->setPriorite(intval($ligne->priorite));
         return $categorie;
+    }
+
+    public function addData() {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO dupappcaisse.categorie (nom,priorite) "
+                . " SELECT FP.FA_LIBELLE, FP.FA_ORDRE "
+                . " FROM prod_bacchus.BAR_FAMILLE_PRODUIT FP ");
     }
 
 }

@@ -63,8 +63,11 @@ function ConnexionLocalWebSQL() {
     };
     this.getAttributCompteByIdCompte = function(method, id) {
         console.log("TO DO");
-    };    
-    this.sendPersonnePriority = function (method,personnePriority,param){
+    };
+    this.sendPersonnePriority = function(method, personnePriority, param) {
+        console.log("TO DO");
+    };
+    this.getAllProduitFavoriteByIdServeur = function(method, id, param) {
         console.log("TO DO");
     };
 }

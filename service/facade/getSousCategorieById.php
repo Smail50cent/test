@@ -2,7 +2,7 @@
 
 if (isset($_GET["id"])) {
     header('Content-Type: text/json; charset=utf-8');
-    include_once '../logique/LogiqueFactory.php';
+    include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
     $produitSrv = LogiqueFactory::getSousCategorieService();
     $result = $produitSrv->getById($_GET["id"]);
     $total = $result->rowCount();

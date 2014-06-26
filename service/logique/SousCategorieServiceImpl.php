@@ -1,6 +1,6 @@
 <?php
 
-include_once 'SousCategorieService.php';
+include_once $path.'service/logique/SousCategorieService.php';
 
 /**
  * Description of CategorieServiceImpl
@@ -21,4 +21,9 @@ class SousCategorieServiceImpl implements SousCategorieService {
     public function getById($id){
         return $this->categorieSrv->getById($id);
     }
+
+    public function addData() {
+        $this->categorieSrv->addData();
+    }
+
 }

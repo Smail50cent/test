@@ -1,14 +1,9 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+include_once $path.'service/persistance/AttributCompteServiceData.php';
+include_once $path.'service/persistance/ConnexionBDD.php';
+include_once $path.'service/logique/entity/AttributCompte.php';
 
-include_once 'AttributCompteServiceData.php';
-include_once 'ConnexionBDD.php';
-include_once '../logique/entity/AttributCompte.php';
 
 class AttributCompteServiceDataImpl implements AttributCompteServiceData {
 
@@ -33,40 +28,36 @@ class AttributCompteServiceDataImpl implements AttributCompteServiceData {
     }
 
     public function getById($id) {
-
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM attribut_compte WHERE id=" . $id);
         $attcompte = new AttributCompte();
-
         $ligne = $retour->fetch();
         $attcompte->setId(intval($ligne->id));
         $attcompte->setId_form($ligne->id_form);
         $attcompte->setValeur_champ($ligne->valeur_champ);
         $attcompte->setDefaut($ligne->defaut);
         $attcompte->setId_compte(intval($ligne->id_compte));
-
         return $attcompte;
     }
 
     public function addAll($id_form, $valeur_champ, $defaut, $id_compte) {
-
         $bdd = new ConnexionBDD();
         $bdd->executeGeneric(" INSERT INTO attribut_compte(id_form,valeur_champ,defaut,id_compte) VALUES (" . $id_form . "," . $valeur_champ . "," . $defaut . "," . $id_compte . ")");
     }
 
     public function getAllByEmail($email) {
-
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM attribut_compte where id_form=7 AND valeur_champ='" . $email . "'");
-        
         $ligne = $retour->fetch();
-        $attcompte = new AttributCompte();
-        $attcompte->setId(intval($ligne->id));
-        $attcompte->setId_form($ligne->id_form);
-        $attcompte->setValeur_champ($ligne->valeur_champ);
-        $attcompte->setDefaut($ligne->defaut);
-        $attcompte->setId_compte(intval($ligne->id_compte));
-        
+        $attcompte = null;
+        if ($retour->rowCount() >= 1) {
+            $attcompte = new AttributCompte();
+            $attcompte->setId(intval($ligne->id));
+            $attcompte->setId_form($ligne->id_form);
+            $attcompte->setValeur_champ($ligne->valeur_champ);
+            $attcompte->setDefaut($ligne->defaut);
+            $attcompte->setId_compte(intval($ligne->id_compte));
+        }
         return $attcompte;
     }
 
