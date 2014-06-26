@@ -69,4 +69,6 @@
     <string key="label.index.li.accesserveur">Accès serveur</string>
     <string key="label.interfaceventeacces.newCommande">Nouvelle commande</string>
     <string key="label.menu.favori">Favori</string>
+    <string key="label.menu.favori.select.itemfacorite">Vos favoris</string>
+    <string key="label.menu.favori.select.itemsuggestion">Produits suggérer</string>
 </strings>

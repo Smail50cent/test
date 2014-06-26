@@ -187,3 +187,6 @@ function getInscriFormUser() {
 function getContentSlideFavorite(){
     return templates.getTemplate("carte/menu/content_slide_favorite");
 }
+function getItemSelectFavorite(){
+    return templates.getTemplate("carte/menu/item_select_type_favorite");
+}

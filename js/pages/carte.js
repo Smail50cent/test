@@ -503,17 +503,44 @@ function lessMenu(id) {
 }
 function printFavorite() {
     if (testIfIsServeurConnected()) {
-        var connexion = getConnexion();
+        console.log("printFavori");
         var htmlDivSlide = getDivSlide();
-        var menuDivSlide = htmlDivSlide;
-        menuDivSlide = paramValue(menuDivSlide, "style", "width: 100%;");
-        menuDivSlide = paramValue(menuDivSlide, "classToAdd", "");
-        menuDivSlide = paramValue(menuDivSlide, "id", "categorieFavori");
-        $("#slides_wrap_id").append(menuDivSlide);
+        var favoriDivSlide = htmlDivSlide;
+        favoriDivSlide = paramValue(favoriDivSlide, "style", "width: 100%;");
+        favoriDivSlide = paramValue(favoriDivSlide, "classToAdd", "");
+        favoriDivSlide = paramValue(favoriDivSlide, "id", "categorieFavori");
+        $("#slides_wrap_id").append(favoriDivSlide);
         var htmlContentSlideFavorite = getContentSlideFavorite();
         $("#categorieFavori").append(htmlContentSlideFavorite);
-        connexion.getAllProduitFavoriteByIdServeur(printProduitFavorite, id, null); //BDDDDDDDDDDDD
+        var htmlItem = getItemSelectFavorite();
+        var m1HtmlItem = htmlItem;
+        m1HtmlItem = paramValue(m1HtmlItem, "name", strings.getString("label.menu.favori.select.itemfacorite"));
+        m1HtmlItem = paramValue(m1HtmlItem, "value", 1);
+        $("#select_favori_id").append(m1HtmlItem);
+        var m2HtmlItem = htmlItem;
+        m2HtmlItem = paramValue(m2HtmlItem, "name", strings.getString("label.menu.favori.select.itemsuggestion"));
+        m2HtmlItem = paramValue(m2HtmlItem, "value", 2);
+        $("#select_favori_id").append(m2HtmlItem);
+        loadDataWithSelectValue(1);
     }
+}
+function loadDataWithSelectValue(valueSelect) {
+    switch (valueSelect) {
+        case 1:
+            getProduitsFavorite();
+            break;
+        case 2:
+            getProduitsSuggerer();
+            break;
+    }
+}
+function getProduitsFavorite() {
+    var connexion = getConnexion();
+    var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+    connexion.getAllProduitFavoriteByIdServeur(printProduitFavorite, serveur.id, null);
+}
+function getProduitsSuggerer() {
+
 }
 function printProduitFavorite(produits, param) {
     var htmlProduitItem = getContentProduitItem();

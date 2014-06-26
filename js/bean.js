@@ -632,4 +632,32 @@ function ParamApp() {
     this.getValeur_parametre = function() {
         return this.valeur_parametre;
     };
+
+}
+function CompteProduitFavori() {
+
+    this.id;
+    this.personneId;
+    this.produit;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setPersonneId = function(personneId) {
+        this.personneId = personneId;
+    };
+    this.getPersonneId = function() {
+        return this.valeur_parametre;
+    };
+
+    this.getProduit = function() {
+        return this.produit;
+    };
+
+    this.setProduit = function(produit) {
+        this.produit = produit;
+    };
 }
