@@ -9,18 +9,18 @@ include '../Modele/getAllProdtest.php';
  */
 $produits = new AllProd();
 $prodata = $produits->getAll();
-
-echo "<table>";
+$column = "class=\"column_table_product_structure column_table_product_personalise\"";
+echo "<table class=\"table_product_structure table_product_personalise\">>";
 echo AllProd::columnHead();
 for($i = 0; $i < sizeof($prodata); $i++) {
-    echo "<tbody>";
-    echo "<tr>";
-    echo "<td>";
-    echo AllProd::fields($prodata[$i]->nom)."</td><td> ".  AllProd::fields($prodata[$i]->categorie_id)."</td><td> ".  AllProd::fields($prodata[$i]->souscategorie)." </td><td>";
-    echo AllProd::fields($prodata[$i]->options)."</td><td> ".  AllProd::fields($prodata[$i]->lienAssociationProduitPrix)."</td><td> ".  AllProd::fields($prodata[$i]->produitSimple)."</td><td> ".  AllProd::fields($prodata[$i]->familleComptable)." </td><td>";
+    echo "<tbody class=\"body_table_product_structure body_table_product_personalise\">";
+    echo "<tr class=\"ligne_table_product_structure ligne_table_product_personalise\">";
+    echo "<td ".$column.">";
+    echo AllProd::fields($prodata[$i]->nom)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->categorie_id)."</td><td ".$column.">  ".  AllProd::fields($prodata[$i]->souscategorie)." </td><td ".$column."> ";
+    echo AllProd::fields($prodata[$i]->options)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->lienAssociationProduitPrix)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->produitSimple)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->familleComptable)." </td><td ".$column."> ";
     echo AllProd::fields($prodata[$i]->tva,1);
     echo "</td>";
-    echo "<td class=bt_column>".AllProd::buttonGestionProduit()."</td>";
+    echo "<td ".$column.">".AllProd::buttonGestionProduit()."</td>";
     echo "</tr>";
     echo "</tbody>";
 }
