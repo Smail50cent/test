@@ -542,23 +542,17 @@ function getProduitsFavorite() {
 function getProduitsSuggerer() {
 
 }
-function printProduitFavorite(produits, param) {
+function printProduitFavorite(cpfs, param) {
     var htmlProduitItem = getContentProduitItem();
-    for (var x = 0; x < produits.length; x++) {
-        var produit = produits[x];
+    for (var x = 0; x < cpfs.length; x++) {
+        var produit = cpfs[x].produit;
         var itemProduit = htmlProduitItem;
         itemProduit = paramValue(itemProduit, "produitId", produit.getId());
-        itemProduit = paramValue(itemProduit, "categorieId", categorie.getId());
-        if (produit.id_sousCategorie instanceof  Object) {
-            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie().id);
-        } else {
-            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
-        }
         var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
-        itemProduit = paramValue(itemProduit, "quantity", quantity);
+        itemProduit = paramValue(itemProduit, "quantity", "");
         itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
         itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
-        $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
+        $('#favorite_id').append(itemProduit);
     }
 }
 /**

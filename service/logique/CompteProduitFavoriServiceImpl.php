@@ -15,7 +15,7 @@ class CompteProduitFavoriServiceImpl implements CompteProduitFavoriService {
 
     public function __construct() {
         $this->compteProduitFavoriSrv = PersistanceFactory::getCompteProduitFavoriService();
-        $this->produitSrv = PersistanceFactory::getProduitService();
+        $this->produitSrv = LogiqueFactory::getProduitService();
     }
 
     public function getByIdServeur($id) {
@@ -25,6 +25,7 @@ class CompteProduitFavoriServiceImpl implements CompteProduitFavoriService {
             $produit = $this->produitSrv->getById($produitid);
             $cpf[$i]->setProduit($produit);
         }
+        
         return $cpf;
     }
 
