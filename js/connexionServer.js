@@ -590,24 +590,65 @@ function ConnexionServer() {
                 if (data != null) {
                     for (var i = 0; i < data.length; i++) {
                         var cpf = new CompteProduitFavori();
-                        cpf.setId(data.id);
+                        cpf.setId(data[i].id);
                         var produit = new Produit();
-                        produit.setNom(data.produit.nom);
-                        produit.setId(data.produit.id);
+                        produit.setNom(data[i].produit.nom);
+                        produit.setId(data[i].produit.id);
+                        produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
                         var categorie = new Categorie();
-                        categorie.setNom(data.produit.categorie.nom);
-                        categorie.setId(data.produit.categorie.id);
-                        categorie.setPriorite(data.produit.categorie.priorite);
-                        categorie.setSousCategorie(data.produit.categorie.souscategorie);
+                        categorie.setNom(data[i].produit.categorie.nom);
+                        categorie.setId(data[i].produit.categorie.id);
+                        categorie.setPriorite(data[i].produit.categorie.priorite);
+                        categorie.setSousCategorie(data[i].produit.categorie.souscategorie);
                         produit.setCategorie(categorie);
-                        produit.setSousCategorie(data.produit.souscategorie);
-                        produit.setIdsIngredients(data.produit.ingredients);
-                        produit.setAssociationPrixProduit(data.produit.associationPrixProduit);
-                        produit.setOptions(data.produit.options);
+                        produit.setSousCategorie(data[i].produit.souscategorie);
+                        produit.setIdsIngredients(data[i].produit.ingredients);
+                        produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
+                        produit.setOptions(data[i].produit.options);
                         cpf.setProduit(produit);
                         cpfs.push(cpf);
                     }
                 }
+                if (method != null) {
+                    method(cpfs, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllProduitSuggerer = function(method, param) {console.log("pasage");
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllProduitsSuggerer"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var cpfs = new Array();
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var cpf = new CompteProduitFavori();
+                        cpf.setId(data[i].id);
+                        var produit = new Produit();
+                        produit.setNom(data[i].produit.nom);
+                        produit.setId(data[i].produit.id);
+                        produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
+                        var categorie = new Categorie();
+                        categorie.setNom(data[i].produit.categorie.nom);
+                        categorie.setId(data[i].produit.categorie.id);
+                        categorie.setPriorite(data[i].produit.categorie.priorite);
+                        categorie.setSousCategorie(data[i].produit.categorie.souscategorie);
+                        produit.setCategorie(categorie);
+                        produit.setSousCategorie(data[i].produit.souscategorie);
+                        produit.setIdsIngredients(data[i].produit.ingredients);
+                        produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
+                        produit.setOptions(data[i].produit.options);
+                        cpf.setProduit(produit);
+                        cpfs.push(cpf);
+                    }
+                }
+                console.log(data);
                 if (method != null) {
                     method(cpfs, param);
                 }

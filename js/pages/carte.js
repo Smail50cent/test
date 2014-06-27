@@ -30,6 +30,7 @@ function calcHeight(nbItem) {
 }
 
 function onCarteLoadFinish(categories) {
+    $("#content_titre_id").text(strings.getString("label.titre.carte"));
     var html = getHeaderCategorieItem();
     var htmlSousCategorie = getHeaderCategorieSousCategorieListe();
     if (testIfIsServeurConnected()) {
@@ -503,7 +504,6 @@ function lessMenu(id) {
 }
 function printFavorite() {
     if (testIfIsServeurConnected()) {
-        console.log("printFavori");
         var htmlDivSlide = getDivSlide();
         var favoriDivSlide = htmlDivSlide;
         favoriDivSlide = paramValue(favoriDivSlide, "style", "width: 100%;");
@@ -522,6 +522,10 @@ function printFavorite() {
         m2HtmlItem = paramValue(m2HtmlItem, "value", 2);
         $("#select_favori_id").append(m2HtmlItem);
         loadDataWithSelectValue(1);
+        $("#select_favori_id").change(function() {
+            var value = $(this).val();
+            loadDataWithSelectValue(parseInt(value));
+        });
     }
 }
 function loadDataWithSelectValue(valueSelect) {
@@ -540,25 +544,22 @@ function getProduitsFavorite() {
     connexion.getAllProduitFavoriteByIdServeur(printProduitFavorite, serveur.id, null);
 }
 function getProduitsSuggerer() {
-
+    var connexion = getConnexion();
+    connexion.getAllProduitSuggerer(printProduitFavorite, null);
 }
-function printProduitFavorite(produits, param) {
+
+function printProduitFavorite(cpfs, param) {
+    $('#favorite_id').html("");
     var htmlProduitItem = getContentProduitItem();
-    for (var x = 0; x < produits.length; x++) {
-        var produit = produits[x];
+    for (var x = 0; x < cpfs.length; x++) {
+        var produit = cpfs[x].produit;
         var itemProduit = htmlProduitItem;
         itemProduit = paramValue(itemProduit, "produitId", produit.getId());
-        itemProduit = paramValue(itemProduit, "categorieId", categorie.getId());
-        if (produit.id_sousCategorie instanceof  Object) {
-            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie().id);
-        } else {
-            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
-        }
         var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
-        itemProduit = paramValue(itemProduit, "quantity", quantity);
+        itemProduit = paramValue(itemProduit, "quantity", "");
         itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
         itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
-        $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
+        $('#favorite_id').append(itemProduit);
     }
 }
 /**

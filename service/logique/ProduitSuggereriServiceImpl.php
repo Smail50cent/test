@@ -1,6 +1,6 @@
 <?php
 
-include_once $path . 'service/logique/CompteProduitFavoriService.php';
+include_once $path . 'service/logique/ProduitSuggererService.php';
 include_once $path . 'service/persistance/PersistanceFactory.php';
 
 /**
@@ -8,24 +8,23 @@ include_once $path . 'service/persistance/PersistanceFactory.php';
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-class CompteProduitFavoriServiceImpl implements CompteProduitFavoriService {
+class ProduitSuggererServiceImpl implements ProduitSuggererService {
 
-    private $compteProduitFavoriSrv;
+    private $produitSuggererSrv;
     private $produitSrv;
 
     public function __construct() {
-        $this->compteProduitFavoriSrv = PersistanceFactory::getCompteProduitFavoriService();
+        $this->produitSuggererSrv = PersistanceFactory::getProduitSuggererService();
         $this->produitSrv = LogiqueFactory::getProduitService();
     }
 
-    public function getByIdServeur($id) {
-        $cpf = $this->compteProduitFavoriSrv->getByIdServeur($id);
+    public function getAll() {
+        $cpf = $this->produitSuggererSrv->getAll();
         for ($i = 0; $i < count($cpf); $i++) {
             $produitid = $cpf[$i]->getProduit();
             $produit = $this->produitSrv->getById($produitid);
             $cpf[$i]->setProduit($produit);
         }
-        
         return $cpf;
     }
 

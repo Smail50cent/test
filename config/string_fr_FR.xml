@@ -71,4 +71,5 @@
     <string key="label.menu.favori">Favori</string>
     <string key="label.menu.favori.select.itemfacorite">Vos favoris</string>
     <string key="label.menu.favori.select.itemsuggestion">Produits suggérer</string>
+    <string key="label.titre.carte">À la carte</string>
 </strings>
