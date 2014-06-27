@@ -303,7 +303,12 @@ function Ticket(id, quantityOfProducts) {
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
                 var quantity = qop[y].getQuantity();
-                var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
+                if (qop[y].product instanceof Menu) {
+                    
+                    console.log(qop[y].product.prix);
+                } else {
+                    var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
+                }
                 this.total += totalTTC * quantity;
             }
         }
@@ -627,7 +632,7 @@ function ParametreApplication() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
-    
+
     this.getId = function() {
         return this.id;
     };

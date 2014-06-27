@@ -185,6 +185,7 @@ function AjoutVisiteur() {
                 listePersonnes.push(personne);
                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                 $('#auth_popup_id').dialog("close");
+                AuthToCommande();
             }
         });
     }
