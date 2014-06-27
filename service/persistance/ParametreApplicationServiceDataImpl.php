@@ -6,9 +6,9 @@
  * and open the template in the editor.
  */
 
-include_once $path.'service/persistance/ParametreApplicationServiceData.php';
-include_once $path.'service/persistance/ConnexionBDD.php';
-include_once $path.'service/logique/entity/ParametreApplication.php';
+include_once $path . 'service/persistance/ParametreApplicationServiceData.php';
+include_once $path . 'service/persistance/ConnexionBDD.php';
+include_once $path . 'service/logique/entity/ParametreApplication.php';
 
 class ParametreApplicationServiceDataImpl implements ParametreApplicationServiceData {
 
@@ -29,7 +29,6 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
     }
 
     public function getById($id) {
-
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE id=" . $id);
         $paramapp = new ParametreApplication();
@@ -37,8 +36,31 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         $paramapp->setId(intval($ligne->id));
         $paramapp->setNom_parametre($ligne->nom_parametre);
         $paramapp->setValeur_parametre($ligne->valeur_parametre);
-
         return $paramapp;
+    }
+
+    public function getByNomParametre($nom) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."'");
+        return $this->parseParametreApplication($retour);
+    }
+
+    private function parseParametreApplication($resultSet) {
+        $liste = array();
+        $ret;
+        while ($ligne = $resultSet->fetch()) {
+            $paramapp = new ParametreApplication();
+            $paramapp->setId(intval($ligne->id));
+            $paramapp->setNom_parametre($ligne->nom_parametre);
+            $paramapp->setValeur_parametre($ligne->valeur_parametre);
+            array_push($liste, $paramapp);
+        }
+        if (count($liste) == 1) {
+            $ret = $liste[0];
+        } else {
+            $ret = $liste;
+        }
+        return $ret;
     }
 
 }

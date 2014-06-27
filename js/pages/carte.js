@@ -741,7 +741,11 @@ function showTicket(qop) {
         var quantityOfProducts = currentTicket.getQuantityOfProduct();
         for (i = 0; i < quantityOfProducts.length; i++) {
             var quantityOfProduct = quantityOfProducts[i];
-            addTicketItem(quantityOfProducts[i]);
+            if (quantityOfProduct.product instanceof Menu) {
+
+            } else {
+                addTicketItem(quantityOfProducts[i]);
+            }
         }
     }
     gestionAffichageTVA(currentTicket.calculerTotal());
