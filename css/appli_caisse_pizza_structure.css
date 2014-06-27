@@ -474,7 +474,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .btn_choice_structure li:nth-child(3) {
         max-width:250px;
-        margin:2em  auto;
     }
 
     .btn_ajout_structure {
