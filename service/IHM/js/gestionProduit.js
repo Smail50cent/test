@@ -58,7 +58,7 @@ function addLigneProduit() {
     var html = $('#ligne_table_product_id_0').clone().wrap("#ligne_table_product_id_0").parent().html();
     $("#ligne_table_product_id_0 > td[id^='column_table_product_id_']").each(function() {
         var tdval = $(this).html();
-        html = paramValue(html, tdval, "<input type=text >");
+        html = paramValue(html, tdval, "<input type=text width=100% >");
         
     });
     html = paramValue(html, "ligne_table_product_id_0", "product_add"+idnewProd++);

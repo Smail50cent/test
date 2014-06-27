@@ -8,7 +8,9 @@ include '../Modele/getAllProdtest.php';
  * and open the template in the editor.
  */
 $produits = new AllProd();
-$prodata = $produits->getAll();
+$prodata = $produits->getAllProducts();
+$categdata = $produits->getAllCategorie();
+
 $column = "class=\"column_table_product_structure column_table_product_personalise\"";
 //$test = array();
 echo "<table class=\"table_product_structure table_product_personalise\">";
@@ -19,7 +21,7 @@ if (sizeof($prodata) > 0) {
 
         echo "<tr id=\"ligne_table_product_id_" . $i . "\" class=\"ligne_table_product_structure ligne_table_product_personalise\">";
         echo AllProd::columnProduct($prodata[$i]->nom, "nom");
-        echo AllProd::columnProduct($prodata[$i]->categorie_id, "categorie_id");
+        echo AllProd::columnProduct($categdata[$prodata[$i]->categorie_id], "categorie_id");
         echo AllProd::columnProduct($prodata[$i]->souscategorie, "souscategorie");
         echo AllProd::columnProduct($prodata[$i]->options, "options");
         echo AllProd::columnProduct($prodata[$i]->lienAssociationProduitPrix, "lienAssociationProduitPrix");

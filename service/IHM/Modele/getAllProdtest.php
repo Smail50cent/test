@@ -5,12 +5,20 @@ include_once $path ."service/logique/LogiqueFactory.php";
 
 class AllProd {
 
-    public $data;
-
-    public function getAll() {
+    public function getAllProducts() {
         $prodtest = LogiqueFactory::getProdtestService();
-        $this->data = $prodtest->getAll();
-        return $this->data;
+        $data = $prodtest->getAll();
+        return $data;
+    }
+    
+    public function getAllCategorie(){
+        $categorie = LogiqueFactory::getCategorieService();
+        $data = $categorie->getAll();
+        $idname = array();
+        for ($i=0;$i<sizeof($data);$i++){
+            $idname[$data[$i]->id] = $data[$i]->nom;
+        }
+        return $idname;
     }
   
     static function columnHead() {
