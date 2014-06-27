@@ -10,20 +10,34 @@ include '../Modele/getAllProdtest.php';
 $produits = new AllProd();
 $prodata = $produits->getAll();
 $column = "class=\"column_table_product_structure column_table_product_personalise\"";
-echo "<table class=\"table_product_structure table_product_personalise\">>";
+//$test = array();
+echo "<table class=\"table_product_structure table_product_personalise\">";
 echo AllProd::columnHead();
-for($i = 0; $i < sizeof($prodata); $i++) {
-    echo "<tbody class=\"body_table_product_structure body_table_product_personalise\">";
-    echo "<tr class=\"ligne_table_product_structure ligne_table_product_personalise\">";
-    echo "<td ".$column.">";
-    echo AllProd::fields($prodata[$i]->nom)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->categorie_id)."</td><td ".$column.">  ".  AllProd::fields($prodata[$i]->souscategorie)." </td><td ".$column."> ";
-    echo AllProd::fields($prodata[$i]->options)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->lienAssociationProduitPrix)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->produitSimple)."</td><td ".$column."> ".  AllProd::fields($prodata[$i]->familleComptable)." </td><td ".$column."> ";
-    echo AllProd::fields($prodata[$i]->tva,1);
+echo "<tbody id=\"body_table_product_id\" class=\"body_table_product_structure body_table_product_personalise\">";
+if (sizeof($prodata) > 0) {
+    for ($i = 0; $i < sizeof($prodata); $i++) {
+
+        echo "<tr id=\"ligne_table_product_id_" . $i . "\" class=\"ligne_table_product_structure ligne_table_product_personalise\">";
+        echo AllProd::columnProduct($prodata[$i]->nom, "nom");
+        echo AllProd::columnProduct($prodata[$i]->categorie_id, "categorie_id");
+        echo AllProd::columnProduct($prodata[$i]->souscategorie, "souscategorie");
+        echo AllProd::columnProduct($prodata[$i]->options, "options");
+        echo AllProd::columnProduct($prodata[$i]->lienAssociationProduitPrix, "lienAssociationProduitPrix");
+        echo AllProd::columnProduct($prodata[$i]->produitSimple, "produitSimple");
+        echo AllProd::columnProduct($prodata[$i]->familleComptable, "familleComptable");
+        echo AllProd::columnProduct($prodata[$i]->tva, "tva");
+        echo "<td " . $column . ">" . AllProd::buttonGestionProduit($prodata[$i]->id) . "</td>";
+
+        echo "</tr>";
+    }
+}else {
+    echo "<tr>";
+    echo "<td>";
+    echo "THERE IS NO DATA TO DISPLAY !";
     echo "</td>";
-    echo "<td ".$column.">".AllProd::buttonGestionProduit()."</td>";
     echo "</tr>";
-    echo "</tbody>";
 }
+echo "</tbody>";
 echo "</table>";
 ?>
 <?php include 'footer.php'; ?>
