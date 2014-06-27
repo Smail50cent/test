@@ -26,7 +26,7 @@ if (sizeof($prodata) > 0) {
         echo AllProd::columnProduct($prodata[$i]->produitSimple, "produitSimple");
         echo AllProd::columnProduct($prodata[$i]->familleComptable, "familleComptable");
         echo AllProd::columnProduct($prodata[$i]->tva, "tva");
-        echo "<td " . $column . ">" . AllProd::buttonGestionProduit($prodata[$i]->id) . "</td>";
+        echo "<td " . $column . ">" . AllProd::buttonGestionProduit("ligne_table_product_id_" . $i) . "</td>";
 
         echo "</tr>";
     }
