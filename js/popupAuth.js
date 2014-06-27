@@ -188,8 +188,8 @@ function AjoutVisiteur() {
             }
         });
     }
-
 }
+
 function facebookAuth() {
     scripts.loadScripts("lib.social", function() {
         window.setTimeout(function() {

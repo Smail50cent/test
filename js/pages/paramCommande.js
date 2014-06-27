@@ -36,7 +36,8 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
             $("#numeroTable_item").hide();
         });
         $("#nbPersonnes").change(function() {
-            onLoadCompte(true, null, "-17", null);
+            var connexion = getConnexion();
+            connexion.getParametreApplicationByNom(chooseIfOpCompte, config.getConfig("parametre.app.gestion.utilisateurs"), null);
             var person = strings.getString("label.personne.auth");
             $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
             $('div#auth_popup_id').bind('dialogclose', function(event) {
@@ -97,4 +98,30 @@ function startCommande(numTable, nbPersonne) {
         }
     }
     redirictWhereFinishParamCommande();
+}
+function chooseIfOpCompte(paramApp, param) {
+    if (paramApp.getValeur_parametre() == true) {
+        onLoadCompte(true, null, "-17", null);
+    } else {
+        var personnes = new Array();
+        for (var i = 0; i < parseInt($("#nbPersonnes").val()); i++) {
+            var connexion = getConnexion();
+            connexion.addCompte(insertFromLastId, "Visiteur", 3, {"i": i});
+            function insertFromLastId(LastId, param) {
+                var prenom = strings.getString("label.where.gestion.user.disable");
+                var nom = (i + 1);
+                connexion.addAttributCompte(2, nom, 1, LastId);
+                connexion.addAttributCompte(3, prenom, 1, LastId);
+                var personne = new Personne();
+                personne.setId(LastId);
+                personne.setNom(nom);
+                personne.setPrenom(prenom);
+                listePersonnes.push(personne);
+                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                if ((param.i + 1) == parseInt($("#nbPersonnes").val())) {
+                    startCommande($("#numTable").val(), $("#nbPersonnes").val());
+                }
+            }
+        }
+    }
 }

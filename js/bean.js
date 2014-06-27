@@ -14,7 +14,6 @@ function Entreprise() {
     this.setMessage = function(message) {
         this.message = message;
     };
-
     this.getMessage = function() {
         return this.message;
     };
@@ -30,7 +29,6 @@ function Entreprise() {
     this.setSlogan = function(slogan) {
         this.slogan = slogan;
     };
-
     this.getSlogan = function() {
         return this.slogan;
     };
@@ -49,14 +47,12 @@ function Entreprise() {
     this.setTelephone = function(telephone) {
         this.telephone = telephone;
     };
-
     this.getTelephone = function() {
         return this.telephone;
     };
     this.setUseComptes = function(use_comptes) {
         this.use_comptes = use_comptes;
     };
-
     this.getUseComptes = function() {
         return this.use_comptes;
     };
@@ -98,7 +94,6 @@ function SousCategorie() {
     this.nom;
     this.priorite;
     this.taux_tva;
-
     this.setId = function(id) {
         this.id = id;
     };
@@ -153,7 +148,7 @@ function Produit() {
     this.id_categorie;
     this.id_sousCategorie;
     this.ids_ingredients; // ARRAY
-    this.demanderCuisson = false;//BOOL
+    this.demanderCuisson = false; //BOOL
     this.options;
     this.associationPrixProduit;
     this.Produit = function(id, nom, categorie, ingredients) {
@@ -210,7 +205,6 @@ function Produit() {
     this.getAssociationPrixProduit = function() {
         return this.associationPrixProduit;
     };
-
 }
 ;
 function Menu(id, produits, prix, nom) {
@@ -473,91 +467,69 @@ function ParamForm() {
     this.ordre;
     this.id_html;
     this.file_template_html;
-
     this.getFile_template_html = function() {
         return this.file_template_html;
     };
-
     this.getId_form = function() {
         return this.id_form;
     };
-
     this.getActif = function() {
         return this.actif;
     };
-
     this.getDiscrim = function() {
         return this.discrim;
     };
-
     this.getLabel = function() {
         return this.label;
     };
-
     this.getId_label_html = function() {
         return this.id_label_html;
     };
-
     this.getType_html = function() {
         return this.type_html;
     };
-
     this.getClass_html = function() {
         return this.class_html;
     };
-
     this.getStyle_html = function() {
         return this.style_html;
     };
-
     this.getOrdre = function() {
         return this.ordre;
     };
-
     this.getId_html = function() {
         return this.id_html;
     };
-
     this.setId_form = function(id_form) {
         this.id_form = id_form;
     };
-
     this.setActif = function(actif) {
         this.actif = actif;
     };
-
     this.setDiscrim = function(discrim) {
         this.discrim = discrim;
     };
-
     this.setLabel = function(label) {
         this.label = label;
     };
-
     this.setId_label_html = function(id_label_html) {
         this.id_label_html = id_label_html;
     };
-
     this.setType_html = function(type_html) {
         this.type_html = type_html;
     };
-
     this.setClass_html = function(class_html) {
         this.class_html = class_html;
     };
-
     this.setStyle_html = function(style_html) {
         this.style_html = style_html;
     };
-
     this.setOrdre = function(ordre) {
         this.ordre = ordre;
     };
-
     this.setId_html = function(id_html) {
         this.id_html = id_html;
     };
-
     this.setFile_template_html = function(file_template_html) {
         this.file_template_html = file_template_html;
     };
@@ -570,7 +542,6 @@ function AttributCompte() {
     this.valeur_champ;
     this.id_compte;
     this.defaut;
-
     this.setId = function(id) {
         this.id = id;
     };
@@ -608,38 +579,30 @@ function ParamApp() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
-
     this.setId = function(id) {
         this.id = id;
     };
-
     this.setNom_parametre = function(nom_parametre) {
         this.nom_parametre = nom_parametre;
     };
-
     this.setValeur_parametre = function(valeur_parametre) {
         this.valeur_parametre = valeur_parametre;
     };
-
     this.getId = function() {
         return this.id;
     };
-
     this.getNom_parametre = function() {
         return this.nom_parametre;
     };
-
     this.getValeur_parametre = function() {
         return this.valeur_parametre;
     };
-
 }
 function CompteProduitFavori() {
 
     this.id;
     this.personneId;
     this.produit;
-
     this.setId = function(id) {
         this.id = id;
     };
@@ -652,12 +615,41 @@ function CompteProduitFavori() {
     this.getPersonneId = function() {
         return this.valeur_parametre;
     };
-
     this.getProduit = function() {
         return this.produit;
     };
-
     this.setProduit = function(produit) {
         this.produit = produit;
     };
+}
+function ParametreApplication() {
+
+    this.id;
+    this.nom_parametre;
+    this.valeur_parametre;
+    
+    this.getId = function() {
+        return this.id;
+    };
+
+    this.getNomParametre = function() {
+        return this.nom_parametre;
+    };
+
+    this.getValeur_parametre = function() {
+        return this.valeur_parametre;
+    };
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+
+    this.setNomParametre = function(nom_parametre) {
+        this.nom_parametre = nom_parametre;
+    };
+
+    this.setValeurParametre = function(valeur_parametre) {
+        this.valeur_parametre = valeur_parametre;
+    };
+
 }

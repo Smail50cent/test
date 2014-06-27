@@ -73,4 +73,7 @@ function ConnexionLocalWebSQL() {
     this.getAllProduitSuggerer = function(method, param) {
         console.log("TO DO");
     };
+    this.getParametreApplicationByNom = function(method, nom, param) {
+        console.log("TO DO");
+    };
 }

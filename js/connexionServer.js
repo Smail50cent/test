@@ -618,7 +618,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.getAllProduitSuggerer = function(method, param) {console.log("pasage");
+    this.getAllProduitSuggerer = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllProduitsSuggerer"),
             type: 'GET',
@@ -658,4 +658,30 @@ function ConnexionServer() {
             }
         });
     };
+    this.getParametreApplicationByNom = function(method, nom, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var parametreApplication=null;
+                if (data != null) {
+                    parametreApplication = new ParametreApplication();
+                    parametreApplication.setId(data.id);
+                    parametreApplication.setNomParametre(data.nom_parametre);
+                    parametreApplication.setValeurParametre(data.valeur_parametre);
+                }
+                if (method != null) {
+                    method(parametreApplication, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
+//this.mAjax = function (){
+//    
+//};
