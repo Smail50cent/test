@@ -266,7 +266,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     left: 0%;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: 99;
 }
 /*_____________________________LOADING____________________________'*/
 
@@ -373,7 +373,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         -webkit-background-size: 100%; /* pour Chrome et Safari */
         -moz-background-size: 100%; /* pour Firefox */
         -o-background-size: 100%; /* pour Opera */
-        background-size: 100%; /* version standardisÃ©e */
+        background-size: 100%; /* version standardisée */
         width:100%;
         padding: 0;
         margin:0;
@@ -387,7 +387,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         margin-top:0;
         position:fixed;
         top:0;
-        z-index:100;
+        z-index:98;
     }
 
     .header_right_structure{
@@ -415,7 +415,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
     .header_left_logo p {    
-        position:absolute;      /*#display none afin de retirer "pizzeria" , mais devant Ãªtre utilisable pour un quelconque texte sous le logo*/
+        position:absolute;      /*#display none afin de retirer "pizzeria" , mais devant être utilisable pour un quelconque texte sous le logo*/
         display:none;
         bottom:-0.4em;
         right: 1.3em;   
@@ -473,7 +473,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     .btn_choice_structure li:nth-child(3) {
-        max-width:160px;
+        max-width:250px;
         margin:2em  auto;
     }
 
@@ -1570,7 +1570,7 @@ body {
         position: absolute;
         top: 0%;
         left: 0%;
-        z-index: 5000;
+        z-index: 99;
 }
 
 
@@ -1647,6 +1647,11 @@ ul#categorie_sous_cat_1 {
 .header_right_logo_structure p {
 right: 0em;
 bottom: -1.4em;
+}
+
+select#select_lang {
+margin-top: -65px;
+position: relative;
 }
 }
 
