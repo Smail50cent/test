@@ -5,46 +5,38 @@ include_once $path . 'service/logique/entity/Reservation.php';
 
 class ReservationServiceImpl implements ReservationService {
 
-    private function parseReservation($resultSet) {
-        $liste = array();
-        $ret;
-        while ($ligne = $resultSet->fetch()) {
-            $reservation = new Reservation();
-            $reservation->setId(intval($ligne->id));
-            $reservation->setCompte($ligne->heureDebut);
-            $reservation->setDateHeure($ligne->date);
-            array_push($liste, $reservation);
-        }
-        if (count($liste) == 1) {
-            $ret = $liste[0];
-        } else {
-            $ret = $liste;
+    private $reservationSrv;
+
+    function __construct() {
+        $this->reservationSrv = PersistanceFactory::getReservationService();
+    }
+
+    public function getAll() {
+        return $this->reservationSrv->getAll();
+    }
+
+    public function getByCompte($compte) {
+        $ret = null;
+        if ($compte != null) {
+            $ret = $this->reservationSrv->getByCompte($compte);
         }
         return $ret;
     }
 
-    public function getAll() {
-        $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT `id`, `compte`, `dateHeure` FROM `reservation` ");
-        return $this->parseReservation($resultSet);
-    }
-
-    public function getByCompte($compte) {
-        $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT `id`, `compte`, `dateHeure` FROM `reservation` WHERE `compte` = ".$compte);
-        return $this->parseReservation($resultSet);
-    }
-
     public function getByDateHeure($dateheure) {
-        $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT `id`, `compte`, `dateHeure` FROM `reservation` WHERE `dateHeure`=".$dateheure);
-        return $this->parseReservation($resultSet);
+        $ret = null;
+        if ($dateheure != null) {
+            $ret = $this->reservationSrv->getByDateHeure($dateheure);
+        }
+        return $ret;
     }
 
     public function getById($id) {
-        $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT `id`, `compte`, `dateHeure` FROM `reservation` WHERE `id` = ".$id);
-        return $this->parseReservation($resultSet);
+        $ret = null;
+        if ($id != null) {
+            $ret = $this->reservationSrv->getById($id);
+        }
+        return $ret;
     }
 
 }
