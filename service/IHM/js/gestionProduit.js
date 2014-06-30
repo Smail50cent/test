@@ -49,17 +49,22 @@ function modProduit() {
     alert('Modify');
 }
 
-function delProduit() {
-    alert('Delete');
+function delProduit(elem) {
+    idnewProd = 0;
+    $("tr[id^='"+elem+"']").remove();
 }
-
-function addProduit() {
-    var html = $('#ligne_table_product_id_0').html();
+var idnewProd = 0;
+function addLigneProduit() {
+    var html = $('#ligne_table_product_id_0').clone().wrap("#ligne_table_product_id_0").parent().html();
     $("#ligne_table_product_id_0 > td[id^='column_table_product_id_']").each(function() {
         var tdval = $(this).html();
-        html = paramValue(html, tdval, "<input type=text >");
+        html = paramValue(html, tdval, "<input type=text width=100% >");
+        
     });
-    $('#body_table_product_id').prepend(html);
+    html = paramValue(html, "ligne_table_product_id_0", "product_add"+idnewProd++);
+    var changepng = paramValue(html, "modify_row", "db_submit");
+    var changefunction = paramValue(changepng, "modProduit", "addProduit");
+    $('#body_table_product_id').prepend(changefunction);
 
 
 
@@ -75,4 +80,8 @@ function paramValue(string, paramName, value) {
         }
     }
     return string;
+}
+
+function addProduit() {
+    alert('MODIFIED :)');
 }

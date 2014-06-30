@@ -17,5 +17,4 @@
 <div id="content_id" class="content content_structure content_personalize">
     <a href="gestionProduit.php" id="bt_ajouter_produit_id" class="bt_ajouter_produit_structure bt_ajouter_produit_personalize" onclick="">Gestion</a>
 </div>
-</div>
 <?php include 'footer.php'; ?>

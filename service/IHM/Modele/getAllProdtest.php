@@ -5,12 +5,20 @@ include_once $path ."service/logique/LogiqueFactory.php";
 
 class AllProd {
 
-    public $data;
-
-    public function getAll() {
+    public function getAllProducts() {
         $prodtest = LogiqueFactory::getProdtestService();
-        $this->data = $prodtest->getAll();
-        return $this->data;
+        $data = $prodtest->getAll();
+        return $data;
+    }
+    
+    public function getAllCategorie(){
+        $categorie = LogiqueFactory::getCategorieService();
+        $data = $categorie->getAll();
+        $idname = array();
+        for ($i=0;$i<sizeof($data);$i++){
+            $idname[$data[$i]->id] = $data[$i]->nom;
+        }
+        return $idname;
     }
   
     static function columnHead() {
@@ -35,14 +43,14 @@ class AllProd {
 
     static function buttonGestionProduit($id) {
 
-        $btmod = "<a href=\"#\" onclick=modProduit() id=\"".$id."\" class=\"modprod_structure modprod_personalise\"><img src=\"../../../img/modify_column.png\" width=35 height=35 id=\"img_modprod_user_id\" alt=\"modifier un produit\" title=\"modifier un produit\"> </a>";
-        $btsup = "<a href=\"#\" onclick=delProduit() id=\"".$id."\" class=\"delprod_structure delprod_personalise\"><img src=\"../../../img/db_remove.png\" width=35 height=35 id=\"img_delprod_user_id\" alt=\"supprimer un produit\" title=\"supprimer un produit\"> </a>";
+        $btmod = "<a href=\"#\" onclick=modProduit() id=\"".$id."\" class=\"modprod_structure modprod_personalise\"><img src=\"../../../img/modify_row.png\" width=35 height=35 id=\"img_modprod_user_id\" alt=\"modifier un produit\" title=\"modifier un produit\"> </a>";
+        $btsup = "<a href=\"#\" onclick=delProduit($(this).attr('id')) id=\"".$id."\" class=\"delprod_structure delprod_personalise\"><img src=\"../../../img/db_remove.png\" width=35 height=35 id=\"img_delprod_user_id\" alt=\"supprimer un produit\" title=\"supprimer un produit\"> </a>";
 
         return $btmod.$btsup;
     }
     
     static function buttonAddProduit() {
-        return  $btadd = "<a href=\"#\" onclick=addProduit() id=\"addprod_id\" class=\"addprod_structure addprod_personalise\"><img src=\"../../../img/db_add.png\" width=40 height=40 id=\"img_addprod_user_id\" alt=\"ajouter un produit\" title=\"ajouter un produit\"> </a>";
+        return  $btadd = "<a href=\"#\" onclick=addLigneProduit() id=\"addprod_id\" class=\"addprod_structure addprod_personalise\"><img src=\"../../../img/db_add.png\" width=40 height=40 id=\"img_addprod_user_id\" alt=\"ajouter un produit\" title=\"ajouter un produit\"> </a>";
         
     }
         
