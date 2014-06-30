@@ -25,4 +25,8 @@ class ProdtestServiceImpl implements ProdtestService {
         return $prodtest;        
     }
 
+    public function add($NOM,$CATEGORIE_ID,$sousCategorie,$options,$lienAssociationProduitPrix,$Produit_simple,$Famille_comptable,$TVA) {
+        $this->prodtestSrv->add($NOM,$CATEGORIE_ID,$sousCategorie,$options,$lienAssociationProduitPrix,$Produit_simple,$Famille_comptable,$TVA);
+    }
+
 }

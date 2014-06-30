@@ -9,7 +9,7 @@
 class AppRoot {
     
     
-    public $isAppRoot = true;
+    public $isAppRoot = TRUE;
     public $NameApp = "appcaisse";
     
     public function getPATH() {

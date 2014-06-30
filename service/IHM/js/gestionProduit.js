@@ -50,23 +50,23 @@ function modProduit() {
 }
 
 function delProduit(elem) {
-    idnewProd = 0;
-    $("tr[id^='"+elem+"']").remove();
+    $("tr[id^='ligne_" + elem + "']").remove();
 }
 var idnewProd = 0;
 function addLigneProduit() {
-    var html = $('#ligne_table_product_id_0').clone().wrap("#ligne_table_product_id_0").parent().html();
-    $("#ligne_table_product_id_0 > td[id^='column_table_product_id_']").each(function() {
+    var html = $('#ligne_table_product_0').clone().wrap("#ligne_table_product_0").parent().html();
+    $("#ligne_table_product_0 > td[id^='column_table_product_id_']").each(function() {
         var tdval = $(this).html();
-        html = paramValue(html, tdval, "<input type=text width=100% >");
-        
+        var column = $(this).attr("id");
+        var idname = column.slice(24);
+        html = paramValue(html, tdval, "<input type=text width=100% id=" + idname + ">");
     });
-    html = paramValue(html, "ligne_table_product_id_0", "product_add"+idnewProd++);
-    var changepng = paramValue(html, "modify_row", "db_submit");
+    html = paramValue(html, "ligne_table_product_0", "ligne_product_add" + idnewProd);
+    var changebuttonId = paramValue(html, "product_add0", "product_add");
+    var changepng = paramValue(changebuttonId, "modify_row", "db_submit");
     var changefunction = paramValue(changepng, "modProduit", "addProduit");
     $('#body_table_product_id').prepend(changefunction);
-
-
+    idnewProd++;
 
 }
 
@@ -82,6 +82,20 @@ function paramValue(string, paramName, value) {
     return string;
 }
 
-function addProduit() {
-    alert('MODIFIED :)');
+function addProduit(NOM,CATEGORIE_ID,sousCategorie,options,lienAssociationProduitPrix,Produit_simple,Famille_comptable,TVA) {
+    
+    $('#').val();
+    $.ajax({
+        url: "../../facade/addProdtest.php",
+        type: 'POST',
+        dataType: 'json',
+        data: { NOM:NOM, CATEGORIE_ID:CATEGORIE_ID, sousCategorie:sousCategorie, options:options, lienAssociationProduitPrix:lienAssociationProduitPrix, Produit_simple:Produit_simple, Famille_comptable:Famille_comptable, TVA:TVA},
+        async: true,
+        success: function(data, textStatus, xhr) {
+            console.log("PRODUCT WAS SUCCESSFULLY ADDED TO DATABASE !");
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        }
+    });
 }

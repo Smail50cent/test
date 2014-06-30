@@ -53,4 +53,9 @@ class ProdtestServiceDataImpl implements ProdtestServiceData {
         return $produit;
     }
 
+    public function add($NOM,$CATEGORIE_ID,$sousCategorie,$options,$lienAssociationProduitPrix,$Produit_simple,$Famille_comptable,$TVA) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric(" INSERT INTO produit(NOM,CATEGORIE_ID,sousCategorie,options,lienAssociationProduitPrix,Produit_simple,Famille_comptable,TVA) VALUES('$NOM','$CATEGORIE_ID','$sousCategorie','$options','$lienAssociationProduitPrix','$Produit_simple','$Famille_comptable','$TVA') ");
+    }
+
 }
