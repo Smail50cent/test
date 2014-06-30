@@ -17,4 +17,8 @@ class AssociationProduitPrixServiceImpl implements AssociationProduitPrixService
         return $this->asssociationProduitPrixSrv->getByProduit($produit);
     }
 
+    public function getByMenu($menu) {
+        return $this->asssociationProduitPrixSrv->getByMenu($menu);
+    }
+
 }

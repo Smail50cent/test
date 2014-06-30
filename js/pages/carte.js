@@ -112,7 +112,6 @@ function sousCategorieClicked(idCat, idSousCat) {
 }
 var catAreShow = "";
 function onClickCategorie(idCategorie) {
-    console.log(idCategorie);
     if (inRecapitulatif) {
         if (catAreShow != "") {
             $("#categorie_sous_cat_" + catAreShow).hide();
@@ -589,7 +588,8 @@ function printProduits(index) {
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
                 itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
-                itemMenu = paramValue(itemMenu, "prixMenu", fntp(menus[i].getPrix()));
+                var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
+                itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());
                 $('#menus_id').append(itemMenu);
             }
@@ -618,8 +618,6 @@ function printProduits(index) {
             var htmlContentProduit = getContentProduit();
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
-
-
             function printProduitByCategorie(produits) {
                 var quantity = "+";
                 var categorie = produits[0].id_categorie;
@@ -726,7 +724,6 @@ function etapeSuivante() {
         html = paramValue(html, "onclick", "validerCommande();");
         $("#footer_id").html(html);
     }
-    console.log(currentTicket);
 }
 /**
  * Print the "racapitulatif"
@@ -742,7 +739,7 @@ function showTicket(qop) {
         for (i = 0; i < quantityOfProducts.length; i++) {
             var quantityOfProduct = quantityOfProducts[i];
             if (quantityOfProduct.product instanceof Menu) {
-
+                addMenuItem(quantityOfProducts[i]);
             } else {
                 addTicketItem(quantityOfProducts[i]);
             }
@@ -755,6 +752,15 @@ function addTicketItem(qop) {
     item = paramValue(item, "qopID", qop.getId());
     item = paramValue(item, "qopProduiID", qop.getProduit().getId());
     item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().id_sousCategorie.tauxTva)));
+    item = paramValue(item, "quantity", qop.getQuantity());
+    item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
+    $('#recapitulatif_liste_id').append(item);
+}
+function addMenuItem(qop) {
+    var item = getRecapitulatifProduitItem();
+    item = paramValue(item, "qopID", qop.getId());
+//    item = paramValue(item, "qopProduiID", qop.getProduit().getId());
+    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().getPrix(), qop.getProduit().tauxDeTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
     $('#recapitulatif_liste_id').append(item);
@@ -1142,7 +1148,12 @@ function validerCommande() {
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
                     personne = personnes[i];
                     produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
-                    totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
+                    if (currentTicket.getQuantityOfProduct()[j].product instanceof Menu) {
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.prix, currentTicket.getQuantityOfProduct()[j].product.tauxDeTva);
+                    } else {
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
+                    }
+                    
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }

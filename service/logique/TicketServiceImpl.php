@@ -1,6 +1,6 @@
 <?php
 
-include_once $path.'service/logique/TicketService.php';
+include_once $path . 'service/logique/TicketService.php';
 
 /**
  * Description of TableServiceImpl
@@ -22,22 +22,32 @@ class TicketServiceImpl implements TicketService {
         $qop = $ticket->getQuantityOfProduct();
         for ($i = 0; $i < count($qop); $i++) {
             $this->setPersonneInTicketToBdd($qop[$i]->getPersonne(), $id);
-            $idCommandeProduit = $this->ticketSrv->addCommandeProduit($qop[$i]->getProduct(), $id);
-            $ingredients = $qop[$i]->getProduct()->getIngredients();
-            for ($j = 0; $j < count($ingredients); $j++) {
-                if ($ingredients[$j]->isAdded() == true && $ingredients[$j]->isIngredientSup() == true) {
-                    $this->ticketSrv->addAddedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
-                } else if ($ingredients[$j]->isAdded() == false && $ingredients[$j]->isIngredientSup() == false) {
-                    $this->ticketSrv->addDeletedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+            if (property_exists($qop[$i]->getProduct(), "produits")) {
+                $prods = $qop[$i]->getProduct()->getProduits();
+                for ($j = 0; $j < count($prods->produits); $j++) {
+                    $menuid = $qop[$i]->getProduct()->getId();
+                    $prix = $qop[$i]->getProduct()->prix;
+                    $produit = $prods->produits[$j];
+                    $this->ticketSrv->addCommandeMenuProduit($menuid, $produit, $id, $prix);
                 }
-            }
-            $options = $qop[$i]->getProduct()->getOptions();
-            if (is_array($options)) {
-                for ($j = 0; $j < count($options); $j++) {
-                    if (is_array($options[$j]->possibilites)) {
-                        $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites[0]->id, $idCommandeProduit);
-                    } else {
-                        $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites, $idCommandeProduit);
+            } else {
+                $idCommandeProduit = $this->ticketSrv->addCommandeProduit($qop[$i]->getProduct(), $id);
+                $ingredients = $qop[$i]->getProduct()->getIngredients();
+                for ($j = 0; $j < count($ingredients); $j++) {
+                    if ($ingredients[$j]->isAdded() == true && $ingredients[$j]->isIngredientSup() == true) {
+                        $this->ticketSrv->addAddedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                    } else if ($ingredients[$j]->isAdded() == false && $ingredients[$j]->isIngredientSup() == false) {
+                        $this->ticketSrv->addDeletedIngredients($ingredients[$j]->getIngredient(), $idCommandeProduit);
+                    }
+                }
+                $options = $qop[$i]->getProduct()->getOptions();
+                if (is_array($options)) {
+                    for ($j = 0; $j < count($options); $j++) {
+                        if (is_array($options[$j]->possibilites)) {
+                            $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites[0]->id, $idCommandeProduit);
+                        } else {
+                            $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites, $idCommandeProduit);
+                        }
                     }
                 }
             }
@@ -70,7 +80,7 @@ class TicketServiceImpl implements TicketService {
         for ($i = 0; $i < count($personneProduits); $i++) {
             $personneId = $personneProduits[$i]->getPersonneId();
             $produitsPriorite = $personneProduits[$i]->getProduits();
-            for($j = 0 ; $j < count($produitsPriorite) ; $j++){
+            for ($j = 0; $j < count($produitsPriorite); $j++) {
                 $produitID = $produitsPriorite[$j]->getProduitId();
                 $priorite = $produitsPriorite[$j]->getPriorite();
                 $this->ticketSrv->updatePriorite($priorite, $produitID, $commandeId);
