@@ -1,14 +1,4 @@
-@font-face {
-    font-family: 'lobster_1.3regular';
-    src: url('lobster_1.3-webfont.eot');
-    src: url('lobster_1.3-webfont.eot?#iefix') format('embedded-opentype'),
-        url('lobster_1.3-webfont.woff') format('woff'),
-        url('lobster_1.3-webfont.ttf') format('truetype'),
-        url('lobster_1.3-webfont.svg#lobster_1.3regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
 
 
  /*____________________________POP UP FB ______________________________*/
@@ -681,10 +671,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .content_list_categorie_structure li a {
-            padding-top: 0.25em;
+            padding-top: 0.48em;
             padding-bottom: 0.2em;
             display: block;
-            height:21px;
+            height:20px;
         }
 
         .content_list_categorie_structure li+li{
@@ -727,9 +717,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             display: block;
             position: relative;
             padding-bottom: 0.3em;
-            padding-top: 2.5em;
             margin: 0 auto;
             z-index: 999;
+            text-decoration: underline;
         }
 
         .content_globlal_zone_structure .content_produit_titre  {
@@ -1016,7 +1006,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .menu_or_card_structure, .recapitulatif_commande_structure {
-            margin-top:-2em;
+            margin-top:-32em;
             height: auto;
             position: relative;
             /*float:left;*/
@@ -1579,6 +1569,8 @@ body {
     margin-bottom: -1.5em;
     padding-top: 2em;
 }
+
+
 
 
 /*Navigation*/
