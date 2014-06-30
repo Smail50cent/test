@@ -25,7 +25,7 @@ class ProdtestServiceDataImpl implements ProdtestServiceData {
             $produit->setSouscategorie(intval($ligne->sousCategorie));
             $produit->setOptions(intval($ligne->options));
             $produit->setLienAssociationProduitPrix(intval($ligne->lienAssociationProduitPrix));
-            $produit->setProduitSimple(intval($ligne->Produit_simple));
+            $produit->setProduitSimple(intval($ligne->produitsimple));
             $produit->setFamilleComptable($ligne->Famille_comptable);
             $produit->setTva(intval($ligne->TVA));
             $produits[$i] = $produit;
@@ -46,7 +46,7 @@ class ProdtestServiceDataImpl implements ProdtestServiceData {
         $produit->setSouscategorie(intval($ligne->sousCategorie));
         $produit->setOptions(intval($ligne->options));
         $produit->setLienAssociationProduitPrix(intval($ligne->lienAssociationProduitPrix));
-        $produit->setProduitSimple(intval($ligne->Produit_simple));
+        $produit->setProduitSimple(intval($ligne->produitsimple));
         $produit->setFamilleComptable($ligne->Famille_comptable);
         $produit->setTva(intval($ligne->TVA));
 
@@ -55,7 +55,7 @@ class ProdtestServiceDataImpl implements ProdtestServiceData {
 
     public function add($NOM,$CATEGORIE_ID,$sousCategorie,$options,$lienAssociationProduitPrix,$Produit_simple,$Famille_comptable,$TVA) {
         $bdd = new ConnexionBDD();
-        $bdd->executeGeneric(" INSERT INTO produit(NOM,CATEGORIE_ID,sousCategorie,options,lienAssociationProduitPrix,Produit_simple,Famille_comptable,TVA) VALUES('$NOM','$CATEGORIE_ID','$sousCategorie','$options','$lienAssociationProduitPrix','$Produit_simple','$Famille_comptable','$TVA') ");
+        $bdd->executeGeneric(" INSERT INTO produit(NOM,CATEGORIE_ID,sousCategorie,options,lienAssociationProduitPrix,produitsimple,Famille_comptable,TVA) VALUES('$NOM','$CATEGORIE_ID','$sousCategorie','$options','$lienAssociationProduitPrix','$Produit_simple','$Famille_comptable','$TVA') ");
     }
 
 }
