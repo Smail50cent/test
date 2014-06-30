@@ -1,19 +1,25 @@
 <?php
 
-include_once $path.'service/logique/entity/Ticket.php';
-include_once $path.'service/logique/entity/QuantityOfProduct.php';
-include_once $path.'service/logique/entity/AssociationProduitIngredients.php';
-include_once $path.'service/logique/entity/Produit.php';
-include_once $path.'service/logique/entity/SousCategorie.php';
-include_once $path.'service/logique/entity/Categorie.php';
-include_once '../outils/AppRoot.php';include_once $path.'service/logique/LogiqueFactory.php';
+include_once '../outils/AppRoot.php';
+include_once $path . 'service/logique/LogiqueFactory.php';
+include_once $path . 'service/logique/entity/Ticket.php';
+include_once $path . 'service/logique/entity/QuantityOfProduct.php';
+include_once $path . 'service/logique/entity/AssociationProduitIngredients.php';
+include_once $path . 'service/logique/entity/Produit.php';
+include_once $path . 'service/logique/entity/SousCategorie.php';
+include_once $path . 'service/logique/entity/Categorie.php';
+include_once $path . 'service/logique/entity/Menu.php';
+
 $ticketSrv = LogiqueFactory::getTicketService();
 
 class ToEncode {
+
     public $id;
+
     public function __construct($id) {
         $this->id = $id;
     }
+
 }
 
 if (isset($_POST["ticket"])) {
@@ -25,7 +31,48 @@ if (isset($_POST["ticket"])) {
     echo 'ERROR';
 }
 
-//trad to php
+
+function getPrixHtInAssociationMenu($menuid, $tauxTva, $table) {
+    $associationProduitPrixSrv = LogiqueFactory::getAssociationProduitPrixService();
+    $associationPrixProduit = $associationProduitPrixSrv->getByMenu($menuid);
+    $prixHt = 0;
+    if (count($associationPrixProduit) != 0) {
+        if (count($associationPrixProduit) == 1) {
+            $prixHt = floatval($associationPrixProduit[0]->prixHt->prix);
+        } else {
+            $currentDate = time();
+            $priorityPrix = array();
+            for ($i = 0; $i < count($associationPrixProduit); $i++) {
+                $startDate = 0;
+                $endDate = 0;
+                if ($associationPrixProduit[$i]->dateDebut != 000) {
+                    $startDate = new DateTime($associationPrixProduit[$i]->dateDebut);
+                    $startDate = $startDate->getTimestamp();
+                    $endDate = new DateTime($associationPrixProduit[$i]->dateFin);
+                    $endDate = $endDate->getTimestamp();
+                }
+                if ($startDate == 000 && $endDate == 000 && ($associationPrixProduit[$i]->zoneTable->id) == null) {
+                    $priorityPrix[$i] = array($associationPrixProduit[$i], 4);
+                } else if ($startDate == 0 && $endDate == 0 && $associationPrixProduit[i]->zoneTable->id == $table . zone) {
+                    $priorityPrix[$i] = array($associationPrixProduit[$i], 3);
+                } else if (isInCurentDate($associationPrixProduit[$i]->dateDebut, $associationPrixProduit[$i]->heureDebut, $associationPrixProduit[$i]->minutesDebut, $associationPrixProduit[$i]->dateFin, $associationPrixProduit[$i]->heureFin, $associationPrixProduit[$i]->minutesFin) && $associationPrixProduit[$i]->zone_table_id != $table->zone) {
+                    $priorityPrix[$i] = array($associationPrixProduit[$i], 2);
+                } else if (isInCurentDate($associationPrixProduit[$i]->dateDebut, $associationPrixProduit[$i]->heureDebut, $associationPrixProduit[$i]->minutesDebut, $associationPrixProduit[$i]->dateFin, $associationPrixProduit[$i]->heureFin, $associationPrixProduit[$i]->minutesFin) && $associationPrixProduit[i]->zone_table_id == $table->zone) {
+                    $priorityPrix[$i] = array($associationPrixProduit[$i], 1);
+                }
+            }
+            $pr = "";
+            if (count($priorityPrix) != 0) {
+                uasort($priorityPrix, 'cmp');
+                $pr = $priorityPrix[0][0];
+            }
+            $prixHt = $pr->prixHt->prix;
+        }
+    } else {
+        $prixHt = 0;
+    }
+    return calculPrixWithTVA(floatval($prixHt), $tauxTva);
+}
 function getPrixHtInAssociation($produitid, $tauxTva, $table) {
     $associationProduitPrixSrv = LogiqueFactory::getAssociationProduitPrixService();
     $associationPrixProduit = $associationProduitPrixSrv->getByProduit($produitid);
@@ -129,29 +176,24 @@ function parseToTicket($toparse) {
     for ($i = 0; $i < count($ticketToParse->quantityOfProducts); $i++) {
         $qop = new QuantityOfProduct();
         $produitToParse = $ticketToParse->quantityOfProducts[$i]->product;
-        $ingredientsToParse = $ticketToParse->quantityOfProducts[$i]->product->ids_ingredients;
-        $ingredients = array();
-        for ($j = 0; $j < count($ingredientsToParse); $j++) {
-            $ingredient = new AssociationProduitIngredients($ingredientsToParse[$j]->produit, $ingredientsToParse[$j]->ingredient, $ingredientsToParse[$j]->isAdded, $ingredientsToParse[$j]->surcout, $ingredientsToParse[$j]->supprimable, $ingredientsToParse[$j]->isIngredientSup);
-            $ingredients[$j] = $ingredient;
+        if (property_exists($produitToParse, "produits")) {
+            $qop->setProduct($ticketToParse->quantityOfProducts[$i]->product);
+            $menuToParse = $ticketToParse->quantityOfProducts[$i]->product;
+            $produitsInMenu = array();
+            $menu = new Menu();
+            $menu->setId($menuToParse->id);
+            $menu->setNom($menuToParse->nom);
+            $menu->setPrix(getPrixHtInAssociationMenu(intval($menuToParse->id), $menuToParse->tauxDeTva, $ticketToParse->table));
+            for ($j = 0; $j < count($ticketToParse->quantityOfProducts[$i]->product->produits); $j++) {
+                $produit = parseSingleProduct($ticketToParse->quantityOfProducts[$i]->product->produits[$j], $ticketToParse->table, $menuToParse->tauxDeTva);
+                array_push($produitsInMenu, $produit);
+            }
+            $menu->setProduits($produitToParse);
+            $qop->setProduct($menu);
+        } else {
+            $produit = parseSingleProduct($ticketToParse->quantityOfProducts[$i]->product, $ticketToParse->table, $ticketToParse->quantityOfProducts[$i]->product->id_sousCategorie->tauxTva);
+            $qop->setProduct($produit);
         }
-        $produit = new Produit();
-        $produit->setId($produitToParse->id);
-        $produit->setIngredients($ingredients);
-        $produit->setNom($produitToParse->nom);
-        $produit->setOptions($produitToParse->options);
-        $produit->setPrix(getPrixHtInAssociation($produitToParse->id, $produitToParse->id_sousCategorie->tauxTva, $ticketToParse->table));
-        $sousCategorie = new SousCategorie();
-        $sousCategorie->setId($produitToParse->id_sousCategorie->id);
-        $sousCategorie->setNom($produitToParse->id_sousCategorie->nom);
-        $sousCategorie->setPriorite($produitToParse->id_sousCategorie->priorite);
-        $produit->setSousCategorie($sousCategorie);
-        $categorie = new Categorie();
-        $categorie->setId($produitToParse->id_categorie->id);
-        $categorie->setNom($produitToParse->id_categorie->nom);
-        $categorie->setPriorite($produitToParse->id_categorie->priorite);
-        $produit->setCategorie($categorie);
-        $qop->setProduct($produit);
         $qop->setPersonne($ticketToParse->quantityOfProducts[$i]->personne);
         $qops[$i] = $qop;
     }
@@ -159,6 +201,32 @@ function parseToTicket($toparse) {
     $ticket->setTypeCommande($ticketToParse->type_commande);
     $ticket->setQuantityOfProduct($qops);
     return $ticket;
+}
+
+function parseSingleProduct($product, $table, $tauxTva) {
+    $ingredientsToParse = $product->ids_ingredients;
+    $ingredients = array();
+    for ($j = 0; $j < count($ingredientsToParse); $j++) {
+        $ingredient = new AssociationProduitIngredients($ingredientsToParse[$j]->produit, $ingredientsToParse[$j]->ingredient, $ingredientsToParse[$j]->isAdded, $ingredientsToParse[$j]->surcout, $ingredientsToParse[$j]->supprimable, $ingredientsToParse[$j]->isIngredientSup);
+        $ingredients[$j] = $ingredient;
+    }
+    $produit = new Produit();
+    $produit->setId($product->id);
+    $produit->setIngredients($ingredients);
+    $produit->setNom($product->nom);
+    $produit->setOptions($product->options);
+    $produit->setPrix(getPrixHtInAssociation($product->id, $tauxTva, $table));
+    $sousCategorie = new SousCategorie();
+    $sousCategorie->setId($product->id_sousCategorie->id);
+    $sousCategorie->setNom($product->id_sousCategorie->nom);
+    $sousCategorie->setPriorite($product->id_sousCategorie->priorite);
+    $produit->setSousCategorie($sousCategorie);
+    $categorie = new Categorie();
+    $categorie->setId($product->id_categorie->id);
+    $categorie->setNom($product->id_categorie->nom);
+    $categorie->setPriorite($product->id_categorie->priorite);
+    $produit->setCategorie($categorie);
+    return $produit;
 }
 
 function calculPrixWithTVA($prixHT, $tauxTVA) {

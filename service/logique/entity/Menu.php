@@ -11,9 +11,10 @@ class Menu {
     public $nom;
     public $produits; //ARRAY
     public $prix;
+    public $tauxDeTva;
 
     public function setId($id) {
-        $this->id= intval($id);
+        $this->id = intval($id);
     }
 
     public function getId() {
@@ -42,6 +43,14 @@ class Menu {
 
     public function getProduits() {
         return $this->produits;
+    }
+
+    public function setTauxDeTva($taux) {
+        $this->tauxDeTva = floatval($taux);
+    }
+
+    public function getTauxDeTva() {
+        return $this->tauxDeTva;
     }
 
 }

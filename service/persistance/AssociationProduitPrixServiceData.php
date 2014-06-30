@@ -7,4 +7,5 @@
  */
 interface AssociationProduitPrixServiceData {
     public function getByProduit($produit);
+    public function getByMenu($menu);
 }

@@ -15,9 +15,11 @@ interface TicketServiceData {
 
     public function addCommandeProduit($produit, $idCommande);
 
+    public function addCommandeMenuProduit($menuid, $produit, $idCommande,$prix);
+
     public function addDeletedIngredients($ingredient, $idCommandeProduit);
 
     public function addOptionCommande($idOption, $idOptionValue, $idCommandeProduit);
-    
-    public function updatePriorite($priorite,$idProduit,$idCommande);
+
+    public function updatePriorite($priorite, $idProduit, $idCommande);
 }

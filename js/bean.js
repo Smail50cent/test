@@ -212,11 +212,18 @@ function Menu(id, produits, prix, nom) {
     this.nom = nom;
     this.produits = produits; //ARRAY
     this.prix = prix;
+    this.tauxDeTva;
     this.setId = function(id) {
         this.id = id;
     };
     this.getId = function(id) {
         return  this.id;
+    };
+    this.setTauxDeTva = function(tauxDeTva) {
+        this.tauxDeTva = tauxDeTva;
+    };
+    this.getTauxDeTva = function() {
+        return  this.tauxDeTva;
     };
     this.setNom = function(nom) {
         this.nom = nom;
@@ -304,8 +311,7 @@ function Ticket(id, quantityOfProducts) {
             for (y = 0; y < qop.length; y++) {
                 var quantity = qop[y].getQuantity();
                 if (qop[y].product instanceof Menu) {
-                    
-                    console.log(qop[y].product.prix);
+                    var totalTTC = getPrixHtInAssociation(qop[y].getProduit().getPrix(), qop[y].getProduit().tauxDeTva);
                 } else {
                     var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
                 }
