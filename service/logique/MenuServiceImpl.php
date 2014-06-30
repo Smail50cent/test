@@ -1,6 +1,6 @@
 <?php
 
-include_once $path.'service/logique/MenuService.php';
+include_once $path . 'service/logique/MenuService.php';
 
 /**
  * Description of CategorieServiceImpl
@@ -17,12 +17,18 @@ class MenuServiceImpl implements MenuService {
 
     public function getAll() {
         $menus = $this->menuSrv->getAll();
+        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
+        for ($i = 0; $i < count($menus) ; $i++) {
+            $menus[$i]->setPrix($associationProduitPrixSrv->getByMenu($menus[$i]->getId()));
+        }
         return $menus;
     }
 
     public function getById($id) {
-        $menus = $this->menuSrv->getById($id);
-        return $menus;
+        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
+        $menu = $this->menuSrv->getById($id);
+        $menu->setPrix($associationProduitPrixSrv->getByMenu($menu->getId()));
+        return $menu;
     }
 
 }

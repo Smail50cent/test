@@ -21,6 +21,7 @@ myStorage.indexedDB.getMenuByIdForDetailMenu = function(methodToExecuteAfter, id
                 menu.setId(result.id);
                 menu.setPrix(result.prix);
                 menu.setProduits(result.produits);
+                menu.setTauxDeTva(result.tauxDeTva);
                 if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
                     methodToExecuteAfter(menu);
                 }
@@ -65,6 +66,7 @@ myStorage.indexedDB.getAllMenuForDetailMenu = function(methodToExecuteAfter) {
                 menu.setId(result.value.id);
                 menu.setPrix(parseInt(result.value.prix));
                 menu.setProduits(result.value.produits);
+                menu.setTauxDeTva(result.value.tauxDeTva);
                 menus.push(menu);
                 result.continue();
             };
@@ -103,6 +105,7 @@ myStorage.indexedDB.getMenuById = function(methodToExecuteAfter, idmenu, param) 
                 var menu = new Menu();
                 menu.setNom(result.nom);
                 menu.setId(result.id);
+                menu.setTauxDeTva(result.tauxDeTva);
                 menu.setPrix(parseFloat(result.prix));
                 menu.setProduits(result.produits);
                 if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.

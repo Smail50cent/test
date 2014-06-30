@@ -181,7 +181,8 @@ myStorage.indexedDB.addFistMenus = function() {
                 "id": menu.id,
                 "nom": menu.nom,
                 "prix": menu.prix,
-                "produits": menu.produits
+                "produits": menu.produits,
+                "tauxDeTva": menu.tauxDeTva
             });
             trans.oncomplete = function(e) {
                 db.close();

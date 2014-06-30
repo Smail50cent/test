@@ -111,7 +111,8 @@ function ConnexionServer() {
                 menu.setId(parseInt(data.id));
                 menu.setNom(data.nom);
                 menu.setProduits(data.produits);
-                menu.setPrix(parseFloat(data.prix));
+                menu.setTauxDeTva(parseFloat(data.tauxDeTva));
+                menu.setPrix((data.prix));
                 if (method != null) {
                     method(menu);
                 }
@@ -164,7 +165,8 @@ function ConnexionServer() {
                     var menu = new Menu();
                     menu.setNom(data[i].nom);
                     menu.setId(data[i].id);
-                    menu.setPrix(parseInt(data[i].prix));
+                    menu.setTauxDeTva(parseFloat(data[i].tauxDeTva));
+                    menu.setPrix((data[i].prix));
                     menu.setProduits(data[i].produits);
                     menus.push(menu);
                 }
@@ -269,7 +271,8 @@ function ConnexionServer() {
                 var menu = new Menu();
                 menu.setNom(data.nom);
                 menu.setId(data.id);
-                menu.setPrix(parseFloat(data.prix));
+                menu.setPrix((data.prix));
+                menu.setTauxDeTva(parseFloat(data.tauxDeTva));
                 menu.setProduits(data.produits);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(menu, param);
@@ -338,7 +341,6 @@ function ConnexionServer() {
     };
     this.sendTicketToServeur = function(method, ticket, param) {
         var monTicket = JSON.stringify(ticket);
-        console.log(monTicket);
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceSetNewTicket"),
             type: 'POST',
