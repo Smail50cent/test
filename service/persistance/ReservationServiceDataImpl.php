@@ -12,8 +12,8 @@ class ReservationServiceDataImpl implements ReservationServiceData {
         while ($ligne = $resultSet->fetch()) {
             $reservation = new Reservation();
             $reservation->setId(intval($ligne->id));
-            $reservation->setCompte($ligne->heureDebut);
-            $reservation->setDateHeure($ligne->date);
+            $reservation->setCompte($ligne->compte);
+            $reservation->setDateHeure($ligne->dateHeure);
             array_push($liste, $reservation);
         }
         if (count($liste) == 1) {
