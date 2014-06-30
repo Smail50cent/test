@@ -24,6 +24,8 @@ include_once $path . 'service/logique/CompteRoleServiceImpl.php';
 include_once $path . 'service/logique/ProdtestServiceImpl.php';
 include_once $path . 'service/logique/CompteProduitFavoriServiceImpl.php';
 include_once $path . 'service/logique/ProduitSuggereriServiceImpl.php';
+include_once $path . 'service/logique/ReservationDateDisponibleServiceImpl.php';
+include_once $path . 'service/logique/ReservationServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -46,6 +48,22 @@ class LogiqueFactory {
     private static $prodtestSrv = null;
     private static $compteProduitFavoriSrv = null;
     private static $produitSuggererSrv = null;
+    private static $reservationDateDisponibleSrv = null;
+    private static $reservationSrv = null;
+
+    public static function getReservationService() {
+        if (LogiqueFactory::$reservationSrv == null) {
+            LogiqueFactory::$reservationSrv = new ReservationServiceImpl();
+        }
+        return LogiqueFactory::$reservationSrv;
+    }
+    
+    public static function getReservationDateDisponibleService() {
+        if (LogiqueFactory::$reservationDateDisponibleSrv == null) {
+            LogiqueFactory::$reservationDateDisponibleSrv = new ReservationDateDisponibleServiceImpl();
+        }
+        return LogiqueFactory::$reservationDateDisponibleSrv;
+    }
 
     public static function getProduitSuggererService() {
         if (LogiqueFactory::$produitSuggererSrv == null) {

@@ -22,7 +22,6 @@
                     <p id="header_left_logo_message_id" class="header_left_logo_message header_left_logo_message_structure header_left_logo_message_personalize">Restaurant Pizzeria</p>
                 </div>
             </div>
-            <!--<div id="header_left_id2" class="header_left"></div>-->
             <div id="header_right_id" class="header_right header_right_structure header_right_personalize">
                 <div id="header_right_logo_id" class="header_right_logo header_right_logo_structure header_right_logo_personalize header_text_bottom header_text_bottom_structure header_text_bottom_personalize">
                     <div style="margin-right: 0px;" id="header_right_isconnced_id" class="header_right_isconnced header_right_isconnced_structure header_right_isconnced_personalize"></div>

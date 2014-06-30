@@ -5,29 +5,31 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once $path.'service/persistance/CategorieServiceDataImpl.php';
-include_once $path.'service/persistance/EntrepriseServiceDataImpl.php';
-include_once $path.'service/persistance/IngredientServiceDataImpl.php';
-include_once $path.'service/persistance/SousCategorieServiceDataImpl.php';
-include_once $path.'service/persistance/ProduitServiceDataImpl.php';
-include_once $path.'service/persistance/MenuServiceDataImpl.php';
-include_once $path.'service/persistance/TablesServiceDataImpl.php';
-include_once $path.'service/persistance/ModeDeReglementServiceDataImpl.php';
-include_once $path.'service/persistance/CompteServiceDataImpl.php';
-include_once $path.'service/persistance/AttributCompteServiceDataImpl.php';
-include_once $path.'service/persistance/ParamFormServiceDataImpl.php';
-include_once $path.'service/persistance/TicketServiceDataImpl.php';
-include_once $path.'service/persistance/ParametreApplicationServiceDataImpl.php';
-include_once $path.'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
-include_once $path.'service/persistance/StringsServiceDataImpl.php';
-include_once $path.'service/persistance/OptionServiceDataImpl.php';
-include_once $path.'service/persistance/AssociationProduitPrixServiceDataImpl.php';
-include_once $path.'service/persistance/CompteRoleServiceDataImpl.php';
-include_once $path.'service/persistance/ProdtestServiceDataImpl.php';
-include_once $path.'service/persistance/CompteProduitFavoriServiceDataImpl.php';
-include_once $path.'service/persistance/OptionServiceDataImpl.php';
-include_once $path.'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
-include_once $path.'service/persistance/ProduitSuggererServiceDataImpl.php';
+include_once $path . 'service/persistance/CategorieServiceDataImpl.php';
+include_once $path . 'service/persistance/EntrepriseServiceDataImpl.php';
+include_once $path . 'service/persistance/IngredientServiceDataImpl.php';
+include_once $path . 'service/persistance/SousCategorieServiceDataImpl.php';
+include_once $path . 'service/persistance/ProduitServiceDataImpl.php';
+include_once $path . 'service/persistance/MenuServiceDataImpl.php';
+include_once $path . 'service/persistance/TablesServiceDataImpl.php';
+include_once $path . 'service/persistance/ModeDeReglementServiceDataImpl.php';
+include_once $path . 'service/persistance/CompteServiceDataImpl.php';
+include_once $path . 'service/persistance/AttributCompteServiceDataImpl.php';
+include_once $path . 'service/persistance/ParamFormServiceDataImpl.php';
+include_once $path . 'service/persistance/TicketServiceDataImpl.php';
+include_once $path . 'service/persistance/ParametreApplicationServiceDataImpl.php';
+include_once $path . 'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
+include_once $path . 'service/persistance/StringsServiceDataImpl.php';
+include_once $path . 'service/persistance/OptionServiceDataImpl.php';
+include_once $path . 'service/persistance/AssociationProduitPrixServiceDataImpl.php';
+include_once $path . 'service/persistance/CompteRoleServiceDataImpl.php';
+include_once $path . 'service/persistance/ProdtestServiceDataImpl.php';
+include_once $path . 'service/persistance/CompteProduitFavoriServiceDataImpl.php';
+include_once $path . 'service/persistance/OptionServiceDataImpl.php';
+include_once $path . 'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
+include_once $path . 'service/persistance/ProduitSuggererServiceDataImpl.php';
+include_once $path . 'service/persistance/ReservationDateDisponibleServiceDataImpl.php';
+include_once $path . 'service/persistance/ReservationServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -53,6 +55,22 @@ class PersistanceFactory {
     private static $prodtestSrv = null;
     private static $compteProduitFavoriSrv = null;
     private static $produitSuggererSrv = null;
+    private static $reservationDateDisponibleSrv = null;
+    private static $reservationSrv = null;
+
+    public static function getReservationService() {
+        if (PersistanceFactory::$reservationSrv == null) {
+            PersistanceFactory::$reservationSrv = new ReservationServiceDataImpl();
+        }
+        return PersistanceFactory::$reservationSrv;
+    }
+
+    public static function getReservationDateDisponibleService() {
+        if (PersistanceFactory::$reservationDateDisponibleSrv == null) {
+            PersistanceFactory::$reservationDateDisponibleSrv = new ReservationDateDisponibleServiceDataImpl();
+        }
+        return PersistanceFactory::$reservationDateDisponibleSrv;
+    }
 
     public static function getCompteProduitFavoriService() {
         if (PersistanceFactory::$compteProduitFavoriSrv == null) {
@@ -60,19 +78,21 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$compteProduitFavoriSrv;
     }
+
     public static function getProduitSuggererService() {
         if (PersistanceFactory::$produitSuggererSrv == null) {
             PersistanceFactory::$produitSuggererSrv = new ProduitSuggererServiceDataImpl();
         }
         return PersistanceFactory::$produitSuggererSrv;
     }
-    
+
     public static function getCompteRoleService() {
         if (PersistanceFactory::$compteRoleSrv == null) {
             PersistanceFactory::$compteRoleSrv = new CompteRoleServiceDataImpl();
         }
         return PersistanceFactory::$compteRoleSrv;
     }
+
     public static function getAssociationProduitPrixService() {
         if (PersistanceFactory::$associationProduitPrixSrv == null) {
             PersistanceFactory::$associationProduitPrixSrv = new AssociationProduitPrixServiceDataImpl();
@@ -198,11 +218,12 @@ class PersistanceFactory {
         }
         return PersistanceFactory::$stringsSrv;
     }
-    
+
     public static function getProdtestService() {
         if (PersistanceFactory::$prodtestSrv == null) {
             PersistanceFactory::$prodtestSrv = new ProdtestServiceDataImpl();
         }
         return PersistanceFactory::$prodtestSrv;
     }
+
 }
