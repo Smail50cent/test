@@ -8,21 +8,28 @@ class ReservationDateDisponibleServiceDataImpl implements ReservationDateDisponi
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $resultset =$bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin` FROM `reservation_date_disponible`");
+        $resultset = $bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin`,`indisponible` FROM `reservation_date_disponible`");
         return $this->parseReservationDateDisponible($resultset);
     }
 
     public function getByDate($date) {
         $bdd = new ConnexionBDD();
-        $resultset =$bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin` FROM `reservation_date_disponible` WHERE date = ".$date);
+        $resultset = $bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin`,`indisponible` FROM `reservation_date_disponible` WHERE date = " . $date);
+        return $this->parseReservationDateDisponible($resultset);
+    }
+
+    public function getByDateNull() {
+        $bdd = new ConnexionBDD();
+        $resultset = $bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin`,`indisponible` FROM `reservation_date_disponible` WHERE `date` IS NULL");
         return $this->parseReservationDateDisponible($resultset);
     }
 
     public function getById($id) {
         $bdd = new ConnexionBDD();
-        $resultset =$bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin` FROM `reservation_date_disponible` WHERE id = ".$id);
+        $resultset = $bdd->executeGeneric("SELECT `id`, `date`, `heureDebut`, `heureFin`,`indisponible` FROM `reservation_date_disponible` WHERE id = " . $id);
         return $this->parseReservationDateDisponible($resultset);
     }
+
     private function parseReservationDateDisponible($resultSet) {
         $liste = array();
         $ret;
@@ -32,6 +39,7 @@ class ReservationDateDisponibleServiceDataImpl implements ReservationDateDisponi
             $reservationDateDispo->setHeureDebut($ligne->heureDebut);
             $reservationDateDispo->setDate($ligne->date);
             $reservationDateDispo->setHeureFin($ligne->heureFin);
+            $reservationDateDispo->setIndisponible($ligne->indisponible);
             array_push($liste, $reservationDateDispo);
         }
         if (count($liste) == 1) {

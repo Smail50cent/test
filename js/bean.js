@@ -664,3 +664,10 @@ function ParametreApplication() {
     };
 
 }
+function ReservationDateDisponible(id, date, heureDebut, heureFin, indisponible) {
+    this.id = id;
+    this.date = date;
+    this.heureDebut = heureDebut;
+    this.heureFin = heureFin;
+    this.indisponible = indisponible;
+}

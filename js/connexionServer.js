@@ -2,6 +2,7 @@ function ConnexionServer() {
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
+        console.log(config.getConfig("tableNameEntreprise"));
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
@@ -667,12 +668,12 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                var parametreApplication=null;
+                var parametreApplication = null;
                 if (data != null) {
                     parametreApplication = new ParametreApplication();
                     parametreApplication.setId(data.id);
                     parametreApplication.setNomParametre(data.nom_parametre);
-                    parametreApplication.setValeurParametre(data.valeur_parametre);
+                    parametreApplication.setValeurParametre(parseInt(data.valeur_parametre));
                 }
                 if (method != null) {
                     method(parametreApplication, param);
@@ -683,7 +684,34 @@ function ConnexionServer() {
             }
         });
     };
+    this.getReservationDisponibleWhereDateNull = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetDateReservationWhereDateNull"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste = new Array();
+                var reservationDateDispo = null;
+                if (data != null) {
+                    if (data instanceof Array) {
+                        for (var i = 0; i < data.length; i++) {
+                            reservationDateDispo = new ReservationDateDisponible(data[i].id, data[i].date, data[i].heureDebut, data[i].heureFin, data[i].indisponible);
+                            liste.push(reservationDateDispo);
+                        }
+                    } else {
+                        reservationDateDispo = new ReservationDateDisponible(data.id, data.date, data.heureDebut, data.heureFin, data.indisponible);
+                        liste.push(reservationDateDispo);
+                    }
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
-//this.mAjax = function (){
-//    
-//};
+

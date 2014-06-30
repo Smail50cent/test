@@ -144,6 +144,12 @@ function controller(entreprise) {
             };
             hideLoading();
             break;
+        case "choixDateHeure":
+            method = function() {
+                onChoixdateHeureLoaded();
+                hideLoading();
+            };
+            break;
         default :
             nom = "index";
             method = function() {

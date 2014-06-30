@@ -1,5 +1,13 @@
 <?php include_once './header.php'; ?>
 <div id="content_id" class="content content_structure content_personalize">
+    <div class="content_date_all_structure content_date_all_personalize">
+        <div class="content_date_label_structure content_date_label_personalize">
+            <p class="content_date_labelp_structure content_date_labelp_personalize"> </p>
+        </div>
+        <div  class="content_date_divinput_structure content_date_divinput_personalize">
+            <select id="select_jours_id" class="content_date_input_structure content_date_input_personalize"  ></select>
+        </div>
+    </div>
     <div class="content_heure_all_structure content_heure_all_personalize">
         <div class="content_heure_label_structure content_heure_label_personalize">
             <p class="content_heure_para_structure content_heure_para_personalize"></p>
@@ -27,14 +35,6 @@
                     <option>45</option>
                 </select>
             </div>
-        </div>
-    </div>
-    <div class="content_date_all_structure content_date_all_personalize">
-        <div class="content_date_label_structure content_date_label_personalize">
-            <p class="content_date_labelp_structure content_date_labelp_personalize"> </p>
-        </div>
-        <div  class="content_date_divinput_structure content_date_divinput_personalize">
-            <input class="content_date_input_structure content_date_input_personalize" type="date" ></input>
         </div>
     </div>
 </div>
