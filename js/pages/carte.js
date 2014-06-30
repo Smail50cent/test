@@ -1149,9 +1149,9 @@ function validerCommande() {
                     personne = personnes[i];
                     produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
                     if (currentTicket.getQuantityOfProduct()[j].product instanceof Menu) {
-                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.prix, currentTicket.getQuantityOfProduct()[j].product.tauxDeTva);
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.prix, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     } else {
-                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     }
                     
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);

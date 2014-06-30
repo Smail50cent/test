@@ -15,7 +15,7 @@ class Produit {
     public $ingredients; // ARRAY
     public $associationPrixProduit;
     public $prix;
-    
+    public $tauxTva;
     public function setId($id) {
         $this->id = $id;
     }
@@ -24,8 +24,8 @@ class Produit {
         $this->nom = $nom;
     }
 
-    public function setOptions($optons) {
-        $this->options = $optons;
+    public function setOptions($options) {
+        $this->options = $options;
     }
 
     public function getOptions() {
@@ -78,5 +78,21 @@ class Produit {
     public function getPrix() {
         return $this->prix;
     }
+    public function getAssociationPrixProduit() {
+        return $this->associationPrixProduit;
+    }
+
+    public function getTauxTva() {
+        return $this->tauxTva;
+    }
+
+    public function setAssociationPrixProduit($associationPrixProduit) {
+        $this->associationPrixProduit = $associationPrixProduit;
+    }
+
+    public function setTauxTva($tauxTva) {
+        $this->tauxTva = $tauxTva;
+    }
+
 
 }

@@ -19,6 +19,7 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 var produit = new Produit();
                 produit.setNom(result.nom);
                 produit.setId(result.id);
+                produit.setTauxTva(result.tauxTva);
                 var categorie = new Categorie();
                 categorie.setNom(result.categorie.nom);
                 categorie.setId(result.categorie.id);
@@ -70,6 +71,7 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
                     var produit = new Produit();
                     produit.setNom(result.value.nom);
                     produit.setId(result.value.id);
+                    produit.setTauxTva(result.value.tauxTva);
                     var categorie = new Categorie();
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
@@ -119,6 +121,7 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
                 var result = e.target.result;
                 var produit = new Produit();
                 produit.setNom(result.nom);
+                produit.setTauxTva(result.tauxTva);
                 produit.setId(result.id);
                 var categorie = new Categorie();
                 categorie.setNom(result.categorie.nom);

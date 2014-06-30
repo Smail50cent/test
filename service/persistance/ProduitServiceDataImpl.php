@@ -5,63 +5,52 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once $path.'service/persistance/ProduitServiceData.php';
-include_once $path.'service/persistance/ConnexionBDD.php';
-include_once $path.'service/logique/entity/Produit.php';
+include_once $path . 'service/persistance/ProduitServiceData.php';
+include_once $path . 'service/persistance/ConnexionBDD.php';
+include_once $path . 'service/logique/entity/Produit.php';
 
 class ProduitServiceDataImpl implements ProduitServiceData {
 
     public function getAll() {
-        $sousCatSrv = PersistanceFactory::getSousCategorieService();
-        $ret = array();
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM produit");
-        $i = 0;
-        while ($ligne = $retour->fetch()) {
+        $retour = $bdd->executeGeneric("SELECT * FROM `produit` LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva");
+        return $this->parseProduit($retour);
+    }
+
+    private function parseProduit($resultSet) {
+        $sousCatSrv = PersistanceFactory::getSousCategorieService();
+        $liste = array();
+        $ret;
+        while ($ligne = $resultSet->fetch()) {
             $produit = new Produit();
             $produit->setCategorie(intval($ligne->CATEGORIE_ID));
             $produit->setId(intval($ligne->ID));
             $produit->setNom($ligne->NOM);
-            $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
+            if ($ligne->sousCategorie != null || intval($ligne->sousCategorie) != 0) {
+                $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
+            }
+            $produit->setTauxTva(floatval($ligne->taux_tva));
             $produit->setOptions(intval($ligne->options));
-            $ret[$i] = $produit;
-            $i++;
+            array_push($liste, $produit);
+        }
+        if (count($liste) == 1) {
+            $ret = $liste[0];
+        } else {
+            $ret = $liste;
         }
         return $ret;
     }
 
     public function getById($id) {
-        $sousCatSrv = PersistanceFactory::getSousCategorieService();
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM produit WHERE ID = " . $id);
-        $i = 0;
-        $ligne = $retour->fetch();
-        $produit = new Produit();
-        $produit->setCategorie(intval($ligne->CATEGORIE_ID));
-        $produit->setId(intval($ligne->ID));
-        $produit->setNom($ligne->NOM);
-        $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
-        $produit->setOptions(intval($ligne->options));
-        return $produit;
+        $retour = $bdd->executeGeneric("SELECT * FROM `produit` LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE ID = " . $id);
+        return $this->parseProduit($retour);
     }
 
     public function getProduitByCategorieId($id) {
-        $sousCatSrv = PersistanceFactory::getSousCategorieService();
-        $ret = array();
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM produit WHERE CATEGORIE_ID = " . $id);
-        $i = 0;
-        while ($ligne = $retour->fetch()) {
-            $produit = new Produit();
-            $produit->setCategorie(intval($ligne->CATEGORIE_ID));
-            $produit->setId(intval($ligne->ID));
-            $produit->setNom($ligne->NOM);
-            $produit->setSousCategorie($sousCatSrv->getByIdParseObj($ligne->sousCategorie));
-            $produit->setOptions(intval($ligne->options));
-            $ret[$i] = $produit;
-            $i++;
-        }
-        return $ret;
+        return $this->parseProduit($retour);
     }
 
     public function addData() {

@@ -33,6 +33,8 @@
         <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur">getAllProduitFavoriteByIdServeur</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitsSuggerer">getAllProduitsSuggerer</variable>
+        <variable name="serveur.clientaccess.serviceGetAllProdtest">getProdtest</variable>
+        <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
