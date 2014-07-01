@@ -210,7 +210,7 @@ function Produit() {
     this.setTauxTva = function(tauxTva) {
         this.tauxTva = tauxTva;
     };
-    this.gettauxTva = function() {
+    this.getTauxTva = function() {
         return this.tauxTva;
     };
 }
@@ -754,4 +754,24 @@ function Prodtest() {
         this.demanderCuisson = cuisson;
     };
     
+}
+
+function MajTables() {
+
+    this.nomTable;
+    this.level;
+
+    this.setNomTable = function(nomTable) {
+        this.nomTable = nomTable;
+    };
+    this.getNomTable = function() {
+        return this.nomTable;
+    };
+    this.setLevel = function(level) {
+        this.level = level;
+    };
+    this.getLevel = function() {
+        return this.level;
+    };
+
 }

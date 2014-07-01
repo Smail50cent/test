@@ -49,7 +49,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
 
     public function getProduitByCategorieId($id) {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM produit WHERE CATEGORIE_ID = " . $id);
+        $retour = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE CATEGORIE_ID = " . $id);
         return $this->parseProduit($retour);
     }
 

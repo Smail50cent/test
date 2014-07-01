@@ -18,6 +18,7 @@
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAttributsComptesByEmail">getAttributsComptesByEmail</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
+        <variable name="serveur.clientaccess.serviceGetAllMajTables">getAllMajTables</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
         <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
@@ -29,6 +30,7 @@
         <variable name="serveur.clientaccess.serviceGetParamFormById">getParamFormById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteById">getAttributCompteById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteByIdCompte">getAttributCompteByIdCompte</variable>
+        <variable name="serveur.clientaccess.serviceGetMajTablesByNom">getMajTablesByNom</variable>
         <variable name="serveur.clientaccess.serviceAddAttributCompte">addAttributCompte</variable>
         <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur">getAllProduitFavoriteByIdServeur</variable>
@@ -37,6 +39,7 @@
         <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
+        <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>
         <variable name="tableNameIngredient">ingredients</variable>

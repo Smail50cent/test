@@ -30,6 +30,7 @@ include_once $path . 'service/persistance/AssociationProduitIngredientServiceDat
 include_once $path . 'service/persistance/ProduitSuggererServiceDataImpl.php';
 include_once $path . 'service/persistance/ReservationDateDisponibleServiceDataImpl.php';
 include_once $path . 'service/persistance/ReservationServiceDataImpl.php';
+include_once $path . 'service/persistance/MajTablesServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -57,6 +58,7 @@ class PersistanceFactory {
     private static $produitSuggererSrv = null;
     private static $reservationDateDisponibleSrv = null;
     private static $reservationSrv = null;
+    private static $majtablesSrv = null;
 
     public static function getReservationService() {
         if (PersistanceFactory::$reservationSrv == null) {
@@ -224,6 +226,13 @@ class PersistanceFactory {
             PersistanceFactory::$prodtestSrv = new ProdtestServiceDataImpl();
         }
         return PersistanceFactory::$prodtestSrv;
+    }
+    
+    public static function getMajTablesService() {
+        if (PersistanceFactory::$majtablesSrv == null) {
+            PersistanceFactory::$majtablesSrv = new MajTablesServiceDataImpl();
+        }
+        return PersistanceFactory::$majtablesSrv;
     }
 
 }

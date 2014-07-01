@@ -643,7 +643,8 @@ function printProduits(index) {
                     } else {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
-                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
+                    //console.log(produit.tauxTva);
+                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
                     itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
                     itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
