@@ -31,6 +31,14 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 produit.setAssociationPrixProduit(result.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
+//                for (var i = 0; i < produits.length; i++) {
+//                    if (produits[i] instanceof Produit) {
+//                        
+//                    }else{
+//                        isexecute = false;
+//                        break;
+//                    }
+//                }
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
                     method(produits);
                 }
@@ -113,8 +121,8 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
-            var trans = db.transaction([config.getConfig("tableNameProduit")], 
-            myStorage.IDBTransactionModes.READ_ONLY);
+            var trans = db.transaction([config.getConfig("tableNameProduit")],
+                    myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
             var request = store.get(produitID);
             request.onsuccess = function(e) {

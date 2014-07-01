@@ -27,7 +27,7 @@ function ConnexionServer() {
             });
         }
     };
-    
+
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
@@ -161,7 +161,7 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
-                produit.setTauxTva(data[i].tauxTva);
+                produit.setTauxTva(data.tauxTva);
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);
@@ -174,6 +174,12 @@ function ConnexionServer() {
                 produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
+                curentReq++;
+                if (totalReq <= curentReq) {
+                    isexecute = true;
+                } else {
+                    isexecute = false;
+                }
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
                     method(produits);
                 }

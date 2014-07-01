@@ -314,6 +314,8 @@ function lessProduit(id, isTicket) {//qopid or Produitid
  * @param {type} id
  * @returns {undefined}
  */
+var totalReq=0;
+var curentReq = 0;
 var idmenuCur = "";
 function detailMenu(id) {
     if (idmenuCur == "") {
@@ -321,29 +323,27 @@ function detailMenu(id) {
     } else if (id == idmenuCur) {
         $("#choose_menu_item_produits_" + idmenuCur).html("");
         $("#choose_menu_valider_menu_" + idmenuCur).remove();
-        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button");
+        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button menu_content_add_button_structure menu_content_add_button_personalize");
         idmenuCur = "";
     } else if (id != idmenuCur) {
         $("#choose_menu_item_produits_" + idmenuCur).html("");
         $("#choose_menu_valider_menu_" + idmenuCur).remove();
-        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button");
+        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button menu_content_add_button_structure menu_content_add_button_personalize");
         load(id);
     }
     function load(id) {
         idmenuCur = id;
-        $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close");
+        $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close menu_content_add_button_structure menu_content_add_button_personalize");
         var connexion = getConnexion();
         connexion.getMenuByIdForDetailMenu(showWithMenuDataById, id);//BDD
         function showWithMenuDataById(menu) {
-
             $("#choose_menu_items_id").html("");
             var produits = menu.getProduits();
+            totalReq = produits.length;
+            curentReq=0;
             for (var i = 0; i < produits.length; i++) {
                 var connexion = getConnexion();
                 var isexecute = false;
-                if (produits.length - 1 == i) {
-                    isexecute = true;
-                }
                 connexion.getProduitByIdForDetailMenu(showWithProduitDataGetById, isexecute, produits[i], i, produits);
             }
 
@@ -355,6 +355,7 @@ function detailMenu(id) {
                         return 1;
                     return 0;
                 }
+                
                 produits.sort(compare);
                 productsInMenu = produits;
                 productsChoosecInMenu = clone(produits); //Clone var
@@ -1154,7 +1155,7 @@ function validerCommande() {
                     } else {
                         totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     }
-                    
+
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
