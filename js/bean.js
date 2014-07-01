@@ -153,6 +153,7 @@ function Produit() {
     this.associationPrixProduit;
     this.tauxTva;
 
+    
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
         this.setId(id);
