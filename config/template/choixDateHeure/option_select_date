@@ -1,1 +1,1 @@
-<option>{valeur}</option>
+<option value="{value}">{valeur}</option>

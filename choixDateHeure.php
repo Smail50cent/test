@@ -14,28 +14,17 @@
         </div>
         <div class="content_heure_selectheure_structure content_heure_selectheure_personalize">
             <div class="content_heure_heure_structure content_heure_heure_personalize">
-                <select class="content_heure_inputheure_structure content_heure_inputheure_personalize">
-                    <option>11</option>
-                    <option>12</option>
-                    <option>13</option>
-                    <option>14</option>
-                    <option>15</option>
-                    <option>18</option>
-                    <option>19</option>
-                    <option>20</option>
-                    <option>21</option>
-                    <option>22</option>
+                <select id="select_hours_id" class="content_heure_inputheure_structure content_heure_inputheure_personalize">
                 </select>
             </div>
             <div class="content_heure_minutes_structure content_heure_minutes_personalize">
-                <select class="content_heure_selectminutes_structure content_heure_selectminutes_personalize">
-                    <option>0</option>
-                    <option>15</option>
-                    <option>30</option>
-                    <option>45</option>
+                <select id="select_minutes_id" class="content_heure_selectminutes_structure content_heure_selectminutes_personalize">
                 </select>
             </div>
         </div>
+    </div>
+    <div class="content_date_btn_valider_structure content_date_btn_valider_personalize">
+        <button type="button" id="btnValiderReservation_id"></button>
     </div>
 </div>
 </div>

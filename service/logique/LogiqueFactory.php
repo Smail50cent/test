@@ -26,6 +26,7 @@ include_once $path . 'service/logique/CompteProduitFavoriServiceImpl.php';
 include_once $path . 'service/logique/ProduitSuggereriServiceImpl.php';
 include_once $path . 'service/logique/ReservationDateDisponibleServiceImpl.php';
 include_once $path . 'service/logique/ReservationServiceImpl.php';
+include_once $path . 'service/logique/MajTablesServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -50,6 +51,7 @@ class LogiqueFactory {
     private static $produitSuggererSrv = null;
     private static $reservationDateDisponibleSrv = null;
     private static $reservationSrv = null;
+    private static $majtablesSrv = null;
 
     public static function getReservationService() {
         if (LogiqueFactory::$reservationSrv == null) {
@@ -196,6 +198,13 @@ class LogiqueFactory {
             LogiqueFactory::$prodtestSrv = new ProdtestServiceImpl();
         }
         return LogiqueFactory::$prodtestSrv;
+    }
+    
+    public static function getMajTablesService() {
+        if (LogiqueFactory::$majtablesSrv == null) {
+            LogiqueFactory::$majtablesSrv = new MajTablesServiceImpl();
+        }
+        return LogiqueFactory::$majtablesSrv;
     }
 
 }

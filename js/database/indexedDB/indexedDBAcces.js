@@ -340,7 +340,8 @@ myStorage.indexedDB.addFistProduits = function() {
                 "souscategorie": (produit.souscategorie),
                 "options": produit.options,
                 "ingredients": produit.ingredients,
-                "associationPrixProduit": produit.associationPrixProduit
+                "associationPrixProduit": produit.associationPrixProduit,
+                "tauxTva": produit.tauxTva
             });
             trans.oncomplete = function(e) {
                 db.close();

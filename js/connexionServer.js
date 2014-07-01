@@ -1,8 +1,36 @@
 function ConnexionServer() {
+    this.getMajTable = function(methodToExecuteAfter, conftableName, tableName) {
+        var ret = null;
+        var updated = false;
+        var clientLevel = getUpdateLevelOfTable(config.getConfig(conftableName));
+        if (isLocalBddSuppored() == false || isMozilla()) {
+            pullLatestData(methodToExecuteAfter);
+        } else {
+            $.ajax({
+                url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + tableName,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success: function(data, textStatus, xhr) {
+//                    console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
+                    if (parseInt(data.level) > parseInt(clientLevel)) {
+                        updated = true;
+                        pullLatestData(methodToExecuteAfter);
+                        incrementeLevelOfTable(config.getConfig(conftableName));
+                    } else {
+                        getImplOfConnexionLocal().getEntreprise(methodToExecuteAfter);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                }
+            });
+        }
+    };
+    
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
-        console.log(config.getConfig("tableNameEntreprise"));
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
@@ -133,6 +161,7 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
+                produit.setTauxTva(data[i].tauxTva);
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);
@@ -188,11 +217,13 @@ function ConnexionServer() {
             dataType: 'json',
             async: false,
             success: function(data, textStatus, xhr) {
+                //console.log(data);
                 var produits = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var produit = new Produit();
                     produit.setNom(data[i].nom);
                     produit.setId(data[i].id);
+                    produit.setTauxTva(data[i].tauxTva);
                     var categorie = new Categorie();
                     categorie.setNom(data[i].categorie.nom);
                     categorie.setId(data[i].categorie.id);
@@ -210,6 +241,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -243,6 +275,7 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
+                produit.setTauxTva(data.tauxTva);
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);
@@ -258,6 +291,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -597,6 +631,7 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data[i].produit.nom);
                         produit.setId(data[i].produit.id);
+                        produit.setTauxTva(data[i].produit.tauxTva);
                         produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
                         var categorie = new Categorie();
                         categorie.setNom(data[i].produit.categorie.nom);
@@ -617,6 +652,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -636,6 +672,7 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data[i].produit.nom);
                         produit.setId(data[i].produit.id);
+                        produit.setTauxTva(data[i].produit.tauxTva);
                         produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
                         var categorie = new Categorie();
                         categorie.setNom(data[i].produit.categorie.nom);
