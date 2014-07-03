@@ -150,7 +150,14 @@ function controller(entreprise) {
                 hideLoading();
             };
             break;
+        case "choixPriseDeCommande":
+            method = function() {
+                onChoixPriseDeCommandeLoaded();
+                hideLoading();
+            };
+            break;
         default :
+            
             nom = "index";
             method = function() {
                 onIndexLoaded();

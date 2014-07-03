@@ -117,13 +117,18 @@ function onClickBtnValider() {
     var minutes = parseInt($("#select_minutes_id").val());
     var heure = parseInt($("#select_hours_id").val());
     var ijour = parseInt($("#select_jours_id").val());
-    console.log(listePropositonDate[ijour][1]);
-    if(listePropositonDate[ijour][1] < 10){
-        listePropositonDate[ijour][1] = "0"+listePropositonDate[ijour][1];
+    if (listePropositonDate[ijour][1].toString().length == 1) {
+        listePropositonDate[ijour][1] = "0" + listePropositonDate[ijour][1];
     }
-    if(listePropositonDate[ijour][0] < 10){
-        listePropositonDate[ijour][0] = "0"+listePropositonDate[ijour][0];
+    if (listePropositonDate[ijour][0].toString().length == 1) {
+        listePropositonDate[ijour][0] = "0" + listePropositonDate[ijour][0];
     }
-    var finalDate= listePropositonDate[ijour][2]+"-"+listePropositonDate[ijour][1]+"-"+listePropositonDate[ijour][0]+" "+heure+":"+minutes+":00";
-    setLocalStorageValue("reservation.date.heure",finalDate);
+    if (minutes.toString().length == 1) {
+        minutes = "0" + minutes;
+    }
+    if (heure.toString().length == 1) {
+        heure = "0" + heure;
+    }
+    var finalDate = listePropositonDate[ijour][2] + "-" + listePropositonDate[ijour][1] + "-" + listePropositonDate[ijour][0] + " " + heure + ":" + minutes + ":00";
+    setLocalStorageValue("reservation.date.heure", finalDate);
 }

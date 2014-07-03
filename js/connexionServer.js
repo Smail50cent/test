@@ -216,7 +216,6 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
             type: 'GET',
