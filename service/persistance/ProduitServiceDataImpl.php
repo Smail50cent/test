@@ -15,8 +15,6 @@ include_once $path . 'service/logique/entity/AssociationProduitPrix.php';
 
 class ProduitServiceDataImpl implements ProduitServiceData {
 
-    private $idProdAfter;
-
     public function getAll() {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT 
@@ -59,69 +57,94 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
     }
 
     private $assoPrixId;
-    private $assoIngredientId;
+//    private $assoIngredientId;
     private $produit;
     private $assoPrix;
     private $assoIngredient;
+    private $idProdAfter;
 
     private function parseProduit($resultSet) {
+        $assoPrixId;
+        $idProdAfter = null;
         $liste = array();
         $ret;
-        $this->assoPrix = array();
-        $this->assoIngredient = array();
-        $this->produit = new Produit();
+        $assoPrix = array();
+        $assoIngredient = array();
+        $produit = new Produit();
         $i = 0;
-        while ($ligne = $resultSet->fetch()) {
-            $this->produit->setId(intval($ligne->produit_id));
+        $lignes = $resultSet->fetchAll();
+        for ($i = 0; $i < count($lignes); $i++) {
+            $ligne = $lignes[$i];
+            $produit->setId(intval($ligne->produit_id));
             $categorie = new Categorie();
             $categorie->setId(intval($ligne->categorie_id));
             $categorie->setNom($ligne->categorie_nom);
             $categorie->setPriorite(intval($ligne->categorie_priorite));
-            $this->produit->setCategorie($categorie);
-            $this->produit->setNom($ligne->produit_nom);
+            $produit->setCategorie($categorie);
+            $produit->setNom($ligne->produit_nom);
             $sousCategorie = new SousCategorie();
             $sousCategorie->setCategorie($ligne->souscategorie_categorie_id);
             $sousCategorie->setId($ligne->souscategorie_id);
             $sousCategorie->setNom($ligne->souscategorie_nom);
             $sousCategorie->setPriorite($ligne->souscategorie_priorite);
-            $this->produit->setSousCategorie($sousCategorie);
-            $this->produit->setTauxTva(floatval($ligne->produit_taux_tva));
-            $this->produit->setOptions(intval($ligne->produit_options));
-            if ($this->idProdAfter == $ligne->produit_id) {// SI LIGNE EGALE A LIGNE PREC
-                $isHerePrix = false;
-                for ($j = 0; $j < count($this->assoPrix); $j++) {
-                    if ($this->assoPrix[$j]->id == $ligne->association_produit_prix_id) {
-                        $isHerePrix = true;
-                        break;
+            $produit->setSousCategorie($sousCategorie);
+            $produit->setTauxTva(floatval($ligne->produit_taux_tva));
+            $produit->setOptions(intval($ligne->produit_options));
+            if ($ligne->produit_id == $idProdAfter) {
+                $assoPrix1 = $this->testsForListePrix($ligne, $produit);
+                if ($assoPrix1 != null) {
+                    $produit->addAssociationPrixProduit($assoPrix1);
+                }
+                $assoIng = $this->testsForListeIngredient($ligne, $produit);
+                if ($assoIng != null) {
+                    $produit->addIngredients($assoIng);
+                }
+                if (count($lignes) != ($i + 1)) {
+                    if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        array_push($liste, $produit);
+                        $assoPrix = array();
+                        $assoIngredient = array();
+                        $produit = new Produit();
                     }
+                } else {
+                    array_push($liste, $produit);
+                    $assoPrix = array();
+                    $assoIngredient = array();
+                    $produit = new Produit();
                 }
-                if (!$isHerePrix) {
-                    array_push($this->assoPrix, $this->parseAssociation($ligne));
+            } else if ($i == 0) {
+                $assoPrix1 = $this->testsForListePrix($ligne, $produit);
+                if ($assoPrix1 != null) {
+                    $produit->addAssociationPrixProduit($assoPrix1);
                 }
-                $isHereIng = false;
-                for ($j = 0; $j < count($this->assoIngredient); $j++) {
-                    if ($this->assoIngredient[$j]->ingredient == $ligne->association_produit_ingredient_id_ingredient) {
-                        $isHereIng = true;
-                        break;
+                $assoIng = $this->testsForListeIngredient($ligne, $produit);
+                if ($assoIng != null) {
+                    $produit->addIngredients($assoIng);
+                }
+                if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                    array_push($liste, $produit);
+                    $produit = new Produit();
+                }
+            } else if ($ligne->produit_id != $idProdAfter) {
+                $assoPrix1 = $this->testsForListePrix($ligne, $produit);
+                if ($assoPrix1 != null) {
+                    $produit->addAssociationPrixProduit($assoPrix1);
+                }
+                $assoIng = $this->testsForListeIngredient($ligne, $produit);
+                if ($assoIng != null) {
+                    $produit->addIngredients($assoIng);
+                }
+                if (count($lignes) != ($i + 1)) {
+                    if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        array_push($liste, $produit);
+                        $produit = new Produit();
                     }
+                } else {
+                    array_push($liste, $produit);
+                    $produit = new Produit();
                 }
-                if (!$isHereIng) {
-                    array_push($this->assoIngredient, $this->parseAssociationIngredient($ligne));
-                }
-            } else {
-                    array_push($this->assoPrix, $this->parseAssociation($ligne));
-                    array_push($this->assoIngredient, $this->parseAssociationIngredient($ligne));
-                    $this->produit->setAssociationProduitPrix($this->assoPrix);
-                    $this->produit->setIngredients($this->assoIngredient);
-                    array_push($liste, $this->produit);
-                    $this->assoPrix = array();
-                    $this->assoIngredient = array();
-                    $this->produit = new Produit();
             }
-            $this->assoIngredientId = $ligne->association_produit_ingredient_id;
-            $this->assoPrixId = $ligne->association_produit_prix_id;
-            $this->idProdAfter = $ligne->produit_id;
-            $i++;
+            $idProdAfter = $ligne->produit_id;
         }
         if (count($liste) == 1) {
             $ret = $liste[0];
@@ -129,6 +152,35 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
             $ret = $liste;
         }
         return $ret;
+    }
+
+    private function testsForListePrix($ligne, Produit $produit) {
+        $isHerePrix = false;
+        for ($j = 0; $j < count($produit->getAssociationPrixProduit()); $j++) {
+            if ($produit->getAssociationPrixProduit()[$j]->id == $ligne->association_produit_prix_id) {
+                $isHerePrix = true;
+                break;
+            }
+        }if (!$isHerePrix) {
+            return ($this->parseAssociation($ligne));
+        } else {
+            return null;
+        }
+    }
+
+    private function testsForListeIngredient($ligne, Produit $produit) {
+        $isHereIng = false;
+        for ($j = 0; $j < count($produit->getIngredients()); $j++) {
+            if (intval($produit->getIngredients()[$j]->ingredient) == intval($ligne->association_produit_ingredient_id_ingredient)) {
+                $isHereIng = true;
+                break;
+            }
+        }
+        if (!$isHereIng) {
+            return $this->parseAssociationIngredient($ligne);
+        } else {
+            return null;
+        }
     }
 
     private function parseAssociationIngredient($ligne) {
@@ -264,13 +316,3 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WH
     }
 
 }
-
-/*SELECT 
-produit.ID as produit_id
-FROM produit
-JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
-JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
-JOIN categorie ON categorie.id = produit.CATEGORIE_ID 
-JOIN taux_tva ON taux_tva.id_tva = produit.TVA
-LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
-LEFT JOIN zone_table ON association_produit_prix.zone_table_id = zone_table.id*/

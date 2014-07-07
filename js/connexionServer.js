@@ -220,9 +220,8 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
-                //console.log(data);
                 var produits = new Array();
                 for (var i = 0; i < data.length; i++) {
                     var produit = new Produit();
@@ -239,6 +238,7 @@ function ConnexionServer() {
                     produit.setAssociationPrixProduit(data[i].associationPrixProduit);
                     produit.setIdsIngredients(data[i].ingredients);
                     produit.setOptions(data[i].options);
+                    console.log(produit);
                     produits.push(produit);
                 }
                 if (method != null) {//Nous avons besoin de l'executer.

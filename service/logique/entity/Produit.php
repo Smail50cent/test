@@ -12,10 +12,11 @@ class Produit {
     public $categorie;
     public $souscategorie;
     public $options; //array
-    public $ingredients; // ARRAY
-    public $associationPrixProduit;
+    public $ingredients = array(); // ARRAY
+    public $associationPrixProduit = array();
     public $prix;
     public $tauxTva;
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -44,6 +45,10 @@ class Produit {
         $this->ingredients = $ingredients;
     }
 
+    public function addIngredients($ingredient) {
+        array_push($this->ingredients, $ingredient);
+    }
+
     public function getSousCategorie() {
         return $this->souscategorie;
     }
@@ -64,13 +69,6 @@ class Produit {
         return $this->categorie;
     }
 
-    public function setAssociationProduitPrix($aspp) {
-        $this->associationPrixProduit = $aspp;
-    }
-
-    public function getAssociationProduitPrix() {
-        return $this->associationPrixProduit;
-    }
     public function setPrix($prix) {
         $this->prix = $prix;
     }
@@ -78,6 +76,7 @@ class Produit {
     public function getPrix() {
         return $this->prix;
     }
+
     public function getAssociationPrixProduit() {
         return $this->associationPrixProduit;
     }
@@ -90,9 +89,12 @@ class Produit {
         $this->associationPrixProduit = $associationPrixProduit;
     }
 
+    public function addAssociationPrixProduit($associationPrixProduit) {
+        array_push($this->associationPrixProduit, $associationPrixProduit);
+    }
+
     public function setTauxTva($tauxTva) {
         $this->tauxTva = $tauxTva;
     }
-
 
 }

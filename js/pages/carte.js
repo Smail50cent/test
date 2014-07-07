@@ -621,6 +621,7 @@ function printProduits(index) {
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
             function printProduitByCategorie(produits) {
                 var quantity = "+";
+                console.log(produits[0]);
                 var categorie = produits[0].id_categorie;
                 try {
                     var qops = currentTicket.getQuantityOfProduct();
