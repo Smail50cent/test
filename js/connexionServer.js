@@ -329,10 +329,10 @@ function ConnexionServer() {
             console.log('exist');
             this.haveMAJ(allprod, "produit", clientLevel);
             function allprod(products, level) {
-                if (products) {
+                if (products!=null) {
                     console.log('update');
                     for (var i = 0; i < products.length; i++) {
-                        getImplOfConnexionLocal().updateEntreprise(produitup, products[i]);
+//                        getImplOfConnexionLocal().updateEntreprise(produitup, products[i]);
                         function produitup(prods){
                             console.log(prods);
                         }

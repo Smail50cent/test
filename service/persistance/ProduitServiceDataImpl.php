@@ -317,7 +317,42 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WH
 
     public function getProduitByLevel($level) {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE level >= " . $level);
+        $retour = $bdd->executeGeneric("SELECT 
+produit.ID AS produit_id,
+produit.NOM AS produit_nom,
+produit.options AS produit_options,
+produit.level AS produit_level,
+categorie.id AS categorie_id,
+categorie.nom AS categorie_nom,
+categorie.priorite AS categorie_priorite,
+souscategorie.ID AS souscategorie_id,
+souscategorie.NOM AS souscategorie_nom,  
+souscategorie.categorie_id AS souscategorie_categorie_id,
+souscategorie.priorite AS souscategorie_priorite,
+taux_tva.taux_tva AS produit_taux_tva,
+association_produit_prix.id AS association_produit_prix_id,
+association_produit_prix.heureDebut AS association_produit_prix_heureDebut,
+association_produit_prix.heureFin AS association_produit_prix_heureFin,
+association_produit_prix.produit_id AS association_produit_prix_produit_id,
+prixHt.id AS prixHt_id,
+prixHt.prix AS prixHt_prix,
+zone_table.id AS zone_table_id, 
+zone_table.nom AS zone_table_nom,
+association_produit_ingredient.id AS association_produit_ingredient_id,
+association_produit_ingredient.id_produit AS association_produit_ingredient_id_produit,
+association_produit_ingredient.id_ingredient AS association_produit_ingredient_id_ingredient,
+association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
+association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
+association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+FROM produit 
+LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
+LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
+LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID 
+LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
+LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
+LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level >= " . $level);
         return $this->parseProduit($retour);
     }
 
