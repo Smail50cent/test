@@ -162,7 +162,7 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
             impl(method);
         } else {
-            myStorage.indexedDB.updateEntreprise(method);
+            myStorage.indexedDB.updateProduit(method);
         }
     }, delay);
     function impl(method) {
