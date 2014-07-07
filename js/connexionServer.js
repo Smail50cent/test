@@ -14,8 +14,8 @@ function ConnexionServer() {
         });
     };
     this.haveMAJ = function(method, nomTable, level) {
-        if (isLocalBddSuppored() == false || isMozilla()) {
-            method(null);
+        if ((isMozilla())  ) {
+            method("NS");
         } else {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
@@ -201,7 +201,6 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data.nom);
                         produit.setId(data.id);
-
                         var categorie = new Categorie();
                         categorie.setNom(data.categorie.nom);
                         categorie.setId(data.categorie.id);
@@ -255,61 +254,60 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
         //this.getMajTable(ifupdated, "tableNameProduit", "produits");
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
-        if (clientLevel == null) {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
-                type: 'GET',
-                dataType: 'json',
-                async: true,
-                success: function(data, textStatus, xhr) {
-                    //console.log(data.id);
-                    var produits = new Array();
-                    for (var i = 0; i < data.length; i++) {
-                        var produit = new Produit();
-                        produit.setNom(data[i].nom);
-                        produit.setId(data[i].id);
-                        produit.setTauxTva(data[i].tauxTva);
-                        var categorie = new Categorie();
-                        categorie.setNom(data[i].categorie.nom);
-                        categorie.setId(data[i].categorie.id);
-                        categorie.setPriorite(data[i].categorie.priorite);
-                        categorie.setSousCategorie(data[i].categorie.souscategorie);
-                        produit.setCategorie(categorie);
-                        produit.setSousCategorie(data[i].souscategorie);
-                        produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-                        produit.setIdsIngredients(data[i].ingredients);
-                        produit.setOptions(data[i].options);
-                        produits.push(produit);
+
+        this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
+        function allprod(products, level) {
+            if (products instanceof Array) {
+                console.log('update');
+                for (var i = 0; i < products.length; i++) {
+                    getImplOfConnexionLocal().updateProduit(produitup, products[i]);
+                    function produitup(prods) {
+                        console.log(prods);
                     }
-                    if (method != null) {//Nous avons besoin de l'executer.
-                        method(produits);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.log(xhr, textStatus, errorThrown);
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
                 }
-            });
-        } else {
-            this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
-            function allprod(products, level) {
-                if (products) {
-                    console.log('update');
-                    for (var i = 0; i < products.length; i++) {
-                        getImplOfConnexionLocal().updateProduit(produitup, products[i]);
-                        function produitup(prods) {
-                            console.log(prods);
+                updateLevelOfTable(config.getConfig("tableNameProduit"), level);
+            } else if (products == "NS") {
+                console.log("Database Not supported !");
+                $.ajax({
+                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success: function(data, textStatus, xhr) {
+                        //console.log(data.id);
+                        var produits = new Array();
+                        for (var i = 0; i < data.length; i++) {
+                            var produit = new Produit();
+                            produit.setNom(data[i].nom);
+                            produit.setId(data[i].id);
+                            produit.setTauxTva(data[i].tauxTva);
+                            var categorie = new Categorie();
+                            categorie.setNom(data[i].categorie.nom);
+                            categorie.setId(data[i].categorie.id);
+                            categorie.setPriorite(data[i].categorie.priorite);
+                            categorie.setSousCategorie(data[i].categorie.souscategorie);
+                            produit.setCategorie(categorie);
+                            produit.setSousCategorie(data[i].souscategorie);
+                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
+                            produit.setIdsIngredients(data[i].ingredients);
+                            produit.setOptions(data[i].options);
+                            produits.push(produit);
                         }
+                        if (method != null) {//Nous avons besoin de l'executer.
+                            method(produits);
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log(xhr, textStatus, errorThrown);
+                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
                     }
-                    updateLevelOfTable(config.getConfig("tableNameProduit"), level);
-                } else {
-                    console.log("NO UPDATE");
-                    getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
-                }
+                });
+            } else {
+                console.log("NO UPDATE");
+                getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
             }
         }
     };
@@ -490,7 +488,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllParamForms = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamForms"),
@@ -521,7 +518,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllAttributsComptes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
@@ -546,7 +542,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
@@ -560,7 +555,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addCompte = function(method, password, id_role, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
@@ -576,7 +570,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllParamApps = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
@@ -600,7 +593,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getCompteById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetCompteById") + "?id=" + id,
@@ -621,7 +613,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAttributCompteByIdCompte = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,

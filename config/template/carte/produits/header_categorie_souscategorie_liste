@@ -1,3 +1,2 @@
-<ul id="categorie_sous_cat_{id}" class="sous_categorie_cat sous_categorie_cat_structure sous_categorie_cat_personalize"
-    style="background-color: black; width: 150px; margin-top: 5px; display: none;">
+<ul id="categorie_sous_cat_{id}" class="sous_categorie_cat sous_categorie_cat_structure sous_categorie_cat_personalize" style="background-color: black; width: 150px; margin-top: 5px; display: none;">
 </ul>

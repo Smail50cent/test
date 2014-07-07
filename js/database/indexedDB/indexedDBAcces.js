@@ -4,7 +4,7 @@ myStorage.indexedDB.onerror = function(e) {
     showErrorMessage(e);
 };
 var delay = 0;//temps d'attente avant d'accèder à la base de données 
-var delayOnupgradeneeded = 3000;
+var delayOnupgradeneeded = 0;
 var indexedDB;
 var IDBTransaction;
 var IDBKeyRange;
@@ -343,7 +343,8 @@ myStorage.indexedDB.addFistProduits = function() {
                 "options": produit.options,
                 "ingredients": produit.ingredients,
                 "associationPrixProduit": produit.associationPrixProduit,
-                "tauxTva": produit.tauxTva
+                "tauxTva": produit.tauxTva,
+                "level": produit.level
             });
             trans.oncomplete = function(e) {
                 console.log("nbtotal="+nbtotal+" ",e);

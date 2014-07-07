@@ -402,4 +402,4 @@ function testIfIsServeurConnected() {
     }
     return isConnected;
 }
-myStorage.indexedDB.countProduits(null,null);
+//myStorage.indexedDB.countProduits(null,null);
