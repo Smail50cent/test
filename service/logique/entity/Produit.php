@@ -18,7 +18,6 @@ class Produit {
     public $tauxTva;
     public $level;
     
-
     public function setId($id) {
         $this->id = $id;
     }

@@ -87,6 +87,7 @@ function ConnexionLocalIndexedDB() {
     };
     this.updateProduit = function(method, produit) {
         myStorage.indexedDB.updateProduit(method, produit);
+    };
     this.getReservationDisponibleWhereDateNull = function (method,param){
         console.log("TODO");
     };
