@@ -315,4 +315,10 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WH
                 . " WHERE DC.nom = FP.FA_LIBELLE AND FP.FA_CODE = BP.PR_CODE_FAMILLE");
     }
 
+    public function getProduitByLevel($level) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE level >= " . $level);
+        return $this->parseProduit($retour);
+    }
+
 }

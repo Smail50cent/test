@@ -23,5 +23,9 @@ class MajTablesServiceImpl implements MajTablesService {
         return $this->majtableSrv->getBynomTable($nom);
     }
 
+    public function haveMAJ($tableName, $level) {
+        return $this->majtableSrv->haveMAJ($tableName, $level);
+    }
+
 }
 

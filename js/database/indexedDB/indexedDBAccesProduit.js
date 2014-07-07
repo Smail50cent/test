@@ -84,9 +84,9 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
-                    categorie.setSousCategorie(result.value.categorie.souscategorie);
+                    //categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
-                    produit.setAssociationPrixProduit(result.associationPrixProduit);
+                    produit.setAssociationPrixProduit(result.value.associationPrixProduit);
                     produit.setSousCategorie(result.value.souscategorie);
                     produit.setIdsIngredients(result.value.ingredients);
                     produit.setOptions(result.value.options);
@@ -140,7 +140,7 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
                 produit.setSousCategorie(result.categorie);
                 produit.setOptions(result.options);
                 produit.setAssociationPrixProduit(result.associationPrixProduit);
-                console.log(result);
+                //console.log(result);
                 produit.setIdsIngredients(result.ingredients);
                 if (method != null) {
                     method(produit, param);
@@ -157,4 +157,51 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
+myStorage.indexedDB.updateProduit = function(method, newProduit) {
+    window.setTimeout(function() {
+        if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
+            impl(method);
+        } else {
+            myStorage.indexedDB.updateEntreprise(method);
+        }
+    }, delay);
+    function impl(method) {
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
+            var store = trans.objectStore(config.getConfig("tableNameProduit"));
+            var openCursorReq = store.openCursor(5);
+            openCursorReq.onsuccess = function(event) {
+                var cursor = event.target.result;
+                var _object = cursor.value;
+                _object.nom = newProduit.nom;
+                _object.tauxTva = newProduit.tauxTva;
+                _object.id = newProduit.id;
+                _object.categorie.nom = newProduit.categorie.nom;
+                _object.categorie.id = newProduit.categorie.id;
+                _object.categorie.priorite = newProduit.categorie.priorite;
+                _object.categorie.souscategorie = newProduit.categorie.souscategorie;
+                _object.categorie = newProduit.categorie;
+                _object.options = newProduit.options;
+                _object.associationPrixProduit = newProduit.associationPrixProduit;
+                _object.ingredients = newProduit.ingredients;
 
+                var updateRequest = cursor.update(_object);
+                updateRequest.onerror = updateRequest.onblocked = function() {
+                    showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+                };
+                updateRequest.onsuccess = function(event) {
+                };
+                trans.oncomplete = function(e) {
+                    if (method != null) {
+                        method(newProduit);
+                    }
+                    db.close();
+                };
+            };
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+
+};

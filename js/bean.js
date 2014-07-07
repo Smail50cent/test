@@ -152,7 +152,8 @@ function Produit() {
     this.options;
     this.associationPrixProduit;
     this.tauxTva;
-
+    this.level;
+    
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
         this.setId(id);
@@ -212,6 +213,12 @@ function Produit() {
     };
     this.getTauxTva = function() {
         return this.tauxTva;
+    };
+    this.setLevel = function(level) {
+        this.level = level;
+    };
+    this.getLevel = function() {
+        return this.level;
     };
 }
 ;

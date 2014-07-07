@@ -16,7 +16,8 @@ class Produit {
     public $associationPrixProduit = array();
     public $prix;
     public $tauxTva;
-
+    public $level;
+    
     public function setId($id) {
         $this->id = $id;
     }
@@ -96,5 +97,14 @@ class Produit {
     public function setTauxTva($tauxTva) {
         $this->tauxTva = $tauxTva;
     }
+
+    public function getLevel() {
+        return $this->level;
+    }
+
+    public function setLevel($level) {
+        $this->level = $level;
+    }
+
 
 }

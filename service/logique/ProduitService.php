@@ -10,4 +10,5 @@ interface ProduitService {
     public function getAll();
     public function getProduitByCategorieId($id);
     public function addData();
+    public function getProduitByLevel($level);
 }
