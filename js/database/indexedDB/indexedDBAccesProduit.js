@@ -31,6 +31,14 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 produit.setAssociationPrixProduit(result.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
+//                for (var i = 0; i < produits.length; i++) {
+//                    if (produits[i] instanceof Produit) {
+//                        
+//                    }else{
+//                        isexecute = false;
+//                        break;
+//                    }
+//                }
                 if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
                     method(produits);
                 }

@@ -76,4 +76,7 @@ function ConnexionLocalWebSQL() {
     this.getParametreApplicationByNom = function(method, nom, param) {
         console.log("TO DO");
     };
+    this.getReservationDisponibleWhereDateNull = function(method, param) {
+        console.log("TODO");
+    };
 }

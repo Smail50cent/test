@@ -325,10 +325,12 @@ function Ticket(id, quantityOfProducts) {
         if (qop != null) {
             for (y = 0; y < qop.length; y++) {
                 var quantity = qop[y].getQuantity();
+                var totalTTC;
                 if (qop[y].product instanceof Menu) {
-                    var totalTTC = getPrixHtInAssociation(qop[y].getProduit().getPrix(), qop[y].getProduit().tauxDeTva);
+                    totalTTC = getPrixHtInAssociation(qop[y].getProduit().getPrix(), qop[y].getProduit().tauxDeTva);
                 } else {
-                    var totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
+                    console.log(qop[y]);
+                    totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
                 }
                 this.total += totalTTC * quantity;
             }
@@ -679,7 +681,13 @@ function ParametreApplication() {
     };
 
 }
-
+function ReservationDateDisponible(id, date, heureDebut, heureFin, indisponible) {
+    this.id = id;
+    this.date = date;
+    this.heureDebut = heureDebut;
+    this.heureFin = heureFin;
+    this.indisponible = indisponible;
+}
 function Prodtest() {
     this.id;
     this.nom;
@@ -760,7 +768,7 @@ function Prodtest() {
     this.setDemanderCuisson = function(cuisson) {
         this.demanderCuisson = cuisson;
     };
-    
+
 }
 
 function MajTables() {
@@ -780,5 +788,4 @@ function MajTables() {
     this.getLevel = function() {
         return this.level;
     };
-
 }

@@ -190,3 +190,6 @@ function getContentSlideFavorite(){
 function getItemSelectFavorite(){
     return templates.getTemplate("carte/menu/item_select_type_favorite");
 }
+function getDateHeureOptionDate(){
+    return templates.getTemplate("choixDateHeure/option_select_date");
+}

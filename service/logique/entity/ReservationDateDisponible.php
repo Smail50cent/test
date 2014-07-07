@@ -17,6 +17,7 @@ class ReservationDateDisponible {
     public $date;
     public $heureDebut;
     public $heureFin;
+    public $indisponible;
 
     public function getId() {
         return $this->id;
@@ -48,6 +49,14 @@ class ReservationDateDisponible {
 
     public function setHeureFin($heureFin) {
         $this->heureFin = $heureFin;
+    }
+
+    public function getIndisponible() {
+        return $this->indisponible;
+    }
+
+    public function setIndisponible($indisponible) {
+        $this->indisponible = $indisponible;
     }
 
 }

@@ -10,6 +10,8 @@ interface ReservationDateDisponibleService {
 
     public function getByDate($date);
 
+    public function getByDateNull();
+    
     public function getById($id);
 
     public function getAll();

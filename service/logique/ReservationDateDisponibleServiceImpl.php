@@ -8,7 +8,7 @@ class ReservationDateDisponibleServiceImpl implements ReservationDateDisponibleS
     private $reservationDateDisponibleSrv;
 
     function __construct() {
-        $this->reservationDateDisponibleSrv = PersistanceFactory::getReservationDateDisponible();
+        $this->reservationDateDisponibleSrv = PersistanceFactory::getReservationDateDisponibleService();
     }
 
     public function getAll() {
@@ -29,6 +29,10 @@ class ReservationDateDisponibleServiceImpl implements ReservationDateDisponibleS
             $ret = $this->reservationDateDisponibleSrv->getById($id);
         }
         return $ret;
+    }
+
+    public function getByDateNull() {
+        return $this->reservationDateDisponibleSrv->getByDateNull();
     }
 
 }
