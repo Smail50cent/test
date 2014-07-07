@@ -14,7 +14,7 @@ function ConnexionServer() {
         });
     };
     this.haveMAJ = function(method, nomTable, level) {
-        if ((isMozilla())  ) {
+        if ((isMozilla())) {
             method("NS");
         } else {
             $.ajax({
@@ -43,7 +43,6 @@ function ConnexionServer() {
                             produit.setOptions(data[i].options);
                             produit.setLevel(data[i].level);
                             var level = data[i].level;
-                            console.log(level);
                             produits.push(produit);
                         }
                     }
@@ -188,9 +187,6 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdForDetailMenu = function(method, isexecute, produitid, i, produits) {
-        this.getMajTable(ifupdated, "tableNameProduit", "produits");
-        function ifupdated(update) {
-            if (update == true) {
                 $.ajax({
                     url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + produitid,
                     type: 'GET',
@@ -222,11 +218,6 @@ function ConnexionServer() {
                         showErrorMessage(strings.getString("label.error.connexion.serveur"));
                     }
                 });
-            } else {
-                getImplOfConnexionLocal().getProduitByIdForDetailMenu();
-            }
-        }
-
     };
     this.getAllMenuForDetailMenu = function(method) {
         $.ajax({
@@ -331,43 +322,35 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdGeneric = function(method, id, param) {
-        this.getMajTable(ifupdated, "tableNameProduit", "produits");
-        function ifupdated(update) {
-            if (update == true) {
-                $.ajax({
-                    url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    async: true,
-                    success: function(data, textStatus, xhr) {
-                        var produit = new Produit();
-                        produit.setNom(data.nom);
-                        produit.setId(data.id);
-                        produit.setTauxTva(data.tauxTva);
-                        var categorie = new Categorie();
-                        categorie.setNom(data.categorie.nom);
-                        categorie.setId(data.categorie.id);
-                        categorie.setPriorite(data.categorie.priorite);
-                        categorie.setSousCategorie(data.categorie.souscategorie);
-                        produit.setCategorie(categorie);
-                        produit.setSousCategorie(data.souscategorie);
-                        produit.setIdsIngredients(data.ingredients);
-                        produit.setAssociationPrixProduit(data.associationPrixProduit);
-                        produit.setOptions(data.options);
-                        if (method != null) {//Nous avons besoin de l'executer.
-                            method(produit, param);
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.log(xhr, textStatus, errorThrown);
-                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                    }
-                });
-            } else {
-                getImplOfConnexionLocal().getProduitByIdGeneric();
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var produit = new Produit();
+                produit.setNom(data.nom);
+                produit.setId(data.id);
+                produit.setTauxTva(data.tauxTva);
+                var categorie = new Categorie();
+                categorie.setNom(data.categorie.nom);
+                categorie.setId(data.categorie.id);
+                categorie.setPriorite(data.categorie.priorite);
+                categorie.setSousCategorie(data.categorie.souscategorie);
+                produit.setCategorie(categorie);
+                produit.setSousCategorie(data.souscategorie);
+                produit.setIdsIngredients(data.ingredients);
+                produit.setAssociationPrixProduit(data.associationPrixProduit);
+                produit.setOptions(data.options);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(produit, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
-        }
-
+        });
     };
     this.getMenuById = function(method, id, param) {
         $.ajax({

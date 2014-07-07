@@ -85,7 +85,6 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
-                    //categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
                     produit.setAssociationPrixProduit(result.value.associationPrixProduit);
                     produit.setSousCategorie(result.value.souscategorie);
