@@ -4,7 +4,7 @@ myStorage.indexedDB.onerror = function(e) {
     showErrorMessage(e);
 };
 var delay = 0;//temps d'attente avant d'accèder à la base de données 
-var delayOnupgradeneeded = 0;
+var delayOnupgradeneeded = 3000;
 var indexedDB;
 var IDBTransaction;
 var IDBKeyRange;
@@ -309,7 +309,9 @@ myStorage.indexedDB.addFistSousCategories = function() {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
+var nbtotal=0;
 myStorage.indexedDB.addFistProduits = function() {
+    getConnexionServeur().getMajTable(config.getConfig("tableNameProduit"));
     $.ajax({
         url: getServicePath("serveur.clientaccess.serviceGetAllProduits"),
         type: 'GET',
@@ -318,7 +320,6 @@ myStorage.indexedDB.addFistProduits = function() {
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
                 addProduit(data[i]);
-                console.log(i);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -345,6 +346,8 @@ myStorage.indexedDB.addFistProduits = function() {
                 "tauxTva": produit.tauxTva
             });
             trans.oncomplete = function(e) {
+                console.log("nbtotal="+nbtotal+" ",e);
+                nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;
             };

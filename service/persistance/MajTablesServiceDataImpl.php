@@ -42,19 +42,10 @@ class MajTablesServiceDataImpl implements MajTablesServiceData {
         return $this->parseMAJTables($retour);
     }
 
-    public function haveMAJ($tableName, $level) {
-        $product = new ProduitServiceDataImpl();
+    public function haveMAJ($tableName,$level) {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES WHERE nomTable='" . $tableName . "' ");
-        $ligne = $retour->fetch();
-        if ($ligne->level > $level) {
-            $produit = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE level >" . $level . " ");
-            $produits = $product->parseProduit($produit);
-            $ret = array($produits, $ligne->level);
-            return $ret;
-        } else {
-            return false;
-        }
+        return $this->parseMAJTables($retour);
     }
 
 }

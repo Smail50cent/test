@@ -1,30 +1,17 @@
 function ConnexionServer() {
-    this.getMajTable = function(conftableName, tableName) {
-//        var ret = null;
-//        var updated = false;
-//        var clientLevel = getUpdateLevelOfTable(config.getConfig(conftableName));
-//        if (isLocalBddSuppored() == false || isMozilla()) {
-//            updated = true;
-//            methodToExecuteAfter(updated);
-//        } else {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + tableName,
-                type: 'GET',
-                dataType: 'json',
-                async: false,
-                success: function(data, textStatus, xhr) {
-                    //console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
-                    //if (parseInt(data.level) > parseInt(clientLevel)) {
-                        //updated = true;
-                        updateLevelOfTable(config.getConfig(conftableName), data.level);
-                    //}
-                    //methodToExecuteAfter(updated);
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                }
-            });
-//        }
+    this.getMajTable = function(conftableName) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                updateLevelOfTable(conftableName, data.level);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
     };
     this.haveMAJ = function(method, nomTable, level) {
         if (isLocalBddSuppored() == false || isMozilla()) {
@@ -36,50 +23,34 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    //console.log(data);
+
                     if (data) {
                         var produits = new Array();
                         var produit = new Produit();
-                        if (data[0].length) {
-                            for (var i = 0; i < data.length; i++) {
-                                produit.setNom(data[0][i].nom);
-                                produit.setId(data[0][i].id);
-                                produit.setTauxTva(data[0][i].tauxTva);
-                                var categorie = new Categorie();
-                                categorie.setNom(data[0][i].categorie.nom);
-                                categorie.setId(data[0][i].categorie.id);
-                                categorie.setPriorite(data[0][i].categorie.priorite);
-                                categorie.setSousCategorie(data[0][i].categorie.souscategorie);
-                                produit.setCategorie(categorie);
-                                produit.setSousCategorie(data[0][i].souscategorie);
-                                produit.setAssociationPrixProduit(data[0][i].associationPrixProduit);
-                                produit.setIdsIngredients(data[0][i].ingredients);
-                                produit.setOptions(data[0][i].options);
-                                produits.push(produit);
-                            }
-
-                        } else {
-                            produit.setNom(data[0].nom);
-                            produit.setId(data[0].id);
-                            produit.setTauxTva(data[0].tauxTva);
+                        for (var i = 0; i < data.length; i++) {
+                            produit.setNom(data[i].nom);
+                            produit.setId(data[i].id);
+                            produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
-                            categorie.setNom(data[0].categorie.nom);
-                            categorie.setId(data[0].categorie.id);
-                            categorie.setPriorite(data[0].categorie.priorite);
-                            categorie.setSousCategorie(data[0].categorie.souscategorie);
+                            categorie.setNom(data[i].categorie.nom);
+                            categorie.setId(data[i].categorie.id);
+                            categorie.setPriorite(data[i].categorie.priorite);
+                            categorie.setSousCategorie(data[i].categorie.souscategorie);
                             produit.setCategorie(categorie);
-                            produit.setSousCategorie(data[0].souscategorie);
-                            produit.setAssociationPrixProduit(data[0].associationPrixProduit);
-                            produit.setIdsIngredients(data[0].ingredients);
-                            produit.setOptions(data[0].options);
+                            produit.setSousCategorie(data[i].souscategorie);
+                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
+                            produit.setIdsIngredients(data[i].ingredients);
+                            produit.setOptions(data[i].options);
+                            produit.setLevel(data[i].level);
+                            var level = data[i].level;
+                            console.log(level);
                             produits.push(produit);
-
                         }
                     }
 
 
                     if (method != null && data) {//Nous avons besoin de l'executer.
-                        method(produits, data[1]);
+                        method(produits, level);
                     } else {
                         method(null);
                     }
@@ -286,18 +257,16 @@ function ConnexionServer() {
     };
 
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-        //console.log("here");
         //this.getMajTable(ifupdated, "tableNameProduit", "produits");
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
-        if (clientLevel == 0) {
-            setUpdateLevelOfTable(config.getConfig("tableNameProduit"),1);
+        if (clientLevel == null) {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
                 type: 'GET',
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    //console.log(data);
+                    //console.log(data.id);
                     var produits = new Array();
                     for (var i = 0; i < data.length; i++) {
                         var produit = new Produit();
@@ -326,14 +295,13 @@ function ConnexionServer() {
                 }
             });
         } else {
-            console.log('exist');
-            this.haveMAJ(allprod, "produit", clientLevel);
+            this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
             function allprod(products, level) {
                 if (products) {
                     console.log('update');
                     for (var i = 0; i < products.length; i++) {
                         getImplOfConnexionLocal().updateProduit(produitup, products[i]);
-                        function produitup(prods){
+                        function produitup(prods) {
                             console.log(prods);
                         }
                     }
@@ -344,48 +312,6 @@ function ConnexionServer() {
                 }
             }
         }
-
-//        function ifupdated(update) {
-//            if (update == true) {
-//                $.ajax({
-//                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
-//                    type: 'GET',
-//                    dataType: 'json',
-//                    async: true,
-//                    success: function(data, textStatus, xhr) {
-//                        //console.log(data);
-//                        var produits = new Array();
-//                        for (var i = 0; i < data.length; i++) {
-//                            var produit = new Produit();
-//                            produit.setNom(data[i].nom);
-//                            produit.setId(data[i].id);
-//                            produit.setTauxTva(data[i].tauxTva);
-//                            var categorie = new Categorie();
-//                            categorie.setNom(data[i].categorie.nom);
-//                            categorie.setId(data[i].categorie.id);
-//                            categorie.setPriorite(data[i].categorie.priorite);
-//                            categorie.setSousCategorie(data[i].categorie.souscategorie);
-//                            produit.setCategorie(categorie);
-//                            produit.setSousCategorie(data[i].souscategorie);
-//                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-//                            produit.setIdsIngredients(data[i].ingredients);
-//                            produit.setOptions(data[i].options);
-//                            produits.push(produit);
-//                        }
-//                        if (method != null) {//Nous avons besoin de l'executer.
-//                            method(produits);
-//                        }
-//
-//                    },
-//                    error: function(xhr, textStatus, errorThrown) {
-//                        console.log(xhr, textStatus, errorThrown);
-//                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
-//                    }
-//                });
-//            } else {
-//                getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
-//            }
-//        }
     };
     this.getIngredientById = function(method, id, param) {
         $.ajax({
