@@ -1,9 +1,10 @@
 <?php
 
-if (isset($_GET["id"])) {
+if (isset($_GET["level"])) {
     include_once '../outils/AppRoot.php';
     include_once $path . 'service/logique/LogiqueFactory.php';
-    $menuSrv = LogiqueFactory::getMenuService();
-    $result = $menuSrv->getById($_GET["id"]);
+    $produitSrv = LogiqueFactory::getProduitService();
+    $result = $produitSrv->getProduitByLevel($_GET["level"]);
     echo json_encode($result);
 }
+

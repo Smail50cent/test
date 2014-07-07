@@ -17,7 +17,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
         return $this->parseProduit($retour);
     }
 
-    private function parseProduit($resultSet) {
+    public function parseProduit($resultSet) {
         $sousCatSrv = PersistanceFactory::getSousCategorieService();
         $liste = array();
         $ret;
@@ -31,6 +31,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
             }
             $produit->setTauxTva(floatval($ligne->taux_tva));
             $produit->setOptions(intval($ligne->options));
+            $produit->setLevel(intval($ligne->level));
             array_push($liste, $produit);
         }
         if (count($liste) == 1) {
@@ -59,6 +60,12 @@ class ProduitServiceDataImpl implements ProduitServiceData {
                 . " SELECT BP.PR_LIBELLE, DC.id, BP.PR_PRODUIT_SIMPLE, BP.PR_FAMILLE_COMPTABLE, BP.PR_TVA  "
                 . " FROM prod_bacchus.BAR_PRODUIT BP ,dupappcaisse.categorie DC ,prod_bacchus.BAR_FAMILLE_PRODUIT FP"
                 . " WHERE DC.nom = FP.FA_LIBELLE AND FP.FA_CODE = BP.PR_CODE_FAMILLE");
+    }
+
+    public function getProduitByLevel($level) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE level >= " . $level);
+        return $this->parseProduit($retour);
     }
 
 }

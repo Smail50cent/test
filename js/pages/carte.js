@@ -587,7 +587,7 @@ function printProduits(index) {
             var htmlMenu = getItemListeMenu();
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
-                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
+                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());                
                 var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
                 itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());
@@ -598,7 +598,7 @@ function printProduits(index) {
     }
     connexion.getCategoriesForContentCategorie(printSlides);
     var derniere = "";
-    function printSlides(categories) {
+    function printSlides(categories) { 
         for (var i = 0; i < categories.length; i++) {
             var categorie = categories[i];
             if (i + 1 == categories.length) {
@@ -618,7 +618,7 @@ function printProduits(index) {
             var htmlContentProduit = getContentProduit();
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
-            function printProduitByCategorie(produits) {
+            function printProduitByCategorie(produits) {                
                 var quantity = "+";
                 var categorie = produits[0].id_categorie;
                 try {
@@ -643,7 +643,6 @@ function printProduits(index) {
                     } else {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
-                    //console.log(produit.tauxTva);
                     var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
                     itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));

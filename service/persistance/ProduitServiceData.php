@@ -11,4 +11,5 @@ interface ProduitServiceData {
     public function getById($id);
     public function getProduitByCategorieId($id);
     public function addData();
+    public function getProduitByLevel($level);
 }

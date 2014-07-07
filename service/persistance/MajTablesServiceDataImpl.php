@@ -5,26 +5,14 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-include_once $path.'service/persistance/ConnexionBDD.php';
-include_once $path.'service/persistance/MajTablesServiceData.php';
-include_once $path.'service/logique/entity/MajTables.php';
+include_once $path . 'service/persistance/ConnexionBDD.php';
+include_once $path . 'service/persistance/MajTablesServiceData.php';
+include_once $path . 'service/logique/entity/MajTables.php';
+include_once $path . 'service/persistance/ProduitServiceDataImpl.php';
+include_once $path . 'service/logique/entity/Produit.php';
 
-class MajTablesServiceDataImpl implements MajTablesServiceData{
+class MajTablesServiceDataImpl implements MajTablesServiceData {
 
-    
-    
-    public function getAll() {
-        $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES ");
-        return $this->parseMAJTables($retour);
-    }
-
-    public function getBynomTable($nom) {
-        $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES WHERE nomTable='".$nom."' ");
-        return $this->parseMAJTables($retour);
-    }
-    
     private function parseMAJTables($resultSet) {
         $liste = array();
         $ret;
@@ -41,4 +29,32 @@ class MajTablesServiceDataImpl implements MajTablesServiceData{
         }
         return $ret;
     }
+
+    public function getAll() {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES ");
+        return $this->parseMAJTables($retour);
+    }
+
+    public function getBynomTable($nom) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES WHERE nomTable='" . $nom . "' ");
+        return $this->parseMAJTables($retour);
+    }
+
+    public function haveMAJ($tableName, $level) {
+        $product = new ProduitServiceDataImpl();
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES WHERE nomTable='" . $tableName . "' ");
+        $ligne = $retour->fetch();
+        if ($ligne->level > $level) {
+            $produit = $bdd->executeGeneric("SELECT * FROM produit LEFT JOIN taux_tva ON produit.TVA = taux_tva.id_tva WHERE level >" . $level . " ");
+            $produits = $product->parseProduit($produit);
+            $ret = array($produits, $ligne->level);
+            return $ret;
+        } else {
+            return false;
+        }
+    }
+
 }

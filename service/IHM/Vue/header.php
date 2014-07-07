@@ -9,10 +9,11 @@
         <meta http-equiv="X-UA-f" content="IE=edge,chrome=1">
         <link  rel="stylesheet" type="text/css" href="../css/produit.css">
         <link rel="stylesheet" href="../../../js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css" type="text/css">
-        <!--link  rel="stylesheet" type="text/css" href="../../../css/appli_caisse_pizza_structure.css">
-        <!--link id="cssToApply" rel="stylesheet" type="text/css"-->
+        <link  rel="stylesheet" type="text/css" href="../../../css/appli_caisse_pizza_structure.css">
+        <link id="cssToApply" rel="stylesheet" type="text/css">
         <script src="../../../js/lib/jqueryui/js/jquery-1.10.2.js" type="text/javascript"></script>
         <script src="../js/gestionProduit.js" type="text/javascript"></script>
+        <script type="text/javascript" src="../../../js/scripts.js"></script>
         <script src="../../../js/lib/jqueryui/js/jquery-ui-1.10.4.custom.js" type="text/javascript"></script>
         
     </head>

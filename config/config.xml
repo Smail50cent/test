@@ -23,6 +23,7 @@
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
         <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
         <variable name="serveur.clientaccess.serviceGetProduitById">getProduitById</variable>
+        <variable name="serveur.clientaccess.serviceGetProduitByLevel">getProduitByLevel</variable>
         <variable name="serveur.clientaccess.serviceGetAllModesDeReglement">getAllModeDeReglement</variable>
         <variable name="serveur.clientaccess.serviceGetModesDeReglementById">getModeDeReglementById</variable>
         <variable name="serveur.clientaccess.serviceGetProduitByCategorieId">getProduitByCategorieId</variable>
@@ -38,6 +39,7 @@
         <variable name="serveur.clientaccess.serviceGetAllProdtest">getProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
+        <variable name="serveur.clientaccess.serviceGethaveMAJ">haveMAJ</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
