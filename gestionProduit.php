@@ -1,6 +1,4 @@
 <?php include_once './header.php'; ?>
-<script src="./service/IHM/js/gestionProduit.js" type="text/javascript"></script>
-<script src="./js/control.js" type="text/javascript"></script>
 <div id="content_id" class="content content_structure content_personalize">
     
     <ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize" style="margin-top: 0;">

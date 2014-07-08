@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css" type="text/css">
         <link  rel="stylesheet" type="text/css" href="./css/appli_caisse_pizza_structure.css">
         <link id="cssToApply" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="./js/lib/jquery.js" ></script>
-        <script type="text/javascript" src="./js/scripts.js"></script>
+        <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>
+        <script type="text/javascript" src="./js/scripts.js" defer></script>
     </head>
     <body>
         <div id="header_id" class="header header_structure header_personalize">

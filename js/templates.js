@@ -193,3 +193,9 @@ function getItemSelectFavorite(){
 function getDateHeureOptionDate(){
     return templates.getTemplate("choixDateHeure/option_select_date");
 }
+function getDivModifProduit(){
+    return templates.getTemplate("gestion/produit/div_modifier_produit");
+}
+function getDivSuppProduit(){
+    return templates.getTemplate("gestion/produit/div_supprimer_produit");
+}
