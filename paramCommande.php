@@ -8,12 +8,14 @@
     <ul id="btn_choice" class="btn_choice btn_choice_structure btn_choice_personalize">
         <li id="nbpersonnes_item" class="nbpersonnes_item nbpersonnes_item_structure nbpersonnes_item_personalize">
             <p id="nbpersonnes_label" class="nbpersonnes_label nbpersonnes_label_structure nbpersonnes_label_personalize" >Combien de personnes pour cette commande ?</p>
-            <select id="nbPersonnes" class="select select_structure select_personalize">
+            <select id="nbPersonnes" class="select_structure select_personalize">
             </select>
         </li>
         <li id="numeroTable_item" class="numeroTable_item numeroTable_item_structure numeroTable_item_personalize">
-            <p id="numerotable_label">A quel table êtes-vous ?</p>
-            <select id="numTable" class="select select_structure select_personalize ">
+            <p id="numerotable_label"></p>
+            <select id="zoneTable" class="select_structure select_personalize ">
+            </select>
+            <select id="numTable" class="select_structure select_personalize ">
             </select>
         </li>
     </ul>

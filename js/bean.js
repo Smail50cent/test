@@ -153,7 +153,7 @@ function Produit() {
     this.associationPrixProduit;
     this.tauxTva;
     this.level;
-    
+
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
         this.setId(id);
@@ -788,4 +788,9 @@ function MajTables() {
     this.getLevel = function() {
         return this.level;
     };
+}
+function ZoneTable(id, nom, tables) {
+    this.id = id;
+    this.nom = nom;
+    this.tables = tables;
 }

@@ -79,4 +79,7 @@ function ConnexionLocalWebSQL() {
     this.getReservationDisponibleWhereDateNull = function(method, param) {
         console.log("TODO");
     };
+    this.getAllZoneTables = function(method, param) {
+        console.log("TO DO");
+    };
 }
