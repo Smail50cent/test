@@ -93,8 +93,12 @@ function loadDataTables(tables) {
             itemOptionTable = paramValue(itemOptionTable, "OptionValue", i);
             $("#zoneTable").append(itemOptionTable);
         }
-        
         printTableByIdZone(0, zoneTable);
+        if (getTypeSequence() == 5) {
+            var serveur = getLocalStorageValue("personnes.serveur");
+            serveur.serveurProperty.zoneTableDefaut;
+//            $("#zoneTable").se
+        }
     }
 }
 function printTableByIdZone(index, zonetables) {

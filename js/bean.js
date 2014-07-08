@@ -415,6 +415,7 @@ function Personne() {
     this.urlProfileImg;
     this.gender;
     this.role;
+    this.serveurProperty;
     this.setId = function(id) {
         this.id = id;
     };
