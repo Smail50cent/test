@@ -309,7 +309,9 @@ myStorage.indexedDB.addFistSousCategories = function() {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
+var nbtotal=0;
 myStorage.indexedDB.addFistProduits = function() {
+    getConnexionServeur().getMajTable(config.getConfig("tableNameProduit"));
     $.ajax({
         url: getServicePath("serveur.clientaccess.serviceGetAllProduits"),
         type: 'GET',
@@ -318,7 +320,6 @@ myStorage.indexedDB.addFistProduits = function() {
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
                 addProduit(data[i]);
-                console.log(i);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
@@ -342,9 +343,12 @@ myStorage.indexedDB.addFistProduits = function() {
                 "options": produit.options,
                 "ingredients": produit.ingredients,
                 "associationPrixProduit": produit.associationPrixProduit,
-                "tauxTva": produit.tauxTva
+                "tauxTva": produit.tauxTva,
+                "level": produit.level
             });
             trans.oncomplete = function(e) {
+                console.log("nbtotal="+nbtotal+" ",e);
+                nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;
             };

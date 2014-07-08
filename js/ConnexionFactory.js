@@ -87,7 +87,7 @@ function getUpdateLevelOfTable(table) {
     if (!isNaN(parseInt(getLocalStorageValue(table)))) {
         ret = parseInt(getLocalStorageValue(table));
     } else {
-        ret = 0;
+        ret = null;
     }
     return ret;
 }

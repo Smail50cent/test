@@ -45,10 +45,10 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
 FROM produit 
-JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
-JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
-JOIN categorie ON categorie.id = produit.CATEGORIE_ID 
-JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
+LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
+LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
+LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID 
+LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
@@ -345,7 +345,7 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level >= " . $level);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
         return $this->parseProduit($retour);
     }
 

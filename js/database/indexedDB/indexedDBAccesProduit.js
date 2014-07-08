@@ -76,6 +76,7 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
             request.onsuccess = function(e) {
                 var result = e.target.result;
                 if (result != null) {
+
                     var produit = new Produit();
                     produit.setNom(result.value.nom);
                     produit.setId(result.value.id);
@@ -84,7 +85,6 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
                     categorie.setNom(result.value.categorie.nom);
                     categorie.setId(result.value.categorie.id);
                     categorie.setPriorite(parseInt(result.value.categorie.priorite));
-                    //categorie.setSousCategorie(result.value.categorie.souscategorie);
                     produit.setCategorie(categorie);
                     produit.setAssociationPrixProduit(result.value.associationPrixProduit);
                     produit.setSousCategorie(result.value.souscategorie);
@@ -96,7 +96,9 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
             };
             trans.oncomplete = function(e) {
                 if (method != null) {//Nous avons besoin de l'executer.
-                    method(produitsByCategorie);
+//                    if (produitsByCategorie.length != 0) {
+                        method(produitsByCategorie);
+//                    }
                 }
                 db.close();
             };
@@ -162,7 +164,7 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
             impl(method);
         } else {
-            myStorage.indexedDB.updateEntreprise(method);
+            myStorage.indexedDB.updateProduit(method);
         }
     }, delay);
     function impl(method) {
@@ -171,9 +173,10 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
-            var openCursorReq = store.openCursor(5);
+            var openCursorReq = store.openCursor(newProduit.id);
             openCursorReq.onsuccess = function(event) {
                 var cursor = event.target.result;
+                console.log("sqd", cursor);
                 var _object = cursor.value;
                 _object.nom = newProduit.nom;
                 _object.tauxTva = newProduit.tauxTva;
@@ -203,5 +206,36 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
         };
         request.onerror = myStorage.indexedDB.onerror;
     }
-
+};
+myStorage.indexedDB.countProduits = function(method, param) {
+    impl(method, param);
+    function impl(method, param) {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_ONLY);
+            var store = trans.objectStore(config.getConfig("tableNameProduit"));
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+            var count = 0;
+            cursorRequest.onsuccess = function(e) {
+                var result = e.target.result;
+                result ? ++count && result.continue() : console.log(count);
+            };
+            trans.oncomplete = function(e) {
+                if (method != null) {//Nous avons besoin de l'executer.
+                    function Param(count) {
+                        this.count = count;
+                    }
+                    method(new Param(count));
+                }
+                db.close();
+            };
+            request.onerror = function(e) {
+                showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+            };
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
 };

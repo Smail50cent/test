@@ -1,34 +1,21 @@
 function ConnexionServer() {
-    this.getMajTable = function(conftableName, tableName) {
-//        var ret = null;
-//        var updated = false;
-//        var clientLevel = getUpdateLevelOfTable(config.getConfig(conftableName));
-//        if (isLocalBddSuppored() == false || isMozilla()) {
-//            updated = true;
-//            methodToExecuteAfter(updated);
-//        } else {
+    this.getMajTable = function(conftableName) {
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + tableName,
+            url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
-                //console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
-                //if (parseInt(data.level) > parseInt(clientLevel)) {
-                //updated = true;
-                updateLevelOfTable(config.getConfig(conftableName), data.level);
-                //}
-                //methodToExecuteAfter(updated);
+                updateLevelOfTable(conftableName, data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
-//        }
     };
     this.haveMAJ = function(method, nomTable, level) {
-        if (isLocalBddSuppored() == false || isMozilla()) {
-            method(null);
+        if ((isMozilla())) {
+            method("NS");
         } else {
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
@@ -36,50 +23,33 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    //console.log(data);
+
                     if (data) {
                         var produits = new Array();
                         var produit = new Produit();
-                        if (data[0].length) {
-                            for (var i = 0; i < data.length; i++) {
-                                produit.setNom(data[0][i].nom);
-                                produit.setId(data[0][i].id);
-                                produit.setTauxTva(data[0][i].tauxTva);
-                                var categorie = new Categorie();
-                                categorie.setNom(data[0][i].categorie.nom);
-                                categorie.setId(data[0][i].categorie.id);
-                                categorie.setPriorite(data[0][i].categorie.priorite);
-                                categorie.setSousCategorie(data[0][i].categorie.souscategorie);
-                                produit.setCategorie(categorie);
-                                produit.setSousCategorie(data[0][i].souscategorie);
-                                produit.setAssociationPrixProduit(data[0][i].associationPrixProduit);
-                                produit.setIdsIngredients(data[0][i].ingredients);
-                                produit.setOptions(data[0][i].options);
-                                produits.push(produit);
-                            }
-
-                        } else {
-                            produit.setNom(data[0].nom);
-                            produit.setId(data[0].id);
-                            produit.setTauxTva(data[0].tauxTva);
+                        for (var i = 0; i < data.length; i++) {
+                            produit.setNom(data[i].nom);
+                            produit.setId(data[i].id);
+                            produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
-                            categorie.setNom(data[0].categorie.nom);
-                            categorie.setId(data[0].categorie.id);
-                            categorie.setPriorite(data[0].categorie.priorite);
-                            categorie.setSousCategorie(data[0].categorie.souscategorie);
+                            categorie.setNom(data[i].categorie.nom);
+                            categorie.setId(data[i].categorie.id);
+                            categorie.setPriorite(data[i].categorie.priorite);
+                            categorie.setSousCategorie(data[i].categorie.souscategorie);
                             produit.setCategorie(categorie);
-                            produit.setSousCategorie(data[0].souscategorie);
-                            produit.setAssociationPrixProduit(data[0].associationPrixProduit);
-                            produit.setIdsIngredients(data[0].ingredients);
-                            produit.setOptions(data[0].options);
+                            produit.setSousCategorie(data[i].souscategorie);
+                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
+                            produit.setIdsIngredients(data[i].ingredients);
+                            produit.setOptions(data[i].options);
+                            produit.setLevel(data[i].level);
+                            var level = data[i].level;
                             produits.push(produit);
-
                         }
                     }
 
 
                     if (method != null && data) {//Nous avons besoin de l'executer.
-                        method(produits, data[1]);
+                        method(produits, level);
                     } else {
                         method(null);
                     }
@@ -217,9 +187,6 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdForDetailMenu = function(method, isexecute, produitid, i, produits) {
-        this.getMajTable(ifupdated, "tableNameProduit", "produits");
-        function ifupdated(update) {
-            if (update == true) {
                 $.ajax({
                     url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + produitid,
                     type: 'GET',
@@ -230,7 +197,6 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data.nom);
                         produit.setId(data.id);
-
                         var categorie = new Categorie();
                         categorie.setNom(data.categorie.nom);
                         categorie.setId(data.categorie.id);
@@ -252,11 +218,6 @@ function ConnexionServer() {
                         showErrorMessage(strings.getString("label.error.connexion.serveur"));
                     }
                 });
-            } else {
-                getImplOfConnexionLocal().getProduitByIdForDetailMenu();
-            }
-        }
-
     };
     this.getAllMenuForDetailMenu = function(method) {
         $.ajax({
@@ -284,108 +245,62 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-        //console.log("here");
         //this.getMajTable(ifupdated, "tableNameProduit", "produits");
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
-        if (clientLevel == 0) {
-            setUpdateLevelOfTable(config.getConfig("tableNameProduit"), 1);
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
-                type: 'GET',
-                dataType: 'json',
-                async: true,
-                success: function(data, textStatus, xhr) {
-                    //console.log(data);
-                    var produits = new Array();
-                    for (var i = 0; i < data.length; i++) {
-                        var produit = new Produit();
-                        produit.setNom(data[i].nom);
-                        produit.setId(data[i].id);
-                        produit.setTauxTva(data[i].tauxTva);
-                        var categorie = new Categorie();
-                        categorie.setNom(data[i].categorie.nom);
-                        categorie.setId(data[i].categorie.id);
-                        categorie.setPriorite(data[i].categorie.priorite);
-                        categorie.setSousCategorie(data[i].categorie.souscategorie);
-                        produit.setCategorie(categorie);
-                        produit.setSousCategorie(data[i].souscategorie);
-                        produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-                        produit.setIdsIngredients(data[i].ingredients);
-                        produit.setOptions(data[i].options);
-                        produits.push(produit);
+
+        this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
+        function allprod(products, level) {
+            if (products instanceof Array) {
+                console.log('update');
+                for (var i = 0; i < products.length; i++) {
+                    getImplOfConnexionLocal().updateProduit(produitup, products[i]);
+                    function produitup(prods) {
+                        console.log(prods);
                     }
-                    if (method != null) {//Nous avons besoin de l'executer.
-                        method(produits);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    console.log(xhr, textStatus, errorThrown);
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
                 }
-            });
-        } else {
-            console.log('exist');
-            this.haveMAJ(allprod, "produit", clientLevel);
-            function allprod(products, level) {
-                if (products != null) {
-                    console.log('update');
-                    for (var i = 0; i < products.length; i++) {
-//                        getImplOfConnexionLocal().updateEntreprise(produitup, products[i]);
-                        function produitup(prods) {
-                            console.log(prods);
+                updateLevelOfTable(config.getConfig("tableNameProduit"), level);
+            } else if (products == "NS") {
+                console.log("Database Not supported !");
+                $.ajax({
+                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success: function(data, textStatus, xhr) {
+                        //console.log(data.id);
+                        var produits = new Array();
+                        for (var i = 0; i < data.length; i++) {
+                            var produit = new Produit();
+                            produit.setNom(data[i].nom);
+                            produit.setId(data[i].id);
+                            produit.setTauxTva(data[i].tauxTva);
+                            var categorie = new Categorie();
+                            categorie.setNom(data[i].categorie.nom);
+                            categorie.setId(data[i].categorie.id);
+                            categorie.setPriorite(data[i].categorie.priorite);
+                            categorie.setSousCategorie(data[i].categorie.souscategorie);
+                            produit.setCategorie(categorie);
+                            produit.setSousCategorie(data[i].souscategorie);
+                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
+                            produit.setIdsIngredients(data[i].ingredients);
+                            produit.setOptions(data[i].options);
+                            produits.push(produit);
                         }
+                        if (method != null) {//Nous avons besoin de l'executer.
+                            method(produits);
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        console.log(xhr, textStatus, errorThrown);
+                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
                     }
-                    updateLevelOfTable(config.getConfig("tableNameProduit"), level);
-                } else {
-                    console.log("NO UPDATE");
-                    getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
-                }
+                });
+            } else {
+                console.log("NO UPDATE");
+                getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
             }
         }
-
-//        function ifupdated(update) {
-//            if (update == true) {
-//                $.ajax({
-//                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
-//                    type: 'GET',
-//                    dataType: 'json',
-//                    async: true,
-//                    success: function(data, textStatus, xhr) {
-//                        //console.log(data);
-//                        var produits = new Array();
-//                        for (var i = 0; i < data.length; i++) {
-//                            var produit = new Produit();
-//                            produit.setNom(data[i].nom);
-//                            produit.setId(data[i].id);
-//                            produit.setTauxTva(data[i].tauxTva);
-//                            var categorie = new Categorie();
-//                            categorie.setNom(data[i].categorie.nom);
-//                            categorie.setId(data[i].categorie.id);
-//                            categorie.setPriorite(data[i].categorie.priorite);
-//                            categorie.setSousCategorie(data[i].categorie.souscategorie);
-//                            produit.setCategorie(categorie);
-//                            produit.setSousCategorie(data[i].souscategorie);
-//                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-//                            produit.setIdsIngredients(data[i].ingredients);
-//                            produit.setOptions(data[i].options);
-//                            produits.push(produit);
-//                        }
-//                        if (method != null) {//Nous avons besoin de l'executer.
-//                            method(produits);
-//                        }
-//
-//                    },
-//                    error: function(xhr, textStatus, errorThrown) {
-//                        console.log(xhr, textStatus, errorThrown);
-//                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
-//                    }
-//                });
-//            } else {
-//                getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
-//            }
-//        }
     };
     this.getIngredientById = function(method, id, param) {
         $.ajax({
@@ -407,43 +322,35 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdGeneric = function(method, id, param) {
-        this.getMajTable(ifupdated, "tableNameProduit", "produits");
-        function ifupdated(update) {
-            if (update == true) {
-                $.ajax({
-                    url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + id,
-                    type: 'GET',
-                    dataType: 'json',
-                    async: true,
-                    success: function(data, textStatus, xhr) {
-                        var produit = new Produit();
-                        produit.setNom(data.nom);
-                        produit.setId(data.id);
-                        produit.setTauxTva(data.tauxTva);
-                        var categorie = new Categorie();
-                        categorie.setNom(data.categorie.nom);
-                        categorie.setId(data.categorie.id);
-                        categorie.setPriorite(data.categorie.priorite);
-                        categorie.setSousCategorie(data.categorie.souscategorie);
-                        produit.setCategorie(categorie);
-                        produit.setSousCategorie(data.souscategorie);
-                        produit.setIdsIngredients(data.ingredients);
-                        produit.setAssociationPrixProduit(data.associationPrixProduit);
-                        produit.setOptions(data.options);
-                        if (method != null) {//Nous avons besoin de l'executer.
-                            method(produit, param);
-                        }
-                    },
-                    error: function(xhr, textStatus, errorThrown) {
-                        console.log(xhr, textStatus, errorThrown);
-                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                    }
-                });
-            } else {
-                getImplOfConnexionLocal().getProduitByIdGeneric();
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetProduitById") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var produit = new Produit();
+                produit.setNom(data.nom);
+                produit.setId(data.id);
+                produit.setTauxTva(data.tauxTva);
+                var categorie = new Categorie();
+                categorie.setNom(data.categorie.nom);
+                categorie.setId(data.categorie.id);
+                categorie.setPriorite(data.categorie.priorite);
+                categorie.setSousCategorie(data.categorie.souscategorie);
+                produit.setCategorie(categorie);
+                produit.setSousCategorie(data.souscategorie);
+                produit.setIdsIngredients(data.ingredients);
+                produit.setAssociationPrixProduit(data.associationPrixProduit);
+                produit.setOptions(data.options);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(produit, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
-        }
-
+        });
     };
     this.getMenuById = function(method, id, param) {
         $.ajax({
@@ -564,7 +471,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllParamForms = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamForms"),
@@ -595,7 +501,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllAttributsComptes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
@@ -620,7 +525,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
@@ -634,7 +538,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addCompte = function(method, password, id_role, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
@@ -650,7 +553,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllParamApps = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
@@ -674,7 +576,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getCompteById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetCompteById") + "?id=" + id,
@@ -695,7 +596,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAttributCompteByIdCompte = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,
@@ -892,32 +792,6 @@ function ConnexionServer() {
                 }
                 if (method != null) {
                     method(liste, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
-    };
-    this.getAllZoneTables = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllZoneTables"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var zonesTables = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var zoneTables;
-                    var tables = new Array();
-                    for (var j = 0; j < data[i].tables.length; j++) {
-                        tables.push(new Table(data[i].tables[j].id, data[i].tables[j].numero, data[i].id));
-                    }
-                    zoneTables = new ZoneTable(data[i].id,data[i].nom,tables);
-                    zonesTables.push(zoneTables);
-                }
-                if (method != null) {
-                    method(zonesTables, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
