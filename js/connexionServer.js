@@ -24,7 +24,7 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    console.log("data " + data);
+                   // console.log("data " + data);
                     if (data) {
                         var produits = new Array();
                         var produit = new Produit();
@@ -298,7 +298,7 @@ function ConnexionServer() {
                     }
                 });
             } else {
-                console.log("NO UPDATE");
+                //console.log("NO UPDATE");
                 getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
             }
         }
