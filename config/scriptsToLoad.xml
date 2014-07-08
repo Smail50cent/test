@@ -37,7 +37,8 @@
     <script for="swipe">lib/jquery.event.swipe.js</script>
         
     <script for="carte">pages/carte.js</script>
-    <script for="gestionProduit">pages/carte.js</script>
+    <script for="gestionProduit" priority="1">pages/carte.js</script>
+    <script for="gestionProduit" priority="2">gestion/gestionProduit.js</script>
     <script for="choixDateHeure">pages/choixDateHeure.js</script>
     <script for="paramCommande" priority="2">pages/paramCommande.js</script>
     <script for="paramCommande" priority="1">popupAuth.js</script>
