@@ -330,7 +330,7 @@ function Ticket(id, quantityOfProducts) {
                     totalTTC = getPrixHtInAssociation(qop[y].getProduit().getPrix(), qop[y].getProduit().tauxDeTva);
                 } else {
                     console.log(qop[y]);
-                    totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().id_sousCategorie.tauxTva);
+                    totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().tauxTva);
                 }
                 this.total += totalTTC * quantity;
             }
@@ -415,6 +415,7 @@ function Personne() {
     this.urlProfileImg;
     this.gender;
     this.role;
+    this.serveurProperty;
     this.setId = function(id) {
         this.id = id;
     };

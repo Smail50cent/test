@@ -93,8 +93,18 @@ function loadDataTables(tables) {
             itemOptionTable = paramValue(itemOptionTable, "OptionValue", i);
             $("#zoneTable").append(itemOptionTable);
         }
-        
         printTableByIdZone(0, zoneTable);
+        if (getTypeSequence() == 5) {
+            var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+            var zoneServeur = serveur.serveurProperty.zoneTableDefaut;
+            for (var i = 0; i < zoneTable.length; i++) {
+                if (zoneTable[i].id == zoneServeur) {
+                    $('#zoneTable option[value="' + i + '"]').prop('selected', true);
+                    printTableByIdZone(i, zoneTable);
+                    break;
+                }
+            }
+        }
     }
 }
 function printTableByIdZone(index, zonetables) {
