@@ -555,7 +555,7 @@ function printProduitFavorite(cpfs, param) {
         var produit = cpfs[x].produit;
         var itemProduit = htmlProduitItem;
         itemProduit = paramValue(itemProduit, "produitId", produit.getId());
-        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
+        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
         itemProduit = paramValue(itemProduit, "quantity", "");
         itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
         itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());

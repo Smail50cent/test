@@ -95,9 +95,15 @@ function loadDataTables(tables) {
         }
         printTableByIdZone(0, zoneTable);
         if (getTypeSequence() == 5) {
-            var serveur = getLocalStorageValue("personnes.serveur");
-            serveur.serveurProperty.zoneTableDefaut;
-//            $("#zoneTable").se
+            var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+            var zoneServeur = serveur.serveurProperty.zoneTableDefaut;
+            for (var i = 0; i < zoneTable.length; i++) {
+                if (zoneTable[i].id == zoneServeur) {
+                    $('#zoneTable option[value="' + i + '"]').prop('selected', true);
+                    printTableByIdZone(i, zoneTable);
+                    break;
+                }
+            }
         }
     }
 }
