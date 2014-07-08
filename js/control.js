@@ -112,6 +112,14 @@ function controller(entreprise) {
             };
             hideLoading();
             break;
+        case "gestionProduit":
+            method = function() {
+                //onLoadGP();
+                printProduits(0);
+                var connexion = getConnexion();
+                connexion.getCategoriesForContentCategorie(onCarteLoadFinish);  
+            };
+            break;
         case "choixEnvoieCuisine":
             method = function() {
                 onChoixEnvoieCuisineLoaded(0);
@@ -157,7 +165,7 @@ function controller(entreprise) {
             };
             break;
         default :
-            
+
             nom = "index";
             method = function() {
                 onIndexLoaded();
