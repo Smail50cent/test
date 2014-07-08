@@ -7,23 +7,23 @@ function ConnexionServer() {
 //            updated = true;
 //            methodToExecuteAfter(updated);
 //        } else {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + tableName,
-                type: 'GET',
-                dataType: 'json',
-                async: false,
-                success: function(data, textStatus, xhr) {
-                    //console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
-                    //if (parseInt(data.level) > parseInt(clientLevel)) {
-                        //updated = true;
-                        updateLevelOfTable(config.getConfig(conftableName), data.level);
-                    //}
-                    //methodToExecuteAfter(updated);
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                }
-            });
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + tableName,
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                //console.log("data.level=" + data.level + " clientLevel=" + clientLevel);
+                //if (parseInt(data.level) > parseInt(clientLevel)) {
+                //updated = true;
+                updateLevelOfTable(config.getConfig(conftableName), data.level);
+                //}
+                //methodToExecuteAfter(updated);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
 //        }
     };
     this.haveMAJ = function(method, nomTable, level) {
@@ -290,7 +290,7 @@ function ConnexionServer() {
         //this.getMajTable(ifupdated, "tableNameProduit", "produits");
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
         if (clientLevel == 0) {
-            setUpdateLevelOfTable(config.getConfig("tableNameProduit"),1);
+            setUpdateLevelOfTable(config.getConfig("tableNameProduit"), 1);
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
                 type: 'GET',
@@ -329,11 +329,11 @@ function ConnexionServer() {
             console.log('exist');
             this.haveMAJ(allprod, "produit", clientLevel);
             function allprod(products, level) {
-                if (products!=null) {
+                if (products != null) {
                     console.log('update');
                     for (var i = 0; i < products.length; i++) {
 //                        getImplOfConnexionLocal().updateEntreprise(produitup, products[i]);
-                        function produitup(prods){
+                        function produitup(prods) {
                             console.log(prods);
                         }
                     }
@@ -892,6 +892,32 @@ function ConnexionServer() {
                 }
                 if (method != null) {
                     method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllZoneTables = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllZoneTables"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var zonesTables = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var zoneTables;
+                    var tables = new Array();
+                    for (var j = 0; j < data[i].tables.length; j++) {
+                        tables.push(new Table(data[i].tables[j].id, data[i].tables[j].numero, data[i].id));
+                    }
+                    zoneTables = new ZoneTable(data[i].id,data[i].nom,tables);
+                    zonesTables.push(zoneTables);
+                }
+                if (method != null) {
+                    method(zonesTables, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {

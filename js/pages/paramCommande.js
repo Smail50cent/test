@@ -7,6 +7,11 @@ $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbc
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
 $('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
+//    if (zoneTable) {
+    var typeCommande = parseInt(getLocalStorageValue("type.commande"));
+    if (typeCommande == 5) {
+
+    }
     if (!chooseLang) {
         $("#choose_lang_id").hide();
     } else {
@@ -71,24 +76,43 @@ function loadDataPersonnes(nbMaxPersonnes) {
         $("#nbPersonnes").append(itemOptionPersonnes);
     }
 }
+var zoneTables;
 function loadDataTables(tables) {
+    setLocalStorageValue("tables", JSON.stringify(tables));
+    $("#zoneTable").change(function() {
+        printTableByIdZone($(this).val(), zoneTables);
+    });
+    var htmlOptionTable = getOptionInChooseTable();
+    var connexion = getConnexion();
+    connexion.getAllZoneTables(printTables, null);
+    function printTables(zoneTable, param) {
+        zoneTables = zoneTable;
+        for (var i = 0; i < zoneTable.length; i++) {
+            var itemOptionTable = htmlOptionTable;
+            itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choix.table.choix.zone.label.option") + zoneTable[i].nom);
+            itemOptionTable = paramValue(itemOptionTable, "OptionValue", i);
+            $("#zoneTable").append(itemOptionTable);
+        }
+        
+        printTableByIdZone(0, zoneTable);
+    }
+}
+function printTableByIdZone(index, zonetables) {
+    $("#numTable").html("");
     var htmlOptionTable = getOptionInChooseTable();
     var itemOptionTable = htmlOptionTable;
     itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option"));
     itemOptionTable = paramValue(itemOptionTable, "OptionValue", "no");
     $("#numTable").append(itemOptionTable);
-    var connexion = getConnexion();
-    connexion.getAllTables(printTables);
-    function printTables(tables) {
-        setLocalStorageValue("tables", JSON.stringify(tables));
-        for (var i = 0; i < tables.length; i++) {
-            var itemOptionTable = htmlOptionTable;
-            itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + tables[i].numero);
-            itemOptionTable = paramValue(itemOptionTable, "OptionValue", tables[i].id);
-            $("#numTable").append(itemOptionTable);
-        }
+    for (var i = 0; i < zonetables[index].tables.length; i++) {
+        var itemOptionTable = htmlOptionTable;
+        itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + zonetables[index].tables[i].numero);
+        itemOptionTable = paramValue(itemOptionTable, "OptionValue", zonetables[0].tables[i].id);
+        $("#numTable").append(itemOptionTable);
     }
+    setLocalStorageValue("tables", JSON.stringify(zonetables[index].tables));
 }
+
 function startCommande(numTable, nbPersonne) {
     setLocalStorageValue("paramCommande.nbPersonne", nbPersonne);
     var tables = (JSON.parse(getLocalStorageValue("tables")));

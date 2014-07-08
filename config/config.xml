@@ -36,6 +36,7 @@
         <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur">getAllProduitFavoriteByIdServeur</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitsSuggerer">getAllProduitsSuggerer</variable>
+        <variable name="serveur.clientaccess.serviceGetAllZoneTables">zoneTables/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllProdtest">getProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>

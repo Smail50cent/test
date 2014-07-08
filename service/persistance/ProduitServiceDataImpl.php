@@ -56,13 +56,6 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
         return $this->parseProduit($retour);
     }
 
-    private $assoPrixId;
-//    private $assoIngredientId;
-    private $produit;
-    private $assoPrix;
-    private $assoIngredient;
-    private $idProdAfter;
-
     private function parseProduit($resultSet) {
         $assoPrixId;
         $idProdAfter = null;

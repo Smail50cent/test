@@ -15,6 +15,7 @@ class ZoneTable {
 
     public $id;
     public $nom;
+    public $tables = array();
 
     public function getId() {
         return $this->id;
@@ -23,6 +24,7 @@ class ZoneTable {
     public function setId($id) {
         $this->id = $id;
     }
+
     public function getNom() {
         return $this->nom;
     }
@@ -30,4 +32,17 @@ class ZoneTable {
     public function setNom($nom) {
         $this->nom = $nom;
     }
+
+    public function getTables() {
+        return $this->tables;
+    }
+
+    public function setTables($tables) {
+        $this->tables = $tables;
+    }
+
+    public function addTable($table) {
+        array_push($this->tables, $table);
+    }
+
 }
