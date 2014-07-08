@@ -21,6 +21,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
 produit.ID AS produit_id,
 produit.NOM AS produit_nom,
 produit.options AS produit_options,
+produit.level AS produit_level,
 categorie.id AS categorie_id,
 categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
@@ -90,6 +91,7 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
             $produit->setSousCategorie($sousCategorie);
             $produit->setTauxTva(floatval($ligne->produit_taux_tva));
             $produit->setOptions(intval($ligne->produit_options));
+            $produit->setLevel($ligne->produit_level);
             if ($ligne->produit_id == $idProdAfter) {
                 $assoPrix1 = $this->testsForListePrix($ligne, $produit);
                 if ($assoPrix1 != null) {
@@ -233,6 +235,7 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
 produit.ID AS produit_id,
 produit.NOM AS produit_nom,
 produit.options AS produit_options,
+produit.level AS produit_level,
 categorie.id AS categorie_id,
 categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
@@ -273,6 +276,7 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WH
 produit.ID AS produit_id,
 produit.NOM AS produit_nom,
 produit.options AS produit_options,
+produit.level AS produit_level,
 categorie.id AS categorie_id,
 categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
@@ -352,7 +356,7 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level >= " . $level);
         return $this->parseProduit($retour);
     }
 

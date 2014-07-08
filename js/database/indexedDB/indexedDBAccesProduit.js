@@ -162,12 +162,12 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
 myStorage.indexedDB.updateProduit = function(method, newProduit) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
-            impl(method);
+            impl(method, newProduit);
         } else {
-            myStorage.indexedDB.updateProduit(method);
+            myStorage.indexedDB.updateProduit(method, newProduit);
         }
     }, delay);
-    function impl(method) {
+    function impl(method, newProduit) {
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
@@ -176,20 +176,20 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
             var openCursorReq = store.openCursor(newProduit.id);
             openCursorReq.onsuccess = function(event) {
                 var cursor = event.target.result;
-                console.log("sqd", cursor);
+//                console.log("sqd", cursor);
+//                console.log("new",newProduit);
                 var _object = cursor.value;
                 _object.nom = newProduit.nom;
                 _object.tauxTva = newProduit.tauxTva;
                 _object.id = newProduit.id;
-                _object.categorie.nom = newProduit.categorie.nom;
-                _object.categorie.id = newProduit.categorie.id;
-                _object.categorie.priorite = newProduit.categorie.priorite;
-                _object.categorie.souscategorie = newProduit.categorie.souscategorie;
-                _object.categorie = newProduit.categorie;
+                _object.categorie.nom = newProduit.id_categorie.nom;
+                _object.categorie.id = newProduit.id_categorie.id;
+                _object.categorie.priorite = newProduit.id_categorie.priorite;
+                _object.categorie.souscategorie = newProduit.id_categorie.souscategorie;
+//                _object.categorie = newProduit.categorie;
                 _object.options = newProduit.options;
                 _object.associationPrixProduit = newProduit.associationPrixProduit;
                 _object.ingredients = newProduit.ingredients;
-
                 var updateRequest = cursor.update(_object);
                 updateRequest.onerror = updateRequest.onblocked = function() {
                     showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
@@ -198,7 +198,7 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
                 };
                 trans.oncomplete = function(e) {
                     if (method != null) {
-                        method(newProduit);
+                        method(newProduit,null);
                     }
                     db.close();
                 };

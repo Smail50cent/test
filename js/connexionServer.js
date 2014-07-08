@@ -6,6 +6,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
+                console.log(data.level);
                 updateLevelOfTable(conftableName, data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -23,7 +24,7 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-
+                    console.log("data "+ data);
                     if (data) {
                         var produits = new Array();
                         var produit = new Produit();
@@ -46,7 +47,6 @@ function ConnexionServer() {
                             produits.push(produit);
                         }
                     }
-
 
                     if (method != null && data) {//Nous avons besoin de l'executer.
                         method(produits, level);
@@ -252,7 +252,8 @@ function ConnexionServer() {
         this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
         function allprod(products, level) {
             if (products instanceof Array) {
-                console.log('update');
+                console.log( products);
+                console.log('level to update :'+level);
                 for (var i = 0; i < products.length; i++) {
                     getImplOfConnexionLocal().updateProduit(produitup, products[i]);
                     function produitup(prods) {
