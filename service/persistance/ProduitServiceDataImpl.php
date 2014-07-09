@@ -349,7 +349,7 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level >= " . $level);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
         return $this->parseProduit($retour);
     }
 

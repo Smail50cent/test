@@ -37,6 +37,7 @@
         <variable name="serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur">getAllProduitFavoriteByIdServeur</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitsSuggerer">getAllProduitsSuggerer</variable>
         <variable name="serveur.clientaccess.serviceGetAllZoneTables">zoneTables/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetAllTypeCommande">typeCommande/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllProdtest">getProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
@@ -67,5 +68,6 @@
         <variable name="tablePendingDataTypeProduitPriorite">PRODUIT_PRIORITY</variable>
         <variable name="serveur.clientaccess.setPersonnePriority">setPersonnePriority</variable>
         <variable name="parametre.app.gestion.utilisateurs">gestionDesUtilisateurs</variable>
+        <variable name="tableNameTypeCommande">typeCommandes</variable>
     </variables>
 </application>

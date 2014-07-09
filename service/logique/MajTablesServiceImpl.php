@@ -25,7 +25,7 @@ class MajTablesServiceImpl implements MajTablesService {
     }
 
     public function haveMAJ($tableName, $level) {
-        $table = $this->majtableSrv->haveMAJ($tableName,$level);
+        $table = $this->majtableSrv->haveMAJ($tableName, $level);
         if ($table->level > $level) {
             $produit = PersistanceFactory::getProduitService();
             $produitByLvl = $produit->getProduitByLevel($level);

@@ -82,4 +82,7 @@ function ConnexionLocalWebSQL() {
     this.getAllZoneTables = function(method, param) {
         console.log("TO DO");
     };
+    this.getAllTypeCommandes = function(method, param) {
+        console.log("TO DO");
+    };
 }

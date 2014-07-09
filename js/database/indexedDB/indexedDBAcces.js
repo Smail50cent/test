@@ -34,6 +34,7 @@ function setEntityFinishTo(bool) {
     entitysFinsh[config.getConfig("tableNameProduit")] = bool;
     entitysFinsh[config.getConfig("tableNameMenu")] = bool;
     entitysFinsh[config.getConfig("tableNameTable")] = bool;
+    entitysFinsh[config.getConfig("tableNameTypeCommande")] = bool;
 }
 function verifyFinish() {
     var finish = false;
@@ -50,6 +51,8 @@ function verifyFinish() {
     } else if (entitysFinsh[config.getConfig("tableNameMenu")] == true) {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameTable")] == true) {
+        finish = true;
+    } else if (entitysFinsh[config.getConfig("tableNameTypeCommande")] == true) {
         finish = true;
     }
     return finish;
@@ -143,6 +146,12 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNamePendingData"), {keyPath: "id", autoIncrement: true});
 
+        if (db.objectStoreNames.contains(config.getConfig("tableNameTypeCommande"))) {
+            var storeReq = db.deleteObjectStore(config.getConfig("tableNameTypeCommande"));
+        }
+        var store = db.createObjectStore(config.getConfig("tableNameTypeCommande"), {keyPath: "id", autoIncrement: true});
+        myStorage.indexedDB.addFistTypesCommandes();
+        
         processOnupgradeneeded = false;
         delay = 0;
     };
@@ -309,7 +318,7 @@ myStorage.indexedDB.addFistSousCategories = function() {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
-var nbtotal=0;
+var nbtotal = 0;
 myStorage.indexedDB.addFistProduits = function() {
     getConnexionServeur().getMajTable(config.getConfig("tableNameProduit"));
     $.ajax({
@@ -347,7 +356,6 @@ myStorage.indexedDB.addFistProduits = function() {
                 "level": produit.level
             });
             trans.oncomplete = function(e) {
-                console.log("nbtotal="+nbtotal+" ",e);
                 nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;

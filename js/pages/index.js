@@ -4,9 +4,16 @@
  */
 
 function onIndexLoaded() {
-    $("#indexLiClientReservation").text(strings.getString("label.index.li.reservation"));
-    $("#indexLiClientEmporter").text(strings.getString("label.index.li.aemporter"));
-    $("#indexLiClientLivraison").text(strings.getString("label.index.li.livraison"));
-    $("#indexLiClientsurplace").text(strings.getString("label.index.li.surplace"));
-    $("#indexLiServeurConnexion").text(strings.getString("label.index.li.accesserveur"));
+    var connexion = getConnexion();
+    connexion.getAllTypeCommandes(function(typesCommandes, param) {
+        for (var i = 0; i < typesCommandes.length; i++) {
+            if (typesCommandes[i].isActif) {
+                $("#" + typesCommandes[i].idInPageHtml).text(strings.getString(typesCommandes[i].labelMenu));
+            } else {
+                $("#" + typesCommandes[i].idInPageHtml).parent().remove();
+            }
+        }
+        $("#indexLiServeurConnexion").text(strings.getString("label.index.li.accesserveur"));
+    }, null);
 }
+  

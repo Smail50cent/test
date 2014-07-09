@@ -795,3 +795,10 @@ function ZoneTable(id, nom, tables) {
     this.nom = nom;
     this.tables = tables;
 }
+function TypeCommande(id, label, labelMenu, isActif, idInPageHtml) {
+    this.id = id;
+    this.label = label;
+    this.isActif = isActif;
+    this.labelMenu = labelMenu;
+    this.idInPageHtml = idInPageHtml;
+}

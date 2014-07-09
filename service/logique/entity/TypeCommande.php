@@ -11,6 +11,15 @@ class TypeCommande {
     public $label;
     public $isActif;
     public $labelMenu;
+    public $idInPageHtml;
+
+    public function getIdInPageHtml() {
+        return $this->idInPageHtml;
+    }
+
+    public function setIdInPageHtml($idInPageHtml) {
+        $this->idInPageHtml = $idInPageHtml;
+    }
 
     public function getId() {
         return $this->id;

@@ -12,6 +12,7 @@
     <script for="data.indexeddb" priority="10">database/indexedDB/indexedDBAccesProduit.js</script>
     <script for="data.indexeddb" priority="11">database/indexedDB/indexedDBAccesSousCategorie.js</script>
     <script for="data.indexeddb" priority="12">database/indexedDB/indexedDBAccesTables.js</script>
+    <script for="data.indexeddb" priority="14">database/indexedDB/indexedDBAccesTypeCommandes.js</script>
     
     <script for="data.websql">database/webSQL/ConnexionLocalWebSQL.js</script>
     
