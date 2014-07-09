@@ -40,7 +40,13 @@
     .sous_categorie_cat_structure  {
         display: none;
     }
+    .content_globlal_zone_structure {
+        overflow: hidden;
+    }
     
+    .slide.active ~ .slide{
+        opacity: 0;
+    }
 </style>
 </body>
 </html> 
