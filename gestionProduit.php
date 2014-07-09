@@ -36,5 +36,17 @@
     <div id="footer_left_id_trgl" class="footer_left_trgl footer_left_trgl_structure footer_left_trgl_personalize"></div>
     <div id="footer_right_id" class="footer_right footer_right_structure footer_right_personalize"></div>
 </div>
+<style>
+    .sous_categorie_cat_structure  {
+        display: none;
+    }
+    .content_globlal_zone_structure {
+        overflow: hidden;
+    }
+    
+    .slide.active ~ .slide{
+        opacity: 0;
+    }
+</style>
 </body>
 </html> 
