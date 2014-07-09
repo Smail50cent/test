@@ -1,6 +1,6 @@
 <?php include_once './header.php'; ?>
 <div id="content_id" class="content content_structure content_personalize">
-    
+
     <ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize" style="margin-top: 0;">
         <!--li><button></button></li-->
     </ul><p id="content_titre_id" class="content_titre content_titre_structure content_titre_personalize"></p>
@@ -43,9 +43,16 @@
     .content_globlal_zone_structure {
         overflow: hidden;
     }
-    
-    .slide.active ~ .slide{
+
+
+    .genreicClassSlide_structure {
         opacity: 0;
+    }
+    .slide.active {
+        opacity: 1;
+    }
+    .notransition{
+        opacity: 0.8;
     }
 </style>
 </body>
