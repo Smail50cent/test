@@ -6,7 +6,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log(data.level);
+                console.log("Table : ",conftableName," level : ",data.level);
                 updateLevelOfTable(conftableName, data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -26,7 +26,7 @@ function ConnexionServer() {
                 success: function(data, textStatus, xhr) {
                     console.log("datasucess " + data);
                     if (data instanceof Object) {
-                        var data = new Array(data);
+//                        var data = new Array(data);
                     }
                     if (method != null && data) {//Nous avons besoin de l'executer.
                         method(data, level);
@@ -229,17 +229,18 @@ function ConnexionServer() {
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
         this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
         function allprod(products, level) {
-            console.log("produicts:", products);
+//            console.log("produicts:", products);
             if (products instanceof Object || products instanceof Array) {
-                console.log(products);
-                console.log('level to update :' + level);
+////                console.log(products);
+////                console.log('level to update :' + level);
                 var produits = new Array();
-                var produit = new Produit();
                 for (var i = 0; i < products.length; i++) {
+                    var produit = new Produit();
                     produit.setNom(products[i].nom);
                     produit.setId(products[i].id);
                     produit.setTauxTva(products[i].tauxTva);
                     var categorie = new Categorie();
+                    console.log("data:",products);
                     categorie.setNom(products[i].categorie.nom);
                     categorie.setId(products[i].categorie.id);
                     categorie.setPriorite(products[i].categorie.priorite);
@@ -284,6 +285,7 @@ function ConnexionServer() {
                             produit.setId(data[i].id);
                             produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
+                            
                             categorie.setNom(data[i].categorie.nom);
                             categorie.setId(data[i].categorie.id);
                             categorie.setPriorite(data[i].categorie.priorite);

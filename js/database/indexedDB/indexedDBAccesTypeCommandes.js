@@ -3,6 +3,7 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 myStorage.indexedDB.addFistTypesCommandes = function() {
+    getConnexionServeur().getMajTable(config.getConfig("tableNameTypeCommande"));
     var connexion = getConnexionServeur();
     connexion.getAllTypeCommandes(addTypeCommande, null);
     function addTypeCommande(typesCommandes, param) {
@@ -17,7 +18,6 @@ myStorage.indexedDB.addFistTypesCommandes = function() {
             for (var i = 0; i < typesCommandes.length; i++) {
                 request = store.put(typesCommandes[i]);
             }
-//            request = store.put({"id": (table.id), "numero": table.numero, "zone": table.zone});
             trans.oncomplete = function(e) {
                 entitysFinsh[config.getConfig("tableNameTypeCommande")] = false;
                 db.close();
