@@ -173,7 +173,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-
+                curentReq++;
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
@@ -189,10 +189,11 @@ function ConnexionServer() {
                 produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
-                if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
-                    method(produits);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    if (curentReq == produits.length) {
+                        method(produits);
+                    }
                 }
-//                console.log("finished");
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));

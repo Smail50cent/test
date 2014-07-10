@@ -336,6 +336,7 @@ function detailMenu(id) {
         $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close menu_content_add_button_structure menu_content_add_button_personalize");
         var connexion = getConnexion();
         connexion.getMenuByIdForDetailMenu(showWithMenuDataById, id);//BDD
+        
         function showWithMenuDataById(menu) {
             $("#choose_menu_items_id").html("");
             var produits = menu.getProduits();
@@ -699,6 +700,7 @@ function etapeSuivante() {
         var optionSelectItem = getOptionInSelectItem();
         var selectInItemHtml = getSelectInItem();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
+        console.log(personnes);
         for (var i = 0; i < qop.length; i++) {
             $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
             $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
@@ -708,6 +710,7 @@ function etapeSuivante() {
             $("#select_item_etape_" + qop[i].getId()).change(function() {
                 var qopId = ($(this).attr("qopId"));
                 var choosedVal = ($(this).val());
+                console.log(choosedVal);
                 currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qopId)].personne = choosedVal;
             });
             function addItemToSelect(html, value, label) {
@@ -1168,7 +1171,7 @@ function validerCommande() {
         }
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
-        }
+        } 
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
