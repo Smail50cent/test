@@ -12,6 +12,7 @@ class TypeCommande {
     public $isActif;
     public $labelMenu;
     public $idInPageHtml;
+    public $level;
 
     public function getIdInPageHtml() {
         return $this->idInPageHtml;
@@ -51,6 +52,14 @@ class TypeCommande {
 
     public function setLabelMenu($labelMenu) {
         $this->labelMenu = $labelMenu;
+    }
+
+    public function getLevel() {
+        return $this->level;
+    }
+
+    public function setLevel($level) {
+        $this->level = $level;
     }
 
 }

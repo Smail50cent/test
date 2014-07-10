@@ -6,6 +6,7 @@
 function onIndexLoaded() {
     var connexion = getConnexion();
     connexion.getAllTypeCommandes(function(typesCommandes, param) {
+        console.log(typesCommandes);
         for (var i = 0; i < typesCommandes.length; i++) {
             if (typesCommandes[i].isActif) {
                 $("#" + typesCommandes[i].idInPageHtml).text(strings.getString(typesCommandes[i].labelMenu));

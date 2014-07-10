@@ -95,6 +95,10 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllTypeCommandes = function(method, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllTypeCommande(method, param);
     };
+    this.updateTypeCommande = function(method, typeCommande) {
+        myStorage.indexedDB.updateTypeCommande(method, typeCommande);
+    };
+
 }

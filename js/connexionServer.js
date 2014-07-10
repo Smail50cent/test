@@ -6,8 +6,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log("Table : ",conftableName," level : ",data.level);
-                updateLevelOfTable(conftableName, data.level);
+                console.log("Table : ", conftableName, " level : ", data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
@@ -15,7 +14,7 @@ function ConnexionServer() {
         });
     };
     this.haveMAJ = function(method, nomTable, level) {
-        if ((isMozilla())) {
+        if (isLocalBddSuppored() == false || isMozilla()) {
             method("NS");
         } else {
             $.ajax({
@@ -24,12 +23,19 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                    console.log("datasucess " + data);
-                    if (data instanceof Object) {
-//                        var data = new Array(data);
-                    }
+//                    console.log("datasucess " + data);
+                    console.log("data:", data);
+
                     if (method != null && data) {//Nous avons besoin de l'executer.
-                        method(data, level);
+                        if (data == false) {
+                            method(data, level);
+                        } else {
+                            if (data.data.length == 0) {
+                                data.data = "NU";
+                            }
+                            method(data.data, data.level);
+                        }
+
                     } else {
                         method(null);
                     }
@@ -229,10 +235,7 @@ function ConnexionServer() {
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
         this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
         function allprod(products, level) {
-//            console.log("produicts:", products);
             if (products instanceof Object || products instanceof Array) {
-////                console.log(products);
-////                console.log('level to update :' + level);
                 var produits = new Array();
                 for (var i = 0; i < products.length; i++) {
                     var produit = new Produit();
@@ -240,7 +243,6 @@ function ConnexionServer() {
                     produit.setId(products[i].id);
                     produit.setTauxTva(products[i].tauxTva);
                     var categorie = new Categorie();
-                    console.log("data:",products);
                     categorie.setNom(products[i].categorie.nom);
                     categorie.setId(products[i].categorie.id);
                     categorie.setPriorite(products[i].categorie.priorite);
@@ -260,7 +262,7 @@ function ConnexionServer() {
                     function produitup(prods) {
                         countProduitHaveUpdate++;
                         console.log(countProduitHaveUpdate + "==" + products.length);
-                        if (countProduitHaveUpdate== products.length) {
+                        if (countProduitHaveUpdate == products.length) {
                             if (method != null) {
                                 method(getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat));
                             }
@@ -277,7 +279,6 @@ function ConnexionServer() {
                     dataType: 'json',
                     async: true,
                     success: function(data, textStatus, xhr) {
-                        //console.log(data.id);
                         var produits = new Array();
                         for (var i = 0; i < data.length; i++) {
                             var produit = new Produit();
@@ -285,7 +286,6 @@ function ConnexionServer() {
                             produit.setId(data[i].id);
                             produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
-                            
                             categorie.setNom(data[i].categorie.nom);
                             categorie.setId(data[i].categorie.id);
                             categorie.setPriorite(data[i].categorie.priorite);
@@ -836,26 +836,79 @@ function ConnexionServer() {
         });
     };
     this.getAllTypeCommandes = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var liste = new Array();
-                if (data != null) {
-                    for (var i = 0; i < data.length; i++) {
-                        liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
-                    }
-                }
-                if (method != null) {
-                    method(liste, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        if (param != null) {
+            if (param.impllocal == false) {
+                pullWebServiceData(method, param);
+            } else {
+                majTest(method, param);
             }
-        });
+        } else {
+            majTest(method, param);
+        }
+        function majTest(method, param) {
+            var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameTypeCommande"));
+            getConnexionServeur().haveMAJ(allprod, config.getConfig("tableNameTypeCommande"), clientLevel);
+            function allprod(typeCommande, level) {
+                console.log("typeCommande:", typeCommande);
+                if (typeCommande instanceof Array || typeCommande instanceof Object) {
+                    var typeCommandes = new Array();
+                    if (typeCommande instanceof Array) {
+                        for (var i = 0; i < typeCommande.length; i++) {
+                            typeCommandes.push(new TypeCommande(typeCommande[i].id, typeCommande[i].label, typeCommande[i].labelMenu, typeCommande[i].isActif, typeCommande[i].idInPageHtml));
+                        }
+                    } else {
+                        typeCommandes.push(new TypeCommande(typeCommande.id, typeCommande.label, typeCommande.labelMenu, typeCommande.isActif, typeCommande.idInPageHtml));
+                    }
+
+                    var countProduitHaveUpdate = 0;
+                    console.log(typeCommandes);
+                    for (var i = 0; i < typeCommandes.length; i++) {
+                        getImplOfConnexionLocal().updateTypeCommande(produitup, typeCommandes[i]);
+                        function produitup(prods) {
+                            countProduitHaveUpdate++;
+                            console.log(countProduitHaveUpdate + "==" + typeCommandes.length);
+                            if (countProduitHaveUpdate == typeCommandes.length) {
+                                if (method != null) {
+                                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+
+                                }
+                            }
+                        }
+                    }
+                    updateLevelOfTable(config.getConfig("tableNameTypeCommande"), level);
+                } else if (typeCommande == "NS") {
+                    console.log("Database Not supported !");
+                    pullWebServiceData(method, param);
+                } else if (typeCommande == "NU") {
+                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+                } else {
+                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+                }
+            }
+        }
+        function pullWebServiceData(method, param) {
+            $.ajax({
+                url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success: function(data, textStatus, xhr) {
+                    var liste = new Array();
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
+                        }
+                    }
+                    if (method != null) {
+                        method(liste, param);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+//                    console.log("error : ",xhr, textStatus, errorThrown);
+                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                }
+            });
+        }
     };
 }
 
