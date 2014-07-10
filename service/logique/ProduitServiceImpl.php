@@ -36,4 +36,8 @@ class ProduitServiceImpl implements ProduitService {
         return $this->produitSrv->getProduitByLevel($level);
     }
 
+    public function DeleteProduit($id) {
+        $this->produitSrv->DeleteProduit($id);
+    }
+
 }

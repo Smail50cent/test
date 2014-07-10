@@ -1,2 +1,2 @@
-<div onclick="ModifyProduct();" type="button" id="modif_produit_id" class="modif_produit_structure modif_produit_personalize">
+<div onclick="ModifyProduct($(this));" type="button" id="modif_produit_id" class="modif_produit_structure modif_produit_personalize">
 <img src="img/gestion/produit/modif_product.png" width="35" height="35" style="position:absolute; right:-5px;"></div>

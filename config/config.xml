@@ -42,6 +42,7 @@
         <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
         <variable name="serveur.clientaccess.serviceGethaveMAJ">haveMAJ</variable>
+        <variable name="serveur.clientaccess.serviceDeleteProduit">deleteProduit</variable>
         <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameMajTables">majTables</variable>

@@ -356,7 +356,8 @@ myStorage.indexedDB.addFistProduits = function() {
                 "level": produit.level
             });
             trans.oncomplete = function(e) {
-                nbtotal++;
+//                console.log("nbtotal="+nbtotal+" ",e);
+//                nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;
             };

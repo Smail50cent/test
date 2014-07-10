@@ -241,6 +241,26 @@ myStorage.indexedDB.countProduits = function(method, param) {
         request.onerror = myStorage.indexedDB.onerror;
     }
 };
+myStorage.indexedDB.deleteProduit = function(id) {
+    myStorage.indexedDB.load();
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"),3);
+    request.onsuccess = function(e) {
+        console.log("succes ",id);
+        var db = e.target.result;
+        var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
+        var store = trans.objectStore(config.getConfig("tableNameProduit"));
+        var request = store.delete(parseInt(id));
+       
+        trans.oncomplete = function(e) {
+            db.close();
+        };
+        request.onerror = function(e) {
+            console.log(e);
+            //<showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+        };
+    };
+//    request.onerror = myStorage.indexedDB.onerror;
+};
 myStorage.indexedDB.addProduit = function(method, produit, param) {
     myStorage.indexedDB.load();
     var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));

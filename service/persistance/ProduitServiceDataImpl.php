@@ -357,4 +357,10 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WH
         return $this->parseProduit($retour);
     }
 
+    public function DeleteProduit($id) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("DELETE FROM produit WHERE ID=".$id);
+        return $retour;
+    }
+
 }
