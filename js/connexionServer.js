@@ -6,7 +6,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log("Table : ",conftableName," level : ",data.level);
+                console.log("Table : ", conftableName, " level : ", data.level);
                 updateLevelOfTable(conftableName, data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -240,7 +240,7 @@ function ConnexionServer() {
                     produit.setId(products[i].id);
                     produit.setTauxTva(products[i].tauxTva);
                     var categorie = new Categorie();
-                    console.log("data:",products);
+                    console.log("data:", products);
                     categorie.setNom(products[i].categorie.nom);
                     categorie.setId(products[i].categorie.id);
                     categorie.setPriorite(products[i].categorie.priorite);
@@ -260,7 +260,7 @@ function ConnexionServer() {
                     function produitup(prods) {
                         countProduitHaveUpdate++;
                         console.log(countProduitHaveUpdate + "==" + products.length);
-                        if (countProduitHaveUpdate== products.length) {
+                        if (countProduitHaveUpdate == products.length) {
                             if (method != null) {
                                 method(getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat));
                             }
@@ -285,7 +285,7 @@ function ConnexionServer() {
                             produit.setId(data[i].id);
                             produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
-                            
+
                             categorie.setNom(data[i].categorie.nom);
                             categorie.setId(data[i].categorie.id);
                             categorie.setPriorite(data[i].categorie.priorite);
@@ -840,10 +840,16 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
             type: 'POST',
             dataType: 'json',
-            data: { ID : id },
+            data: {ID: id},
             async: true,
             success: function(data, textStatus, xhr) {
                 console.log("ON DELETE SUCCESS !");
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
     this.getAllTypeCommandes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
