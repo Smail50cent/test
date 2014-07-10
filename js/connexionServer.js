@@ -6,7 +6,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log(data.level);
+                console.log("Table : ",conftableName," level : ",data.level);
                 updateLevelOfTable(conftableName, data.level);
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -24,32 +24,12 @@ function ConnexionServer() {
                 dataType: 'json',
                 async: true,
                 success: function(data, textStatus, xhr) {
-                   // console.log("data " + data);
-                    if (data) {
-                        var produits = new Array();
-                        var produit = new Produit();
-                        for (var i = 0; i < data.length; i++) {
-                            produit.setNom(data[i].nom);
-                            produit.setId(data[i].id);
-                            produit.setTauxTva(data[i].tauxTva);
-                            var categorie = new Categorie();
-                            categorie.setNom(data[i].categorie.nom);
-                            categorie.setId(data[i].categorie.id);
-                            categorie.setPriorite(data[i].categorie.priorite);
-                            categorie.setSousCategorie(data[i].categorie.souscategorie);
-                            produit.setCategorie(categorie);
-                            produit.setSousCategorie(data[i].souscategorie);
-                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-                            produit.setIdsIngredients(data[i].ingredients);
-                            produit.setOptions(data[i].options);
-                            produit.setLevel(data[i].level);
-                            var level = data[i].level;
-                            produits.push(produit);
-                        }
+                    console.log("datasucess " + data);
+                    if (data instanceof Object) {
+//                        var data = new Array(data);
                     }
-
                     if (method != null && data) {//Nous avons besoin de l'executer.
-                        method(produits, level);
+                        method(data, level);
                     } else {
                         method(null);
                     }
@@ -246,17 +226,45 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-        //this.getMajTable(ifupdated, "tableNameProduit", "produits");
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
-
         this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
         function allprod(products, level) {
-            if (products instanceof Array) {
-                console.log(products);
-                console.log('level to update :' + level);
+//            console.log("produicts:", products);
+            if (products instanceof Object || products instanceof Array) {
+////                console.log(products);
+////                console.log('level to update :' + level);
+                var produits = new Array();
+                for (var i = 0; i < products.length; i++) {
+                    var produit = new Produit();
+                    produit.setNom(products[i].nom);
+                    produit.setId(products[i].id);
+                    produit.setTauxTva(products[i].tauxTva);
+                    var categorie = new Categorie();
+                    console.log("data:",products);
+                    categorie.setNom(products[i].categorie.nom);
+                    categorie.setId(products[i].categorie.id);
+                    categorie.setPriorite(products[i].categorie.priorite);
+                    categorie.setSousCategorie(products[i].categorie.souscategorie);
+                    produit.setCategorie(categorie);
+                    produit.setSousCategorie(products[i].souscategorie);
+                    produit.setAssociationPrixProduit(products[i].associationPrixProduit);
+                    produit.setIdsIngredients(products[i].ingredients);
+                    produit.setOptions(products[i].options);
+                    produit.setLevel(products[i].level);
+                    var level = products[i].level;
+                    produits.push(produit);
+                }
+                var countProduitHaveUpdate = 0;
                 for (var i = 0; i < products.length; i++) {
                     getImplOfConnexionLocal().updateProduit(produitup, products[i]);
                     function produitup(prods) {
+                        countProduitHaveUpdate++;
+                        console.log(countProduitHaveUpdate + "==" + products.length);
+                        if (countProduitHaveUpdate== products.length) {
+                            if (method != null) {
+                                method(getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat));
+                            }
+                        }
                         console.log(prods);
                     }
                 }
@@ -277,6 +285,7 @@ function ConnexionServer() {
                             produit.setId(data[i].id);
                             produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
+                            
                             categorie.setNom(data[i].categorie.nom);
                             categorie.setId(data[i].categorie.id);
                             categorie.setPriorite(data[i].categorie.priorite);
@@ -835,6 +844,22 @@ function ConnexionServer() {
             async: true,
             success: function(data, textStatus, xhr) {
                 console.log("ON DELETE SUCCESS !");
+    this.getAllTypeCommandes = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste = new Array();
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
+                    }
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));

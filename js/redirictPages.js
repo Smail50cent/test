@@ -101,7 +101,7 @@ function redirictWhereServeurConnected() {
 }
 function goNouvelleCommande() {
     redirct(new RedirictPages(null, null, null, null, "paramCommande"));
-}
+    }
 function redrictWhereHavePay(){
     redirct(new RedirictPages("index", "index", "index", "index", "interfaceVenteAcces"));
 }

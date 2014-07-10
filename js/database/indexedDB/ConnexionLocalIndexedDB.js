@@ -96,5 +96,7 @@ function ConnexionLocalIndexedDB() {
     };
     this.deleteProduit = function(id) {
         myStorage.indexedDB.deleteProduit(id);
+    this.getAllTypeCommandes = function(method, param) {
+        console.log("TO DO");
     };
 }

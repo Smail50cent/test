@@ -11,9 +11,11 @@ include_once $path . 'service/persistance/PersistanceFactory.php';
 class MajTablesServiceImpl implements MajTablesService {
 
     private $majtableSrv;
+    private $produitSrv;
 
     function __construct() {
         $this->majtableSrv = PersistanceFactory::getMajTablesService();
+        $this->produitSrv = PersistanceFactory::getProduitService();
     }
 
     public function getAll() {
@@ -25,10 +27,9 @@ class MajTablesServiceImpl implements MajTablesService {
     }
 
     public function haveMAJ($tableName, $level) {
-        $table = $this->majtableSrv->haveMAJ($tableName,$level);
+        $table = $this->majtableSrv->haveMAJ($tableName, $level);
         if ($table->level > $level) {
-            $produit = PersistanceFactory::getProduitService();
-            $produitByLvl = $produit->getProduitByLevel($level);
+            $produitByLvl = $this->produitSrv->getProduitByLevel($level);
             return $produitByLvl;
         } else {
             return FALSE;

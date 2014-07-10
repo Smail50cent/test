@@ -116,9 +116,13 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
                 if ($assoIng != null) {
                     $produit->addIngredients($assoIng);
                 }
-                if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                if (count($lignes) != ($i + 1)) {
+                    if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        array_push($liste, $produit);
+                        $produit = new Produit();
+                    }
+                }else{
                     array_push($liste, $produit);
-                    $produit = new Produit();
                 }
             } else if ($ligne->produit_id != $idProdAfter) {
                 $assoPrix1 = $this->testsForListePrix($ligne, $produit);
@@ -349,7 +353,7 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level >= " . $level);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
         return $this->parseProduit($retour);
     }
 
