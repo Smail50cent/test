@@ -826,5 +826,20 @@ function ConnexionServer() {
             }
         });
     };
+    this.deleteProduit = function(id) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
+            type: 'POST',
+            dataType: 'json',
+            data: { ID : id },
+            async: true,
+            success: function(data, textStatus, xhr) {
+                console.log("ON DELETE SUCCESS !");
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
 

@@ -97,7 +97,7 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
             trans.oncomplete = function(e) {
                 if (method != null) {//Nous avons besoin de l'executer.
 //                    if (produitsByCategorie.length != 0) {
-                        method(produitsByCategorie);
+                    method(produitsByCategorie);
 //                    }
                 }
                 db.close();
@@ -198,7 +198,7 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
                 };
                 trans.oncomplete = function(e) {
                     if (method != null) {
-                        method(newProduit,null);
+                        method(newProduit, null);
                     }
                     db.close();
                 };
@@ -238,4 +238,24 @@ myStorage.indexedDB.countProduits = function(method, param) {
         };
         request.onerror = myStorage.indexedDB.onerror;
     }
+};
+myStorage.indexedDB.deleteProduit = function(id) {
+    myStorage.indexedDB.load();
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    request.onsuccess = function(e) {
+        var db = e.target.result;
+        var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
+        var store = trans.objectStore(config.getConfig("tableNameProduit"));
+        var request = store.delete(id);
+
+        trans.oncomplete = function(e) {
+            db.close();
+            myStorage.indexedDB.getAllTodoItems();
+        };
+
+        request.onerror = function(e) {
+            showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+        };
+    };
+    request.onerror = myStorage.indexedDB.onerror;
 };

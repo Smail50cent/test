@@ -1,2 +1,2 @@
-<div onclick="DeleteProduct();" type="button" id="supp_produit_id" class="supp_produit_structure supp_produit_personalize">
+<div onclick="DeleteProduct($(this));" type="button" id="supp_produit_id" class="supp_produit_structure supp_produit_personalize">
 <img src="img/gestion/produit/delete_product.png" width="31" height="31" style="position:absolute; left:-5px; bottom:0px"></div>

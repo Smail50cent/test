@@ -94,4 +94,7 @@ function ConnexionLocalIndexedDB() {
     this.getAllZoneTables = function(method, param) {
         console.log("TO DO");
     };
+    this.deleteProduit = function(id) {
+        myStorage.indexedDB.deleteProduit(id);
+    };
 }
