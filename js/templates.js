@@ -199,3 +199,6 @@ function getDivModifProduit(){
 function getDivSuppProduit(){
     return templates.getTemplate("gestion/produit/div_supprimer_produit");
 }
+function getDivAddProduit(){
+    return templates.getTemplate("gestion/produit/div_ajouter_produit");
+}
