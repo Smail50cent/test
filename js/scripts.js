@@ -14,6 +14,7 @@ scripts.loadScripts = function(forpage, method) {
     function getScripts(forpage) {
         var abonements = new Array();
         var url = "./config/scriptsToLoad.xml";
+        $.ajaxSetup({cache: true});
         $.ajax({
             type: "GET",
             url: url,
@@ -41,11 +42,11 @@ scripts.loadScripts = function(forpage, method) {
     }
     function load(abonements, method) {
         var finish = true;
-        $.ajaxSetup({async: false});
+        
         var scriptsLoaded = new Array();
         var lenEnd = 0;
         for (var i = 0; i < abonements.length; i++) {
-            scriptsLoaded[i] = abonements[i].url;
+            scriptsLoaded[i] = abonements[i].url;$.ajaxSetup({async: false, cache: true});
             $.getScript("./js/" + abonements[i].url, function(data, textStatus, jqxhr) {
                 lenEnd++;
                 if (jqxhr.status != 200) {
@@ -53,7 +54,7 @@ scripts.loadScripts = function(forpage, method) {
                 } else {
 //                    console.log("Valid load script =" + $(this).attr('url'));
                 }
-            });
+            });  
         }
         testIfWeCanExec();
         function testIfWeCanExec() {
@@ -69,7 +70,7 @@ scripts.loadScripts = function(forpage, method) {
                 }
             }, 0);
         }
-        $.ajaxSetup({async: true});
+      
     }
     function errorManagement(scriptToLoad) {
         for (var i = 0; i < scriptToLoad.length; i++) {
@@ -87,6 +88,7 @@ function init() {
     if (isIndexedDBSupported()) {
         myStorage.indexedDB.create(); // open displays the data previously saved
     }
+    $.ajaxSetup({async: true,cache:true});
     $.getScript("./js/control.js");
 }
 scripts.loadScripts("all", function() {

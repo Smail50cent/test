@@ -24,6 +24,7 @@ function getLangagesSupported(){
 strings.getString = function(key) {
     var ret = "no result";
     var url = "";
+    $.ajaxSetup({async: true,cache:true});
     switch (getLanguage()) {
         case "fr_FR":
             url = "./config/string_fr_FR.xml";

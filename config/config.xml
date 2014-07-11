@@ -17,7 +17,7 @@
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAttributsComptesByEmail">getAttributsComptesByEmail</variable>
-        <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
+        <variable name="serveur.clientaccess.serviceGetAllParamApps">parametreApplication/getAllParamApps</variable>
         <variable name="serveur.clientaccess.serviceGetAllMajTables">getAllMajTables</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
@@ -70,5 +70,6 @@
         <variable name="serveur.clientaccess.setPersonnePriority">setPersonnePriority</variable>
         <variable name="parametre.app.gestion.utilisateurs">gestionDesUtilisateurs</variable>
         <variable name="tableNameTypeCommande">typeCommandes</variable>
+        <variable name="tableNameParamApplication">parametresApplication</variable>
     </variables>
 </application>

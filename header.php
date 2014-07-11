@@ -1,4 +1,5 @@
 <!doctype html>
+<!--html manifest="site.manifest"-->
 <html>
     <head>
         <title id="title_app_id" ></title>

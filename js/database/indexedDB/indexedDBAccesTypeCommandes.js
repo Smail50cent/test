@@ -3,7 +3,6 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 myStorage.indexedDB.addFistTypesCommandes = function() {
-//    getConnexionServeur().getMajTable(config.getConfig("tableNameTypeCommande"));
     var connexion = getConnexionServeur();
     connexion.getAllTypeCommandes(addTypeCommande, {impllocal: false});
     function addTypeCommande(typesCommandes, param) {

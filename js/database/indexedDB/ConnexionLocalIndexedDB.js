@@ -83,7 +83,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getParametreApplicationByNom = function(method, nom, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getParametreApplicationByNom(method, nom, param);
     };
     this.updateProduit = function(method, produit) {
         myStorage.indexedDB.updateProduit(method, produit);
