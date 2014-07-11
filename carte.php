@@ -43,8 +43,6 @@
     .content_globlal_zone_structure {
         overflow: hidden;
     }
-
-
     .genreicClassSlide_structure {
         opacity: 0;
     }
@@ -53,6 +51,9 @@
     }
     .notransition{
         opacity: 0.8;
+    }
+    .content_structure ul {
+        margin-top: -65px;
     }
 </style>
 </body>

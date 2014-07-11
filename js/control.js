@@ -114,12 +114,7 @@ function controller(entreprise) {
             break;
         case "gestionProduit":
             method = function() {
-                printProduits(0);
-                var connexion = getConnexion();
-                connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
-                window.setTimeout(function() {
                     onLoadGP();
-                }, 2500);
             };
             break;
         case "choixEnvoieCuisine":
