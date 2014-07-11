@@ -22,6 +22,7 @@ function onChoixEnvoieCuisineLoaded(toLoad) {
             remplirWithProduit($(this).val());
         });
         var htmlOption = getOptionPersonnes();
+        console.log(personnesProduits);
         for (var i = 0; i < personnesProduits.length; i++) {
             var itemOption = htmlOption;
             itemOption = paramValue(itemOption, "label", personnesProduits[i].personne.prenom + " " + personnesProduits[i].personne.nom);

@@ -329,7 +329,6 @@ function Ticket(id, quantityOfProducts) {
                 if (qop[y].product instanceof Menu) {
                     totalTTC = getPrixHtInAssociation(qop[y].getProduit().getPrix(), qop[y].getProduit().tauxDeTva);
                 } else {
-                    console.log(qop[y]);
                     totalTTC = getPrixHtInAssociation(qop[y].getProduit().associationPrixProduit, qop[y].getProduit().tauxTva);
                 }
                 this.total += totalTTC * quantity;

@@ -11,6 +11,12 @@ include_once $path . 'service/logique/entity/TypeCommande.php';
  */
 class TypeCommandeServiceDataImpl implements TypeCommandeServiceData {
 
+    public function getByLevel($id) {
+        $bdd = new ConnexionBDD();
+        $resultSet = $bdd->executeGeneric("SELECT `id`, `label`, `actif`, `label_menu`, `id_in_html_page`, `level` FROM `type_commandes` WHERE level > " . $id);
+        return $this->parseTypeCommande($resultSet);
+    }
+
     public function getAll() {
         $bdd = new ConnexionBDD();
         $resultSet = $bdd->executeGeneric("SELECT `id`, `label`, `actif`, `label_menu`, `id_in_html_page` FROM `type_commandes` ");
@@ -33,6 +39,10 @@ class TypeCommandeServiceDataImpl implements TypeCommandeServiceData {
             $typeCommande->setIdInPageHtml($ligne->id_in_html_page);
             $typeCommande->setLabel($ligne->label);
             $typeCommande->setLabelMenu($ligne->label_menu);
+            if (isset($ligne->level)) {
+                $typeCommande->setLevel($ligne->level);
+            }
+
             array_push($liste, $typeCommande);
         }
         if (count($liste) == 1) {

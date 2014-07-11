@@ -12,10 +12,12 @@ class MajTablesServiceImpl implements MajTablesService {
 
     private $majtableSrv;
     private $produitSrv;
+    private $typeCommandeSrv;
 
     function __construct() {
         $this->majtableSrv = PersistanceFactory::getMajTablesService();
         $this->produitSrv = PersistanceFactory::getProduitService();
+        $this->typeCommandeSrv = PersistanceFactory::getTypeCommandeService();
     }
 
     public function getAll() {
@@ -29,11 +31,30 @@ class MajTablesServiceImpl implements MajTablesService {
     public function haveMAJ($tableName, $level) {
         $table = $this->majtableSrv->haveMAJ($tableName, $level);
         if ($table->level > $level) {
-            $produitByLvl = $this->produitSrv->getProduitByLevel($level);
-            return $produitByLvl;
+            $data = null;
+            switch ($tableName) {
+                case "typeCommandes":
+                    $data = $this->typeCommandeSrv->getByLevel($level);
+                    break;
+                case "produits":
+                    $data = $this->produitSrv->getProduitByLevel($level);
+                    break;
+                case "entreprise": break;
+            }
+            $toRet = new ToRet();
+            $toRet->level = $table->level;
+            $toRet->data = $data;
+            return $toRet;
         } else {
             return FALSE;
         }
     }
+
+}
+
+class ToRet {
+
+    public $level;
+    public $data;
 
 }

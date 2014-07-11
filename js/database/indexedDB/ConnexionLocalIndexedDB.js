@@ -98,6 +98,9 @@ function ConnexionLocalIndexedDB() {
         myStorage.indexedDB.deleteProduit(id);
     };
     this.getAllTypeCommandes = function(method, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllTypeCommande(method, param);
+    };
+    this.updateTypeCommande = function(method, typeCommande) {
+        myStorage.indexedDB.updateTypeCommande(method, typeCommande);
     };
 }
