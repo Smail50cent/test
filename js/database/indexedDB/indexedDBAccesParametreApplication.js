@@ -52,25 +52,66 @@ myStorage.indexedDB.getParametreApplicationByNom = function(method, nom, param) 
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
-            var trans = db.transaction([config.getConfig("tableNameTypeCommande")], myStorage.IDBTransactionModes.READ_ONLY);
-            var store = trans.objectStore(config.getConfig("tableNameTypeCommande"));
+            var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_ONLY);
+            var store = trans.objectStore(config.getConfig("tableNameParamApplication"));
             var index = store.index("nom_parametre");
-            var request = index.get(nom);
+            var request = index.get(nom.toString());
             request.onsuccess = function(e) {
                 var result = e.target.result;
-                if (!!result == false) {
-                    return;
-                }
                 var parametreApplication = new ParametreApplication();
-                parametreApplication.setId(result.value.id);
-                parametreApplication.setNomParametre(result.value.nom_parametre);
-                parametreApplication.setValeurParametre(parseInt(result.value.valeur_parametre));
+                parametreApplication.setId(result.id);
+                parametreApplication.setNomParametre(result.nom_parametre);
+                parametreApplication.setValeurParametre(parseInt(result.valeur_parametre));
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(parametreApplication, param);
                 }
             };
             trans.oncomplete = function(e) {
+                db.close();
+            };
+            request.onerror = function(e) {
+                showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+            };
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+};
 
+myStorage.indexedDB.getAllParametreApplication = function(method, param) {
+    entitysFinsh[config.getConfig("tableNameZoneTables")] = false;
+    window.setTimeout(function() {
+        if (entitysFinsh[config.getConfig("tableNameZoneTables")] == false) {
+            impl(method, param);
+        } else {
+            myStorage.indexedDB.getAllParametreApplication(method, param);
+        }
+    }, delay);
+    function impl(method, param) {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_ONLY);
+            var store = trans.objectStore(config.getConfig("tableNameParamApplication"));
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+            var parametreApplication = new Array();
+            cursorRequest.onsuccess = function(e) {
+                var result = e.target.result;
+                if (!!result == false) {
+                    return;
+                }
+                var myparametreApplication = new ParametreApplication();
+                myparametreApplication.setId(result.value.id);
+                myparametreApplication.setNomParametre(result.value.nom_parametre);
+                myparametreApplication.setValeurParametre(parseInt(result.value.valeur_parametre));
+                parametreApplication.push(myparametreApplication);
+                result.continue();
+            };
+            trans.oncomplete = function(e) {
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(parametreApplication, param);
+                }
                 db.close();
             };
             request.onerror = function(e) {

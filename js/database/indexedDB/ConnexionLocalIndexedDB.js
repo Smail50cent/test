@@ -59,7 +59,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllParamApps = function(method) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllParametreApplication (method, null);
     };
     this.getAllPendingMethods = function(method, param) {
         myStorage.indexedDB.getAllPendingsDatas(method, param);
@@ -92,7 +92,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TODO");
     };
     this.getAllZoneTables = function(method, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllZoneTables(method, param);
     };
     this.deleteProduit = function(id) {
         myStorage.indexedDB.deleteProduit(id);

@@ -36,6 +36,7 @@ function setEntityFinishTo(bool) {
     entitysFinsh[config.getConfig("tableNameTable")] = bool;
     entitysFinsh[config.getConfig("tableNameTypeCommande")] = bool;
     entitysFinsh[config.getConfig("tableNameParamApplication")] = bool;
+    entitysFinsh[config.getConfig("tableNameZoneTables")] = bool;
 }
 function verifyFinish() {
     var finish = false;
@@ -56,6 +57,8 @@ function verifyFinish() {
     } else if (entitysFinsh[config.getConfig("tableNameTypeCommande")] == true) {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameParamApplication")] == true) {
+        finish = true;
+    }else if (entitysFinsh[config.getConfig("tableNameZoneTables")] == true) {
         finish = true;
     }
     return finish;
@@ -163,6 +166,12 @@ myStorage.indexedDB.create = function() {
         store.createIndex("nom_parametre", "nom_parametre", {unique: false});
         myStorage.indexedDB.addFirstParametreApplication();
 
+        if (db.objectStoreNames.contains(config.getConfig("tableNameZoneTables"))) {
+            var storeReq = db.deleteObjectStore(config.getConfig("tableNameZoneTables"));
+        }
+        var store = db.createObjectStore(config.getConfig("tableNameZoneTables"), {keyPath: "id", autoIncrement: true});
+        myStorage.indexedDB.addFirstZoneTables();
+        
         processOnupgradeneeded = false;
         delay = 0;
     };

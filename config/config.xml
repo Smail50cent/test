@@ -71,5 +71,6 @@
         <variable name="parametre.app.gestion.utilisateurs">gestionDesUtilisateurs</variable>
         <variable name="tableNameTypeCommande">typeCommandes</variable>
         <variable name="tableNameParamApplication">parametresApplication</variable>
+        <variable name="tableNameZoneTables">zonesTables</variable>
     </variables>
 </application>
