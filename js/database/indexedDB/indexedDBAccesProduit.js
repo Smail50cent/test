@@ -1,12 +1,12 @@
 myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, produitid, i, produits) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameProduit")] == false) {
-            impl();
+            impl(method, isexecute, produitid, i, produits);
         } else {
-            myStorage.indexedDB.getProduitByIdForDetailMenu(methodToExecuteAfter);
+            myStorage.indexedDB.getProduitByIdForDetailMenu(method, isexecute, produitid, i, produits);
         }
     }, delay);
-    function impl() {
+    function impl(method, isexecute, produitid, i, produits) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -31,16 +31,11 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
                 produit.setAssociationPrixProduit(result.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
-//                for (var i = 0; i < produits.length; i++) {
-//                    if (produits[i] instanceof Produit) {
-//                        
-//                    }else{
-//                        isexecute = false;
-//                        break;
-//                    }
-//                }
-                if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
-                    method(produits);
+                curentReq++;
+                if (method != null) {//Nous avons besoin de l'executer.
+                    if (curentReq == produits.length) {
+                        method(produits);
+                    }
                 }
             };
             trans.oncomplete = function(e) {

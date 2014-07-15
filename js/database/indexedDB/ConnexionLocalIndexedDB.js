@@ -59,7 +59,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllParamApps = function(method) {
-        myStorage.indexedDB.getAllParametreApplication (method, null);
+        myStorage.indexedDB.getAllParametreApplication(method, null);
     };
     this.getAllPendingMethods = function(method, param) {
         myStorage.indexedDB.getAllPendingsDatas(method, param);
@@ -102,5 +102,22 @@ function ConnexionLocalIndexedDB() {
     };
     this.updateTypeCommande = function(method, typeCommande) {
         myStorage.indexedDB.updateTypeCommande(method, typeCommande);
+    };
+
+    this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
+        myStorage.indexedDB.addPendingData(null, {
+            "id_form": id_form,
+            "valeur_champ": valeur_champ,
+            "defaut": defaut,
+            "id_compte": id_compte
+        }, config.getConfig("tablePendingDataTypeAttrCompte"), null);
+    };
+    this.addCompte = function(method, password, id_role, param) {
+        myStorage.indexedDB.addPendingData(method, {
+            "password": password,
+            "id_role": id_role
+        }, config.getConfig("tablePendingDataTypeCompte"), param);
+        var id = Math.floor((Math.random() * 1000000) + 1);
+        method(id, param);
     };
 }

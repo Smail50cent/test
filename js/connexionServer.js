@@ -46,7 +46,6 @@ function ConnexionServer() {
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
-        
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameEntreprise"));
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);

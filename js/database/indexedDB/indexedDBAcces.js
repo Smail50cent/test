@@ -114,6 +114,8 @@ myStorage.indexedDB.create = function() {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameIngredient"));
         }
         var store = db.createObjectStore(config.getConfig("tableNameIngredient"), {keyPath: "id", autoIncrement: true});
+        myStorage.indexedDB.addFistIngredients();
+        
         entitysFinsh[config.getConfig("tableNameCategorie")] = true;
         myStorage.indexedDB.addFistIngredients();
         if (db.objectStoreNames.contains(config.getConfig("tableNameCategorie"))) {
