@@ -278,7 +278,7 @@ myStorage.indexedDB.addFistIngredients = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data);
+                //console.log(data);
                 addIng(data[i]);
             }
         },

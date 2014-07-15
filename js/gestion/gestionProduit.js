@@ -55,7 +55,7 @@ function addProduct() {
 
     scripts.loadScripts("lib.dialog", function() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, width: "30%"
-            , top: "-4634px", left: "240px"});
+            , top: "-8159px", left: "798px"});
     });
     var divadd = getDivAddProduit();
     $('#dialog_add_produit_id').html(divadd);
@@ -71,6 +71,7 @@ function addPage1() {
 
     $("input#name_prod_Id").on("keyup", function() {
         $('#label_name_prod_id').text($(this).val());
+        $('#content_produit_titre_id').text($(this).val());
     });
 
 
@@ -113,35 +114,52 @@ function addPage1() {
 
 function ingredientPage() {
 
+    $('.ui-dialog').css("width", "50%");
+    
+    
+    var cbox = getIngredCheckBoxAddProduit();
+    var ingredCB;
     getImplOfConnexionLocal().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
-            console.log(Ingredients.nom);
+            ingredCB = paramValue(cbox, "ingred_nom", Ingredients[i].nom);
+            $('#select_ingredient_id').append(ingredCB);
         }
+        $('#select_ingredient_id').css("width", "50%");
+        $('#list_ingredients_id').css("width", "50%");
+        $('.ingred_checkbox').change(function(){
+            if(this.checked) {
+                $('#list_ingredients_id').append($('<option>', {value: this.value, text: this.value}));
+                $('#content_produit_description_id').append(""+this.value+"");
+            }else {
+                $("#list_ingredients_id option[value=\""+this.value+"\"]").remove();
+            }
+    });
     }
-
-
-
 
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
-    $("#select_ingredient_id").each(function() {
-        var checkboxes = $(this).find("input:checkbox");
-        checkboxes.each(function() {
-            var checkbox = $(this);
-            // Highlight pre-selected checkboxes
-            if (checkbox.prop("checked"))
-                checkbox.parent().addClass("select_ingredient-on");
-
-            // Highlight checkboxes that the user selects
-            checkbox.click(function() {
-                if (checkbox.prop("checked"))
-                    checkbox.parent().addClass("select_ingredient-on");
-                else
-                    checkbox.parent().removeClass("select_ingredient-on");
-            });
-        });
-    });
+//    $("#select_ingredient_id").each(function() {
+//        var checkboxes = $(this).find("input:checkbox");
+//        checkboxes.each(function() {
+//            var checkbox = $(this);
+//            // Highlight pre-selected checkboxes
+//            if (checkbox.prop("checked"))
+//                checkbox.parent().addClass("select_ingredient-on");
+//            // Highlight checkboxes that the user selects
+//            checkbox.click(function() {
+//                if (checkbox.prop("checked")) {
+//                    checkbox.parent().addClass("select_ingredient-on");
+//                    alert('checked');
+//                }
+//                else {
+//                    checkbox.parent().removeClass("select_ingredient-on");
+//                    alert('unchecked');
+//                }
+//
+//            });
+//        });
+//    });
 
     $('#check_all_id').click(function() {
         if (this.checked) {
@@ -154,6 +172,7 @@ function ingredientPage() {
             });
         }
     });
+    
 }
 
 

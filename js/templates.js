@@ -216,3 +216,6 @@ function getPage1ShowAddProduit(){
 function getPageIngredAddProduit(){
     return templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
 }
+function getIngredCheckBoxAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredient_checkbox_ajouter_produit");
+}

@@ -9,8 +9,10 @@
         <div id="content_titre_categorie_center_id" class="content_titre_categorie_center content_titre_categorie_center_structure content_titre_categorie_center_personalize"><p id="titre_categorie_id"></p></div>
         <div id="content_titre_categorie_right_id" class="content_titre_categorie_right content_titre_categorie_right_structure content_titre_categorie_right_personalize"></div>
     </div>
-
+    <div id="confirm_dialog_produit_id" class="confirm_dialog_produit"></div>
+    <div id="dialog_add_produit_id" class="dialog_add_produit"></div>
     <div id="menu_or_card" class="menu_or_card menu_or_card_structure menu_or_card_personalize ">
+
         <ul id="content_global_zone_id" class="content_globlal_zone content_globlal_zone_structure content_globlal_zone_personalize">
             <!--            li>
                             <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
@@ -26,8 +28,7 @@
                         </li-->
         </ul>
     </div>
-    <div id="confirm_dialog_produit_id" class="confirm_dialog_produit"></div>
-    <div id="dialog_add_produit_id" class="dialog_add_produit"></div>
+
 </div>
 <!--div id="recapitulatif_commande_id" class="recapitulatif_commande recapitulatif_commande_structure recapitulatif_commande_personalize"></div-->
 </div>
@@ -69,10 +70,10 @@
         display:block;
     }
 
-    .select_ingredient-on {
+/*    .select_ingredient-on {
         color:#ffffff;
         background-color:#000099;
-    }
+    }*/
 
 </style>
 </body>
