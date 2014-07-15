@@ -1,9 +1,13 @@
-<li class="produit_cat_structure produit_cat_personalize ">
+
+<li class="produit_cat_structure produit_cat_personalize " >
     <div id="content_add_produit_zone_show_id" class="content_add_produit_zone_show_structure content_add_produit_zone_show_personalize">
-        <p>Nom :<label id="label_name_prod_id" class="label_name_prod_structure label_name_prod_personalise"> </label></p>
+        <p class="content_produit_titre_structure content_produit_titre_personalize">Catégorie : <label id="label_categorie_prod_id" class="label_categorie_prod_structure label_categorie_prod_personalise"> </label></p>
+        <p class="content_produit_titre_structure content_produit_titre_personalize">Sous Catégorie : <label id="label_souscat_prod_id" class="label_souscat_prod_structure label_souscat_prod_personalise"> </label></p>
+    </div>
+    <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
 
-        <p>Catégorie :<label id="label_categorie_prod_id" class="label_categorie_prod_structure label_categorie_prod_personalise"> </label></p>
-
-        <p>Sous Catégorie :<label id="label_souscat_prod_id" class="label_souscat_prod_structure label_souscat_prod_personalise"> </label></p>
+        <p id="content_produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize">0.00 €</p>  
+        <label id="content_produit_titre_id" class="content_produit_titre content_produit_titre_structure content_produit_titre_personalize"> </label>       
+        <ul id="content_produit_description_id" style="padding:0;" class="content_produit_description content_produit_description_structure content_produit_description_personalize"></ul>
     </div>
 </li>

@@ -55,7 +55,7 @@ function addProduct() {
 
     scripts.loadScripts("lib.dialog", function() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, width: "30%"
-            , top: "-4634px", left: "240px"});
+            , top: "-8159px", left: "798px"});
     });
     var divadd = getDivAddProduit();
     $('#dialog_add_produit_id').html(divadd);
@@ -71,8 +71,8 @@ function addPage1() {
 
     $("input#name_prod_Id").on("keyup", function() {
         $('#label_name_prod_id').text($(this).val());
+        $('#content_produit_titre_id').text($(this).val());
     });
-
 
     getImplOfConnexionLocal().getCategoriesForContentCategorie(allCat);
     function allCat(categorie) {
@@ -81,14 +81,11 @@ function addPage1() {
                 value: categorie[i].id,
                 text: categorie[i].nom
             }));
-
-
         }
     }
 
     $('#liste_categorie_id').change(function() {
         $('#liste_souscategorie_id').empty();
-
         getImplOfConnexionLocal().getSousCategoriesForContentSousCategorie(souCats);
         var idcat = $(this).val();
         //$('#label_categorie_prod_id').text($(this).text());
@@ -113,47 +110,39 @@ function addPage1() {
 
 function ingredientPage() {
 
+    var cbox = getIngredCheckBoxAddProduit();
+    var ingredCB;
     getImplOfConnexionLocal().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
-            console.log(Ingredients.nom);
+            ingredCB = paramValue(cbox, "ingred_nom", Ingredients[i].nom);
+            $('#select_ingredient_id').append(ingredCB);
         }
+
+        $('.ingred_checkbox').change(function(){
+            if(this.checked) {
+                var listIngred = getIngredLiAddProduit();
+                var valLi = paramValue(listIngred,"ingred_val",this.value);
+                var hashLi = paramValue(valLi,"hash_ingred",this.value.hashCode());
+                $('#content_produit_description_id').append(hashLi);
+            }else {
+                $("#"+this.value.hashCode()).remove();
+            }
+    });
     }
-
-
-
 
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
-    $("#select_ingredient_id").each(function() {
-        var checkboxes = $(this).find("input:checkbox");
-        checkboxes.each(function() {
-            var checkbox = $(this);
-            // Highlight pre-selected checkboxes
-            if (checkbox.prop("checked"))
-                checkbox.parent().addClass("select_ingredient-on");
-
-            // Highlight checkboxes that the user selects
-            checkbox.click(function() {
-                if (checkbox.prop("checked"))
-                    checkbox.parent().addClass("select_ingredient-on");
-                else
-                    checkbox.parent().removeClass("select_ingredient-on");
-            });
-        });
-    });
 
     $('#check_all_id').click(function() {
-        if (this.checked) {
-            $('.ingred_checkbox').each(function() {
-                this.checked = true;
-            });
-        } else {
+        if (!this.checked) {
             $('.ingred_checkbox').each(function() {
                 this.checked = false;
+                $('#content_produit_description_id').empty();
             });
         }
     });
+    
 }
 
 
