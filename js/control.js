@@ -184,6 +184,26 @@ function onTemplateLoadStart() {
     connexion.getEntreprise(onTemplateLoadFinish);
 }
 function onTemplateLoadFinish(entreprise) {
+    getConnexion().getParametreApplicationByNom(function(paramapp, param) {
+        if (paramapp.getValeur_parametre() == true) {
+//            console.log("use cache");
+        } else {
+//            var webappCache = window.applicationCache;
+//console.log(webappCache);
+//            webappCache.addEventListener("updateready", updateCache, false);
+//             webappCache.update();
+//            webappCache.swapCache();
+           
+            //,njt
+//            updateCache();
+//            function updateCache() {
+//                
+//                alert("Une nouvelle version est disponible.\nVeuillez rafraîchir la page pour mettre à jour.");
+//            }
+//            console.log("don't use cache");
+        }
+//        $("html").attr("manifest", "");
+    }, "app.use.cache", null);
     useMenus = entreprise.menus;
     $("#title_app_id").text(entreprise.getNom()); //Name of companie in the title 
     $("#cssToApply").attr('href', './css/' + entreprise.getTheme()); //Show css are choosed 

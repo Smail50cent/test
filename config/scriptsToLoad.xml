@@ -13,6 +13,8 @@
     <script for="data.indexeddb" priority="11">database/indexedDB/indexedDBAccesSousCategorie.js</script>
     <script for="data.indexeddb" priority="12">database/indexedDB/indexedDBAccesTables.js</script>
     <script for="data.indexeddb" priority="14">database/indexedDB/indexedDBAccesTypeCommandes.js</script>
+    <script for="data.indexeddb" priority="15">database/indexedDB/indexedDBAccesParametreApplication.js</script>
+    <script for="data.indexeddb" priority="16">database/indexedDB/indexedDBAccesZoneTables.js</script>
     
     <script for="data.websql">database/webSQL/ConnexionLocalWebSQL.js</script>
     
@@ -46,7 +48,7 @@
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
-    <script for="produit">pages/produit.js</script>
+    <!--script for="produit">pages/produit.js</script-->
     <script for="index">pages/index.js</script>
     <script for="pageConnexionServeur" priority="2">pages/pageConnexionServeur.js</script>
     <script for="pageConnexionServeur" priority="1">popupAuth.js</script>

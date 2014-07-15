@@ -3,6 +3,7 @@ var templates = {};
 templates.getTemplate = function(name) {
     var ret = null;
     var url = "config/template/" + name;
+    $.ajaxSetup({cache: true});
     $.ajax({
         type: "GET",
         url: url,
@@ -12,6 +13,7 @@ templates.getTemplate = function(name) {
             ret = text;
         }
     });
+    $.ajaxSetup({cache: false});
     return ret;
 };
 templates.getIHMTemplate = function(name) {

@@ -50,6 +50,7 @@ function ConnexionServer() {
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
         } else {
+            $.ajaxSetup({ cache: false});
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
                 type: 'GET',
@@ -566,10 +567,11 @@ function ConnexionServer() {
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
                     paramapps.push(paramapp);
                 }
-                method(paramapps, param);
+                if(method!=null){
+                    method(paramapps, param);
+                }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

@@ -3,7 +3,7 @@
     <page key="index">index.php</page>
     <page key="carte">carte.php</page>
     <page key="paramCommande">paramCommande.php</page>
-    <page key="choixEnvoieCuisine">./choixEnvoieCuisine.php</page>
+    <page key="choixEnvoieCuisine">choixEnvoieCuisine.php</page>
     <page key="choixPaimentPersonnes">choixPaimentPersonnes.php</page>
     <page key="reglement">reglement.php</page>
     <page key="pageConnexionServeur">pageConnexionServeur.php</page>
