@@ -31,11 +31,7 @@ class GroupeServiceDataImpl implements GroupeServiceData {
             $groupe->setTelephone($ligne->telephone);
             array_push($liste, $groupe);
         }
-//        if (count($liste) == 1) {
-//            $ret = $liste[0];
-//        } else {
-//            $ret = $liste;
-//        }
+        $ret = $liste;
         return $ret;
     }
 

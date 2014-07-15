@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <variables>
+        <variable name="client.application.etablissement.id">1</variable>
         <variable name="serveur.clientaccess.protocol">http</variable>
         <variable name="serveur.clientaccess.ip">localhost</variable>
         <variable name="serveur.clientaccess.isRootApplication">false</variable>
@@ -45,12 +46,15 @@
         <variable name="serveur.clientaccess.serviceDeleteProduit">deleteProduit</variable>
         <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
+        <variable name="serveur.clientaccess.serviceGetAllEtablissements">etablissement/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetByIdEtablissements">etablissement/getById</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>
         <variable name="tableNameIngredient">ingredients</variable>
         <variable name="tableNameSousCategorie">sousCategories</variable>
         <variable name="tableNameProduit">produits</variable>
+        <variable name="tableNameEtablissements">etablissements</variable>
         <variable name="tableNameMenu">menus</variable>
         <variable name="tableNameModeDeReglement">modesDeReglement</variable>
         <variable name="tableNameTable">tables</variable>

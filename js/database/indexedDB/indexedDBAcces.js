@@ -102,6 +102,15 @@ myStorage.indexedDB.create = function() {
 
         myStorage.indexedDB.addFistTables();
 
+        entitysFinsh[config.getConfig("tableNameEtablissements")] = true;
+        if (db.objectStoreNames.contains(config.getConfig("tableNameEtablissements"))) {
+            var storeReq = db.deleteObjectStore(config.getConfig("tableNameEtablissements"));
+        }
+        var store = db.createObjectStore(config.getConfig("tableNameEtablissements"), {keyPath: "id", autoIncrement: true});
+//        store.createIndex("id", "id", {unique: false});
+        myStorage.indexedDB.addFirstEtablissements();
+
+
         entitysFinsh[config.getConfig("tableNameEntrepriseMaj")] = true;
         if (db.objectStoreNames.contains(config.getConfig("tableNameEntrepriseMaj"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameEntrepriseMaj"));
@@ -283,7 +292,7 @@ myStorage.indexedDB.addFistIngredients = function() {
             }
         },
         error: function(xhr, textStatus, errorThrown) {
-            
+
             showErrorMessage(strings.getString("label.error.connexion.serveur"));
         }
     });

@@ -7,15 +7,15 @@
  */
 class Groupe {
 
-    private $id;
-    private $nom;
-    private $logo;
-    private $style;
-    private $adresseSiege;
-    private $slogan;
-    private $message;
-    private $telephone;
-    private $etablissements;
+    public $id;
+    public $nom;
+    public $logo;
+    public $style;
+    public $adresseSiege;
+    public $slogan;
+    public $message;
+    public $telephone;
+    public $etablissements;
 
     public function getEtablissements() {
         return $this->etablissements;

@@ -81,7 +81,7 @@ function controller(entreprise) {
             break;
         case "paramCommande":
             method = function() {
-                var useComptes = entreprise.getUseComptes();
+//                var useComptes = entreprise.getUseComptes();
                 var tables;
                 if (getParameterByName("table") == "") {
                     tables = null;
@@ -114,7 +114,7 @@ function controller(entreprise) {
             break;
         case "gestionProduit":
             method = function() {
-                    onLoadGP();
+                onLoadGP();
             };
             break;
         case "choixEnvoieCuisine":
@@ -162,7 +162,6 @@ function controller(entreprise) {
             };
             break;
         default :
-
             nom = "index";
             method = function() {
                 onIndexLoaded();
@@ -170,7 +169,6 @@ function controller(entreprise) {
             hideLoading();
             break;
     }
-
     scripts.loadScripts(nom, method);
 }
 // TEST IF THE CACHE ARE UP TO DATE
@@ -181,35 +179,40 @@ if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 }
 function onTemplateLoadStart() {
     var connexion = getConnexion();
-    connexion.getEntreprise(onTemplateLoadFinish);
+    connexion.getEtablissementById(onTemplateLoadFinish, parseInt(config.getConfig("client.application.etablissement.id")), null);
 }
-function onTemplateLoadFinish(entreprise) {
+function onTemplateLoadFinish(etablissement) {
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
         if (paramapp.getValeur_parametre() == true) {
-//            console.log("use cache");
         } else {
-//            var webappCache = window.applicationCache;
-//console.log(webappCache);
-//            webappCache.addEventListener("updateready", updateCache, false);
-//             webappCache.update();
-//            webappCache.swapCache();
-           
-            //,njt
-//            updateCache();
-//            function updateCache() {
-//                
-//                alert("Une nouvelle version est disponible.\nVeuillez rafraîchir la page pour mettre à jour.");
-//            }
-//            console.log("don't use cache");
         }
-//        $("html").attr("manifest", "");
     }, "app.use.cache", null);
-    useMenus = entreprise.menus;
-    $("#title_app_id").text(entreprise.getNom()); //Name of companie in the title 
-    $("#cssToApply").attr('href', './css/' + entreprise.getTheme()); //Show css are choosed 
-    $("#header_right_logo_slogan").text(entreprise.getSlogan());
-    $("#header_left_logo_message_id").text(entreprise.getMessage());
-    controller(entreprise);
+    getConnexion().getParametreApplicationByNom(function(paramapp, param) {
+        useMenus = paramapp.getValeur_parametre;
+    }, "gestionDesUtilisateurs", null);
+    if (etablissement.nom != null) {
+        $("#title_app_id").text(etablissement.nom);
+    } else {
+        $("#title_app_id").text(etablissement.groupe.nom);
+    }
+    if (etablissement.style != null) {
+        $("#cssToApply").attr('href', './css/' + etablissement.style + ".css");
+    } else {
+        console.log("null");
+        $("#cssToApply").attr('href', './css/' + etablissement.groupe.style + ".css");
+    }
+    if (etablissement.slogan != null) {
+        $("#header_right_logo_slogan").text(etablissement.slogan);
+    } else {
+        console.log("null");
+        $("#header_right_logo_slogan").text(etablissement.groupe.slogan);
+    }
+    if (etablissement.message != null && etablissement.message != "") {
+        $("#header_left_logo_message_id").text(etablissement.message);
+    } else {
+        $("#header_left_logo_message_id").text(etablissement.groupe.message);
+    }
+    controller(etablissement);
     choosePrintFooter();
 }
 /**

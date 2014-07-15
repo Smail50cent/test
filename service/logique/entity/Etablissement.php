@@ -7,14 +7,23 @@
  */
 class Etablissement {
 
-    private $id;
-    private $nom;
-    private $logo;
-    private $style;
-    private $adresseEtab;
-    private $telephone;
-    private $message;
-    private $groupe;
+    public $id;
+    public $nom;
+    public $logo;
+    public $style;
+    public $adresseEtab;
+    public $telephone;
+    public $message;
+    public $groupe;
+    public $slogan;
+
+    public function getSlogan() {
+        return $this->slogan;
+    }
+
+    public function setSlogan($slogan) {
+        $this->slogan = $slogan;
+    }
 
     public function getGroupe() {
         return $this->groupe;

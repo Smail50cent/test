@@ -85,4 +85,7 @@ function ConnexionLocalWebSQL() {
     this.getAllTypeCommandes = function(method, param) {
         console.log("TO DO");
     };
+    this.getEtablissementById = function(method, id, param) {
+        console.log("TO DO");
+    };
 }
