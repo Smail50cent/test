@@ -29,6 +29,8 @@ include_once $path . 'service/logique/ReservationServiceImpl.php';
 include_once $path . 'service/logique/MajTablesServiceImpl.php';
 include_once $path . 'service/logique/ZoneTableServiceImpl.php';
 include_once $path . 'service/logique/TypeCommandeServiceImpl.php';
+include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
+include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -56,7 +58,29 @@ class LogiqueFactory {
     private static $majtablesSrv = null;
     private static $zoneTableSrv = null;
     private static $typeCommandeSrv = null;
+    private static $etablissementSrv = null;
+    private static $groupeSrv = null;
 
+    /**
+     * 
+     * @return EtablissementService
+     */
+    public static function getGroupeService() {
+        if (LogiqueFactory::$groupeSrv == null) {
+            LogiqueFactory::$groupeSrv = new GroupeServiceImpl();
+        }
+        return LogiqueFactory::$groupeSrv;
+    }
+    /**
+     * 
+     * @return EtablissementService
+     */
+    public static function getEtablissementService() {
+        if (LogiqueFactory::$etablissementSrv == null) {
+            LogiqueFactory::$etablissementSrv = new EtablissementServiceImpl();
+        }
+        return LogiqueFactory::$etablissementSrv;
+    }
     /**
      * 
      * @return TypeCommandeService
