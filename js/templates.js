@@ -214,8 +214,11 @@ function getPage1ShowAddProduit(){
     return templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
 }
 function getPageIngredAddProduit(){
-    return templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
+    return templates.getTemplate("gestion/produit/ingredOpt_ajouter_produit");
 }
 function getIngredCheckBoxAddProduit(){
-    return templates.getTemplate("gestion/produit/ingredient_checkbox_ajouter_produit");
+    return templates.getTemplate("gestion/produit/ingredOpt_checkbox_ajouter_produit");
+}
+function getIngredLiAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredOpt_li_ajouter_produit");
 }
