@@ -120,4 +120,5 @@ function ConnexionLocalIndexedDB() {
         var id = Math.floor((Math.random() * 1000000) + 1);
         method(id, param);
     };
+    
 }

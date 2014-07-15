@@ -756,7 +756,7 @@ function addTicketItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
     item = paramValue(item, "qopProduiID", qop.getProduit().getId());
-    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().id_sousCategorie.tauxTva)));
+    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().tauxTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
     $('#recapitulatif_liste_id').append(item);
@@ -764,7 +764,6 @@ function addTicketItem(qop) {
 function addMenuItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
-//    item = paramValue(item, "qopProduiID", qop.getProduit().getId());
     item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().getPrix(), qop.getProduit().tauxDeTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());

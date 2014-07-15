@@ -50,7 +50,7 @@ function ConnexionServer() {
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
         } else {
-            $.ajaxSetup({ cache: false});
+            $.ajaxSetup({cache: false});
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
                 type: 'GET',
@@ -567,7 +567,7 @@ function ConnexionServer() {
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
                     paramapps.push(paramapp);
                 }
-                if(method!=null){
+                if (method != null) {
                     method(paramapps, param);
                 }
             },

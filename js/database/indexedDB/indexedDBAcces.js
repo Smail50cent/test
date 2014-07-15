@@ -4,7 +4,7 @@ myStorage.indexedDB.onerror = function(e) {
     showErrorMessage(e);
 };
 var delay = 0;//temps d'attente avant d'accèder à la base de données 
-var delayOnupgradeneeded = 0;
+var delayOnupgradeneeded = 1000;
 var indexedDB;
 var IDBTransaction;
 var IDBKeyRange;
@@ -58,7 +58,7 @@ function verifyFinish() {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameParamApplication")] == true) {
         finish = true;
-    }else if (entitysFinsh[config.getConfig("tableNameZoneTables")] == true) {
+    } else if (entitysFinsh[config.getConfig("tableNameZoneTables")] == true) {
         finish = true;
     }
     return finish;
@@ -115,9 +115,9 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameIngredient"), {keyPath: "id", autoIncrement: true});
         myStorage.indexedDB.addFistIngredients();
-        
+
         entitysFinsh[config.getConfig("tableNameCategorie")] = true;
-        myStorage.indexedDB.addFistIngredients();
+
         if (db.objectStoreNames.contains(config.getConfig("tableNameCategorie"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameCategorie"));
         }
@@ -173,7 +173,7 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameZoneTables"), {keyPath: "id", autoIncrement: true});
         myStorage.indexedDB.addFirstZoneTables();
-        
+
         processOnupgradeneeded = false;
         delay = 0;
     };
@@ -278,10 +278,12 @@ myStorage.indexedDB.addFistIngredients = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
+                console.log(data);
                 addIng(data[i]);
             }
         },
         error: function(xhr, textStatus, errorThrown) {
+            
             showErrorMessage(strings.getString("label.error.connexion.serveur"));
         }
     });
