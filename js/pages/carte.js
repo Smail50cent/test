@@ -89,7 +89,7 @@ function onCarteLoadFinish(categories) {
         $("#categorie_sous_cat_" + id).append(item);
     }
 }
-
+var idSousCat="";
 function sousCategorieClicked(idCat, idSousCat) {
     onClickCategorie(idCat);
     if (idSousCat == -2) {

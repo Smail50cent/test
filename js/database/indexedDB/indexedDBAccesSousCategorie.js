@@ -27,7 +27,7 @@ myStorage.indexedDB.getSousCategorieById = function(id, methodToExecuteAfter) {
                 sousCategorie.setTauxTva(result.taux_tva);
                 sousCategorie.setId(result.id);
                 if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
-                    methodToExecuteAfter(e);
+                    methodToExecuteAfter(sousCategorie);
                 }
             };
 
@@ -123,6 +123,101 @@ myStorage.indexedDB.getAllCategories = function(methodToExecuteAfter) {
                 db.close();
             };
             cursorRequest.onerror = myStorage.indexedDB.onerror;
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+};
+
+myStorage.indexedDB.getAllSousCategories = function(methodToExecuteAfter) {
+    window.setTimeout(function() {
+        if (entitysFinsh[config.getConfig("tableNameSousCategorie")] == false) {
+            impl();
+        } else {
+            myStorage.indexedDB.getAllSousCategories(methodToExecuteAfter);
+        }
+    }, delay);
+    function impl() {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_WRITE);
+            var store = trans.objectStore(config.getConfig("tableNameSousCategorie"));
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+            var souscategories = new Array();
+            cursorRequest.onsuccess = function(e) {
+                var souscategorie = new SousCategorie();
+                var result = e.target.result;
+                if (!!result == false) {
+                    return;
+                }
+                souscategorie.setId(result.value.id);
+                souscategorie.setNom(result.value.nom);
+                souscategorie.setPriorite(result.value.priorite);
+                souscategorie.setCategorie(result.value.categorie);
+                souscategorie.setTauxTva(result.value.taux_tva);
+                souscategories.push(souscategorie);
+                result.continue();
+            };
+
+            trans.oncomplete = function(e) {
+                if (methodToExecuteAfter != null) {
+                    methodToExecuteAfter(souscategories);
+                } else {
+                    showErrorMessage("No method in arguments.");
+                }
+                db.close();
+            };
+            cursorRequest.onerror = myStorage.indexedDB.onerror;
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+};
+
+myStorage.indexedDB.getSousCategorieByIdCat = function(methodToExecuteAfter,idCat) {
+    window.setTimeout(function() {
+        if (entitysFinsh[config.getConfig("tableNameSousCategorie")] == false) {
+            impl();
+        } else {
+            myStorage.indexedDB.getSousCategorieByIdCat(methodToExecuteAfter,idCat);
+        }
+    }, delay);
+    function impl() {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_ONLY);
+            var store = trans.objectStore(config.getConfig("tableNameSousCategorie"));
+            var request = store.index("categorie").get(idCat);
+            var souscategories = new Array();
+            request.onsuccess = function(e) {
+                var souscategorie = new SousCategorie();
+                var result = e.target.result;
+                if (!!result == false) {
+                    return;
+                }
+                souscategorie.setId(result.value.id);
+                souscategorie.setNom(result.value.nom);
+                souscategorie.setPriorite(result.value.priorite);
+                souscategorie.setCategorie(result.value.categorie);
+                souscategorie.setTauxTva(result.value.taux_tva);
+                souscategories.push(souscategorie);
+                result.continue();
+
+                if (methodToExecuteAfter != null) { //Nous avons besoin de l'executer.
+                    methodToExecuteAfter(souscategories);
+                }
+            };
+
+            trans.oncomplete = function(e) {
+                db.close();
+            };
+
+            request.onerror = function(e) {
+                showErrorMessage("Error Getting: ", e);
+            };
         };
         request.onerror = myStorage.indexedDB.onerror;
     }
