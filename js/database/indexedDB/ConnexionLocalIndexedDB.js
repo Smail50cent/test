@@ -10,6 +10,15 @@ function ConnexionLocalIndexedDB() {
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllCategories(onCarteLoadFinish);
     };
+    this.getSousCategoriesForContentSousCategorie = function(onCarteLoadFinish) {
+        myStorage.indexedDB.getAllSousCategories(onCarteLoadFinish);
+    };
+    this.getSousCategorieByIdCat = function(onCarteLoadFinish,idCat) {
+        myStorage.indexedDB.getSousCategorieByIdCat(onCarteLoadFinish,idCat);
+    };
+    this.getSousCategorieById = function(id, onCarteLoadFinish) {
+        myStorage.indexedDB.getSousCategorieById(id, onCarteLoadFinish);
+    };
     this.getSousCategoriesByIdCategorieForContentSousCategorie = function(functionToLoad, idsousCat, idCat) {
         myStorage.indexedDB.getSousCategorieByIdForContentSousCat(functionToLoad, idsousCat, idCat);
     };
@@ -27,6 +36,9 @@ function ConnexionLocalIndexedDB() {
     };
     this.getIngredientById = function(method, id, param) {
         myStorage.indexedDB.getIngredientById(method, id, param);
+    };
+    this.getAllIngredients = function(method) {
+        myStorage.indexedDB.getAllIngredients(method);
     };
     this.getProduitByIdGeneric = function(method, id, param) {
         myStorage.indexedDB.getProduitByIdGeneric(method, id, param);

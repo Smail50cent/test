@@ -1,1 +1,1 @@
-<ul id="content_global_zone__idcat_{idCategorie}" class="content_globlal_zone content_globlal_zone_structure content_globlal_zone_personalize"></ul>
+<ul id="content_global_zone__idcat_{idCategorie}" class="content_globlal_zone content_globlal_zone_structure content_globlal_zone_personalize" categorieId="{idCategorie}"></ul>

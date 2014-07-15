@@ -27,6 +27,7 @@
         </ul>
     </div>
     <div id="confirm_dialog_produit_id" class="confirm_dialog_produit"></div>
+    <div id="dialog_add_produit_id" class="dialog_add_produit"></div>
 </div>
 <!--div id="recapitulatif_commande_id" class="recapitulatif_commande recapitulatif_commande_structure recapitulatif_commande_personalize"></div-->
 </div>
@@ -56,6 +57,21 @@
     }
     .content_structure ul {
         margin-top: -65px;
+    }
+    .select_ingredient_structure {
+        width:20em;
+        height:15em;
+        border:solid 1px #c0c0c0;
+        overflow:auto;
+    }
+
+    .select_ingredient_structure label {
+        display:block;
+    }
+
+    .select_ingredient-on {
+        color:#ffffff;
+        background-color:#000099;
     }
 
 </style>

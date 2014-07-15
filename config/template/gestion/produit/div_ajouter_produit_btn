@@ -1,0 +1,6 @@
+<li class="produit_cat_structure produit_cat_personalize ">
+    <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
+
+        <a id="link_add_product_id" class="link_add_product" href="#" onclick="addProduct($(this))"> <img src="img/gestion/produit/add_produit.png" width="41" height="41" style="position:center;"> </a>
+    </div>
+</li>

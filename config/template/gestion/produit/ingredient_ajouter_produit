@@ -1,0 +1,6 @@
+
+ <label><input id="check_all_id" type="checkbox" name="option[]" />Tout cocher / décocher</label>
+<div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
+    <label><input type="checkbox" name="option[]" value="1" class="ingred_checkbox"/>Green</label>
+    <label><input type="checkbox" name="option[]" value="2" class="ingred_checkbox"/>Red</label>
+</div>

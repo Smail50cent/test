@@ -199,6 +199,18 @@ function getDivModifProduit(){
 function getDivSuppProduit(){
     return templates.getTemplate("gestion/produit/div_supprimer_produit");
 }
+function getDivAddProduitBtn(){
+    return templates.getTemplate("gestion/produit/div_ajouter_produit_btn");
+}
 function getDivAddProduit(){
     return templates.getTemplate("gestion/produit/div_ajouter_produit");
+}
+function getPage1AddProduit(){
+    return templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
+}
+function getPage1ShowAddProduit(){
+    return templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
+}
+function getPageIngredAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
 }
