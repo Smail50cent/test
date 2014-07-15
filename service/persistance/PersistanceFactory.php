@@ -33,6 +33,7 @@ include_once $path . 'service/persistance/ReservationServiceDataImpl.php';
 include_once $path . 'service/persistance/MajTablesServiceDataImpl.php';
 include_once $path . 'service/persistance/ZoneTableServiceDataImpl.php';
 include_once $path . 'service/persistance/TypeCommandeServiceDataImpl.php';
+include_once $path . 'service/persistance/groupe/GroupeServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -63,10 +64,21 @@ class PersistanceFactory {
     private static $majtablesSrv = null;
     private static $zoneTablesSrv = null;
     private static $typeCommandeSrv = null;
+    private static $groupeSrv = null;
 
     /**
      * 
-     * @return ZoneTableServiceData
+     * @return GroupeServiceData
+     */
+    public static function getGroupeService() {
+        if (PersistanceFactory::$groupeSrv == null) {
+            PersistanceFactory::$groupeSrv = new GroupeServiceDataImpl();
+        }
+        return PersistanceFactory::$groupeSrv;
+    }
+    /**
+     * 
+     * @return TypeCommandeServiceData
      */
     public static function getTypeCommandeService() {
         if (PersistanceFactory::$typeCommandeSrv == null) {
