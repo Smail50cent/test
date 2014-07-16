@@ -40,4 +40,13 @@ class ProduitServiceImpl implements ProduitService {
         $this->produitSrv->DeleteProduit($id);
     }
 
+    public function getByCategorieAndEtablissentAndZone($idcategorie, $idetablissement, $idzone) {
+        $ret;
+        if ($idcategorie != null && $idetablissement != null && $idzone != null) {
+            $ret = $this->produitSrv->getByCategorieAndEtablissentAndZone($idcategorie, $idetablissement, $idzone);
+        } else {
+            $ret = "ERROR";
+        }return $ret;
+    }
+
 }
