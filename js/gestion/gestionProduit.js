@@ -142,9 +142,9 @@ function UncheckAllBoxIngredOpt(id) {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
             });
-        }else {
+        } else {
             $(".ingredOpt_checkbox").each(function() {
-                this.checked = true; 
+                this.checked = true;
             });
         }
     });
@@ -159,9 +159,21 @@ function addOption() {
         for (var i = 0; i < options.length; i++) {
             var checkbox = getIngredCheckBoxAddProduit();
             var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].nom);
-            $('#select_ingredient_id').append(optCB);
+            $('#select_option_id').append(optCB);
+            for (var j = 0; j < options[i].possibilites.length; j++) {
+                console.log(options[i].possibilites[j].nom);
+                var possCB = paramValue(checkbox, "ingredOpt_nom", options[i].possibilites[j].nom);
+                var possId = paramValue(possCB, "id_possib", options[i].id.hashCode());
+                $('#select_possibilite_id').append(possId);
+            }
+
         }
-      UncheckAllBoxIngredOpt("#uncheck_all_option_id");  
+        $('.ingredOpt_checkbox').change(function () {
+            
+            
+        });
+        UncheckAllBoxIngredOpt("#uncheck_all_option_id");
+
     }
 }
 

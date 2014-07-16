@@ -61,12 +61,12 @@
 
         .ui-dialog{
         position:relative !important;
-        width: 50% !important;
+        //width: 50% !important;
         min-width: 275px !important;
         margin: 0 auto !important;
         //top: -17em !important;
         display: block !important;
-        max-width: 350px;
+        //max-width: 350px;
     }
 
 
