@@ -118,30 +118,36 @@ function ingredientPage() {
             $('#select_ingredient_id').append(ingredCB);
         }
 
-        $('.ingredOpt_checkbox').change(function(){
-            if(this.checked) {
+        $('.ingredOpt_checkbox').change(function() {
+            if (this.checked) {
                 var listIngred = getIngredLiAddProduit();
-                var valLi = paramValue(listIngred,"ingred_val",this.value);
-                var hashLi = paramValue(valLi,"hash_ingred",this.value.hashCode());
+                var valLi = paramValue(listIngred, "ingred_val", this.value);
+                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
                 $('#content_produit_description_id').append(hashLi);
-            }else {
-                $("#"+this.value.hashCode()).remove();
+            } else {
+                $("#" + this.value.hashCode()).remove();
             }
-    });
+        });
+        UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
     }
 
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
+}
 
-    $('#check_all_id').click(function() {
+function UncheckAllBoxIngredOpt(id) {
+    $(id).change(function() {
         if (!this.checked) {
-            $('.ingred_checkbox').each(function() {
+            $(".ingredOpt_checkbox").each(function() {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
             });
+        }else {
+            $(".ingredOpt_checkbox").each(function() {
+                this.checked = true; 
+            });
         }
     });
-    
 }
 
 function addOption() {
@@ -149,8 +155,13 @@ function addOption() {
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     getImplOfConnexionLocal().getAllOptions(getOpts);
-    function getOpts(options){
-        //console.log(options);
+    function getOpts(options) {
+        for (var i = 0; i < options.length; i++) {
+            var checkbox = getIngredCheckBoxAddProduit();
+            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].nom);
+            $('#select_ingredient_id').append(optCB);
+        }
+      UncheckAllBoxIngredOpt("#uncheck_all_option_id");  
     }
 }
 
