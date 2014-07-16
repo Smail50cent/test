@@ -13,34 +13,34 @@ function ConnexionServer() {
             }
         });
     };
-    this.haveMAJ = function(method, nomTable, level) {//method("NS");
-        if (isLocalBddSuppored() == false || isMozilla()) {
-            method("NS");
-        } else {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
-                type: 'GET',
-                dataType: 'json',
-                async: true,
-                success: function(data, textStatus, xhr) {
-                    if (method != null && data) {//Nous avons besoin de l'executer.
-                        if (data == false) {
-                            method(data, level);
-                        } else {
-                            if (data.data.length == 0) {
-                                data.data = "NU";
-                            }
-                            method(data.data, data.level);
-                        }
-                    } else {
-                        method(null);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                }
-            });
-        }
+    this.haveMAJ = function(method, nomTable, level) {method("NS");
+//        if (isLocalBddSuppored() == false || isMozilla()) {
+//            method("NS");
+//        } else {
+//            $.ajax({
+//                url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
+//                type: 'GET',
+//                dataType: 'json',
+//                async: true,
+//                success: function(data, textStatus, xhr) {
+//                    if (method != null && data) {//Nous avons besoin de l'executer.
+//                        if (data == false) {
+//                            method(data, level);
+//                        } else {
+//                            if (data.data.length == 0) {
+//                                data.data = "NU";
+//                            }
+//                            method(data.data, data.level);
+//                        }
+//                    } else {
+//                        method(null);
+//                    }
+//                },
+//                error: function(xhr, textStatus, errorThrown) {
+//                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+//                }
+//            });
+//        }
 
     };
     this.getEntreprise = function(methodToExecuteAfter) {
@@ -266,9 +266,11 @@ function ConnexionServer() {
                 }
                 updateLevelOfTable(config.getConfig("tableNameProduit"), level);
             } else if (products == "NS") {
+                var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+                var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
                 $.ajax({
                     url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" +
-                            idcat /*+ "&idetablissement=" + param.idetablissement + "&idzone=" + param.idzone*/,
+                            idcat + "&idetablissement=" + idetablissement + "&idzone=" + idzone,
                     type: 'GET',
                     dataType: 'json',
                     async: true,

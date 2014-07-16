@@ -89,7 +89,7 @@ function onCarteLoadFinish(categories) {
         $("#categorie_sous_cat_" + id).append(item);
     }
 }
-var idSousCat="";
+var idSousCat = "";
 function sousCategorieClicked(idCat, idSousCat) {
     onClickCategorie(idCat);
     if (idSousCat == -2) {
@@ -314,7 +314,7 @@ function lessProduit(id, isTicket) {//qopid or Produitid
  * @param {type} id
  * @returns {undefined}
  */
-var totalReq=0;
+var totalReq = 0;
 var curentReq = 0;
 var idmenuCur = "";
 function detailMenu(id) {
@@ -336,12 +336,12 @@ function detailMenu(id) {
         $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close menu_content_add_button_structure menu_content_add_button_personalize");
         var connexion = getConnexion();
         connexion.getMenuByIdForDetailMenu(showWithMenuDataById, id);//BDD
-        
+
         function showWithMenuDataById(menu) {
             $("#choose_menu_items_id").html("");
             var produits = menu.getProduits();
             totalReq = produits.length;
-            curentReq=0;
+            curentReq = 0;
             for (var i = 0; i < produits.length; i++) {
                 var connexion = getConnexion();
                 var isexecute = false;
@@ -356,7 +356,7 @@ function detailMenu(id) {
                         return 1;
                     return 0;
                 }
-                
+
                 produits.sort(compare);
                 productsInMenu = produits;
                 productsChoosecInMenu = clone(produits); //Clone var
@@ -589,7 +589,7 @@ function printProduits(index) {
             var htmlMenu = getItemListeMenu();
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
-                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());                
+                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
                 var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
                 itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());
@@ -600,7 +600,9 @@ function printProduits(index) {
     }
     connexion.getCategoriesForContentCategorie(printSlides);
     var derniere = "";
-    function printSlides(categories) { 
+    function printSlides(categories) {
+        var lenToGo=categories.length;
+        var lenCurrent=0;
         for (var i = 0; i < categories.length; i++) {
             var categorie = categories[i];
             if (i + 1 == categories.length) {
@@ -620,39 +622,43 @@ function printProduits(index) {
             var htmlContentProduit = getContentProduit();
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
-            function printProduitByCategorie(produits) {                
-                var quantity = "+";
+            function printProduitByCategorie(produits) {
+                var quantity = "+";lenCurrent++;
                 //console.log(produits[0]);
-                var categorie = produits[0].id_categorie;
-                try {
-                    var qops = currentTicket.getQuantityOfProduct();
-                    for (j = 0; j < qops.length; j++) {
-                        var qop = currentTicket.getQuantityOfProduct()[j];
-                        if (qop.getProduit().getId() == produit.getId()) {
-                            quantity = qop.getQuantity();
+                if (produits.length != 0) {
+                    var categorie = produits[0].id_categorie;
+                    try {
+                        var qops = currentTicket.getQuantityOfProduct();
+                        for (j = 0; j < qops.length; j++) {
+                            var qop = currentTicket.getQuantityOfProduct()[j];
+                            if (qop.getProduit().getId() == produit.getId()) {
+                                quantity = qop.getQuantity();
+                            }
                         }
+                    } catch (e) {
+                        //console.log("pas de ticket");
                     }
-                } catch (e) {
-                    //console.log("pas de ticket");
-                }
-                var htmlProduitItem = getContentProduitItem();
-                for (var x = 0; x < produits.length; x++) {
-                    var produit = produits[x];
-                    var itemProduit = htmlProduitItem;
-                    itemProduit = paramValue(itemProduit, "produitId", produit.getId());
-                    itemProduit = paramValue(itemProduit, "categorieId", categorie.getId());
-                    if (produit.id_sousCategorie instanceof  Object) {
-                        itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie().id);
-                    } else {
-                        itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
+                    var htmlProduitItem = getContentProduitItem();
+                    for (var x = 0; x < produits.length; x++) {
+                        var produit = produits[x];
+                        var itemProduit = htmlProduitItem;
+                        itemProduit = paramValue(itemProduit, "produitId", produit.getId());
+                        itemProduit = paramValue(itemProduit, "categorieId", categorie.getId());
+                        if (produit.id_sousCategorie instanceof  Object) {
+                            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie().id);
+                        } else {
+                            itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
+                        }
+                        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
+                        itemProduit = paramValue(itemProduit, "quantity", quantity);
+                        itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
+                        itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
+                        $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
                     }
-                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
-                    itemProduit = paramValue(itemProduit, "quantity", quantity);
-                    itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
-                    itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
-                    $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
+                    
                 }
-                if (derniere != "" && categorie.getId() == derniere) {
+
+                if (lenCurrent == lenToGo) {
                     //si on a fini de charger les produits on charge les scripts de swipe
                     scripts.loadScripts("swipe");
                     hideLoading();
@@ -1170,7 +1176,7 @@ function validerCommande() {
         }
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
-        } 
+        }
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
