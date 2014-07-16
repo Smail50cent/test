@@ -10,7 +10,7 @@ function onReglementLoadStart(prix) {
     connexion.getAllModesDeReglement(onReglementLoadFinish, null);
 }
 
-function onReglementLoadFinish(modeDeReglements, param) {
+function onReglementLoadFinish(modeDeReglements, param) {console.log(modeDeReglements);
     var html = getItemListeReglement();
     for (var i = 0; i < modeDeReglements.length; i++) {
         var itemHtml = html;

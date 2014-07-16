@@ -13,6 +13,7 @@ class Prodtest {
     public $souscategorie;
     public $options; //array
     public $lienAssociationProduitPrix; // ARRAY
+    public $ingredients; // ARRAY
     public $produitSimple;
     public $familleComptable;
     public $tva;
@@ -87,6 +88,14 @@ class Prodtest {
 
     public function setTva($tva) {
         $this->tva = $tva;
+    }
+
+    public function getIngredients() {
+        return $this->ingredients;
+    }
+
+    public function setIngredients($ingredients) {
+        $this->ingredients = $ingredients;
     }
 
 

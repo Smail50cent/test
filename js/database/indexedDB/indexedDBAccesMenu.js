@@ -1,12 +1,12 @@
 myStorage.indexedDB.getMenuByIdForDetailMenu = function(methodToExecuteAfter, idmenu) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameMenu")] == false) {
-            impl();
+            impl(methodToExecuteAfter, idmenu);
         } else {
-            myStorage.indexedDB.getMenuByIdForDetailMenu(methodToExecuteAfter);
+            myStorage.indexedDB.getMenuByIdForDetailMenu(methodToExecuteAfter, idmenu);
         }
     }, delay);
-    function impl() {
+    function impl(methodToExecuteAfter, idmenu) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -16,7 +16,7 @@ myStorage.indexedDB.getMenuByIdForDetailMenu = function(methodToExecuteAfter, id
             var request = store.get(idmenu);
             request.onsuccess = function(e) {
                 var result = e.target.result;
-                var menu = new Menu();
+                var menu = new Menu();console.log(result);
                 menu.setNom(result.nom);
                 menu.setId(result.id);
                 menu.setPrix(result.prix);
@@ -64,7 +64,7 @@ myStorage.indexedDB.getAllMenuForDetailMenu = function(methodToExecuteAfter) {
                 var menu = new Menu();
                 menu.setNom(result.value.nom);
                 menu.setId(result.value.id);
-                menu.setPrix(parseInt(result.value.prix));
+                menu.setPrix(result.value.prix);
                 menu.setProduits(result.value.produits);
                 menu.setTauxDeTva(result.value.tauxDeTva);
                 menus.push(menu);
@@ -106,7 +106,7 @@ myStorage.indexedDB.getMenuById = function(methodToExecuteAfter, idmenu, param) 
                 menu.setNom(result.nom);
                 menu.setId(result.id);
                 menu.setTauxDeTva(result.tauxDeTva);
-                menu.setPrix(parseFloat(result.prix));
+                menu.setPrix(result.prix);
                 menu.setProduits(result.produits);
                 if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
                     methodToExecuteAfter(menu, param);

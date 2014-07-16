@@ -1,9 +1,9 @@
-<li class="produitcat{categorieId}_sscat{sousCategorieId} produit{produitId} produit_cat_structure produit_cat_personalize " >
+<li class="produitcat{categorieId}_sscat{sousCategorieId} produit{produitId} produit_cat_structure produit_cat_personalize " produitid="{produitId}" >
     <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
-        <div id="content_produit_zone_left_id" class="content_produit_zone_left content_produit_zone_left_structure content_produit_zone_left_personalize">
+        <div id="content_produit_zone_left_id" class="content_produit_zone_left content_produit_zone_left_structure content_produit_zone_left_personalize" >
             <div onclick="lessProduit({produitId},false);" id="content_produit_btn_left_id_{produitId}" class="content_produit_btn_left content_produit_btn_left_structure content_produit_btn_left_personalize">-</div>
         </div> 
-        <div id="content_produit_zone_right_id" class="content_produit_zone_right content_produit_zone_right_structure content_produit_zone_right_personalize">
+        <div id="content_produit_zone_right_id" class="content_produit_zone_right content_produit_zone_right_structure content_produit_zone_right_personalize" >
             <div class="btn_more__left btn_more__left_structure btn_more__left_personalize"> 
                 <div onclick="addProduit({produitId},false);" type="button" id="content_produit_btn_right_id_{produitId}"  class="content_produit_btn_right content_produit_btn_right_structure content_produit_btn_right_personalize">{quantity}</div>
             </div>

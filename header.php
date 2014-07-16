@@ -1,4 +1,5 @@
 <!doctype html>
+<!--html manifest="site.manifest"-->
 <html>
     <head>
         <title id="title_app_id" ></title>
@@ -10,8 +11,8 @@
         <link rel="stylesheet" href="./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css" type="text/css">
         <link  rel="stylesheet" type="text/css" href="./css/appli_caisse_structure.css">
         <link id="cssToApply" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="./js/lib/jquery.js" ></script>
-        <script type="text/javascript" src="./js/scripts.js"></script>
+        <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>
+        <script type="text/javascript" src="./js/scripts.js" defer></script>
     </head>
     <body>
         <div id="header_id" class="header header_structure header_personalize">
@@ -22,7 +23,6 @@
                     <p id="header_left_logo_message_id" class="header_left_logo_message header_left_logo_message_structure header_left_logo_message_personalize">Gastronomie provencale</p>
                 </div>
             </div>
-            <!--<div id="header_left_id2" class="header_left"></div>-->
             <div id="header_right_id" class="header_right header_right_structure header_right_personalize">
                 <div id="header_right_logo_id" class="header_right_logo header_right_logo_structure header_right_logo_personalize header_text_bottom header_text_bottom_structure header_text_bottom_personalize">
                     <div style="margin-right: 0px;" id="header_right_isconnced_id" class="header_right_isconnced header_right_isconnced_structure header_right_isconnced_personalize"></div>

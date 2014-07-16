@@ -1,4 +1,48 @@
 function ConnexionServer() {
+    this.getMajTable = function(conftableName) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+//                console.log("Table : ", conftableName, " level : ", data.level);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.haveMAJ = function(method, nomTable, level) {
+        if (isLocalBddSuppored() == false || isMozilla()) {
+            method("NS");
+        } else {
+            $.ajax({
+                url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success: function(data, textStatus, xhr) {
+                    if (method != null && data) {//Nous avons besoin de l'executer.
+                        if (data == false) {
+                            method(data, level);
+                        } else {
+                            if (data.data.length == 0) {
+                                data.data = "NU";
+                            }
+                            method(data.data, data.level);
+                        }
+                    } else {
+                        method(null);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                }
+            });
+        }
+
+    };
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
         var updated = false;
@@ -6,6 +50,7 @@ function ConnexionServer() {
         if (isLocalBddSuppored() == false || isMozilla()) {
             pullNewData(methodToExecuteAfter);
         } else {
+            $.ajaxSetup({cache: false});
             $.ajax({
                 url: getServicePath("serveur.clientaccess.serviceGetEntrepriseMaj"),
                 type: 'GET',
@@ -129,6 +174,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
+                curentReq++;
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
@@ -144,8 +190,10 @@ function ConnexionServer() {
                 produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produits[i] = produit;
                 produitsInMenuLoaded.push(produit);
-                if (method != null && isexecute == true) {//Nous avons besoin de l'executer.
-                    method(produits);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    if (curentReq == produits.length) {
+                        method(produits);
+                    }
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -180,38 +228,81 @@ function ConnexionServer() {
         });
     };
     this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
-
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data, textStatus, xhr) {
+        var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
+        this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
+        function allprod(products, level) {
+            if (products instanceof Object || products instanceof Array) {
                 var produits = new Array();
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < products.length; i++) {
                     var produit = new Produit();
-                    produit.setNom(data[i].nom);
-                    produit.setId(data[i].id);
+                    produit.setNom(products[i].nom);
+                    produit.setId(products[i].id);
+                    produit.setTauxTva(products[i].tauxTva);
                     var categorie = new Categorie();
-                    categorie.setNom(data[i].categorie.nom);
-                    categorie.setId(data[i].categorie.id);
-                    categorie.setPriorite(data[i].categorie.priorite);
-                    categorie.setSousCategorie(data[i].categorie.souscategorie);
+                    categorie.setNom(products[i].categorie.nom);
+                    categorie.setId(products[i].categorie.id);
+                    categorie.setPriorite(products[i].categorie.priorite);
+                    categorie.setSousCategorie(products[i].categorie.souscategorie);
                     produit.setCategorie(categorie);
-                    produit.setSousCategorie(data[i].souscategorie);
-                    produit.setAssociationPrixProduit(data[i].associationPrixProduit);
-                    produit.setIdsIngredients(data[i].ingredients);
-                    produit.setOptions(data[i].options);
+                    produit.setSousCategorie(products[i].souscategorie);
+                    produit.setAssociationPrixProduit(products[i].associationPrixProduit);
+                    produit.setIdsIngredients(products[i].ingredients);
+                    produit.setOptions(products[i].options);
+                    produit.setLevel(products[i].level);
+                    var level = products[i].level;
                     produits.push(produit);
                 }
-                if (method != null) {//Nous avons besoin de l'executer.
-                    method(produits);
+                var countProduitHaveUpdate = 0;
+                for (var i = 0; i < products.length; i++) {
+                    getImplOfConnexionLocal().updateProduit(produitup, products[i]);
+                    function produitup(prods) {
+                        countProduitHaveUpdate++;
+                        if (countProduitHaveUpdate == products.length) {
+                            if (method != null) {
+                                method(getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat));
+                            }
+                        }
+                    }
                 }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                updateLevelOfTable(config.getConfig("tableNameProduit"), level);
+            } else if (products == "NS") {
+                $.ajax({
+                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success: function(data, textStatus, xhr) {
+                        var produits = new Array();
+                        for (var i = 0; i < data.length; i++) {
+                            var produit = new Produit();
+                            produit.setNom(data[i].nom);
+                            produit.setId(data[i].id);
+                            produit.setTauxTva(data[i].tauxTva);
+                            var categorie = new Categorie();
+
+                            categorie.setNom(data[i].categorie.nom);
+                            categorie.setId(data[i].categorie.id);
+                            categorie.setPriorite(data[i].categorie.priorite);
+                            categorie.setSousCategorie(data[i].categorie.souscategorie);
+                            produit.setCategorie(categorie);
+                            produit.setSousCategorie(data[i].souscategorie);
+                            produit.setAssociationPrixProduit(data[i].associationPrixProduit);
+                            produit.setIdsIngredients(data[i].ingredients);
+                            produit.setOptions(data[i].options);
+                            produits.push(produit);
+                        }
+                        if (method != null) {//Nous avons besoin de l'executer.
+                            method(produits);
+                        }
+                    },
+                    error: function(xhr, textStatus, errorThrown) {
+                        showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                    }
+                });
+            } else {
+                getImplOfConnexionLocal().getProduitByIdCategorieForPrintProduits(method, idcat);
             }
-        });
+        }
     };
     this.getIngredientById = function(method, id, param) {
         $.ajax({
@@ -242,6 +333,7 @@ function ConnexionServer() {
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
+                produit.setTauxTva(data.tauxTva);
                 var categorie = new Categorie();
                 categorie.setNom(data.categorie.nom);
                 categorie.setId(data.categorie.id);
@@ -334,7 +426,6 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-//                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -347,7 +438,6 @@ function ConnexionServer() {
             data: {ticket: monTicket},
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log(data);
                 data = JSON.parse(data);
                 setLocalStorageValue("id.last.created.ticket", data.id);
                 if (method != null) {
@@ -380,7 +470,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllParamForms = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamForms"),
@@ -411,7 +500,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllAttributsComptes = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllAttributsComptes"),
@@ -436,7 +524,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAttributCompte") + "?id_form=" + id_form + "&valeur_champ=\"" + valeur_champ + "\"&defaut=" + defaut + "&id_compte=" + id_compte,
@@ -450,7 +537,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addCompte = function(method, password, id_role, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddCompte"),
@@ -461,12 +547,11 @@ function ConnexionServer() {
                 method(data, param);
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
+//                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
-
     this.getAllParamApps = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
@@ -482,15 +567,15 @@ function ConnexionServer() {
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
                     paramapps.push(paramapp);
                 }
-                method(paramapps, param);
+                if (method != null) {
+                    method(paramapps, param);
+                }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
-
     this.getCompteById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetCompteById") + "?id=" + id,
@@ -511,7 +596,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAttributCompteByIdCompte = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAttributCompteByIdCompte") + "?id_compte=" + id,
@@ -596,6 +680,7 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data[i].produit.nom);
                         produit.setId(data[i].produit.id);
+                        produit.setTauxTva(data[i].produit.tauxTva);
                         produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
                         var categorie = new Categorie();
                         categorie.setNom(data[i].produit.categorie.nom);
@@ -616,6 +701,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -635,6 +721,7 @@ function ConnexionServer() {
                         var produit = new Produit();
                         produit.setNom(data[i].produit.nom);
                         produit.setId(data[i].produit.id);
+                        produit.setTauxTva(data[i].produit.tauxTva);
                         produit.setAssociationPrixProduit(data[i].produit.associationPrixProduit);
                         var categorie = new Categorie();
                         categorie.setNom(data[i].produit.categorie.nom);
@@ -667,12 +754,12 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
-                var parametreApplication=null;
+                var parametreApplication = null;
                 if (data != null) {
                     parametreApplication = new ParametreApplication();
                     parametreApplication.setId(data.id);
                     parametreApplication.setNomParametre(data.nom_parametre);
-                    parametreApplication.setValeurParametre(data.valeur_parametre);
+                    parametreApplication.setValeurParametre(parseInt(data.valeur_parametre));
                 }
                 if (method != null) {
                     method(parametreApplication, param);
@@ -683,7 +770,165 @@ function ConnexionServer() {
             }
         });
     };
+    this.getReservationDisponibleWhereDateNull = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetDateReservationWhereDateNull"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste = new Array();
+                var reservationDateDispo = null;
+                if (data != null) {
+                    if (data instanceof Array) {
+                        for (var i = 0; i < data.length; i++) {
+                            reservationDateDispo = new ReservationDateDisponible(data[i].id, data[i].date, data[i].heureDebut, data[i].heureFin, data[i].indisponible);
+                            liste.push(reservationDateDispo);
+                        }
+                    } else {
+                        reservationDateDispo = new ReservationDateDisponible(data.id, data.date, data.heureDebut, data.heureFin, data.indisponible);
+                        liste.push(reservationDateDispo);
+                    }
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllZoneTables = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllZoneTables"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste = new Array();
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        var tables = new Array();
+                        for (var j = 0; j < data [i].tables.length; j++) {
+                            tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
+                        }
+                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables));
+                    }
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.deleteProduit = function(id) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
+            type: 'POST',
+            dataType: 'json',
+            data: {ID: id},
+            async: true,
+            success: function(data, textStatus, xhr) {
+                console.log("ON DELETE SUCCESS !");
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllTypeCommandes = function(method, param) {
+        if (param != null) {
+            if (param.impllocal == false) {
+                pullWebServiceData(method, param);
+            } else {
+                majTest(method, param);
+            }
+        } else {
+            majTest(method, param);
+        }
+        function majTest(method, param) {
+            var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameTypeCommande"));
+            getConnexionServeur().haveMAJ(allprod, config.getConfig("tableNameTypeCommande"), clientLevel);
+            function allprod(typeCommande, level) {
+                if (typeCommande instanceof Array || typeCommande instanceof Object) {
+                    var typeCommandes = new Array();
+                    if (typeCommande instanceof Array) {
+                        for (var i = 0; i < typeCommande.length; i++) {
+                            typeCommandes.push(new TypeCommande(typeCommande[i].id, typeCommande[i].label, typeCommande[i].labelMenu, typeCommande[i].isActif, typeCommande[i].idInPageHtml));
+                        }
+                    } else {
+                        typeCommandes.push(new TypeCommande(typeCommande.id, typeCommande.label, typeCommande.labelMenu, typeCommande.isActif, typeCommande.idInPageHtml));
+                    }
+
+                    var countProduitHaveUpdate = 0;
+                    for (var i = 0; i < typeCommandes.length; i++) {
+                        getImplOfConnexionLocal().updateTypeCommande(produitup, typeCommandes[i]);
+                        function produitup(prods) {
+                            countProduitHaveUpdate++;
+                            if (countProduitHaveUpdate == typeCommandes.length) {
+                                if (method != null) {
+                                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+
+                                }
+                            }
+                        }
+                    }
+                    updateLevelOfTable(config.getConfig("tableNameTypeCommande"), level);
+                } else if (typeCommande == "NS") {
+                    pullWebServiceData(method, param);
+                } else if (typeCommande == "NU") {
+                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+                } else {
+                    getImplOfConnexionLocal().getAllTypeCommandes(method, null);
+                }
+            }
+        }
+        function pullWebServiceData(method, param) {
+            $.ajax({
+                url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success: function(data, textStatus, xhr) {
+                    var liste = new Array();
+                    if (data != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
+                        }
+                    }
+                    if (method != null) {
+                        method(liste, param);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                }
+            });
+        }
+    };
+    this.getEtablissementById = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetByIdEtablissements")+"?id="+id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste;
+                if (data != null) {
+                     liste = new Etablissement(data[0].id, data[0].nom, data[0].logo, data[0].style, data[0].adresseEtab, data[0].telephone, data[0].message, data[0].slogan, data[0].groupe);
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
-//this.mAjax = function (){
-//    
-//};
+

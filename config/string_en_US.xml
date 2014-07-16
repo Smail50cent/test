@@ -71,4 +71,7 @@
     <string key="label.menu.favori.select.itemsuggestion">Products suggest</string>
     <string key="label.titre.carte">To map</string>
     <string key="label.where.gestion.user.disable">Covered n°</string>
+    <string key="label.choix.prisedecommande">Place an order now</string>
+    <string key="label.choix.finreservation">Ordering later</string>
+    <string key="label.choix.table.choix.zone.label.option">Area : </string>
 </strings>

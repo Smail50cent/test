@@ -1,11 +1,12 @@
 function getConnexion() {
     if (isConnected) {
-    //if (false) {
+//    if (false) {
         return getConnexionServeur();
     } else {
         if (isLocalBddSuppored()) {
             return getImplOfConnexionLocal();
-        } else {
+        }
+        else {
             if (isMozilla()) {
                 return getConnexionServeur();
             } else {
@@ -83,7 +84,13 @@ function setUpdateLevelOfTable(table, level) {
     setLocalStorageValue(table, level);
 }
 function getUpdateLevelOfTable(table) {
-    return parseInt(getLocalStorageValue(table));
+    var ret = null;
+    if (!isNaN(parseInt(getLocalStorageValue(table)))) {
+        ret = parseInt(getLocalStorageValue(table));
+    } else {
+        ret = null;
+    }
+    return ret;
 }
 function incrementeLevelOfTable(table) {
     var level = getUpdateLevelOfTable(table);
@@ -94,4 +101,7 @@ function incrementeLevelOfTable(table) {
     }
     level += (1);
     setLocalStorageValue(table, level);
+}
+function updateLevelOfTable(table, value) {
+    setLocalStorageValue(table, value);
 }

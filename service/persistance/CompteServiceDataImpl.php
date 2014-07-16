@@ -58,7 +58,7 @@ class CompteServiceDataImpl implements CompteServiceData {
 
     public function addAll($password, $role) {
         $bdd = new ConnexionBDD();
-        $bdd->executeGeneric(" INSERT INTO compte(password,id_role) VALUES('$password','$role') ");
+        return $bdd->executeGeneric(" INSERT INTO compte(password,id_role) VALUES('$password','$role') ");
     }
 
 }

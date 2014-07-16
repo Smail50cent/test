@@ -89,7 +89,7 @@ function onCarteLoadFinish(categories) {
         $("#categorie_sous_cat_" + id).append(item);
     }
 }
-
+var idSousCat="";
 function sousCategorieClicked(idCat, idSousCat) {
     onClickCategorie(idCat);
     if (idSousCat == -2) {
@@ -314,6 +314,8 @@ function lessProduit(id, isTicket) {//qopid or Produitid
  * @param {type} id
  * @returns {undefined}
  */
+var totalReq=0;
+var curentReq = 0;
 var idmenuCur = "";
 function detailMenu(id) {
     if (idmenuCur == "") {
@@ -321,29 +323,28 @@ function detailMenu(id) {
     } else if (id == idmenuCur) {
         $("#choose_menu_item_produits_" + idmenuCur).html("");
         $("#choose_menu_valider_menu_" + idmenuCur).remove();
-        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button");
+        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button menu_content_add_button_structure menu_content_add_button_personalize");
         idmenuCur = "";
     } else if (id != idmenuCur) {
         $("#choose_menu_item_produits_" + idmenuCur).html("");
         $("#choose_menu_valider_menu_" + idmenuCur).remove();
-        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button");
+        $("#menu_content_add_" + idmenuCur).attr("class", "menu_content_add_button menu_content_add_button_structure menu_content_add_button_personalize");
         load(id);
     }
     function load(id) {
         idmenuCur = id;
-        $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close");
+        $("#menu_content_add_" + id).attr("class", ($("#menu_content_add_" + id).attr("class")) + " menu_content_add_button_close menu_content_add_button_structure menu_content_add_button_personalize");
         var connexion = getConnexion();
         connexion.getMenuByIdForDetailMenu(showWithMenuDataById, id);//BDD
+        
         function showWithMenuDataById(menu) {
-
             $("#choose_menu_items_id").html("");
             var produits = menu.getProduits();
+            totalReq = produits.length;
+            curentReq=0;
             for (var i = 0; i < produits.length; i++) {
                 var connexion = getConnexion();
                 var isexecute = false;
-                if (produits.length - 1 == i) {
-                    isexecute = true;
-                }
                 connexion.getProduitByIdForDetailMenu(showWithProduitDataGetById, isexecute, produits[i], i, produits);
             }
 
@@ -355,6 +356,7 @@ function detailMenu(id) {
                         return 1;
                     return 0;
                 }
+                
                 produits.sort(compare);
                 productsInMenu = produits;
                 productsChoosecInMenu = clone(produits); //Clone var
@@ -554,7 +556,7 @@ function printProduitFavorite(cpfs, param) {
         var produit = cpfs[x].produit;
         var itemProduit = htmlProduitItem;
         itemProduit = paramValue(itemProduit, "produitId", produit.getId());
-        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
+        var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
         itemProduit = paramValue(itemProduit, "quantity", "");
         itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
         itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
@@ -587,7 +589,7 @@ function printProduits(index) {
             var htmlMenu = getItemListeMenu();
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
-                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
+                itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());                
                 var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
                 itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());
@@ -598,7 +600,7 @@ function printProduits(index) {
     }
     connexion.getCategoriesForContentCategorie(printSlides);
     var derniere = "";
-    function printSlides(categories) {
+    function printSlides(categories) { 
         for (var i = 0; i < categories.length; i++) {
             var categorie = categories[i];
             if (i + 1 == categories.length) {
@@ -618,8 +620,9 @@ function printProduits(index) {
             var htmlContentProduit = getContentProduit();
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
-            function printProduitByCategorie(produits) {
+            function printProduitByCategorie(produits) {                
                 var quantity = "+";
+                //console.log(produits[0]);
                 var categorie = produits[0].id_categorie;
                 try {
                     var qops = currentTicket.getQuantityOfProduct();
@@ -643,7 +646,7 @@ function printProduits(index) {
                     } else {
                         itemProduit = paramValue(itemProduit, "sousCategorieId", produit.getSousCategorie());
                     }
-                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.id_sousCategorie.tauxTva);
+                    var prixTTC = getPrixHtInAssociation(produit.associationPrixProduit, produit.tauxTva);
                     itemProduit = paramValue(itemProduit, "quantity", quantity);
                     itemProduit = paramValue(itemProduit, "produitPrix", fntp(prixTTC));
                     itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
@@ -697,6 +700,7 @@ function etapeSuivante() {
         var optionSelectItem = getOptionInSelectItem();
         var selectInItemHtml = getSelectInItem();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
+        console.log(personnes);
         for (var i = 0; i < qop.length; i++) {
             $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
             $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
@@ -706,6 +710,7 @@ function etapeSuivante() {
             $("#select_item_etape_" + qop[i].getId()).change(function() {
                 var qopId = ($(this).attr("qopId"));
                 var choosedVal = ($(this).val());
+                console.log(choosedVal);
                 currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qopId)].personne = choosedVal;
             });
             function addItemToSelect(html, value, label) {
@@ -751,7 +756,7 @@ function addTicketItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
     item = paramValue(item, "qopProduiID", qop.getProduit().getId());
-    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().id_sousCategorie.tauxTva)));
+    item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().associationPrixProduit, qop.getProduit().tauxTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
     $('#recapitulatif_liste_id').append(item);
@@ -759,7 +764,6 @@ function addTicketItem(qop) {
 function addMenuItem(qop) {
     var item = getRecapitulatifProduitItem();
     item = paramValue(item, "qopID", qop.getId());
-//    item = paramValue(item, "qopProduiID", qop.getProduit().getId());
     item = paramValue(item, "prix", fntp(getPrixHtInAssociation(qop.getProduit().getPrix(), qop.getProduit().tauxDeTva)));
     item = paramValue(item, "quantity", qop.getQuantity());
     item = paramValue(item, "qopProduitNom", qop.getProduit().getNom());
@@ -1149,11 +1153,11 @@ function validerCommande() {
                     personne = personnes[i];
                     produits.push(new ProduitPriorite(currentTicket.getQuantityOfProduct()[j].product, 0));
                     if (currentTicket.getQuantityOfProduct()[j].product instanceof Menu) {
-                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.prix, currentTicket.getQuantityOfProduct()[j].product.tauxDeTva);
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.prix, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     } else {
-                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.id_sousCategorie.tauxTva);
+                        totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     }
-                    
+
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
@@ -1166,7 +1170,7 @@ function validerCommande() {
         }
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
-        }
+        } 
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");

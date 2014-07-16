@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <variables>
+        <variable name="client.application.etablissement.id">1</variable>
         <variable name="serveur.clientaccess.protocol">http</variable>
         <variable name="serveur.clientaccess.ip">localhost</variable>
         <variable name="serveur.clientaccess.isRootApplication">false</variable>
-        <variable name="serveur.clientaccess.applicationName">appcaisse2</variable>
+        <variable name="serveur.clientaccess.applicationName">appcaisse</variable>
         <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
         <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
@@ -17,11 +18,13 @@
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
         <variable name="serveur.clientaccess.serviceGetAllAttributsComptes">getAllAttributsComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAttributsComptesByEmail">getAttributsComptesByEmail</variable>
-        <variable name="serveur.clientaccess.serviceGetAllParamApps">getAllParamApps</variable>
+        <variable name="serveur.clientaccess.serviceGetAllParamApps">parametreApplication/getAllParamApps</variable>
+        <variable name="serveur.clientaccess.serviceGetAllMajTables">getAllMajTables</variable>
         <variable name="serveur.clientaccess.serviceGetSousCategoriesById">getSousCategorieById</variable>
         <variable name="serveur.clientaccess.serviceGetIngredientById">getIngredientById</variable>
         <variable name="serveur.clientaccess.serviceGetMenuById">getMenuById</variable>
         <variable name="serveur.clientaccess.serviceGetProduitById">getProduitById</variable>
+        <variable name="serveur.clientaccess.serviceGetProduitByLevel">getProduitByLevel</variable>
         <variable name="serveur.clientaccess.serviceGetAllModesDeReglement">getAllModeDeReglement</variable>
         <variable name="serveur.clientaccess.serviceGetModesDeReglementById">getModeDeReglementById</variable>
         <variable name="serveur.clientaccess.serviceGetProduitByCategorieId">getProduitByCategorieId</variable>
@@ -29,24 +32,36 @@
         <variable name="serveur.clientaccess.serviceGetParamFormById">getParamFormById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteById">getAttributCompteById</variable>
         <variable name="serveur.clientaccess.serviceGetAttributCompteByIdCompte">getAttributCompteByIdCompte</variable>
+        <variable name="serveur.clientaccess.serviceGetMajTablesByNom">getMajTablesByNom</variable>
         <variable name="serveur.clientaccess.serviceAddAttributCompte">addAttributCompte</variable>
         <variable name="serveur.clientaccess.serviceAddCompte">addCompte</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitFavoriteByIdServeur">getAllProduitFavoriteByIdServeur</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduitsSuggerer">getAllProduitsSuggerer</variable>
+        <variable name="serveur.clientaccess.serviceGetAllZoneTables">zoneTables/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetAllTypeCommande">typeCommande/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetAllProdtest">getProdtest</variable>
+        <variable name="serveur.clientaccess.serviceGetProdtestById">getAllProdtest</variable>
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
+        <variable name="serveur.clientaccess.serviceGethaveMAJ">haveMAJ</variable>
+        <variable name="serveur.clientaccess.serviceDeleteProduit">deleteProduit</variable>
+        <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
+        <variable name="serveur.clientaccess.serviceGetAllEtablissements">etablissement/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetByIdEtablissements">etablissement/getById</variable>
+        <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>
         <variable name="tableNameIngredient">ingredients</variable>
         <variable name="tableNameSousCategorie">sousCategories</variable>
         <variable name="tableNameProduit">produits</variable>
+        <variable name="tableNameEtablissements">etablissements</variable>
         <variable name="tableNameMenu">menus</variable>
         <variable name="tableNameModeDeReglement">modesDeReglement</variable>
         <variable name="tableNameTable">tables</variable>
         <variable name="tableNameCompte">comptes</variable>
         <variable name="tableNameParamForm">paramforms</variable>
         <variable name="tableNameAttributCompte">attributscomptes</variable>
-        <variable name="indexedDBDatabaseName">appcaisse2</variable>
+        <variable name="indexedDBDatabaseName">appcaisse</variable>
         <variable name="tableNameParametreApplication">parametresapplications</variable>
         <variable name="serveur.clientaccess.serviceGetEntrepriseMaj">getEntepriseMaj</variable>
         <variable name="tableNameEntrepriseMaj">entrepriseMaj</variable>
@@ -56,7 +71,12 @@
         <variable name="tableNamePendingData">pendingdatas</variable>
         <variable name="tablePendingDataTypeTicket">TICKET</variable>
         <variable name="tablePendingDataTypeProduitPriorite">PRODUIT_PRIORITY</variable>
+        <variable name="tablePendingDataTypeAttrCompte">ATTR_COMPTE_PRIORITY</variable>
+        <variable name="tablePendingDataTypeCompte">COMPTE_PRIORITY</variable>
         <variable name="serveur.clientaccess.setPersonnePriority">setPersonnePriority</variable>
         <variable name="parametre.app.gestion.utilisateurs">gestionDesUtilisateurs</variable>
+        <variable name="tableNameTypeCommande">typeCommandes</variable>
+        <variable name="tableNameParamApplication">parametresApplication</variable>
+        <variable name="tableNameZoneTables">zonesTables</variable>
     </variables>
 </application>

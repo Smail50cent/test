@@ -76,4 +76,16 @@ function ConnexionLocalWebSQL() {
     this.getParametreApplicationByNom = function(method, nom, param) {
         console.log("TO DO");
     };
+    this.getReservationDisponibleWhereDateNull = function(method, param) {
+        console.log("TODO");
+    };
+    this.getAllZoneTables = function(method, param) {
+        console.log("TO DO");
+    };
+    this.getAllTypeCommandes = function(method, param) {
+        console.log("TO DO");
+    };
+    this.getEtablissementById = function(method, id, param) {
+        console.log("TO DO");
+    };
 }

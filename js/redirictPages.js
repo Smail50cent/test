@@ -80,7 +80,7 @@ function connexionDunServeur() {
     redirct(new RedirictPages(null, null, null, null, ("pageConnexionServeur")));
 }
 function redirictWhereFinishParamCommande() {
-    redirct(new RedirictPages("carte", null, null, null, "carte"));
+    redirct(new RedirictPages("carte", null, null, "choixDateHeure", "carte"));
 }
 function redirictWhereFinishCarte() {
     redirct(new RedirictPages("choixEnvoieCuisine", null, null, null, "choixEnvoieCuisine"));
@@ -101,7 +101,7 @@ function redirictWhereServeurConnected() {
 }
 function goNouvelleCommande() {
     redirct(new RedirictPages(null, null, null, null, "paramCommande"));
-}
+    }
 function redrictWhereHavePay(){
     redirct(new RedirictPages("index", "index", "index", "index", "interfaceVenteAcces"));
 }

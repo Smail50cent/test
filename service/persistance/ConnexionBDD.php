@@ -20,7 +20,7 @@ class ConnexionBDD {
 
     private function getCurrentDatabaseInfo() {
         $t = $this->getDatabasesInfo();
-        return $t[0];
+        return $t[3];
     }
 
     public function getConnexion() {

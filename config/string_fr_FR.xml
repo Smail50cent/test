@@ -73,4 +73,7 @@
     <string key="label.menu.favori.select.itemsuggestion">Produits suggérer</string>
     <string key="label.titre.carte">À la carte</string>
     <string key="label.where.gestion.user.disable">Couvert n°</string>
+    <string key="label.choix.prisedecommande">Passer commande maintenant</string>
+    <string key="label.choix.finreservation">Passer commande plus tard</string>
+    <string key="label.choix.table.choix.zone.label.option">Zone : </string>
 </strings>

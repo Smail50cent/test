@@ -1,0 +1,1 @@
+<label><input type="checkbox" value="{ingred_nom}" class="ingred_checkbox" />{ingred_nom}</label>

@@ -3,6 +3,7 @@ var templates = {};
 templates.getTemplate = function(name) {
     var ret = null;
     var url = "config/template/" + name;
+    $.ajaxSetup({cache: true});
     $.ajax({
         type: "GET",
         url: url,
@@ -12,6 +13,7 @@ templates.getTemplate = function(name) {
             ret = text;
         }
     });
+    $.ajaxSetup({cache: false});
     return ret;
 };
 templates.getIHMTemplate = function(name) {
@@ -189,4 +191,34 @@ function getContentSlideFavorite(){
 }
 function getItemSelectFavorite(){
     return templates.getTemplate("carte/menu/item_select_type_favorite");
+}
+function getDateHeureOptionDate(){
+    return templates.getTemplate("choixDateHeure/option_select_date");
+}
+function getDivModifProduit(){
+    return templates.getTemplate("gestion/produit/div_modifier_produit");
+}
+function getDivSuppProduit(){
+    return templates.getTemplate("gestion/produit/div_supprimer_produit");
+}
+function getDivAddProduitBtn(){
+    return templates.getTemplate("gestion/produit/div_ajouter_produit_btn");
+}
+function getDivAddProduit(){
+    return templates.getTemplate("gestion/produit/div_ajouter_produit");
+}
+function getPage1AddProduit(){
+    return templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
+}
+function getPage1ShowAddProduit(){
+    return templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
+}
+function getPageIngredAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredOpt_ajouter_produit");
+}
+function getIngredCheckBoxAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredOpt_checkbox_ajouter_produit");
+}
+function getIngredLiAddProduit(){
+    return templates.getTemplate("gestion/produit/ingredOpt_li_ajouter_produit");
 }

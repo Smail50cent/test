@@ -24,6 +24,13 @@ include_once $path . 'service/logique/CompteRoleServiceImpl.php';
 include_once $path . 'service/logique/ProdtestServiceImpl.php';
 include_once $path . 'service/logique/CompteProduitFavoriServiceImpl.php';
 include_once $path . 'service/logique/ProduitSuggereriServiceImpl.php';
+include_once $path . 'service/logique/ReservationDateDisponibleServiceImpl.php';
+include_once $path . 'service/logique/ReservationServiceImpl.php';
+include_once $path . 'service/logique/MajTablesServiceImpl.php';
+include_once $path . 'service/logique/ZoneTableServiceImpl.php';
+include_once $path . 'service/logique/TypeCommandeServiceImpl.php';
+include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
+include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -46,7 +53,82 @@ class LogiqueFactory {
     private static $prodtestSrv = null;
     private static $compteProduitFavoriSrv = null;
     private static $produitSuggererSrv = null;
+    private static $reservationDateDisponibleSrv = null;
+    private static $reservationSrv = null;
+    private static $majtablesSrv = null;
+    private static $zoneTableSrv = null;
+    private static $typeCommandeSrv = null;
+    private static $etablissementSrv = null;
+    private static $groupeSrv = null;
 
+    /**
+     * 
+     * @return EtablissementService
+     */
+    public static function getGroupeService() {
+        if (LogiqueFactory::$groupeSrv == null) {
+            LogiqueFactory::$groupeSrv = new GroupeServiceImpl();
+        }
+        return LogiqueFactory::$groupeSrv;
+    }
+    /**
+     * 
+     * @return EtablissementService
+     */
+    public static function getEtablissementService() {
+        if (LogiqueFactory::$etablissementSrv == null) {
+            LogiqueFactory::$etablissementSrv = new EtablissementServiceImpl();
+        }
+        return LogiqueFactory::$etablissementSrv;
+    }
+    /**
+     * 
+     * @return TypeCommandeService
+     */
+    public static function getTypeCommandeService() {
+        if (LogiqueFactory::$typeCommandeSrv == null) {
+            LogiqueFactory::$typeCommandeSrv = new TypeCommandeServiceImpl();
+        }
+        return LogiqueFactory::$typeCommandeSrv;
+    }
+
+    /**
+     * 
+     * @return ZoneTableService
+     */
+    public static function getZoneTableService() {
+        if (LogiqueFactory::$zoneTableSrv == null) {
+            LogiqueFactory::$zoneTableSrv = new ZoneTableServiceImpl();
+        }
+        return LogiqueFactory::$zoneTableSrv;
+    }
+
+    /**
+     * 
+     * @return ReservationService
+     */
+    public static function getReservationService() {
+        if (LogiqueFactory::$reservationSrv == null) {
+            LogiqueFactory::$reservationSrv = new ReservationServiceImpl();
+        }
+        return LogiqueFactory::$reservationSrv;
+    }
+
+    /**
+     * 
+     * @return ReservationDateDisponibleService
+     */
+    public static function getReservationDateDisponibleService() {
+        if (LogiqueFactory::$reservationDateDisponibleSrv == null) {
+            LogiqueFactory::$reservationDateDisponibleSrv = new ReservationDateDisponibleServiceImpl();
+        }
+        return LogiqueFactory::$reservationDateDisponibleSrv;
+    }
+
+    /**
+     * 
+     * @return ProduitSuggererService
+     */
     public static function getProduitSuggererService() {
         if (LogiqueFactory::$produitSuggererSrv == null) {
             LogiqueFactory::$produitSuggererSrv = new ProduitSuggererServiceImpl();
@@ -54,6 +136,10 @@ class LogiqueFactory {
         return LogiqueFactory::$produitSuggererSrv;
     }
 
+    /**
+     * 
+     * @return CompteProduitFavoriService
+     */
     public static function getCompteProduitFavoriService() {
         if (LogiqueFactory::$compteProduitFavoriSrv == null) {
             LogiqueFactory::$compteProduitFavoriSrv = new CompteProduitFavoriServiceImpl();
@@ -61,6 +147,10 @@ class LogiqueFactory {
         return LogiqueFactory::$compteProduitFavoriSrv;
     }
 
+    /**
+     * 
+     * @return AssociationProduitPrixService
+     */
     public static function getAssociationProduitPrixService() {
         if (LogiqueFactory::$associationProduitPrixService == null) {
             LogiqueFactory::$associationProduitPrixService = new AssociationProduitPrixServiceImpl();
@@ -68,6 +158,10 @@ class LogiqueFactory {
         return LogiqueFactory::$associationProduitPrixService;
     }
 
+    /**
+     * 
+     * @return CompteRoleService
+     */
     public static function getCompteRoleService() {
         if (LogiqueFactory::$compteRoleService == null) {
             LogiqueFactory::$compteRoleService = new CompteRoleServiceImpl();
@@ -75,6 +169,10 @@ class LogiqueFactory {
         return LogiqueFactory::$compteRoleService;
     }
 
+    /**
+     * 
+     * @return ModeDeReglementService
+     */
     public static function getModeDeReglementService() {
         if (LogiqueFactory::$modeDeReglementSrv == null) {
             LogiqueFactory::$modeDeReglementSrv = new ModeDeReglementServiceImpl();
@@ -82,6 +180,10 @@ class LogiqueFactory {
         return LogiqueFactory::$modeDeReglementSrv;
     }
 
+    /**
+     * 
+     * @return TicketService
+     */
     public static function getTicketService() {
         if (LogiqueFactory::$ticketSrv == null) {
             LogiqueFactory::$ticketSrv = new TicketServiceImpl();
@@ -89,6 +191,10 @@ class LogiqueFactory {
         return LogiqueFactory::$ticketSrv;
     }
 
+    /**
+     * 
+     * @return TableService
+     */
     public static function getTableService() {
         if (LogiqueFactory::$tableSrv == null) {
             LogiqueFactory::$tableSrv = new TableServiceImpl();
@@ -96,6 +202,10 @@ class LogiqueFactory {
         return LogiqueFactory::$tableSrv;
     }
 
+    /**
+     * 
+     * @return MenuService
+     */
     public static function getMenuService() {
         if (LogiqueFactory::$menuSrv == null) {
             LogiqueFactory::$menuSrv = new MenuServiceImpl();
@@ -103,6 +213,10 @@ class LogiqueFactory {
         return LogiqueFactory::$menuSrv;
     }
 
+    /**
+     * 
+     * @return ProduitService
+     */
     public static function getProduitService() {
         if (LogiqueFactory::$produitSrv == null) {
             LogiqueFactory::$produitSrv = new ProduitServiceImpl();
@@ -110,6 +224,10 @@ class LogiqueFactory {
         return LogiqueFactory::$produitSrv;
     }
 
+    /**
+     * 
+     * @return EntrepriseService
+     */
     public static function getEntrepriseService() {
         if (LogiqueFactory::$entrepriseSrv == null) {
             LogiqueFactory::$entrepriseSrv = new EntrepriseServiceImpl();
@@ -117,6 +235,10 @@ class LogiqueFactory {
         return LogiqueFactory::$entrepriseSrv;
     }
 
+    /**
+     * 
+     * @return CategorieService
+     */
     public static function getCategorieService() {
         if (LogiqueFactory::$categorieSrv == null) {
             LogiqueFactory::$categorieSrv = new CategorieServiceImpl();
@@ -124,6 +246,10 @@ class LogiqueFactory {
         return LogiqueFactory::$categorieSrv;
     }
 
+    /**
+     * 
+     * @return SousCategorieService
+     */
     public static function getSousCategorieService() {
         if (LogiqueFactory::$sousCategorieSrv == null) {
             LogiqueFactory::$sousCategorieSrv = new SousCategorieServiceImpl();
@@ -131,6 +257,10 @@ class LogiqueFactory {
         return LogiqueFactory::$sousCategorieSrv;
     }
 
+    /**
+     * 
+     * @return IngredientService
+     */
     public static function getIngredientService() {
         if (LogiqueFactory::$ingredientSrv == null) {
             LogiqueFactory::$ingredientSrv = new IngredientServiceImpl();
@@ -138,6 +268,10 @@ class LogiqueFactory {
         return LogiqueFactory::$ingredientSrv;
     }
 
+    /**
+     * 
+     * @return CompteService
+     */
     public static function getCompteService() {
         if (LogiqueFactory::$compteSrv == null) {
             LogiqueFactory::$compteSrv = new CompteServiceImpl();
@@ -145,6 +279,10 @@ class LogiqueFactory {
         return LogiqueFactory::$compteSrv;
     }
 
+    /**
+     * 
+     * @return AttributCompteService
+     */
     public static function getAttributCompteService() {
         if (LogiqueFactory::$attcompteSrv == null) {
             LogiqueFactory::$attcompteSrv = new AttributCompteServiceImpl();
@@ -152,6 +290,10 @@ class LogiqueFactory {
         return LogiqueFactory::$attcompteSrv;
     }
 
+    /**
+     * 
+     * @return ParamFormService
+     */
     public static function getParamFormService() {
         if (LogiqueFactory::$paramformSrv == null) {
             LogiqueFactory::$paramformSrv = new ParamFormServiceImpl();
@@ -159,6 +301,10 @@ class LogiqueFactory {
         return LogiqueFactory::$paramformSrv;
     }
 
+    /**
+     * 
+     * @return ParametreApplicationService
+     */
     public static function getParamAppService() {
         if (LogiqueFactory::$paramappSrv == null) {
             LogiqueFactory::$paramappSrv = new ParametreApplicationServiceImpl();
@@ -166,6 +312,10 @@ class LogiqueFactory {
         return LogiqueFactory::$paramappSrv;
     }
 
+    /**
+     * 
+     * @return StringsService
+     */
     public static function getStringsService() {
         if (LogiqueFactory::$stringsSrv == null) {
             LogiqueFactory::$stringsSrv = new StringsServiceImpl();
@@ -173,11 +323,26 @@ class LogiqueFactory {
         return LogiqueFactory::$stringsSrv;
     }
 
+    /**
+     * 
+     * @return ProdtestService
+     */
     public static function getProdtestService() {
         if (LogiqueFactory::$prodtestSrv == null) {
             LogiqueFactory::$prodtestSrv = new ProdtestServiceImpl();
         }
         return LogiqueFactory::$prodtestSrv;
+    }
+
+    /**
+     * 
+     * @return MajTablesService
+     */
+    public static function getMajTablesService() {
+        if (LogiqueFactory::$majtablesSrv == null) {
+            LogiqueFactory::$majtablesSrv = new MajTablesServiceImpl();
+        }
+        return LogiqueFactory::$majtablesSrv;
     }
 
 }

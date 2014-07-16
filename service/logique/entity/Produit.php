@@ -12,9 +12,11 @@ class Produit {
     public $categorie;
     public $souscategorie;
     public $options; //array
-    public $ingredients; // ARRAY
-    public $associationPrixProduit;
+    public $ingredients = array(); // ARRAY
+    public $associationPrixProduit = array();
     public $prix;
+    public $tauxTva;
+    public $level;
     
     public function setId($id) {
         $this->id = $id;
@@ -24,8 +26,8 @@ class Produit {
         $this->nom = $nom;
     }
 
-    public function setOptions($optons) {
-        $this->options = $optons;
+    public function setOptions($options) {
+        $this->options = $options;
     }
 
     public function getOptions() {
@@ -42,6 +44,10 @@ class Produit {
 
     public function setIngredients($ingredients) {
         $this->ingredients = $ingredients;
+    }
+
+    public function addIngredients($ingredient) {
+        array_push($this->ingredients, $ingredient);
     }
 
     public function getSousCategorie() {
@@ -64,13 +70,6 @@ class Produit {
         return $this->categorie;
     }
 
-    public function setAssociationProduitPrix($aspp) {
-        $this->associationPrixProduit = $aspp;
-    }
-
-    public function getAssociationProduitPrix() {
-        return $this->associationPrixProduit;
-    }
     public function setPrix($prix) {
         $this->prix = $prix;
     }
@@ -78,5 +77,34 @@ class Produit {
     public function getPrix() {
         return $this->prix;
     }
+
+    public function getAssociationPrixProduit() {
+        return $this->associationPrixProduit;
+    }
+
+    public function getTauxTva() {
+        return $this->tauxTva;
+    }
+
+    public function setAssociationPrixProduit($associationPrixProduit) {
+        $this->associationPrixProduit = $associationPrixProduit;
+    }
+
+    public function addAssociationPrixProduit($associationPrixProduit) {
+        array_push($this->associationPrixProduit, $associationPrixProduit);
+    }
+
+    public function setTauxTva($tauxTva) {
+        $this->tauxTva = $tauxTva;
+    }
+
+    public function getLevel() {
+        return $this->level;
+    }
+
+    public function setLevel($level) {
+        $this->level = $level;
+    }
+
 
 }

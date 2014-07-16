@@ -5,7 +5,7 @@
 var listePersonnes = new Array();
 var methodToLoadAfter;
 var isServeur;
-function onLoadCompte(showVisiteurs, titre, topvalue, method,isServeusr) {//To DO an object
+function onLoadCompte(showVisiteurs, titre, topvalue, method, isServeusr) {//To DO an object
     isServeur = isServeusr;
     methodToLoadAfter = method;
     var htmlDialog = getDialogAccesCompte();
@@ -46,6 +46,7 @@ function authenCompte() {
                     var idcompte = data.id_compte;
                     connexion.getCompteById(verifpass, data.id_compte);
                     function verifpass(compte) {
+
                         if (compte.password === cryptedpass) {
                             connexion.getAttributCompteByIdCompte(allinfos, idcompte);
                             function allinfos(infos) {
@@ -58,14 +59,17 @@ function authenCompte() {
                                         personne.setNom(infos[j].valeur_champ);
                                     } else if (infos[j].id_form == 7) {
                                         personne.setEmail(infos[j].valeur_champ);
+                                    } else if (infos[j].id_form == 10) {
+                                        personne.serveurProperty = {"zoneTableDefaut": parseInt(infos[j].valeur_champ)};
                                     }
                                 }
                                 personne.setRole(compte.role);
                                 personne.setId(idcompte);
+                                console.log(personne);
                                 listePersonnes.push(personne);
-                                if(isServeur){
+                                if (isServeur) {
                                     setLocalStorageValue("personnes.serveur", JSON.stringify(personne));
-                                }else{
+                                } else {
                                     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 }
                                 if (methodToLoadAfter != null) {
@@ -203,7 +207,7 @@ function socialNetworkButtonAuth() {
     connexion.getAllParamApps(enableButton);
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) {
-            if (paramapps[i].valeur_parametre == 1) {
+            if (parseInt(paramapps[i].valeur_parametre) == 1) {
                 if (paramapps[i].nom_parametre === "Facebook") {
                     var html = getButtonFacebookAuth();
                     $('#button_facebook_id').html(html);

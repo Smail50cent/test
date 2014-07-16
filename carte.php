@@ -1,6 +1,6 @@
 <?php include_once './header.php'; ?>
 <div id="content_id" class="content content_structure content_personalize">
-    
+
     <ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize" style="margin-top: 0;">
         <!--li><button></button></li-->
     </ul><p id="content_titre_id" class="content_titre content_titre_structure content_titre_personalize"></p>
@@ -36,5 +36,25 @@
     <div id="footer_left_id_trgl" class="footer_left_trgl footer_left_trgl_structure footer_left_trgl_personalize"></div>
     <div id="footer_right_id" class="footer_right footer_right_structure footer_right_personalize"></div>
 </div>
+<style>
+    .sous_categorie_cat_structure  {
+        display: none;
+    }
+    .content_globlal_zone_structure {
+        overflow: hidden;
+    }
+    .genreicClassSlide_structure {
+        opacity: 0;
+    }
+    .slide.active {
+        opacity: 1;
+    }
+    .notransition{
+        opacity: 0.8;
+    }
+    .content_structure ul {
+        margin-top: -65px;
+    }
+</style>
 </body>
 </html> 

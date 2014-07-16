@@ -27,7 +27,7 @@ class CompteServiceImpl implements CompteService {
     }
 
     public function addAll($password,$role) {
-        $this->compteSrv->addAll($password,$role);
+        return $this->compteSrv->addAll($password,$role);
     }
 
     public function getUser($email, $password) {

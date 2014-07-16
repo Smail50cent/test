@@ -10,6 +10,15 @@ function ConnexionLocalIndexedDB() {
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllCategories(onCarteLoadFinish);
     };
+    this.getSousCategoriesForContentSousCategorie = function(onCarteLoadFinish) {
+        myStorage.indexedDB.getAllSousCategories(onCarteLoadFinish);
+    };
+    this.getSousCategorieByIdCat = function(onCarteLoadFinish, idCat) {
+        myStorage.indexedDB.getSousCategorieByIdCat(onCarteLoadFinish, idCat);
+    };
+    this.getSousCategorieById = function(id, onCarteLoadFinish) {
+        myStorage.indexedDB.getSousCategorieById(id, onCarteLoadFinish);
+    };
     this.getSousCategoriesByIdCategorieForContentSousCategorie = function(functionToLoad, idsousCat, idCat) {
         myStorage.indexedDB.getSousCategorieByIdForContentSousCat(functionToLoad, idsousCat, idCat);
     };
@@ -27,6 +36,9 @@ function ConnexionLocalIndexedDB() {
     };
     this.getIngredientById = function(method, id, param) {
         myStorage.indexedDB.getIngredientById(method, id, param);
+    };
+    this.getAllIngredients = function(method) {
+        myStorage.indexedDB.getAllIngredients(method);
     };
     this.getProduitByIdGeneric = function(method, id, param) {
         myStorage.indexedDB.getProduitByIdGeneric(method, id, param);
@@ -59,7 +71,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllParamApps = function(method) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllParametreApplication(method, null);
     };
     this.getAllPendingMethods = function(method, param) {
         myStorage.indexedDB.getAllPendingsDatas(method, param);
@@ -83,6 +95,45 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getParametreApplicationByNom = function(method, nom, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getParametreApplicationByNom(method, nom, param);
     };
+    this.updateProduit = function(method, produit) {
+        myStorage.indexedDB.updateProduit(method, produit);
+    };
+    this.getReservationDisponibleWhereDateNull = function(method, param) {
+        console.log("TODO");
+    };
+    this.getAllZoneTables = function(method, param) {
+        myStorage.indexedDB.getAllZoneTables(method, param);
+    };
+    this.deleteProduit = function(id) {
+        myStorage.indexedDB.deleteProduit(id);
+    };
+    this.getAllTypeCommandes = function(method, param) {
+        myStorage.indexedDB.getAllTypeCommande(method, param);
+    };
+    this.updateTypeCommande = function(method, typeCommande) {
+        myStorage.indexedDB.updateTypeCommande(method, typeCommande);
+    };
+
+    this.addAttributCompte = function(id_form, valeur_champ, defaut, id_compte) {
+        myStorage.indexedDB.addPendingData(null, {
+            "id_form": id_form,
+            "valeur_champ": valeur_champ,
+            "defaut": defaut,
+            "id_compte": id_compte
+        }, config.getConfig("tablePendingDataTypeAttrCompte"), null);
+    };
+    this.addCompte = function(method, password, id_role, param) {
+        myStorage.indexedDB.addPendingData(method, {
+            "password": password,
+            "id_role": id_role
+        }, config.getConfig("tablePendingDataTypeCompte"), param);
+        var id = Math.floor((Math.random() * 1000000) + 1);
+        method(id, param);
+    };
+    this.getEtablissementById = function(method, id, param) {
+        myStorage.indexedDB.getEtablissementById(method, id, param);
+    };
+
 }
