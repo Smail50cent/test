@@ -93,7 +93,7 @@ myStorage.indexedDB.updateTypeCommande = function(method, typeCommande) {
                 var _object;
                 try {
                     _object = cursor.value;
-                    console.log("_object:"+_object+" typeCommande"+typeCommande);
+                    //console.log("_object:"+_object+" typeCommande"+typeCommande);
                     _object.idInPageHtml = typeCommande.idInPageHtml;
                     _object.isActif = typeCommande.isActif;
                     _object.id = typeCommande.id;

@@ -931,5 +931,31 @@ function ConnexionServer() {
             }
         });
     };
+    this.getAllOptions = function(method) {
+    $.ajax({
+        url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data, textStatus, xhr) {
+            var options = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var option = new Option();
+                option.setId(data[i].id);
+                option.setNom(data[i].nom);
+                option.setLabel(data[i].label);
+                option.setPossibilites(data[i].possibilites);
+                options.push(option);
+                
+                if (method != null) {
+                    method(options);
+                }
+            }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        }
+    });
+    };
 }
 

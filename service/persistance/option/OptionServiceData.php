@@ -8,4 +8,5 @@
 interface OptionServiceData {
     public function getOptionByIdProduit($id);
     public function getById($id);
+    public function getAll();
 }

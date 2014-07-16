@@ -4,7 +4,7 @@ myStorage.indexedDB.onerror = function(e) {
     showErrorMessage(e);
 };
 var delay = 0;//temps d'attente avant d'accèder à la base de données 
-var delayOnupgradeneeded = 1000;
+var delayOnupgradeneeded = 0;
 var indexedDB;
 var IDBTransaction;
 var IDBKeyRange;
@@ -37,6 +37,7 @@ function setEntityFinishTo(bool) {
     entitysFinsh[config.getConfig("tableNameTypeCommande")] = bool;
     entitysFinsh[config.getConfig("tableNameParamApplication")] = bool;
     entitysFinsh[config.getConfig("tableNameZoneTables")] = bool;
+    entitysFinsh[config.getConfig("tableNameOptions")] = bool;
 }
 function verifyFinish() {
     var finish = false;
@@ -59,6 +60,8 @@ function verifyFinish() {
     } else if (entitysFinsh[config.getConfig("tableNameParamApplication")] == true) {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameZoneTables")] == true) {
+        finish = true;
+    } else if (entitysFinsh[config.getConfig("tableNameOptions")] == true) {
         finish = true;
     }
     return finish;
@@ -182,6 +185,13 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameZoneTables"), {keyPath: "id", autoIncrement: true});
         myStorage.indexedDB.addFirstZoneTables();
+        
+        entitysFinsh[config.getConfig("tableNameOptions")] = true;
+        if (db.objectStoreNames.contains(config.getConfig("tableNameOptions"))) {
+            var storeReq = db.deleteObjectStore(config.getConfig("tableNameOptions"));
+        }
+        var store = db.createObjectStore(config.getConfig("tableNameOptions"), {keyPath: "id", autoIncrement: true});
+        myStorage.indexedDB.addFirstOptions();
 
         processOnupgradeneeded = false;
         delay = 0;
@@ -249,7 +259,7 @@ myStorage.indexedDB.addFistEntreprise = function() {
             dataType: 'json',
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log("data:",data);
+                //console.log("data:",data);
                 request = store.put({
                     "id": parseInt(data.id),
                     "nom": data.nom,
@@ -394,6 +404,42 @@ myStorage.indexedDB.addFistProduits = function() {
 //                nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;
+            };
+            request.onerror = function(e) {
+                showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
+            };
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+};
+myStorage.indexedDB.addFirstOptions = function() {
+    $.ajax({
+        url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data, textStatus, xhr) {
+            for (var i = 0; i < data.length; i++) {
+                //console.log(data);
+                addOption(data[i]);
+            }
+        },
+        error: function(xhr, textStatus, errorThrown) {
+            showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        }
+    });
+    function addOption(option) {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameOptions")], myStorage.IDBTransactionModes.READ_WRITE);
+            var store = trans.objectStore(config.getConfig("tableNameOptions"));
+            var request;
+            request = store.put({"id": parseInt(option.id), "nom": option.nom, "label": option.label, "possibilite": option.possibilites});
+            trans.oncomplete = function(e) {
+                entitysFinsh[config.getConfig("tableNameOptions")] = false;
+                db.close();
             };
             request.onerror = function(e) {
                 showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));

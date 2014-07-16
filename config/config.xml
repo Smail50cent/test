@@ -45,7 +45,9 @@
         <variable name="serveur.clientaccess.serviceGethaveMAJ">haveMAJ</variable>
         <variable name="serveur.clientaccess.serviceDeleteProduit">deleteProduit</variable>
         <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
+        <variable name="serveur.clientaccess.serviceGetAllOptions">option/getAll</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
+        <variable name="tableNameOptions">options</variable>
         <variable name="serveur.clientaccess.serviceGetAllEtablissements">etablissement/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetByIdEtablissements">etablissement/getById</variable>
         <variable name="tableNameMajTables">majTables</variable>

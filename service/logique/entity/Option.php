@@ -16,7 +16,7 @@ class Option {
     public $id;
     public $nom;
     public $label;
-    public $possibilites;
+    public $possibilites = array();
 
     public function setId($id) {
         $this->id = intval($id);
@@ -48,6 +48,10 @@ class Option {
 
     public function getPossibilite() {
         return $this->possibilites;
+    }
+    
+    public function addPossibiliteOptions($possiblilite){
+        array_push($this->possibilites, $possiblilite);
     }
 
 }

@@ -801,6 +801,38 @@ function TypeCommande(id, label, labelMenu, isActif, idInPageHtml) {
     this.labelMenu = labelMenu;
     this.idInPageHtml = idInPageHtml;
 }
+function Option() {
+
+    this.id;
+    this.nom;
+    this.label;
+    this.possibilites;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setNom = function(nom) {
+        this.nom = nom;
+    };
+    this.getNom = function() {
+        return this.nom;
+    };
+    this.setLabel = function(label) {
+        this.label = label;
+    };
+    this.getLabel = function() {
+        return this.label;
+    };
+    this.setPossibilites = function(possibilites) {
+        this.possibilites = possibilites;
+    };
+    this.getPossibilites = function() {
+        return this.possibilites;
+    };
+}
 function Groupe(id, nom, style, adresseSiege, slogan, message, telephone, logo) {
     this.id = id;
     this.nom = nom;

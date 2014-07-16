@@ -31,6 +31,7 @@ include_once $path . 'service/logique/ZoneTableServiceImpl.php';
 include_once $path . 'service/logique/TypeCommandeServiceImpl.php';
 include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
 include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';
+include_once $path . 'service/logique/option/OptionServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -60,6 +61,7 @@ class LogiqueFactory {
     private static $typeCommandeSrv = null;
     private static $etablissementSrv = null;
     private static $groupeSrv = null;
+    private static $optSrv = null;
 
     /**
      * 
@@ -343,6 +345,17 @@ class LogiqueFactory {
             LogiqueFactory::$majtablesSrv = new MajTablesServiceImpl();
         }
         return LogiqueFactory::$majtablesSrv;
+    }
+    
+    /**
+     * 
+     * @return OptionService
+     */
+    public static function getOptionService() {
+        if (LogiqueFactory::$optSrv == null) {
+            LogiqueFactory::$optSrv = new OptionServiceImpl();
+        }
+        return LogiqueFactory::$optSrv;
     }
 
 }

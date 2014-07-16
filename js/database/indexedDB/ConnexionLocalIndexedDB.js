@@ -132,6 +132,9 @@ function ConnexionLocalIndexedDB() {
         var id = Math.floor((Math.random() * 1000000) + 1);
         method(id, param);
     };
+    this.getAllOptions = function(methodToExecuteAfter) {
+        myStorage.indexedDB.getAllOptions(methodToExecuteAfter);
+    };
     this.getEtablissementById = function(method, id, param) {
         myStorage.indexedDB.getEtablissementById(method, id, param);
     };
