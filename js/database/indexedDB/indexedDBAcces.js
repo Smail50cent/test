@@ -249,6 +249,7 @@ myStorage.indexedDB.addFistEntreprise = function() {
             dataType: 'json',
             async: false,
             success: function(data, textStatus, xhr) {
+                console.log("data:",data);
                 request = store.put({
                     "id": parseInt(data.id),
                     "nom": data.nom,

@@ -5,7 +5,7 @@
         <variable name="serveur.clientaccess.protocol">http</variable>
         <variable name="serveur.clientaccess.ip">localhost</variable>
         <variable name="serveur.clientaccess.isRootApplication">false</variable>
-        <variable name="serveur.clientaccess.applicationName">appcaisse</variable>
+        <variable name="serveur.clientaccess.applicationName">appcaisse2</variable>
         <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
         <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
