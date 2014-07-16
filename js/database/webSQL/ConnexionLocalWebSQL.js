@@ -88,4 +88,7 @@ function ConnexionLocalWebSQL() {
     this.getEtablissementById = function(method, id, param) {
         console.log("TO DO");
     };
+    this.getAllOptions = function(method) {
+        console.log("TO DO");
+    };
 }

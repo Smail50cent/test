@@ -32,7 +32,7 @@ myStorage.indexedDB.getAllOptions = function(methodToExecuteAfter) {
 
             trans.oncomplete = function(e) {
                 if (methodToExecuteAfter != null) {
-                    methodToExecuteAfter(ingredients);
+                    methodToExecuteAfter(options);
                 } else {
                     showErrorMessage("No method in arguments.");
                 }

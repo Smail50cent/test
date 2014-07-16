@@ -150,7 +150,7 @@ function addOption() {
     $('#dialog_add_produit_id').html(optProd);
     getImplOfConnexionLocal().getAllOptions(getOpts);
     function getOpts(options){
-        console.log(options);
+        //console.log(options);
     }
 }
 

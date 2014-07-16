@@ -259,7 +259,7 @@ myStorage.indexedDB.addFistEntreprise = function() {
             dataType: 'json',
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log("data:",data);
+                //console.log("data:",data);
                 request = store.put({
                     "id": parseInt(data.id),
                     "nom": data.nom,
@@ -420,7 +420,7 @@ myStorage.indexedDB.addFirstOptions = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data);
+                //console.log(data);
                 addOption(data[i]);
             }
         },

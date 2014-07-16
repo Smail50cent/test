@@ -16,6 +16,7 @@
     <script for="data.indexeddb" priority="15">database/indexedDB/indexedDBAccesParametreApplication.js</script>
     <script for="data.indexeddb" priority="16">database/indexedDB/indexedDBAccesZoneTables.js</script>
     <script for="data.indexeddb" priority="17">database/indexedDB/indexedDBAccesEtablissements.js</script>
+    <script for="data.indexeddb" priority="18">database/indexedDB/indexedDBAccesOption.js</script>
     
     <script for="data.websql">database/webSQL/ConnexionLocalWebSQL.js</script>
     

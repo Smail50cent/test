@@ -802,12 +802,12 @@ function TypeCommande(id, label, labelMenu, isActif, idInPageHtml) {
     this.idInPageHtml = idInPageHtml;
 }
 function Option() {
-    
+
     this.id;
     this.nom;
     this.label;
     this.possibilites;
-    
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -832,6 +832,7 @@ function Option() {
     this.getPossibilites = function() {
         return this.possibilites;
     };
+}
 function Groupe(id, nom, style, adresseSiege, slogan, message, telephone, logo) {
     this.id = id;
     this.nom = nom;

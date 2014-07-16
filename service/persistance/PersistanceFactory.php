@@ -20,12 +20,10 @@ include_once $path . 'service/persistance/TicketServiceDataImpl.php';
 include_once $path . 'service/persistance/ParametreApplicationServiceDataImpl.php';
 include_once $path . 'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
 include_once $path . 'service/persistance/StringsServiceDataImpl.php';
-include_once $path . 'service/persistance/OptionServiceDataImpl.php';
 include_once $path . 'service/persistance/AssociationProduitPrixServiceDataImpl.php';
 include_once $path . 'service/persistance/CompteRoleServiceDataImpl.php';
 include_once $path . 'service/persistance/ProdtestServiceDataImpl.php';
 include_once $path . 'service/persistance/CompteProduitFavoriServiceDataImpl.php';
-include_once $path . 'service/persistance/OptionServiceDataImpl.php';
 include_once $path . 'service/persistance/AssociationProduitIngredientServiceDataImpl.php';
 include_once $path . 'service/persistance/ProduitSuggererServiceDataImpl.php';
 include_once $path . 'service/persistance/ReservationDateDisponibleServiceDataImpl.php';
@@ -34,8 +32,8 @@ include_once $path . 'service/persistance/MajTablesServiceDataImpl.php';
 include_once $path . 'service/persistance/ZoneTableServiceDataImpl.php';
 include_once $path . 'service/persistance/TypeCommandeServiceDataImpl.php';
 include_once $path . 'service/persistance/groupe/GroupeServiceDataImpl.php';
-include_once $path . 'service/persistance/OptionServiceDataImpl.php';
 include_once $path . 'service/persistance/etablissement/EtablissementServiceDataImpl.php';
+include_once $path . 'service/persistance/option/OptionServiceDataImpl.php';
 
 class PersistanceFactory {
 
