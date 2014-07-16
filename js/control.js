@@ -179,7 +179,14 @@ if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 }
 function onTemplateLoadStart() {
     var connexion = getConnexion();
-    connexion.getEtablissementById(onTemplateLoadFinish, parseInt(config.getConfig("client.application.etablissement.id")), null);
+    var id;
+    if (getLocalStorageValue("client.application.etablissement.id") == null) {
+        id = parseInt(config.getConfig("client.application.etablissement.id"));
+        setLocalStorageValue("client.application.etablissement.id", id);
+    } else {
+        id = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+    }
+    connexion.getEtablissementById(onTemplateLoadFinish, id, null);
 }
 function onTemplateLoadFinish(etablissement) {
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
