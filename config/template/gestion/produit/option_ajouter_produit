@@ -1,0 +1,9 @@
+
+ <label><input id="check_all_id" type="checkbox" name="option[]" />Tout décocher</label>
+<div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
+</div>
+
+<div onclick="ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
+<!--div onclick="addOption();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<img src="img/gestion/produit/right.png" width="40" height="40" "></div></p-->

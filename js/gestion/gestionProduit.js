@@ -63,14 +63,13 @@ function addProduct() {
     var page1show = getPage1ShowAddProduit();
     $('#content_add_produit_zone_input_id').html(page1input);
     $('#content_produit_zone_id').html(page1show);
-    addPage1();
+    LoadCatSousCat();
 
 }
 
-function addPage1() {
+function LoadCatSousCat() {
 
     $("input#name_prod_Id").on("keyup", function() {
-        $('#label_name_prod_id').text($(this).val());
         $('#content_produit_titre_id').text($(this).val());
     });
 
@@ -109,17 +108,17 @@ function addPage1() {
 }
 
 function ingredientPage() {
-
+    $('.ui-dialog-title').html("Ajouter les Ingrédients");
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
     getImplOfConnexionLocal().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
-            ingredCB = paramValue(cbox, "ingred_nom", Ingredients[i].nom);
+            ingredCB = paramValue(cbox, "ingredOpt_nom", Ingredients[i].nom);
             $('#select_ingredient_id').append(ingredCB);
         }
 
-        $('.ingred_checkbox').change(function(){
+        $('.ingredOpt_checkbox').change(function(){
             if(this.checked) {
                 var listIngred = getIngredLiAddProduit();
                 var valLi = paramValue(listIngred,"ingred_val",this.value);
@@ -145,4 +144,13 @@ function ingredientPage() {
     
 }
 
+function addOption() {
+    $('.ui-dialog-title').html("Ajouter les Options");
+    var optProd = getOptionAddProduit();
+    $('#dialog_add_produit_id').html(optProd);
+    getImplOfConnexionLocal().getAllOptions(getOpts);
+    function getOpts(options){
+        console.log(options);
+    }
+}
 
