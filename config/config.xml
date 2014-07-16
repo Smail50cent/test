@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application>
     <variables>
+        <variable name="client.application.etablissement.id">1</variable>
         <variable name="serveur.clientaccess.protocol">http</variable>
         <variable name="serveur.clientaccess.ip">localhost</variable>
         <variable name="serveur.clientaccess.isRootApplication">false</variable>
-        <variable name="serveur.clientaccess.applicationName">appcaisse</variable>
+        <variable name="serveur.clientaccess.applicationName">appcaisse2</variable>
         <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
         <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
@@ -47,12 +48,15 @@
         <variable name="serveur.clientaccess.serviceGetAllOptions">option/getAll</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameOptions">options</variable>
+        <variable name="serveur.clientaccess.serviceGetAllEtablissements">etablissement/getAll</variable>
+        <variable name="serveur.clientaccess.serviceGetByIdEtablissements">etablissement/getById</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>
         <variable name="tableNameIngredient">ingredients</variable>
         <variable name="tableNameSousCategorie">sousCategories</variable>
         <variable name="tableNameProduit">produits</variable>
+        <variable name="tableNameEtablissements">etablissements</variable>
         <variable name="tableNameMenu">menus</variable>
         <variable name="tableNameModeDeReglement">modesDeReglement</variable>
         <variable name="tableNameTable">tables</variable>

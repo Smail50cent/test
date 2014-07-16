@@ -832,4 +832,24 @@ function Option() {
     this.getPossibilites = function() {
         return this.possibilites;
     };
+function Groupe(id, nom, style, adresseSiege, slogan, message, telephone, logo) {
+    this.id = id;
+    this.nom = nom;
+    this.style = style;
+    this.adresseSiege = adresseSiege;
+    this.slogan = slogan;
+    this.message = message;
+    this.telephone = telephone;
+    this.logo = logo;
+}
+function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, slogan, groupe) {
+    this.id = id;
+    this.nom = nom;
+    this.logo = logo;
+    this.style = style;
+    this.adresseEtab = adresseEtab;
+    this.telephone = telephone;
+    this.message = message;
+    this.slogan = slogan;
+    this.groupe = groupe;
 }

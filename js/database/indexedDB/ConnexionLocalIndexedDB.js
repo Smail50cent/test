@@ -13,8 +13,8 @@ function ConnexionLocalIndexedDB() {
     this.getSousCategoriesForContentSousCategorie = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllSousCategories(onCarteLoadFinish);
     };
-    this.getSousCategorieByIdCat = function(onCarteLoadFinish,idCat) {
-        myStorage.indexedDB.getSousCategorieByIdCat(onCarteLoadFinish,idCat);
+    this.getSousCategorieByIdCat = function(onCarteLoadFinish, idCat) {
+        myStorage.indexedDB.getSousCategorieByIdCat(onCarteLoadFinish, idCat);
     };
     this.getSousCategorieById = function(id, onCarteLoadFinish) {
         myStorage.indexedDB.getSousCategorieById(id, onCarteLoadFinish);
@@ -135,4 +135,8 @@ function ConnexionLocalIndexedDB() {
     this.getAllOptions = function(methodToExecuteAfter) {
         myStorage.indexedDB.getAllOptions(methodToExecuteAfter);
     };
+    this.getEtablissementById = function(method, id, param) {
+        myStorage.indexedDB.getEtablissementById(method, id, param);
+    };
+
 }

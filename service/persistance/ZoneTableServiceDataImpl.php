@@ -80,7 +80,8 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
     private function testsForTable($ligne, ZoneTable $zonetable) {
         $isHere = false;
         for ($j = 0; $j < count($zonetable->getTables()); $j++) {
-            if ($zonetable->getTables()[$j]->id == $ligne->table_id) {
+           $tables =  $zonetable->getTables();
+            if ($tables[$j]->id == $ligne->table_id) {
                 $isHere = true;
                 break;
             }

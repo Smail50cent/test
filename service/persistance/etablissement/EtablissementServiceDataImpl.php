@@ -37,7 +37,6 @@ etablissement.message AS etablissement_message
 
     private function parseEtablissement($resultSet) {
         $liste = array();
-        $ret;
         while ($ligne = $resultSet->fetch()) {
             $etablissement = new Etablissement();
             $etablissement->setId(intval($ligne->etablissement_id));
@@ -57,9 +56,33 @@ etablissement.message AS etablissement_message
             $groupe->setSlogan($ligne->groupe_slogan);
             $groupe->setStyle($ligne->groupe_style);
             $groupe->setTelephone($ligne->groupe_telephone);
-            array_push($liste, $groupe);
+            $etablissement->setGroupe($groupe);
+            array_push($liste, $etablissement);
         }
-        return $ret;
+        return $liste;
+    }
+
+    public function getById($id) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT 
+groupe.id AS groupe_id,
+groupe.nom AS groupe_nom,
+groupe.style AS groupe_style,
+groupe.adresseSiege AS groupe_adresseSiege,
+groupe.slogan AS groupe_slogan,
+groupe.logo AS groupe_logo,
+groupe.message AS groupe_message,
+groupe.telephone AS groupe_telephone,
+etablissement.id AS etablissement_id,
+etablissement.nom AS etablissement_nom,
+etablissement.logo AS etablissement_logo,
+etablissement.style AS etablissement_style,
+etablissement.slogan AS etablissement_slogan,
+etablissement.telephone AS etablissement_adresseEtab,
+etablissement.telephone AS etablissement_telephone,
+etablissement.message AS etablissement_message
+ FROM `etablissement` LEFT JOIN groupe ON groupe.id = `id_groupe` WHERE etablissement.id=" . $id);
+        return $this->parseEtablissement($retour);
     }
 
 }

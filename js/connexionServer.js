@@ -13,7 +13,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.haveMAJ = function(method, nomTable, level) {
+    this.haveMAJ = function(method, nomTable, level) {//method("NS");
         if (isLocalBddSuppored() == false || isMozilla()) {
             method("NS");
         } else {
@@ -227,7 +227,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.getProduitByIdCategorieForPrintProduits = function(method, idcat) {
+    this.getProduitByIdCategorieForPrintProduits = function(method, idcat, param) {
         var clientLevel = getUpdateLevelOfTable(config.getConfig("tableNameProduit"));
         this.haveMAJ(allprod, config.getConfig("tableNameProduit"), clientLevel);
         function allprod(products, level) {
@@ -267,7 +267,8 @@ function ConnexionServer() {
                 updateLevelOfTable(config.getConfig("tableNameProduit"), level);
             } else if (products == "NS") {
                 $.ajax({
-                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" + idcat,
+                    url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" +
+                            idcat /*+ "&idetablissement=" + param.idetablissement + "&idzone=" + param.idzone*/,
                     type: 'GET',
                     dataType: 'json',
                     async: true,
@@ -909,6 +910,26 @@ function ConnexionServer() {
                 }
             });
         }
+    };
+    this.getEtablissementById = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetByIdEtablissements") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var liste;
+                if (data != null) {
+                    liste = new Etablissement(data[0].id, data[0].nom, data[0].logo, data[0].style, data[0].adresseEtab, data[0].telephone, data[0].message, data[0].slogan, data[0].groupe);
+                }
+                if (method != null) {
+                    method(liste, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
     };
 }
 

@@ -13,12 +13,15 @@ class EtablissementServiceImpl implements EtablissementService {
     private $etablissementSrv;
 
     public function __construct() {
-        $this->etablissementSrv = PersistanceFactory::getGroupeService();
+        $this->etablissementSrv = PersistanceFactory::getEtablissementService();
     }
 
     public function getAll() {
         return $this->etablissementSrv->getAll();
     }
 
-    
+    public function getById($id) {
+        return $this->etablissementSrv->getById($id);
     }
+
+}

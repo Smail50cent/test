@@ -18,4 +18,6 @@ interface ProduitServiceData {
     public function getProduitByLevel($level);
 
     public function DeleteProduit($id);
+    
+    public function getByCategorieAndEtablissentAndZone($idcategorie,$idetablissement,$idzone);
 }

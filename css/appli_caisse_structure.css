@@ -1,14 +1,4 @@
-@font-face {
-    font-family: 'lobster_1.3regular';
-    src: url('lobster_1.3-webfont.eot');
-    src: url('lobster_1.3-webfont.eot?#iefix') format('embedded-opentype'),
-        url('lobster_1.3-webfont.woff') format('woff'),
-        url('lobster_1.3-webfont.ttf') format('truetype'),
-        url('lobster_1.3-webfont.svg#lobster_1.3regular') format('svg');
-    font-weight: normal;
-    font-style: normal;
 
-}
 
 
  /*____________________________POP UP FB ______________________________*/
@@ -69,15 +59,15 @@
         margin: auto;
     }
 
-/*    .ui-dialog{
+        .ui-dialog{
         position:relative !important;
-        //width: 50% !important;
+        width: 50% !important;
         min-width: 275px !important;
         margin: 0 auto !important;
-        //top: -17em !important;
+        top: -17em !important;
         display: block !important;
-        //max-width: 350px;
-    }*/
+        max-width: 350px;
+    }
 
 
         .all_snbutton {
@@ -370,10 +360,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     body {
-        -webkit-background-size: 100%; /* pour Chrome et Safari */
-        -moz-background-size: 100%; /* pour Firefox */
-        -o-background-size: 100%; /* pour Opera */
-        background-size: 100%; /* version standardis�e */
+
         width:100%;
         padding: 0;
         margin:0;
@@ -383,7 +370,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_structure {
         box-sizing: border-box;
         width:100%;
-        height: 4.2em;
+        height: 4.7em;
         margin-top:0;
         position:fixed;
         top:0;
@@ -399,7 +386,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     .header_left_structure {
-        width: 100px;
+        width: 165px;
         height: 0px;
         float: left;
         position: initial;
@@ -408,15 +395,15 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_left_logo_structure { 
         height: 50px;
         margin-left: 3%;
-        position:absolute;
+        position:relative;
         left:0em;
-        bottom:3.8em;
+        top:-6.2em;
 }
 
     p.header_left_logo_message_structure:last-child {
-        position: absolute;
-        bottom: -4.7em;
-        left: 2.35em;
+        position: relative;
+        bottom: 6.9em;
+        /*left: 2.1em;*/
 }
 
     .content_structure  {
@@ -427,7 +414,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
     .choose_lang_structure {
-        margin-top:4em;
+        margin-top:4.5em;
 }
 
     .choose_lang_structure p {
@@ -436,8 +423,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .content_structure ul  {
         list-style-type:none; 
+        position: relative;
         padding : 0 0 0 0;
         width: auto;
+        z-index: 98;
         /* margin:0 0 2em 0;*/
         /*margin-right: -1em;*/
 }
@@ -579,8 +568,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .header_right_structure {
         clear: right;
-        height: 4.1em;
-        position: relative;
+        height: 7.1em;
+        /*position: relative;*/
         width: 100%;
         z-index: 3;
     }
@@ -588,8 +577,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_right_logo_structure p {
         position:absolute;
         right:0;
-        bottom: -1.15em;   
-        padding: 0 1% 1% 2%;
+        top: 1.15em;   
+        /*padding: 0 1% 1% 2%;*/
     }
 
     .slides_wrap_structure {
@@ -649,10 +638,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         
         .content_list_categorie_structure     {
             width:100%;
-            height:30px;
+            height:40px;
             /*position:fixed;*/
             display:flex;
-            margin-top:0;
+            margin-top:4.8em !important;
             z-index: 99;
         }
         .content_structure .sous_categorie_cat_structure {
@@ -664,7 +653,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .content_structure .sous_categorie_cat li{
             float: none;
-            width:100%;       
+            width:104%;       
         }
 
         .content_structure .sous_categorie_cat_structure li:last-child {
@@ -681,10 +670,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .content_list_categorie_structure li a {
-            padding-top: 0.25em;
+            padding-top: 0.3em;
             padding-bottom: 0.2em;
             display: block;
-            height:21px;
+            height:20px;
         }
 
         .content_list_categorie_structure li+li{
@@ -726,10 +715,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             width: 40%;
             display: block;
             position: relative;
-            padding-bottom: 0.3em;
-            padding-top: 2.5em;
+            /*padding-bottom: 0.3em;*/
             margin: 0 auto;
-            z-index: 999;
+            z-index: 10;
         }
 
         .content_globlal_zone_structure .content_produit_titre  {
@@ -766,8 +754,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .content_produit_description_structure li div {
             display:block;
-            margin: 6% auto -8% auto;
-            width: 50%;
+            margin: 3% auto -5% auto;
+            width: 60%;
         }
 
         .content_produit_description_structure li a {
@@ -777,7 +765,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .content_produit_description_structure li:first-child {
             padding-top: 0.3em;
-            margin-top: 0.5em;
+            margin-top: 1.5em;
         }
 
         .content_globlal_zone_structure>li:last-child {
@@ -800,10 +788,16 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         } 
 
         .content_produit_structure>p {
-            width: 65%;
+            width: 55%;
             /*margin: 0 15% 0 15%;*/
             /*display: inline-block;*/
             vertical-align: super;
+        }
+
+        .content_produit_titre_personnes_personalize {
+            /*width: 100%!important;
+            padding-left: 0!important;
+            text-align: center!important;*/
         }
 
         .choose_menu_item_produits_structure p, .content_globlal_zone_structure .content_produit_titre_structure{
@@ -850,9 +844,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         .content_produit_zone_structure, .menu_item_structure {
             position: relative;
             margin-bottom: 15px;
-            min-height: 50px;
+            min-height: 66px;
             margin-top: 0px;
-            padding-bottom: 1em;
+            /*padding-bottom: 0.5em;*/
             float:left;
             /* display: inline-table; */
             width: 100%;
@@ -864,7 +858,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .btn_more__left_structure {
-            width:700%; /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
+            width:100%; /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
         }
         .content_produit_zone_right_structure {
 
@@ -876,8 +870,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         p.content_produit_zone_right_prix_structure, .choose_menu_item_prix_structure {
             position:absolute;
-            right:3.2em;
-            top:0.3em;
+            right:2.6em;
+            top:2.5em;
         }
 
         .recapitulatif_commande_structure li {
@@ -892,7 +886,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         /*-----------------------------------------------------------RECAPITULATIF DE COMMANDE---------------------------------------------------------------------*/
 
         .recapitulatif_commande_structure p.content_produit_zone_right_prix_structure {
-            width:135%;
+            width:250%;
         }
 
         /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -907,21 +901,28 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }*/
 
         .content_produit_zone_left_structure{
-            display:inline-block;    
-            width: 50px;
-            height: 50px;
-            position:absolute;
-            bottom:0;
-            left:0;
+            display: inline-block;
+            width: 37px;
+            min-height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-bottom: 15px;
+            padding-bottom: 1em;
+            min-height: 50px;
+            margin-top: 0px;
         }
 
         .content_produit_zone_right_structure{
-            display:inline-block;    
-            width: 50px;
-            height: 50px;
-            position:absolute;
-            top:0;
-            right:0;
+            display: inline-block;
+            width: 37px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-bottom: 15px;
+            padding-bottom: 1em;
+            min-height: 50px;
+            margin-top: 0px;
         }
 
         .content_globlal_zone_structure .content_produit_btn_left_structure,  .content_globlal_zone_structure .content_produit_btn_right_structure {
@@ -933,21 +934,20 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .content_produit_btn_left_structure {
-            padding-bottom: 11px;
-            padding-right: 40px;
-            padding-top: 25px;
-            position: absolute;
-            left: 0.5em;
+            padding-top: 20px;
+            padding-left: 14px;
+            position: relative;
+            z-index: 97;
+            vertical-align: middle;
         }
 
 
         .content_produit_btn_right_structure {
-            padding-top: 7px;
-            padding-left: 40px;
-            padding-bottom: 40px;
-            position: absolute;
+            padding-top: 20px;
+            padding-left: 14px;
+            position: relative;
             z-index: 97;
-            right: 0.5em;
+            vertical-align: middle;
         }
 
         .btn_recapitulatif_commande_structure, .btn_valider_commande_structure {
@@ -992,7 +992,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .menu_content_titre_structure {
             width:100%;
-            padding:0.2em 0.2em;
+            /*padding:0.2em 0.2em;*/
             /*position:absolute;*/  /*______________________07/04/2014___________________________*/
             /*display:inline-block;*/
             /*width: 60%;*/ /*______________________09/04/2014___________________________*/
@@ -1002,7 +1002,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .menu_content_prix_structure {
             right:17%;
-            top:0;
+            top:-0.1em;
             z-index:945;
         }
 
@@ -1087,7 +1087,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .menu_content_structure p:not([class="choose_menu_item_titre"]) {
-
+            display: inline-block;
+            vertical-align: middle;
+            width: 47%;
         }
 
         /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/        
@@ -1141,7 +1143,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .recapitulatif_liste_structure{
         padding: 0 0 0 0;
-        margin-top: -1.5em;
+        margin-top: -3.5em;
     }
 
 
@@ -1447,7 +1449,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     height: 25px;
     z-index:955 ;
     right:0.5em;
-    top: 1em;
+    /*top: 1em;*/
     position: absolute;
 }
 
@@ -1547,6 +1549,16 @@ body {
         z-index: 4500;
         width: 100%;
         position: absolute;    
+        top:-2.7em;  
+        left:-1em; 
+}
+
+p.header_left_logo_message_structure:last-child {
+        bottom: 12em;
+}
+
+.header_right_structure {
+        height: 9.1em;
 }
 
 
@@ -1576,9 +1588,11 @@ body {
 /*_________________titre______________________*/
 
 .content_titre_structure {
-    margin-bottom: -1.5em;
-    padding-top: 2em;
+    margin-bottom: -0.5em;
+    padding-top: 0.5em;
 }
+
+
 
 
 /*Navigation*/
@@ -1596,21 +1610,33 @@ body {
     padding: 0 0.5em;
 }*/
 
+.sous_categorie_cat_structure{
+    width: 180px !important;
+}
+
+.content_structure .sous_categorie_cat_structure li a {
+margin-left: 0.2em;
+}
+
 ul#categorie_sous_cat_1 {
     width: 175px !important;
+}
+
+.content_list_categorie_structure {
+margin-top: 0!important;
 }
 
 .content_structure .sous_categorie_cat li {
     width: 104%;
 }
 
-.content_titre_structure {
-    padding-top: 0em;
+.content_list_categorie_structure li a {
+    height: 28px;
 }
 
 /*Items*/
 
-.produit_cat_personalize {
+.produit_cat_personalize, .menu_item_structure {
     width: 470px;
     display: inline-table;
 }
@@ -1619,30 +1645,77 @@ ul#categorie_sous_cat_1 {
     margin-left:20px;
 }
 
+.content_list_categorie_structure, .content_list_categorie_structure li {
+    height: 41px;
+}
+
+.recapitulatif_liste_structure {
+    width: 980px;
+    margin: 0.5em auto 0 auto;
+}
+
+p#menu_content_prix_id {
+width: 30%;
+}
 
 /*FOOTER*/
 
-.btn_recapitulatif_commande_structure {
-    /*margin: 0 29%;*/
-    width: 42%;
+.footer_structure {
+    width:980px;
+    left: 50%;
+    margin-left: -490px;
+}
 
+.footer_tarif_structure {
+    width:980px;
+    height: 90px;
+}
+
+.btn_recapitulatif_commande_structure {
+    margin: 0 29%;
+    width: 42%;
 }
 
 .menu_or_card_structure, .recapitulatif_commande_structure {
-    padding-top: 6em;
+    padding-top: 1em;
     margin-top: -3.5em;
 }
 
+.liste_ingredients_structure li {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.menu_item_structure:nth-child(even) {
+    margin-left: 2%;
+}
+
 .header_right_logo_structure p {
-    right: 0em;
+    right: 6.3em;
     margin-bottom: 0.4em;
-    bottom: -1.4em;
+    top: 1.8em;
 }
 
 select#select_lang {
-margin-top: -65px;
-position: relative;
+    margin-top: -65px;
+    position: relative;
 }
+
+.footer_tarif_total_structure, .footer_tarif_nbCouvert_structure {
+padding-bottom: 1.2em;
+}
+
+input[value="La carte"] {
+    margin:0;
+}
+
+
+
+.btn_ajout_ingredient_structure {
+     max-width: 150px;
+}
+
+
 }
 
 
