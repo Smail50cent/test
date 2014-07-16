@@ -57,9 +57,6 @@
     .notransition{
         opacity: 0.8;
     }
-    .content_structure ul {
-        margin-top: -65px;
-    }
     .select_ingredient_structure {
         width:20em;
         height:15em;
