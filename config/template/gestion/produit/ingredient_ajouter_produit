@@ -1,5 +1,5 @@
 
- <label><input id="check_all_id" type="checkbox" name="option[]" />Tout décocher</label>
+ <label><input id="uncheck_all_ingredient_id" type="checkbox" name="option[]" />Tout décocher</label>
 <div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
 </div>
 
