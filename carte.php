@@ -52,9 +52,6 @@
     .notransition{
         opacity: 0.8;
     }
-    .content_structure ul {
-        margin-top: -65px;
-    }
 </style>
 </body>
 </html> 
