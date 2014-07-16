@@ -1,14 +1,11 @@
 <?php
-
-include_once $path.'service/persistance/ConnexionBDD.php';
+include_once '../outils/AppRoot.php';
+include_once $path . 'service/persistance/ConnexionBDD.php';
 
 $bdd = new ConnexionBDD();
-$lignes = $bdd->executeGeneric("SELECT `ID`,`PRIX` FROM `produit`");
-echo "total=" . $lignes->rowCount();
-$i = 0;
+$lignes = $bdd->executeGeneric("SELECT * FROM `sous` WHERE `ID` > 8");
 while ($ligne = $lignes->fetch()) {
-    $lastID = $bdd->executeGeneric("INSERT INTO `prixHt`(`prix`) VALUES (" . $ligne->PRIX . ")");
-    $lastID2 = $bdd->executeGeneric("INSERT INTO `association_produit_prix`(`produit_id`, `prixht_id`) VALUES (" . $ligne->PRIX . "," . $lastID . " ) ");
-    $i++;
+    $bdd = new ConnexionBDD();                              
+    $bdd->executeGeneric("INSERT INTO `association_etablissement_produit`(`id_produit`, `id_etablissement`) VALUES (" . $ligne->ID . ",2)");
 }
-echo " i=" . $i;
+
