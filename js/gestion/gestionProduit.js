@@ -166,18 +166,28 @@ function addOption() {
             possibilite[options[i].id] = options[i].possibilites;
         }
         $(".ingredOpt_checkbox").change(function() {
+            var valOpt = this.value;
             if (this.checked) {
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
                     var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
-                    var possclass = paramValue(possCB, "opt_id", $(this).attr('id'));
-                    $('#select_possibilite_id').append(possclass);
+                    var possClass = paramValue(possCB, "possib_class", "possibOpt_checkbox");
+                    var possAttr = paramValue(possClass, "opt_id", $(this).attr('id'));
+                    $('#select_possibilite_id').append(possAttr);
                 }
-                
+                $('.possibOpt_checkbox').change(function() {
+                    if (this.checked) {
+                        var listIngred = getIngredLiAddProduit();
+                        var valLi = paramValue(listIngred, "ingred_val", valOpt+" "+this.value);
+                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+                        $('#content_produit_description_id').append(hashLi);
+                    }else {
+                        $("#" + this.value.hashCode()).remove();
+                    }
+                });
             } else {
                 $("input[optionid=" + $(this).attr('id') + "]").each(function() {
-                    $("#" + this.value.hashCode()).remove();
                     $(this).parent().remove();
-                    
+
                 });
             }
 

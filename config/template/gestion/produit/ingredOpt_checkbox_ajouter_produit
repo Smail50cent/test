@@ -1,1 +1,1 @@
-<label><input type="checkbox" value="{ingredOpt_nom}" class="ingredOpt_checkbox" id="{id_obj}" optionid="{opt_id}"/>{ingredOpt_nom}</label>
+<label><input type="checkbox" value="{ingredOpt_nom}" class="ingredOpt_checkbox {possib_class}" id="{id_obj}" optionid="{opt_id}"/>{ingredOpt_nom}</label>
