@@ -130,7 +130,8 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
     private function testsForListeSousCategorie($ligne, Categorie $produit) {
         $isHerePrix = false;
         for ($j = 0; $j < count($produit->getSousCategories()); $j++) {
-            if ($produit->getSousCategories()[$j]->id == $ligne->souscategorie_ID) {
+            $cats = $produit->getSousCategories();
+            if ($cats[$j]->id == $ligne->souscategorie_ID) {
                 $isHerePrix = true;
                 break;
             }

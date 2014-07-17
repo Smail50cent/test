@@ -91,7 +91,6 @@
                 width: 6px;
                 height: 6px;
                 background-color: #ffffff;
-
                 border-radius: 100%;
                 position: absolute;
                 -webkit-animation: bouncedelay 1.2s infinite ease-in-out;
@@ -322,6 +321,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     width:100%;
     margin-left: 1em;
 }
+
 .info_prix_content_couverts_content_structure, .info_prix_content_couverts_label_structure, .info_prix_content_table_label_structure, .info_prix_content_table_content_structure{
     display: inline;
 }
@@ -360,7 +360,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     body {
-
         width:100%;
         padding: 0;
         margin:0;
@@ -369,8 +368,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .header_structure {
         box-sizing: border-box;
-        width:100%;
-        height: 4.7em;
         margin-top:0;
         position:fixed;
         top:0;
@@ -387,7 +384,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .header_left_structure {
         width: 165px;
-        height: 0px;
+        height: 0px;             
         float: left;
         position: initial;
 }
@@ -395,15 +392,13 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_left_logo_structure { 
         height: 50px;
         margin-left: 3%;
-        position:relative;
-        left:0em;
-        top:-6.2em;
+
 }
 
     p.header_left_logo_message_structure:last-child {
         position: relative;
         bottom: 6.9em;
-        /*left: 2.1em;*/
+        /*left: 2.1em; */
 }
 
     .content_structure  {
@@ -423,15 +418,13 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .content_structure ul  {
         list-style-type:none; 
-        position: relative;
         padding : 0 0 0 0;
         width: auto;
-        z-index: 98;
-        /* margin:0 0 2em 0;*/
+        /* margin:0 0 2em 0;*/      /*personalize*/
         /*margin-right: -1em;*/
 }
 
-    .btn_choice_structure li,.choix_mode_calcul_structure  {
+    .btn_choice_structure li, .choix_mode_calcul_structure  {
         max-width:250px;
         display:block;
         margin:1em auto 3% auto;
@@ -568,8 +561,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .header_right_structure {
         clear: right;
-        height: 7.1em;
-        /*position: relative;*/
         width: 100%;
         z-index: 3;
     }
@@ -577,8 +568,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_right_logo_structure p {
         position:absolute;
         right:0;
-        top: 1.15em;   
-        /*padding: 0 1% 1% 2%;*/
     }
 
     .slides_wrap_structure {
@@ -638,12 +627,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         
         .content_list_categorie_structure     {
             width:100%;
-            height:40px;
-            /*position:fixed;*/
-            display:flex;
-            margin-top:4.8em !important;
             z-index: 99;
         }
+
         .content_structure .sous_categorie_cat_structure {
             float: none;
             opacity:0.9;
@@ -670,7 +656,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .content_list_categorie_structure li a {
-            padding-top: 0.3em;
             padding-bottom: 0.2em;
             display: block;
             height:20px;
@@ -715,9 +700,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             width: 40%;
             display: block;
             position: relative;
-            /*padding-bottom: 0.3em;*/
             margin: 0 auto;
-            z-index: 10;
         }
 
         .content_globlal_zone_structure .content_produit_titre  {
@@ -765,7 +748,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .content_produit_description_structure li:first-child {
             padding-top: 0.3em;
-            margin-top: 1.5em;
         }
 
         .content_globlal_zone_structure>li:last-child {
@@ -792,12 +774,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             /*margin: 0 15% 0 15%;*/
             /*display: inline-block;*/
             vertical-align: super;
-        }
-
-        .content_produit_titre_personnes_personalize {
-            /*width: 100%!important;
-            padding-left: 0!important;
-            text-align: center!important;*/
         }
 
         .choose_menu_item_produits_structure p, .content_globlal_zone_structure .content_produit_titre_structure{
@@ -844,7 +820,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         .content_produit_zone_structure, .menu_item_structure {
             position: relative;
             margin-bottom: 15px;
-            min-height: 66px;
             margin-top: 0px;
             /*padding-bottom: 0.5em;*/
             float:left;
@@ -857,8 +832,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             float:left;
         }
 
-        .btn_more__left_structure {
-            width:100%; /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
+        .btn_more__left_structure {/*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
         }
         .content_produit_zone_right_structure {
 
@@ -870,8 +844,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         p.content_produit_zone_right_prix_structure, .choose_menu_item_prix_structure {
             position:absolute;
-            right:2.6em;
-            top:2.5em;
         }
 
         .recapitulatif_commande_structure li {
@@ -901,28 +873,11 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }*/
 
         .content_produit_zone_left_structure{
-            display: inline-block;
-            width: 37px;
-            min-height: 50px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin-bottom: 15px;
-            padding-bottom: 1em;
-            min-height: 50px;
-            margin-top: 0px;
+            
         }
 
         .content_produit_zone_right_structure{
-            display: inline-block;
-            width: 37px;
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin-bottom: 15px;
-            padding-bottom: 1em;
-            min-height: 50px;
-            margin-top: 0px;
+            
         }
 
         .content_globlal_zone_structure .content_produit_btn_left_structure,  .content_globlal_zone_structure .content_produit_btn_right_structure {
@@ -934,20 +889,12 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .content_produit_btn_left_structure {
-            padding-top: 20px;
-            padding-left: 14px;
-            position: relative;
-            z-index: 97;
-            vertical-align: middle;
+            
         }
 
 
         .content_produit_btn_right_structure {
-            padding-top: 20px;
-            padding-left: 14px;
-            position: relative;
-            z-index: 97;
-            vertical-align: middle;
+            
         }
 
         .btn_recapitulatif_commande_structure, .btn_valider_commande_structure {
@@ -992,11 +939,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
         .menu_content_titre_structure {
             width:100%;
-            /*padding:0.2em 0.2em;*/
             /*position:absolute;*/  /*______________________07/04/2014___________________________*/
             /*display:inline-block;*/
             /*width: 60%;*/ /*______________________09/04/2014___________________________*/
-            margin:0 0 0 3%;
             /*top: 0.6em*/
         } 
 
@@ -1553,13 +1498,7 @@ body {
         left:-1em; 
 }
 
-p.header_left_logo_message_structure:last-child {
-        bottom: 12em;
-}
 
-.header_right_structure {
-        height: 9.1em;
-}
 
 
 /*________________________MESSAGE D'ERREUR________________________*/
@@ -1587,10 +1526,7 @@ p.header_left_logo_message_structure:last-child {
 
 /*_________________titre______________________*/
 
-.content_titre_structure {
-    margin-bottom: -0.5em;
-    padding-top: 0.5em;
-}
+
 
 
 
