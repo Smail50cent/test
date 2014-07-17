@@ -156,7 +156,8 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
     private function testsForListePrix($ligne, Produit $produit) {
         $isHerePrix = false;
         for ($j = 0; $j < count($produit->getAssociationPrixProduit()); $j++) {
-            if ($produit->getAssociationPrixProduit()[$j]->id == $ligne->association_produit_prix_id) {
+            $prod=$produit->getAssociationPrixProduit();
+            if ($prod[$j]->id == $ligne->association_produit_prix_id) {
                 $isHerePrix = true;
                 break;
             }
@@ -170,7 +171,8 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
     private function testsForListeIngredient($ligne, Produit $produit) {
         $isHereIng = false;
         for ($j = 0; $j < count($produit->getIngredients()); $j++) {
-            if (intval($produit->getIngredients()[$j]->ingredient) == intval($ligne->association_produit_ingredient_id_ingredient)) {
+            $pro=$produit->getIngredients();
+            if (intval($pro[$j]->ingredient) == intval($ligne->association_produit_ingredient_id_ingredient)) {
                 $isHereIng = true;
                 break;
             }

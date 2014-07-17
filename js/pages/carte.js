@@ -52,17 +52,13 @@ function onCarteLoadFinish(categories) {
     for (var i = 0; i < categories.length; i++) {// Load categories bar
         var item = (html);
         var sscat = (htmlSousCategorie);
-        console.log(categories[i]);
         item = paramValue(item, "onclick", "onClickCategorie(" + categories[i].getId() + ");");
         item = paramValue(item, "href", "#categorie" + categories[i].getId());
         item = paramValue(item, "avalue", categories[i].getNom());
         sscat = paramValue(sscat, "id", categories[i].getId());
         item = paramValue(item, "sscat", sscat);
         $('#content_list_categorie_id').append(item);
-
     }
-    var connexion = getConnexion();
-    var i = 0;
     var htmlSSCat = getHeaderCategorieSousCategorieItem();
     for (var i = 0; i < categories.length; i++) {
         var categorie = categories[i];
@@ -89,9 +85,6 @@ function onCarteLoadFinish(categories) {
                 }
             }
         }
-    }
-    function printSousCategorie(sousCategorie, id) {
-
     }
 }
 var idSousCat = "";
