@@ -238,8 +238,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
-@media all and (min-width: 310px) /*and (max-device-width: 980px)*/
-{
+@media all and (min-width: 310px) {
     html {
         overflow: hidden;
     }
@@ -259,6 +258,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     
 
     .header_personalize {
+        width:100%;
+        height: 4.7em;
         background: #bed536; /* Old browsers */
         background: -moz-linear-gradient(top, #bed536 0%, #279b3e 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bed536), color-stop(100%,#279b3e)); /* Chrome,Safari4+ */
@@ -281,15 +282,17 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
     .header_left_personalize {
+        width: 120px;
         border-top: 75px solid #726D07;
         border-left: 0px solid transparent;
         border-right: 71px solid transparent;
 }
 
-    /*.header_left_logo_personalize { 
-        background-repeat: no-repeat;
-        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAAnCAYAAABHeLXLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QUREMURFNkJBRTkzMTFFMzlGNkU5NTk2NTE3NDUxM0QiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QUREMURFNkNBRTkzMTFFMzlGNkU5NTk2NTE3NDUxM0QiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBREQxREU2OUFFOTMxMUUzOUY2RTk1OTY1MTc0NTEzRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBREQxREU2QUFFOTMxMUUzOUY2RTk1OTY1MTc0NTEzRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pkzref0AAAQ4SURBVHja7Foxb9UwEH6uGgmFLSthYEKpxIZU8xPCb0hnhFjIQvkBLO7AjyCIESaYw4AEAysVA4+BDix0QWVhCI44S8f1fLb78h7kiZNOTZ/ti/P57nx3thqGYfGXKLd8yfLpYia0s+H3FZYby+MK3bF8aHkJwP37NGrWBjizbIbf1MH/4+8F/NZsaB4r8UU0S1muLLegFQOw9vQvLX+0/MDykeUDyz9JnxtzUKzdxP4jSC/h+Z7lm2BCIyAnnv4f4Pmz5Yek/Tb8/bpNZqjAVJzJqIgx1fAnlYxpOqrmYIaxHU2ib6FAtYLMPhL8WYClEz8qJ0AtmXFa0LgpNpN8HfJiOjrSkebaE7A0A+YS2uqJgSqR7GpqeaHODfromNVqCVC9AKZZg6ksExc3SV6oM9aSUN9iOE8VAapDsZZaI1hLFMtNJi/UeUgAqxe0ahNAORPXEwF1Tl4KWHnEJsBpVYaAauay811kNzQRPkAR28ZahR2knitIsenOC/T8zHLG9Nm3fI38ZiAd+mL5jeXLlt8uZk4qUKIZ88AnUCkY6SlUC36g9k8MWCO9tnzX8nFkvrkPKVNJgHVtjt6j3HJsuwJjRnoHeaqv4uHoO8hwZaIFlIpkeZGxk2Eico18ETXB1BiH+rzME75Q30nbCmbuGrmCHs25ZsaK8lIDtNYDkJTWpKRTbrf0xTo0NuuEmC4n7RoBSKmLkLdSPathXpoJuaKOjM9KIcfMhbbCkyXQeC9j0rEsIG8lsLgdsI0wMw7MzqM5SojIaVstAKUDJl8F5K0Mlk7QKty/SPBVtWAStE15gGoDi2wC8hSe01RapSPBLYg5+DQgF0xCqpN1no/mQHZmLbmBGs9rCq3qIsbUzEcboYzjM82cpFWtMK8i4BtrpkrSMkm/uihYVBtiE9aemFkZWE2fUx+Ed6eYX4/CCp+8ltbafGZWEM5IMpxSDi4ZDfGtZiGYtxbaqoD/bBmtkzaQinPy+IPMkEaxgachZlF5VpPTWuUBUXLqTaDE3TDgU3mdbzfk/EkBLzGBALQKVBEq5gM6Zot2WYJh2tzke2ahuDYpFsMLIMlTPrCkepWO1DIHXEbSDGd+yuN3CnQAmxOwKmjvmd2xFNqcy6iZeZaeeVB53hKNQR+cI4QbJt9zGtdFALj0hBQ9kbtE7zWMjNxTXMQn2y0Z47RZSpUkeV6w3CrQiRr4PRd2Ro3GOg6ZZ0U+SHnyuYZM3o3rPYcg+HpAGdjpQvJYDpVo5koZXBlwpaNbU9TTdhbbSY8QUEdTFR63UbNKqNC6+xXXmYso/8FiKrdXPRdWtt4Mc1Ia5ug+8VMnU05gZ0amdWb5G1xj4mi8H/YYng/WcUCyOyOw8GEDpdryK3jeizwk2VrNwuZ0Sk5sDAB1BEdux+uaxJzA2oOjuNEcO7ii+dxyDyAdoiO6tdAvAQYAABxKrYEM2nYAAAAASUVORK5CYII=);
-}*/
+    .header_left_logo_personalize { 
+        position:relative;
+        left:0em;
+        top:-6.2em;
+}
 
     .logo_header_font_personalize {
         font-family: 'birds_of_paradiseregular', cursive, Trebuchet MS, Verdana, sans_serif !important;
@@ -308,11 +311,13 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .content_personalize  {
-	
+	    position: relative;
+        z-index: 98;
 }
 
     .choose_lang_personalize {
-}
+        margin-top:4.5em;
+}   
 
     .choose_lang_personalize p {
 }
@@ -338,6 +343,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         line-height: 128%;
         /* text-shadow: 0 1px 1px #000000;*/
 }
+
+    p.header_left_logo_message_structure:last-child {
+        position: absolute;
+        bottom: -4.6em;
+        left: 2.1em; 
+    }
 
     .btn_choice_personalize>li:first-child {
         background-color: #C90912;
@@ -546,6 +557,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
     .header_right_personalize {
+        height: 7.1em;
         text-align: right;
         position: absolute;
         background-image: url(../img/olivier.png);
@@ -567,6 +579,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .slides_wrap_personalize {
 
+    }
+
+    .content_produit_titre_personnes_personalize {
+        /*width: 100%!important;
+        padding-left: 0!important;
+        text-align: center!important;*/
     }
 
 
@@ -607,6 +625,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         /*-----------------------------------------------NAVIGATION-------------------------------------------*/
        
         .content_list_categorie_personalize     {
+            height:40px;
+            display:flex;
+            margin-top:4.8em !important;
             /*border-top: 1px dotted white;*/
             border-bottom: 1px solid white;
             /*background: linear-gradient(to top, rgba(217, 158, 66, 0.2) -10%, rgba(178, 101, 23, 0.5) 79%);*/
@@ -651,6 +672,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_list_categorie_personalize li a {
             font-family:'tangerineregular', cursive, Trebuchet MS, Verdana, Sans serif;
             font-size: 1.6em;
+            padding-top: 0.3em;
             color: rgba(255, 255, 255, 1);
             text-decoration: none;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
@@ -733,6 +755,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .content_produit_description_personalize li:first-child {
             border-top: 1px dotted #58550A;
+            margin-top: 1.5em;
         }
 
         .content_globlal_zone_personalize>li:last-child {
@@ -780,6 +803,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_produit_zone_personalize, .menu_item_personalize {
             background-color: rgba(0, 0, 0, 0.6);
             box-shadow: 0 3px 5px #000000;
+            min-height: 66px;
             border-radius: 5px;
             background-image: url(../img/textured_pper.png);
         }
@@ -789,7 +813,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .btn_more__left_personalize {
-                     /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
+            width:700%;         /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
         }
 
         .content_produit_zone_right_personalize {
@@ -807,7 +831,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
-
+            right:2.6em;
+            top:2.5em;
         }
 
         .recapitulatif_commande_personalize li {
@@ -822,6 +847,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         /*-----------------------------------------------------------RECAPITULATIF DE COMMANDE---------------------------------------------------------------------*/
 
         .recapitulatif_commande_personalize  p.content_produit_zone_right_prix_personalize {
+            width:250%;
             text-align:right;
         }
 
@@ -843,6 +869,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             border-bottom-left-radius: 5px;
             border-top-left-radius: 5px;
             border-right: 1px dotted rgba(88, 85, 10, 1);
+            display: inline-block;
+            width: 37px;
+            min-height: 50px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin-bottom: 15px;
+            padding-bottom: 1em;
+            min-height: 50px;
+            margin-top: 0px;
         }
 
         .content_produit_zone_right_personalize{
@@ -852,6 +888,15 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             border-bottom-right-radius: 5px;
             border-top-right-radius: 5px;
             border-left: 1px dotted rgba(88, 85, 10, 1);
+            display: inline-block;
+            width: 37px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-bottom: 15px;
+            padding-bottom: 1em;
+            min-height: 50px;
+            margin-top: 0px;
         }
 
         .content_globlal_zone_personalize .content_produit_btn_left_personalize, .content_globlal_zone_personalize .content_produit_btn_right_personalize, .recapitulatif_liste_personalize .content_produit_btn_left_personalize,  .recapitulatif_liste_personalize .content_produit_zone_right_personalize {
@@ -873,12 +918,21 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .content_produit_btn_left_personalize {
             cursor: pointer;
-
+            padding-top: 20px;
+            padding-left: 14px;
+            position: relative;
+            z-index: 97;
+            vertical-align: middle;
         }
 
 
         .content_produit_btn_right_personalize {
             cursor: pointer;
+            padding-top: 20px;
+            padding-left: 14px;
+            position: relative;
+            z-index: 97;
+            vertical-align: middle;
         }
 
         .btn_recapitulatif_commande_personalize, .btn_valider_commande_personalize {
@@ -936,6 +990,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             border-radius:3px  ;
             color:black;
             font-size: 1.3em;
+            /*padding:0.2em 0.2em;*/
+            margin:0 0 0 3%;
         } 
 
         .menu_content_prix_personalize {
@@ -995,6 +1051,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background: -o-linear-gradient(#74a81f, #17722d); 
             background: -ms-linear-gradient(#74a81f, #17722d); 
             background: linear-gradient(#74a81f, #17722d);
+        }
+
+                .menu_content_structure p:not([class="choose_menu_item_titre"]) {
+            display: inline-block;
+            vertical-align: middle;
+            width: 47%;
         }
 
         /*#choose_menu_valider_menu {
@@ -1125,10 +1187,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .content_titre_personalize {
         font-family: 'tangerineregular', cursive, Trebuchet MS, Verdana, Sans serif;
         font-size: 2.5em;
+        /*padding-bottom: 0.3em;*/
         /*font-weight: bold;*/
         text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
         color: rgba(255, 255, 255, 0.9);
         text-align: center;
+        z-index: 10;
         /* text-decoration: underline; */
 }
 
@@ -1247,6 +1311,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         padding-bottom: 5px;
 }
 
+.header_left_logo_structure {
+        top:-2.7em;  
+        left:-1em; 
+}
 
 /*________________________NAVIGATION________________________*/
 
@@ -1272,6 +1340,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         height: 36px;
 }
 
+
+p.header_left_logo_message_structure:last-child {
+        bottom: 12em;
+}
+
+.header_right_structure {
+        height: 9.1em;
+}
 
 /*________________________MESSAGE D'ERREUR________________________*/
 
@@ -1331,6 +1407,11 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 .footer_tarif_personalize {
 border-top-left-radius: 7px;
 border-top-right-radius: 7px;
+}
+
+.content_titre_structure {
+    margin-bottom: -0.5em;
+    padding-top: 0.5em;
 }
 
 }
