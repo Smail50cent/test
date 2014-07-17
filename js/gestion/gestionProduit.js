@@ -141,6 +141,7 @@ function UncheckAllBoxIngredOpt(id) {
             $(".ingredOpt_checkbox").each(function() {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
+                $('#select_possibilite_id').empty();
             });
         } else {
             $(".ingredOpt_checkbox").each(function() {
@@ -159,7 +160,7 @@ function addOption() {
         var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
             var checkbox = getIngredCheckBoxAddProduit();
-            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].nom);
+            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].label);
             var optId = paramValue(optCB, "id_obj", options[i].id);
             $('#select_option_id').append(optId);
 
@@ -176,12 +177,18 @@ function addOption() {
                 }
                 $('.possibOpt_checkbox').change(function() {
                     if (this.checked) {
+                        $(".possibOpt_checkbox").not(":checked").each(function() {
+                            $(this).attr("disabled",true);
+                        });
                         var listIngred = getIngredLiAddProduit();
                         var valLi = paramValue(listIngred, "ingred_val", valOpt+" "+this.value);
                         var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
                         $('#content_produit_description_id').append(hashLi);
                     }else {
                         $("#" + this.value.hashCode()).remove();
+                        $('.possibOpt_checkbox').each(function(){
+                            $(this).attr("disabled",false);
+                        });
                     }
                 });
             } else {
