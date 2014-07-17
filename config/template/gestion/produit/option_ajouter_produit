@@ -1,6 +1,8 @@
 
- <label><input id="check_all_id" type="checkbox" name="option[]" />Tout décocher</label>
-<div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
+ <label><input id="uncheck_all_option_id" type="checkbox" name="option[]" />Tout cocher / décocher</label>
+<div id="select_option_id" class="select_option select_option_structure select_ingredient_personalise">
+</div>
+<div id="select_possibilite_id" class="select_possibilite select_possibilite_structure select_possibilite_personalise">
 </div>
 
 <div onclick="ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">

@@ -118,30 +118,36 @@ function ingredientPage() {
             $('#select_ingredient_id').append(ingredCB);
         }
 
-        $('.ingredOpt_checkbox').change(function(){
-            if(this.checked) {
+        $('.ingredOpt_checkbox').change(function() {
+            if (this.checked) {
                 var listIngred = getIngredLiAddProduit();
-                var valLi = paramValue(listIngred,"ingred_val",this.value);
-                var hashLi = paramValue(valLi,"hash_ingred",this.value.hashCode());
+                var valLi = paramValue(listIngred, "ingred_val", this.value);
+                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
                 $('#content_produit_description_id').append(hashLi);
-            }else {
-                $("#"+this.value.hashCode()).remove();
+            } else {
+                $("#" + this.value.hashCode()).remove();
             }
-    });
+        });
+        UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
     }
 
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
+}
 
-    $('#check_all_id').click(function() {
+function UncheckAllBoxIngredOpt(id) {
+    $(id).change(function() {
         if (!this.checked) {
-            $('.ingred_checkbox').each(function() {
+            $(".ingredOpt_checkbox").each(function() {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
             });
+        } else {
+            $(".ingredOpt_checkbox").each(function() {
+                this.checked = true;
+            });
         }
     });
-    
 }
 
 function addOption() {
@@ -149,8 +155,45 @@ function addOption() {
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     getImplOfConnexionLocal().getAllOptions(getOpts);
-    function getOpts(options){
-        //console.log(options);
+    function getOpts(options) {
+        var possibilite = new Array();
+        for (var i = 0; i < options.length; i++) {
+            var checkbox = getIngredCheckBoxAddProduit();
+            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].nom);
+            var optId = paramValue(optCB, "id_obj", options[i].id);
+            $('#select_option_id').append(optId);
+
+            possibilite[options[i].id] = options[i].possibilites;
+        }
+        $(".ingredOpt_checkbox").change(function() {
+            var valOpt = this.value;
+            if (this.checked) {
+                for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
+                    var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
+                    var possClass = paramValue(possCB, "possib_class", "possibOpt_checkbox");
+                    var possAttr = paramValue(possClass, "opt_id", $(this).attr('id'));
+                    $('#select_possibilite_id').append(possAttr);
+                }
+                $('.possibOpt_checkbox').change(function() {
+                    if (this.checked) {
+                        var listIngred = getIngredLiAddProduit();
+                        var valLi = paramValue(listIngred, "ingred_val", valOpt+" "+this.value);
+                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+                        $('#content_produit_description_id').append(hashLi);
+                    }else {
+                        $("#" + this.value.hashCode()).remove();
+                    }
+                });
+            } else {
+                $("input[optionid=" + $(this).attr('id') + "]").each(function() {
+                    $(this).parent().remove();
+
+                });
+            }
+
+        });
+        UncheckAllBoxIngredOpt("#uncheck_all_option_id");
+
     }
 }
 

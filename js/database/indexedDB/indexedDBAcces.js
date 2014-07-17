@@ -436,7 +436,7 @@ myStorage.indexedDB.addFirstOptions = function() {
             var trans = db.transaction([config.getConfig("tableNameOptions")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameOptions"));
             var request;
-            request = store.put({"id": parseInt(option.id), "nom": option.nom, "label": option.label, "possibilite": option.possibilites});
+            request = store.put({"id": parseInt(option.id), "nom": option.nom, "label": option.label, "possibilites": option.possibilites});
             trans.oncomplete = function(e) {
                 entitysFinsh[config.getConfig("tableNameOptions")] = false;
                 db.close();

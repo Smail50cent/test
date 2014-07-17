@@ -13,34 +13,35 @@ function ConnexionServer() {
             }
         });
     };
-    this.haveMAJ = function(method, nomTable, level) {//method("NS");
-        if (isLocalBddSuppored() == false || isMozilla()) {
-            method("NS");
-        } else {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
-                type: 'GET',
-                dataType: 'json',
-                async: true,
-                success: function(data, textStatus, xhr) {
-                    if (method != null && data) {//Nous avons besoin de l'executer.
-                        if (data == false) {
-                            method(data, level);
-                        } else {
-                            if (data.data.length == 0) {
-                                data.data = "NU";
-                            }
-                            method(data.data, data.level);
-                        }
-                    } else {
-                        method(null);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
-                }
-            });
-        }
+    this.haveMAJ = function(method, nomTable, level) {
+        method("NS");
+//        if (isLocalBddSuppored() == false || isMozilla()) {
+//            method("NS");
+//        } else {
+//            $.ajax({
+//                url: getServicePath("serveur.clientaccess.serviceGethaveMAJ") + "?nomTable=" + nomTable + "&level=" + level,
+//                type: 'GET',
+//                dataType: 'json',
+//                async: true,
+//                success: function(data, textStatus, xhr) {
+//                    if (method != null && data) {//Nous avons besoin de l'executer.
+//                        if (data == false) {
+//                            method(data, level);
+//                        } else {
+//                            if (data.data.length == 0) {
+//                                data.data = "NU";
+//                            }
+//                            method(data.data, data.level);
+//                        }
+//                    } else {
+//                        method(null);
+//                    }
+//                },
+//                error: function(xhr, textStatus, errorThrown) {
+//                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+//                }
+//            });
+//        }
 
     };
     this.getEntreprise = function(methodToExecuteAfter) {
@@ -100,8 +101,10 @@ function ConnexionServer() {
         }
     };
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllCategories"),
+            url: getServicePath("serveur.clientaccess.serviceGetAllCategories") + "?idetablissement=" + idetablissement + "&idzone=" + idzone,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -120,6 +123,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -266,9 +270,11 @@ function ConnexionServer() {
                 }
                 updateLevelOfTable(config.getConfig("tableNameProduit"), level);
             } else if (products == "NS") {
+                var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+                var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
                 $.ajax({
                     url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" +
-                            idcat /*+ "&idetablissement=" + param.idetablissement + "&idzone=" + param.idzone*/,
+                            idcat + "&idetablissement=" + idetablissement + "&idzone=" + idzone,
                     type: 'GET',
                     dataType: 'json',
                     async: true,
@@ -932,30 +938,30 @@ function ConnexionServer() {
         });
     };
     this.getAllOptions = function(method) {
-    $.ajax({
-        url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data, textStatus, xhr) {
-            var options = new Array();
-            for (var i = 0; i < data.length; i++) {
-                var option = new Option();
-                option.setId(data[i].id);
-                option.setNom(data[i].nom);
-                option.setLabel(data[i].label);
-                option.setPossibilites(data[i].possibilites);
-                options.push(option);
-                
-                if (method != null) {
-                    method(options);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                var options = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var option = new Option();
+                    option.setId(data[i].id);
+                    option.setNom(data[i].nom);
+                    option.setLabel(data[i].label);
+                    option.setPossibilites(data[i].possibilites);
+                    options.push(option);
+
+                    if (method != null) {
+                        method(options);
+                    }
                 }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            showErrorMessage(strings.getString("label.error.connexion.serveur"));
-        }
-    });
+        });
     };
 }
 

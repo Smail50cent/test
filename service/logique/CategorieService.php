@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Description of CategorieService
  *
@@ -9,5 +8,8 @@
 interface CategorieService {
 
     public function getAll();
+
     public function addData();
+
+    public function getByEtablissementAndZone($etablissement, $zone);
 }
