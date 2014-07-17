@@ -13,7 +13,8 @@ function ConnexionServer() {
             }
         });
     };
-    this.haveMAJ = function(method, nomTable, level) {method("NS");
+    this.haveMAJ = function(method, nomTable, level) {
+        method("NS");
 //        if (isLocalBddSuppored() == false || isMozilla()) {
 //            method("NS");
 //        } else {
@@ -100,8 +101,10 @@ function ConnexionServer() {
         }
     };
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllCategories"),
+            url: getServicePath("serveur.clientaccess.serviceGetAllCategories") + "?idetablissement=" + idetablissement + "&idzone=" + idzone,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -120,6 +123,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -934,30 +938,30 @@ function ConnexionServer() {
         });
     };
     this.getAllOptions = function(method) {
-    $.ajax({
-        url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data, textStatus, xhr) {
-            var options = new Array();
-            for (var i = 0; i < data.length; i++) {
-                var option = new Option();
-                option.setId(data[i].id);
-                option.setNom(data[i].nom);
-                option.setLabel(data[i].label);
-                option.setPossibilites(data[i].possibilites);
-                options.push(option);
-                
-                if (method != null) {
-                    method(options);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                var options = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var option = new Option();
+                    option.setId(data[i].id);
+                    option.setNom(data[i].nom);
+                    option.setLabel(data[i].label);
+                    option.setPossibilites(data[i].possibilites);
+                    options.push(option);
+
+                    if (method != null) {
+                        method(options);
+                    }
                 }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
-        },
-        error: function(xhr, textStatus, errorThrown) {
-            showErrorMessage(strings.getString("label.error.connexion.serveur"));
-        }
-    });
+        });
     };
 }
 

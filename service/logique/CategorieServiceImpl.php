@@ -34,4 +34,8 @@ class CategorieServiceImpl implements CategorieService {
         $this->categorieSrv->addData();
     }
 
+    public function getByEtablissementAndZone($etablissement, $zone) {
+        return $this->categorieSrv->getByEtablissementAndZone($etablissement, $zone);
+    }
+
 }
