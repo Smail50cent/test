@@ -156,21 +156,31 @@ function addOption() {
     $('#dialog_add_produit_id').html(optProd);
     getImplOfConnexionLocal().getAllOptions(getOpts);
     function getOpts(options) {
+        var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
             var checkbox = getIngredCheckBoxAddProduit();
             var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].nom);
-            $('#select_option_id').append(optCB);
-            for (var j = 0; j < options[i].possibilites.length; j++) {
-                console.log(options[i].possibilites[j].nom);
-                var possCB = paramValue(checkbox, "ingredOpt_nom", options[i].possibilites[j].nom);
-                var possId = paramValue(possCB, "id_possib", options[i].id.hashCode());
-                $('#select_possibilite_id').append(possId);
+            var optId = paramValue(optCB, "id_obj", options[i].id);
+            $('#select_option_id').append(optId);
+
+            possibilite[options[i].id] = options[i].possibilites;
+        }
+        $(".ingredOpt_checkbox").change(function() {
+            if (this.checked) {
+                for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
+                    var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
+                    var possclass = paramValue(possCB, "opt_id", $(this).attr('id'));
+                    $('#select_possibilite_id').append(possclass);
+                }
+                
+            } else {
+                $("input[optionid=" + $(this).attr('id') + "]").each(function() {
+                    $("#" + this.value.hashCode()).remove();
+                    $(this).parent().remove();
+                    
+                });
             }
 
-        }
-        $('.ingredOpt_checkbox').change(function () {
-            
-            
         });
         UncheckAllBoxIngredOpt("#uncheck_all_option_id");
 
