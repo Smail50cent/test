@@ -10,7 +10,7 @@ class Categorie {
     public $id;
     public $nom;
     public $priorite;
-    public $souscategorie;
+    public $souscategorie = array();
 
     public function setId($id) {
         $this->id = $id;
@@ -38,6 +38,10 @@ class Categorie {
 
     public function setSousCategories($souscategories) {
         $this->souscategorie = $souscategories;
+    }
+
+    public function addSousCategories($souscategories) {
+        array_push($this->souscategorie, $souscategories);
     }
 
     public function getSousCategories() {

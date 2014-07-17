@@ -2,7 +2,7 @@ var sousCategorieLoaded = new Array();
 getSousCategoriesByIdCategorieInListe = function(id) {
     var souscategories = new Array();
     for (var i = 0; i < sousCategorieLoaded.length; i++) {
-        if (sousCategorieLoaded[i].getCategorie() == id) {
+        if (sousCategorieLoaded[i].categorie == id) {
             souscategories.push(sousCategorieLoaded[i]);
         }
     }

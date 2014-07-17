@@ -52,12 +52,14 @@ function onCarteLoadFinish(categories) {
     for (var i = 0; i < categories.length; i++) {// Load categories bar
         var item = (html);
         var sscat = (htmlSousCategorie);
+        console.log(categories[i]);
         item = paramValue(item, "onclick", "onClickCategorie(" + categories[i].getId() + ");");
         item = paramValue(item, "href", "#categorie" + categories[i].getId());
         item = paramValue(item, "avalue", categories[i].getNom());
         sscat = paramValue(sscat, "id", categories[i].getId());
         item = paramValue(item, "sscat", sscat);
         $('#content_list_categorie_id').append(item);
+
     }
     var connexion = getConnexion();
     var i = 0;
@@ -66,27 +68,30 @@ function onCarteLoadFinish(categories) {
         var categorie = categories[i];
         var souscategories = categorie.souscategorie;
         categorieLoaded.push(categorie);
-        if (souscategories.length != 0) {
-            var voirtoutItem = htmlSSCat;
-            voirtoutItem = paramValue(voirtoutItem, "idcat", categorie.getId());
-            voirtoutItem = paramValue(voirtoutItem, "idSousCat", -2);
-            voirtoutItem = paramValue(voirtoutItem, "text", strings.getString("label.categorie.souscategorie.voirtout"));
-            $("#categorie_sous_cat_" + categorie.getId()).append(voirtoutItem);
-            var height = (categorie.souscategorie.length + 1 * 25);
-            document.getElementById("categorie_sous_cat_" + categorie.getId()).style += "height " + height + "px;";
-            for (var j = 0; j < souscategories.length; j++) {
-                var sousCategorieid = souscategories[j];
-                connexion.getSousCategoriesByIdCategorieForContentSousCategorie(printSousCategorie, sousCategorieid, categorie.getId());
+        if (souscategories != null) {
+            if (souscategories.length != 0) {
+                var voirtoutItem = htmlSSCat;
+                voirtoutItem = paramValue(voirtoutItem, "idcat", categorie.getId());
+                voirtoutItem = paramValue(voirtoutItem, "idSousCat", -2);
+                voirtoutItem = paramValue(voirtoutItem, "text", strings.getString("label.categorie.souscategorie.voirtout"));
+                $("#categorie_sous_cat_" + categorie.getId()).append(voirtoutItem);
+                var height = (categorie.souscategorie.length + 1 * 25);
+                document.getElementById("categorie_sous_cat_" + categorie.getId()).style += "height " + height + "px;";
+                for (var j = 0; j < souscategories.length; j++) {
+                    var sousCategorie = souscategories[j];
+                    console.log(sousCategorie);
+                    sousCategorieLoaded.push(sousCategorie);
+                    var item = htmlSSCat;
+                    item = paramValue(item, "idcat", categorie.id);
+                    item = paramValue(item, "idSousCat", sousCategorie.id);
+                    item = paramValue(item, "text", sousCategorie.nom);
+                    $("#categorie_sous_cat_" + categorie.id).append(item);
+                }
             }
         }
     }
     function printSousCategorie(sousCategorie, id) {
-        sousCategorieLoaded.push(sousCategorie);
-        var item = htmlSSCat;
-        item = paramValue(item, "idcat", id);
-        item = paramValue(item, "idSousCat", sousCategorie.getId());
-        item = paramValue(item, "text", sousCategorie.getNom());
-        $("#categorie_sous_cat_" + id).append(item);
+
     }
 }
 var idSousCat = "";
@@ -95,16 +100,16 @@ function sousCategorieClicked(idCat, idSousCat) {
     if (idSousCat == -2) {
         var sousCategorie = getSousCategoriesByIdCategorieInListe(idCat);
         for (i = 0; i < sousCategorie.length; i++) {
-            $('.produitcat' + idCat + '_sscat' + sousCategorie[i].getId()).show();
+            $('.produitcat' + idCat + '_sscat' + sousCategorie[i].id).show();
         }
         $('.produitcat' + idCat + '_sscatundefined').show();
     } else {
         var sousCategorie = getSousCategoriesByIdCategorieInListe(idCat);
         for (i = 0; i < sousCategorie.length; i++) {
-            if (sousCategorie[i].getId() == idSousCat) {
-                $('.produitcat' + idCat + '_sscat' + sousCategorie[i].getId()).show();
+            if (sousCategorie[i].id == idSousCat) {
+                $('.produitcat' + idCat + '_sscat' + sousCategorie[i].id).show();
             } else {
-                $('.produitcat' + idCat + '_sscat' + sousCategorie[i].getId()).hide();
+                $('.produitcat' + idCat + '_sscat' + sousCategorie[i].id).hide();
                 $('.produitcat' + idCat + '_sscatundefined').hide();
             }
         }
@@ -601,8 +606,8 @@ function printProduits(index) {
     connexion.getCategoriesForContentCategorie(printSlides);
     var derniere = "";
     function printSlides(categories) {
-        var lenToGo=categories.length;
-        var lenCurrent=0;
+        var lenToGo = categories.length;
+        var lenCurrent = 0;
         for (var i = 0; i < categories.length; i++) {
             var categorie = categories[i];
             if (i + 1 == categories.length) {
@@ -623,7 +628,8 @@ function printProduits(index) {
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
             $("#categorie" + categorie.getId()).html(htmlContentProduit);
             function printProduitByCategorie(produits) {
-                var quantity = "+";lenCurrent++;
+                var quantity = "+";
+                lenCurrent++;
                 //console.log(produits[0]);
                 if (produits.length != 0) {
                     var categorie = produits[0].id_categorie;
@@ -655,7 +661,7 @@ function printProduits(index) {
                         itemProduit = paramValue(itemProduit, "produitNom", produit.getNom());
                         $('#content_global_zone__idcat_' + categorie.getId()).append(itemProduit);
                     }
-                    
+
                 }
 
                 if (lenCurrent == lenToGo) {
