@@ -606,7 +606,7 @@ function printProduits(index) {
             if (i + 1 == categories.length) {
                 derniere = categorie.getId();
             }
-            if (categorie.getId() - 1 == index) {
+            if (i == index) {
                 isActive = "active";
             } else {
                 isActive = "";
@@ -615,7 +615,6 @@ function printProduits(index) {
             myDivSlide = paramValue(myDivSlide, "style", "width: 100%;");
             myDivSlide = paramValue(myDivSlide, "classToAdd", isActive);
             myDivSlide = paramValue(myDivSlide, "id", "categorie" + categorie.getId());
-
             $("#slides_wrap_id").append(myDivSlide);
             var htmlContentProduit = getContentProduit();
             htmlContentProduit = paramValue(htmlContentProduit, "idCategorie", categorie.getId());
@@ -623,7 +622,7 @@ function printProduits(index) {
             function printProduitByCategorie(produits) {
                 var quantity = "+";
                 lenCurrent++;
-                //console.log(produits[0]);
+                console.log(produits[0]);
                 if (produits.length != 0) {
                     var categorie = produits[0].id_categorie;
                     try {

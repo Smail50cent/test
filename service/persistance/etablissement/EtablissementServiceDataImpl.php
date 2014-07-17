@@ -45,6 +45,7 @@ etablissement.message AS etablissement_message
             $etablissement->setMessage($ligne->etablissement_message);
             $etablissement->setSlogan($ligne->etablissement_slogan);
             $etablissement->setStyle($ligne->etablissement_style);
+            $etablissement->setLogo($ligne->etablissement_logo);
             $etablissement->setTelephone($ligne->etablissement_telephone);
             $groupe = new Groupe();
             $groupe->setAdresseSiege($ligne->groupe_adresseSiege);

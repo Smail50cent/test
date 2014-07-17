@@ -54,10 +54,10 @@ LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
 ");
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour,true);
     }
 
-    private function parseProduit($resultSet) {
+    private function parseProduit($resultSet, $isListeRet) {
         $assoPrixId;
         $idProdAfter = null;
         $liste = array();
@@ -145,10 +145,14 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
             }
             $idProdAfter = $ligne->produit_id;
         }
-        if (count($liste) == 1) {
-            $ret = $liste[0];
-        } else {
+        if ($isListeRet) {
             $ret = $liste;
+        } else {
+            if (count($liste) == 1) {
+                $ret = $liste[0];
+            } else {
+                $ret = $liste;
+            }
         }
         return $ret;
     }
@@ -264,7 +268,7 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.id = " . $id);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour,false);
     }
 
     public function getProduitByCategorieId($id) {
@@ -305,7 +309,7 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.CATEGORIE_ID = " . $id);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour,true);
     }
 
     public function addData() {
@@ -354,7 +358,7 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour,true);
     }
 
     public function DeleteProduit($id) {
@@ -403,10 +407,10 @@ LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingr
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
 WHERE
-produit.CATEGORIE_ID = ".$idcategorie." AND
-association_etablissement_produit.id_etablissement = ".$idetablissement." AND (
-(association_etablissement_produit.`id_zone` = ".$idzone.") OR (association_etablissement_produit.`id_zone` IS NULL))");
-        return $this->parseProduit($retour);
+produit.CATEGORIE_ID = " . $idcategorie . " AND
+association_etablissement_produit.id_etablissement = " . $idetablissement . " AND (
+(association_etablissement_produit.`id_zone` = " . $idzone . ") OR (association_etablissement_produit.`id_zone` IS NULL))");
+        return $this->parseProduit($retour,true);
     }
 
 }

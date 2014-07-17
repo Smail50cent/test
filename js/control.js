@@ -197,10 +197,17 @@ function onTemplateLoadFinish(etablissement) {
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
         useMenus = paramapp.getValeur_parametre;
     }, "gestionDesUtilisateurs", null);
+    
     if (etablissement.nom != null) {
         $("#title_app_id").text(etablissement.nom);
     } else {
         $("#title_app_id").text(etablissement.groupe.nom);
+    }
+    console.log(etablissement);
+    if (etablissement.logo != null) {
+        $("#logo_header_font").text(etablissement.logo);
+    } else {
+        $("#logo_header_font").text(etablissement.groupe.logo);
     }
     if (etablissement.style != null) {
         $("#cssToApply").attr('href', './css/' + etablissement.style + ".css");
