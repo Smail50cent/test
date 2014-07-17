@@ -168,6 +168,7 @@ function addOption() {
         }
         $(".ingredOpt_checkbox").change(function() {
             var valOpt = this.value;
+            
             if (this.checked) {
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
                     var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
@@ -176,9 +177,13 @@ function addOption() {
                     $('#select_possibilite_id').append(possAttr);
                 }
                 $('.possibOpt_checkbox').change(function() {
+                    var idOpt = $(this).attr('optionid');
                     if (this.checked) {
                         $(".possibOpt_checkbox").not(":checked").each(function() {
-                            $(this).attr("disabled",true);
+                            if($(this).attr("optionid") == idOpt){
+                                console.log($(this).attr("optionid")+ "=="+ idOpt);
+                                $(this).attr("disabled",true);
+                            }
                         });
                         var listIngred = getIngredLiAddProduit();
                         var valLi = paramValue(listIngred, "ingred_val", valOpt+" "+this.value);
