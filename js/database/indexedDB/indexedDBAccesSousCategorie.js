@@ -94,6 +94,8 @@ myStorage.indexedDB.getAllCategories = function(methodToExecuteAfter) {
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
+            var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+            var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameCategorie")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameCategorie"));
@@ -106,13 +108,34 @@ myStorage.indexedDB.getAllCategories = function(methodToExecuteAfter) {
                 if (!!result == false) {
                     return;
                 }
-                categorie.setId(result.value.id);
-                categorie.setNom(result.value.nom);
-                categorie.setPriorite(result.value.priorite);
-                categorie.setSousCategorie(result.value.souscategorie);
-                categories.push(categorie);
+                var etablissementOk = false;
+                for (var i = 0; i < result.value.etablissements.length; i++) {
+                    if (result.value.etablissements[i] == idetablissement) {
+                        etablissementOk = true;
+                        break;
+                    }
+                }
+                var zoneOk = false;
+                if (result.value.zones.length == 0) {
+                    zoneOk = true;
+                } else {
+                    for (var i = 0; i < result.value.zones.length; i++) {
+                        if (result.value.zones[i] == idzone) {
+                            zoneOk = true;
+                            break;
+                        }
+                    }
+                }
+                if (etablissementOk && zoneOk) {
+                    categorie.setId(result.value.id);
+                    categorie.setNom(result.value.nom);
+                    categorie.setPriorite(result.value.priorite);
+                    categorie.setSousCategorie(result.value.souscategorie);
+                    categories.push(categorie);
+                }
                 result.continue();
-            };
+            }
+            ;
 
             trans.oncomplete = function(e) {
                 if (methodToExecuteAfter != null) {
@@ -126,7 +149,8 @@ myStorage.indexedDB.getAllCategories = function(methodToExecuteAfter) {
         };
         request.onerror = myStorage.indexedDB.onerror;
     }
-};
+}
+;
 
 myStorage.indexedDB.getAllSousCategories = function(methodToExecuteAfter) {
     window.setTimeout(function() {
@@ -175,12 +199,12 @@ myStorage.indexedDB.getAllSousCategories = function(methodToExecuteAfter) {
     }
 };
 
-myStorage.indexedDB.getSousCategorieByIdCat = function(methodToExecuteAfter,idCat) {
+myStorage.indexedDB.getSousCategorieByIdCat = function(methodToExecuteAfter, idCat) {
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameSousCategorie")] == false) {
             impl();
         } else {
-            myStorage.indexedDB.getSousCategorieByIdCat(methodToExecuteAfter,idCat);
+            myStorage.indexedDB.getSousCategorieByIdCat(methodToExecuteAfter, idCat);
         }
     }, delay);
     function impl() {

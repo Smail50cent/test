@@ -75,7 +75,6 @@ function onCarteLoadFinish(categories) {
                 document.getElementById("categorie_sous_cat_" + categorie.getId()).style += "height " + height + "px;";
                 for (var j = 0; j < souscategories.length; j++) {
                     var sousCategorie = souscategories[j];
-                    console.log(sousCategorie);
                     sousCategorieLoaded.push(sousCategorie);
                     var item = htmlSSCat;
                     item = paramValue(item, "idcat", categorie.id);

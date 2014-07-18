@@ -18,7 +18,9 @@ myStorage.indexedDB.addFistCategories = function() {
                         "id": parseInt(data[i].id),
                         "nom": data[i].nom,
                         "priorite": data[i].priorite,
-                        "souscategorie": data[i].souscategorie
+                        "souscategorie": data[i].souscategorie,
+                        "etablissements": data[i].etablissements,
+                        "zones": data[i].zones
                     });
                 }
             },

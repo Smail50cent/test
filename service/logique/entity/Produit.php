@@ -17,7 +17,33 @@ class Produit {
     public $prix;
     public $tauxTva;
     public $level;
-    
+    public $etablissements = array();
+    public $zones = array();
+
+    public function getZones() {
+        return $this->zones;
+    }
+
+    public function setZones($zones) {
+        $this->zones = $zones;
+    }
+
+    public function addZone($zone) {
+        array_push($this->zones, $zone);
+    }
+
+    public function getEtablissements() {
+        return $this->etablissements;
+    }
+
+    public function setEtablissements($etablissements) {
+        $this->etablissements = $etablissements;
+    }
+
+    public function addEtablissements($etablissements) {
+        array_push($this->etablissements, $etablissements);
+    }
+
     public function setId($id) {
         $this->id = $id;
     }
@@ -105,6 +131,5 @@ class Produit {
     public function setLevel($level) {
         $this->level = $level;
     }
-
 
 }

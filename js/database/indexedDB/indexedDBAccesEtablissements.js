@@ -50,27 +50,28 @@ myStorage.indexedDB.addFirstEtablissements = function() {
 };
 
 myStorage.indexedDB.getEtablissementById = function(method, id, param) {
+
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameEtablissements")] == false) {
             impl(method, id, param);
         } else {
-            myStorage.indexedDB.getMenuByIdForDetailMenu(method, id, param);
+            myStorage.indexedDB.getEtablissementById(method, id, param);
         }
     }, delay);
     function impl(method, id, param) {
+        
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEtablissements")], myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameEtablissements"));
-            var request = store.get(id);
+            var request = store.get(parseInt(id));
             request.onsuccess = function(e) {
                 var result = e.target.result;
-                var etablissement;
-                console.log("df",etablissement);
+                var etablissement = result;
                 if (method != null) {
-                    method(etablissement,param);
+                    method(etablissement, param);
                 }
             };
             trans.oncomplete = function(e) {
