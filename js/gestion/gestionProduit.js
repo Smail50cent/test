@@ -273,8 +273,3 @@ function prixPage() {
     });
 
 }
-
-function addTva() {
-
-    alert('tva');
-}
