@@ -45,7 +45,9 @@
 
 
     .ui-dialog-title {
-    font-family: 'lobster_1.3regular',Trebuchet MS,Verdana,sans_serif !important;
+        font-family: 'lobster_1.3regular',Trebuchet MS,Verdana,sans_serif !important;
+        color: white;
+        text-shadow: 0px 0px 1px black;
     }
 
     .ui-dialog .ui-dialog-content{
@@ -1247,7 +1249,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 .header_left_personalize {
     border-top: 91px solid #C90912;
     border-left: 0px solid transparent;
-    width: 150px;
+    width: 195px;
     border-right: 77px solid transparent;
 }
 
@@ -1334,6 +1336,33 @@ background: rgba(248, 255, 197, 0.5);
 .footer_left_structure {
 display: none;
 }
+
+
+/*____________________GESTION DE PRODUITS_____________________*/
+
+.dialog-ajout-produit {
+    width: 495px !important;
+    position: absolute !important;
+    top: 14em !important;
+    right: -12em !important;
+    box-shadow: 1px 1px 15px #000;
+    z-index: 1000;
+}
+
+.dialog-ajout-produit .dialog_add_produit label {
+    display:block;
+}
+.dialog-ajout-produit .dialog_add_produit label input {
+    margin-bottom: 1em;
+}
+.select_ingredient_structure, .select_option_structure, .select_possibilite_structure {
+width: 40% !important;
+display: inline-block !important;
+background-color: rgba(255, 255, 255, 1);
+padding: 0.7em 0.3em 0.3em 0.3em;
+}
+
+
 }
 
 
