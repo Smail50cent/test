@@ -4,5 +4,10 @@
 include_once '../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 $menuSrv = LogiqueFactory::getMenuService();
-$result = $menuSrv->getAll();
+$result;
+if (isset($_GET["idetablissement"]) && isset($_GET["idzone"])) {
+    $result = $menuSrv->getByEtablissementAndZone($_GET["idetablissement"], $_GET["idzone"]);
+} else {
+    $result = $menuSrv->getAll();
+}
 echo json_encode($result);

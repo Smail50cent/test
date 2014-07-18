@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Description of MenueService
  *
@@ -8,6 +7,9 @@
  */
 interface MenuService {
 
+    public function getByEtablissementAndZone($etablissementid, $zone);
+
     public function getAll();
+
     public function getById($id);
 }

@@ -9,9 +9,35 @@ class Menu {
 
     public $id;
     public $nom;
-    public $produits; //ARRAY
-    public $prix;
+    public $produits = array(); //ARRAY
+    public $prix = array();
     public $tauxDeTva;
+    public $etablissements = array();
+    public $zones = array();
+
+    public function getZones() {
+        return $this->zones;
+    }
+
+    public function setZones($zones) {
+        $this->zones = $zones;
+    }
+
+    public function addZone($zone) {
+        array_push($this->zones, $zone);
+    }
+
+    public function getEtablissements() {
+        return $this->etablissements;
+    }
+
+    public function setEtablissements($etablissements) {
+        $this->etablissements = $etablissements;
+    }
+
+    public function addEtablissements($etablissements) {
+        array_push($this->etablissements, $etablissements);
+    }
 
     public function setId($id) {
         $this->id = intval($id);
@@ -33,8 +59,16 @@ class Menu {
         $this->produits = $produits;
     }
 
+    public function addProduit($produit) {
+        array_push($this->produits, $produit);
+    }
+
     public function setPrix($prix) {
         $this->prix = $prix;
+    }
+
+    public function addPrix($prix) {
+        array_push($this->prix, $prix);
     }
 
     public function getPrix() {
