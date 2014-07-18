@@ -54,8 +54,7 @@ function DeleteProduct(id) {
 function addProduct() {
 
     scripts.loadScripts("lib.dialog", function() {
-        $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, width: "30%"
-            , top: "-8159px", left: "798px"});
+        $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit"});
     });
     var divadd = getDivAddProduit();
     $('#dialog_add_produit_id').html(divadd);
@@ -168,7 +167,7 @@ function addOption() {
         }
         $(".ingredOpt_checkbox").change(function() {
             var valOpt = this.value;
-            
+
             if (this.checked) {
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
                     var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
@@ -180,19 +179,18 @@ function addOption() {
                     var idOpt = $(this).attr('optionid');
                     if (this.checked) {
                         $(".possibOpt_checkbox").not(":checked").each(function() {
-                            if($(this).attr("optionid") == idOpt){
-                                console.log($(this).attr("optionid")+ "=="+ idOpt);
-                                $(this).attr("disabled",true);
+                            if ($(this).attr("optionid") == idOpt) {
+                                //$(this).attr("disabled", true);
                             }
                         });
                         var listIngred = getIngredLiAddProduit();
-                        var valLi = paramValue(listIngred, "ingred_val", valOpt+" "+this.value);
+                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
                         var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
                         $('#content_produit_description_id').append(hashLi);
-                    }else {
+                    } else {
                         $("#" + this.value.hashCode()).remove();
-                        $('.possibOpt_checkbox').each(function(){
-                            $(this).attr("disabled",false);
+                        $('.possibOpt_checkbox').each(function() {
+                            //$(this).attr("disabled", false);
                         });
                     }
                 });
@@ -209,3 +207,74 @@ function addOption() {
     }
 }
 
+function prixPage() {
+    scripts.loadScripts("lib.datetimepicker", function() {
+        $('.ui-dialog-title').html("Ajouter les Prix");
+        var pagePrix = getPrixAddProduit();
+        $('#dialog_add_produit_id').html(pagePrix);
+
+        var AllTva = new Array();
+        getConnexion().getAllTauxTva(getTva);
+        function getTva(TVA) {
+            for (var i = 0; i < TVA.length; i++) {
+                AllTva.push(TVA[i]);
+            }
+        }
+        // A FAIRE / REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
+        getConnexion().getAllZoneTables(getZones);
+        function getZones(zones) {
+            var id_etab = getLocalStorageValue("client.application.etablissement.id");
+            for (var i = 0; i < zones.length; i++) {
+                if (zones[i].etablissement_id == id_etab) {
+                    var zonePrix = getPrixZoneAddProduit();
+                    var zoneName = paramValue(zonePrix, "zone_name", zones[i].nom);
+                    var zoneId = paramValue(zoneName, "zone_prix_id", zones[i].id);
+                    $('#div_zone_id').append(zoneId);
+                }
+            }
+            $(".tva_produit").each(function() {
+                for (var j = 0; j < AllTva.length; j++) {
+                    $(this).append($('<option>', {
+                        value: AllTva[j].taux,
+                        text: parseFloat(AllTva[j].taux)
+                    }));
+                }
+            });
+
+            $('.datetimepicker').datetimepicker();
+            $("input#input_defaut_prix_id").on("keyup", function() {
+                var valPrix = $(this).val();
+                $('.input_zone_prix').each(function() {
+                    var idzone = $(this).parent().attr('parentId');
+                    var taux = $("#tva_" + idzone).val();
+                    if (taux != 0) {
+                        var prixTVA = parseFloat(valPrix) + parseFloat(valPrix) * parseFloat(taux) / 100;
+                        $(this).val(parseFloat(prixTVA));
+                    } else {
+                        $(this).val(parseFloat(valPrix));
+                    }
+                });
+            });
+            $('.tva_produit ').change(function() {
+                if ($(this).val() != 0) {
+                    var selectId = $(this).attr("tvaid");
+                    var selectVal = $(this).val();
+                    $(".input_zone_prix").each(function() {
+                        if ($(this).attr('id_inputprix') == selectId) {
+                            if ($(this).val() != 0) {
+                                var prixTVA = parseFloat($(this).val()) + parseFloat($(this).val()) * parseFloat(selectVal) / 100;
+                                $(this).val(prixTVA.toFixed(2));
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    });
+
+}
+
+function addTva() {
+
+    alert('tva');
+}

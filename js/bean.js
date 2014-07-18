@@ -789,10 +789,11 @@ function MajTables() {
         return this.level;
     };
 }
-function ZoneTable(id, nom, tables) {
+function ZoneTable(id, nom, tables,etablissement_id) {
     this.id = id;
     this.nom = nom;
     this.tables = tables;
+    this.etablissement_id = etablissement_id;
 }
 function TypeCommande(id, label, labelMenu, isActif, idInPageHtml) {
     this.id = id;
@@ -853,4 +854,23 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     this.message = message;
     this.slogan = slogan;
     this.groupe = groupe;
+}
+function TauxTva(id,taux) {
+    
+    this.id = id;
+    this.taux = taux;
+    
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setTaux = function(taux) {
+        this.taux = taux;
+    };
+    this.getTaux = function() {
+        return this.taux;
+    };
+    
 }

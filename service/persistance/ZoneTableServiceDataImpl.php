@@ -14,7 +14,7 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke");
+        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke");
         return $this->parseZoneTable($resultSet);
     }
 
@@ -29,6 +29,7 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
             $ligne = $lignes[$i];
             $zoneTable->setId(intval($ligne->zone_table_id));
             $zoneTable->setNom($ligne->zone_table_nom);
+            $zoneTable->setEtablissement_id($ligne->etablissement_id);
             if ($ligne->zone_table_id == $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
                 if ($table != null) {

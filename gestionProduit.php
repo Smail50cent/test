@@ -58,8 +58,8 @@
         opacity: 0.8;
     }
     .select_ingredient_structure, .select_option_structure, .select_possibilite_structure{
-        width:20em;
-        height:15em;
+        width:16em;
+        height:12em;
         border:solid 1px #c0c0c0;
         overflow:auto;
     }

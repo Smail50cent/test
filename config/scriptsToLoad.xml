@@ -37,6 +37,7 @@
     <script for="lib.social" priority="3">lib/all.js</script>
     <script for="lib.crypt">lib/SHA512.js</script>
     <script for="upload" priority="2">uploadImg.js</script>
+    <script for="lib.datetimepicker">lib/jqueryDatetimePicker/jquery.datetimepicker.js</script>
     
     <script for="swipe">lib/jquery.event.move.js</script>
     <script for="swipe">lib/jquery.event.swipe.js</script>

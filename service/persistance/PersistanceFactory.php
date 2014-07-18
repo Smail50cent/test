@@ -34,6 +34,7 @@ include_once $path . 'service/persistance/TypeCommandeServiceDataImpl.php';
 include_once $path . 'service/persistance/groupe/GroupeServiceDataImpl.php';
 include_once $path . 'service/persistance/etablissement/EtablissementServiceDataImpl.php';
 include_once $path . 'service/persistance/option/OptionServiceDataImpl.php';
+include_once $path . 'service/persistance/TauxTvaServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -184,7 +185,7 @@ class PersistanceFactory {
      */
     public static function getTauxTvaService() {
         if (PersistanceFactory::$tauxTvaSrv == null) {
-            PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceImpl();
+            PersistanceFactory::$tauxTvaSrv = new TauxTvaServiceDataImpl();
         }
         return PersistanceFactory::$tauxTvaSrv;
     }
