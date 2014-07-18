@@ -225,3 +225,9 @@ function getIngredLiAddProduit(){
 function getOptionAddProduit(){
     return templates.getTemplate("gestion/produit/option_ajouter_produit");
 }
+function getPrixAddProduit(){
+    return templates.getTemplate("gestion/produit/prix_ajouter_produit");
+}
+function getPrixZoneAddProduit(){
+    return templates.getTemplate("gestion/produit/prix_zone_ajouter_produit");
+}

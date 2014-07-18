@@ -9,6 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
         <meta http-equiv="X-UA-f" content="IE=edge,chrome=1">
         <link rel="stylesheet" href="./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css" type="text/css">
+        <link rel="stylesheet" href="./js/lib/jqueryDatetimePicker/jquery.datetimepicker.css" type="text/css">
         <link  rel="stylesheet" type="text/css" href="./css/appli_caisse_structure.css">
         <link id="cssToApply" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>

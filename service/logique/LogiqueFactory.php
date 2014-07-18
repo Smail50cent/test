@@ -32,6 +32,7 @@ include_once $path . 'service/logique/TypeCommandeServiceImpl.php';
 include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
 include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';
 include_once $path . 'service/logique/option/OptionServiceImpl.php';
+include_once $path . 'service/logique/tauxTva/TauxTvaServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -62,6 +63,7 @@ class LogiqueFactory {
     private static $etablissementSrv = null;
     private static $groupeSrv = null;
     private static $optSrv = null;
+    private static $tauxTvaSrv = null;
 
     /**
      * 
@@ -356,6 +358,17 @@ class LogiqueFactory {
             LogiqueFactory::$optSrv = new OptionServiceImpl();
         }
         return LogiqueFactory::$optSrv;
+    }
+    
+    /**
+     * 
+     * @return TauxTvaService
+     */
+    public static function getTauxTvaService() {
+        if (LogiqueFactory::$tauxTvaSrv == null) {
+            LogiqueFactory::$tauxTvaSrv = new TauxTvaServiceImpl();
+        }
+        return LogiqueFactory::$tauxTvaSrv;
     }
 
 }

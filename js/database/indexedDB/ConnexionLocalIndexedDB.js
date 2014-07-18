@@ -138,5 +138,8 @@ function ConnexionLocalIndexedDB() {
     this.getEtablissementById = function(method, id, param) { 
         myStorage.indexedDB.getEtablissementById(method, id, param);
     };
+    this.getAllTauxTva = function(method) {
+        console.log("TO DO");
+    };
 
 }

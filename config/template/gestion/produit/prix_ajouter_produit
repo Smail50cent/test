@@ -1,0 +1,11 @@
+<label id="defaut_prix_id" class="defaut_prix"> Prix </label> 
+<input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix">
+
+<hr width=50% align="center">
+
+<div id="div_zone_id" class="div_zone"> </div>
+
+<div onclick="addOption();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
+<!--div onclick="addTva();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<img src="img/gestion/produit/right.png" width="40" height="40" "></div></p-->

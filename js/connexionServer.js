@@ -822,7 +822,7 @@ function ConnexionServer() {
                         for (var j = 0; j < data [i].tables.length; j++) {
                             tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
                         }
-                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables));
+                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
                     }
                 }
                 if (method != null) {
@@ -944,7 +944,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
                 var options = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -959,6 +959,30 @@ function ConnexionServer() {
                         method(options);
                     }
                 }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getAllTauxTva = function(method,param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllTauxTva"),
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(data, textStatus, xhr) {
+                var TVA = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var tauxtva = new TauxTva();
+                    tauxtva.setId(data[i].id_tva);
+                    tauxtva.setTaux(data[i].taux_tva);
+                    TVA.push(tauxtva);
+                }
+                
+                if (method != null) {
+                        method(TVA,param);
+                    }
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));

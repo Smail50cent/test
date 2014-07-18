@@ -5,7 +5,8 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-interface TauxTvaService {
+interface TauxTvaServiceData {
 
     public function getById($id);
+    public function getAll();
 }

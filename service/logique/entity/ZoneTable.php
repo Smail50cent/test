@@ -15,7 +15,16 @@ class ZoneTable {
 
     public $id;
     public $nom;
+    public $etablissement_id;
     public $tables = array();
+
+    public function getEtablissement_id() {
+        return $this->etablissement_id;
+    }
+
+    public function setEtablissement_id($etablissement_id) {
+        $this->etablissement_id = $etablissement_id;
+    }
 
     public function getId() {
         return $this->id;
