@@ -11,6 +11,32 @@ class Categorie {
     public $nom;
     public $priorite;
     public $souscategorie = array();
+    public $etablissements = array();
+    public $zones = array();
+
+    public function getZones() {
+        return $this->zones;
+    }
+
+    public function setZones($zones) {
+        $this->zones = $zones;
+    }
+
+    public function addZone($zone) {
+        array_push($this->zones, $zone);
+    }
+
+    public function getEtablissements() {
+        return $this->etablissements;
+    }
+
+    public function setEtablissements($etablissements) {
+        $this->etablissements = $etablissements;
+    }
+
+    public function addEtablissements($etablissements) {
+        array_push($this->etablissements, $etablissements);
+    }
 
     public function setId($id) {
         $this->id = $id;

@@ -135,7 +135,7 @@ function ConnexionLocalIndexedDB() {
     this.getAllOptions = function(methodToExecuteAfter) {
         myStorage.indexedDB.getAllOptions(methodToExecuteAfter);
     };
-    this.getEtablissementById = function(method, id, param) {
+    this.getEtablissementById = function(method, id, param) { 
         myStorage.indexedDB.getEtablissementById(method, id, param);
     };
     this.getAllTauxTva = function(method) {

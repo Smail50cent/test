@@ -13,23 +13,23 @@ include_once $path . 'service/logique/entity/SousCategorie.php';
 class CategorieServiceDataImpl implements CategorieServiceData {
 
     public function getAll() {
-        $ret = array();
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM categorie");
-        $i = 0;
-        while ($ligne = $retour->fetch()) {
-            $categorie = new Categorie();
-            $categorie->setId(intval($ligne->id));
-            $categorie->setNom($ligne->nom);
-            $categorie->setPriorite(intval($ligne->priorite));
-            $ret[$i] = $categorie;
-            $i++;
-        }
-        return $ret;
+        $retour = $bdd->executeGeneric("SELECT
+categorie.id AS categorie_id,
+categorie.nom AS categorie_nom,
+categorie.priorite AS categorie_priorite,
+souscategorie.ID AS souscategorie_ID,
+souscategorie.NOM AS souscategorie_NOM,
+souscategorie.priorite AS souscategorie_priorite,
+association_etablissement_categorie.id_etablissement AS association_etablissement_categorie_id_etablissement,
+association_etablissement_categorie.id_zone AS association_etablissement_categorie_id_zone
+FROM `categorie`
+LEFT JOIN souscategorie ON souscategorie.categorie_id = categorie.id
+LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id");
+        return $this->parse($retour);
     }
 
     public function getById($id) {
-
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM categorie WHERE id=" . $id);
         $categorie = new Categorie();
@@ -55,7 +55,9 @@ categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
 souscategorie.ID AS souscategorie_ID,
 souscategorie.NOM AS souscategorie_NOM,
-souscategorie.priorite AS souscategorie_priorite
+souscategorie.priorite AS souscategorie_priorite,
+association_etablissement_categorie.id_etablissement AS association_etablissement_categorie_id_etablissement,
+association_etablissement_categorie.id_zone AS association_etablissement_categorie_id_zone
 FROM `categorie`
 LEFT JOIN souscategorie ON souscategorie.categorie_id = categorie.id
 LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id
@@ -80,6 +82,14 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 if ($assoIng != null) {
                     $categorie->addSousCategories($assoIng);
                 }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $categorie);
+                if ($assoEtablissements != null) {
+                    $categorie->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $categorie);
+                if ($assoZones != null) {
+                    $categorie->addZone($assoZones);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
                         array_push($liste, $categorie);
@@ -94,6 +104,14 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 if ($assoPrix1 != null) {
                     $categorie->addSousCategories($assoPrix1);
                 }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $categorie);
+                if ($assoEtablissements != null) {
+                    $categorie->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $categorie);
+                if ($assoZones != null) {
+                    $categorie->addZone($assoZones);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
                         array_push($liste, $categorie);
@@ -106,6 +124,14 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 $assoPrix1 = $this->testsForListeSousCategorie($ligne, $categorie);
                 if ($assoPrix1 != null) {
                     $categorie->addSousCategories($assoPrix1);
+                }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $categorie);
+                if ($assoEtablissements != null) {
+                    $categorie->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $categorie);
+                if ($assoZones != null) {
+                    $categorie->addZone($assoZones);
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
@@ -137,6 +163,45 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
             }
         }if (!$isHerePrix) {
             return ($this->createSousCategorie($ligne));
+        } else {
+            return null;
+        }
+    }
+
+    private function testsForListeZone($ligne, Categorie $produit) {
+        $isHerePrix = false;
+        for ($j = 0; $j < count($produit->getZones()); $j++) {
+            $prod = $produit->getZones();
+            if (intval($prod[$j]) == intval($ligne->association_etablissement_categorie_id_zone)) {
+                $isHerePrix = true;
+                break;
+            }
+        }if (!$isHerePrix) {
+            return intval($ligne->association_etablissement_categorie_id_zone);
+        } else {
+            return null;
+        }
+    }
+
+    private function testsForListeEtablissements($ligne, Categorie $produit) {
+        $isHerePrix = false;
+        if (isset($ligne->association_etablissement_categorie_id_etablissement)) {
+            for ($j = 0; $j < count($produit->getEtablissements()); $j++) {
+                $prod = $produit->getEtablissements();
+                if (intval($prod[$j]) == intval($ligne->association_etablissement_categorie_id_etablissement)) {
+                    $isHerePrix = true;
+                    break;
+                }
+            }
+            if (!$isHerePrix) {
+                if ($ligne->association_etablissement_categorie_id_etablissement == null) {
+                    return null;
+                } else {
+                    return intval($ligne->association_etablissement_categorie_id_etablissement);
+                }
+            } else {
+                return null;
+            }
         } else {
             return null;
         }

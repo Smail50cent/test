@@ -202,16 +202,19 @@ function onTemplateLoadFinish(etablissement) {
     } else {
         $("#title_app_id").text(etablissement.groupe.nom);
     }
+    if (etablissement.logo != null) {
+        $("#logo_header_font").text(etablissement.logo);
+    } else {
+        $("#logo_header_font").text(etablissement.groupe.logo);
+    }
     if (etablissement.style != null) {
         $("#cssToApply").attr('href', './css/' + etablissement.style + ".css");
     } else {
-        console.log("null");
         $("#cssToApply").attr('href', './css/' + etablissement.groupe.style + ".css");
     }
     if (etablissement.slogan != null) {
         $("#header_right_logo_slogan").text(etablissement.slogan);
     } else {
-        console.log("null");
         $("#header_right_logo_slogan").text(etablissement.groupe.slogan);
     }
     if (etablissement.message != null && etablissement.message != "") {

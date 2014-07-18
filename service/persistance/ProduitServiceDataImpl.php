@@ -17,8 +17,7 @@ class ProduitServiceDataImpl implements ProduitServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT 
-produit.ID AS produit_id,
+        $retour = $bdd->executeGeneric("SELECT produit.ID AS produit_id,
 produit.NOM AS produit_nom,
 produit.options AS produit_options,
 produit.level AS produit_level,
@@ -44,7 +43,9 @@ association_produit_ingredient.id_ingredient AS association_produit_ingredient_i
 association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
 association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
-association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,	
+association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,	
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -52,12 +53,12 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
-");
-        return $this->parseProduit($retour);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
+LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID");
+        return $this->parseProduit($retour, true);
     }
 
-    private function parseProduit($resultSet) {
+    private function parseProduit($resultSet, $isListeRet) {
         $assoPrixId;
         $idProdAfter = null;
         $liste = array();
@@ -94,6 +95,14 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
                 if ($assoIng != null) {
                     $produit->addIngredients($assoIng);
                 }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $produit);
+                if ($assoEtablissements != null) {
+                    $produit->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $produit);
+                if ($assoZones != null) {
+                    $produit->addZone($assoZones);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
                         array_push($liste, $produit);
@@ -116,6 +125,14 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
                 if ($assoIng != null) {
                     $produit->addIngredients($assoIng);
                 }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $produit);
+                if ($assoEtablissements != null) {
+                    $produit->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $produit);
+                if ($assoZones != null) {
+                    $produit->addZone($assoZones);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
                         array_push($liste, $produit);
@@ -133,6 +150,14 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
                 if ($assoIng != null) {
                     $produit->addIngredients($assoIng);
                 }
+                $assoEtablissements = $this->testsForListeEtablissements($ligne, $produit);
+                if ($assoEtablissements != null) {
+                    $produit->addEtablissements($assoEtablissements);
+                }
+                $assoZones = $this->testsForListeZone($ligne, $produit);
+                if ($assoZones != null) {
+                    $produit->addZone($assoZones);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
                         array_push($liste, $produit);
@@ -145,18 +170,23 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
             }
             $idProdAfter = $ligne->produit_id;
         }
-        if (count($liste) == 1) {
-            $ret = $liste[0];
-        } else {
+        if ($isListeRet) {
             $ret = $liste;
+        } else {
+            if (count($liste) == 1) {
+                $ret = $liste[0];
+            } else {
+                $ret = $liste;
+            }
         }
         return $ret;
     }
 
+//association_produit_ingredient_id_etablissement
     private function testsForListePrix($ligne, Produit $produit) {
         $isHerePrix = false;
         for ($j = 0; $j < count($produit->getAssociationPrixProduit()); $j++) {
-            $prod=$produit->getAssociationPrixProduit();
+            $prod = $produit->getAssociationPrixProduit();
             if ($prod[$j]->id == $ligne->association_produit_prix_id) {
                 $isHerePrix = true;
                 break;
@@ -168,10 +198,49 @@ LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id
         }
     }
 
+    private function testsForListeZone($ligne, Produit $produit) {
+        $isHerePrix = false;
+        for ($j = 0; $j < count($produit->getZones()); $j++) {
+            $prod = $produit->getZones();
+            if (intval($prod[$j]) == intval($ligne->association_produit_etablissement_id_zone)) {
+                $isHerePrix = true;
+                break;
+            }
+        }if (!$isHerePrix) {
+            return intval($ligne->association_produit_etablissement_id_zone);
+        } else {
+            return null;
+        }
+    }
+
+    private function testsForListeEtablissements($ligne, Produit $produit) {
+        $isHerePrix = false;
+        if (isset($ligne->association_produit_ingredient_id_etablissement)) {
+            for ($j = 0; $j < count($produit->getEtablissements()); $j++) {
+                $prod = $produit->getEtablissements();
+                if (intval($prod[$j]) == intval($ligne->association_produit_ingredient_id_etablissement)) {
+                    $isHerePrix = true;
+                    break;
+                }
+            }
+            if (!$isHerePrix) {
+                if ($ligne->association_produit_ingredient_id_etablissement == null) {
+                    return null;
+                } else {
+                    return intval($ligne->association_produit_ingredient_id_etablissement);
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
+
     private function testsForListeIngredient($ligne, Produit $produit) {
         $isHereIng = false;
         for ($j = 0; $j < count($produit->getIngredients()); $j++) {
-            $pro=$produit->getIngredients();
+            $pro = $produit->getIngredients();
             if (intval($pro[$j]->ingredient) == intval($ligne->association_produit_ingredient_id_ingredient)) {
                 $isHereIng = true;
                 break;
@@ -257,7 +326,9 @@ association_produit_ingredient.id_ingredient AS association_produit_ingredient_i
 association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
 association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
-association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
+association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -265,8 +336,9 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
+LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.id = " . $id);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour, false);
     }
 
     public function getProduitByCategorieId($id) {
@@ -298,7 +370,9 @@ association_produit_ingredient.id_ingredient AS association_produit_ingredient_i
 association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
 association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
-association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
+association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -306,8 +380,9 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
+LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.CATEGORIE_ID = " . $id);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour, true);
     }
 
     public function addData() {
@@ -347,7 +422,9 @@ association_produit_ingredient.id_ingredient AS association_produit_ingredient_i
 association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
 association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
-association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
+association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -355,8 +432,9 @@ LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
+LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
-        return $this->parseProduit($retour);
+        return $this->parseProduit($retour, true);
     }
 
     public function DeleteProduit($id) {
@@ -394,7 +472,9 @@ association_produit_ingredient.id_ingredient AS association_produit_ingredient_i
 association_produit_ingredient.isAdded AS association_produit_ingredient_isAdded,
 association_produit_ingredient.surcout AS association_produit_ingredient_surcout,
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
-association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup
+association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
+association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -405,10 +485,10 @@ LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingr
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
 WHERE
-produit.CATEGORIE_ID = ".$idcategorie." AND
-association_etablissement_produit.id_etablissement = ".$idetablissement." AND (
-(association_etablissement_produit.`id_zone` = ".$idzone.") OR (association_etablissement_produit.`id_zone` IS NULL))");
-        return $this->parseProduit($retour);
+produit.CATEGORIE_ID = " . $idcategorie . " AND
+association_etablissement_produit.id_etablissement = " . $idetablissement . " AND (
+(association_etablissement_produit.`id_zone` = " . $idzone . ") OR (association_etablissement_produit.`id_zone` IS NULL))");
+        return $this->parseProduit($retour, true);
     }
 
 }

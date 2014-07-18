@@ -38,6 +38,7 @@ function setEntityFinishTo(bool) {
     entitysFinsh[config.getConfig("tableNameParamApplication")] = bool;
     entitysFinsh[config.getConfig("tableNameZoneTables")] = bool;
     entitysFinsh[config.getConfig("tableNameOptions")] = bool;
+    entitysFinsh[config.getConfig("tableNameEtablissements")] = bool;
 }
 function verifyFinish() {
     var finish = false;
@@ -62,6 +63,8 @@ function verifyFinish() {
     } else if (entitysFinsh[config.getConfig("tableNameZoneTables")] == true) {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameOptions")] == true) {
+        finish = true;
+    } else if (entitysFinsh[config.getConfig("tableNameEtablissements")] == true) {
         finish = true;
     }
     return finish;
@@ -147,6 +150,8 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameProduit"), {keyPath: "id", autoIncrement: true});
         store.createIndex('categorie', ['categorie.id'], {unique: false});
+        store.createIndex('etablissements', 'etablissements', {unique: false});
+        store.createIndex('zones', 'zones', {unique: false});
         myStorage.indexedDB.addFistProduits();
 
         if (db.objectStoreNames.contains(config.getConfig("tableNameMenu"))) {
@@ -185,7 +190,7 @@ myStorage.indexedDB.create = function() {
         }
         var store = db.createObjectStore(config.getConfig("tableNameZoneTables"), {keyPath: "id", autoIncrement: true});
         myStorage.indexedDB.addFirstZoneTables();
-        
+
         entitysFinsh[config.getConfig("tableNameOptions")] = true;
         if (db.objectStoreNames.contains(config.getConfig("tableNameOptions"))) {
             var storeReq = db.deleteObjectStore(config.getConfig("tableNameOptions"));
@@ -365,6 +370,7 @@ myStorage.indexedDB.addFistSousCategories = function() {
 var nbtotal = 0;
 myStorage.indexedDB.addFistProduits = function() {
     getConnexionServeur().getMajTable(config.getConfig("tableNameProduit"));
+
     $.ajax({
         url: getServicePath("serveur.clientaccess.serviceGetAllProduits"),
         type: 'GET',
@@ -372,6 +378,7 @@ myStorage.indexedDB.addFistProduits = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
+
                 addProduit(data[i]);
             }
         },
@@ -388,6 +395,7 @@ myStorage.indexedDB.addFistProduits = function() {
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
             var request;
+            console.log(produit);
             request = store.put({
                 "id": parseInt(produit.id),
                 "nom": produit.nom,
@@ -397,7 +405,9 @@ myStorage.indexedDB.addFistProduits = function() {
                 "ingredients": produit.ingredients,
                 "associationPrixProduit": produit.associationPrixProduit,
                 "tauxTva": produit.tauxTva,
-                "level": produit.level
+                "level": produit.level,
+                "etablissements": produit.etablissements,
+                "zones": produit.zones
             });
             trans.oncomplete = function(e) {
 //                console.log("nbtotal="+nbtotal+" ",e);
@@ -582,3 +592,113 @@ myStorage.indexedDB.deleteDB = function() {
 
 myStorage.IDBTransactionModes = {"READ_ONLY": "readonly", "READ_WRITE": "readwrite", "VERSION_CHANGE": "versionchange"};
 
+function logical_or(index1, keyRange1, index2, keyRange2, onfound, onfinish) {
+    var openCursorRequest1 = index1.openCursor(keyRange1);
+    var openCursorRequest2 = index2.openCursor(keyRange2);
+
+    assert(index1.objectStore === index2.objectStore);
+    var primKey = index1.objectStore.keyPath;
+
+    var set = {};
+    var resolved = 0;
+
+    function complete() {
+        if (++resolved === 2)
+            onfinish();
+    }
+
+    function union(item) {
+        var key = JSON.stringify(item[primKey]);
+        if (!set.hasOwnProperty(key)) {
+            set[key] = true;
+            onfound(item);
+        }
+    }
+
+    openCursorRequest1.onsuccess = function(event) {
+        var cursor = event.target.result;
+        if (cursor) {
+            union(cursor.value);
+        } else {
+            complete();
+        }
+    }
+
+    openCursorRequest2.onsuccess = function(event) {
+        var cursor = event.target.result;
+        if (cursor) {
+            union(cursor.value);
+        } else {
+            complete();
+        }
+    }
+}
+function assert (assertion) {
+  // From: http://phpjs.org/functions
+  // +   original by: Brett Zamir (http://brett-zamir.me)
+  // %          note 1: Do not pass untrusted user input to assert() in string form (you can test it beforehand though)
+  // %          note 2: Does not provide perfect arguments to the assertion callback, as far as file location or line number
+  // *     example 1: assert('false === true');
+  // *     returns 1: false
+
+  var result = false,
+    callback, retVal, err = undefined;
+
+  // BEGIN REDUNDANT
+  this.php_js = this.php_js || {};
+  this.php_js.ini = this.php_js.ini || {};
+  this.php_js.assert_values = this.php_js.assert_values || {};
+  // END REDUNDANT
+
+  var getOption = function (value) {
+    if (this.php_js.assert_values[value]) {
+      return this.php_js.assert_values[value];
+    }
+    if (this.php_js.ini[value]) {
+      return this.php_js.ini[value].local_value;
+    }
+    switch (value) {
+    case 'assert.active':
+      return 1;
+    case 'assert.warning':
+      // Don't need this now
+      //return 1;
+      throw 'We have not yet implemented warnings in JavaScript (assert())';
+    case 'assert.bail':
+      return 0;
+    case 'assert.quiet_eval':
+      return 0;
+    case 'assert.callback':
+      return null;
+    default:
+      throw 'There was some problem';
+    }
+  };
+
+  if (!getOption('assert.active')) {
+    return false; // is this correct? should callbacks still execute? Should still bail if on?
+  }
+
+  try { // Less overhead to use string when assertion checking is off, allows message of exact code to callback
+    result = typeof assertion === 'string' ? eval(assertion) : assertion;
+  } catch (e) {
+    if (!getOption('assert.quiet_eval')) {
+      throw e;
+    }
+    err = e;
+    result = false;
+  }
+  retVal = result !== false; // return false if false, otherwise, return true
+  if (retVal === false) {
+    if (getOption('assert.bail')) { // Todo: Will the function bail before a callback or after?
+      throw 'Assertion bailed'; // No way to bail without throwing an exception (and there are no "warnings" in JavaScript for us to throw)
+    }
+    callback = getOption('assert.callback');
+    if (typeof callback === 'string') {
+      callback = this.window[callback];
+    }
+    // Not perfect for file location (might also use __FILE__()) or line number
+    callback(this.window.location.href, err && err.lineNumber, (typeof assertion === 'string' ? assertion : '')); // From the docs, what does this mean?: "the third argument will contain the expression that failed (if any - literal values such as 1 or "two" will not be passed via this argument)"
+  }
+  return retVal;
+}

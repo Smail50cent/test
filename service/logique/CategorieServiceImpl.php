@@ -15,19 +15,7 @@ class CategorieServiceImpl implements CategorieService {
     }
 
     public function getAll() {
-        $sousCat = PersistanceFactory::getSousCategorieService();
-        $categories = $this->categorieSrv->getAll();
-        for ($i = 0; $i < count($categories); $i++) {
-            $ings = $sousCat->getByIdCategortie($categories[$i]->getId());
-            $souscategories = array();
-            $j = 0;
-            while ($ing = $ings->fetch()) {
-                $souscategories[$j] = intval($ing->ID);
-                $j++;
-            }
-            $categories[$i]->setSousCategories($souscategories);
-        }
-        return $categories;
+        return $this->categorieSrv->getAll();
     }
 
     public function addData() {

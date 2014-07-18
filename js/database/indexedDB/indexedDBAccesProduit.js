@@ -61,6 +61,8 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
+            var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+            var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
@@ -71,21 +73,40 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
             request.onsuccess = function(e) {
                 var result = e.target.result;
                 if (result != null) {
-
-                    var produit = new Produit();
-                    produit.setNom(result.value.nom);
-                    produit.setId(result.value.id);
-                    produit.setTauxTva(result.value.tauxTva);
-                    var categorie = new Categorie();
-                    categorie.setNom(result.value.categorie.nom);
-                    categorie.setId(result.value.categorie.id);
-                    categorie.setPriorite(parseInt(result.value.categorie.priorite));
-                    produit.setCategorie(categorie);
-                    produit.setAssociationPrixProduit(result.value.associationPrixProduit);
-                    produit.setSousCategorie(result.value.souscategorie);
-                    produit.setIdsIngredients(result.value.ingredients);
-                    produit.setOptions(result.value.options);
-                    produitsByCategorie.push(produit);
+                    var etablissementOk = false;
+                    for (var i = 0; i < result.value.etablissements.length; i++) {
+                        if (result.value.etablissements[i] == idetablissement) {
+                            etablissementOk = true;
+                            break;
+                        }
+                    }
+                    var zoneOk = false;
+                    if (result.value.zones.length == 0) {
+                        zoneOk = true;
+                    } else {
+                        for (var i = 0; i < result.value.zones.length; i++) {
+                            if (result.value.zones[i] == idzone) {
+                                zoneOk = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (etablissementOk && zoneOk) {
+                        var produit = new Produit();
+                        produit.setNom(result.value.nom);
+                        produit.setId(result.value.id);
+                        produit.setTauxTva(result.value.tauxTva);
+                        var categorie = new Categorie();
+                        categorie.setNom(result.value.categorie.nom);
+                        categorie.setId(result.value.categorie.id);
+                        categorie.setPriorite(parseInt(result.value.categorie.priorite));
+                        produit.setCategorie(categorie);
+                        produit.setAssociationPrixProduit(result.value.associationPrixProduit);
+                        produit.setSousCategorie(result.value.souscategorie);
+                        produit.setIdsIngredients(result.value.ingredients);
+                        produit.setOptions(result.value.options);
+                        produitsByCategorie.push(produit);
+                    }
                     result.continue();
                 }
             };
@@ -238,14 +259,14 @@ myStorage.indexedDB.countProduits = function(method, param) {
 };
 myStorage.indexedDB.deleteProduit = function(id) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"),3);
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), 3);
     request.onsuccess = function(e) {
-        console.log("succes ",id);
+        console.log("succes ", id);
         var db = e.target.result;
         var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
         var store = trans.objectStore(config.getConfig("tableNameProduit"));
         var request = store.delete(parseInt(id));
-       
+
         trans.oncomplete = function(e) {
             db.close();
         };
