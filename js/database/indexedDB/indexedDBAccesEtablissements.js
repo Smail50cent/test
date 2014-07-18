@@ -50,7 +50,6 @@ myStorage.indexedDB.addFirstEtablissements = function() {
 };
 
 myStorage.indexedDB.getEtablissementById = function(method, id, param) {
-
     window.setTimeout(function() {
         if (entitysFinsh[config.getConfig("tableNameEtablissements")] == false) {
             impl(method, id, param);

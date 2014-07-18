@@ -76,4 +76,5 @@
     <string key="label.choix.prisedecommande">Passer commande maintenant</string>
     <string key="label.choix.finreservation">Passer commande plus tard</string>
     <string key="label.choix.table.choix.zone.label.option">Zone : </string>
+    <string key="label.option.choose.etablissement">Choisisez l'établissement où faire votre commande</string>
 </strings>

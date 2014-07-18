@@ -237,7 +237,9 @@ myStorage.indexedDB.addFistMenus = function() {
                 "nom": menu.nom,
                 "prix": menu.prix,
                 "produits": menu.produits,
-                "tauxDeTva": menu.tauxDeTva
+                "tauxDeTva": menu.tauxDeTva,
+                "etablissements": menu.etablissements,
+                "zones": menu.zones
             });
             trans.oncomplete = function(e) {
                 db.close();
@@ -378,7 +380,6 @@ myStorage.indexedDB.addFistProduits = function() {
         async: false,
         success: function(data, textStatus, xhr) {
             for (var i = 0; i < data.length; i++) {
-
                 addProduit(data[i]);
             }
         },
