@@ -12,8 +12,7 @@
     }
 
     .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input, .button_inscri_compte input{
-        width:90px;
-        margin: 0 30px;
+        width:100%;
     }
 
     .auth_popup_structure {
@@ -82,7 +81,7 @@
                 margin: 100px auto;
                 width: 20px;
                 height: 20px;
-                position: relative;
+                position: relative !important;
             }
 /*            body{
                 background-color: black;
@@ -340,11 +339,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 /*____________________________________LOADING PICS___________________________________________*/
 
 .loading_pict_structure {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+    /*display: inline-block;*/
+    margin: 0 auto;
     margin-top: 30%;
-    position: fixed;
+    /*position: fixed;*/
     z-index: 1001;
     top: 0;
 }
@@ -392,7 +390,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_left_logo_structure { 
         height: 50px;
         margin-left: 3%;
-
 }
 
     p.header_left_logo_message_structure:last-child {
@@ -474,7 +471,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     .select_item_etape_structure {
-        margin:-1em auto -0.5em auto;
+        margin:-1em auto 0.5em auto;
     }
 
     .choix_paiment_personne_btn_valider_structure {
@@ -1034,7 +1031,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         .menu_content_structure p:not([class="choose_menu_item_titre"]) {
             display: inline-block;
             vertical-align: middle;
-            width: 47%;
+            width: 55%;
         }
 
         /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/        
@@ -1474,10 +1471,7 @@ body {
         background-size: initial;
 }
 
-.header_structure, .content_structure {
-        width: 980px;
-        margin: 0 auto;
-}
+
 
 .header_structure {
         position: relative;
@@ -1494,7 +1488,7 @@ body {
         z-index: 4500;
         width: 100%;
         position: absolute;    
-        top:-2.7em;  
+        top:-3.5em;  
         left:-1em; 
 }
 
@@ -1627,9 +1621,9 @@ width: 30%;
 }
 
 .header_right_logo_structure p {
-    right: 6.3em;
+    right: 0.3em;
     margin-bottom: 0.4em;
-    top: 1.8em;
+    top: 1.3em;
 }
 
 select#select_lang {
@@ -1646,12 +1640,11 @@ input[value="La carte"] {
 }
 
 
-
 .btn_ajout_ingredient_structure {
      max-width: 150px;
 }
-
-
 }
+
+
 
 

@@ -33,7 +33,7 @@
 
        
 
-/*____________________________POP UP FB ______________________________*/
+/*____________________________POP UP FB, & AUTRES ______________________________*/
 
     .auth_form_personalize {
         color: #565656;
@@ -41,6 +41,15 @@
 
     .ui-dialog_personalize .ui-dialog-title_personalize {
         color:white;
+    }
+
+
+    .ui-dialog-title {
+    font-family: 'lobster_1.3regular',Trebuchet MS,Verdana,sans_serif !important;
+    }
+
+    .ui-dialog .ui-dialog-content{
+
     }
 
     .button_authen_compte_personalize input, .button_ajout_vclient_personalize input, .button_inscri_compte_personalize input, .button_inscri_compte input{
@@ -247,7 +256,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .header_personalize {
         width:100%;
-        height: 4.2em;
+        /*height: 4.15em;*/
         background: #bed536; /* Old browsers */
         background: -moz-linear-gradient(top, #bed536 0%, #279b3e 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bed536), color-stop(100%,#279b3e)); /* Chrome,Safari4+ */
@@ -299,7 +308,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .content_personalize  {
-	
+        margin-top: 4.15em;  
 }
 
     .choose_lang_personalize {
@@ -378,7 +387,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .btn_choice_personalize li:nth-child(even){
         background-color:#bed536;
-        text-shadow:1px 1px 2px rgba(150, 150, 150, 1);
+        /*text-shadow:1px 1px 2px rgba(150, 150, 150, 1);*/
         cursor:pointer;
         /*transition*/
         -webkit-transition:all 0.4s ease;
@@ -394,7 +403,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     a[onclick="connexionDunServeur();"] {
         font-size: 1.07em;
-        text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);
+        /*text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);*/
         cursor:pointer;
         /*transition*/
         -webkit-transition:text-shadow 0.4s ease, font-size 0.2s ease-in;
@@ -404,7 +413,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }    
 
         a[onclick="connexionDunServeur();"]:hover, a[onclick="connexionDunServeur();"]:focus, a[onclick="connexionDunServeur();"]:active{
-        font-size: 1.2em;
+        /*font-size: 1.2em;*/
         text-shadow: 1px 1px 14px rgba(255, 255, 255, 1);
     }
 
@@ -549,9 +558,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
      .content_produit_titre_personnes_personalize {
-        width: 100%!important;
-        padding-left: 0!important;
-        text-align: center!important;
+        
     }
 
 
@@ -590,12 +597,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         /*-----------------------------------------------NAVIGATION-------------------------------------------*/
        
         .content_list_categorie_personalize     {
-            height:30px;
+            /*height:30px;*/
             display:flex;
-            margin-top:4.2em !important;
+            /*margin-top:4.1em !important;*/
             border-top: 1px dotted white;
             border-bottom: 1px solid white;
-            background: linear-gradient(to top, rgba(217, 158, 66, 0.2) -10%, rgba(178, 101, 23, 0.5) 79%);
+            background: linear-gradient(to top, rgba(217, 158, 66, 0.2) -10%, rgba(178, 101, 23, 0.7) 79%);
             box-shadow: 0px 2px 13px rgba(0,0,0,0.7);
             /*background-color: rgba(71,49,23, 0.9);*/
         }
@@ -616,6 +623,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .content_personalize  .sous_categorie_cat_personalize li a{
+            margin-left: 0;
+            padding-left: 0.7em
         }
 
         .content_list_categorie_personalize li {
@@ -639,10 +648,12 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             padding-top: 0.48em;
             color:white;
             text-decoration: none;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
         }
 
-
+        .content_list_categorie_personalize ul:last-child {
+            margin-left: -60px;
+        }
 
         .content_list_categorie_personalize li+li{
             border-left:1px solid #efdbc2;
@@ -676,7 +687,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_globlal_zone_personalize .content_globlal_zone_personalize li,.content_globlal_zone_personalize .content_produit_titre_personalize, .choose_menu_item_titre_personalize, .menu_content_titre_personalize, .content_produit_personalize p, .info_prix_content_couverts_content_personalize, .info_prix_content_couverts_label_personalize, .info_prix_content_table_label_personalize, .info_prix_content_table_content_personalize, .btn_ajout_personalize {
             color: #FFFFFF;
             font-family: "Trebuchet MS",Verdana,sans_serif;
-            font-size:0.8em;
+            font-size:0.75em;
             font-style: italic;
             font-weight: bold;
             text-align: left;
@@ -715,7 +726,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .content_produit_description_personalize li:first-child {
             border-top: 1px dotted white;
-            margin-top: 0.5em;
+            margin-top: 1.5em;
         }
 
         .content_globlal_zone_personalize>li:last-child {
@@ -759,7 +770,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_produit_zone_personalize, .menu_item_personalize {
             background-color: rgba(0, 0, 0, 0.6);
             box-shadow: 0 3px 5px #000000;
-            min-height: 50px;
+            min-height: 55px;
             border-radius: 5px;
         }
 
@@ -782,13 +793,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         p.content_produit_zone_right_prix, .choose_menu_item_prix, .menu_content_prix  {
             color: #FFFFFF;
             font-family: "Trebuchet MS",Verdana,sans_serif;
+            font-size: 0.85em;
             font-style: italic;
             font-weight: bold;
         }
 
         p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
             right:3.2em;
-            top:0.3em;
+            top:2em;
         }
 
         .recapitulatif_commande_personalize li {
@@ -796,7 +808,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .menu_content_prix_personalize  {
-
+            text-align: right;
         }
 
 
@@ -928,17 +940,17 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         /*-----------------------------------------------------------------PAGE MENU----------------------------------------------------------------------*/
 
-        .menu_content_personalize {
-            /*background-color:#C90912;*/
+        .menu_content_personalize ul p {
+            color:white !important;
         }
 
         .menu_content_titre_personalize {
-            border-radius:3px  ;
-            color:black;
-            font-size: 1.3em;
-            text-align: justify;
-            padding:0.2em 0.2em;
-            margin:0 0 0 3%;
+            border-radius: 3px  ;
+            color: white;
+            font-size: 1.2em;
+            text-align: left;
+            padding: 0.2em 0.2em;
+            margin: 0 0 0 3%;
         } 
 
         .menu_content_prix_personalize {
@@ -965,6 +977,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background: transparent;
             border-style: none;
             color:white;
+            margin-right: 0.55em;
             background-color:#468D26;
             border-radius: 5px; 
             border: 2px solid white;
@@ -999,12 +1012,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background: linear-gradient(#74a81f, #17722d);
         }
 
-        .menu_content_structure p:not([class="choose_menu_item_titre"]) {
-            display: inline-block;
-            vertical-align: middle;
-            width: 47%;
-        }
-
 
         /*#choose_menu_valider_menu {
             top: 100%;
@@ -1034,7 +1041,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
         
 
-
         .content_list_categorie_personalize li:hover, .content_list_categorie_personalize li:focus {
             color: #473117;
             background-color: #efdbc2;
@@ -1045,8 +1051,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
              transition: background-color .5s ease;
         }
 
-        .content_list_categorie_personalize li:first-child:link, .content_list_categorie_personalize li:first-child:hover, .content_list_categorie_personalize li:first-child:focus {
-            border-bottom-left-radius: 7px;
+        .content_list_categorie_personalize > li:first-child:link, .content_list_categorie_personalize > li:first-child:hover, .content_list_categorie_personalize > li:first-child:focus {
+            /*border-bottom-left-radius: 7px;*/
             -webkit-transition: background-color .5s ease;
             -moz-transition: background-color .5s ease;
              -ms-transition: background-color .5s ease;
@@ -1054,8 +1060,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
              transition: background-color .5s ease;
         }
 
-        .content_list_categorie_personalize li:last-child:link, .content_list_categorie_personalize li:last-child:hover, .content_list_categorie_personalize li:last-child:focus {
-            border-bottom-right-radius: 7px;
+        .content_list_categorie_personalize > li:last-child:link, .content_list_categorie_personalize > li:last-child:hover, .content_list_categorie_personalize > li:last-child:focus {
+            /*border-bottom-right-radius: 7px;*/
             -webkit-transition: background-color .5s ease;
             -moz-transition: background-color .5s ease;
              -ms-transition: background-color .5s ease;
@@ -1072,7 +1078,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .menu_content_personalize p:not([class="choose_menu_item_titre"]) {
-            font-size: 1.3em;  
+            /*font-size: 1.2em;*/
             color: #efdbc2;
         }
 
@@ -1170,6 +1176,20 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
+    .ajouter_ingredient_box_structure {
+        background-color: whitesmoke;
+        border-radius: 5px;
+        box-shadow: 2px 2px 11px #000;
+    }
+
+
+.ajouter_ingredient_box_structure p{
+        font-family: Trebuchet MS, Verdana, Sans serif;
+        font-size: 1em;
+    }
+    
+
+
 @media all and (min-width: 768px) and (max-width: 979px) {
 
    
@@ -1219,8 +1239,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         background-repeat-y: initial;
 }
 
-.header_structure {
-
+.header_structure, .content_structure {
+        width: 980px;
+        margin: 0 auto;
 }
 
 .header_left_personalize {
@@ -1255,12 +1276,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
          border-bottom-right-radius: 7px;
 }
 
+
+
 .content_list_categorie_personalize li a {
     font-size: 1.25em;
 }
 
 p.header_left_logo_message_structure:last-child {
-        bottom: -6.3em;
+        bottom: -6.65em;
         left: 5.5em;
 }
 
@@ -1304,7 +1327,16 @@ background: rgba(248, 255, 197, 0.5);
 
 
 .content_titre_structure {
-    margin-bottom: -1.5em;
-    padding-top: 2em;
+    margin-bottom: -1em;
+    padding-top: 1em;
+}
+
+.footer_left_structure {
+display: none;
 }
 }
+
+
+/*.content_list_categorie_personalize li:first-child:hover {
+border-bottom-left-radius: 5px;
+}*/
