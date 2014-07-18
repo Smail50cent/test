@@ -172,6 +172,7 @@ association_etablissement_produit.id_etablissement = " . $etablissementid . " AN
             $ligne = $lignes[$i];
             $menu->setId(intval($ligne->menu_id));
             $menu->setNom($ligne->menu_nom);
+            $menu->setTauxDeTva($ligne->taux_tva);
             if ($ligne->menu_id == $idProdAfter) {
                 $assoIng = $this->testsForListeProduits($ligne, $menu);
                 if ($assoIng != null) {
