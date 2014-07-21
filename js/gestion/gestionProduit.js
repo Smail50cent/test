@@ -54,7 +54,10 @@ function DeleteProduct(id) {
 function addProduct() {
 
     scripts.loadScripts("lib.dialog", function() {
-        $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit"});
+        $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
+            close: function(event, ui) {
+                $(this).remove();
+            }});
     });
     var divadd = getDivAddProduit();
     $('#dialog_add_produit_id').html(divadd);
@@ -272,4 +275,48 @@ function prixPage() {
         }
     });
 
+}
+
+function formInsertOption() {
+
+    $("#dialog_add_option_id").dialog(
+            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
+                buttons: {
+                    annuler: function() {
+                        $(this).dialog("close");
+                    },
+                    valider: function() {
+                        insertOption();
+                    }
+                },
+                close: function(event, ui) {
+                    $(this).remove();
+                }
+            });
+    var divOpt = getDivAddOption();
+    $("#dialog_add_option_id").html(divOpt);
+
+}
+
+function insertPossib() {
+    var txtPossib = $("#insert_possib_id").val();
+    $("#list_possib_id").append($('<option>', {
+        value: txtPossib,
+        text: txtPossib
+    }));
+}
+
+function removePossib() {
+    $("#list_possib_id :selected").each(function() {
+        $(this).remove();
+    });
+}
+
+function insertOption() {
+
+    var option = $('#insert_option_id').val();
+
+    $("#list_possib_id > option").each(function() {
+        console.log($(this).value);
+    });
 }

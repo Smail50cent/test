@@ -1021,4 +1021,19 @@ function ConnexionServer() {
             }
         });
     };
+    this.addOption = function(method, Option, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
+            type: 'POST',
+            data: {option: Option},
+            async: true,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
 }

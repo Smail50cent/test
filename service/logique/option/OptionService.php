@@ -11,4 +11,5 @@ interface OptionService{
     public function getOptionByIdProduit($id);
     public function getById($id);
     public function getAll();
+    public function add($option);
 }
