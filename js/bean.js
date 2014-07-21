@@ -607,6 +607,8 @@ function ParamApp() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
+    this.etablissement;
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -624,6 +626,12 @@ function ParamApp() {
     };
     this.getValeur_parametre = function() {
         return this.valeur_parametre;
+    };
+    this.getEtablissement = function() {
+        return this.etablissement;
+    };
+    this.setEtablissement = function(etablissement) {
+        this.etablissement = etablissement;
     };
 }
 function CompteProduitFavori() {
@@ -655,7 +663,13 @@ function ParametreApplication() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
-
+    this.etablissement;
+    this.getEtablissement = function() {
+        return this.etablissement;
+    };
+    this.setEtablissement = function(etablissement) {
+        this.etablissement = etablissement;
+    };
     this.getId = function() {
         return this.id;
     };
@@ -789,7 +803,7 @@ function MajTables() {
         return this.level;
     };
 }
-function ZoneTable(id, nom, tables,etablissement_id) {
+function ZoneTable(id, nom, tables, etablissement_id) {
     this.id = id;
     this.nom = nom;
     this.tables = tables;
@@ -855,11 +869,11 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     this.slogan = slogan;
     this.groupe = groupe;
 }
-function TauxTva(id,taux) {
-    
+function TauxTva(id, taux) {
+
     this.id = id;
     this.taux = taux;
-    
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -872,5 +886,5 @@ function TauxTva(id,taux) {
     this.getTaux = function() {
         return this.taux;
     };
-    
+
 }

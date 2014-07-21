@@ -1,3 +1,7 @@
+/**
+ * 
+ * @returns connexionServer
+ */
 function getConnexion() {
     if (isConnected) {
 //    if (false) {

@@ -11,6 +11,7 @@ class ParametreApplication {
     public $id;
     public $nom_parametre;
     public $valeur_parametre;
+    public $etablissement;
 
     public function getId() {
         return $this->id;
@@ -34,6 +35,14 @@ class ParametreApplication {
 
     public function setValeur_parametre($valeur_parametre) {
         $this->valeur_parametre = $valeur_parametre;
+    }
+
+    public function getEtablissement() {
+        return $this->etablissement;
+    }
+
+    public function setEtablissement($etablissement) {
+        $this->etablissement = $etablissement;
     }
 
 }

@@ -15,8 +15,8 @@ class ParametreApplicationServiceImpl implements ParametreApplicationService {
         $this->paramappSrv = PersistanceFactory::getParamAppService();
     }
 
-    public function getAll() {
-        $paramapp = $this->paramappSrv->getAll();
+    public function getAll($etablissementid) {
+        $paramapp = $this->paramappSrv->getAll($etablissementid);
         return $paramapp;
     }
 
@@ -25,12 +25,12 @@ class ParametreApplicationServiceImpl implements ParametreApplicationService {
         return $paramapp;
     }
 
-    public function getByNomParametre($nom) {
+    public function getByNomParametre($nom, $etablissementid) {
         $ret;
         if ($nom != null) {
-            $ret = $this->paramappSrv->getByNomParametre($nom);
-        }else{
-            $ret=null;
+            $ret = $this->paramappSrv->getByNomParametre($nom, $etablissementid);
+        } else {
+            $ret = null;
         }
         return $ret;
     }

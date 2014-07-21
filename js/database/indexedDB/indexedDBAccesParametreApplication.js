@@ -18,17 +18,13 @@ myStorage.indexedDB.addFirstParametreApplication = function() {
             var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameParamApplication"));
             var request;
-//            var levelMax = 0;
-//                if (typesCommandes[i].level > levelMax) {
-//                    levelMax = typesCommandes[i].level;
-//                }
             request = store.put({
                 "id": parseInt(paramApp.id),
                 "nom_parametre": paramApp.nom_parametre,
-                "valeur_parametre": (paramApp.valeur_parametre)
+                "valeur_parametre": (paramApp.valeur_parametre),
+                "etablissement": paramApp.etablissement
             });
             trans.oncomplete = function(e) {
-//                updateLevelOfTable(config.getConfig("tableNameParamApplication"), levelMax);
                 entitysFinsh[config.getConfig("tableNameParamApplication")] = false;
                 db.close();
             };
@@ -58,10 +54,15 @@ myStorage.indexedDB.getParametreApplicationByNom = function(method, nom, param) 
             var request = index.get(nom.toString());
             request.onsuccess = function(e) {
                 var result = e.target.result;
-                var parametreApplication = new ParametreApplication();
-                parametreApplication.setId(result.id);
-                parametreApplication.setNomParametre(result.nom_parametre);
-                parametreApplication.setValeurParametre(parseInt(result.valeur_parametre));
+                var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+                var parametreApplication = null;
+                if (idetablissement == parseInt(result.etablissement) || result.etablissement == null) {
+                    parametreApplication = new ParametreApplication();
+                    parametreApplication.setId(result.id);
+                    parametreApplication.setNomParametre(result.nom_parametre);
+                    parametreApplication.setValeurParametre(parseInt(result.valeur_parametre));
+                    parametreApplication.setEtablissement(parseInt(result.etablissement));
+                }
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(parametreApplication, param);
                 }
@@ -87,6 +88,7 @@ myStorage.indexedDB.getAllParametreApplication = function(method, param) {
         }
     }, delay);
     function impl(method, param) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -101,11 +103,14 @@ myStorage.indexedDB.getAllParametreApplication = function(method, param) {
                 if (!!result == false) {
                     return;
                 }
-                var myparametreApplication = new ParametreApplication();
-                myparametreApplication.setId(result.value.id);
-                myparametreApplication.setNomParametre(result.value.nom_parametre);
-                myparametreApplication.setValeurParametre(parseInt(result.value.valeur_parametre));
-                parametreApplication.push(myparametreApplication);
+                if (idetablissement == parseInt(result.etablissement) || result.etablissement == null) {
+                    var myparametreApplication = new ParametreApplication();
+                    myparametreApplication.setId(result.value.id);
+                    myparametreApplication.setNomParametre(result.value.nom_parametre);
+                    myparametreApplication.setEtablissement(parseInt(result.etablissement));
+                    myparametreApplication.setValeurParametre(parseInt(result.value.valeur_parametre));
+                    parametreApplication.push(myparametreApplication);
+                }
                 result.continue();
             };
             trans.oncomplete = function(e) {
