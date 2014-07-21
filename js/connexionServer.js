@@ -123,7 +123,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                
+
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -963,7 +963,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.getAllTauxTva = function(method,param) {
+    this.getAllTauxTva = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllTauxTva"),
             type: 'GET',
@@ -977,15 +977,30 @@ function ConnexionServer() {
                     tauxtva.setTaux(data[i].taux_tva);
                     TVA.push(tauxtva);
                 }
-                
+
                 if (method != null) {
-                        method(TVA,param);
-                    }
+                    method(TVA, param);
+                }
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
     };
+    this.addCompte = function(method, Option, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
+            type: 'POST',
+            data: {option: Option},
+            async: true,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
 }
 

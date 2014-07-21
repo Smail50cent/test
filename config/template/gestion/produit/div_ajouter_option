@@ -1,0 +1,14 @@
+<p>
+<label> Option </label>
+<input type="text" id="insert_option_id" class="insert_option"> <p>
+
+<p>
+<label> Possibilité </label>
+<input type="text" id="insert_possib_id" class="insert_possib"> 
+<div onclick="insertPossib();" type="button" id="insertPossib_id" class="insertPossib_structure insertPossib_personalize">
+<img src="img/gestion/produit/InsertOption.png" width="20" height="20" "></div>
+<div onclick="removePossib();" type="button" id="removePossib_id" class="removePossib_structure removePossib_personalize">
+<img src="img/gestion/produit/del_possib.png" width="20" height="20" "></div></p>
+
+<select id="list_possib_id" class="list_possib" multiple>
+</select>

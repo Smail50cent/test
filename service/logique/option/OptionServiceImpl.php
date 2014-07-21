@@ -1,7 +1,7 @@
 <?php
 
-include_once $path.'service/logique/option/OptionService.php';
-include_once $path.'service/logique/entity/Option.php';
+include_once $path . 'service/logique/option/OptionService.php';
+include_once $path . 'service/logique/entity/Option.php';
 
 /**
  * Description of OptionServiceImpl
@@ -11,7 +11,7 @@ include_once $path.'service/logique/entity/Option.php';
 class OptionServiceImpl implements OptionService {
 
     private $optSrv;
-    
+
     public function __construct() {
         $this->optSrv = PersistanceFactory::getOptionService();
     }
@@ -26,6 +26,16 @@ class OptionServiceImpl implements OptionService {
 
     public function getAll() {
         return $this->optSrv->getAll();
+    }
+
+    public function add($option) {
+
+        $idLastInsert = $this->optSrv->add($option->id, $option->nom, $option->label);
+        $idPossib = 0;
+        for ($i = 0; $i < count($option->possibilite); $i++) {
+            $idPossib = $this->optSrv->addPossibilite($option->possibilite[$i]->id, $option->possibilite[$i]->nom, $idLastInsert);
+        }
+    return $idPossib;
     }
 
 }
