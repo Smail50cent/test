@@ -6,8 +6,8 @@ if (isset($_GET["nom"])) {
     extract($_GET);
     $paramform = LogiqueFactory::getParamAppService();
     $result;
-    if (isset($_GET["etablissementid"])) {
-        $result = $paramform->getByNomParametre($nom, $etablissementid);
+    if (isset($_GET["idetablissement"])) {
+        $result = $paramform->getByNomParametre($nom, $idetablissement);
     } else {
         $result = $paramform->getByNomParametre($nom, null);
     }

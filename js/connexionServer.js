@@ -562,8 +562,9 @@ function ConnexionServer() {
         });
     };
     this.getAllParamApps = function(method, param) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
+            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps")+"?idetablissement="+idetablissement,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -758,11 +759,12 @@ function ConnexionServer() {
         });
     };
     this.getParametreApplicationByNom = function(method, nom, param) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom,
+            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom+"&idetablissement="+idetablissement,
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var parametreApplication = null;
                 if (data != null) {
@@ -770,7 +772,7 @@ function ConnexionServer() {
                     parametreApplication.setId(data.id);
                     parametreApplication.setNomParametre(data.nom_parametre);
                     parametreApplication.setEtablissement(data.etablissement);
-                    parametreApplication.setValeurParametre(parseInt(data.valeur_parametre));
+                    parametreApplication.setValeurParametre((data.valeur_parametre));
                 }
                 if (method != null) {
                     method(parametreApplication, param);

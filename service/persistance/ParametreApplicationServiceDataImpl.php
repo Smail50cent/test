@@ -17,7 +17,7 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         $return;
         if($etablissementid != null){
           
-            $return = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE (etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL)");
+            $return = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
         }else{
             $return = $bdd->executeGeneric("SELECT * FROM parametre_application ");
         }
@@ -34,7 +34,7 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         $bdd = new ConnexionBDD();
         $retour;
         if($etablissementid!=null){
-            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."' AND  (etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL)");
+            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."' AND  ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
         }else{
             $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."'");
         }

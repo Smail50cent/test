@@ -43,11 +43,11 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#nbPersonnes").change(function() {
             var connexion = getConnexion();
             connexion.getParametreApplicationByNom(chooseIfOpCompte, config.getConfig("parametre.app.gestion.utilisateurs"), null);
-            var person = strings.getString("label.personne.auth");
-            $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
-            $('div#auth_popup_id').bind('dialogclose', function(event) {
-                AuthToCommande();
-            });
+//            var person = strings.getString("label.personne.auth");
+//            $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
+//            $('div#auth_popup_id').bind('dialogclose', function(event) {
+//                AuthToCommande();
+//            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
@@ -134,7 +134,12 @@ function startCommande(numTable, nbPersonne) {
     redirictWhereFinishParamCommande();
 }
 function chooseIfOpCompte(paramApp, param) {
-    if (paramApp.getValeur_parametre() == true) {
+    console.log(paramApp);
+    
+    
+   var test= JSON.parse(paramApp.getValeur_parametre());
+   console.log(test);
+    if (test == true) {console.log("load compte");
         onLoadCompte(true, null, "-17", null);
     } else {
         var personnes = new Array();
@@ -157,5 +162,6 @@ function chooseIfOpCompte(paramApp, param) {
                 }
             }
         }
+//        redirictWhereFinishParamCommande();
     }
 }
