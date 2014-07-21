@@ -49,4 +49,8 @@ class ProduitServiceImpl implements ProduitService {
         }return $ret;
     }
 
+    public function add($produit) {
+        
+    }
+
 }

@@ -95,7 +95,6 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
             $sousCategorie->setPriorite($ligne->souscategorie_priorite);
             $produit->setSousCategorie($sousCategorie);
             $produit->setTauxTva(floatval($ligne->produit_taux_tva));
-//            $produit->setOptions(intval($ligne->produit_options));
             $produit->setLevel($ligne->produit_level);
             if ($ligne->produit_id == $idProdAfter) {
                 $assoPrix1 = $this->testsForListePrix($ligne, $produit);
