@@ -280,21 +280,33 @@ function prixPage() {
 function formInsertOption() {
 
     $("#dialog_add_option_id").dialog(
-            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
+            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right', bgiframe: true,
                 buttons: {
                     annuler: function() {
-                        $(this).dialog("close");
+                        $(this).dialog("destroy");
+                        $("#dialog_add_option_id").empty();
                     },
                     valider: function() {
                         insertOption();
                     }
                 },
-                close: function(event, ui) {
-                    $(this).remove();
+                close: function() {
+                    $(this).dialog("destroy");
+                    $("#dialog_add_option_id").empty();
                 }
             });
     var divOpt = getDivAddOption();
     $("#dialog_add_option_id").html(divOpt);
+
+    $('#insert_option_id').keyup(function() {
+        if ($(this).val() != "") {
+            $('#insert_possib_id').attr("disabled", false);
+        } else {
+            $("#insert_possib_id").val("");
+            $('#insert_possib_id').attr("disabled", true);
+            $("#list_possib_id").empty();
+        }
+    });
 
 }
 
@@ -315,20 +327,39 @@ function removePossib() {
 
 function insertOption() {
 
-    var optionVal = $('#insert_option_id').val();
-    var optionName = optionVal.charAt(0).toUpperCase() + optionVal.slice(1);
-    var optionLabel = optionVal.toLowerCase() + " :";
-    var possib = new Array();
-    var optionObj = new Option();
-    $("#list_possib_id option").each(function() {
-        console.log(optionLabel + " " + $(this).val() + " " + optionName);
-        possib.push($(this).val());
-    });
+    if (!TestEmptyFieldsProduit()) {
+        var optionVal = $('#insert_option_id').val();
+        var optionName = optionVal.charAt(0).toUpperCase() + optionVal.slice(1);
+        var optionLabel = optionVal.toLowerCase() + " :";
+        var possib = new Array();
+        var optionObj = new Option();
+        $("#list_possib_id option").each(function() {
+            console.log(optionLabel + " " + $(this).val() + " " + optionName);
+            possib.push($(this).val());
+        });
 
-    optionObj.setLabel(optionLabel);
-    optionObj.setNom(optionName);
-    optionObj.setPossibilites(possib);
+        optionObj.setLabel(optionLabel);
+        optionObj.setNom(optionName);
+        optionObj.setPossibilites(possib);
+        getConnexion().addOption(result,optionObj);
+        function result(data) {
+            console.log("SUCCESS");
+        }
 
-    console.log(optionObj);
-    getConnexion().addOption(optionObj);
+        $('#list_possib_id').empty();
+        $("#insert_option_id").empty();
+        $("#insert_possib_id").val("");
+    }
+
+}
+
+function TestEmptyFieldsProduit() {
+    var empty = false;
+    if($("select").has('option').length === 0) {
+        empty = true;
+    }
+    if (empty) {
+        alert("Remplissez tout les champs avant de valider !");
+    }
+    return empty;
 }

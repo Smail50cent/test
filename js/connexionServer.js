@@ -1023,11 +1023,12 @@ function ConnexionServer() {
             }
         });
     };
-    this.addOption = function(method, Option, param) {
+    this.addOption = function(method, option, param) {
+        option = JSON.stringify(option);
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
             type: 'POST',
-            data: {option: Option},
+            data: {option: option},
             async: true,
             success: function(data) {
                 method(data, param);
