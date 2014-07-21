@@ -2,10 +2,8 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-
 function onIndexLoaded() {
     var connexion = getConnexion();
-
     connexion.getAllTypeCommandes(function(typesCommandes, param) {
         for (var i = 0; i < typesCommandes.length; i++) {
             if (typesCommandes[i].isActif) {

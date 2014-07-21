@@ -574,6 +574,7 @@ function ConnexionServer() {
                     paramapp.setId(data[i].id);
                     paramapp.setNom_parametre(data[i].nom_parametre);
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
+                    paramapp.setEtablissement(data[i].etablissement);
                     paramapps.push(paramapp);
                 }
                 if (method != null) {
@@ -768,6 +769,7 @@ function ConnexionServer() {
                     parametreApplication = new ParametreApplication();
                     parametreApplication.setId(data.id);
                     parametreApplication.setNomParametre(data.nom_parametre);
+                    parametreApplication.setEtablissement(data.etablissement);
                     parametreApplication.setValeurParametre(parseInt(data.valeur_parametre));
                 }
                 if (method != null) {
@@ -1010,7 +1012,6 @@ function ConnexionServer() {
                     e.groupe = data[i].groupe;
                     etablissements.push(e);
                 }
-                console.log(etablissements);
                 if(method!=null){
                     method(etablissements,param);
                 }
