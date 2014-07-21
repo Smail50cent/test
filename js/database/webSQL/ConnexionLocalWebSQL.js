@@ -94,4 +94,8 @@ function ConnexionLocalWebSQL() {
     this.getAllTauxTva = function(method) {
         console.log("TO DO");
     };
+
+    this.getAllEtablissements = function(method, param) {
+        console.log("TO DO ");
+    };
 }

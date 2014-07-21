@@ -16,7 +16,8 @@ myStorage.indexedDB.getMenuByIdForDetailMenu = function(methodToExecuteAfter, id
             var request = store.get(idmenu);
             request.onsuccess = function(e) {
                 var result = e.target.result;
-                var menu = new Menu();console.log(result);
+                var menu = new Menu();
+                console.log(result);
                 menu.setNom(result.nom);
                 menu.setId(result.id);
                 menu.setPrix(result.prix);
@@ -46,6 +47,8 @@ myStorage.indexedDB.getAllMenuForDetailMenu = function(methodToExecuteAfter) {
         }
     }, delay);
     function impl() {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
         myStorage.indexedDB.load();
         var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
         request.onsuccess = function(e) {
@@ -55,19 +58,39 @@ myStorage.indexedDB.getAllMenuForDetailMenu = function(methodToExecuteAfter) {
             var keyRange = IDBKeyRange.lowerBound(0);
             var cursorRequest = store.openCursor(keyRange);
             var menus = new Array();
-        
             cursorRequest.onsuccess = function(e) {
                 var result = e.target.result;
                 if (!!result == false) {
                     return;
                 }
-                var menu = new Menu();
-                menu.setNom(result.value.nom);
-                menu.setId(result.value.id);
-                menu.setPrix(result.value.prix);
-                menu.setProduits(result.value.produits);
-                menu.setTauxDeTva(result.value.tauxDeTva);
-                menus.push(menu);
+                var etablissementOk = false;
+                for (var i = 0; i < result.value.etablissements.length; i++) {
+                    if (result.value.etablissements[i] == idetablissement) {
+                        etablissementOk = true;
+                        break;
+                    }
+                }
+                var zoneOk = false;
+                if (result.value.zones.length == 0) {
+                    zoneOk = true;
+                } else {
+                    for (var i = 0; i < result.value.zones.length; i++) {
+                        if (result.value.zones[i] == idzone) {
+                            zoneOk = true;
+                            break;
+                        }
+                    }
+                }
+                if (etablissementOk && zoneOk) {
+                    var menu = new Menu();
+                    menu.setNom(result.value.nom);
+                    menu.setId(result.value.id);
+                    menu.setPrix(result.value.prix);
+                    menu.setProduits(result.value.produits);
+                    menu.setTauxDeTva(result.value.tauxDeTva);
+                    menus.push(menu);
+                }
+
                 result.continue();
             };
             trans.oncomplete = function(e) {
@@ -147,8 +170,8 @@ myStorage.indexedDB.countMenus = function(method, param) {
             };
             trans.oncomplete = function(e) {
                 if (method != null) {//Nous avons besoin de l'executer.
-                    function Param(count){
-                        this.count= count;
+                    function Param(count) {
+                        this.count = count;
                     }
                     method(new Param(count));
                 }

@@ -17,10 +17,10 @@ class MenuServiceImpl implements MenuService {
 
     public function getAll() {
         $menus = $this->menuSrv->getAll();
-        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
-        for ($i = 0; $i < count($menus) ; $i++) {
-            $menus[$i]->setPrix($associationProduitPrixSrv->getByMenu($menus[$i]->getId()));
-        }
+//        $associationProduitPrixSrv = PersistanceFactory::getAssociationProduitPrixService();
+//        for ($i = 0; $i < count($menus) ; $i++) {
+//            $menus[$i]->setPrix($associationProduitPrixSrv->getByMenu($menus[$i]->getId()));
+//        }
         return $menus;
     }
 
@@ -29,6 +29,10 @@ class MenuServiceImpl implements MenuService {
         $menu = $this->menuSrv->getById($id);
         $menu->setPrix($associationProduitPrixSrv->getByMenu($menu->getId()));
         return $menu;
+    }
+
+    public function getByEtablissementAndZone($etablissementid, $zone) {
+        return $this->menuSrv->getByEtablissementAndZone($etablissementid, $zone);
     }
 
 }

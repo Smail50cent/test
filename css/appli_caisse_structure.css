@@ -12,8 +12,7 @@
     }
 
     .button_authen_compte_structure input, .button_ajout_vclient_structure input, .button_inscri_compte_structure input, .button_inscri_compte input{
-        width:90px;
-        margin: 0 30px;
+        width:100%;
     }
 
     .auth_popup_structure {
@@ -82,7 +81,7 @@
                 margin: 100px auto;
                 width: 20px;
                 height: 20px;
-                position: relative;
+                position: relative !important;
             }
 /*            body{
                 background-color: black;
@@ -340,11 +339,10 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 /*____________________________________LOADING PICS___________________________________________*/
 
 .loading_pict_structure {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
+    /*display: inline-block;*/
+    margin: 0 auto;
     margin-top: 30%;
-    position: fixed;
+    /*position: fixed;*/
     z-index: 1001;
     top: 0;
 }
@@ -392,7 +390,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     .header_left_logo_structure { 
         height: 50px;
         margin-left: 3%;
-
 }
 
     p.header_left_logo_message_structure:last-child {
@@ -474,7 +471,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
 
     .select_item_etape_structure {
-        margin:-1em auto -0.5em auto;
+        margin:-1em auto 0.5em auto;
     }
 
     .choix_paiment_personne_btn_valider_structure {
@@ -1034,7 +1031,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         .menu_content_structure p:not([class="choose_menu_item_titre"]) {
             display: inline-block;
             vertical-align: middle;
-            width: 47%;
+            width: 55%;
         }
 
         /*---------------------------------------------------------------------------------------------------------------------------------------------------------*/        
@@ -1371,12 +1368,12 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     }
     .pane{position:relative}
     .content{position:relative}
-    .slide{display:inline-block;vertical-align:top;position:relative;width:100%;margin-right:-100%}// SWIPE DON'T REMOVE ! 
+    .slide{display:none;vertical-align:top;position:relative;width:100%;margin-right:-100%}// SWIPE DON'T REMOVE ! 
     .js .tab,.js .popup_layer,.js .dialog_layer,.js .loading_layer,.js .tip{visibility:hidden;opacity:0;z-index:1;-webkit-transition-property:opacity,visibility;-moz-transition-property:opacity,visibility;-ms-transition-property:opacity,visibility;-o-transition-property:opacity,visibility;transition-property:opacity,visibility;-webkit-transition-duration:120ms;-moz-transition-duration:120ms;-ms-transition-duration:120ms;-o-transition-duration:120ms;transition-duration:120ms;-webkit-transition-timing-function:ease-in;-moz-transition-timing-function:ease-in;-ms-transition-timing-function:ease-in;-o-transition-timing-function:ease-in;transition-timing-function:ease-in}
     .js .tab.active,.js .popup_layer.active,.js .dialog_layer.active,.js .loading .loading_layer,.js .tip.active{visibility:visible;opacity:1;z-index:2;-webkit-transition-timing-function:ease-out;-moz-transition-timing-function:ease-out;-ms-transition-timing-function:ease-out;-o-transition-timing-function:ease-out;transition-timing-function:ease-out}
     .js .tip.active{-webkit-transition-delay:540ms;-moz-transition-delay:540ms;-ms-transition-delay:540ms;transition-delay:540ms}
     .js .slide{left:-100%;height:auto;overflow:hidden;z-index:1;-webkit-transition-property:left,height;-moz-transition-property:left,height;-ms-transition-property:left,height;-o-transition-property:left,height;transition-property:left,height;-webkit-transition-duration:333ms;-moz-transition-duration:333ms;-ms-transition-duration:333ms;-o-transition-duration:333ms;transition-duration:333ms;-webkit-transition-timing-function:cubic-bezier(0.1,0.7,0.7,1);-moz-transition-timing-function:cubic-bezier(0.1,0.7,0.7,1);-ms-transition-timing-function:cubic-bezier(0.1,0.7,0.7,1);-o-transition-timing-function:cubic-bezier(0.1,0.7,0.7,1);transition-timing-function:cubic-bezier(0.1,0.7,0.7,1);-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);-o-transform:translate3d(0,0,0);transform:translate3d(0,0,0)}
-    .js .slide.active{left:0;height:auto;overflow:visible;z-index:2;/*margin-top: -15px;*/}
+    .js .slide.active{display:block;left:0;height:auto;overflow:visible;z-index:2;/*margin-top: -15px;*/}
     .js .slide.active ~ .slide{left:100%}// SWIPE DON'T REMOVE ! 
     .js .slide.active ~ .slide.active{left:0}
     .notransition,.notransition .slide,.notransition .tab,.notransition .popdown,.notransition .dropdown,.notransition .layer,.notransition .tip{-webkit-transition-duration:0!important;-moz-transition-duration:0!important;-ms-transition-duration:0!important;transition-duration:0!important;-webkit-transition-delay:0!important;-moz-transition-delay:0!important;-ms-transition-delay:0!important;transition-delay:0!important}
@@ -1474,10 +1471,7 @@ body {
         background-size: initial;
 }
 
-.header_structure, .content_structure {
-        width: 980px;
-        margin: 0 auto;
-}
+
 
 .header_structure {
         position: relative;
@@ -1494,7 +1488,7 @@ body {
         z-index: 4500;
         width: 100%;
         position: absolute;    
-        top:-2.7em;  
+        top:-3.5em;  
         left:-1em; 
 }
 
@@ -1627,9 +1621,9 @@ width: 30%;
 }
 
 .header_right_logo_structure p {
-    right: 6.3em;
+    right: 0.3em;
     margin-bottom: 0.4em;
-    top: 1.8em;
+    top: 1.3em;
 }
 
 select#select_lang {
@@ -1645,13 +1639,17 @@ input[value="La carte"] {
     margin:0;
 }
 
-
-
 .btn_ajout_ingredient_structure {
      max-width: 150px;
 }
 
 
+
+
+
+
 }
+
+
 
 

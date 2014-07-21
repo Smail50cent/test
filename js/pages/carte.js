@@ -587,6 +587,7 @@ function printProduits(index) {
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
                 itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
+                console.log(menus[i].getPrix()," ", menus[i].getTauxDeTva());
                 var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
                 itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());
@@ -621,7 +622,6 @@ function printProduits(index) {
             function printProduitByCategorie(produits) {
                 var quantity = "+";
                 lenCurrent++;
-                console.log(produits[0]);
                 if (produits.length != 0) {
                     var categorie = produits[0].id_categorie;
                     try {
@@ -703,7 +703,6 @@ function etapeSuivante() {
         var optionSelectItem = getOptionInSelectItem();
         var selectInItemHtml = getSelectInItem();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
-        console.log(personnes);
         for (var i = 0; i < qop.length; i++) {
             $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
             $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
@@ -713,7 +712,6 @@ function etapeSuivante() {
             $("#select_item_etape_" + qop[i].getId()).change(function() {
                 var qopId = ($(this).attr("qopId"));
                 var choosedVal = ($(this).val());
-                console.log(choosedVal);
                 currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qopId)].personne = choosedVal;
             });
             function addItemToSelect(html, value, label) {
@@ -1104,7 +1102,7 @@ function showDialogInfoPrix(total) {
     var nbCouverts = JSON.parse(getLocalStorageValue("personnes.couverts"));
     nbCouverts = parseInt(nbCouverts.length);
     var numTable = getLocalStorageValue("paramCommande.numTable");
-    var showTime = 2;// secondes
+    var showTime = 2;//secondes
     if ($("#info_prix_id").length) {
         $("#info_prix_content_couverts_content_id").html(nbCouverts);
         $("#info_prix_content_table_content_id").html(fntp(total));

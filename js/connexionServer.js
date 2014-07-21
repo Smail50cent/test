@@ -206,8 +206,10 @@ function ConnexionServer() {
         });
     };
     this.getAllMenuForDetailMenu = function(method) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllMenus"),
+            url: getServicePath("serveur.clientaccess.serviceGetAllMenus") + "?idetablissement=" + idetablissement + "&idzone=" + idzone,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -218,7 +220,7 @@ function ConnexionServer() {
                     menu.setNom(data[i].nom);
                     menu.setId(data[i].id);
                     menu.setTauxDeTva(parseFloat(data[i].tauxDeTva));
-                    menu.setPrix((data[i].prix));
+                    menu.setPrix(data[i].prix);
                     menu.setProduits(data[i].produits);
                     menus.push(menu);
                 }
@@ -987,6 +989,37 @@ function ConnexionServer() {
             }
         });
     };
+    this.getAllEtablissements = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllEtablissements"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var etablissements = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var e = new Etablissement();
+                    e.id = data[i].id;
+                    e.nom = data[i].nom;
+                    e.logo = data[i].logo;
+                    e.style = data[i].style;
+                    e.adresseEtab = data[i].adresseEtab;
+                    e.telephone = data[i].telephone;
+                    e.message = data[i].message;
+                    e.slogan = data[i].slogan;
+                    e.groupe = data[i].groupe;
+                    etablissements.push(e);
+                }
+                console.log(etablissements);
+                if(method!=null){
+                    method(etablissements,param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
     this.addCompte = function(method, Option, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
@@ -1003,4 +1036,3 @@ function ConnexionServer() {
     };
 
 }
-
