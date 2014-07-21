@@ -1020,7 +1020,7 @@ function ConnexionServer() {
             }
         });
     };
-    this.addCompte = function(method, Option, param) {
+    this.addOption = function(method, Option, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
             type: 'POST',
