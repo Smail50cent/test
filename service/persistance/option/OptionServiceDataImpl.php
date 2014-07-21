@@ -101,14 +101,14 @@ class OptionServiceDataImpl implements OptionServiceData {
         return $ret;
     }
 
-    public function add($id, $nom, $label) {
+    public function addOption($nom, $label) {
         $bdd = new ConnexionBDD();
-        return $bdd->executeGeneric("INSERT INTO options(id,nom,label) VALUES('$id','$nom','$label')");
+        return $bdd->executeGeneric("INSERT INTO options(nom,label) VALUES('$nom','$label')");
     }
 
-    public function addPossibilite($id, $nom, $id_option) {
+    public function addPossibilite($nom, $id_option) {
         $bdd = new ConnexionBDD();
-        return $bdd->executeGeneric("INSERT INTO option_possibilite(id,nom,id_option) VALUES('$id','$nom','$id_option')");
+        return $bdd->executeGeneric("INSERT INTO option_possibilite(nom,id_option) VALUES('$nom','$id_option')");
     }
 
 }

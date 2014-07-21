@@ -304,6 +304,7 @@ function insertPossib() {
         value: txtPossib,
         text: txtPossib
     }));
+    $("#insert_possib_id").val("");
 }
 
 function removePossib() {
@@ -314,9 +315,20 @@ function removePossib() {
 
 function insertOption() {
 
-    var option = $('#insert_option_id').val();
-
-    $("#list_possib_id > option").each(function() {
-        console.log($(this).value);
+    var optionVal = $('#insert_option_id').val();
+    var optionName = optionVal.charAt(0).toUpperCase() + optionVal.slice(1);
+    var optionLabel = optionVal.toLowerCase() + " :";
+    var possib = new Array();
+    var optionObj = new Option();
+    $("#list_possib_id option").each(function() {
+        console.log(optionLabel + " " + $(this).val() + " " + optionName);
+        possib.push($(this).val());
     });
+
+    optionObj.setLabel(optionLabel);
+    optionObj.setNom(optionName);
+    optionObj.setPossibilites(possib);
+
+    console.log(optionObj);
+    getConnexion().addOption(optionObj);
 }

@@ -6,8 +6,12 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 interface OptionServiceData {
+
     public function getOptionByIdProduit($id);
+
     public function getById($id);
+
     public function getAll();
-    public function add($option);
+
+    public function addOption($nom, $label);
 }

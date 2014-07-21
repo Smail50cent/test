@@ -30,10 +30,10 @@ class OptionServiceImpl implements OptionService {
 
     public function add($option) {
 
-        $idLastInsert = $this->optSrv->add($option->id, $option->nom, $option->label);
+        $idLastInsert = $this->optSrv->addOption($option->nom, $option->label);
         $idPossib = 0;
         for ($i = 0; $i < count($option->possibilite); $i++) {
-            $idPossib = $this->optSrv->addPossibilite($option->possibilite[$i]->id, $option->possibilite[$i]->nom, $idLastInsert);
+            $idPossib = $this->optSrv->addPossibilite($option->possibilite[$i]->nom, $idLastInsert);
         }
     return $idPossib;
     }
