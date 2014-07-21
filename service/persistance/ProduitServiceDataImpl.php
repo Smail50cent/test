@@ -12,6 +12,8 @@ include_once $path . 'service/logique/entity/Categorie.php';
 include_once $path . 'service/logique/entity/SousCategorie.php';
 include_once $path . 'service/logique/entity/AssociationProduitIngredients.php';
 include_once $path . 'service/logique/entity/AssociationProduitPrix.php';
+include_once $path . 'service/logique/entity/Option.php';
+include_once $path . 'service/logique/entity/OptionPossibilite.php';
 
 class ProduitServiceDataImpl implements ProduitServiceData {
 
@@ -45,7 +47,13 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,	
 association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,	
-association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+options.id AS option_id,
+options.nom AS option_nom,
+options.label AS option_label,
+option_possibilite.id AS option_possibilite_id,
+option_possibilite.nom AS option_possibilite_nom
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -54,7 +62,10 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
-LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID");
+LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
+LEFT JOIN association_produit_options ON association_produit_options.produit_id = produit.ID
+LEFT JOIN options ON options.id = association_produit_options.option_id
+LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
         return $this->parseProduit($retour, true);
     }
 
@@ -84,7 +95,7 @@ LEFT JOIN association_etablissement_produit ON association_etablissement_produit
             $sousCategorie->setPriorite($ligne->souscategorie_priorite);
             $produit->setSousCategorie($sousCategorie);
             $produit->setTauxTva(floatval($ligne->produit_taux_tva));
-            $produit->setOptions(intval($ligne->produit_options));
+//            $produit->setOptions(intval($ligne->produit_options));
             $produit->setLevel($ligne->produit_level);
             if ($ligne->produit_id == $idProdAfter) {
                 $assoPrix1 = $this->testsForListePrix($ligne, $produit);
@@ -102,6 +113,10 @@ LEFT JOIN association_etablissement_produit ON association_etablissement_produit
                 $assoZones = $this->testsForListeZone($ligne, $produit);
                 if ($assoZones != null) {
                     $produit->addZone($assoZones);
+                }
+                $assoOp = $this->testAddOption($ligne, $produit);
+                if ($assoOp != null) {
+                    $produit->addOption($assoOp);
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
@@ -133,6 +148,12 @@ LEFT JOIN association_etablissement_produit ON association_etablissement_produit
                 if ($assoZones != null) {
                     $produit->addZone($assoZones);
                 }
+
+                $assoOp = $this->testAddOption($ligne, $produit);
+                if ($assoOp != null) {
+                    $produit->addOption($assoOp);
+                }
+
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
                         array_push($liste, $produit);
@@ -158,6 +179,10 @@ LEFT JOIN association_etablissement_produit ON association_etablissement_produit
                 if ($assoZones != null) {
                     $produit->addZone($assoZones);
                 }
+                $assoOp = $this->testAddOption($ligne, $produit);
+                if ($assoOp != null) {
+                    $produit->addOption($assoOp);
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
                         array_push($liste, $produit);
@@ -182,7 +207,42 @@ LEFT JOIN association_etablissement_produit ON association_etablissement_produit
         return $ret;
     }
 
-//association_produit_ingredient_id_etablissement
+    private function testAddOption($ligne, Produit $produit) {
+        $isHerePrix = false;
+        $i = 0;
+        for ($j = 0; $j < count($produit->getOptions()); $j++) {
+            $prod = $produit->getOptions();
+            if ($prod[$j]->id == $ligne->option_id) {
+                $isHerePrix = true;
+                $i = $j;
+                break;
+            }
+        }
+        if (!$isHerePrix) {
+            $op = new Option();
+            $op->setId($ligne->option_id);
+            $op->setLabel($ligne->option_label);
+            $op->setNom($ligne->option_nom);
+            return $op;
+        } else {
+            $isHerePos = false;
+            for ($j = 0; $j < count($produit->getOptions()[$i]->getPossibilite()); $j++) {
+                $prod = $produit->getOptions();
+                if ($produit->getOptions()[$i]->getPossibilite()[$j]->id == $ligne->option_possibilite_id) {
+                    $isHerePos = true;
+                    break;
+                }
+            }
+            if(!$isHerePos){ 
+                $posibilite = new OptionPossibilite();
+                $posibilite->setId($ligne->option_possibilite_id);
+                $posibilite->setNom($ligne->option_possibilite_nom);
+                $produit->getOptions()[$i]->addPossibiliteOptions($posibilite);
+            }
+            return null;
+        }
+    }
+
     private function testsForListePrix($ligne, Produit $produit) {
         $isHerePrix = false;
         for ($j = 0; $j < count($produit->getAssociationPrixProduit()); $j++) {
@@ -328,12 +388,20 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
 association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
-association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+options.id AS option_id,
+options.nom AS option_nom,
+options.label AS option_label,
+option_possibilite.id AS option_possibilite_id,
+option_possibilite.nom AS option_possibilite_nom
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
 LEFT JOIN categorie ON categorie.id = produit.CATEGORIE_ID 
 LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA 
+LEFT JOIN association_produit_options ON association_produit_options.produit_id = produit.ID
+LEFT JOIN options ON options.id = association_produit_options.option_id
+LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
@@ -372,7 +440,13 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
 association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
-association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+options.id AS option_id,
+options.nom AS option_nom,
+options.label AS option_label,
+option_possibilite.id AS option_possibilite_id,
+option_possibilite.nom AS option_possibilite_nom
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -381,7 +455,10 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.CATEGORIE_ID = " . $id);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
+LEFT JOIN association_produit_options ON association_produit_options.produit_id = produit.ID
+LEFT JOIN options ON options.id = association_produit_options.option_id
+LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id WHERE produit.CATEGORIE_ID = " . $id);
         return $this->parseProduit($retour, true);
     }
 
@@ -424,7 +501,13 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
 association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
-association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+options.id AS option_id,
+options.nom AS option_nom,
+options.label AS option_label,
+option_possibilite.id AS option_possibilite_id,
+option_possibilite.nom AS option_possibilite_nom
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -433,7 +516,10 @@ LEFT JOIN taux_tva ON taux_tva.id_tva = produit.TVA
 LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id 
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
-LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id WHERE produit.level > " . $level);
+LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
+LEFT JOIN association_produit_options ON association_produit_options.produit_id = produit.ID
+LEFT JOIN options ON options.id = association_produit_options.option_id
+LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id WHERE produit.level > " . $level);
         return $this->parseProduit($retour, true);
     }
 
@@ -474,7 +560,13 @@ association_produit_ingredient.surcout AS association_produit_ingredient_surcout
 association_produit_ingredient.supprimable AS association_produit_ingredient_supprimable,
 association_produit_ingredient.isIngredientSup AS association_produit_ingredient_isIngredientSup,
 association_etablissement_produit.id_etablissement AS association_produit_ingredient_id_etablissement,
-association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+association_etablissement_produit.id_zone AS association_produit_etablissement_id_zone,
+options.id AS option_id,
+options.nom AS option_nom,
+options.label AS option_label,
+option_possibilite.id AS option_possibilite_id,
+option_possibilite.nom AS option_possibilite_nom
 FROM produit 
 LEFT JOIN association_produit_prix ON association_produit_prix.produit_id = produit.id 
 LEFT JOIN souscategorie ON souscategorie.ID = produit.sousCategorie
@@ -484,6 +576,9 @@ LEFT JOIN prixHt ON prixHt.id = association_produit_prix.prixht_id
 LEFT JOIN association_produit_ingredient ON produit.id= association_produit_ingredient.id_produit
 LEFT JOIN zone_table ON zone_table.id= association_produit_prix.zone_table_id 
 LEFT JOIN association_etablissement_produit ON association_etablissement_produit.id_produit= produit.ID
+LEFT JOIN association_produit_options ON association_produit_options.produit_id = produit.ID
+LEFT JOIN options ON options.id = association_produit_options.option_id
+LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id
 WHERE
 produit.CATEGORIE_ID = " . $idcategorie . " AND
 association_etablissement_produit.id_etablissement = " . $idetablissement . " AND (
