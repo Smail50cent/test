@@ -291,6 +291,24 @@ function optionPage() {
     }
 }
 
+function submit_optionPage() {
+    var checked = false;
+    var list = new Array();
+    $(".ingredOpt_checkbox:checked").each(function() {
+        checked = true;
+        var option = new Option();
+        option.setId($(this).attr('id'));
+        list.push(option);
+        produit.setOptions(list);
+    });
+    if(checked){
+        prixPage();
+    }else {
+        alert('Ajouter une Option avant de valider !');
+    }
+    
+}
+
 function prixPage() {
     scripts.loadScripts("lib.datetimepicker", function() {
         $('.ui-dialog-title').html("Ajouter les Prix");
@@ -356,15 +374,7 @@ function prixPage() {
 }
 
 function submit_prixPage() {
-    var list = new Array();
-    $(".ingredOpt_checkbox:checked").each(function() {
-        var option = new Option();
-        option.setId($(this).attr('id'));
-        list.push(option);
-        produit.setOptions(list);
-    });
-    console.log(produit);
-    prixPage();
+    
 }
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
