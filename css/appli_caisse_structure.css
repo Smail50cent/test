@@ -348,7 +348,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
 
-@media all and (min-width: 310px)  {
+@media all and (min-width: 220px)  {
 
     html {
         width:100%;

@@ -236,7 +236,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
-@media all and (min-width: 310px) {
+@media all and (min-width:220px) {
     html {
         overflow: hidden;
     }
@@ -324,7 +324,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         list-style-type:none; 
         padding : 0 0.4em 0 0;
         margin: 0em auto 7em auto;
-        /*margin-right: -1em;*/
+        margin-top: 0!important;
 }
 
     .btn_choice_personalize li, .choix_mode_calcul_personalize  {
@@ -653,7 +653,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
         }
 
-        .content_list_categorie_personalize ul:last-child {
+        .content_list_categorie_personalize li:last-child>ul {
             margin-left: -60px;
         }
 
@@ -1054,7 +1054,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .content_list_categorie_personalize > li:first-child:link, .content_list_categorie_personalize > li:first-child:hover, .content_list_categorie_personalize > li:first-child:focus {
-            /*border-bottom-left-radius: 7px;*/
+            border-bottom-left-radius: 7px;
             -webkit-transition: background-color .5s ease;
             -moz-transition: background-color .5s ease;
              -ms-transition: background-color .5s ease;
@@ -1063,7 +1063,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .content_list_categorie_personalize > li:last-child:link, .content_list_categorie_personalize > li:last-child:hover, .content_list_categorie_personalize > li:last-child:focus {
-            /*border-bottom-right-radius: 7px;*/
+            border-bottom-right-radius: 7px;
             -webkit-transition: background-color .5s ease;
             -moz-transition: background-color .5s ease;
              -ms-transition: background-color .5s ease;
@@ -1194,7 +1194,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 @media all and (min-width: 768px) and (max-width: 979px) {
 
-   
+   .content_list_categorie_personalize li:last-child>ul {
+        margin-left: 0px; 
+}
+
+.img_slide_structure li ul li {
+        display: inline-table;
+        width: 72%;
+        padding: 0 1.75%;
+}
+
     .content_globlal_zone_personalize{
  
     }
@@ -1262,6 +1271,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 }
 
+.menu_or_card_structure, .recapitulatif_commande_structure {
+    float: left;
+}
+
 
 /*________________________NAVIGATION________________________*/
 
@@ -1307,6 +1320,13 @@ p.header_left_logo_message_structure:last-child {
 
 /*______________________Content_____________________*/
 
+
+.img_slide_structure li ul li {
+        display: inline-table;
+        width: 72%;
+        padding: 0 1.75%;
+}
+
     .menu_or_card_personalize {
         background-color: rgba(255,255,255,0.3);
         width: 980px;
@@ -1349,15 +1369,12 @@ display: none;
     z-index: 1000;
 }
 
-.dialog-ajout-produit .dialog_add_produit label {
-    display:block;
-}
 .dialog-ajout-produit .dialog_add_produit label input {
     margin-bottom: 1em;
 }
-.select_ingredient_structure, .select_option_structure, .select_possibilite_structure {
+.select_ingredient_structure, .select_possibilite_structure {
 width: 40% !important;
-display: inline-block !important;
+/*display: inline-block !important;*/
 background-color: rgba(255, 255, 255, 1);
 padding: 0.7em 0.3em 0.3em 0.3em;
 }
@@ -1365,6 +1382,26 @@ padding: 0.7em 0.3em 0.3em 0.3em;
     overflow-y: auto;
 }
 
+
+.div_zone label, .defaut_prix {
+    font-size: 0.8em;
+    display: inline-block;
+    width: 40%;
+}
+
+.div_zone input {
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+
+/*____________________FOOTER____________________*/
+
+.footer_tarif_personalize{
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+
+}
 }
 
 
