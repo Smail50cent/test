@@ -238,7 +238,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 
-@media all and (min-width: 310px) {
+@media all and (min-width: 220px) {
     html {
         overflow: hidden;
     }
@@ -282,16 +282,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
     .header_left_personalize {
-        width: 120px;
+        width: 148px;
         border-top: 75px solid #726D07;
         border-left: 0px solid transparent;
-        border-right: 71px solid transparent;
+        border-right: 60px solid transparent;
 }
 
     .header_left_logo_personalize { 
         position:relative;
         left:0em;
-        top:-6.2em;
+        top:-6.1em;
 }
 
     .logo_header_font_personalize {
@@ -302,7 +302,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         letter-spacing: -0.075em;
         word-spacing: 0.15em;
         display: inline-block;
-        width: 120%;
+        width: 147%;
 }
 
 
@@ -347,7 +347,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     p.header_left_logo_message_structure:last-child {
         position: absolute;
         bottom: -4.6em;
-        left: 2.1em; 
+        /*left: 2.1em;*/ 
+        width: 160%
     }
 
     .btn_choice_personalize>li:first-child {
@@ -540,7 +541,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .header_text_bottom_personalize p{
         font-family: Verdana, cursive, Trebuchet MS, sans_serif;
-        font-size:0.6em; 
+        font-size:0.59em; 
         /* font-weight: bold ;
          font-style: italic;*/
          color:rgba(57, 73, 2, 1);
@@ -562,13 +563,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         position: absolute;
         background-image: url(../img/olivier.png);
         background-size: 142px;
-        right: 8px;
-        top: -6px;
+        right: 2px;
+        top: -11px;
     }
 
     .header_right_logo_personalize p {
         /*background-color: #C90912;*/
         border-radius: 0.4em 0 0 0;
+        top: 1.39em;
     }
 
     .header_left_logo_message_personalize{
@@ -937,7 +939,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .btn_recapitulatif_commande_personalize, .btn_valider_commande_personalize {
             border: 1px solid #FFFFFF;
-            border-radius: 10px;
+            border-radius: 6px;
             box-shadow: 0 3px 10px #343434;
             color: #343434;
             font-family: "Trebuchet MS",Verdana,sans_serif;
@@ -1228,6 +1230,20 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 @media all and (min-width: 768px) and (max-width: 979px) {
 
    
+    .header_left_personalize {
+        width: 200px;
+    }
+
+    .logo_header_font_personalize {
+        font-size: 2.4em !important;
+    }
+
+    .header_left_logo_personalize {
+        position: relative;
+        left: 0.4em;
+        top: -6.4em;
+    }
+
     .content_globlal_zone_personalize{
  
     }
@@ -1275,8 +1291,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }*/
 
 .header_structure {
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px;
+        width: 980px;
+        margin: 0 auto;
 }
 
 
@@ -1286,7 +1302,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         border-left: 0px solid transparent;
         width: 280px;
         border-right: 77px solid transparent;
-        border-bottom-left-radius: 7px;
 }
 
 .logo_header_font_personalize {
@@ -1312,8 +1327,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 .header_left_logo_structure {
-        top:-2.7em;  
-        left:-1em; 
+        top:-8.7em;  
+        left:1em; 
+        margin-left: 0%;
 }
 
 /*________________________NAVIGATION________________________*/
@@ -1342,7 +1358,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 
 p.header_left_logo_message_structure:last-child {
-        bottom: 12em;
+        top: 10em;
+        left: 0;
 }
 
 .header_right_structure {
@@ -1362,12 +1379,27 @@ p.header_left_logo_message_structure:last-child {
         background-color: rgba(255,255,255,0.2);
         width: 980px;
         margin: 0 auto;
+        min-height: 260px;
         margin-bottom: 2em;
         border-radius: 7px;
         box-shadow: 0px 4px 10px #000;
 }
 
+.content_personalize {
+        width: 980px;
+        position: relative;
+        height: auto;
+        margin: 0 auto;
+}
 
+.content_list_categorie_personalize {
+        width: 980px;
+        margin-top: 0!important;
+}
+
+.content_globlal_zone_structure .content_produit_titre {
+        width: 80%;
+}
 
 .content_globlal_zone_personalize .content_produit_titre_personalize {
         font-size: 0.8em;
@@ -1405,13 +1437,58 @@ p.header_left_logo_message_structure:last-child {
 /*_________________________FOOTER__________________________*/
 
 .footer_tarif_personalize {
-border-top-left-radius: 7px;
-border-top-right-radius: 7px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
 }
 
 .content_titre_structure {
-    margin-bottom: -0.5em;
-    padding-top: 0.5em;
+        margin-bottom: -0.5em;
+        padding-top: 0.5em;
 }
 
+.footer_tarif_personalize{
+        border-top-right-radius: 7px;
+        border-top-left-radius: 7px;
+    }
+
+/*____________________GESTION DE PRODUITS_____________________*/
+
+.dialog-ajout-produit {
+        width: 495px !important;
+        position: absolute !important;
+        top: 14em !important;
+        right: -12em !important;
+        box-shadow: 1px 1px 15px #000;
+        z-index: 1000;
+}
+
+.dialog-ajout-produit .dialog_add_produit label {
+        display:block;
+    }
+.dialog-ajout-produit .dialog_add_produit label input {
+        margin-bottom: 1em;
+}
+.select_ingredient_structure, .select_option_structure, .select_possibilite_structure {
+        width: 40% !important;
+        display: inline-block !important;
+        background-color: rgba(255, 255, 255, 1);
+        padding: 0.7em 0.3em 0.3em 0.3em;
+}
+
+.modif_produit_personalize img {
+        right:0 !important;
+        top:13px;   
+}
+
+.supp_produit_personalize img{
+        position: absolute;
+        left: 3px !important;
+        bottom: 17px  !important;
+}
+
+div#content_produit_zone_id a img {
+        top: 12px;
+        left: 17px;
+        position: absolute;
+}
 }

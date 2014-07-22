@@ -1369,18 +1369,29 @@ display: none;
     z-index: 1000;
 }
 
-.dialog-ajout-produit .dialog_add_produit label {
-    display:block;
-}
 .dialog-ajout-produit .dialog_add_produit label input {
     margin-bottom: 1em;
 }
-.select_ingredient_structure, .select_option_structure, .select_possibilite_structure {
+.select_ingredient_structure, .select_possibilite_structure {
 width: 40% !important;
-display: inline-block !important;
+/*display: inline-block !important;*/
 background-color: rgba(255, 255, 255, 1);
 padding: 0.7em 0.3em 0.3em 0.3em;
 }
+
+
+
+.div_zone label, .defaut_prix {
+    font-size: 0.8em;
+    display: inline-block;
+    width: 40%;
+}
+
+.div_zone input {
+    font-size: 0.8em;
+    display: inline-block;
+}
+
 
 /*____________________FOOTER____________________*/
 
