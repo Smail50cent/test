@@ -10,5 +10,5 @@
 
 <div onclick="ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
 <img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
-<div onclick="prixPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
+<div onclick="submit_prixPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
 <img src="img/gestion/produit/right.png" width="40" height="40" "></div></p>

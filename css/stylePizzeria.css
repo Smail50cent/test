@@ -1343,11 +1343,10 @@ display: none;
 .dialog-ajout-produit {
     width: 495px !important;
     position: absolute !important;
-    top: 14em !important;
+    top: 3em !important;
     right: -12em !important;
     box-shadow: 1px 1px 15px #000;
     z-index: 1000;
-    max-height: 460px;
 }
 
 .dialog-ajout-produit .dialog_add_produit label {

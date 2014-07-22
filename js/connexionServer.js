@@ -564,7 +564,7 @@ function ConnexionServer() {
     this.getAllParamApps = function(method, param) {
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps")+"?idetablissement="+idetablissement,
+            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps") + "?idetablissement=" + idetablissement,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -761,7 +761,7 @@ function ConnexionServer() {
     this.getParametreApplicationByNom = function(method, nom, param) {
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom+"&idetablissement="+idetablissement,
+            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom + "&idetablissement=" + idetablissement,
             type: 'GET',
             dataType: 'json',
             async: false,
@@ -1067,6 +1067,33 @@ function ConnexionServer() {
                     ingredient.setId(data[i].id);
                     ingredient.setNom(data[i].nom);
                     list.push(ingredient);
+                }
+                if (method != null) {
+                    method(list, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllSousCategories = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllSousCategories"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var list = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var souscategorie = new SousCategorie();
+                    souscategorie.setId(data[i].ID);
+                    souscategorie.setNom(data[i].NOM);
+                    souscategorie.setPriorite(data[i].priorite);
+                    souscategorie.setCategorie(data[i].categorie_id);
+                    souscategorie.setTauxTva(data[i].taux_tva);
+                    list.push(souscategorie);
                 }
                 if (method != null) {
                     method(list, param);

@@ -64,12 +64,32 @@ function productPage() {
     LoadCatSousCat();
 
 }
+var produit = new Produit();
 
+function submit_productPage() {
+    var categorie = new Categorie();
+    var souscategorie = new SousCategorie();
+
+    var idCat = $("#liste_categorie_id :selected").val();
+    var idSousCat = $("#liste_souscategorie_id :selected").val();
+    var nomProduit = $("#name_prod_Id").val();
+    if (idCat != 0 && idSousCat != 0 && nomProduit != "") {
+        produit.setNom(nomProduit);
+        categorie.setId(idCat);
+        souscategorie.setId(idSousCat);
+        produit.setCategorie(categorie);
+        produit.setSousCategorie(souscategorie);
+        ingredientPage();
+    } else {
+        alert('Avant de valider :\n - ajouter un nom à votre produit \n - choisissez une Catégorie et une Sous Catégorie');
+    }
+
+}
 function LoadCatSousCat() {
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
-    getImplOfConnexionLocal().getCategoriesForContentCategorie(allCat);
+    getConnexion().getCategoriesForContentCategorie(allCat);
     function allCat(categorie) {
         for (var i = 0; i < categorie.length; i++) {
             $('#liste_categorie_id').append($('<option>', {
@@ -80,7 +100,7 @@ function LoadCatSousCat() {
     }
     $('#liste_categorie_id').change(function() {
         $('#liste_souscategorie_id').empty();
-        getImplOfConnexionLocal().getSousCategoriesForContentSousCategorie(souCats);
+        getConnexion().getAllSousCategories(souCats);
         var idcat = $(this).val();
         //$('#label_categorie_prod_id').text($(this).text());
         $('#label_categorie_prod_id').text($(this).find(":selected").text());
@@ -103,13 +123,15 @@ function LoadCatSousCat() {
 
 function ingredientPage() {
     $('.ui-dialog-title').html("Ajouter les Ingrédients");
+    $('#content_produit_description_id').empty();
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
     getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
             ingredCB = paramValue(cbox, "ingredOpt_nom", Ingredients[i].nom);
-            $('#select_ingredient_id').append(ingredCB);
+            var ingredId = paramValue(ingredCB, "id_obj", Ingredients[i].id);
+            $('#select_ingredient_id').append(ingredId);
         }
         $('.ingredOpt_checkbox').change(function() {
             if (this.checked) {
@@ -127,6 +149,23 @@ function ingredientPage() {
     $('#dialog_add_produit_id').html(ingredDiv);
 }
 
+function submit_ingredientPage() {
+    var list = new Array();
+    var checked = false;
+    $(".ingredOpt_checkbox:checked").each(function() {
+        checked = true;
+        var ingredient = new Ingredient();
+        ingredient.setId($(this).attr('id'));
+        list.push(ingredient);
+        produit.setIdsIngredients(list);
+    });
+    if(!checked){
+        alert('Ajouter des Ingrédients avant de valider !')
+    }else {
+       optionPage(); 
+    }
+    
+}
 function formInsertIngredient() {
 
     $("#dialog_add_opt_ingred_id").dialog(
@@ -169,19 +208,19 @@ function removeIngred() {
 
 function insertIngredDB() {
     if ($("select").has('option').length > 0) {
-       var list = new Array();
-       var ingredient = new Ingredient();
-       $("#list_ingred_id option").each(function() {
-           var ingredient = new Ingredient();
+        var list = new Array();
+        var ingredient = new Ingredient();
+        $("#list_ingred_id option").each(function() {
+            var ingredient = new Ingredient();
             ingredient.setNom($(this).val());
             list.push(ingredient);
         });
-        getConnexion().addIngredient(result,list);
+        getConnexion().addIngredient(result, list);
         function result(data) {
             console.log(data);
         }
     }
-    
+
 }
 function UncheckAllBoxIngredOpt(id) {
     $(id).change(function() {
@@ -316,6 +355,17 @@ function prixPage() {
     });
 }
 
+function submit_prixPage() {
+    var list = new Array();
+    $(".ingredOpt_checkbox:checked").each(function() {
+        var option = new Option();
+        option.setId($(this).attr('id'));
+        list.push(option);
+        produit.setOptions(list);
+    });
+    console.log(produit);
+    prixPage();
+}
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

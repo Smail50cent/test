@@ -10,7 +10,7 @@ function ConnexionLocalIndexedDB() {
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllCategories(onCarteLoadFinish);
     };
-    this.getSousCategoriesForContentSousCategorie = function(onCarteLoadFinish) {
+    this.getAllSousCategories = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllSousCategories(onCarteLoadFinish);
     };
     this.getSousCategorieByIdCat = function(onCarteLoadFinish, idCat) {
