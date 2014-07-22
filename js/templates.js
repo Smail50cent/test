@@ -234,3 +234,6 @@ function getPrixZoneAddProduit(){
 function getDivAddOption(){
     return templates.getTemplate("gestion/produit/div_ajouter_option");
 }
+function getDivAddIngredient(){
+    return templates.getTemplate("gestion/produit/div_ajouter_ingredient");
+}

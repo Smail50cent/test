@@ -1347,6 +1347,7 @@ display: none;
     right: -12em !important;
     box-shadow: 1px 1px 15px #000;
     z-index: 1000;
+    max-height: 460px;
 }
 
 .dialog-ajout-produit .dialog_add_produit label {
@@ -1361,7 +1362,9 @@ display: inline-block !important;
 background-color: rgba(255, 255, 255, 1);
 padding: 0.7em 0.3em 0.3em 0.3em;
 }
-
+.dialog_add_opt_ingred {
+    overflow-y: auto;
+}
 
 }
 

@@ -1,5 +1,4 @@
 
-
 function onLoadGP() {
     printProduits(0);
     var connexion = getConnexion();
@@ -9,7 +8,6 @@ function onLoadGP() {
         $('#content_titre_id').html("Gestion des Produits");
         $('.content_produit_zone_right_structure').empty();
         $('.content_produit_zone_left_structure').empty();
-
         var modifdiv = getDivModifProduit();
         $('.content_produit_zone_right_structure').append(modifdiv);
         var suppdiv = getDivSuppProduit();
@@ -28,7 +26,6 @@ function ModifyProduct(id) {
 
 function DeleteProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
-
     scripts.loadScripts("lib.dialog", function() {
         $('#confirm_dialog_produit_id').dialog({
             modal: true, title: 'Voulez vous supprimer ce produit ?', autoOpen: true, position: 'center',
@@ -51,8 +48,7 @@ function DeleteProduct(id) {
     });
 }
 
-function addProduct() {
-
+function productPage() {
     scripts.loadScripts("lib.dialog", function() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
             close: function(event, ui) {
@@ -70,11 +66,9 @@ function addProduct() {
 }
 
 function LoadCatSousCat() {
-
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
-
     getImplOfConnexionLocal().getCategoriesForContentCategorie(allCat);
     function allCat(categorie) {
         for (var i = 0; i < categorie.length; i++) {
@@ -84,7 +78,6 @@ function LoadCatSousCat() {
             }));
         }
     }
-
     $('#liste_categorie_id').change(function() {
         $('#liste_souscategorie_id').empty();
         getImplOfConnexionLocal().getSousCategoriesForContentSousCategorie(souCats);
@@ -103,7 +96,6 @@ function LoadCatSousCat() {
             $('#label_souscat_prod_id').text($("#liste_souscategorie_id").find(":selected").text());
         }
     });
-
     $('#liste_souscategorie_id').change(function() {
         $('#label_souscat_prod_id').text($(this).find(":selected").text());
     });
@@ -113,13 +105,12 @@ function ingredientPage() {
     $('.ui-dialog-title').html("Ajouter les Ingrédients");
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
-    getImplOfConnexionLocal().getAllIngredients(allIngredients);
+    getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
             ingredCB = paramValue(cbox, "ingredOpt_nom", Ingredients[i].nom);
             $('#select_ingredient_id').append(ingredCB);
         }
-
         $('.ingredOpt_checkbox').change(function() {
             if (this.checked) {
                 var listIngred = getIngredLiAddProduit();
@@ -132,11 +123,66 @@ function ingredientPage() {
         });
         UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
     }
-
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
 }
 
+function formInsertIngredient() {
+
+    $("#dialog_add_opt_ingred_id").dialog(
+            {modal: true, title: 'Ajouter un Ingrédient', autoOpen: true, position: 'right',
+                buttons: {
+                    annuler: function() {
+                        $(this).dialog("destroy");
+                        $("#dialog_add_opt_ingred_id").empty();
+                    },
+                    valider: function() {
+                        insertIngredDB();
+                        $(this).dialog("destroy");
+                        $("#dialog_add_opt_ingred_id").empty();
+                        ingredientPage();
+                    }
+                },
+                close: function() {
+                    $(this).dialog("destroy");
+                    $("#dialog_add_opt_ingred_id").empty();
+                }
+            });
+    var ingredDiv = getDivAddIngredient();
+    $("#dialog_add_opt_ingred_id").html(ingredDiv);
+}
+
+function insertIngred() {
+    var txtIngred = $("#insert_ingredient_id").val();
+    $("#list_ingred_id").append($('<option>', {
+        value: txtIngred,
+        text: txtIngred
+    }));
+    $("#insert_ingredient_id").val("");
+}
+
+function removeIngred() {
+    $("#list_ingred_id :selected").each(function() {
+        $(this).remove();
+    });
+}
+
+function insertIngredDB() {
+    if ($("select").has('option').length > 0) {
+       var list = new Array();
+       var ingredient = new Ingredient();
+       $("#list_ingred_id option").each(function() {
+           var ingredient = new Ingredient();
+            ingredient.setNom($(this).val());
+            list.push(ingredient);
+        });
+        getConnexion().addIngredient(result,list);
+        function result(data) {
+            console.log(data);
+        }
+    }
+    
+}
 function UncheckAllBoxIngredOpt(id) {
     $(id).change(function() {
         if (!this.checked) {
@@ -153,11 +199,11 @@ function UncheckAllBoxIngredOpt(id) {
     });
 }
 
-function addOption() {
+function optionPage() {
     $('.ui-dialog-title').html("Ajouter les Options");
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
-    getImplOfConnexionLocal().getAllOptions(getOpts);
+    getConnexion().getAllOptions(getOpts);
     function getOpts(options) {
         var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
@@ -165,12 +211,10 @@ function addOption() {
             var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].label);
             var optId = paramValue(optCB, "id_obj", options[i].id);
             $('#select_option_id').append(optId);
-
             possibilite[options[i].id] = options[i].possibilites;
         }
         $(".ingredOpt_checkbox").change(function() {
             var valOpt = this.value;
-
             if (this.checked) {
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
                     var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
@@ -203,10 +247,8 @@ function addOption() {
 
                 });
             }
-
         });
         UncheckAllBoxIngredOpt("#uncheck_all_option_id");
-
     }
 }
 
@@ -215,7 +257,6 @@ function prixPage() {
         $('.ui-dialog-title').html("Ajouter les Prix");
         var pagePrix = getPrixAddProduit();
         $('#dialog_add_produit_id').html(pagePrix);
-
         var AllTva = new Array();
         getConnexion().getAllTauxTva(getTva);
         function getTva(TVA) {
@@ -243,7 +284,6 @@ function prixPage() {
                     }));
                 }
             });
-
             $('.datetimepicker').datetimepicker();
             $("input#input_defaut_prix_id").on("keyup", function() {
                 var valPrix = $(this).val();
@@ -274,30 +314,30 @@ function prixPage() {
             })
         }
     });
-
 }
 
 function formInsertOption() {
-
-    $("#dialog_add_option_id").dialog(
-            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right', bgiframe: true,
+    $("#dialog_add_opt_ingred_id").dialog(
+            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
                 buttons: {
                     annuler: function() {
                         $(this).dialog("destroy");
-                        $("#dialog_add_option_id").empty();
+                        $("#dialog_add_opt_ingred_id").empty();
                     },
                     valider: function() {
-                        insertOption();
+                        insertOptionDB();
+                        $(this).dialog("destroy");
+                        $("#dialog_add_opt_ingred_id").empty();
+                        optionPage();
                     }
                 },
                 close: function() {
                     $(this).dialog("destroy");
-                    $("#dialog_add_option_id").empty();
+                    $("#dialog_add_opt_ingred_id").empty();
                 }
             });
     var divOpt = getDivAddOption();
-    $("#dialog_add_option_id").html(divOpt);
-
+    $("#dialog_add_opt_ingred_id").html(divOpt);
     $('#insert_option_id').keyup(function() {
         if ($(this).val() != "") {
             $('#insert_possib_id').attr("disabled", false);
@@ -307,7 +347,6 @@ function formInsertOption() {
             $("#list_possib_id").empty();
         }
     });
-
 }
 
 function insertPossib() {
@@ -325,41 +364,25 @@ function removePossib() {
     });
 }
 
-function insertOption() {
-
-    if (!TestEmptyFieldsProduit()) {
+function insertOptionDB() {
+    if ($("select").has('option').length > 0) {
         var optionVal = $('#insert_option_id').val();
         var optionName = optionVal.charAt(0).toUpperCase() + optionVal.slice(1);
         var optionLabel = optionVal.toLowerCase() + " :";
         var possib = new Array();
         var optionObj = new Option();
         $("#list_possib_id option").each(function() {
-            console.log(optionLabel + " " + $(this).val() + " " + optionName);
             possib.push($(this).val());
         });
-
         optionObj.setLabel(optionLabel);
         optionObj.setNom(optionName);
         optionObj.setPossibilites(possib);
-        getConnexion().addOption(result,optionObj);
+        getConnexion().addOption(result, optionObj);
         function result(data) {
             console.log("SUCCESS");
         }
-
         $('#list_possib_id').empty();
         $("#insert_option_id").empty();
         $("#insert_possib_id").val("");
     }
-
-}
-
-function TestEmptyFieldsProduit() {
-    var empty = false;
-    if($("select").has('option').length === 0) {
-        empty = true;
-    }
-    if (empty) {
-        alert("Remplissez tout les champs avant de valider !");
-    }
-    return empty;
 }

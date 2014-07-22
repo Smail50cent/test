@@ -13,7 +13,7 @@ class IngredientServiceDataImpl implements IngredientServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM ingredient");
+        $retour = $bdd->executeGeneric("SELECT * FROM ingredient ORDER BY nom ASC");
         return $this->parseIngredient($retour);
     }
 
@@ -38,6 +38,11 @@ class IngredientServiceDataImpl implements IngredientServiceData {
             $ret = $liste;
         }
         return $ret;
+    }
+
+    public function add($nom) {
+        $bdd = new ConnexionBDD();
+        return $bdd->executeGeneric("INSERT INTO ingredient(nom) VALUES('$nom')");
     }
 
 }

@@ -1,6 +1,6 @@
 <p>
 <label> Option </label>
-<input type="text" id="insert_option_id" class="insert_option" test_empty=1> <p>
+<input type="text" id="insert_option_id" class="insert_option" test_empty=1> </p>
 
 <p>
 <label> Possibilité </label>

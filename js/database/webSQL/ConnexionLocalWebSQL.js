@@ -100,4 +100,7 @@ function ConnexionLocalWebSQL() {
     this.addOption = function(method, Option, param) {
         console.log("TO DO");
     };
+    this.addIngredient = function(method, ingredient, param) {
+        console.log("TO DO");
+    };
 }

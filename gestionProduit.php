@@ -10,7 +10,7 @@
         <div id="content_titre_categorie_right_id" class="content_titre_categorie_right content_titre_categorie_right_structure content_titre_categorie_right_personalize"></div>
         
         <div id="confirm_dialog_produit_id" class="confirm_dialog_produit"></div>
-        <div id="dialog_add_option_id" class="dialog_add_option"></div>
+        <div id="dialog_add_opt_ingred_id" class="dialog_add_opt_ingred"></div>
         <div id="dialog_add_produit_id" class="dialog_add_produit"></div>
     </div>
 

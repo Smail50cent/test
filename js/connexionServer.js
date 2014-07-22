@@ -956,10 +956,9 @@ function ConnexionServer() {
                     option.setLabel(data[i].label);
                     option.setPossibilites(data[i].possibilites);
                     options.push(option);
-
-                    if (method != null) {
-                        method(options);
-                    }
+                }
+                if (method != null) {
+                    method(options);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -1012,8 +1011,8 @@ function ConnexionServer() {
                     e.groupe = data[i].groupe;
                     etablissements.push(e);
                 }
-                if(method!=null){
-                    method(etablissements,param);
+                if (method != null) {
+                    method(etablissements, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -1027,7 +1026,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
             type: 'POST',
             data: {option: option},
-            async: true,
+            async: false,
             success: function(data) {
                 method(data, param);
             },
@@ -1037,4 +1036,43 @@ function ConnexionServer() {
         });
     };
 
+    this.addIngredient = function(method, ingredient, param) {
+        ingredient = JSON.stringify(ingredient);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAllIngredient"),
+            type: 'POST',
+            data: {ingredient_nom: ingredient},
+            async: false,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllIngredients = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var list = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var ingredient = new Ingredient();
+                    ingredient.setId(data[i].id);
+                    ingredient.setNom(data[i].nom);
+                    list.push(ingredient);
+                }
+                if (method != null) {
+                    method(list, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }

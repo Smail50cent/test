@@ -47,6 +47,7 @@
         <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
         <variable name="serveur.clientaccess.serviceGetAllOptions">option/getAll</variable>
         <variable name="serveur.clientaccess.serviceAddAllOptions">option/addAll</variable>
+        <variable name="serveur.clientaccess.serviceAddAllIngredient">ingredient/addAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllTauxTva">tauxTva/getAll</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameOptions">options</variable>
