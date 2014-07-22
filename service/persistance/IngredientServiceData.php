@@ -14,4 +14,5 @@
 interface IngredientServiceData {
     public function getAll();
     public function getById($id);
+    public function add($nom);
 }

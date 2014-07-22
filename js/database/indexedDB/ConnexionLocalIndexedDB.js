@@ -10,7 +10,7 @@ function ConnexionLocalIndexedDB() {
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllCategories(onCarteLoadFinish);
     };
-    this.getSousCategoriesForContentSousCategorie = function(onCarteLoadFinish) {
+    this.getAllSousCategories = function(onCarteLoadFinish) {
         myStorage.indexedDB.getAllSousCategories(onCarteLoadFinish);
     };
     this.getSousCategorieByIdCat = function(onCarteLoadFinish, idCat) {
@@ -141,8 +141,13 @@ function ConnexionLocalIndexedDB() {
     this.getAllTauxTva = function(method) {
         console.log("TO DO");
     };
-
     this.getAllEtablissements = function(method, param) {
         console.log("TO DO ");
+    };
+    this.addOption = function(method, Option, param) {
+        console.log("TO DO");
+    };
+    this.addIngredient = function(method, ingredient, param) {
+        console.log("TO DO");
     };
 }

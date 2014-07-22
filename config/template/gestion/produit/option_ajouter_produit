@@ -5,7 +5,10 @@
 <div id="select_possibilite_id" class="select_possibilite select_possibilite_structure select_possibilite_personalise">
 </div>
 
+<label> Ajout Option </label> <div onclick="formInsertOption();" type="button" id="insertOpt_id" class="insertOpt_structure insertOpt_personalize">
+<img src="img/gestion/produit/InsertOption.png" width="22" height="22" "></div>
+
 <div onclick="ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
 <img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
-<div onclick="prixPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<div onclick="submit_optionPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
 <img src="img/gestion/produit/right.png" width="40" height="40" "></div></p>

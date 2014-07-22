@@ -147,12 +147,14 @@ function Produit() {
     this.nom;
     this.id_categorie;
     this.id_sousCategorie;
-    this.ids_ingredients; // ARRAY
-    this.demanderCuisson = false; //BOOL
     this.options;
+    this.ids_ingredients; // ARRAY
     this.associationPrixProduit;
     this.tauxTva;
     this.level;
+    this.etablissements;
+    this.zones;
+    this.prix;
 
     this.Produit = function(id, nom, categorie, ingredients) {
         this.setCategorie(categorie);
@@ -160,8 +162,20 @@ function Produit() {
         this.setNom(nom);
         this.setIdsIngredients(ingredients);
     };
+    this.setEtablissements = function(etablissements) {
+        this.etablissements = etablissements;
+    };
+    this.setZones = function(zones) {
+        this.zones = zones;
+    };
+    this.setPrix = function(prix) {
+        this.prix = prix;
+    };
     this.setId = function(id) {
         this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
     };
     this.setNom = function(nom) {
         this.nom = nom;
@@ -174,15 +188,6 @@ function Produit() {
     };
     this.setOptions = function(options) {
         this.options = options;
-    };
-    this.getId = function() {
-        return this.id;
-    };
-    this.getDemanderCuisson = function() {
-        return this.demanderCuisson;
-    };
-    this.setDemanderCuisson = function(cuisson) {
-        this.demanderCuisson = cuisson;
     };
     this.setIdsIngredients = function(idsIngredients) {
         this.ids_ingredients = idsIngredients;
@@ -219,6 +224,15 @@ function Produit() {
     };
     this.getLevel = function() {
         return this.level;
+    };
+    this.getEtablissements = function() {
+        return this.etablissements;
+    };
+    this.getZones = function() {
+        return this.zones;
+    };
+    this.getPrix = function() {
+        return this.prix;
     };
 }
 ;
@@ -607,6 +621,8 @@ function ParamApp() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
+    this.etablissement;
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -624,6 +640,12 @@ function ParamApp() {
     };
     this.getValeur_parametre = function() {
         return this.valeur_parametre;
+    };
+    this.getEtablissement = function() {
+        return this.etablissement;
+    };
+    this.setEtablissement = function(etablissement) {
+        this.etablissement = etablissement;
     };
 }
 function CompteProduitFavori() {
@@ -655,7 +677,13 @@ function ParametreApplication() {
     this.id;
     this.nom_parametre;
     this.valeur_parametre;
-
+    this.etablissement;
+    this.getEtablissement = function() {
+        return this.etablissement;
+    };
+    this.setEtablissement = function(etablissement) {
+        this.etablissement = etablissement;
+    };
     this.getId = function() {
         return this.id;
     };
@@ -688,89 +716,6 @@ function ReservationDateDisponible(id, date, heureDebut, heureFin, indisponible)
     this.heureFin = heureFin;
     this.indisponible = indisponible;
 }
-function Prodtest() {
-    this.id;
-    this.nom;
-    this.categorie_id;
-    this.souscategorie;
-    this.ids_ingredients; // ARRAY
-    this.demanderCuisson = false; //BOOL
-    this.options;
-    this.lienAssociationProduitPrix;
-    this.produitSimple;
-    this.familleComptable;
-    this.tva;
-
-    this.getId = function() {
-        return this.id;
-    };
-    this.getNom = function() {
-        return this.nom;
-    };
-    this.getCategorie_id = function() {
-        return this.categorie_id;
-    };
-    this.getSouscategorie = function() {
-        return this.souscategorie;
-    };
-    this.getOptions = function() {
-        return this.options;
-    };
-    this.getLienAssociationProduitPrix = function() {
-        return this.lienAssociationProduitPrix;
-    };
-    this.getProduitSimple = function() {
-        return this.produitSimple;
-    };
-    this.getFamilleComptable = function() {
-        return this.familleComptable;
-    };
-    this.getTva = function() {
-        return this.tva;
-    };
-    this.getIdsIngredients = function() {
-        return this.ids_ingredients;
-    };
-
-    this.setId = function(id) {
-        this.id = id;
-    };
-    this.setNom = function(nom) {
-        this.nom = nom;
-    };
-    this.setCategorie_id = function(categorie_id) {
-        this.categorie_id = categorie_id;
-    };
-    this.setSouscategorie = function(souscategorie) {
-        this.souscategorie = souscategorie;
-    };
-    this.setOptions = function(options) {
-        this.options = options;
-    };
-    this.setLienAssociationProduitPrix = function(lienAssociationProduitPrix) {
-        this.lienAssociationProduitPrix = lienAssociationProduitPrix;
-    };
-    this.setProduitSimple = function(produitSimple) {
-        this.produitSimple = produitSimple;
-    };
-    this.setFamilleComptable = function(familleComptable) {
-        this.familleComptable = familleComptable;
-    };
-    this.setTva = function(tva) {
-        this.tva = tva;
-    };
-    this.setIdsIngredients = function(idsIngredients) {
-        this.ids_ingredients = idsIngredients;
-    };
-    this.getDemanderCuisson = function() {
-        return this.demanderCuisson;
-    };
-    this.setDemanderCuisson = function(cuisson) {
-        this.demanderCuisson = cuisson;
-    };
-
-}
-
 function MajTables() {
 
     this.nomTable;
@@ -789,7 +734,7 @@ function MajTables() {
         return this.level;
     };
 }
-function ZoneTable(id, nom, tables,etablissement_id) {
+function ZoneTable(id, nom, tables, etablissement_id) {
     this.id = id;
     this.nom = nom;
     this.tables = tables;
@@ -855,11 +800,11 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     this.slogan = slogan;
     this.groupe = groupe;
 }
-function TauxTva(id,taux) {
-    
+function TauxTva(id, taux) {
+
     this.id = id;
     this.taux = taux;
-    
+
     this.setId = function(id) {
         this.id = id;
     };
@@ -872,5 +817,44 @@ function TauxTva(id,taux) {
     this.getTaux = function() {
         return this.taux;
     };
-    
+
+}
+function AssociationProduitPrix() {
+
+    this.id;
+    this.datedebut;
+    this.datefin;
+    this.prixHt;
+    this.zonetable;
+
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setDatedebut = function(datedebut) {
+        this.datedebut = datedebut;
+    };
+    this.getDatedebut = function() {
+        return this.datedebut;
+    };
+    this.setPrixHt = function(prixHt) {
+        this.prixHt = prixHt;
+    };
+    this.getPrixHt = function() {
+        return this.prixHt;
+    };
+    this.setDatefin = function(datefin) {
+        this.datefin = datefin;
+    };
+    this.getDatefin = function() {
+        return this.datefin;
+    };
+    this.setZonetable = function(zonetable) {
+        this.zonetable = zonetable;
+    };
+    this.getZonetable = function() {
+        return this.zonetable;
+    };
 }

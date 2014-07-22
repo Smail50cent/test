@@ -1378,7 +1378,9 @@ width: 40% !important;
 background-color: rgba(255, 255, 255, 1);
 padding: 0.7em 0.3em 0.3em 0.3em;
 }
-
+.dialog_add_opt_ingred {
+    overflow-y: auto;
+}
 
 
 .div_zone label, .defaut_prix {

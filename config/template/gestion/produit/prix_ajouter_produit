@@ -5,7 +5,5 @@
 
 <div id="div_zone_id" class="div_zone"> </div>
 
-<div onclick="addOption();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+<div onclick="optionPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
 <img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
-<!--div onclick="addTva();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/right.png" width="40" height="40" "></div></p-->

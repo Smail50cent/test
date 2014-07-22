@@ -587,7 +587,6 @@ function printProduits(index) {
             for (var i = 0; i < menus.length; i++) {
                 var itemMenu = htmlMenu;
                 itemMenu = paramValue(itemMenu, "menuId", menus[i].getId());
-                console.log(menus[i].getPrix()," ", menus[i].getTauxDeTva());
                 var prixTTC = getPrixHtInAssociation(menus[i].getPrix(), menus[i].getTauxDeTva());
                 itemMenu = paramValue(itemMenu, "prixMenu", fntp(prixTTC));
                 itemMenu = paramValue(itemMenu, "menuNom", menus[i].getNom());

@@ -23,4 +23,11 @@ class IngredientServiceImpl implements IngredientService {
         return $this->ingredientSrv->getById($id);
     }
 
+    public function add($ingredients) {
+        for ($i = 0; $i < count($ingredients); $i++) {
+            $idIngred = $this->ingredientSrv->add($ingredients[$i]->nom);
+        }
+        return $idIngred;
+    }
+
 }

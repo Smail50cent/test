@@ -12,36 +12,33 @@ include_once $path . 'service/logique/entity/ParametreApplication.php';
 
 class ParametreApplicationServiceDataImpl implements ParametreApplicationServiceData {
 
-    public function getAll() {
-        $paramapps = array();
+    public function getAll($etablissementid) {
         $bdd = new ConnexionBDD();
-        $return = $bdd->executeGeneric("SELECT * FROM parametre_application ");
-        $i = 0;
-        while ($ligne = $return->fetch()) {
-            $paramapp = new ParametreApplication();
-            $paramapp->setId(intval($ligne->id));
-            $paramapp->setNom_parametre($ligne->nom_parametre);
-            $paramapp->setValeur_parametre($ligne->valeur_parametre);
-            $paramapps[$i] = $paramapp;
-            $i++;
+        $return;
+        if($etablissementid != null){
+          
+            $return = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
+        }else{
+            $return = $bdd->executeGeneric("SELECT * FROM parametre_application ");
         }
-        return $paramapps;
+        return $this->parseParametreApplication($return);
     }
 
     public function getById($id) {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE id=" . $id);
-        $paramapp = new ParametreApplication();
-        $ligne = $retour->fetch();
-        $paramapp->setId(intval($ligne->id));
-        $paramapp->setNom_parametre($ligne->nom_parametre);
-        $paramapp->setValeur_parametre($ligne->valeur_parametre);
-        return $paramapp;
+        return $this->parseParametreApplication($retour);
     }
 
-    public function getByNomParametre($nom) {
+    public function getByNomParametre($nom,$etablissementid) {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."'");
+        $retour;
+        if($etablissementid!=null){
+            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."' AND  ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
+        }else{
+            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."'");
+        }
+        
         return $this->parseParametreApplication($retour);
     }
 
@@ -51,6 +48,7 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         while ($ligne = $resultSet->fetch()) {
             $paramapp = new ParametreApplication();
             $paramapp->setId(intval($ligne->id));
+            $paramapp->setEtablissement($ligne->etablissement_id);
             $paramapp->setNom_parametre($ligne->nom_parametre);
             $paramapp->setValeur_parametre($ligne->valeur_parametre);
             array_push($liste, $paramapp);

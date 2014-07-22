@@ -6,7 +6,9 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 class ManifestGenerator {
-    public static $manifestFileName ="site.manifest";
+
+    public static $manifestFileName = "site.manifest";
+
     private function getDirToIgnore() {
         return array("service", "nbproject");
     }
@@ -34,8 +36,12 @@ class ManifestGenerator {
         array_push($fichiersToCache, "./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css");
         $templatePath = "../../config/template/";
         $allFiles = $this->getFilesInFolder($templatePath);
+        $cssFiles = $this->getFilesInFolder("../../css/");
         for ($i = 0; $i < count($allFiles); $i++) {
             array_push($fichiersToCache, $allFiles[$i]);
+        }
+        for ($i = 0; $i < count($cssFiles); $i++) {
+            array_push($fichiersToCache, $cssFiles[$i]);
         }
         return $fichiersToCache;
     }
@@ -52,20 +58,27 @@ class ManifestGenerator {
     }
 
     private function getFilesInFolder($folder) {
+        $dirs = $this->getDirToIgnore();
         $filesListe = array();
         if ($dossier = opendir($folder)) {
             $i = 0;
             while (false !== ($fichier = readdir($dossier))) {
                 if ($fichier != ".") {
+                    $noGetFiles = false;
                     if ($fichier != "..") {
-                        
-                        if (is_dir($folder . $fichier . "/") == true) {
+                        for ($j = 0; $j < count($dirs); $j++) {
+                            if ($dirs[$j] == $fichier) {
+                                $noGetFiles = true;
+                                break;
+                            }
+                        }
+                        if (is_dir($folder . $fichier . "/") == true && $noGetFiles == false) {
                             $ret = $this->getFilesInFolder($folder . $fichier . "/");
                             for ($i = 0; $i < count($ret); $i++) {
                                 array_push($filesListe, $this->toUsablePath($ret[$i]));
                             }
                         } else {
-                            array_push($filesListe, $this->toUsablePath("./" . $folder . $fichier ));
+                            array_push($filesListe, $this->toUsablePath("./" . $folder . $fichier));
                         }
                     }
                 }
@@ -91,7 +104,7 @@ class ManifestGenerator {
     public function generateManifest($version) {
         $ret = null;
         $strOfFile = $this->getContentOfManifest($version);
-        $fichier = fopen("../../".ManifestGenerator::$manifestFileName, "w");
+        $fichier = fopen("../../" . ManifestGenerator::$manifestFileName, "w");
         if (fwrite($fichier, $strOfFile)) {
             $ret = true;
         } else {
@@ -102,5 +115,6 @@ class ManifestGenerator {
     }
 
 }
+
 $generator = new ManifestGenerator();
 $generator->generateManifest(1.5);

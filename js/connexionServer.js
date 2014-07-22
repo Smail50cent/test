@@ -562,8 +562,9 @@ function ConnexionServer() {
         });
     };
     this.getAllParamApps = function(method, param) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
+            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps") + "?idetablissement=" + idetablissement,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -574,6 +575,7 @@ function ConnexionServer() {
                     paramapp.setId(data[i].id);
                     paramapp.setNom_parametre(data[i].nom_parametre);
                     paramapp.setValeur_parametre(data[i].valeur_parametre);
+                    paramapp.setEtablissement(data[i].etablissement);
                     paramapps.push(paramapp);
                 }
                 if (method != null) {
@@ -757,18 +759,20 @@ function ConnexionServer() {
         });
     };
     this.getParametreApplicationByNom = function(method, nom, param) {
+        var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom,
+            url: getServicePath("serveur.clientaccess.serviceGetParamAppByNom") + "?nom=" + nom + "&idetablissement=" + idetablissement,
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var parametreApplication = null;
                 if (data != null) {
                     parametreApplication = new ParametreApplication();
                     parametreApplication.setId(data.id);
                     parametreApplication.setNomParametre(data.nom_parametre);
-                    parametreApplication.setValeurParametre(parseInt(data.valeur_parametre));
+                    parametreApplication.setEtablissement(data.etablissement);
+                    parametreApplication.setValeurParametre((data.valeur_parametre));
                 }
                 if (method != null) {
                     method(parametreApplication, param);
@@ -954,10 +958,9 @@ function ConnexionServer() {
                     option.setLabel(data[i].label);
                     option.setPossibilites(data[i].possibilites);
                     options.push(option);
-
-                    if (method != null) {
-                        method(options);
-                    }
+                }
+                if (method != null) {
+                    method(options);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -1010,9 +1013,90 @@ function ConnexionServer() {
                     e.groupe = data[i].groupe;
                     etablissements.push(e);
                 }
-                console.log(etablissements);
-                if(method!=null){
-                    method(etablissements,param);
+                if (method != null) {
+                    method(etablissements, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.addOption = function(method, option, param) {
+        option = JSON.stringify(option);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
+            type: 'POST',
+            data: {option: option},
+            async: false,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.addIngredient = function(method, ingredient, param) {
+        ingredient = JSON.stringify(ingredient);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddAllIngredient"),
+            type: 'POST',
+            data: {ingredient_nom: ingredient},
+            async: false,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllIngredients = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var list = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var ingredient = new Ingredient();
+                    ingredient.setId(data[i].id);
+                    ingredient.setNom(data[i].nom);
+                    list.push(ingredient);
+                }
+                if (method != null) {
+                    method(list, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.getAllSousCategories = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllSousCategories"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var list = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var souscategorie = new SousCategorie();
+                    souscategorie.setId(data[i].ID);
+                    souscategorie.setNom(data[i].NOM);
+                    souscategorie.setPriorite(data[i].priorite);
+                    souscategorie.setCategorie(data[i].categorie_id);
+                    souscategorie.setTauxTva(data[i].taux_tva);
+                    list.push(souscategorie);
+                }
+                if (method != null) {
+                    method(list, param);
                 }
             },
             error: function(xhr, textStatus, errorThrown) {

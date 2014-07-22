@@ -1,19 +1,16 @@
 
 <p><input type="text" id="name_prod_Id" class="name_prod_structure name_prod_personalise" placeholder="Nom du Produit"></p>
 
-<p><label> Catégorie </label>
+<p>
 <select id="liste_categorie_id" class="liste_categorie_structure liste_categorie_personalise">
-<option selected disabled>Catégorie </option>
+<option value=0 selected disabled>Catégorie </option>
 </select></p>
 
-<p><label> Sous Catégorie </label>
+<p>
 <select id="liste_souscategorie_id" class="liste_souscategorie_structure liste_souscategorie_personalise">
-<option selected disabled> Sous Catégorie</option>
+<option value=0 selected disabled> Sous Catégorie</option>
 </select></p>
 
 
-<p><div onclick="ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
+<p><div onclick="submit_productPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
 <img src="img/gestion/produit/right.png" width="40" height="40" "></div>
-
-<!--div onclick="prevPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" "></div></p-->

@@ -176,10 +176,10 @@ myStorage.indexedDB.getAllSousCategories = function(methodToExecuteAfter) {
                 if (!!result == false) {
                     return;
                 }
-                souscategorie.setId(result.value.id);
-                souscategorie.setNom(result.value.nom);
+                souscategorie.setId(result.value.ID);
+                souscategorie.setNom(result.value.NOM);
                 souscategorie.setPriorite(result.value.priorite);
-                souscategorie.setCategorie(result.value.categorie);
+                souscategorie.setCategorie(result.value.categorie_id);
                 souscategorie.setTauxTva(result.value.taux_tva);
                 souscategories.push(souscategorie);
                 result.continue();
