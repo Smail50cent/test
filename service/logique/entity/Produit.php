@@ -11,7 +11,7 @@ class Produit {
     public $nom;
     public $categorie;
     public $souscategorie;
-    public $options; //array
+    public $options = array(); //array
     public $ingredients = array(); // ARRAY
     public $associationPrixProduit = array();
     public $prix;
@@ -54,6 +54,10 @@ class Produit {
 
     public function setOptions($options) {
         $this->options = $options;
+    }
+
+    public function addOption($options) {
+        array_push($this->options, $options);
     }
 
     public function getOptions() {

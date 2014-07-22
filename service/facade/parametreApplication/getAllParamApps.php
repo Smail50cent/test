@@ -4,9 +4,9 @@ include_once '../../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 $paramappSrv = LogiqueFactory::getParamAppService();
 $result;
-if (isset($_GET["etablissementid"])) {
+if (isset($_GET["idetablissement"])) {
     extract($_GET);
-    $result = $paramappSrv->getAll($etablissementid);
+    $result = $paramappSrv->getAll($idetablissement);
 } else {
     $result = $paramappSrv->getAll(null);
 }
