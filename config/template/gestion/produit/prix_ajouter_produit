@@ -1,9 +1,14 @@
-<label id="defaut_prix_id" class="defaut_prix"> Prix </label> 
-<input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix">
+<div class="dialog_ajouter_produit_ajouterprix_structure dialog_ajouter_produit_ajouterprix_personalize">
+    <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">Prix </label> 
+    <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix_structure input_defaut_prix_personalize ">
 
-<hr width=50% align="center">
+    <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">
 
-<div id="div_zone_id" class="div_zone"> </div>
+    <div id="div_zone_id" class="div_zone_personalize div_zone_structure"> </div>
 
-<div onclick="optionPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
+    <div onclick="optionPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+    <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
+
+    <div onclick="submit_prixPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+    <img src="img/gestion/produit/right.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
+<div>

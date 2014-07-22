@@ -374,7 +374,8 @@ function prixPage() {
 }
 
 function submit_prixPage() {
-    
+    var list = new Array();
+    var prix = $("");
 }
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
