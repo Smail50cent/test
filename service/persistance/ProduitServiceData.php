@@ -20,4 +20,6 @@ interface ProduitServiceData {
     public function DeleteProduit($id);
     
     public function getByCategorieAndEtablissentAndZone($idcategorie,$idetablissement,$idzone);
+    
+    public function add(Produit $produit);
 }

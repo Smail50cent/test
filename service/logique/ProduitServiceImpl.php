@@ -49,8 +49,10 @@ class ProduitServiceImpl implements ProduitService {
         }return $ret;
     }
 
-    public function add($produit) {
-        
+    public function add(Produit $produit) {
+        if($produit!=null){
+            $this->produitSrv->add($produit);
+        }        
     }
 
 }

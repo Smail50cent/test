@@ -119,12 +119,22 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        $op = $produit->getOptions();
+
+                        if ($op[0]->getId() == 0) {
+                            $produit->setOptions(null);
+                        }
                         array_push($liste, $produit);
                         $assoPrix = array();
                         $assoIngredient = array();
                         $produit = new Produit();
                     }
                 } else {
+                    $op = $produit->getOptions();
+
+                    if ($op[0]->getId() == 0) {
+                        $produit->setOptions(null);
+                    }
                     array_push($liste, $produit);
                     $assoPrix = array();
                     $assoIngredient = array();
@@ -155,6 +165,11 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
 
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        $op = $produit->getOptions();
+
+                        if ($op[0]->getId() == 0) {
+                            $produit->setOptions(null);
+                        }
                         array_push($liste, $produit);
                         $produit = new Produit();
                     }
@@ -184,10 +199,20 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->produit_id != $lignes[$i + 1]->produit_id) {
+                        $op = $produit->getOptions();
+
+                        if ($op[0]->getId() == 0) {
+                            $produit->setOptions(null);
+                        }
                         array_push($liste, $produit);
                         $produit = new Produit();
                     }
                 } else {
+                    $op = $produit->getOptions();
+
+                    if ($op[0]->getId() == 0) {
+                        $produit->setOptions(null);
+                    }
                     array_push($liste, $produit);
                     $produit = new Produit();
                 }
@@ -232,7 +257,7 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
                     break;
                 }
             }
-            if(!$isHerePos){ 
+            if (!$isHerePos) {
                 $posibilite = new OptionPossibilite();
                 $posibilite->setId($ligne->option_possibilite_id);
                 $posibilite->setNom($ligne->option_possibilite_nom);
@@ -583,6 +608,85 @@ produit.CATEGORIE_ID = " . $idcategorie . " AND
 association_etablissement_produit.id_etablissement = " . $idetablissement . " AND (
 (association_etablissement_produit.`id_zone` = " . $idzone . ") OR (association_etablissement_produit.`id_zone` IS NULL))");
         return $this->parseProduit($retour, true);
+    }
+
+    public function addPrix($prix) {
+        $bdd = new ConnexionBDD();
+        $id = $bdd->executeGeneric("INSERT INTO `prixHt`(`prix`) VALUES (" . $prix . ")");
+        return $id;
+    }
+
+    public function getTauxTvaId($taux) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM  `taux_tva` WHERE CAST(  `taux_tva` AS DECIMAL ) = CAST(" . $taux . " AS DECIMAL ) ");
+        $retour = $retour->fetch();
+        return $retour->id_tva;
+    }
+
+    public function add(Produit $produit) {
+        $reqSql = "";
+        $assoPrixProduit = $produit->getAssociationPrixProduit();
+        $produitNom = $produit->getNom();
+        $categorieId = $produit->getCategorie()->getId();
+        $souscategorieId = $produit->getSousCategorie()->getId();
+        $tauxTvaid = $this->getTauxTvaId($produit->getTauxTva());
+        $level = 1;
+        $bdd = new ConnexionBDD();
+        $produitId = $bdd->executeGeneric("INSERT INTO `produit`"
+                . "(`NOM`, `CATEGORIE_ID`, `sousCategorie`, `TVA`, `level`) VALUES "
+                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",1)");
+        if ($assoPrixProduit != null) {
+            for ($i = 0; $i < count($assoPrixProduit); $i++) {
+                $prixHt = $assoPrixProduit[$i]->getPrixHt();
+                $idPrixHT = $this->addPrix($prixHt);
+                $dateDebut = $assoPrixProduit[$i]->getDateDebut();
+                if($dateDebut == ""){
+                    $dateDebut="null";
+                }
+                $dateFin = $assoPrixProduit[$i]->getDateFin();
+                if($dateFin == ""){
+                    $dateFin="null";
+                }
+                $idZoneTable = null;
+                if($assoPrixProduit[$i]->getZoneTable()!=null){
+                    $idZoneTable = $assoPrixProduit[$i]->getZoneTable()->getId();
+                }else{
+                    $idZoneTable ="null";
+                }
+                $reqSql = $reqSql . " INSERT INTO `association_produit_prix`"
+                        . "(`heureDebut`, `heureFin`, `produit_id`, `prixht_id`, `zone_table_id`) VALUES "
+                        . "(" . $dateDebut . "," . $dateFin . "," . $produitId . "," . $idPrixHT . "," . $idZoneTable . ");";
+            }
+        }
+        $etablissements = $produit->getEtablissements();
+        if ($etablissements != null) {
+            for ($i = 0; $i < count($etablissements); $i++) {
+                $reqSql = $reqSql . "INSERT INTO `association_etablissement_produit`"
+                        . "( `id_produit`, `id_etablissement`) VALUES "
+                        . "(" . $produitId . "," . $etablissements[$i]->getId() . ");";
+            }
+        }
+        $ingredients = $produit->getIngredients();
+        if ($ingredients != null) {
+            for ($i = 0; $i < count($ingredients); $i++) {
+                $reqSql = $reqSql . "INSERT INTO `association_produit_ingredient`"
+                        . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
+                        . "(" . $produitId . "," . $ingredients [$i]->getId() . ",1,0,1,0)";
+            }
+        }
+        $options = $produit->getOptions();
+        if ($options != null) {
+            for ($i = 0; $i < count($options); $i++) {
+                $reqSql = $reqSql . "INSERT INTO `association_produit_options`"
+                        . "(`produit_id`, `option_id`) VALUES "
+                        . "(" . $produitId . "," . $options[$i]->getId() . ")";
+            }
+        }
+        if ($reqSql != "") {
+            echo $reqSql;
+            $bdd = new ConnexionBDD();
+            $bdd->executeGeneric($reqSql);
+        }
     }
 
 }

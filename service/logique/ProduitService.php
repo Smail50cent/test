@@ -22,7 +22,7 @@ interface ProduitService {
     public function getByCategorieAndEtablissentAndZone($idcategorie, $idetablissement, $idzone);
     /**
      * 
-     * @param type Produit
+     * @param Produit $produit
      */
-    public function add($produit);
+    public function add(Produit $produit);
 }
