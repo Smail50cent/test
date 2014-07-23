@@ -294,21 +294,14 @@ function optionPage() {
 }
 
 function submit_optionPage() {
-    var checked = false;
     var list = new Array();
     $(".ingredOpt_checkbox:checked").each(function() {
-        checked = true;
         var option = new Option();
         option.setId($(this).attr('id'));
         list.push(option);
         produit.setOptions(list);
     });
-    if (checked) {
-        prixPage();
-    } else {
-        alert('Ajouter une Option avant de valider !');
-    }
-
+    prixPage();
 }
 
 var dates = new Array();
@@ -415,7 +408,7 @@ function onLoadEtablissementPage() {
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
     $("#dialog_add_produit_id").html(htmlAll);
-    var htmlDiv = getDivShowEtblissementsAndZone();          
+    var htmlDiv = getDivShowEtblissementsAndZone();
     var htmlliZoneEtab = getLiZonesEtablissement();
     getConnexion().getAllEtablissementsWithZones(printEtablissement, null);
     function printEtablissement(etablissements, param) {
@@ -425,11 +418,11 @@ function onLoadEtablissementPage() {
             newEtab = paramValue(newEtab, "idetablissement", etablissements[i].id);
             newEtab = paramValue(newEtab, "nomEtablissement", etablissements[i].nom);
             $("#ajouter_produit_div_etablissement").append(newEtab);
-            for(var j = 0 ; j < etablissements[i].zones.length ; j++) {
-                var divLiZone =htmlliZoneEtab;
-                divLiZone = paramValue(divLiZone,"idzone",etablissements[i].zones[j].id);   
-                divLiZone = paramValue(divLiZone,"idetablissement",etablissements[i].id);
-                divLiZone = paramValue(divLiZone,"nomZone",etablissements[i].zones[j].nom);
+            for (var j = 0; j < etablissements[i].zones.length; j++) {
+                var divLiZone = htmlliZoneEtab;
+                divLiZone = paramValue(divLiZone, "idzone", etablissements[i].zones[j].id);
+                divLiZone = paramValue(divLiZone, "idetablissement", etablissements[i].id);
+                divLiZone = paramValue(divLiZone, "nomZone", etablissements[i].zones[j].nom);
                 $("#etablissement_div_contentzoneliste_" + etablissements[i].id).append(divLiZone);
             }
         }
