@@ -1,12 +1,13 @@
 
- <label><input id="uncheck_all_ingredient_id" type="checkbox" name="option[]" />Tout décocher</label>
+ <label id="label_uncheck_id" class="label_uncheck_structure label_uncheck_personalise">
+<input id="uncheck_all_ingredient_id" class="uncheck_all_ingredient uncheck_all_ingredient_structure uncheck_all_ingredient_personalise" type="checkbox" name="option[]" />Tout décocher</label>
 <div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
 </div>
 
-<label> Ajout Ingrédient </label> <div onclick="formInsertIngredient();" type="button" id="insertIngred_id" class="insertIngred_structure insertIngred_personalize">
-<img src="img/gestion/produit/InsertOption.png" width="22" height="22" "></div>
+<label id="label_ajout_ingred_id" class="label_ajout_ingred_structure label_ajout_ingred_personalise"> Ajout Ingrédient </label> <div onclick="formInsertIngredient();" type="button" id="insertIngred_id" class="insertIngred_structure insertIngred_personalize">
+<img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalise"></div>
 
 <div onclick="productPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" "></div></p>
-<div onclick="submit_ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/right.png" width="40" height="40" "></div></p>
+<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div></p>
+<div onclick="submit_ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
+<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div></p>

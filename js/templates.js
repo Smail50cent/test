@@ -252,4 +252,7 @@ function getDivShowEtblissementsAndZone(){
 function getPossibiliteLabelAddProduit(){
     return templates.getTemplate("gestion/produit/possibilite_label_ajouter_produit");
 }
+function getOptionPossibSelectAddProduit(){
+    return templates.getTemplate("gestion/produit/option_select_ajouter_produit");
+}
     

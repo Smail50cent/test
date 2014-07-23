@@ -49,7 +49,10 @@ function productPage() {
     scripts.loadScripts("lib.dialog", function() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
             close: function(event, ui) {
-                $(this).remove();
+                $(this).dialog("destroy");
+                $("#dialog_add_produit_id").empty();
+                $(".produit_info").remove();
+                onLoadGP();
             }});
         var divadd = getDivAddProduit();
         $('#dialog_add_produit_id').html(divadd);
@@ -149,20 +152,13 @@ function ingredientPage() {
 
 function submit_ingredientPage() {
     var list = new Array();
-    var checked = false;
     $(".ingredient_checkbox:checked").each(function() {
-        checked = true;
         var ingredient = new Ingredient();
         ingredient.setId($(this).attr('id'));
         list.push(ingredient);
         produit.setIdsIngredients(list);
     });
-    if (!checked) {
-        alert('Ajouter des Ingrédients avant de valider !')
-    } else {
-        optionPage();
-    }
-
+    optionPage();
 }
 function formInsertIngredient() {
 
@@ -245,8 +241,9 @@ function optionPage() {
         var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
             var checkbox = getOptionCheckBoxAddProduit();
-            var optCB = paramValue(checkbox, "option_nom", options[i].label);
-            var optId = paramValue(optCB, "id_obj", options[i].id);
+            var optCB = paramValue(checkbox, "option_nom", options[i].nom);
+            var optLabel = paramValue(optCB, "option_label", options[i].label);
+            var optId = paramValue(optLabel, "id_obj", options[i].id);
             $('#select_option_id').append(optId);
             possibilite[options[i].id] = options[i].possibilites;
         }
@@ -254,36 +251,27 @@ function optionPage() {
             var idOpt = $(this).attr('id');
             var possLabel = getPossibiliteLabelAddProduit();
             if (this.checked) {
-                var gpOption = paramValue(possLabel, "possib_val", this.value);
+                var gpOption = paramValue(possLabel, "possib_val", $(this).attr("label_opt"));
                 var gpclass = paramValue(gpOption, "gp_class", "gp_class");
                 var gpId = paramValue(gpclass, "id_opt", idOpt);
                 $('#select_possibilite_id').append(gpId);
-                for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
-                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[$(this).attr('id')][j].nom);
+                for (var j = 0; j < possibilite[idOpt].length; j++) {
+                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[idOpt][j].nom);
                     var possId = paramValue(possCB, "id_opt", idOpt);
                     $('#select_possibilite_id').append(possId);
                 }
-//                $('.possibOpt_checkbox').change(function() {
-//                    var idOpt = $(this).attr('optionid');
-//                    if (this.checked) {
-//                        $(".possibOpt_checkbox").not(":checked").each(function() {
-//                            if ($(this).attr("optionid") == idOpt) {
-//                                //$(this).attr("disabled", true);
-//                            }
-//                        });
-//                        var listIngred = getIngredLiAddProduit();
-//                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
-//                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
-//                        $('#content_produit_description_id').append(hashLi);
-//                    } else {
-//                        $("#" + this.value.hashCode()).remove();
-//                        $('.possibOpt_checkbox').each(function() {
-//                            //$(this).attr("disabled", false);
-//                        });
-//                    }
-//                });
+                var optSelect = getOptionPossibSelectAddProduit();
+                var optPoss = paramValue(optSelect, "option_id", idOpt);
+                var optlab = paramValue(optPoss, "opt_label_val", options[idOpt].label);
+                $('#content_produit_description_id').append(optlab);
+                for (var j = 0; j < possibilite[idOpt].length; j++) {
+                    $('#liste_option_possib_id').append($('<option>', {
+                        value: possibilite[idOpt][j].nom,
+                        text: possibilite[idOpt][j].nom
+                    }));
+                }
             } else {
-                $("label[optionid=" + $(this).attr('id') + "]").each(function() {
+                $("li[optionid=" + $(this).attr('id') + "]").each(function() {
                     $(this).remove();
 
                 });
@@ -294,20 +282,14 @@ function optionPage() {
 }
 
 function submit_optionPage() {
-    var checked = false;
     var list = new Array();
     $(".ingredOpt_checkbox:checked").each(function() {
-        checked = true;
         var option = new Option();
         option.setId($(this).attr('id'));
         list.push(option);
         produit.setOptions(list);
     });
-    if (checked) {
-        prixPage();
-    } else {
-        alert('Ajouter une Option avant de valider !');
-    }
+    prixPage();
 
 }
 
