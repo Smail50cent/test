@@ -395,6 +395,7 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage() {
+    $("#valider_produit").text(strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
     htmlAll = paramValue(htmlAll, "titreSelect", strings.getString("gestion.produit.ajout.etablissement.labelselectall"));
@@ -439,8 +440,14 @@ function onLoadEtablissementPage() {
         }
     });
 }
+function submitEtablissements() {
+
+}
+function validerProduit() {
+    submitEtablissements();
+}
 var tailleItem = new Array("small-item-structure small-item-personalize",
-"medium-item-structure medium-item-personalize","large-item-structure large-item-personalize ");
+        "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

@@ -6,5 +6,5 @@
     <div id="ajouter_produit_div_etablissement">
     
     </div>
-
+    <input id="valider_produit" type="button" onclick="validerProduit();" ></input>
 </div>

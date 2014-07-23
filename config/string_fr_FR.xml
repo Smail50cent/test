@@ -78,4 +78,5 @@
     <string key="label.choix.table.choix.zone.label.option">Zone : </string>
     <string key="label.option.choose.etablissement">Choisisez l'établissement où faire votre commande</string>
      <string key="gestion.produit.ajout.etablissement.labelselectall">Séléctionnez tous les établissements</string>
+     <string key="gestion.produit.ajout.etablissement.labelvaliderproduit">Ajouter le produit</string>
 </strings>
