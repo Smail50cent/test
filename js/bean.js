@@ -799,6 +799,7 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     this.message = message;
     this.slogan = slogan;
     this.groupe = groupe;
+    this.zones;
 }
 function TauxTva(id, taux) {
 

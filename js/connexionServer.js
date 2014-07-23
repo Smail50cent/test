@@ -1113,4 +1113,38 @@ function ConnexionServer() {
             }
         });
     };
+    this.getAllEtablissementsWithZones = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllEtablissementsWithZones"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data, textStatus, xhr) {
+                var etablissements = new Array();
+                for (var i = 0; i < data.length; i++) {
+                    var e = new Etablissement();
+                    e.id = data[i].id;
+                    e.nom = data[i].nom;
+                    e.logo = data[i].logo;
+                    e.style = data[i].style;
+                    e.adresseEtab = data[i].adresseEtab;
+                    e.telephone = data[i].telephone;
+                    e.message = data[i].message;
+                    e.slogan = data[i].slogan;
+                    e.groupe = data[i].groupe;
+                    e.zones = new Array();
+                    for (var j = 0; j < data[i].zones.length; j++) {
+                        e.zones.push(new ZoneTable(data [i].zones[j].id, data [i].zones[j].nom, null, data [i].zones[j].etablissement_id));
+                    }
+                    etablissements.push(e);
+                }
+                if (method != null) {
+                    method(etablissements, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }

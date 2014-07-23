@@ -246,4 +246,6 @@ function getAjouterProduitSelectEtablissements(){
 function getDivShowEtblissementsAndZone(){
     return templates.getTemplate("gestion/produit/div_show_etblissements_and_zone");
 }
-    
+ function getLiZonesEtablissement(){
+    return templates.getTemplate("gestion/produit/li_zones_etablissement");
+}   

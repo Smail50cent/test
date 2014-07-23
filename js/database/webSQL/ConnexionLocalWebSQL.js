@@ -106,4 +106,7 @@ function ConnexionLocalWebSQL() {
     this.getAllSousCategories = function(method) {
         console.log("TO DO");
     };
+    this.getAllEtablissementsWithZones = function(method, param) {
+        console.log("todo");
+    };
 }
