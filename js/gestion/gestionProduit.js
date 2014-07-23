@@ -377,6 +377,10 @@ function submit_prixPage() {
     var list = new Array();
     var prix = $("");
 }
+
+function onLoadEtablissementPage(){
+    
+}
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
