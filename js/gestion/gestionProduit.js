@@ -1,6 +1,6 @@
 
 function onLoadGP() {
-    
+
 //    window.setTimeout(function() {
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
@@ -51,14 +51,15 @@ function productPage() {
             close: function(event, ui) {
                 $(this).remove();
             }});
+        var divadd = getDivAddProduit();
+        $('#dialog_add_produit_id').html(divadd);
+        var page1input = getPage1AddProduit();
+        var page1show = getPage1ShowAddProduit();
+        $('#content_add_produit_zone_input_id').html(page1input);
+        $('#content_produit_zone_id').html(page1show);
+        LoadCatSousCat();
     });
-    var divadd = getDivAddProduit();
-    $('#dialog_add_produit_id').html(divadd);
-    var page1input = getPage1AddProduit();
-    var page1show = getPage1ShowAddProduit();
-    $('#content_add_produit_zone_input_id').html(page1input);
-    $('#content_produit_zone_id').html(page1show);
-    LoadCatSousCat();
+
 
 }
 var produit = new Produit();
@@ -126,11 +127,11 @@ function ingredientPage() {
     getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
-            ingredCB = paramValue(cbox, "ingredOpt_nom", Ingredients[i].nom);
+            ingredCB = paramValue(cbox, "ingredient_nom", Ingredients[i].nom);
             var ingredId = paramValue(ingredCB, "id_obj", Ingredients[i].id);
             $('#select_ingredient_id').append(ingredId);
         }
-        $('.ingredOpt_checkbox').change(function() {
+        $('.ingredient_checkbox').change(function() {
             if (this.checked) {
                 var listIngred = getIngredLiAddProduit();
                 var valLi = paramValue(listIngred, "ingred_val", this.value);
@@ -149,7 +150,7 @@ function ingredientPage() {
 function submit_ingredientPage() {
     var list = new Array();
     var checked = false;
-    $(".ingredOpt_checkbox:checked").each(function() {
+    $(".ingredient_checkbox:checked").each(function() {
         checked = true;
         var ingredient = new Ingredient();
         ingredient.setId($(this).attr('id'));
@@ -243,43 +244,47 @@ function optionPage() {
     function getOpts(options) {
         var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
-            var checkbox = getIngredCheckBoxAddProduit();
-            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].label);
+            var checkbox = getOptionCheckBoxAddProduit();
+            var optCB = paramValue(checkbox, "option_nom", options[i].label);
             var optId = paramValue(optCB, "id_obj", options[i].id);
             $('#select_option_id').append(optId);
             possibilite[options[i].id] = options[i].possibilites;
         }
-        $(".ingredOpt_checkbox").change(function() {
-            var valOpt = this.value;
+        $(".option_checkbox").change(function() {
+            var idOpt = $(this).attr('id');
+            var possLabel = getPossibiliteLabelAddProduit();
             if (this.checked) {
+                var gpOption = paramValue(possLabel, "possib_val", this.value);
+                var gpclass = paramValue(gpOption, "gp_class", "gp_class");
+                var gpId = paramValue(gpclass, "id_opt", idOpt);
+                $('#select_possibilite_id').append(gpId);
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
-                    var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
-                    var possClass = paramValue(possCB, "possib_class", "possibOpt_checkbox");
-                    var possAttr = paramValue(possClass, "opt_id", $(this).attr('id'));
-                    $('#select_possibilite_id').append(possAttr);
+                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[$(this).attr('id')][j].nom);
+                    var possId = paramValue(possCB, "id_opt", idOpt);
+                    $('#select_possibilite_id').append(possId);
                 }
-                $('.possibOpt_checkbox').change(function() {
-                    var idOpt = $(this).attr('optionid');
-                    if (this.checked) {
-                        $(".possibOpt_checkbox").not(":checked").each(function() {
-                            if ($(this).attr("optionid") == idOpt) {
-                                //$(this).attr("disabled", true);
-                            }
-                        });
-                        var listIngred = getIngredLiAddProduit();
-                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
-                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
-                        $('#content_produit_description_id').append(hashLi);
-                    } else {
-                        $("#" + this.value.hashCode()).remove();
-                        $('.possibOpt_checkbox').each(function() {
-                            //$(this).attr("disabled", false);
-                        });
-                    }
-                });
+//                $('.possibOpt_checkbox').change(function() {
+//                    var idOpt = $(this).attr('optionid');
+//                    if (this.checked) {
+//                        $(".possibOpt_checkbox").not(":checked").each(function() {
+//                            if ($(this).attr("optionid") == idOpt) {
+//                                //$(this).attr("disabled", true);
+//                            }
+//                        });
+//                        var listIngred = getIngredLiAddProduit();
+//                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
+//                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+//                        $('#content_produit_description_id').append(hashLi);
+//                    } else {
+//                        $("#" + this.value.hashCode()).remove();
+//                        $('.possibOpt_checkbox').each(function() {
+//                            //$(this).attr("disabled", false);
+//                        });
+//                    }
+//                });
             } else {
-                $("input[optionid=" + $(this).attr('id') + "]").each(function() {
-                    $(this).parent().remove();
+                $("label[optionid=" + $(this).attr('id') + "]").each(function() {
+                    $(this).remove();
 
                 });
             }
