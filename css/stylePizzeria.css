@@ -116,7 +116,6 @@
     box-shadow: 0 2px 4px #000000;
     line-height: 128%;
     text-shadow: 0 1px 1px #000000;
-
 }
 
 img.pict_warning_personalize {
@@ -1354,7 +1353,7 @@ background: rgba(248, 255, 197, 0.5);
 }
 
 .footer_left_structure {
-display: none;
+    display: none;
 }
 
 
@@ -1369,19 +1368,17 @@ display: none;
     z-index: 1000;
 }
 
-.dialog-ajout-produit .dialog_add_produit label input {
-    margin-bottom: 1em;
-}
 .select_ingredient_structure, .select_possibilite_structure {
-width: 40% !important;
-/*display: inline-block !important;*/
-background-color: rgba(255, 255, 255, 1);
-padding: 0.7em 0.3em 0.3em 0.3em;
-}
-.dialog_add_opt_ingred {
-    overflow-y: auto;
+    width: 100%!important;
+    font-size:0.7em!important;
+    /*display: inline-block !important;*/
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.7em 0.3em 0.3em 0.3em;
 }
 
+.select_option_structure {
+    width: 40% !important;
+}
 
 .div_zone label, .defaut_prix {
     font-size: 0.8em;
@@ -1393,6 +1390,52 @@ padding: 0.7em 0.3em 0.3em 0.3em;
     font-size: 0.8em;
     display: inline-block;
 }
+
+.name_prod_personalise {
+    width: 50%;
+}
+
+.name_prod_structure, .liste_categorie_structure, .liste_souscategorie_structure, .ui-widget-content input, .ui-widget-content select { 
+    font-size: 0.9em!important;
+}
+
+.select_ingredient_structure, .select_option_structure{
+    margin: 2em 0;
+    float: left;
+}
+
+.select_ingredient_structure+label{
+    margin-left: 2em;
+    display: inherit;
+    z-index: 500;
+}
+
+.insertIngred_structure img {
+    z-index: 501;
+    margin-top: -1.2em;
+    float: left;
+}
+
+.prev_page_personalise {
+    z-index: 508;
+    padding-left: 4em;
+    display: inline-block;
+    left: -3em;
+    width: 40%;
+    position: absolute;
+}
+
+div.prev_page_structure {
+display: inline;
+margin-left: -2em;
+}
+
+div.prev_page_structure+div.prev_page_structure {
+display: inline;
+margin-left: 0;
+}
+
+
 
 
 /*____________________FOOTER____________________*/

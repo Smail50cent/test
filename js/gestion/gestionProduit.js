@@ -399,8 +399,24 @@ function onLoadEtablissementPage() {
     var htmlAll = getAjouterProduitSelectEtablissements();
     $("#dialog_add_produit_id").html(htmlAll);
     var htmlDiv = getDivShowEtblissementsAndZone();
-    var newEtab = htmlDiv;
-    newEtab = paramValue(newEtab, "idetablissement", id);
+    var htmlliZoneEtab = getLiZonesEtablissement();
+    getConnexion().getAllEtablissementsWithZones(printEtablissement, null);
+    function printEtablissement(etablissements, param) {
+        $("#ajouter_produit_div_etablissement").html("");
+        for (var i = 0; i < etablissements.length; i++) {
+            var newEtab = htmlDiv;
+            newEtab = paramValue(newEtab, "idetablissement", etablissements[i].id);
+            newEtab = paramValue(newEtab, "nomEtablissement", etablissements[i].nom);
+            $("#ajouter_produit_div_etablissement").append(newEtab);
+            for (var j = 0; j < etablissements[i].zones.length; j++) {
+                var divLiZone = htmlliZoneEtab;
+                divLiZone = paramValue(divLiZone, "idzone", etablissements[i].zones[j].id);
+                divLiZone = paramValue(divLiZone, "idetablissement", etablissements[i].id);
+                divLiZone = paramValue(divLiZone, "nomZone", etablissements[i].zones[j].nom);
+                $("#etablissement_div_contentzoneliste_" + etablissements[i].id).append(divLiZone);
+            }
+        }
+    }
 }
 
 function formInsertOption() {

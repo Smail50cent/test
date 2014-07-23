@@ -157,7 +157,7 @@ etablissement.message AS etablissement_message
             } else if ($i == 0) {
                 $assoZone = $this->testsForListeZones($ligne, $etablissement);
                 if ($assoZone != null) {
-                        $etablissement->addZone($assoZone);
+                    $etablissement->addZone($assoZone);
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->etablissement_id != $lignes[$i + 1]->etablissement_id) {
@@ -201,10 +201,13 @@ etablissement.message AS etablissement_message
                 break;
             }
         }if (!$isHerePrix) {
-            $zoneTable = new ZoneTable();
-            $zoneTable->setId($ligne->zone_table_id);
-            $zoneTable->setNom($ligne->zone_table_nom);
-            $zoneTable->setEtablissement_id($ligne->etablissement_id);
+            $zoneTable = null;
+            if ($ligne->zone_table_id != null) {
+                $zoneTable = new ZoneTable();
+                $zoneTable->setId($ligne->zone_table_id);
+                $zoneTable->setNom($ligne->zone_table_nom);
+                $zoneTable->setEtablissement_id($ligne->etablissement_id);
+            }
             return $zoneTable;
         } else {
             return null;
