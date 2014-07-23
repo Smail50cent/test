@@ -51,6 +51,7 @@ function productPage() {
             close: function(event, ui) {
                 $(this).dialog("destroy");
                 $("#dialog_add_produit_id").empty();
+                $("#dialog_add_opt_ingred_id").dialog("destroy");
                 $("#dialog_add_opt_ingred_id").empty();
                 $(".produit_info").remove();
                 onLoadGP();
@@ -113,6 +114,8 @@ function LoadCatSousCat() {
                         value: souscat[i].id,
                         text: souscat[i].nom
                     }));
+                }else {
+                   $('#liste_souscategorie_id').remove();
                 }
             }
             $('#label_souscat_prod_id').text($("#liste_souscategorie_id").find(":selected").text());
