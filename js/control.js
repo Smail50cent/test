@@ -114,7 +114,10 @@ function controller(entreprise) {
             break;
         case "gestionProduit":
             method = function() {
-                onLoadGP();
+                printProduits(0);
+                var connexion = getConnexion();
+                connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
+//                onLoadGP();
             };
             break;
         case "choixEnvoieCuisine":

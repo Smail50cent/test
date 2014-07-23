@@ -217,7 +217,10 @@ function getPageIngredAddProduit(){
     return templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
 }
 function getIngredCheckBoxAddProduit(){
-    return templates.getTemplate("gestion/produit/ingredOpt_checkbox_ajouter_produit");
+    return templates.getTemplate("gestion/produit/ingredient_checkbox_ajouter_produit");
+}
+function getOptionCheckBoxAddProduit(){
+    return templates.getTemplate("gestion/produit/option_checkbox_ajouter_produit");
 }
 function getIngredLiAddProduit(){
     return templates.getTemplate("gestion/produit/ingredOpt_li_ajouter_produit");
@@ -237,3 +240,19 @@ function getDivAddOption(){
 function getDivAddIngredient(){
     return templates.getTemplate("gestion/produit/div_ajouter_ingredient");
 }
+function getAjouterProduitSelectEtablissements(){
+    return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
+}
+function getAjouterProduitSelectEtablissements(){
+    return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
+}
+function getDivShowEtblissementsAndZone(){
+    return templates.getTemplate("gestion/produit/div_show_etblissements_and_zone");
+}
+ function getLiZonesEtablissement(){
+    return templates.getTemplate("gestion/produit/li_zones_etablissement");
+}   
+function getPossibiliteLabelAddProduit(){
+    return templates.getTemplate("gestion/produit/possibilite_label_ajouter_produit");
+}
+    

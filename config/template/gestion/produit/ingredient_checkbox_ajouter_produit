@@ -1,0 +1,1 @@
+<label><input type="checkbox" value="{ingredient_nom}" class="ingredient_checkbox ingredient_checkbox_structure ingredient_checkbox_personalise" id="{id_obj}" "/>{ingredient_nom}</label>

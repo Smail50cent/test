@@ -1,0 +1,1 @@
+<label><input type="checkbox" value="{option_nom}" class="option_checkbox option_checkbox_structure option_checkbox_personalise" id="{id_obj}" optionid="{opt_id}"/>{option_nom}</label>

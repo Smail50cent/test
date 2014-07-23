@@ -1,0 +1,4 @@
+<li id="li_zones_etablissement_{idzone}" class="li_zones_etablissement_structure li_zones_etablissement_personalize">
+    <input id="checkbox_zone_{idetablissement}" type="checkbox" idetablissement="{idetablissement}" class="li_zones_etablissement_checkbox_structure li_zones_etablissement_checkbox_personalize"></input>
+    <p class="li_zones_etablissement_titrezone_structure li_zones_etablissement_titrezone_personalize">{nomZone}</p>
+</li>

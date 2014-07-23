@@ -150,4 +150,7 @@ function ConnexionLocalIndexedDB() {
     this.addIngredient = function(method, ingredient, param) {
         console.log("TO DO");
     };
+    this.getAllEtablissementsWithZones = function(method, param) {
+        console.log("todo");
+    };
 }

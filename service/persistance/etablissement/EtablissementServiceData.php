@@ -9,5 +9,7 @@ interface EtablissementServiceData {
 
     public function getAll();
 
+    public function getAllWithZones();
+
     public function getById($id);
 }

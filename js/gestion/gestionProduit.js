@@ -1,21 +1,18 @@
 
 function onLoadGP() {
-    printProduits(0);
-    var connexion = getConnexion();
-    connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
 
-    window.setTimeout(function() {
-        $('#content_titre_id').html("Gestion des Produits");
-        $('.content_produit_zone_right_structure').empty();
-        $('.content_produit_zone_left_structure').empty();
-        var modifdiv = getDivModifProduit();
-        $('.content_produit_zone_right_structure').append(modifdiv);
-        var suppdiv = getDivSuppProduit();
-        $('.content_produit_zone_left_structure').append(suppdiv);
-        var adddiv = getDivAddProduitBtn();
-        $('.content_globlal_zone').prepend(adddiv);
-        $('#liste_souscategorie_id').hide();
-    }, 2500);
+//    window.setTimeout(function() {
+    $('#content_titre_id').html("Gestion des Produits");
+    $('.content_produit_zone_right_structure').empty();
+    $('.content_produit_zone_left_structure').empty();
+    var modifdiv = getDivModifProduit();
+    $('.content_produit_zone_right_structure').append(modifdiv);
+    var suppdiv = getDivSuppProduit();
+    $('.content_produit_zone_left_structure').append(suppdiv);
+    var adddiv = getDivAddProduitBtn();
+    $('.content_globlal_zone').prepend(adddiv);
+    $('#liste_souscategorie_id').hide();
+//    }, 2500);
 
 }
 
@@ -54,14 +51,15 @@ function productPage() {
             close: function(event, ui) {
                 $(this).remove();
             }});
+        var divadd = getDivAddProduit();
+        $('#dialog_add_produit_id').html(divadd);
+        var page1input = getPage1AddProduit();
+        var page1show = getPage1ShowAddProduit();
+        $('#content_add_produit_zone_input_id').html(page1input);
+        $('#content_produit_zone_id').html(page1show);
+        LoadCatSousCat();
     });
-    var divadd = getDivAddProduit();
-    $('#dialog_add_produit_id').html(divadd);
-    var page1input = getPage1AddProduit();
-    var page1show = getPage1ShowAddProduit();
-    $('#content_add_produit_zone_input_id').html(page1input);
-    $('#content_produit_zone_id').html(page1show);
-    LoadCatSousCat();
+
 
 }
 var produit = new Produit();
@@ -129,11 +127,11 @@ function ingredientPage() {
     getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
-            ingredCB = paramValue(cbox, "ingredOpt_nom", Ingredients[i].nom);
+            ingredCB = paramValue(cbox, "ingredient_nom", Ingredients[i].nom);
             var ingredId = paramValue(ingredCB, "id_obj", Ingredients[i].id);
             $('#select_ingredient_id').append(ingredId);
         }
-        $('.ingredOpt_checkbox').change(function() {
+        $('.ingredient_checkbox').change(function() {
             if (this.checked) {
                 var listIngred = getIngredLiAddProduit();
                 var valLi = paramValue(listIngred, "ingred_val", this.value);
@@ -152,19 +150,19 @@ function ingredientPage() {
 function submit_ingredientPage() {
     var list = new Array();
     var checked = false;
-    $(".ingredOpt_checkbox:checked").each(function() {
+    $(".ingredient_checkbox:checked").each(function() {
         checked = true;
         var ingredient = new Ingredient();
         ingredient.setId($(this).attr('id'));
         list.push(ingredient);
         produit.setIdsIngredients(list);
     });
-    if(!checked){
+    if (!checked) {
         alert('Ajouter des Ingrédients avant de valider !')
-    }else {
-       optionPage(); 
+    } else {
+        optionPage();
     }
-    
+
 }
 function formInsertIngredient() {
 
@@ -246,43 +244,47 @@ function optionPage() {
     function getOpts(options) {
         var possibilite = new Array();
         for (var i = 0; i < options.length; i++) {
-            var checkbox = getIngredCheckBoxAddProduit();
-            var optCB = paramValue(checkbox, "ingredOpt_nom", options[i].label);
+            var checkbox = getOptionCheckBoxAddProduit();
+            var optCB = paramValue(checkbox, "option_nom", options[i].label);
             var optId = paramValue(optCB, "id_obj", options[i].id);
             $('#select_option_id').append(optId);
             possibilite[options[i].id] = options[i].possibilites;
         }
-        $(".ingredOpt_checkbox").change(function() {
-            var valOpt = this.value;
+        $(".option_checkbox").change(function() {
+            var idOpt = $(this).attr('id');
+            var possLabel = getPossibiliteLabelAddProduit();
             if (this.checked) {
+                var gpOption = paramValue(possLabel, "possib_val", this.value);
+                var gpclass = paramValue(gpOption, "gp_class", "gp_class");
+                var gpId = paramValue(gpclass, "id_opt", idOpt);
+                $('#select_possibilite_id').append(gpId);
                 for (var j = 0; j < possibilite[$(this).attr('id')].length; j++) {
-                    var possCB = paramValue(checkbox, "ingredOpt_nom", possibilite[$(this).attr('id')][j].nom);
-                    var possClass = paramValue(possCB, "possib_class", "possibOpt_checkbox");
-                    var possAttr = paramValue(possClass, "opt_id", $(this).attr('id'));
-                    $('#select_possibilite_id').append(possAttr);
+                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[$(this).attr('id')][j].nom);
+                    var possId = paramValue(possCB, "id_opt", idOpt);
+                    $('#select_possibilite_id').append(possId);
                 }
-                $('.possibOpt_checkbox').change(function() {
-                    var idOpt = $(this).attr('optionid');
-                    if (this.checked) {
-                        $(".possibOpt_checkbox").not(":checked").each(function() {
-                            if ($(this).attr("optionid") == idOpt) {
-                                //$(this).attr("disabled", true);
-                            }
-                        });
-                        var listIngred = getIngredLiAddProduit();
-                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
-                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
-                        $('#content_produit_description_id').append(hashLi);
-                    } else {
-                        $("#" + this.value.hashCode()).remove();
-                        $('.possibOpt_checkbox').each(function() {
-                            //$(this).attr("disabled", false);
-                        });
-                    }
-                });
+//                $('.possibOpt_checkbox').change(function() {
+//                    var idOpt = $(this).attr('optionid');
+//                    if (this.checked) {
+//                        $(".possibOpt_checkbox").not(":checked").each(function() {
+//                            if ($(this).attr("optionid") == idOpt) {
+//                                //$(this).attr("disabled", true);
+//                            }
+//                        });
+//                        var listIngred = getIngredLiAddProduit();
+//                        var valLi = paramValue(listIngred, "ingred_val", valOpt + " " + this.value);
+//                        var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+//                        $('#content_produit_description_id').append(hashLi);
+//                    } else {
+//                        $("#" + this.value.hashCode()).remove();
+//                        $('.possibOpt_checkbox').each(function() {
+//                            //$(this).attr("disabled", false);
+//                        });
+//                    }
+//                });
             } else {
-                $("input[optionid=" + $(this).attr('id') + "]").each(function() {
-                    $(this).parent().remove();
+                $("label[optionid=" + $(this).attr('id') + "]").each(function() {
+                    $(this).remove();
 
                 });
             }
@@ -292,23 +294,17 @@ function optionPage() {
 }
 
 function submit_optionPage() {
-    var checked = false;
     var list = new Array();
     $(".ingredOpt_checkbox:checked").each(function() {
-        checked = true;
         var option = new Option();
         option.setId($(this).attr('id'));
         list.push(option);
         produit.setOptions(list);
     });
-    if(checked){
-        prixPage();
-    }else {
-        alert('Ajouter une Option avant de valider !');
-    }
-    
+    prixPage();
 }
 
+var dates = new Array();
 function prixPage() {
     scripts.loadScripts("lib.datetimepicker", function() {
         $('.ui-dialog-title').html("Ajouter les Prix");
@@ -341,7 +337,6 @@ function prixPage() {
                     }));
                 }
             });
-            $('.datetimepicker').datetimepicker();
             $("input#input_defaut_prix_id").on("keyup", function() {
                 var valPrix = $(this).val();
                 $('.input_zone_prix').each(function() {
@@ -368,15 +363,72 @@ function prixPage() {
                         }
                     });
                 }
-            })
+            });
         }
     });
 }
 
 function submit_prixPage() {
     var list = new Array();
-    var prix = $("");
+    var prix = $("#input_defaut_prix_id").val();
+    var associationPrixProduit = new AssociationProduitPrix();
+    associationPrixProduit.setDatedebut(null);
+    associationPrixProduit.setDatefin(null);
+    associationPrixProduit.setPrixHt(prix);
+    associationPrixProduit.setZonetable(null);
+    list.push(associationPrixProduit);
+    $(".input_zone_prix").each(function() {
+        var associationPPZone = new AssociationProduitPrix();
+        var prix = $(this).val();
+        var idprix = $(this).attr("id_inputprix");
+        var datedebut;
+        var datefin;
+        $(".datetimepicker[id_inputprix=" + idprix + "]").each(function() {
+            if ($(this).hasClass("date_debut")) {
+                var date = $(this).val();
+                datedebut = date.replace('T', ' ');
+            } else if ($(this).hasClass("date_fin")) {
+                var date = $(this).val();
+                datefin = date.replace('T', ' ');
+            }
+
+        });
+        associationPPZone.setDatedebut(datedebut);
+        associationPPZone.setDatefin(datefin);
+        associationPPZone.setPrixHt(prix);
+        associationPPZone.setZonetable(idprix);
+        list.push(associationPPZone);
+    });
+    produit.setAssociationPrixProduit(list);
+    console.log(produit);
+    onLoadEtablissementPage();
 }
+
+function onLoadEtablissementPage() {
+    $("#dialog_add_produit_id").html("");
+    var htmlAll = getAjouterProduitSelectEtablissements();
+    $("#dialog_add_produit_id").html(htmlAll);
+    var htmlDiv = getDivShowEtblissementsAndZone();
+    var htmlliZoneEtab = getLiZonesEtablissement();
+    getConnexion().getAllEtablissementsWithZones(printEtablissement, null);
+    function printEtablissement(etablissements, param) {
+        $("#ajouter_produit_div_etablissement").html("");
+        for (var i = 0; i < etablissements.length; i++) {
+            var newEtab = htmlDiv;
+            newEtab = paramValue(newEtab, "idetablissement", etablissements[i].id);
+            newEtab = paramValue(newEtab, "nomEtablissement", etablissements[i].nom);
+            $("#ajouter_produit_div_etablissement").append(newEtab);
+            for (var j = 0; j < etablissements[i].zones.length; j++) {
+                var divLiZone = htmlliZoneEtab;
+                divLiZone = paramValue(divLiZone, "idzone", etablissements[i].zones[j].id);
+                divLiZone = paramValue(divLiZone, "idetablissement", etablissements[i].id);
+                divLiZone = paramValue(divLiZone, "nomZone", etablissements[i].zones[j].nom);
+                $("#etablissement_div_contentzoneliste_" + etablissements[i].id).append(divLiZone);
+            }
+        }
+    }
+}
+
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

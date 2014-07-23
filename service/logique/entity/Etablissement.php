@@ -16,6 +16,19 @@ class Etablissement {
     public $message;
     public $groupe;
     public $slogan;
+    public $zones = array();
+
+    public function getZones() {
+        return $this->zones;
+    }
+
+    public function setZones($zones) {
+        $this->zones = $zones;
+    }
+
+    public function addZone($zone) {
+        array_push($this->zones, $zone);
+    }
 
     public function getSlogan() {
         return $this->slogan;
