@@ -250,9 +250,13 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
             return $op;
         } else {
             $isHerePos = false;
-            for ($j = 0; $j < count($produit->getOptions()[$i]->getPossibilite()); $j++) {
+            $op=$produit->getOptions();
+           $o=$op [$i];
+            for ($j = 0; $j < count($o->getPossibilite()); $j++) {
                 $prod = $produit->getOptions();
-                if ($produit->getOptions()[$i]->getPossibilite()[$j]->id == $ligne->option_possibilite_id) {
+                $pr=$o->getPossibilite();
+               
+                if ( $pr[$j]->id == $ligne->option_possibilite_id) {
                     $isHerePos = true;
                     break;
                 }
@@ -261,7 +265,7 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
                 $posibilite = new OptionPossibilite();
                 $posibilite->setId($ligne->option_possibilite_id);
                 $posibilite->setNom($ligne->option_possibilite_nom);
-                $produit->getOptions()[$i]->addPossibiliteOptions($posibilite);
+                $o->addPossibiliteOptions($posibilite);
             }
             return null;
         }
