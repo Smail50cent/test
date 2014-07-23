@@ -159,12 +159,12 @@ function submit_ingredientPage() {
         list.push(ingredient);
         produit.setIdsIngredients(list);
     });
-    if(!checked){
+    if (!checked) {
         alert('Ajouter des Ingrédients avant de valider !')
-    }else {
-       optionPage(); 
+    } else {
+        optionPage();
     }
-    
+
 }
 function formInsertIngredient() {
 
@@ -301,12 +301,12 @@ function submit_optionPage() {
         list.push(option);
         produit.setOptions(list);
     });
-    if(checked){
+    if (checked) {
         prixPage();
-    }else {
+    } else {
         alert('Ajouter une Option avant de valider !');
     }
-    
+
 }
 
 function prixPage() {
@@ -341,7 +341,9 @@ function prixPage() {
                     }));
                 }
             });
-            $('.datetimepicker').datetimepicker();
+            $('.datetimepicker').datetimepicker({
+                format: 'Y-m-d h:m',
+            });
             $("input#input_defaut_prix_id").on("keyup", function() {
                 var valPrix = $(this).val();
                 $('.input_zone_prix').each(function() {
@@ -368,14 +370,39 @@ function prixPage() {
                         }
                     });
                 }
-            })
+            });
         }
     });
 }
 
 function submit_prixPage() {
     var list = new Array();
-    var prix = $("");
+    var prix = $("#input_defaut_prix_id").val();
+    var associationPrixProduit = new AssociationProduitPrix();
+    associationPrixProduit.setDatedebut(null);
+    associationPrixProduit.setDatefin(null);
+    associationPrixProduit.setPrixHt(prix);
+    associationPrixProduit.setZonetable(null);
+    associationPrixProduit.setId(1);
+    list.push(associationPrixProduit);
+    $(".input_zone_prix").each(function() {
+        var associationPPZone = new AssociationProduitPrix();
+        var prix = $(this).val();
+        var idprix = $(this).attr("id_inputprix");
+        var datedebut = $(".date_debut[id_inputprix='" + idprix + "'] ").text();
+        $("input[id_inputprix='" + idprix + "'] ").each(function(){
+            console.log($(this).val());
+        });
+        console.log(datedebut);
+        var datefin = $(".date_fin[id_inputprix=" + idprix + "] ").val();
+        associationPPZone.setDatedebut(datedebut);
+        associationPPZone.setDatefin(datefin);
+        associationPPZone.setPrixHt(prix);
+        list.push(associationPPZone);
+    });
+    //produit.setAssociationPrixProduit(list);
+    //console.log(list);
+    //console.log(produit);
 }
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
