@@ -403,6 +403,7 @@ function submit_prixPage() {
     //produit.setAssociationPrixProduit(list);
     //console.log(list);
     //console.log(produit);
+    onLoadEtablissementPage();
 }
 
 function onLoadEtablissementPage(){
