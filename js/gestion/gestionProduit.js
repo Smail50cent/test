@@ -309,6 +309,7 @@ function submit_optionPage() {
 
 }
 
+var dates = new Array();
 function prixPage() {
     scripts.loadScripts("lib.datetimepicker", function() {
         $('.ui-dialog-title').html("Ajouter les Prix");
@@ -340,9 +341,6 @@ function prixPage() {
                         text: parseFloat(AllTva[j].taux)
                     }));
                 }
-            });
-            $('.datetimepicker').datetimepicker({
-                format: 'Y-m-d h:m',
             });
             $("input#input_defaut_prix_id").on("keyup", function() {
                 var valPrix = $(this).val();
@@ -383,31 +381,36 @@ function submit_prixPage() {
     associationPrixProduit.setDatefin(null);
     associationPrixProduit.setPrixHt(prix);
     associationPrixProduit.setZonetable(null);
-    associationPrixProduit.setId(1);
     list.push(associationPrixProduit);
     $(".input_zone_prix").each(function() {
         var associationPPZone = new AssociationProduitPrix();
         var prix = $(this).val();
         var idprix = $(this).attr("id_inputprix");
-        var datedebut = $(".date_debut[id_inputprix='" + idprix + "'] ").text();
-        $("input[id_inputprix='" + idprix + "'] ").each(function(){
-            console.log($(this).val());
+        var datedebut;
+        var datefin;
+        $(".datetimepicker[id_inputprix=" + idprix + "]").each(function() {
+            if ($(this).hasClass("date_debut")) {
+                var date = $(this).val();
+                datedebut = date.replace('T', ' ');
+            }else if($(this).hasClass("date_fin")) {
+                var date = $(this).val();
+                datefin = date.replace('T', ' ');
+            }
+
         });
-        console.log(datedebut);
-        var datefin = $(".date_fin[id_inputprix=" + idprix + "] ").val();
         associationPPZone.setDatedebut(datedebut);
         associationPPZone.setDatefin(datefin);
         associationPPZone.setPrixHt(prix);
+        associationPPZone.setZonetable(idprix);
         list.push(associationPPZone);
     });
-    //produit.setAssociationPrixProduit(list);
-    //console.log(list);
-    //console.log(produit);
+    produit.setAssociationPrixProduit(list);
+    console.log(produit);
     onLoadEtablissementPage();
 }
 
-function onLoadEtablissementPage(){
-    
+function onLoadEtablissementPage() {
+
 }
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
