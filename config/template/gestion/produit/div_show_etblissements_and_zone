@@ -1,0 +1,11 @@
+<div id="{etablissement_div_id}" class="etablissement_div_structure etablissement_div_personalize">
+    <div id="etablissement_div_header_{idetablissement}" class="etablissement_div_header_structure etablissement_div_header_personalize">
+        <p id="etablissement_div_{idetablissement}" class="etablissement_div_header_titre_structure etablissement_div_header_titre_personalize"></p>
+        <input type="checkbox" id="slect_all_zones_{idetablissement}" class="etablissement_div_header_select_structure etablissement_div_header_select_personalize" />
+    </div>
+    <div id="etablissement_div_contentzone_{idetablissement}" class="etablissement_div_contentzone_structure etablissement_div_contentzone_personalize">
+        <ul id="etablissement_div_contentzone_{idetablissement}" class="etablissement_div_listezone_structure etablissement_div_listezone_personalize">
+        
+        </ul>
+    </div>
+</div>

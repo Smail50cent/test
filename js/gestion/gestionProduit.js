@@ -404,6 +404,10 @@ function submit_prixPage() {
     //console.log(list);
     //console.log(produit);
 }
+
+function onLoadEtablissementPage(){
+    
+}
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
