@@ -101,8 +101,11 @@ function ConnexionServer() {
         }
     };
     this.getCategoriesForContentCategorie = function(onCarteLoadFinish) {
+        var idzone = null;
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+        if (getLocalStorageValue("paramCommande.numTable") != null) {
+            idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+        }
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllCategories") + "?idetablissement=" + idetablissement + "&idzone=" + idzone,
             type: 'GET',
@@ -206,8 +209,11 @@ function ConnexionServer() {
         });
     };
     this.getAllMenuForDetailMenu = function(method) {
+        var idzone = null;
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-        var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+        if (getLocalStorageValue("paramCommande.numTable") != null) {
+            idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+        }
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllMenus") + "?idetablissement=" + idetablissement + "&idzone=" + idzone,
             type: 'GET',
@@ -272,8 +278,11 @@ function ConnexionServer() {
                 }
                 updateLevelOfTable(config.getConfig("tableNameProduit"), level);
             } else if (products == "NS") {
+                var idzone = null;
                 var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-                var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+                if (getLocalStorageValue("paramCommande.numTable") != null) {
+                    idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
+                }
                 $.ajax({
                     url: getServicePath("serveur.clientaccess.serviceGetProduitByCategorieId") + "?id=" +
                             idcat + "&idetablissement=" + idetablissement + "&idzone=" + idzone,

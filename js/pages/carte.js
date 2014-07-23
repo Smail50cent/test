@@ -657,6 +657,9 @@ function printProduits(index) {
                 if (lenCurrent == lenToGo) {
                     //si on a fini de charger les produits on charge les scripts de swipe
                     scripts.loadScripts("swipe");
+                    if(nom=="gestionProduit"){
+                        onLoadGP();
+                    }
                     hideLoading();
                 }
             }

@@ -1,21 +1,18 @@
 
 function onLoadGP() {
-    printProduits(0);
-    var connexion = getConnexion();
-    connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
-
-    window.setTimeout(function() {
-        $('#content_titre_id').html("Gestion des Produits");
-        $('.content_produit_zone_right_structure').empty();
-        $('.content_produit_zone_left_structure').empty();
-        var modifdiv = getDivModifProduit();
-        $('.content_produit_zone_right_structure').append(modifdiv);
-        var suppdiv = getDivSuppProduit();
-        $('.content_produit_zone_left_structure').append(suppdiv);
-        var adddiv = getDivAddProduitBtn();
-        $('.content_globlal_zone').prepend(adddiv);
-        $('#liste_souscategorie_id').hide();
-    }, 2500);
+    
+//    window.setTimeout(function() {
+    $('#content_titre_id').html("Gestion des Produits");
+    $('.content_produit_zone_right_structure').empty();
+    $('.content_produit_zone_left_structure').empty();
+    var modifdiv = getDivModifProduit();
+    $('.content_produit_zone_right_structure').append(modifdiv);
+    var suppdiv = getDivSuppProduit();
+    $('.content_produit_zone_left_structure').append(suppdiv);
+    var adddiv = getDivAddProduitBtn();
+    $('.content_globlal_zone').prepend(adddiv);
+    $('#liste_souscategorie_id').hide();
+//    }, 2500);
 
 }
 
@@ -392,7 +389,7 @@ function submit_prixPage() {
             if ($(this).hasClass("date_debut")) {
                 var date = $(this).val();
                 datedebut = date.replace('T', ' ');
-            }else if($(this).hasClass("date_fin")) {
+            } else if ($(this).hasClass("date_fin")) {
                 var date = $(this).val();
                 datefin = date.replace('T', ' ');
             }
@@ -409,13 +406,13 @@ function submit_prixPage() {
     onLoadEtablissementPage();
 }
 
-function onLoadEtablissementPage(){
+function onLoadEtablissementPage() {
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
     $("#dialog_add_produit_id").html(htmlAll);
     var htmlDiv = getDivShowEtblissementsAndZone();
     var newEtab = htmlDiv;
-    newEtab = paramValue(newEtab,"idetablissement",id);
+    newEtab = paramValue(newEtab, "idetablissement", id);
 }
 
 function formInsertOption() {
