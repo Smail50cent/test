@@ -24,4 +24,8 @@ class EtablissementServiceImpl implements EtablissementService {
         return $this->etablissementSrv->getById($id);
     }
 
+    public function getAllWithZones() {
+        return $this->etablissementSrv->getAllWithZones();
+    }
+
 }

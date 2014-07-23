@@ -407,8 +407,14 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage(){
-    
+    $("#dialog_add_produit_id").html("");
+    var htmlAll = getAjouterProduitSelectEtablissements();
+    $("#dialog_add_produit_id").html(htmlAll);
+    var htmlDiv = getDivShowEtblissementsAndZone();
+    var newEtab = htmlDiv;
+    newEtab = paramValue(newEtab,"idetablissement",id);
 }
+
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

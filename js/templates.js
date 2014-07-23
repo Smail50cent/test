@@ -237,3 +237,13 @@ function getDivAddOption(){
 function getDivAddIngredient(){
     return templates.getTemplate("gestion/produit/div_ajouter_ingredient");
 }
+function getAjouterProduitSelectEtablissements(){
+    return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
+}
+function getAjouterProduitSelectEtablissements(){
+    return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
+}
+function getDivShowEtblissementsAndZone(){
+    return templates.getTemplate("gestion/produit/div_show_etblissements_and_zone");
+}
+    
