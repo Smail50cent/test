@@ -2,6 +2,9 @@
 function onLoadGP() {
     var htmlDivdrop = getDivGestionDropdown();
     $("#header_right_id").append(htmlDivdrop);
+    loadViewsForAddProduit();
+}
+function loadViewsForAddProduit(){
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
@@ -51,7 +54,7 @@ function productPage() {
                 $(".produit_info").remove();
                 $("#dialog_add_produit_id").empty();
                 $("#dialog_add_opt_ingred_id").empty();
-                onLoadGP();
+                loadViewsForAddProduit();
             }});
         var divadd = getDivAddProduit();
         $('#dialog_add_produit_id').html(divadd);
