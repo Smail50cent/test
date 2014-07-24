@@ -1372,7 +1372,7 @@ background: rgba(248, 255, 197, 0.5);
     z-index: 1000;
 }
 
-.select_ingredient_structure {
+.select_ingredient_structure, .select_option_structure {
     width: 100%!important;
     font-size:0.7em!important;
     /*display: inline-block !important;*/
@@ -1420,7 +1420,7 @@ div.prev_page_structure+div.prev_page_structure {
     margin-left: 0;
 }
 
-.label_uncheck_personalise, .label_ajout_ingred_personalise {
+.label_uncheck_personalise, .label_ajout_ingred_personalise, .label_ajout_option_structure {
     font-size: 0.8em;
 }
 
