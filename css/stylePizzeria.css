@@ -23,7 +23,6 @@
 
     .content_list_categorie_personalize li :active, .content_list_categorie_personalize li :hover, .content_list_categorie_personalize li :focus {
          color: #473117;
-         background-color: #efdbc2;
          -webkit-transition: background-color .5s ease;
          -moz-transition: background-color .5s ease;
          -ms-transition: background-color .5s ease;
@@ -309,7 +308,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
     .content_personalize  {
-        margin-top: 4.15em;  
+        margin-top: 4.75em;  
 }
 
     .choose_lang_personalize {
@@ -1042,7 +1041,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
         
 
-        .content_list_categorie_personalize li:hover, .content_list_categorie_personalize li:focus {
+        .content_list_categorie_personalize li :active, .content_list_categorie_personalize li:hover, .content_list_categorie_personalize li:focus {
             color: #473117;
             background-color: #efdbc2;
             -webkit-transition: background-color .5s ease;
@@ -1257,7 +1256,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 .header_left_personalize {
     border-top: 91px solid #C90912;
     border-left: 0px solid transparent;
-    width: 195px;
+    width: 272px;
     border-right: 77px solid transparent;
 }
 
@@ -1375,19 +1374,20 @@ background: rgba(248, 255, 197, 0.5);
     z-index: 1000;
 }
 
-.select_ingredient_structure {
+.select_ingredient_structure, .select_option_structure {
     width: 100%!important;
     font-size:0.7em!important;
     /*display: inline-block !important;*/
     background-color: rgba(255, 255, 255, 1);
     padding: 0.7em 0.3em 0.3em 0.3em;
-    margin: 1em 0;
+    margin: 3em 0;
 
 }
 
 .select_option_structure, .select_possibilite_structure {
     width: 45% !important;
     float: left;
+    margin: 2em 0 2em 0;
 }
 
 .select_option_structure {
@@ -1398,6 +1398,12 @@ background: rgba(248, 255, 197, 0.5);
     font-size: 0.8em;
     display: inline-block;
     width: 40%;
+}
+
+a.link_add_product {                    /*bouton +*/
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 0.5em;
 }
 
 .div_zone input {
@@ -1429,12 +1435,23 @@ div.prev_page_structure+div.prev_page_structure {
 
 .label_ajout_ingred_personalise {
     float: right;
-    margin-right: 23em;
+    margin-right: 26em;
     margin-top: 0.2em;
 }
 
 .name_prod_personalise, .liste_categorie_personalise, .liste_souscategorie_personalise {
     font-size: 0.8em !important;
+}
+
+select#liste_categorie_id {
+    float: left;
+    display: inline-block;
+    margin: 0 0 0 1em; 
+}
+
+.select_ingredient_structure label input, .select_option_structure label input {
+    vertical-align: middle;
+    margin-right: 1em;
 }
 
 /*____________________FLECHES____________________*/
@@ -1447,7 +1464,29 @@ div.prev_page_structure+div.prev_page_structure {
 
 /*____________________AJOUT OPTIONS____________________*/
 
+.label_uncheck_personalise {
+    float: left;
+    width: 100%;
+    display: inline-block;
+}
 
+.label_uncheck_personalise input {
+    margin-right: 1em;
+}
+
+.uncheck_all_ingredient_structure input {
+    margin-right: 1em;
+}
+
+.label_ajout_option_structure {
+    display: inline-block;
+    width: 100%;
+    margin-left: 2em;
+}
+
+.insertOpt_structure img {
+    margin-top: -3em;
+}
 
 /*____________________Page prix intérieur extérieur____________________*/
 
