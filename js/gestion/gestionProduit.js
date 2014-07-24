@@ -395,10 +395,11 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage() {
-    $("#valider_produit").text(strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
+    $("#ui-id-1").text(strings.getString("gestion.produit.ajout.etablissement.dialog.titre"));
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
     htmlAll = paramValue(htmlAll, "titreSelect", strings.getString("gestion.produit.ajout.etablissement.labelselectall"));
+    htmlAll = paramValue(htmlAll, "inputVal", strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#dialog_add_produit_id").html(htmlAll);
     var htmlDiv = getDivShowEtblissementsAndZone();
     var htmlliZoneEtab = getLiZonesEtablissement();
@@ -440,12 +441,35 @@ function onLoadEtablissementPage() {
         }
     });
 }
+function AssociationEtablissementZones(etablissement, zone) {
+    this.etablissement = etablissement;
+    this.zone = zone;
+}
 function submitEtablissements() {
-
+    var listeEtabZone = new Array();
+    $('input[type=checkbox]').each(function() {
+        if ($(this).attr("selectallzoneInEtablissement")) {
+            var isChecked = $(this).is(":checked");
+            var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            if(isChecked == true){
+                listeEtabZone.push(new AssociationEtablissementZones(id, null));
+            }
+            console.log($(this).attr("id"), isChecked);
+        }else if($(this).attr("idetablissement")){
+            var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var idZone = parseInt($(this).attr("idzone"));
+            var isChecked = $(this).is(":checked");
+            if(isChecked==true){
+                listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
+            }
+        }
+    });
+    setLocalStorageValue("gestion.add.produit.etablissemnts",JSON.stringify(listeEtabZone));
 }
 function validerProduit() {
     submitEtablissements();
 }
+
 var tailleItem = new Array("small-item-structure small-item-personalize",
         "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
