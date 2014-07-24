@@ -147,7 +147,7 @@ function ingredientPage() {
                 var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
                 $('#content_produit_description_id').append(hashLi);
             } else {
-                $("#" + this.value.hashCode()).remove();
+                $("#" + this.value.hashCode()).parent().remove();
             }
         });
         UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
