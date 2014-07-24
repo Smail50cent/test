@@ -1,5 +1,5 @@
 <li optionid="{option_id}">
 <label id="opt_label_id" class="opt_label opt_label_structure opt_label_personalise" optionid="{option_id}"> {opt_label_val} </label>
-<select class="liste_option_possib liste_option_possib_structure liste_option_possib_personalise" optionid="{option_id}">
+<select class="liste_option_possib product_spec_structure product_spec_personalize" optionid="{option_id}">
 </select>
 </li>
