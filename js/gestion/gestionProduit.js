@@ -1,7 +1,5 @@
 
 function onLoadGP() {
-
-//    window.setTimeout(function() {
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
@@ -12,8 +10,6 @@ function onLoadGP() {
     var adddiv = getDivAddProduitBtn();
     $('.content_globlal_zone').prepend(adddiv);
     $('#liste_souscategorie_id').hide();
-//    }, 2500);
-
 }
 
 function ModifyProduct(id) {
@@ -50,10 +46,10 @@ function productPage() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
             close: function(event, ui) {
                 $(this).dialog("destroy");
+                $(".produit_info").remove();
                 $("#dialog_add_produit_id").empty();
                 $("#dialog_add_opt_ingred_id").dialog("destroy");
                 $("#dialog_add_opt_ingred_id").empty();
-                $(".produit_info").remove();
                 onLoadGP();
             }});
         var divadd = getDivAddProduit();
@@ -105,22 +101,29 @@ function LoadCatSousCat() {
         $('#liste_souscategorie_id').empty();
         getConnexion().getAllSousCategories(souCats);
         var idcat = $(this).val();
-        //$('#label_categorie_prod_id').text($(this).text());
         $('#label_categorie_prod_id').text($(this).find(":selected").text());
         function souCats(souscat) {
+            $('.souscat_p').show();
+            var findSoucat = false;
             for (var i = 0; i < souscat.length; i++) {
                 if (souscat[i].categorie == idcat) {
+                    findSoucat = true;
                     $('#liste_souscategorie_id').append($('<option>', {
                         value: souscat[i].id,
                         text: souscat[i].nom
                     }));
-                }else {
-                   $('#liste_souscategorie_id').remove();
                 }
             }
+            if (!findSoucat) {
+                $('#liste_souscategorie_id').remove();
+            }
             $('#label_souscat_prod_id').text($("#liste_souscategorie_id").find(":selected").text());
+            if ($('#label_souscat_prod_id').text() === "") {
+                $('.souscat_p').hide();
+            }
         }
     });
+
     $('#liste_souscategorie_id').change(function() {
         $('#label_souscat_prod_id').text($(this).find(":selected").text());
     });
@@ -223,13 +226,12 @@ function insertIngredDB() {
 function UncheckAllBoxIngredOpt(id) {
     $(id).change(function() {
         if (!this.checked) {
-            $(".ingredOpt_checkbox").each(function() {
+            $(".ingredient_checkbox, .option_checkbox").each(function() {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
-                $('#select_possibilite_id').empty();
             });
         } else {
-            $(".ingredOpt_checkbox").each(function() {
+            $(".ingredient_checkbox, .option_checkbox").each(function() {
                 this.checked = true;
             });
         }
@@ -258,18 +260,13 @@ function optionPage() {
                 var gpOption = paramValue(possLabel, "possib_val", $(this).attr("label_opt"));
                 var gpclass = paramValue(gpOption, "gp_class", "gp_class");
                 var gpId = paramValue(gpclass, "id_opt", idOpt);
-                $('#select_possibilite_id').append(gpId);
-                for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[idOpt][j].nom);
-                    var possId = paramValue(possCB, "id_opt", idOpt);
-                    $('#select_possibilite_id').append(possId);
-                }
+
                 var optSelect = getOptionPossibSelectAddProduit();
                 var optPoss = paramValue(optSelect, "option_id", idOpt);
-                var optlab = paramValue(optPoss, "opt_label_val", options[idOpt].label);
+                var optlab = paramValue(optPoss, "opt_label_val", $(this).attr("label_opt"));
                 $('#content_produit_description_id').append(optlab);
                 for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    $('#liste_option_possib_id').append($('<option>', {
+                    $(".liste_option_possib[optionid="+idOpt+"]").append($('<option>', {
                         value: possibilite[idOpt][j].nom,
                         text: possibilite[idOpt][j].nom
                     }));
