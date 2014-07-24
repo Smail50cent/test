@@ -4,7 +4,7 @@
 
 <p>
 <div onclick="insertIngred();" type="button" id="insertPossib_id" class="insertPossib_structure insertPossib_personalize">
-<img src="img/gestion/produit/InsertOption.png" width="20" height="20" "></div>
+<img src="img/gestion/produit/insert.png" width="20" height="20" "></div>
 <div onclick="removeIngred();" type="button" id="removePossib_id" class="removePossib_structure removePossib_personalize">
 <img src="img/gestion/produit/del_possib.png" width="20" height="20" "></div></p>
 

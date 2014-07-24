@@ -1,7 +1,5 @@
 
 function onLoadGP() {
-
-//    window.setTimeout(function() {
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
@@ -12,8 +10,6 @@ function onLoadGP() {
     var adddiv = getDivAddProduitBtn();
     $('.content_globlal_zone').prepend(adddiv);
     $('#liste_souscategorie_id').hide();
-//    }, 2500);
-
 }
 
 function ModifyProduct(id) {
@@ -50,9 +46,9 @@ function productPage() {
         $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
             close: function(event, ui) {
                 $(this).dialog("destroy");
+                $(".produit_info").remove();
                 $("#dialog_add_produit_id").empty();
                 $("#dialog_add_opt_ingred_id").empty();
-                $(".produit_info").remove();
                 onLoadGP();
             }});
         var divadd = getDivAddProduit();
@@ -104,20 +100,29 @@ function LoadCatSousCat() {
         $('#liste_souscategorie_id').empty();
         getConnexion().getAllSousCategories(souCats);
         var idcat = $(this).val();
-        //$('#label_categorie_prod_id').text($(this).text());
         $('#label_categorie_prod_id').text($(this).find(":selected").text());
         function souCats(souscat) {
+            $('.souscat_p').show();
+            var findSoucat = false;
             for (var i = 0; i < souscat.length; i++) {
                 if (souscat[i].categorie == idcat) {
+                    findSoucat = true;
                     $('#liste_souscategorie_id').append($('<option>', {
                         value: souscat[i].id,
                         text: souscat[i].nom
                     }));
                 }
             }
+            if (!findSoucat) {
+                $('#liste_souscategorie_id').remove();
+            }
             $('#label_souscat_prod_id').text($("#liste_souscategorie_id").find(":selected").text());
+            if ($('#label_souscat_prod_id').text() === "") {
+                $('.souscat_p').hide();
+            }
         }
     });
+
     $('#liste_souscategorie_id').change(function() {
         $('#label_souscat_prod_id').text($(this).find(":selected").text());
     });
@@ -220,13 +225,12 @@ function insertIngredDB() {
 function UncheckAllBoxIngredOpt(id) {
     $(id).change(function() {
         if (!this.checked) {
-            $(".ingredOpt_checkbox").each(function() {
+            $(".ingredient_checkbox, .option_checkbox").each(function() {
                 this.checked = false;
                 $('#content_produit_description_id').empty();
-                $('#select_possibilite_id').empty();
             });
         } else {
-            $(".ingredOpt_checkbox").each(function() {
+            $(".ingredient_checkbox, .option_checkbox").each(function() {
                 this.checked = true;
             });
         }
@@ -255,18 +259,13 @@ function optionPage() {
                 var gpOption = paramValue(possLabel, "possib_val", $(this).attr("label_opt"));
                 var gpclass = paramValue(gpOption, "gp_class", "gp_class");
                 var gpId = paramValue(gpclass, "id_opt", idOpt);
-                $('#select_possibilite_id').append(gpId);
-                for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    var possCB = paramValue(possLabel, "possib_val", "- " + possibilite[idOpt][j].nom);
-                    var possId = paramValue(possCB, "id_opt", idOpt);
-                    $('#select_possibilite_id').append(possId);
-                }
+
                 var optSelect = getOptionPossibSelectAddProduit();
                 var optPoss = paramValue(optSelect, "option_id", idOpt);
-                var optlab = paramValue(optPoss, "opt_label_val", options[idOpt].label);
+                var optlab = paramValue(optPoss, "opt_label_val", $(this).attr("label_opt"));
                 $('#content_produit_description_id').append(optlab);
                 for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    $('#liste_option_possib_id').append($('<option>', {
+                    $(".liste_option_possib[optionid="+idOpt+"]").append($('<option>', {
                         value: possibilite[idOpt][j].nom,
                         text: possibilite[idOpt][j].nom
                     }));
@@ -395,8 +394,11 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage() {
+    $("#ui-id-1").text(strings.getString("gestion.produit.ajout.etablissement.dialog.titre"));
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
+    htmlAll = paramValue(htmlAll, "titreSelect", strings.getString("gestion.produit.ajout.etablissement.labelselectall"));
+    htmlAll = paramValue(htmlAll, "inputVal", strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#dialog_add_produit_id").html(htmlAll);
     var htmlDiv = getDivShowEtblissementsAndZone();
     var htmlliZoneEtab = getLiZonesEtablissement();
@@ -408,6 +410,14 @@ function onLoadEtablissementPage() {
             newEtab = paramValue(newEtab, "idetablissement", etablissements[i].id);
             newEtab = paramValue(newEtab, "nomEtablissement", etablissements[i].nom);
             $("#ajouter_produit_div_etablissement").append(newEtab);
+            var cssClass = $("#etablissement_div_id" + etablissements[i].id).attr("class");
+            if (etablissements[i].zones.length <= 3) {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[0]);
+            } else if (etablissements[i].zones.length > 3 && etablissements[i].zones.length <= 6) {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[1]);
+            } else {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[2]);
+            }
             for (var j = 0; j < etablissements[i].zones.length; j++) {
                 var divLiZone = htmlliZoneEtab;
                 divLiZone = paramValue(divLiZone, "idzone", etablissements[i].zones[j].id);
@@ -417,8 +427,50 @@ function onLoadEtablissementPage() {
             }
         }
     }
+    $("#checkbox_selectAllEta").change(function() {
+        var isCheked = $(this).is(":checked");
+        if (isCheked == true) {
+            $('input[type=checkbox]').each(function() {
+                $(this).attr("checked", true);
+            });
+        } else {
+            $('input[type=checkbox]').each(function() {
+                $(this).attr("checked", false);
+            });
+        }
+    });
+}
+function AssociationEtablissementZones(etablissement, zone) {
+    this.etablissement = etablissement;
+    this.zone = zone;
+}
+function submitEtablissements() {
+    var listeEtabZone = new Array();
+    $('input[type=checkbox]').each(function() {
+        if ($(this).attr("selectallzoneInEtablissement")) {
+            var isChecked = $(this).is(":checked");
+            var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            if(isChecked == true){
+                listeEtabZone.push(new AssociationEtablissementZones(id, null));
+            }
+            console.log($(this).attr("id"), isChecked);
+        }else if($(this).attr("idetablissement")){
+            var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var idZone = parseInt($(this).attr("idzone"));
+            var isChecked = $(this).is(":checked");
+            if(isChecked==true){
+                listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
+            }
+        }
+    });
+    setLocalStorageValue("gestion.add.produit.etablissemnts",JSON.stringify(listeEtabZone));
+}
+function validerProduit() {
+    submitEtablissements();
 }
 
+var tailleItem = new Array("small-item-structure small-item-personalize",
+        "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

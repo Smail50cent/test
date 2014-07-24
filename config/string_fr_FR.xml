@@ -77,4 +77,7 @@
     <string key="label.choix.finreservation">Passer commande plus tard</string>
     <string key="label.choix.table.choix.zone.label.option">Zone : </string>
     <string key="label.option.choose.etablissement">Choisisez l'établissement où faire votre commande</string>
+    <string key="gestion.produit.ajout.etablissement.labelselectall">Séléctionnez tous les établissements</string>
+    <string key="gestion.produit.ajout.etablissement.labelvaliderproduit">Ajouter le produit</string>
+    <string key="gestion.produit.ajout.etablissement.dialog.titre">Ajouter les établissements</string>
 </strings>
