@@ -12,5 +12,7 @@
 </select></p>
 
 
+<div class="next_prev_div_structure next_prev_div_personalise">
 <p><div onclick="submit_productPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
 <img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
+</div>

@@ -2,6 +2,9 @@
 function onLoadGP() {
     var htmlDivdrop = getDivGestionDropdown();
     $("#header_right_id").append(htmlDivdrop);
+    loadViewsForAddProduit();
+}
+function loadViewsForAddProduit(){
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
@@ -51,7 +54,7 @@ function productPage() {
                 $(".produit_info").remove();
                 $("#dialog_add_produit_id").empty();
                 $("#dialog_add_opt_ingred_id").empty();
-                onLoadGP();
+                loadViewsForAddProduit();
             }});
         var divadd = getDivAddProduit();
         $('#dialog_add_produit_id').html(divadd);
@@ -285,7 +288,7 @@ function optionPage() {
 
 function submit_optionPage() {
     var list = new Array();
-    $(".ingredOpt_checkbox:checked").each(function() {
+    $(".option_checkbox:checked").each(function() {
         var option = new Option();
         option.setId($(this).attr('id'));
         list.push(option);
@@ -362,36 +365,42 @@ function prixPage() {
 function submit_prixPage() {
     var list = new Array();
     var prix = $("#input_defaut_prix_id").val();
+    var objprix = {prix : prix};
+    var Tva = $("#tva_1").val();
     var associationPrixProduit = new AssociationProduitPrix();
     associationPrixProduit.setDatedebut(null);
     associationPrixProduit.setDatefin(null);
-    associationPrixProduit.setPrixHt(prix);
+    associationPrixProduit.setPrixHt(objprix);
     associationPrixProduit.setZonetable(null);
     list.push(associationPrixProduit);
-    $(".input_zone_prix").each(function() {
-        var associationPPZone = new AssociationProduitPrix();
-        var prix = $(this).val();
-        var idprix = $(this).attr("id_inputprix");
-        var datedebut;
-        var datefin;
-        $(".datetimepicker[id_inputprix=" + idprix + "]").each(function() {
-            if ($(this).hasClass("date_debut")) {
-                var date = $(this).val();
-                datedebut = date.replace('T', ' ');
-            } else if ($(this).hasClass("date_fin")) {
-                var date = $(this).val();
-                datefin = date.replace('T', ' ');
-            }
-
-        });
-        associationPPZone.setDatedebut(datedebut);
-        associationPPZone.setDatefin(datefin);
-        associationPPZone.setPrixHt(prix);
-        associationPPZone.setZonetable(idprix);
-        list.push(associationPPZone);
-    });
+//    $(".input_zone_prix").each(function() {
+//        var associationPPZone = new AssociationProduitPrix();
+//        var prix = $(this).val();
+//        var objprix = {prix : prix};
+//        var idprix = $(this).attr("id_inputprix");
+//        var datedebut;
+//        var datefin;
+//        $(".datetimepicker[id_inputprix=" + idprix + "]").each(function() {
+//            if ($(this).hasClass("date_debut")) {
+//                var date = $(this).val();
+//                datedebut = date.replace('T', ' ');
+//            } else if ($(this).hasClass("date_fin")) {
+//                var date = $(this).val();
+//                datefin = date.replace('T', ' ');
+//            }
+//
+//        });
+//        associationPPZone.setDatedebut(datedebut);
+//        associationPPZone.setDatefin(datefin);
+//        associationPPZone.setPrixHt(objprix);
+//        associationPPZone.setZonetable(idprix);
+//        list.push(associationPPZone);
+//    });
     produit.setAssociationPrixProduit(list);
+    produit.setTauxTva(Tva);
     console.log(produit);
+    var prixTTC = getPrixHtInAssociation(list,produit.getTauxTva());
+    $("#produit_zone_right_prix_id").html(fntp(prixTTC));
     onLoadEtablissementPage();
 }
 

@@ -4,10 +4,14 @@
 <div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
 </div>
 
+<div class="show_insert_dialog_structure show_insert_dialog_personalise">
 <label id="label_ajout_ingred_id" class="label_ajout_ingred_structure label_ajout_ingred_personalise"> Ajout Ingrédient </label> <div onclick="formInsertIngredient();" type="button" id="insertIngred_id" class="insertIngred_structure insertIngred_personalize">
 <img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalise"></div>
+</div>
 
+<div class="next_prev_div_structure next_prev_div_personalise">
 <div onclick="productPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div></p>
+<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
 <div onclick="submit_ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
-<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div></p>
+<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
+</div>
