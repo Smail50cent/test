@@ -9,10 +9,15 @@ function Script(url, priority, fors) {
     this.priority = priority;
     this.for = fors;
 }
+function Style(url, fors) {
+    this.url = url;
+    this.for = fors;
+}
 scripts.loadScripts = function(forpage, method) {
     load(getScripts(forpage), method);
     function getScripts(forpage) {
         var abonements = new Array();
+        var styles = new Array();
         var url = "./config/scriptsToLoad.xml";
         $.ajaxSetup({cache: true});
         $.ajax({
@@ -35,18 +40,31 @@ scripts.loadScripts = function(forpage, method) {
                     return 0;
                 }
                 abonements = abonements.sort(compare);
+                var unitStyle = $(xml).find("style[for='" + forpage + "']");
+                unitStyle.each(function() {
+                    var fors = $(this).attr('for');
+                    styles.push(new Style($(this).text(), fors));
+                    
+                });
+                loadStyle(styles);
             }
         });
-
         return abonements;
     }
+    function loadStyle(styles){
+        for(var i = 0 ; i < styles.length ; i++){
+            $("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\""+styles[i].url+"\">");
+        }
+    }
+    
     function load(abonements, method) {
         var finish = true;
-        
+
         var scriptsLoaded = new Array();
         var lenEnd = 0;
         for (var i = 0; i < abonements.length; i++) {
-            scriptsLoaded[i] = abonements[i].url;$.ajaxSetup({async: false, cache: true});
+            scriptsLoaded[i] = abonements[i].url;
+            $.ajaxSetup({async: false, cache: true});
             $.getScript("./js/" + abonements[i].url, function(data, textStatus, jqxhr) {
                 lenEnd++;
                 if (jqxhr.status != 200) {
@@ -54,7 +72,7 @@ scripts.loadScripts = function(forpage, method) {
                 } else {
 //                    console.log("Valid load script =" + $(this).attr('url'));
                 }
-            });  
+            });
         }
         testIfWeCanExec();
         function testIfWeCanExec() {
@@ -70,7 +88,7 @@ scripts.loadScripts = function(forpage, method) {
                 }
             }, 0);
         }
-      
+
     }
     function errorManagement(scriptToLoad) {
         for (var i = 0; i < scriptToLoad.length; i++) {
@@ -88,7 +106,7 @@ function init() {
     if (isIndexedDBSupported()) {
         myStorage.indexedDB.create(); // open displays the data previously saved
     }
-    $.ajaxSetup({async: true,cache:true});
+    $.ajaxSetup({async: true, cache: true});
     $.getScript("./js/control.js");
 }
 scripts.loadScripts("all", function() {
