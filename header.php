@@ -14,8 +14,6 @@
         <link id="cssToApply" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>
         <script type="text/javascript" src="./js/scripts.js" defer></script>
-        
-        <link  rel="stylesheet" type="text/css" href="./js/lib/bootstrapDropdown/css/bootstrap.min.css">
     </head>
     <body>
         <div id="header_id" class="header header_structure header_personalize">
