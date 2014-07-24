@@ -48,7 +48,6 @@ function productPage() {
                 $(this).dialog("destroy");
                 $(".produit_info").remove();
                 $("#dialog_add_produit_id").empty();
-                $("#dialog_add_opt_ingred_id").dialog("destroy");
                 $("#dialog_add_opt_ingred_id").empty();
                 onLoadGP();
             }});
@@ -395,8 +394,11 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage() {
+    $("#ui-id-1").text(strings.getString("gestion.produit.ajout.etablissement.dialog.titre"));
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
+    htmlAll = paramValue(htmlAll, "titreSelect", strings.getString("gestion.produit.ajout.etablissement.labelselectall"));
+    htmlAll = paramValue(htmlAll, "inputVal", strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#dialog_add_produit_id").html(htmlAll);
     var htmlDiv = getDivShowEtblissementsAndZone();
     var htmlliZoneEtab = getLiZonesEtablissement();
@@ -408,6 +410,14 @@ function onLoadEtablissementPage() {
             newEtab = paramValue(newEtab, "idetablissement", etablissements[i].id);
             newEtab = paramValue(newEtab, "nomEtablissement", etablissements[i].nom);
             $("#ajouter_produit_div_etablissement").append(newEtab);
+            var cssClass = $("#etablissement_div_id" + etablissements[i].id).attr("class");
+            if (etablissements[i].zones.length <= 3) {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[0]);
+            } else if (etablissements[i].zones.length > 3 && etablissements[i].zones.length <= 6) {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[1]);
+            } else {
+                $("#etablissement_div_id" + etablissements[i].id).attr("class", cssClass + " " + tailleItem[2]);
+            }
             for (var j = 0; j < etablissements[i].zones.length; j++) {
                 var divLiZone = htmlliZoneEtab;
                 divLiZone = paramValue(divLiZone, "idzone", etablissements[i].zones[j].id);
@@ -417,8 +427,50 @@ function onLoadEtablissementPage() {
             }
         }
     }
+    $("#checkbox_selectAllEta").change(function() {
+        var isCheked = $(this).is(":checked");
+        if (isCheked == true) {
+            $('input[type=checkbox]').each(function() {
+                $(this).attr("checked", true);
+            });
+        } else {
+            $('input[type=checkbox]').each(function() {
+                $(this).attr("checked", false);
+            });
+        }
+    });
+}
+function AssociationEtablissementZones(etablissement, zone) {
+    this.etablissement = etablissement;
+    this.zone = zone;
+}
+function submitEtablissements() {
+    var listeEtabZone = new Array();
+    $('input[type=checkbox]').each(function() {
+        if ($(this).attr("selectallzoneInEtablissement")) {
+            var isChecked = $(this).is(":checked");
+            var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            if(isChecked == true){
+                listeEtabZone.push(new AssociationEtablissementZones(id, null));
+            }
+            console.log($(this).attr("id"), isChecked);
+        }else if($(this).attr("idetablissement")){
+            var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var idZone = parseInt($(this).attr("idzone"));
+            var isChecked = $(this).is(":checked");
+            if(isChecked==true){
+                listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
+            }
+        }
+    });
+    setLocalStorageValue("gestion.add.produit.etablissemnts",JSON.stringify(listeEtabZone));
+}
+function validerProduit() {
+    submitEtablissements();
 }
 
+var tailleItem = new Array("small-item-structure small-item-personalize",
+        "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',

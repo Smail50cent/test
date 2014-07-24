@@ -1,3 +1,10 @@
-<div id="ajouter_produit_div_etablissement" class="ajouter_produit_div_etablissement_structure ajouter_produit_div_etablissement_personalize">
-
+<div  class="ajouter_produit_div_etablissement_structure ajouter_produit_div_etablissement_personalize">
+    <div class="ajouter_produit_div_etablissement_head_structure  ajouter_produit_div_etablissement_head_personalize">
+        <p class="ajouter_produit_div_etablissement_head_p_structure ajouter_produit_div_etablissement_head_p_personalize">{titreSelect}</p>
+        <input type="checkbox" id="checkbox_selectAllEta" class="ajouter_produit_div_etablissement_head_checkbox_structure ajouter_produit_div_etablissement_head_checkbox_personalize"
+    </div>
+    <div id="ajouter_produit_div_etablissement">
+    
+    </div>
+    <input id="valider_produit_id" type="button" value="{inputVal}" onclick="validerProduit();" ></input>
 </div>
