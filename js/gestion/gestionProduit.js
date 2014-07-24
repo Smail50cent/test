@@ -1,7 +1,7 @@
 
 function onLoadGP() {
     var htmlDivdrop = getDivGestionDropdown();
-    $("#header_left_logo_id").append(htmlDivdrop);
+    $("#header_right_id").append(htmlDivdrop);
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
