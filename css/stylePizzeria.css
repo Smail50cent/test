@@ -1359,6 +1359,10 @@ background: rgba(248, 255, 197, 0.5);
 
 /*____________________GESTION DE PRODUITS_____________________*/
 
+.ui-dialog .ui-dialog-content {
+    width: 100%;
+}
+
 .dialog-ajout-produit {
     width: 495px !important;
     position: absolute !important;
@@ -1368,16 +1372,23 @@ background: rgba(248, 255, 197, 0.5);
     z-index: 1000;
 }
 
-.select_ingredient_structure, .select_possibilite_structure {
+.select_ingredient_structure {
     width: 100%!important;
     font-size:0.7em!important;
     /*display: inline-block !important;*/
     background-color: rgba(255, 255, 255, 1);
     padding: 0.7em 0.3em 0.3em 0.3em;
+    margin: 1em 0;
+
+}
+
+.select_option_structure, .select_possibilite_structure {
+    width: 45% !important;
+    float: left;
 }
 
 .select_option_structure {
-    width: 40% !important;
+    margin-right: 9%
 }
 
 .div_zone label, .defaut_prix {
@@ -1395,27 +1406,6 @@ background: rgba(248, 255, 197, 0.5);
     width: 50%;
 }
 
-.name_prod_structure, .liste_categorie_structure, .liste_souscategorie_structure, .ui-widget-content input, .ui-widget-content select { 
-    font-size: 0.9em!important;
-}
-
-.select_ingredient_structure, .select_option_structure{
-    margin: 2em 0;
-    float: left;
-}
-
-.select_ingredient_structure+label{
-    margin-left: 2em;
-    display: inherit;
-    z-index: 500;
-}
-
-.insertIngred_structure img {
-    z-index: 501;
-    margin-top: -1.2em;
-    float: left;
-}
-
 .prev_page_personalise {
     z-index: 508;
     padding-left: 4em;
@@ -1425,15 +1415,54 @@ background: rgba(248, 255, 197, 0.5);
     position: absolute;
 }
 
-div.prev_page_structure {
-display: inline;
-margin-left: -2em;
+div.prev_page_structure+div.prev_page_structure {
+    display: inline;
+    margin-left: 0;
 }
 
-div.prev_page_structure+div.prev_page_structure {
-display: inline;
-margin-left: 0;
+.label_uncheck_personalise, .label_ajout_ingred_personalise {
+    font-size: 0.8em;
 }
+
+.label_ajout_ingred_personalise {
+    float: right;
+    margin-right: 23em;
+    margin-top: 0.2em;
+}
+
+.name_prod_personalise, .liste_categorie_personalise, .liste_souscategorie_personalise {
+    font-size: 0.8em !important;
+}
+
+/*____________________FLECHES____________________*/
+
+.prev_page_structure, .img_left_structure, .img_right_structure {
+    margin-top: 1em;
+    display: inline-block;
+    float: left;
+}
+
+/*____________________AJOUT OPTIONS____________________*/
+
+
+
+/*____________________Page prix intérieur extérieur____________________*/
+
+.dialog_ajouter_produit_ajouterprix_personalize label {
+    width: 38%;
+    display: inline-block;
+}
+
+.prix_definition_prix_personalize {
+    font-size: 0.8em;
+}
+
+hr{
+    width:100%;
+}
+
+
+/*___________________Choix restaurant____________________*/
 
 
 
