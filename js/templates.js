@@ -258,4 +258,6 @@ function getPossibiliteLabelAddProduit(){
 function getOptionPossibSelectAddProduit(){
     return templates.getTemplate("gestion/produit/option_select_ajouter_produit");
 }
-    
+function getDivGestionDropdown(){
+    return templates.getTemplate("gestion/all/div_gestion_dropdown");
+}

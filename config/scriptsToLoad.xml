@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scripts>
+<files>
     <script for="data.indexeddb" priority="1">database/indexedDB/ConnexionLocalIndexedDB.js</script>
     <script for="data.indexeddb" priority="2">database/indexedDB/indexedDBAcces.js</script>
     <script for="data.indexeddb" priority="13">database/indexedDB/indexedDBAccesCategorie.js</script>
@@ -45,6 +45,7 @@
     <script for="carte">pages/carte.js</script>
     <script for="gestionProduit" priority="1">pages/carte.js</script>
     <script for="gestionProduit" priority="2">gestion/gestionProduit.js</script>
+    <script for="gestionProduit" priority="2">lib/bootstrapDropdown/js/bootstrap.min.js</script>
     <script for="choixDateHeure">pages/choixDateHeure.js</script>
     <script for="paramCommande" priority="2">pages/paramCommande.js</script>
     <script for="paramCommande" priority="1">popupAuth.js</script>
@@ -57,4 +58,6 @@
     <script for="pageConnexionServeur" priority="1">popupAuth.js</script>
     <script for="interfaceVenteAcces" >pages/interfaceVenteAcces.js</script>
     <script for="choixPriseDeCommande" >pages/choixPriseDeCommande.js</script>
-</scripts>
+    <style for="gestionProduit">./js/lib/bootstrapDropdown/css/bootstrap.min.css</style>
+    <style for="gestionProduit">./js/lib/bootstrapDropdown/css/bootstrap-theme.min.css</style>
+</files>

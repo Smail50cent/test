@@ -63,9 +63,9 @@ function authenCompte() {
                                         personne.serveurProperty = {"zoneTableDefaut": parseInt(infos[j].valeur_champ)};
                                     }
                                 }
+                                console.log(personne);
                                 personne.setRole(compte.role);
                                 personne.setId(idcompte);
-                                console.log(personne);
                                 listePersonnes.push(personne);
                                 if (isServeur) {
                                     setLocalStorageValue("personnes.serveur", JSON.stringify(personne));
