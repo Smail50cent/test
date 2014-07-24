@@ -1144,7 +1144,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         text-shadow: 1px 1px 1px white;
         color: rgba(71,49,23, 0.9);
         text-align: center;
-        z-index: 999;
+        z-index: 99;
         text-decoration: underline;
 }
 
@@ -1359,7 +1359,10 @@ background: rgba(248, 255, 197, 0.5);
 
 /*____________________GESTION DE PRODUITS_____________________*/
 
-.ui-dialog .ui-dialog-content {
+
+/**/
+
+.ui-dialog-content {
     width: 100%;
 }
 
@@ -1372,7 +1375,7 @@ background: rgba(248, 255, 197, 0.5);
     z-index: 1000;
 }
 
-.select_ingredient_structure, .select_option_structure {
+.select_ingredient_structure {
     width: 100%!important;
     font-size:0.7em!important;
     /*display: inline-block !important;*/
@@ -1420,7 +1423,7 @@ div.prev_page_structure+div.prev_page_structure {
     margin-left: 0;
 }
 
-.label_uncheck_personalise, .label_ajout_ingred_personalise, .label_ajout_option_structure {
+.label_uncheck_personalise, .label_ajout_ingred_personalise {
     font-size: 0.8em;
 }
 
