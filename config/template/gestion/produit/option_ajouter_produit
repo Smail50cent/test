@@ -2,13 +2,11 @@
  <label><input id="uncheck_all_option_id" type="checkbox" name="option[]" />Tout cocher / décocher</label>
 <div id="select_option_id" class="select_option select_option_structure select_ingredient_personalise">
 </div>
-<div id="select_possibilite_id" class="select_possibilite select_possibilite_structure select_possibilite_personalise">
-</div>
 
 <label> Ajout Option </label> <div onclick="formInsertOption();" type="button" id="insertOpt_id" class="insertOpt_structure insertOpt_personalize">
-<img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalise></div>
+<img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalise"></div>
 
 <div onclick="ingredientPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div></p>
+<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
 <div onclick="submit_optionPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
-<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div></p>
+<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
