@@ -261,3 +261,6 @@ function getOptionPossibSelectAddProduit(){
 function getDivGestionDropdown(){
     return templates.getTemplate("gestion/all/div_gestion_dropdown");
 }
+function getLiAccesInterface(){
+    return templates.getTemplate("interfaceVenteAcces/li_acces_interface");
+}

@@ -1,10 +1,26 @@
 
 function onLoadGP() {
+    if (!testIfAdminConnected()) {
+        $("body").html("");
+        showErrorMessage(strings.getString("connexion.users.acces.interdit"));
+    }
     var htmlDivdrop = getDivGestionDropdown();
-    $("#header_right_id").append(htmlDivdrop);
+    $("#header_id").append(htmlDivdrop);
     loadViewsForAddProduit();
 }
-function loadViewsForAddProduit(){
+function testIfAdminConnected() {
+    var ret = false;
+    var personne = getLocalStorageValue("personnes.serveur");
+    if (personne != null) {
+        personne = JSON.parse(personne);
+        var level = parseInt(personne.role.level);
+        if (level == 1) {
+            ret = true;
+        }
+    }
+    return ret;
+}
+function loadViewsForAddProduit() {
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
@@ -270,7 +286,7 @@ function optionPage() {
                 var optlab = paramValue(optPoss, "opt_label_val", $(this).attr("label_opt"));
                 $('#content_produit_description_id').append(optlab);
                 for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    $(".liste_option_possib[optionid="+idOpt+"]").append($('<option>', {
+                    $(".liste_option_possib[optionid=" + idOpt + "]").append($('<option>', {
                         value: possibilite[idOpt][j].nom,
                         text: possibilite[idOpt][j].nom
                     }));
@@ -365,7 +381,7 @@ function prixPage() {
 function submit_prixPage() {
     var list = new Array();
     var prix = $("#input_defaut_prix_id").val();
-    var objprix = {prix : prix};
+    var objprix = {prix: prix};
     var Tva = $("#tva_1").val();
     var associationPrixProduit = new AssociationProduitPrix();
     associationPrixProduit.setDatedebut(null);
@@ -399,7 +415,7 @@ function submit_prixPage() {
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
     console.log(produit);
-    var prixTTC = getPrixHtInAssociation(list,produit.getTauxTva());
+    var prixTTC = getPrixHtInAssociation(list, produit.getTauxTva());
     $("#produit_zone_right_prix_id").html(fntp(prixTTC));
     onLoadEtablissementPage();
 }
@@ -461,20 +477,20 @@ function submitEtablissements() {
         if ($(this).attr("selectallzoneInEtablissement")) {
             var isChecked = $(this).is(":checked");
             var id = parseInt($(this).attr("selectallzoneInEtablissement"));
-            if(isChecked == true){
+            if (isChecked == true) {
                 listeEtabZone.push(new AssociationEtablissementZones(id, null));
             }
             console.log($(this).attr("id"), isChecked);
-        }else if($(this).attr("idetablissement")){
+        } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var idZone = parseInt($(this).attr("idzone"));
             var isChecked = $(this).is(":checked");
-            if(isChecked==true){
+            if (isChecked == true) {
                 listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
             }
         }
     });
-    setLocalStorageValue("gestion.add.produit.etablissemnts",JSON.stringify(listeEtabZone));
+    setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
 }
 function validerProduit() {
     submitEtablissements();
