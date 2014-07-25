@@ -101,8 +101,22 @@ function redirictWhereServeurConnected() {
 }
 function goNouvelleCommande() {
     redirct(new RedirictPages(null, null, null, null, "paramCommande"));
-    }
-function redrictWhereHavePay(){
+}
+function redrictWhereHavePay() {
     redirct(new RedirictPages("index", "index", "index", "index", "interfaceVenteAcces"));
 }
+function goGestionApplication() {
+    setLocalStorageValue("personnes.couverts", "");
+    setIdTypeCommande(5);
+    redirct(new RedirictPages(("gestionProduit"), ("gestionProduit"), ("gestionProduit"), ("gestionProduit"), ("gestionProduit")));
+}
+function disconnectUser() {
+    removeLocalStorageItem("personnes.serveur");
+    redirct(new RedirictPages("index", "index", "index", "index", "index"));
+}
+function goGestionCompteUtilisateur() {
 
+}
+function goExpertMode() {
+    redirct(new RedirictPages("modeexpert", "modeexpert", "modeexpert", "modeexpert", "modeexpert"));
+}

@@ -9,4 +9,6 @@
     <page key="pageConnexionServeur">pageConnexionServeur.php</page>
     <page key="choixDateHeure">choixDateHeure.php</page>
     <page key="interfaceVenteAcces">interfaceVenteAcces.php</page>
+    <page key="gestionProduit">gestionProduit.php</page>
+    <page key="modeexpert">modeexpert.php</page>
 </pages>

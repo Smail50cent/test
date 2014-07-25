@@ -443,4 +443,15 @@ function testIfIsServeurConnected() {
     }
     return isConnected;
 }
-//myStorage.indexedDB.countProduits(null,null);
+function testIfAdminConnected() {
+    var ret = false;
+    var personne = getLocalStorageValue("personnes.serveur");
+    if (personne != null) {
+        personne = JSON.parse(personne);
+        var level = parseInt(personne.role.level);
+        if (level == 1) {
+            ret = true;
+        }
+    }
+    return ret;
+}
