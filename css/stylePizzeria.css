@@ -1436,6 +1436,24 @@ a.link_add_product {
     margin-top: 0.2em;
 }
 
+.div_gestion_dropdown_menu_structure {
+    width: 230px;
+    margin-left: -6.1em;
+}
+
+.div_gestion_dropdown_item_structure {
+    margin-bottom: 0.8em
+}
+
+.div_gestion_dropdown_item_structure a {
+    text-align: center;
+}
+
+
+
+
+
+
 
 
 .div_zone input {
