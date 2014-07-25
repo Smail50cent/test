@@ -114,10 +114,14 @@ function controller(entreprise) {
             break;
         case "gestionProduit":
             method = function() {
-                printProduits(0);
-                var connexion = getConnexion();
-                connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
-//                onLoadGP();
+                if (!testIfAdminConnected()) {
+                    $("body").html("");
+                    showErrorMessage(strings.getString("connexion.users.acces.interdit"));
+                } else {
+                    printProduits(0);
+                    var connexion = getConnexion();
+                    connexion.getCategoriesForContentCategorie(onCarteLoadFinish);
+                }
             };
             break;
         case "choixEnvoieCuisine":
@@ -162,6 +166,12 @@ function controller(entreprise) {
             method = function() {
                 onChoixPriseDeCommandeLoaded();
                 hideLoading();
+            };
+            break;
+        case "modeexpert":
+            method = function() {
+                hideLoading();
+                gestionAdmininistrateurConnected(onModeExpertLoaded());                
             };
             break;
         default :
@@ -454,4 +464,14 @@ function testIfAdminConnected() {
         }
     }
     return ret;
+}
+function gestionAdmininistrateurConnected(method) {
+    if (!testIfAdminConnected()) {
+        $("body").html("");
+        showErrorMessage(strings.getString("connexion.users.acces.interdit"));
+    } else {
+        if (method != null) {
+            method();
+        }
+    }
 }

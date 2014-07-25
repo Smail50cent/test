@@ -273,3 +273,17 @@ function getLiDropDownDivider() {
 function getLiDropDownImg() {
     return templates.getTemplate("gestion/all/li_dropdown_img");
 }
+function getBootstrapNavPillLi() {
+    return templates.getTemplate("gestion/modeexpert/all/li_nav_pill");
+}
+
+function getGererlesSites() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
+}
+function getGererlesSitesTableThead() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/table_thead");
+}
+function getGererlesSitesTableTbodyTr() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/table_tbody_tr");
+}
+ 
