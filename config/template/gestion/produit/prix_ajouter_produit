@@ -3,7 +3,6 @@
     <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix_structure input_defaut_prix_personalize ">
     <label> TVA </label>
     <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
-    <option value=0> 0 </option>
     </select>
 
     <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">

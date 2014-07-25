@@ -6,7 +6,6 @@
     <p><label> Date fin  </label> <input type="datetime-local" id="date_fin_id" class="date_fin date_fin_structure date_fin_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p> 
     <label> TVA </label>
     <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
-    <option value=0> 0 </option>
     </select>
     </p>
 <div>

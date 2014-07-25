@@ -5,7 +5,7 @@ function onLoadGP() {
         showErrorMessage(strings.getString("connexion.users.acces.interdit"));
     }
     var htmlDivdrop = getDivGestionDropdown();
-    htmlDivdrop = paramValue(htmlDivdrop,"labelDropdown",strings.getString("label.dropdown.autreparam"));
+    htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
     $("#header_id").append(htmlDivdrop);
     var htmlLi = getLiDropDownImg();
     var liDropdown = htmlLi;
@@ -617,8 +617,12 @@ function ajoutPeriode() {
 }
 
 function loadNewProduit() {
+    
     var liProd = getContentProduitItem();
-    var prodName = paramValue(liProd,"",produit.getId());
-    $('.content_globlal_zone').append(liProd);
-    onLoadGP();
+    var prodId = paramValue(liProd, "produitId", produit.getId());
+    var prodName = paramValue(prodId, "produitNom", produit.getNom());
+    var prodPrix = paramValue(prodName, "produitPrix", fntp(getPrixHtInAssociation(produit.getAssociationPrixProduit(), produit.tauxTva)));
+    $('.content_globlal_zone').append(prodPrix);
+    loadViewsForAddProduit();
+    //onLoadGP();
 }

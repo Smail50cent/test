@@ -851,10 +851,11 @@ function ConnexionServer() {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
             type: 'POST',
-            dataType: 'json',
+            dataType: 'text',
             data: {ID: id},
             async: true,
             success: function(data, textStatus, xhr) {
+                console.log(data);
                 console.log("ON DELETE SUCCESS !");
             },
             error: function(xhr, textStatus, errorThrown) {
