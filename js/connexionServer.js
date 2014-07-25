@@ -851,10 +851,11 @@ function ConnexionServer() {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
             type: 'POST',
-            dataType: 'json',
+            dataType: 'text',
             data: {ID: id},
             async: true,
             success: function(data, textStatus, xhr) {
+                console.log(data);
                 console.log("ON DELETE SUCCESS !");
             },
             error: function(xhr, textStatus, errorThrown) {
@@ -1141,6 +1142,22 @@ function ConnexionServer() {
                 if (method != null) {
                     method(etablissements, param);
                 }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
+    this.addProduit = function(method, produit, param) {
+        produit = JSON.stringify(produit);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddProduit"),
+            type: 'POST',
+            data: {produit: produit},
+            async: false,
+            success: function(data) {
+                method(data, param);
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
