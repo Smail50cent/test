@@ -675,7 +675,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             for ($i = 0; $i < count($ingredients); $i++) {
                 $reqSql = $reqSql . "INSERT INTO `association_produit_ingredient`"
                         . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
-                        . "(" . $produitId . "," . $ingredients [$i]->getId() . ",1,0,1,0)";
+                        . "(" . $produitId . "," . $ingredients [$i]->getId() . ",1,0,1,0);";
             }
         }
         $options = $produit->getOptions();
@@ -687,6 +687,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             }
         }
         if ($reqSql != "") {
+            //echo $reqSql;
             $bdd = new ConnexionBDD();
             $bdd->executeGeneric($reqSql);
         }
