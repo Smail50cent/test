@@ -827,7 +827,35 @@ function AssociationProduitPrix() {
     this.datefin;
     this.prixHt;
     this.zonetable;
-
+    this.heuredebut;
+    this.heurefin;
+    this.minutedebut;
+    this.minutefin;
+    
+    this.setHeuredebut = function(heuredebut) {
+        this.heuredebut = heuredebut;
+    };
+    this.getHeuredebut = function() {
+        return this.heuredebut;
+    };
+    this.setHeurefin = function(heurefin) {
+        this.heurefin = heurefin;
+    };
+    this.getHeurefin = function() {
+        return this.heurefin;
+    };
+    this.setMinutedebut = function(minutedebut) {
+        this.minutedebut = minutedebut;
+    };
+    this.getMinutedebut = function() {
+        return this.minutedebut;
+    };
+    this.setMinutefin = function(minutefin) {
+        this.minutefin = minutefin;
+    };
+    this.getMinutefin = function() {
+        return this.minutefin;
+    };
     this.setId = function(id) {
         this.id = id;
     };

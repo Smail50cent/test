@@ -109,4 +109,7 @@ function ConnexionLocalWebSQL() {
     this.getAllEtablissementsWithZones = function(method, param) {
         console.log("todo");
     };
+    this.addProduit = function(method, produit, param) {
+        console.log("TO DO");
+    };
 }
