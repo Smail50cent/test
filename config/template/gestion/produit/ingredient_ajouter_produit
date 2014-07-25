@@ -10,8 +10,8 @@
 </div>
 
 <div class="next_prev_div_structure next_prev_div_personalise">
-<div onclick="productPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
-<img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
-<div onclick="submit_ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
-<img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
+    <div onclick="productPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+    <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
+    <div onclick="submit_ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
+    <img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
 </div>

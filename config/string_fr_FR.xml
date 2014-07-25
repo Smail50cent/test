@@ -82,4 +82,8 @@
     <string key="gestion.produit.ajout.etablissement.dialog.titre">Ajouter les établissements</string>
     <string key="label.interfaceacces.gestionapp">Gestion de l'application</string>
     <string key="connexion.users.acces.interdit">Vous n'avez pas les droits nécessaires pour accéder à cette page.</string>
+    <string key="gestion.dropdwon.item1">Mode expert</string>
+    <string key="gestion.dropdwon.itemdeconnexion">Déconnexion</string>
+    <string key="gestion.dropdwon.itemdegestioncompte">Gestion de votre compte</string>
+    <string key="label.dropdown.autreparam">Autres paramètres</string>
 </strings>
