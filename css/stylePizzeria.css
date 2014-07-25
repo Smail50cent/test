@@ -1360,10 +1360,17 @@ background: rgba(248, 255, 197, 0.5);
 
 
 .div_gestion_dropdown_structure.div_gestion_dropdown_personalize {          /* bouton Drop Down*/
-position: absolute;
-right: 0;
-top: 0;
-z-index: 10000;
+    position: absolute;
+    right: 0.3em;
+    top: 0.3em;
+    z-index: 10000;
+}
+
+.div_gestion_dropdown_button_personalize {
+    border: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 0.3em 0.7em; 
 }
 
 .ui-dialog-content {
@@ -1405,11 +1412,30 @@ z-index: 10000;
     width: 40%;
 }
 
-a.link_add_product {                    /*bouton +*/
+/*________________ bouton + ________________*/
+
+.show_insert_dialog_structure.show_insert_dialog_personalise {
+    width: 35%;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgb(196, 196, 196);
+    padding: 0.5em;
+    cursor: pointer;
+}
+
+a.link_add_product {                    
     display: inline-block;
     margin-top: 8px;
     margin-left: 0.5em;
 }
+
+.label_ajout_ingred_personalise {
+    float: right;
+    margin-right: 1em;
+    margin-top: 0.2em;
+}
+
+
 
 .div_zone input {
     font-size: 0.8em;
@@ -1438,11 +1464,7 @@ div.prev_page_structure+div.prev_page_structure {
     font-size: 0.8em;
 }
 
-.label_ajout_ingred_personalise {
-    float: right;
-    margin-right: 26em;
-    margin-top: 0.2em;
-}
+
 
 .name_prod_personalise, .liste_categorie_personalise, .liste_souscategorie_personalise {
     font-size: 0.8em !important;
@@ -1461,10 +1483,17 @@ select#liste_categorie_id {
 
 /*____________________FLECHES____________________*/
 
-.prev_page_structure, .img_left_structure, .img_right_structure {
-    margin-top: 1em;
+.prev_page_structure {
     display: inline-block;
     float: left;
+    margin: 1em 0 0.5em 0;
+    cursor: pointer;
+}
+
+.next_page_structure {
+    float: right;
+    margin: 1em 0 0.5em 0;
+    cursor: pointer;
 }
 
 /*____________________AJOUT OPTIONS____________________*/
