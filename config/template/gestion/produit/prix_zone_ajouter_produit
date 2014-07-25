@@ -1,12 +1,19 @@
 <div class="prix_definition_prix_structure prix_definition_prix_personalize">
     <p parentId="{zone_prix_id}"> 
+    
+    <div class="zone_tva_structure zone_tva_personalise">
     <label id="{zone_prix_id}" class="zone_prix zone_prix_structure zone_prix_personalise"> {zone_name} </label>
     <input min=0.01 size=2 type="number" class="input_zone_prix input_zone_prix_structure input_zone_prix_personalise" placeholder="Prix" Id_inputPrix="{zone_prix_id}">
-    <p><label> Date début </label> <input type="datetime-local" id="date_debut_id" class="date_debut date_debut_structure date_debut_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p>
-    <p><label> Date fin  </label> <input type="datetime-local" id="date_fin_id" class="date_fin date_fin_structure date_fin_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p> 
     <label> TVA </label>
     <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
     </select>
+    </div>
+    
+    <div class="datetime_structure datetime_personalise">
+    <p><label> Date début </label> <input type="datetime-local" id="date_debut_id" class="date_debut date_debut_structure date_debut_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p>
+    <p><label> Date fin  </label> <input type="datetime-local" id="date_fin_id" class="date_fin date_fin_structure date_fin_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p> 
+    </div>
+
     </p>
 <div>
 <hr>

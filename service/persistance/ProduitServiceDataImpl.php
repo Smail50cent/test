@@ -687,11 +687,9 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             }
         }
         if ($reqSql != "") {
-            echo $reqSql;
             $bdd = new ConnexionBDD();
             $bdd->executeGeneric($reqSql);
         }
-        echo $produitId;
         return $produitId;
     }
 

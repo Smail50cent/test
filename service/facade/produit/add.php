@@ -53,6 +53,6 @@ if (isset($_POST['produit'])) {
     }
     $prodPhp->setEtablissements($listEtab);
     $produitSrv = LogiqueFactory::getProduitService();
-    $produitSrv->add($prodPhp);
+    echo $produitSrv->add($prodPhp);
 }
 

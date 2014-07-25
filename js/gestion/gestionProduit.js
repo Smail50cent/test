@@ -58,14 +58,17 @@ function DeleteProduct(id) {
                     connexion.deleteProduit(idprod);
                     getImplOfConnexionLocal().deleteProduit(idprod);
                     id.parent().parent().parent().remove();
-                    $(this).dialog("close");
+                    $(this).dialog("destroy");
+                    $('#confirm_dialog_produit_id').empty();
                 },
                 No: function() {
-                    $(this).dialog("close");
+                    $(this).dialog("destroy");
+                    $('#confirm_dialog_produit_id').empty();
                 }
             },
             close: function(event, ui) {
-                $(this).remove();
+                $(this).dialog("destroy");
+                $('#confirm_dialog_produit_id').empty();
             }
         });
     });
@@ -617,7 +620,7 @@ function ajoutPeriode() {
 }
 
 function loadNewProduit() {
-    
+
     var liProd = getContentProduitItem();
     var prodId = paramValue(liProd, "produitId", produit.getId());
     var prodName = paramValue(prodId, "produitNom", produit.getNom());
