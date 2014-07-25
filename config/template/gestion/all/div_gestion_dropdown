@@ -1,15 +1,10 @@
 <div class="div_gestion_dropdown_structure div_gestion_dropdown_personalize">
 <div class="dropdown div_gestion_dropdown_div_structure div_gestion_dropdown_div_personalize">
   <button class="btn btn-default dropdown-toggle div_gestion_dropdown_button_structure div_gestion_dropdown_button_personalize" type="button" id="dropdownMenu1" data-toggle="dropdown">
-    Dropdown
+    {labelDropdown}
     <span class="caret div_gestion_dropdown_span_structure div_gestion_dropdown_span_personalize"></span>
   </button>
-  <ul class="dropdown-menu div_gestion_dropdown_menu_structure div_gestion_dropdown_menu_personalize" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-    <li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-    <li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-    <li role="presentation" class="divider"></li>
-    <li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+  <ul id="ul_dropdown_gestion" class="dropdown-menu div_gestion_dropdown_menu_structure div_gestion_dropdown_menu_personalize" role="menu" aria-labelledby="dropdownMenu1">
   </ul>
 </div>
 </div>

@@ -186,81 +186,90 @@ function getButtonBackToAuth() {
 function getInscriFormUser() {
     return templates.getTemplate("compte/inscri_form_user");
 }
-function getContentSlideFavorite(){
+function getContentSlideFavorite() {
     return templates.getTemplate("carte/menu/content_slide_favorite");
 }
-function getItemSelectFavorite(){
+function getItemSelectFavorite() {
     return templates.getTemplate("carte/menu/item_select_type_favorite");
 }
-function getDateHeureOptionDate(){
+function getDateHeureOptionDate() {
     return templates.getTemplate("choixDateHeure/option_select_date");
 }
-function getDivModifProduit(){
+function getDivModifProduit() {
     return templates.getTemplate("gestion/produit/div_modifier_produit");
 }
-function getDivSuppProduit(){
+function getDivSuppProduit() {
     return templates.getTemplate("gestion/produit/div_supprimer_produit");
 }
-function getDivAddProduitBtn(){
+function getDivAddProduitBtn() {
     return templates.getTemplate("gestion/produit/div_ajouter_produit_btn");
 }
-function getDivAddProduit(){
+function getDivAddProduit() {
     return templates.getTemplate("gestion/produit/div_ajouter_produit");
 }
-function getPage1AddProduit(){
+function getPage1AddProduit() {
     return templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
 }
-function getPage1ShowAddProduit(){
+function getPage1ShowAddProduit() {
     return templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
 }
-function getPageIngredAddProduit(){
+function getPageIngredAddProduit() {
     return templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
 }
-function getIngredCheckBoxAddProduit(){
+function getIngredCheckBoxAddProduit() {
     return templates.getTemplate("gestion/produit/ingredient_checkbox_ajouter_produit");
 }
-function getOptionCheckBoxAddProduit(){
+function getOptionCheckBoxAddProduit() {
     return templates.getTemplate("gestion/produit/option_checkbox_ajouter_produit");
 }
-function getIngredLiAddProduit(){
+function getIngredLiAddProduit() {
     return templates.getTemplate("gestion/produit/ingredOpt_li_ajouter_produit");
 }
-function getOptionAddProduit(){
+function getOptionAddProduit() {
     return templates.getTemplate("gestion/produit/option_ajouter_produit");
 }
-function getPrixAddProduit(){
+function getPrixAddProduit() {
     return templates.getTemplate("gestion/produit/prix_ajouter_produit");
 }
-function getPrixZoneAddProduit(){
+function getPrixZoneAddProduit() {
     return templates.getTemplate("gestion/produit/prix_zone_ajouter_produit");
 }
-function getDivAddOption(){
+function getDivAddOption() {
     return templates.getTemplate("gestion/produit/div_ajouter_option");
 }
-function getDivAddIngredient(){
+function getDivAddIngredient() {
     return templates.getTemplate("gestion/produit/div_ajouter_ingredient");
 }
-function getAjouterProduitSelectEtablissements(){
+function getAjouterProduitSelectEtablissements() {
     return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
 }
-function getAjouterProduitSelectEtablissements(){
+function getAjouterProduitSelectEtablissements() {
     return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
 }
-function getDivShowEtblissementsAndZone(){
+function getDivShowEtblissementsAndZone() {
     return templates.getTemplate("gestion/produit/div_show_etblissements_and_zone");
 }
- function getLiZonesEtablissement(){
+function getLiZonesEtablissement() {
     return templates.getTemplate("gestion/produit/li_zones_etablissement");
-}   
-function getPossibiliteLabelAddProduit(){
+}
+function getPossibiliteLabelAddProduit() {
     return templates.getTemplate("gestion/produit/possibilite_label_ajouter_produit");
 }
-function getOptionPossibSelectAddProduit(){
+function getOptionPossibSelectAddProduit() {
     return templates.getTemplate("gestion/produit/option_select_ajouter_produit");
 }
-function getDivGestionDropdown(){
+function getDivGestionDropdown() {
     return templates.getTemplate("gestion/all/div_gestion_dropdown");
 }
-function getLiAccesInterface(){
+function getLiAccesInterface() {
     return templates.getTemplate("interfaceVenteAcces/li_acces_interface");
+}
+function getLiDropDown() {
+    return templates.getTemplate("gestion/all/li_dropdown");
+}
+function getLiDropDownDivider() {
+    return templates.getTemplate("gestion/all/li_dropdown_divider");
+}
+function getLiDropDownImg() {
+    return templates.getTemplate("gestion/all/li_dropdown_img");
 }

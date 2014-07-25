@@ -5,21 +5,27 @@ function onLoadGP() {
         showErrorMessage(strings.getString("connexion.users.acces.interdit"));
     }
     var htmlDivdrop = getDivGestionDropdown();
+    htmlDivdrop = paramValue(htmlDivdrop,"labelDropdown",strings.getString("label.dropdown.autreparam"));
     $("#header_id").append(htmlDivdrop);
+    var htmlLi = getLiDropDownImg();
+    var liDropdown = htmlLi;
+    liDropdown = paramValue(liDropdown, "src", "./img/albert.png");
+    liDropdown = paramValue(liDropdown, "onclick", "");
+    liDropdown = paramValue(liDropdown, "name", strings.getString("gestion.dropdwon.item1"));
+    $("#ul_dropdown_gestion").append(liDropdown);
+    var liDropdown2 = htmlLi;
+    liDropdown2 = paramValue(liDropdown2, "src", "./img/gestioncompte.gif");
+    liDropdown2 = paramValue(liDropdown2, "onclick", "");
+    liDropdown2 = paramValue(liDropdown2, "name", strings.getString("gestion.dropdwon.itemdegestioncompte"));
+    $("#ul_dropdown_gestion").append(liDropdown2);
+    $("#ul_dropdown_gestion").append(getLiDropDownDivider());
+    var liDropdown3 = getLiDropDown();
+    liDropdown3 = paramValue(liDropdown3, "onclick", "");
+    liDropdown3 = paramValue(liDropdown3, "name", strings.getString("gestion.dropdwon.itemdeconnexion"));
+    $("#ul_dropdown_gestion").append(liDropdown3);
     loadViewsForAddProduit();
 }
-function testIfAdminConnected() {
-    var ret = false;
-    var personne = getLocalStorageValue("personnes.serveur");
-    if (personne != null) {
-        personne = JSON.parse(personne);
-        var level = parseInt(personne.role.level);
-        if (level == 1) {
-            ret = true;
-        }
-    }
-    return ret;
-}
+
 function loadViewsForAddProduit() {
     $('#content_titre_id').html("Gestion des Produits");
     $('.content_produit_zone_right_structure').empty();
@@ -42,7 +48,10 @@ function DeleteProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
     scripts.loadScripts("lib.dialog", function() {
         $('#confirm_dialog_produit_id').dialog({
-            modal: true, title: 'Voulez vous supprimer ce produit ?', autoOpen: true, position: 'center',
+            modal: true,
+            title: 'Voulez vous supprimer ce produit ?',
+            autoOpen: true,
+            position: 'center',
             buttons: {
                 Yes: function() {
                     var connexion = getConnexion();

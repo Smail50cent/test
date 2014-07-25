@@ -1,0 +1,8 @@
+<li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize">
+    <div class="div_gestion_dropdown_item_innerdiv_structure div_gestion_dropdown_item_innerdiv_personalize"  >
+        <img src="{src}" class="persentation_itemdropdwon_img_structure persentation_itemdropdwon_img_personalize" style="height: 40px;
+margin-right: 6px;
+margin-left: 6px;"/>
+        <a role="menuitem" tabindex="-1" onclick="{onclick}" class="a_dropdwon_with_img_structure a_dropdwon_with_img_personalize">{name}</a>
+    </div>
+</li>
