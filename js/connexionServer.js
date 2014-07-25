@@ -1147,4 +1147,20 @@ function ConnexionServer() {
             }
         });
     };
+
+    this.addProduit = function(method, produit, param) {
+        produit = JSON.stringify(produit);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddProduit"),
+            type: 'POST',
+            data: {produit: produit},
+            async: false,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }

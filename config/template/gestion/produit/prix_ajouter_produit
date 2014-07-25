@@ -1,9 +1,13 @@
 <div class="dialog_ajouter_produit_ajouterprix_structure dialog_ajouter_produit_ajouterprix_personalize">
     <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">Prix </label> 
     <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix_structure input_defaut_prix_personalize ">
+    <label> TVA </label>
+    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
+    <option value=0> 0 </option>
+    </select>
 
     <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">
-
+    <a onclick="ajoutPeriode()" id="add_periode_id" class="add_periode_structure add_periode_personalise"> ajout periode </a>
     <div id="div_zone_id" class="div_zone_personalize div_zone_structure"> </div>
 
 <div class="next_prev_div_structure next_prev_div_personalise">

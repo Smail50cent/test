@@ -267,7 +267,7 @@ function optionPage() {
                 var optlab = paramValue(optPoss, "opt_label_val", $(this).attr("label_opt"));
                 $('#content_produit_description_id').append(optlab);
                 for (var j = 0; j < possibilite[idOpt].length; j++) {
-                    $(".liste_option_possib[optionid="+idOpt+"]").append($('<option>', {
+                    $(".liste_option_possib[optionid=" + idOpt + "]").append($('<option>', {
                         value: possibilite[idOpt][j].nom,
                         text: possibilite[idOpt][j].nom
                     }));
@@ -308,6 +308,7 @@ function prixPage() {
                 AllTva.push(TVA[i]);
             }
         }
+
         // A FAIRE / REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
         getConnexion().getAllZoneTables(getZones);
         function getZones(zones) {
@@ -320,6 +321,7 @@ function prixPage() {
                     $('#div_zone_id').append(zoneId);
                 }
             }
+            $("#div_zone_id").hide();
             $(".tva_produit").each(function() {
                 for (var j = 0; j < AllTva.length; j++) {
                     $(this).append($('<option>', {
@@ -362,7 +364,7 @@ function prixPage() {
 function submit_prixPage() {
     var list = new Array();
     var prix = $("#input_defaut_prix_id").val();
-    var objprix = {prix : prix};
+    var objprix = {prix: prix};
     var Tva = $("#tva_1").val();
     var associationPrixProduit = new AssociationProduitPrix();
     associationPrixProduit.setDatedebut(null);
@@ -375,18 +377,35 @@ function submit_prixPage() {
 //        var prix = $(this).val();
 //        var objprix = {prix : prix};
 //        var idprix = $(this).attr("id_inputprix");
-//        var datedebut;
-//        var datefin;
+//        var datedebut,datefin,heuredebut,heurefin,minutedebut,minutefin;
 //        $(".datetimepicker[id_inputprix=" + idprix + "]").each(function() {
 //            if ($(this).hasClass("date_debut")) {
 //                var date = $(this).val();
 //                datedebut = date.replace('T', ' ');
+//                var time = datedebut.split(" ");
+//                time = time[1];
+//                var timetab = time.split(":");
+//                heuredebut = timetab[0];
+//                minutedebut = timetab[1];
+//                console.log(heuredebut+" "+minutedebut);
+//                
 //            } else if ($(this).hasClass("date_fin")) {
 //                var date = $(this).val();
 //                datefin = date.replace('T', ' ');
+//                var time = datefin.split(" ");
+//                time = time[1];
+//                var timetab = time[1].split(":");
+//                heurefin = timetab[0];
+//                minutefin = timetab[1];
+//                console.log(heurefin+" "+minutefin);
+//                
 //            }
 //
 //        });
+//        associationPPZone.setHeuredebut(heuredebut);
+//        associationPPZone.setHeurefin(heurefin);
+//        associationPPZone.setMinutedebut(minutedebut);
+//        associationPPZone.setMinutefin(minutefin);
 //        associationPPZone.setDatedebut(datedebut);
 //        associationPPZone.setDatefin(datefin);
 //        associationPPZone.setPrixHt(objprix);
@@ -395,8 +414,7 @@ function submit_prixPage() {
 //    });
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
-    console.log(produit);
-    var prixTTC = getPrixHtInAssociation(list,produit.getTauxTva());
+    var prixTTC = getPrixHtInAssociation(list, produit.getTauxTva());
     $("#produit_zone_right_prix_id").html(fntp(prixTTC));
     onLoadEtablissementPage();
 }
@@ -458,23 +476,39 @@ function submitEtablissements() {
         if ($(this).attr("selectallzoneInEtablissement")) {
             var isChecked = $(this).is(":checked");
             var id = parseInt($(this).attr("selectallzoneInEtablissement"));
-            if(isChecked == true){
+            if (isChecked == true) {
                 listeEtabZone.push(new AssociationEtablissementZones(id, null));
             }
-            console.log($(this).attr("id"), isChecked);
-        }else if($(this).attr("idetablissement")){
+            //console.log($(this).attr("id"), isChecked);
+        } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var idZone = parseInt($(this).attr("idzone"));
             var isChecked = $(this).is(":checked");
-            if(isChecked==true){
+            if (isChecked == true) {
                 listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
             }
         }
     });
-    setLocalStorageValue("gestion.add.produit.etablissemnts",JSON.stringify(listeEtabZone));
+    setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
 }
 function validerProduit() {
     submitEtablissements();
+
+    var list = new Array();
+    var etab = JSON.parse(getLocalStorageValue("gestion.add.produit.etablissemnts"));
+    for (var i = 0; i < etab.length; i++) {
+        list.push(etab[i]);
+    }
+    produit.setEtablissements(list);
+    console.log(produit);
+    getConnexion().addProduit(insertP, produit);
+    function insertP(data) {
+        produit.setId(data);
+        $("#dialog_add_produit_id").dialog("destroy");
+        $(".produit_info").remove();
+        $("#dialog_add_produit_id").empty();
+        loadNewProduit();
+    }
 }
 
 var tailleItem = new Array("small-item-structure small-item-personalize",
@@ -548,4 +582,15 @@ function insertOptionDB() {
         $("#insert_option_id").empty();
         $("#insert_possib_id").val("");
     }
+}
+
+function ajoutPeriode() {
+    $("#div_zone_id").toggle();
+}
+
+function loadNewProduit() {
+    var liProd = getContentProduitItem();
+    var prodName = paramValue(liProd,"",produit.getId());
+    $('.content_globlal_zone').append(liProd);
+    onLoadGP();
 }
