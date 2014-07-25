@@ -1320,6 +1320,7 @@ p.header_left_logo_message_structure:last-child {
 
 
 .img_slide_structure li ul li {
+        text-align: center;
         display: inline-table;
         width: 72%;
         padding: 0 1.75%;
@@ -1537,6 +1538,14 @@ hr{
     width:100%;
 }
 
+/*___________________Ajouter les prix____________________*/
+
+.dialog_ajouter_produit_ajouterprix_personalize {
+    width: 140px
+}
+
+
+
 
 /*___________________Choix restaurant____________________*/
 
@@ -1550,7 +1559,17 @@ hr{
     border-top-left-radius: 7px;
 
 }
+
+
+/*________________________Fenêtre erreur_____________________*/
+.dialog_error.dialog_error_structure.dialog_error_personalize {
+position: absolute;
+top: 22em;
+right: 34%;
 }
+}
+
+
 
 
 /*.content_list_categorie_personalize li:first-child:hover {
