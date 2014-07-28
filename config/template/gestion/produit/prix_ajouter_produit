@@ -2,14 +2,14 @@
     <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">Prix </label> 
     <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix_structure input_defaut_prix_personalize ">
     <label> TVA </label>
-    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
+    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="{zone_prix_id}">
     </select>
 
     <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">
-    <a onclick="ajoutPeriode()" id="add_periode_id" class="add_periode_structure add_periode_personalise"> ajout periode </a>
+    <a onclick="ajoutPeriode()" id="add_periode_id" class="add_periode_structure add_periode_personalize"> ajout periode </a>
     <div id="div_zone_id" class="div_zone_personalize div_zone_structure"> </div>
 
-<div class="next_prev_div_structure next_prev_div_personalise">
+<div class="next_prev_div_structure next_prev_div_personalize">
     <div onclick="optionPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
     <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
 
