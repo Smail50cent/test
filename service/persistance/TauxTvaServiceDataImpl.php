@@ -19,7 +19,7 @@ class TauxTvaServiceDataImpl implements TauxTvaServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $rep = $bdd->executeGeneric("SELECT * FROM `taux_tva` ");
+        $rep = $bdd->executeGeneric("SELECT * FROM `taux_tva` ORDER BY taux_tva");
         return $this->parseTauxTva($rep);
     }
 
