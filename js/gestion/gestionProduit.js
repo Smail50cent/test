@@ -1,9 +1,5 @@
 
 function onLoadGP() {
-    if (!testIfAdminConnected()) {
-        $("body").html("");
-        showErrorMessage(strings.getString("connexion.users.acces.interdit"));
-    }
     var htmlDivdrop = getDivGestionDropdown();
     htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
     $("#header_id").append(htmlDivdrop);
