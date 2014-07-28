@@ -259,7 +259,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .header_personalize {
         width:100%;
-        height: 4.7em;
+        height: 5.7em;
         background: #bed536; /* Old browsers */
         background: -moz-linear-gradient(top, #bed536 0%, #279b3e 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bed536), color-stop(100%,#279b3e)); /* Chrome,Safari4+ */
