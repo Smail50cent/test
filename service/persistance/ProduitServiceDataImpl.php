@@ -666,8 +666,8 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         if ($etablissements != null) {
             for ($i = 0; $i < count($etablissements); $i++) {
                 $reqSql = $reqSql . "INSERT INTO `association_etablissement_produit`"
-                        . "( `id_produit`, `id_etablissement`) VALUES "
-                        . "(" . $produitId . "," . $etablissements[$i]->getId() . ");";
+                        . "( `id_produit`, `id_etablissement`, `id_zone`) VALUES "
+                        . "(" . $produitId . "," . $etablissements[$i]->getId() . ",".$etablissements[$i]->getZones().");";
             }
         }
         $ingredients = $produit->getIngredients();

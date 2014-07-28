@@ -739,6 +739,32 @@ function ZoneTable(id, nom, tables, etablissement_id) {
     this.nom = nom;
     this.tables = tables;
     this.etablissement_id = etablissement_id;
+    
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setNom = function(nom) {
+        this.nom = nom;
+    };
+    this.getNom = function() {
+        return this.nom;
+    };
+    this.setTables = function(tables) {
+        this.tables = tables;
+    };
+    this.getTables = function() {
+        return this.tables;
+    };
+    this.setEtablissement_id= function(etablissement_id) {
+        this.etablissement_id = etablissement_id;
+    };
+    this.getEtablissement_id = function() {
+        return this.etablissement_id;
+    };
+    
 }
 function TypeCommande(id, label, labelMenu, isActif, idInPageHtml) {
     this.id = id;
@@ -800,6 +826,19 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     this.slogan = slogan;
     this.groupe = groupe;
     this.zones;
+    
+    this.setId = function(id) {
+        this.id = id;
+    };
+    this.getId = function() {
+        return this.id;
+    };
+    this.setZones = function(zones) {
+        this.zones = zones;
+    };
+    this.getZones = function() {
+        return this.zones;
+    };
 }
 function TauxTva(id, taux) {
 
@@ -887,3 +926,4 @@ function AssociationProduitPrix() {
         return this.zonetable;
     };
 }
+
