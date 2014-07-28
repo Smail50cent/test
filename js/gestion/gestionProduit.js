@@ -327,7 +327,9 @@ function prixPage() {
     scripts.loadScripts("lib.datetimepicker", function() {
         $('.ui-dialog-title').html("Ajouter les Prix");
         var pagePrix = getPrixAddProduit();
-        $('#dialog_add_produit_id').html(pagePrix);
+        var inputId = paramValue(pagePrix, "Id_inputPrix", 0);
+        var tvaId = paramValue(inputId, "tvaid", 0);
+        $('#dialog_add_produit_id').html(tvaId);
         var AllTva = new Array();
         getConnexion().getAllTauxTva(getTva);
         function getTva(TVA) {
@@ -370,19 +372,31 @@ function prixPage() {
                     }
                 });
             });
+
+            var reset = false;
             $('.tva_produit ').change(function() {
-                if ($(this).val() != 0) {
-                    var selectId = $(this).attr("tvaid");
-                    var selectVal = $(this).val();
-                    $(".input_zone_prix").each(function() {
-                        if ($(this).attr('id_inputprix') == selectId) {
-                            if ($(this).val() != 0) {
-                                var prixTVA = parseFloat($(this).val()) + parseFloat($(this).val()) * parseFloat(selectVal) / 100;
-                                $(this).val(prixTVA.toFixed(2));
+                if (reset == false) {
+                    reset = true;
+                    if ($(this).val() != 0) {
+                        var selectId = $(this).attr("tvaid");
+                        var selectVal = $(this).val();
+                        $(".input_zone_prix, .input_defaut_prix").each(function() {
+                            var prix = $(this).val();
+                            if ($(this).attr('id_inputprix') == selectId) {
+                                if ($(this).val() != 0) {
+                                    var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
+                                    $(this).val(prixTVA.toFixed(2));
+                                }
                             }
-                        }
+                        });
+                    }
+                } else {
+                    $(".input_zone_prix, .input_defaut_prix").each(function() {
+                       $(this).val("") ;
                     });
+                    reset = false;
                 }
+
             });
         }
     });
