@@ -7,4 +7,9 @@
     
     </div>
     <input id="valider_produit_id" type="button" value="{inputVal}" onclick="validerProduit();" ></input>
+
+    <div class="next_prev_div_structure next_prev_div_personalize">
+    <div onclick="prixPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
+    <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
+    </div>
 </div>
