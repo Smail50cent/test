@@ -8,14 +8,14 @@
     </div>
     <div class="zone_extprix_tva_structure zone_extprix_tva_personalise">
     <label> TVA </label>
-    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalise" tvaId="{zone_prix_id}">
+    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="{zone_prix_id}">
     </select>
     </div>
     </div>
     
-    <div class="datetime_structure datetime_personalise">
-    <p><label> Date début </label> <input type="datetime-local" id="date_debut_id" class="date_debut date_debut_structure date_debut_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p>
-    <p><label> Date fin  </label> <input type="datetime-local" id="date_fin_id" class="date_fin date_fin_structure date_fin_personalise datetimepicker" Id_inputPrix="{zone_prix_id}"> </p> 
+    <div class="datetime_structure datetime_personalize">
+    <p><label> Date début </label> <input type="datetime-local" id="date_debut_id" class="date_debut date_debut_structure date_debut_personalize datetimepicker" Id_inputPrix="{zone_prix_id}"> </p>
+    <p><label> Date fin  </label> <input type="datetime-local" id="date_fin_id" class="date_fin date_fin_structure date_fin_personalize datetimepicker" Id_inputPrix="{zone_prix_id}"> </p> 
     </div>
 
     </p>

@@ -39,12 +39,19 @@
     <script for="upload" priority="2">uploadImg.js</script>
     <script for="lib.datetimepicker">lib/jqueryDatetimePicker/jquery.datetimepicker.js</script>
     
+    <style for="bootstrapall">./js/lib/bootstrapAll/dist/css/bootstrap.min.css</style>
+    <style for="bootstrapall">./js/lib/bootstrapAll/dist/css/bootstrap-theme.min.css</style>
+    <script for="bootstrapall">lib/bootstrapAll/docs/assets/js/ie-emulation-modes-warning.js</script>
+    <script for="bootstrapall">lib/bootstrapAll/docs/assets/js/ie10-viewport-bug-workaround.js</script>
+    <script for="bootstrapall">lib/bootstrapAll/docs/assets/js/ie10-viewport-bug-workaround.js</script>
+    <script for="bootstrapall">lib/bootstrapAll/dist/js/bootstrap.min.js</script>
+     
     <script for="swipe">lib/jquery.event.move.js</script>
     <script for="swipe">lib/jquery.event.swipe.js</script>
         
     <script for="carte">pages/carte.js</script>
     <script for="gestionProduit" priority="1">pages/carte.js</script>
-    <script for="gestionProduit" priority="2">gestion/gestionProduit.js</script>
+    
     <script for="gestionProduit" priority="2">lib/bootstrapDropdown/js/bootstrap.min.js</script>
     <script for="choixDateHeure">pages/choixDateHeure.js</script>
     <script for="paramCommande" priority="2">pages/paramCommande.js</script>
@@ -52,12 +59,16 @@
     <script for="reglement">pages/reglement.js</script>
     <script for="choixPaimentPersonnes">pages/choixPaimentPersonnes.js</script>
     <script for="choixEnvoieCuisine">pages/choixEnvoieCuisine.js</script>
-    <!--script for="produit">pages/produit.js</script-->
     <script for="index">pages/index.js</script>
+    
     <script for="pageConnexionServeur" priority="2">pages/pageConnexionServeur.js</script>
     <script for="pageConnexionServeur" priority="1">popupAuth.js</script>
     <script for="interfaceVenteAcces" >pages/interfaceVenteAcces.js</script>
     <script for="choixPriseDeCommande" >pages/choixPriseDeCommande.js</script>
+    
+    <script for="gestionProduit" priority="2">gestion/gestionProduit.js</script>
     <style for="gestionProduit">./js/lib/bootstrapDropdown/css/bootstrap.min.css</style>
     <style for="gestionProduit">./js/lib/bootstrapDropdown/css/bootstrap-theme.min.css</style>
+    
+    <script for="modeexpert" priority="1">gestion/modeexpert.js</script>
 </files>

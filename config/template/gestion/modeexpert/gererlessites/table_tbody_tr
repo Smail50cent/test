@@ -1,0 +1,10 @@
+<tr>
+    <td>{nom}</td>
+    <td>{logo}</td>
+    <td>{style}</td>
+    <td>{adresseEtab}</td>
+    <td>{telephone}</td>
+    <td>{message}</td>
+    <td>{slogan}</td>
+    <td>{groupe}</td>
+</tr>

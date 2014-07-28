@@ -1,9 +1,5 @@
 
 function onLoadGP() {
-    if (!testIfAdminConnected()) {
-        $("body").html("");
-        showErrorMessage(strings.getString("connexion.users.acces.interdit"));
-    }
     var htmlDivdrop = getDivGestionDropdown();
     htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
     $("#header_id").append(htmlDivdrop);
@@ -483,19 +479,50 @@ function onLoadEtablissementPage() {
                 $("#etablissement_div_contentzoneliste_" + etablissements[i].id).append(divLiZone);
             }
         }
+
+        $("#checkbox_selectAllEta").change(function() {
+            var isCheked = $(this).is(":checked");
+            if (isCheked == true) {
+                $('input[type=checkbox]').each(function() {
+                    this.checked = true;
+                    $(".li_zones_etablissement_checkbox_structure").each(function() {
+                        this.disabled = true;
+                        this.checked = true;
+                    });
+                });
+            } else {
+                $('input[type=checkbox]').each(function() {
+                    this.checked = false;
+                    $(".li_zones_etablissement_checkbox_structure").each(function() {
+                        this.disabled = false;
+                        this.checked = false;
+                    });
+                });
+            }
+        });
+
+        $(".etablissement_div_header_select_structure").change(function() {
+            var id = $(this).attr("selectallzoneinetablissement");
+            if (this.checked) {
+                $(".li_zones_etablissement_checkbox_structure").each(function() {
+                    if ($(this).attr("idetablissement") == id) {
+                        this.disabled = true;
+                        this.checked = true;
+                    }
+                });
+            } else {
+                $(".li_zones_etablissement_checkbox_structure").each(function() {
+                    if ($(this).attr("idetablissement") == id) {
+                        this.disabled = false;
+                        this.checked = false;
+                    }
+                });
+            }
+
+        });
+
     }
-    $("#checkbox_selectAllEta").change(function() {
-        var isCheked = $(this).is(":checked");
-        if (isCheked == true) {
-            $('input[type=checkbox]').each(function() {
-                $(this).attr("checked", true);
-            });
-        } else {
-            $('input[type=checkbox]').each(function() {
-                $(this).attr("checked", false);
-            });
-        }
-    });
+
 }
 function AssociationEtablissementZones(etablissement, zone) {
     this.etablissement = etablissement;
@@ -508,29 +535,30 @@ function submitEtablissements() {
             var isChecked = $(this).is(":checked");
             var id = parseInt($(this).attr("selectallzoneInEtablissement"));
             if (isChecked == true) {
-                listeEtabZone.push(new AssociationEtablissementZones(id, null));
+                var etabZone = new Etablissement();
+                etabZone.setId(id);
+                etabZone.setZones(null);
+                listeEtabZone.push(etabZone);
             }
             //console.log($(this).attr("id"), isChecked);
         } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var idZone = parseInt($(this).attr("idzone"));
             var isChecked = $(this).is(":checked");
-            if (isChecked == true) {
-                listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
+            var isEnabled = $(this).is(":enabled");
+            if (isChecked == true && isEnabled) {
+                var etabZone = new Etablissement();
+                etabZone.setId(idEtablissement);
+                etabZone.setZones(idZone);
+                listeEtabZone.push(etabZone);
             }
         }
     });
-    setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
+    produit.setEtablissements(listeEtabZone);
+    //setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
 }
 function validerProduit() {
     submitEtablissements();
-
-    var list = new Array();
-    var etab = JSON.parse(getLocalStorageValue("gestion.add.produit.etablissemnts"));
-    for (var i = 0; i < etab.length; i++) {
-        list.push(etab[i]);
-    }
-    produit.setEtablissements(list);
     console.log(produit);
     getConnexion().addProduit(insertP, produit);
     function insertP(data) {

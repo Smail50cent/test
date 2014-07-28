@@ -15,9 +15,9 @@ if (isset($_POST['produit'])) {
     $produit = json_decode($_POST["produit"]);
     $prodPhp = new Produit();
     
-    $assoPrixProduit = new AssociationProduitPrix();
     $listAssoc = array();
     for ($i = 0 ; $i< count($produit->associationPrixProduit);$i++){
+        $assoPrixProduit = new AssociationProduitPrix();
         $assoPrixProduit->setPrixHt($produit->associationPrixProduit[$i]->prixHt->prix);
         array_push($listAssoc, $assoPrixProduit);
     }
@@ -25,17 +25,19 @@ if (isset($_POST['produit'])) {
     $categorie = new Categorie();
     $categorie->setId($produit->id_categorie->id);
     $prodPhp->setCategorie($categorie);
-    $ingredient = new Ingredient();
+    
     $listIngred = array();
     for ($i = 0 ; $i< count($produit->ids_ingredients);$i++){
+        $ingredient = new Ingredient();
         $ingredient->setId($produit->ids_ingredients[$i]->id);
         array_push($listIngred, $ingredient);
     }
     $prodPhp->setIngredients($listIngred);
     $prodPhp->setNom($produit->nom);
-    $option = new Option();
+    
     $listOpt = array();
     for ($i = 0 ; $i< count($produit->options);$i++){
+        $option = new Option();
         $option->setId($produit->options[$i]->id);
         array_push($listOpt, $option);
     }
@@ -45,13 +47,18 @@ if (isset($_POST['produit'])) {
     $prodPhp->setSousCategorie($souscategorie);
     $prodPhp->setTauxTva($produit->tauxTva);
     
-    $listEtab = array();
+    $listeEtabZone = array();
     for ($i = 0 ; $i< count($produit->etablissements);$i++){
         $etablissement = new Etablissement();
-        $etablissement->setId($produit->etablissements[$i]->etablissement);
-        array_push($listEtab, $etablissement);
+        $etablissement->setId($produit->etablissements[$i]->id);
+        if(strlen($produit->etablissements[$i]->zones) == 0){
+            $etablissement->setZones(null);
+        }else {
+            $etablissement->setZones($produit->etablissements[$i]->zones);
+        }
+        array_push($listeEtabZone, $etablissement);
     }
-    $prodPhp->setEtablissements($listEtab);
+    $prodPhp->setEtablissements($listeEtabZone);
     $produitSrv = LogiqueFactory::getProduitService();
     echo $produitSrv->add($prodPhp);
 }
