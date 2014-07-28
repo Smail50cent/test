@@ -1360,6 +1360,10 @@ background: rgba(248, 255, 197, 0.5);
 /*____________________GESTION DE PRODUITS_____________________*/
 
 
+.ui-dialog .ui-dialog-content {
+    padding: 1.5em 1em;
+}
+
 .div_gestion_dropdown_structure.div_gestion_dropdown_personalize {          /* bouton Drop Down*/
     position: absolute;
     right: 0.3em;
@@ -1398,13 +1402,18 @@ background: rgba(248, 255, 197, 0.5);
 }
 
 .select_option_structure, .select_possibilite_structure {
-    width: 45% !important;
+    /*width: 45% !important;*/
     float: left;
     margin: 2em 0 2em 0;
 }
 
 .select_option_structure {
+    width: 100%;
     margin-right: 9%
+}
+
+.select_ingredient_structure label, .select_option_structure label {
+    margin-left: 0.5em;
 }
 
 .div_zone label, .defaut_prix {
@@ -1415,12 +1424,14 @@ background: rgba(248, 255, 197, 0.5);
 
 /*________________ bouton + ________________*/
 
-.show_insert_dialog_structure.show_insert_dialog_personalise {
+.show_insert_dialog_structure {
     width: 35%;
     background-color: white;
     border-radius: 5px;
     border: 1px solid rgb(196, 196, 196);
     padding: 0.5em;
+    margin: 0 60% 0 0;
+    float: left;
     cursor: pointer;
 }
 
@@ -1430,7 +1441,7 @@ a.link_add_product {
     margin-left: 0.5em;
 }
 
-.label_ajout_ingred_personalise {
+.label_ajout_ingred_personalise, .label_ajout_option_structure {
     float: right;
     margin-right: 1em;
     margin-top: 0.2em;
@@ -1449,8 +1460,7 @@ a.link_add_product {
     text-align: center;
 }
 
-
-
+/*__________________________________________*/
 
 
 
@@ -1479,7 +1489,7 @@ div.prev_page_structure+div.prev_page_structure {
     margin-left: 0;
 }
 
-.label_uncheck_personalise, .label_ajout_ingred_personalise {
+.label_uncheck_personalise, .label_ajout_ingred_personalise, .label_ajout_option_personalise {
     font-size: 0.8em;
 }
 
@@ -1489,10 +1499,14 @@ div.prev_page_structure+div.prev_page_structure {
     font-size: 0.8em !important;
 }
 
-select#liste_categorie_id {
+.dialog_add_produit .product_spec_structure {
     float: left;
-    display: inline-block;
-    margin: 0 0 0 1em; 
+    margin: 0;
+}
+
+.dialog_add_produit .product_spec_souscat_structure {
+    float: left;
+    margin: 0 0 0 1.5em;
 }
 
 .select_ingredient_structure label input, .select_option_structure label input {
@@ -1524,29 +1538,16 @@ select#liste_categorie_id {
 }
 
 .label_uncheck_personalise input {
-    margin-right: 1em;
+    margin: 0 1em;
+    vertical-align: middle;
 }
 
 .uncheck_all_ingredient_structure input {
     margin-right: 1em;
 }
 
-.label_ajout_option_structure {
-    display: inline-block;
-    width: 100%;
-    margin-left: 2em;
-}
-
-.insertOpt_structure img {
-    margin-top: -3em;
-}
 
 /*____________________Page prix intérieur extérieur____________________*/
-
-.dialog_ajouter_produit_ajouterprix_personalize label {
-    width: 38%;
-    display: inline-block;
-}
 
 .prix_definition_prix_personalize {
     font-size: 0.8em;
@@ -1556,10 +1557,78 @@ hr{
     width:100%;
 }
 
+.datetime_structure  {
+    width: 100%;
+    display: inline-block;
+}
+
+.datetime_structure p {
+    width: 50%;
+    float: left;
+}
+
+.datetime_structure p input {
+    width: 56%;
+    float: right;
+    margin-right: 2.2em;
+}
+
+.datetime_structure p label {
+    width: 32%;
+
+}
+
+.zone_extprix_tva_structure {
+    width: 50%;
+    float: left;
+}
+
+.zone_extprix_tva_structure input, .tva_produit_structure {
+    margin: 0 2.2em 0 0;
+    float: right;
+}
+
+
 /*___________________Ajouter les prix____________________*/
 
-.dialog_ajouter_produit_ajouterprix_personalize {
-    width: 140px
+
+.dialog_ajouter_produit_ajouterprix_personalize label {
+width: 10%;
+display: inline-block;
+}
+
+.label_tva_structure {
+margin-left: 3em;
+}
+
+
+/*___________________Ajouter les établissements____________________*/
+
+.ajouter_produit_div_etablissement_head_p_structure, .etablissement_div_header_titre_structure  {
+    display: inline-block;
+    width: 67%;
+    margin: 0;
+}
+
+.ajouter_produit_div_etablissement_head_checkbox_structure, .etablissement_div_header_select_structure, .li_zones_etablissement_checkbox_structure {
+    float: right;
+    margin: 0.5em 0.5em 0 0;
+}
+
+.etablissement_div_personalize {
+    width: 100%!important;
+    font-size: 0.7em!important;
+    /* display: inline-block !important; */
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.7em 0.3em 0.3em 0.3em;
+    margin: 3em 0;
+    border: 1px solid rgba(196, 196, 196, 1);
+}
+
+.etablissement_div_header_titre_personalize {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 1em;
 }
 
 
