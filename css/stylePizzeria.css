@@ -1359,6 +1359,9 @@ background: rgba(248, 255, 197, 0.5);
 
 /*____________________GESTION DE PRODUITS_____________________*/
 
+.name_prod_structure {
+    width: 68%;
+}
 
 .ui-dialog .ui-dialog-content {
     padding: 1.5em 1em;
@@ -1441,7 +1444,7 @@ a.link_add_product {
     margin-left: 0.5em;
 }
 
-.label_ajout_ingred_personalise, .label_ajout_option_structure {
+.label_ajout_ingred_personalize, .label_ajout_option_structure {
     float: right;
     margin-right: 1em;
     margin-top: 0.2em;
@@ -1471,17 +1474,8 @@ a.link_add_product {
     display: inline-block;
 }
 
-.name_prod_personalise {
+.name_prod_personalize {
     width: 50%;
-}
-
-.prev_page_personalise {
-    z-index: 508;
-    padding-left: 4em;
-    display: inline-block;
-    left: -3em;
-    width: 40%;
-    position: absolute;
 }
 
 div.prev_page_structure+div.prev_page_structure {
@@ -1489,13 +1483,13 @@ div.prev_page_structure+div.prev_page_structure {
     margin-left: 0;
 }
 
-.label_uncheck_personalise, .label_ajout_ingred_personalise, .label_ajout_option_personalise {
+.label_uncheck_personalize, .label_ajout_ingred_personalize, .label_ajout_option_personalize {
     font-size: 0.8em;
 }
 
 
 
-.name_prod_personalise, .liste_categorie_personalise, .liste_souscategorie_personalise {
+.name_prod_personalize, .liste_categorie_personalize, .liste_souscategorie_personalize {
     font-size: 0.8em !important;
 }
 
@@ -1520,6 +1514,7 @@ div.prev_page_structure+div.prev_page_structure {
     display: inline-block;
     float: left;
     margin: 1em 0 0.5em 0;
+    z-index: 508;
     cursor: pointer;
 }
 
@@ -1531,14 +1526,14 @@ div.prev_page_structure+div.prev_page_structure {
 
 /*____________________AJOUT OPTIONS____________________*/
 
-.label_uncheck_personalise {
+.label_uncheck_personalize {
     float: left;
     width: 100%;
     display: inline-block;
 }
 
-.label_uncheck_personalise input {
-    margin: 0 1em;
+.label_uncheck_personalize input {
+    margin: 0 0.8em;
     vertical-align: middle;
 }
 
@@ -1604,7 +1599,7 @@ margin-left: 3em;
 
 /*___________________Ajouter les établissements____________________*/
 
-.ajouter_produit_div_etablissement_head_p_structure, .etablissement_div_header_titre_structure  {
+.ajouter_produit_div_etablissement_head_p_structure, .etablissement_div_header_titre_structure {
     display: inline-block;
     width: 67%;
     margin: 0;
@@ -1650,9 +1645,9 @@ margin-left: 3em;
 
 /*________________________Fenêtre erreur_____________________*/
 .dialog_error.dialog_error_structure.dialog_error_personalize {
-position: absolute;
-top: 22em;
-right: 34%;
+    position: absolute;
+    top: 22em;
+    right: 34%;
 }
 }
 
