@@ -35,6 +35,7 @@ include_once $path . 'service/persistance/groupe/GroupeServiceDataImpl.php';
 include_once $path . 'service/persistance/etablissement/EtablissementServiceDataImpl.php';
 include_once $path . 'service/persistance/option/OptionServiceDataImpl.php';
 include_once $path . 'service/persistance/TauxTvaServiceDataImpl.php';
+include_once $path . 'service/persistance/style/StyleServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -68,7 +69,18 @@ class PersistanceFactory {
     private static $groupeSrv = null;
     private static $optSrv = null;
     private static $etablissementSrv = null;
+    private static $styleSrv = null;
 
+    /**
+     * 
+     * @return StyleServiceDataImpl
+     */
+    public static function getStyleService() {
+        if (PersistanceFactory::$styleSrv == null) {
+            PersistanceFactory::$styleSrv = new StyleServiceDataImpl();
+        }
+        return PersistanceFactory::$styleSrv;
+    }
     /**
      * 
      * @return EtablissementServiceData

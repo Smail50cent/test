@@ -1,6 +1,6 @@
-<h2 class="sub-header">{title}</h2>
-<button type="button" onclick="addEtablissement();" class="btn btn-primary btn-lg">
-    <span class="glyphicon glyphicon-plus"></span> Ajouter un établissement
+<h2 class="sub-header sub-header_etablissements_structure sub-header_etablissements_personalize">{title}</h2>
+<button type="button" onclick="addEtablissement();" class="btn btn-primary btn-lg btn-primary_addetab_structure btn-primary_addetab_personalize">
+    <span class="glyphicon glyphicon-plus glyphicon-plus_addetablissement_stucture glyphicon-plus_addetablissement_personbalize"></span> Ajouter un établissement
 </button>
 <div class="table-responsive">
     <table id="table_gererlessites_all" class="table table-striped">
