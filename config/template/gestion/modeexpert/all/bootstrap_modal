@@ -1,0 +1,17 @@
+<div class="modal fade modal_structure modal_personalize" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog_structure modal-dialog_personalize">
+    <div class="modal-content modal-content_structure modal-content_personalize">
+      <div class="modal-header modal-header_structure modal-header_personalize">
+        <button type="button" class="close close_structure close_personalize" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title modal-title_structure modal-title_personalize" id="myModalLabel">{titre}</h4>
+      </div>
+      <div id="bootstrap_modal_body" class="modal-body modal-body_structure modal-body_personalize">
+        
+      </div>
+      <div class="modal-footer modal-footer_structure modal-footer_personalize">
+        <button type="button" class="btn btn-default btn-default_modal_structure  btn-default_modal_personalize" data-dismiss="modal">{closeLabel}</button>
+        <button type="button" onclick="{onclick}" class="btn btn-primary btn-primary_modal_stucture btn-primary_modal_personalize">{primaryLabel}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,10 +1,22 @@
-<tr>
-    <td>{nom}</td>
-    <td>{logo}</td>
-    <td>{style}</td>
-    <td>{adresseEtab}</td>
-    <td>{telephone}</td>
-    <td>{message}</td>
-    <td>{slogan}</td>
-    <td>{groupe}</td>
+<tr class="section_tableausites_structure section_tableausites_personalize" idetablissement="{idetab}">
+    <td class="section_tr_nom_structure section_tr_nom_personalize"><p idetablissement="{idetab}" typelabel="nom">{nom}</p></td>
+    <td class="section_tr_logo_structure section_tr_logo_personalize"><p idetablissement="{idetab}" typelabel="logo">{logo}</p></td>
+    <td class="section_tr_style_structure section_tr_style_personalize"><p idetablissement="{idetab}" typelabel="style">{style}</p></td>
+    <td class="section_tr_adresseEtab_structure section_tr_adresseEtab_personalize"><p idetablissement="{idetab}" typelabel="adresseEtab">{adresseEtab}</p></td>
+    <td class="section_tr_telephone_structure section_tr_telephone_personalize"><p idetablissement="{idetab}" typelabel="telephone">{telephone}</p></td>
+    <td class="section_tr_message_structure section_tr_message_personalize"><p idetablissement="{idetab}" typelabel="message">{message}</p></td>
+    <td class="section_tr_slogan_structure section_tr_slogan_personalize"><p idetablissement="{idetab}" typelabel="slogan">{slogan}</p></td>
+    <td class="section_tr_groupe_structure section_tr_groupe_personalize" ><p idetablissement="{idetab}" typelabel="groupe">{groupe}</p></td>
+    <td class="section_tr_actions_structure section_tr_actions_personalize" >
+        <div class="section_update_structure section_update_personalize">
+            <button type="button" onclick="removeEtablissement({idetab});" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </div>
+        <div class="section_remove_structure section_remove_personalize">
+            <button type="button" onclick="updateEtablissement({idetab});" class="btn btn-default btn-sm">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+        </div>
+    </td>
 </tr>

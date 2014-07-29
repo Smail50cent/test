@@ -86,4 +86,17 @@
     <string key="gestion.dropdwon.itemdeconnexion">Déconnexion</string>
     <string key="gestion.dropdwon.itemdegestioncompte">Gestion de votre compte</string>
     <string key="label.dropdown.autreparam">Autres paramètres</string>
+    <string key="label.gererlessites.table.head.action.tr">Actions</string>
+    <string key="label.gererlessites.table.modal.title">Ajouter un établissement</string>
+    <string key="label.gererlessites.table.modal.label.nom">Nom établissement</string>
+    <string key="label.gererlessites.table.modal.label.style">Fichier de style à utiliser</string>
+    <string key="label.gererlessites.table.modal.label.logo">Texte affiché sous forme de logo</string>
+    <string key="label.gererlessites.table.modal.label.adresse">Adresse de votre établissement</string>
+    <string key="label.gererlessites.table.modal.label.telephone">Numéro de téléphone de votre établissement</string>
+    <string key="label.gererlessites.table.modal.label.message">Message qui sera affiché à gauche de la page</string>
+    <string key="label.gererlessites.table.modal.label.slogan">Votre slogan</string>
+    <string key="label.fermer">Fermer</string>
+    <string key="label.error.nom.required">Le nom est requis pour un nouvel établissement</string>
+    <string key="label.confirm.remove.etablissement">Etes-vous sûr de vouloir supprimer cet établissement ?</string>
+    <string key="error.label.errror.action.serveur">Le serveur n'a pas réussi à éffectuer l'action.</string>
 </strings>

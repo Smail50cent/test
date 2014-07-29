@@ -33,6 +33,7 @@ include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
 include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';
 include_once $path . 'service/logique/option/OptionServiceImpl.php';
 include_once $path . 'service/logique/tauxTva/TauxTvaServiceImpl.php';
+include_once $path . 'service/logique/style/StyleServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -64,7 +65,18 @@ class LogiqueFactory {
     private static $groupeSrv = null;
     private static $optSrv = null;
     private static $tauxTvaSrv = null;
+    private static $styleSrv = null;
 
+    /**
+     * 
+     * @return StyleService
+     */
+    public static function getStyleService() {
+        if (LogiqueFactory::$styleSrv == null) {
+            LogiqueFactory::$styleSrv = new StyleServiceImpl();
+        }
+        return LogiqueFactory::$styleSrv;
+    }
     /**
      * 
      * @return EtablissementService

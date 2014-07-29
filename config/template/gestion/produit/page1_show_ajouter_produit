@@ -6,7 +6,7 @@
     </div>
     <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
 
-        <p id="produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize">{prixTTC} €</p>  
+        <p id="produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize"> 0.00 €</p>  
         <label id="content_produit_titre_id" class="content_produit_titre content_produit_titre_structure content_produit_titre_personalize"> </label>       
         <ul id="content_produit_description_id" style="padding:0;" class="content_produit_description content_produit_description_structure content_produit_description_personalize"></ul>
     </div>

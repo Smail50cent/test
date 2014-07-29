@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Description of CategorieService
+ * Description of StyleService
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
-interface GroupeServiceData {
+interface StyleService {
 
     public function getAll();
 
-    public function getById($id);
 }

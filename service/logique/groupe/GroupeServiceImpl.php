@@ -20,4 +20,12 @@ class GroupeServiceImpl implements GroupeService {
         return $this->groupeSrv->getAll();
     }
 
+    public function getById($id) {
+        $ret = null;
+        if($id!=null){
+            $ret = $this->groupeSrv->getById($id);
+        }
+        return $ret;
+    }
+
 }

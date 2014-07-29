@@ -1,6 +1,9 @@
 
- <label id="label_uncheck_ingred_id" class="label_uncheck_structure label_uncheck_personalize">
-<input id="uncheck_all_ingredient_id" class="uncheck_all_ingredient uncheck_all_ingredient_structure uncheck_all_ingredient_personalize" type="checkbox" name="option[]" />Tout décocher</label>
+<div id="div_search_ingred_id" class="div_search_ingred_structure div_search_ingred_personalize">
+<label id="label_search_ingred_id" class="label_search_ingred_structure label_search_ingred_personalize"> Tapez ici le nom de l'ingrédient </label> 
+<input type="text" id="autocomplete_ingredient_id" class="autocomplete_ingredient_structure autocomplete_ingredient_personalize">
+</div>
+
 <div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalize">
 </div>
 

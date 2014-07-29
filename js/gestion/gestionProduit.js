@@ -80,6 +80,8 @@ function productPage() {
                 $("#dialog_add_opt_ingred_id").empty();
                 loadViewsForAddProduit();
             }});
+        // Instantiate Produit Object
+        produit = new Produit();
         var divadd = getDivAddProduit();
         $('#dialog_add_produit_id').html(divadd);
         var page1input = getPage1AddProduit();
@@ -87,11 +89,11 @@ function productPage() {
         $('#content_add_produit_zone_input_id').html(page1input);
         $('#content_produit_zone_id').html(page1show);
         LoadCatSousCat();
+
     });
 
 
 }
-var produit = new Produit();
 
 function submit_productPage() {
     var categorie = new Categorie();
@@ -113,6 +115,10 @@ function submit_productPage() {
 
 }
 function LoadCatSousCat() {
+    $("#name_prod_Id").val(produit.getNom());
+    $('#label_categorie_prod_id').text(produit.getCategorie());
+    $('#label_souscat_prod_id').text(produit.getSousCategorie());
+
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
@@ -162,15 +168,17 @@ function ingredientPage() {
     $('#content_produit_description_id').empty();
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
+    var listIngredient = new Array();
     getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
             ingredCB = paramValue(cbox, "ingredient_nom", Ingredients[i].nom);
             var ingredId = paramValue(ingredCB, "id_obj", Ingredients[i].id);
             $('#select_ingredient_id').append(ingredId);
+            listIngredient.push(Ingredients[i].nom);
         }
         $('.ingredient_checkbox').change(function() {
-            if (this.checked) {
+            if (this.checked || $(this).prop("checked")) {
                 var listIngred = getIngredLiAddProduit();
                 var valLi = paramValue(listIngred, "ingred_val", this.value);
                 var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
@@ -179,10 +187,30 @@ function ingredientPage() {
                 $("#" + this.value.hashCode()).parent().remove();
             }
         });
-        UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
+        $('#autocomplete_ingredient_id').autocomplete({
+            source: listIngredient,
+            select: function(event, ui) {
+                if (!$("input:checkbox[value=\"" + ui.item.value + "\"]").is("checked")) {
+                    $("input:checkbox[value=\"" + ui.item.value + "\"]").prop("checked", true);
+                    var scrollto = $("input:checkbox[value=\"" + ui.item.value + "\"]");
+                    var container = $("#select_ingredient_id");
+                    container.animate({
+                        scrollTop: scrollto.offset().top - container.offset().top + container.scrollTop()
+                    });
+                    var listIngred = getIngredLiAddProduit();
+                    var valLi = paramValue(listIngred, "ingred_val", ui.item.value);
+                    var hashLi = paramValue(valLi, "hash_ingred", ui.item.value.hashCode());
+                    $('#content_produit_description_id').append(hashLi);
+                }else {
+                    $("#" + ui.item.value.hashCode()).parent().remove();
+                }
+                ui.item.value = "";
+            }
+        });
     }
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
+
 }
 
 function submit_ingredientPage() {
@@ -392,7 +420,7 @@ function prixPage() {
                     }
                 } else {
                     $(".input_zone_prix, .input_defaut_prix").each(function() {
-                       $(this).val("") ;
+                        $(this).val("");
                     });
                     reset = false;
                 }

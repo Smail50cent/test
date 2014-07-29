@@ -191,7 +191,7 @@ function parseToTicket($toparse) {
             $menu->setProduits($produitToParse);
             $qop->setProduct($menu);
         } else {
-            $produit = parseSingleProduct($ticketToParse->quantityOfProducts[$i]->product, $ticketToParse->table, $ticketToParse->quantityOfProducts[$i]->product->id_sousCategorie->tauxTva);
+            $produit = parseSingleProduct($ticketToParse->quantityOfProducts[$i]->product, $ticketToParse->table, $ticketToParse->quantityOfProducts[$i]->product->tauxTva);
             $qop->setProduct($produit);
         }
         $qop->setPersonne($ticketToParse->quantityOfProducts[$i]->personne);

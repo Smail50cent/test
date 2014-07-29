@@ -17,6 +17,15 @@ class GroupeServiceDataImpl implements GroupeServiceData {
         return $this->parseGroupe($retour);
     }
 
+    public function getById($id) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT * FROM `groupe` WHERE id=".$id);
+        return $this->parseById($retour);
+    }
+    private function parseById($resultSet) {
+        $result = $this->parseGroupe($resultSet);
+        return $result[0];
+    }
     private function parseGroupe($resultSet) {
         $liste = array();
         $ret;
@@ -28,6 +37,7 @@ class GroupeServiceDataImpl implements GroupeServiceData {
             $groupe->setMessage($ligne->message);
             $groupe->setSlogan($ligne->slogan);
             $groupe->setStyle($ligne->style);
+             $groupe->setLogo($ligne->logo);
             $groupe->setTelephone($ligne->telephone);
             array_push($liste, $groupe);
         }
