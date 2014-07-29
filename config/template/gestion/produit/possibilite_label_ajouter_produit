@@ -1,1 +1,1 @@
-<label id="label_possib_id" class="label_possib label_possib_structure label_possib_personalise {gp_class}" optionid={id_opt}> {possib_val} </label>
+<label id="label_possib_id" class="label_possib label_possib_structure label_possib_personalize {gp_class}" optionid={id_opt}> {possib_val} </label>

@@ -1,14 +1,14 @@
 <p>
-<label> Ingrédient </label>
+<label id="label_insert_ingredient_id" class="label_insert_ingredient_structure label_insert_ingredient_personalize"> Ingrédient </label>
 <input type="text" id="insert_ingredient_id" class="insert_ingredient" test_empty=1> </p>
 
 <p>
-<div onclick="insertIngred();" type="button" id="insertPossib_id" class="insertPossib_structure insertPossib_personalize">
+<div onclick="insertIngred();" type="button" id="insertIngred_id" class="insertIngred_structure insertIngred_personalize">
 <img src="img/gestion/produit/insert.png" width="20" height="20" "></div>
-<div onclick="removeIngred();" type="button" id="removePossib_id" class="removePossib_structure removePossib_personalize">
+<div onclick="removeIngred();" type="button" id="removeIngred_id" class="removeIngred_structure removeIngred_personalize">
 <img src="img/gestion/produit/del_possib.png" width="20" height="20" "></div></p>
 
 <p>
-<select id="list_ingred_id" class="list_ingred test_empty" multiple>
+<select id="list_ingred_id" class="list_ingred_structure list_ingred_personalize test_empty" multiple>
 </select>
 </p>

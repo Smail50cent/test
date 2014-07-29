@@ -1,16 +1,19 @@
 
- <label id="label_uncheck_ingred_id" class="label_uncheck_structure label_uncheck_personalise">
-<input id="uncheck_all_ingredient_id" class="uncheck_all_ingredient uncheck_all_ingredient_structure uncheck_all_ingredient_personalise" type="checkbox" name="option[]" />Tout décocher</label>
-<div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalise">
+<div id="div_search_ingred_id" class="div_search_ingred_structure div_search_ingred_personalize">
+<label id="label_search_ingred_id" class="label_search_ingred_structure label_search_ingred_personalize"> Tapez ici le nom de l'ingrédient </label> 
+<input type="text" id="autocomplete_ingredient_id" class="autocomplete_ingredient_structure autocomplete_ingredient_personalize">
 </div>
 
-<div class="show_insert_dialog_structure show_insert_dialog_personalise">
-<label id="label_ajout_ingred_id" class="label_ajout_ingred_structure label_ajout_ingred_personalise"> Ajout Ingrédient </label> 
+<div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalize">
+</div>
+
+<div class="show_insert_dialog_structure show_insert_dialog_personalize">
+<label id="label_ajout_ingred_id" class="label_ajout_ingred_structure label_ajout_ingred_personalize"> Ajout Ingrédient </label> 
 <div onclick="formInsertIngredient();" type="button" id="insertIngred_id" class="insertIngred_structure insertIngred_personalize">
-<img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalise"></div>
+<img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalize"></div>
 </div>
 
-<div class="next_prev_div_structure next_prev_div_personalise">
+<div class="next_prev_div_structure next_prev_div_personalize">
     <div onclick="productPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
     <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
     <div onclick="submit_ingredientPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">

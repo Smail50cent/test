@@ -1,1 +1,1 @@
-<label><input type="checkbox" value="{option_nom}" class="option_checkbox option_checkbox_structure option_checkbox_personalise" id="{id_obj}" optionid="{opt_id}" label_opt="{option_label}" />{option_nom}</label>
+<label><input type="checkbox" value="{option_nom}" class="option_checkbox option_checkbox_structure option_checkbox_personalize" id="{id_obj}" optionid="{opt_id}" label_opt="{option_label}" />{option_nom}</label>

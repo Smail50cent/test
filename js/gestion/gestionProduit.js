@@ -80,6 +80,8 @@ function productPage() {
                 $("#dialog_add_opt_ingred_id").empty();
                 loadViewsForAddProduit();
             }});
+        // Instantiate Produit Object
+        produit = new Produit();
         var divadd = getDivAddProduit();
         $('#dialog_add_produit_id').html(divadd);
         var page1input = getPage1AddProduit();
@@ -87,11 +89,11 @@ function productPage() {
         $('#content_add_produit_zone_input_id').html(page1input);
         $('#content_produit_zone_id').html(page1show);
         LoadCatSousCat();
+
     });
 
 
 }
-var produit = new Produit();
 
 function submit_productPage() {
     var categorie = new Categorie();
@@ -113,6 +115,10 @@ function submit_productPage() {
 
 }
 function LoadCatSousCat() {
+    $("#name_prod_Id").val(produit.getNom());
+    $('#label_categorie_prod_id').text(produit.getCategorie());
+    $('#label_souscat_prod_id').text(produit.getSousCategorie());
+
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
@@ -162,15 +168,17 @@ function ingredientPage() {
     $('#content_produit_description_id').empty();
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
+    var listIngredient = new Array();
     getConnexion().getAllIngredients(allIngredients);
     function allIngredients(Ingredients) {
         for (var i = 0; i < Ingredients.length; i++) {
             ingredCB = paramValue(cbox, "ingredient_nom", Ingredients[i].nom);
             var ingredId = paramValue(ingredCB, "id_obj", Ingredients[i].id);
             $('#select_ingredient_id').append(ingredId);
+            listIngredient.push(Ingredients[i].nom);
         }
         $('.ingredient_checkbox').change(function() {
-            if (this.checked) {
+            if (this.checked || $(this).prop("checked")) {
                 var listIngred = getIngredLiAddProduit();
                 var valLi = paramValue(listIngred, "ingred_val", this.value);
                 var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
@@ -179,10 +187,30 @@ function ingredientPage() {
                 $("#" + this.value.hashCode()).parent().remove();
             }
         });
-        UncheckAllBoxIngredOpt("#uncheck_all_ingredient_id");
+        $('#autocomplete_ingredient_id').autocomplete({
+            source: listIngredient,
+            select: function(event, ui) {
+                if (!$("input:checkbox[value=\"" + ui.item.value + "\"]").is("checked")) {
+                    $("input:checkbox[value=\"" + ui.item.value + "\"]").prop("checked", true);
+                    var scrollto = $("input:checkbox[value=\"" + ui.item.value + "\"]");
+                    var container = $("#select_ingredient_id");
+                    container.animate({
+                        scrollTop: scrollto.offset().top - container.offset().top + container.scrollTop()
+                    });
+                    var listIngred = getIngredLiAddProduit();
+                    var valLi = paramValue(listIngred, "ingred_val", ui.item.value);
+                    var hashLi = paramValue(valLi, "hash_ingred", ui.item.value.hashCode());
+                    $('#content_produit_description_id').append(hashLi);
+                }else {
+                    $("#" + ui.item.value.hashCode()).parent().remove();
+                }
+                ui.item.value = "";
+            }
+        });
     }
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
+
 }
 
 function submit_ingredientPage() {
@@ -327,7 +355,9 @@ function prixPage() {
     scripts.loadScripts("lib.datetimepicker", function() {
         $('.ui-dialog-title').html("Ajouter les Prix");
         var pagePrix = getPrixAddProduit();
-        $('#dialog_add_produit_id').html(pagePrix);
+        var inputId = paramValue(pagePrix, "Id_inputPrix", 0);
+        var tvaId = paramValue(inputId, "tvaid", 0);
+        $('#dialog_add_produit_id').html(tvaId);
         var AllTva = new Array();
         getConnexion().getAllTauxTva(getTva);
         function getTva(TVA) {
@@ -370,19 +400,31 @@ function prixPage() {
                     }
                 });
             });
+
+            var reset = false;
             $('.tva_produit ').change(function() {
-                if ($(this).val() != 0) {
-                    var selectId = $(this).attr("tvaid");
-                    var selectVal = $(this).val();
-                    $(".input_zone_prix").each(function() {
-                        if ($(this).attr('id_inputprix') == selectId) {
-                            if ($(this).val() != 0) {
-                                var prixTVA = parseFloat($(this).val()) + parseFloat($(this).val()) * parseFloat(selectVal) / 100;
-                                $(this).val(prixTVA.toFixed(2));
+                if (reset == false) {
+                    reset = true;
+                    if ($(this).val() != 0) {
+                        var selectId = $(this).attr("tvaid");
+                        var selectVal = $(this).val();
+                        $(".input_zone_prix, .input_defaut_prix").each(function() {
+                            var prix = $(this).val();
+                            if ($(this).attr('id_inputprix') == selectId) {
+                                if ($(this).val() != 0) {
+                                    var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
+                                    $(this).val(prixTVA.toFixed(2));
+                                }
                             }
-                        }
+                        });
+                    }
+                } else {
+                    $(".input_zone_prix, .input_defaut_prix").each(function() {
+                        $(this).val("");
                     });
+                    reset = false;
                 }
+
             });
         }
     });
@@ -479,19 +521,50 @@ function onLoadEtablissementPage() {
                 $("#etablissement_div_contentzoneliste_" + etablissements[i].id).append(divLiZone);
             }
         }
+
+        $("#checkbox_selectAllEta").change(function() {
+            var isCheked = $(this).is(":checked");
+            if (isCheked == true) {
+                $('input[type=checkbox]').each(function() {
+                    this.checked = true;
+                    $(".li_zones_etablissement_checkbox_structure").each(function() {
+                        this.disabled = true;
+                        this.checked = true;
+                    });
+                });
+            } else {
+                $('input[type=checkbox]').each(function() {
+                    this.checked = false;
+                    $(".li_zones_etablissement_checkbox_structure").each(function() {
+                        this.disabled = false;
+                        this.checked = false;
+                    });
+                });
+            }
+        });
+
+        $(".etablissement_div_header_select_structure").change(function() {
+            var id = $(this).attr("selectallzoneinetablissement");
+            if (this.checked) {
+                $(".li_zones_etablissement_checkbox_structure").each(function() {
+                    if ($(this).attr("idetablissement") == id) {
+                        this.disabled = true;
+                        this.checked = true;
+                    }
+                });
+            } else {
+                $(".li_zones_etablissement_checkbox_structure").each(function() {
+                    if ($(this).attr("idetablissement") == id) {
+                        this.disabled = false;
+                        this.checked = false;
+                    }
+                });
+            }
+
+        });
+
     }
-    $("#checkbox_selectAllEta").change(function() {
-        var isCheked = $(this).is(":checked");
-        if (isCheked == true) {
-            $('input[type=checkbox]').each(function() {
-                $(this).attr("checked", true);
-            });
-        } else {
-            $('input[type=checkbox]').each(function() {
-                $(this).attr("checked", false);
-            });
-        }
-    });
+
 }
 function AssociationEtablissementZones(etablissement, zone) {
     this.etablissement = etablissement;
@@ -504,29 +577,30 @@ function submitEtablissements() {
             var isChecked = $(this).is(":checked");
             var id = parseInt($(this).attr("selectallzoneInEtablissement"));
             if (isChecked == true) {
-                listeEtabZone.push(new AssociationEtablissementZones(id, null));
+                var etabZone = new Etablissement();
+                etabZone.setId(id);
+                etabZone.setZones(null);
+                listeEtabZone.push(etabZone);
             }
             //console.log($(this).attr("id"), isChecked);
         } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var idZone = parseInt($(this).attr("idzone"));
             var isChecked = $(this).is(":checked");
-            if (isChecked == true) {
-                listeEtabZone.push(new AssociationEtablissementZones(idEtablissement, idZone));
+            var isEnabled = $(this).is(":enabled");
+            if (isChecked == true && isEnabled) {
+                var etabZone = new Etablissement();
+                etabZone.setId(idEtablissement);
+                etabZone.setZones(idZone);
+                listeEtabZone.push(etabZone);
             }
         }
     });
-    setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
+    produit.setEtablissements(listeEtabZone);
+    //setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
 }
 function validerProduit() {
     submitEtablissements();
-
-    var list = new Array();
-    var etab = JSON.parse(getLocalStorageValue("gestion.add.produit.etablissemnts"));
-    for (var i = 0; i < etab.length; i++) {
-        list.push(etab[i]);
-    }
-    produit.setEtablissements(list);
     console.log(produit);
     getConnexion().addProduit(insertP, produit);
     function insertP(data) {

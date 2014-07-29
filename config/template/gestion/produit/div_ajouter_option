@@ -1,14 +1,14 @@
 <p>
-<label> Option </label>
-<input type="text" id="insert_option_id" class="insert_option" test_empty=1> </p>
+<label id="label_insert_option_id" class="label_insert_option_structure label_insert_option_personalize"> Option </label>
+<input type="text" id="insert_option_id" class="insert_option_structure insert_option_personalize" test_empty=1> </p>
 
 <p>
-<label> Possibilité </label>
-<input type="text" id="insert_possib_id" class="insert_possib" disabled> 
+<label id="label_insert_possib_id" class="label_insert_possib_structure label_insert_possib_personalize"> Possibilité </label>
+<input type="text" id="insert_possib_id" class="insert_possib_structure insert_possib_personalize" disabled> 
 <div onclick="insertPossib();" type="button" id="insertPossib_id" class="insertPossib_structure insertPossib_personalize">
 <img src="img/gestion/produit/insert.png" width="20" height="20" "></div>
 <div onclick="removePossib();" type="button" id="removePossib_id" class="removePossib_structure removePossib_personalize">
 <img src="img/gestion/produit/del_possib.png" width="20" height="20" "></div></p>
 
-<select id="list_possib_id" class="list_possib test_empty" multiple>
+<select id="list_possib_id" class="list_possib_structure list_possib_personalize test_empty" multiple>
 </select>
