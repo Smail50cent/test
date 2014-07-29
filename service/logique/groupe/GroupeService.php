@@ -7,4 +7,5 @@
  */
 interface GroupeService {
     public function getAll();
+    public function getById($id);
 }

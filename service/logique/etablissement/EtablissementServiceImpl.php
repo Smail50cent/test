@@ -28,4 +28,26 @@ class EtablissementServiceImpl implements EtablissementService {
         return $this->etablissementSrv->getAllWithZones();
     }
 
+    public function add(Etablissement $etablissement) {
+       $ret = null;
+       if ($etablissement !=null) {
+          $ret = $this->etablissementSrv->add($etablissement);
+       }
+       return $ret;
+    }
+
+    public function remove($id) {
+        $ret = null;
+       if ($id !=null) {
+          $ret = $this->etablissementSrv->remove($id);
+       }
+       return $ret;
+    }
+
+    public function update(\Etablissement $etablissement) {
+       if ($etablissement !=null) {
+           $this->etablissementSrv->update($etablissement);
+       }
+    }
+
 }

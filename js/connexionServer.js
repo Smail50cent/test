@@ -1164,4 +1164,74 @@ function ConnexionServer() {
             }
         });
     };
+    this.getGroupeById = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetGroupeById") + "?id=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                var groupe = new Groupe(data.id, data.nom, data.style, data.adresseSiege, data.slogan, data.message,
+                        data.telephone, data.logo);
+                method(groupe, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.sendNewEtablissement = function(method, etablissement, param) {
+        etablissement = JSON.stringify(etablissement);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddEtablissements") + "?etablissement=" + etablissement,
+            type: 'GET',
+//            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (method != null) {
+                    method(data, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.removeEtablissement = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceRemoveEtablissements") + "?id=" + id,
+            type: 'GET',
+//            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (method != null) {
+                    method(data, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.updateEtablissement = function(method, etablissement, param) {
+        etablissement = JSON.stringify(etablissement);
+        console.log(etablissement);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceUpdateEtablissements") + "?etablissement=" + etablissement,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if(data.error==true){
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    method(data, param);
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }

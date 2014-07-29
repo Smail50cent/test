@@ -18,7 +18,7 @@
         </ul>
 
         <p id="total_selection_id"></p>
-        <input class="validerPaimentSelection validerPaimentSelection_structure validerPaimentSelectionpersonalize" onclick="validerPaimentSelection();" type="button" id="content_paiment_personne_button_valider_id"></input>
+        <input  class="validerPaimentSelection validerPaimentSelection_structure validerPaimentSelectionpersonalize" onclick="validerPaimentSelection();" type="button" id="content_paiment_personne_button_valider_id"></input>
     </div>
 </div>
 
