@@ -1759,6 +1759,22 @@ div#ajouter_produit_div_etablissement {
     right: 34%;
 }
 
+/*_____________________________MODE EXPERT_______________________________*/
+
+
+.etablissemend_added {
+    background-color: #3ACF88;
+    -webkit-transition: background-color .5s ease;
+         -moz-transition: background-color .5s ease;
+         -ms-transition: background-color .5s ease;
+         -o-transition: background-color .5s ease;
+         transition: background-color .5s ease;
+}
+
+.etablissemend_added:active {
+    
+}
+
 
 
 
