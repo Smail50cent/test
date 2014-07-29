@@ -112,4 +112,16 @@ function ConnexionLocalWebSQL() {
     this.addProduit = function(method, produit, param) {
         console.log("TO DO");
     };
+    this.getGroupeById = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.sendNewEtablissement = function(method, etablissement, param) {
+        console.log("TO DO")
+    };
+    this.removeEtablissement = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.updateEtablissement = function(method, etablissement, param) {
+        console.log("TO DO");
+    };
 }

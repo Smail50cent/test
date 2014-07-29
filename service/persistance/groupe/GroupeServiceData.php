@@ -6,5 +6,8 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 interface GroupeServiceData {
+
     public function getAll();
+
+    public function getById($id);
 }

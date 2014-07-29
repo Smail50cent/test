@@ -214,4 +214,101 @@ etablissement.message AS etablissement_message
         }
     }
 
+    public function add(Etablissement $etablissement) {
+        $bdd = new ConnexionBDD();
+        $style = "";
+        if ($etablissement->getStyle() == null) {
+            $style = "null";
+        } else {
+            $style = "'" . $etablissement->getStyle() . "'";
+        }
+        $logo = "";
+        if ($etablissement->getLogo() == null) {
+            $logo = "null";
+        } else {
+            $logo = "'" . $etablissement->getLogo() . "'";
+        }
+        $adresse = "";
+        if ($etablissement->getAdresseEtab() == null) {
+            $adresse = "null";
+        } else {
+            $adresse = "'" . $etablissement->getAdresseEtab() . "'";
+        }
+        $telephone = "";
+        if ($etablissement->getAdresseEtab() == null) {
+            $telephone = "null";
+        } else {
+            $telephone = "'" . $etablissement->getAdresseEtab() . "'";
+        }
+        $message = "";
+        if ($etablissement->getMessage() == null) {
+            $message = "null";
+        } else {
+            $message = "'" . $etablissement->getMessage() . "'";
+        }
+        $slogan = "";
+        if ($etablissement->getSlogan() == null) {
+            $slogan = "null";
+        } else {
+            $slogan = "'" . $etablissement->getSlogan() . "'";
+        }
+        $id = $bdd->executeGeneric("INSERT INTO `etablissement`"
+                . "(`nom`, `logo`, `style`, `adresseEtab`, `telephone`, `message`, `slogan`, `id_groupe`) "
+                . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
+                . "," . $style . "," . $adresse . ","
+                . "" . $telephone . "," . $message . ","
+                . "" . $slogan . "," . $etablissement->getGroupe() . ")");
+
+        return $id;
+    }
+
+    public function remove($id) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("DELETE FROM `etablissement` WHERE `id`=" . $id);
+    }
+
+    public function update(\Etablissement $etablissement) {
+        $bdd = new ConnexionBDD();
+        $style = "";
+        if ($etablissement->getStyle() == null) {
+            $style = "null";
+        } else {
+            $style = "'" . $etablissement->getStyle() . "'";
+        }
+        $logo = "";
+        if ($etablissement->getLogo() == null) {
+            $logo = "null";
+        } else {
+            $logo = "'" . $etablissement->getLogo() . "'";
+        }
+        $adresse = "";
+        if ($etablissement->getAdresseEtab() == null) {
+            $adresse = "null";
+        } else {
+            $adresse = "'" . $etablissement->getAdresseEtab() . "'";
+        }
+        $telephone = "";
+        if ($etablissement->getAdresseEtab() == null) {
+            $telephone = "null";
+        } else {
+            $telephone = "'" . $etablissement->getAdresseEtab() . "'";
+        }
+        $message = "";
+        if ($etablissement->getMessage() == null) {
+            $message = "null";
+        } else {
+            $message = "'" . $etablissement->getMessage() . "'";
+        }
+        $slogan = "";
+        if ($etablissement->getSlogan() == null) {
+            $slogan = "null";
+        } else {
+            $slogan = "'" . $etablissement->getSlogan() . "'";
+        }
+        $bdd->executeGeneric("UPDATE `etablissement` "
+                . "SET `nom`='".$etablissement->getNom()."',`logo`= ".$logo." ,"
+                . "`style`= ".$style.",`adresseEtab`=".$adresse.","
+                . "`telephone`=".$telephone.",`message`=".$message.",`slogan`=".$slogan." WHERE `id` = ".$etablissement->getId());
+    }
+
 }

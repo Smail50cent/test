@@ -12,4 +12,10 @@ interface EtablissementService {
     public function getAllWithZones();
 
     public function getById($id);
+
+    public function add(Etablissement $etablissement);
+
+    public function remove($id);
+    
+    public function update(Etablissement $etablissement);
 }

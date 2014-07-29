@@ -1,0 +1,60 @@
+<table>
+    <tbody>
+        <tr>
+            <td>
+                <p id="add_site_nom_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_nom_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_style_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_style_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_logo_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_logo_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_adresse_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_adresse_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_telephone_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_telephone_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_message_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_message_value" ></input>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p id="add_site_slogan_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_site_slogan_value" ></input>
+            </td>
+        </tr>
+    </tbody>
+</table>

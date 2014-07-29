@@ -156,4 +156,16 @@ function ConnexionLocalIndexedDB() {
     this.getAllEtablissementsWithZones = function(method, param) {
         console.log("todo");
     };
+    this.getGroupeById = function(method, id, param) {
+        console.log("TODO");
+    };
+    this.sendNewEtablissement = function(method, etablissement, param) {
+        console.log("TO DO")
+    };
+    this.removeEtablissement = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.updateEtablissement = function(method, etablissement, param) {
+        console.log("TO DO");
+    };
 }

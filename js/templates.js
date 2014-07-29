@@ -286,4 +286,10 @@ function getGererlesSitesTableThead() {
 function getGererlesSitesTableTbodyTr() {
     return templates.getTemplate("gestion/modeexpert/gererlessites/table_tbody_tr");
 }
- 
+function getBootstrapModal(){
+    return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal");
+}
+
+function getAddSiteModalBody(){
+    return templates.getTemplate("gestion/modeexpert/gererlessites/add_site_modal_body");
+}
