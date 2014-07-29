@@ -120,3 +120,7 @@ function goGestionCompteUtilisateur() {
 function goExpertMode() {
     redirct(new RedirictPages("modeexpert", "modeexpert", "modeexpert", "modeexpert", "modeexpert"));
 }
+function deconexion(){
+    removeLocalStorageItem("personnes.serveur");
+    redirct(new RedirictPages("index", "index", "index", "index", "index"));
+}
