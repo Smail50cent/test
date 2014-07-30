@@ -467,7 +467,7 @@ function prixPage() {
                 }
             });
             $("input#input_defaut_prix_id").on("keyup", function() {
-                $("#label_prixttc_id").text("PrixTTC : " + $(this).val());
+                $("#label_val_prixttc_id").text($(this).val());
                 var valPrix = $(this).val();
                 $('.input_zone_prix').each(function() {
                     var idzone = $(this).parent().attr('parentId');
@@ -490,7 +490,7 @@ function prixPage() {
                         if ($(this).attr('id_inputprix') == selectId) {
                             if ($(this).val() != 0) {
                                 var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
-                                $("#label_prixttc_id").text("PrixTTC : " + prixTVA.toFixed(2));
+                                $("#label_val_prixttc_id").text(prixTVA.toFixed(2));
                             }
                         }
                     });
@@ -504,7 +504,7 @@ function prixPage() {
 
 function submit_prixPage() {
     var list = new Array();
-    var prix = $("#label_prixttc_id").text();
+    var prix = $("#label_val_prixttc_id").text();
     var objprix = {prix: prix};
     var Tva = $("#tva_1").val();
     var associationPrixProduit = new AssociationProduitPrix();

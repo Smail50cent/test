@@ -6,6 +6,7 @@
     <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="{zone_prix_id}">
     </select>
     <label id="label_prixttc_id" class="label_prixttc_structure label_prixttc_personalize"> PrixTTC : </label>
+    <label id="label_val_prixttc_id" class="label_val_prixttc_structure label_val_prixttc_personalize"> </label>
     </div>
 
     <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">

@@ -52,7 +52,7 @@ if (isset($_POST['produit'])) {
         $etablissement = new Etablissement();
         $etablissement->setId($produit->etablissements[$i]->id);
         if(strlen($produit->etablissements[$i]->zones) == 0){
-            $etablissement->setZones(null);
+            $etablissement->setZones("null");
         }else {
             $etablissement->setZones($produit->etablissements[$i]->zones);
         }
