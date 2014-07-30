@@ -1,5 +1,5 @@
 
-<p><input type="text" id="name_prod_Id" class="name_prod_structure name_prod_personalize" placeholder="Nom du Produit"></p>
+<p><input type="text" title="entrez ici le nom du produit" id="name_prod_Id" class="name_prod_structure name_prod_personalize tooltip" placeholder="Nom du Produit"></p>
 
 <p>
 <select id="liste_categorie_id" class="product_spec_structure product_spec_personalize">
