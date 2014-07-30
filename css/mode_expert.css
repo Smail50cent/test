@@ -1,3 +1,59 @@
 /**
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
+
+@-webkit-keyframes greentowhite  { 
+                        0%   { background-color: rgba(44, 176, 240,1);}
+                        50%  { background-color: rgba(44, 176, 240,0.5);}
+                        100% { background-color: rgba(44, 176, 240,0);}
+                        } 
+    @-moz-keyframes greentowhite { 
+                        0%   { background-color: rgba(44, 176, 240,1);}
+                        50%  { background-color: rgba(44, 176, 240,0.5);}
+                        100% { background-color: rgba(44, 176, 240,0);}
+                        } 
+     @-ms-keyframes greentowhite { 
+                        0%   { background-color: rgba(44, 176, 240,1);}
+                        50%  { background-color: rgba(44, 176, 240,0.5);}
+                        100% { background-color: rgba(44, 176, 240,0);}
+                        }   
+      @-o-keyframes greentowhite { 
+                        0%   { background-color: rgba(44, 176, 240,1);}
+                        50%  { background-color: rgba(44, 176, 240,0.5);}
+                        100% { background-color: rgba(44, 176, 240,0);}
+                        }   
+         @keyframes greentowhite { 
+                        0%   { background-color: rgba(44, 176, 240,1);}
+                        50%  { background-color: rgba(44, 176, 240,0.5);}
+                        100% { background-color: rgba(44, 176, 240,0);}
+                        } 
+
+
+.etablissemend_added{
+    background-color: rgba(44, 176, 240,1);
+    -webkit-animation-name: greentowhite;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-timing-function: linear; 
+    -webkit-animation-delay: .6s;
+    -webkit-animation-fill-mode: both;
+    -moz-animation-name: greentowhite;
+    -moz-animation-duration: 2s;
+    -moz-animation-timing-function: linear; 
+    -moz-animation-delay: .6s;
+    -moz-animation-fill-mode: both;
+    -ms-animation-name: greentowhite;
+    -ms-animation-duration: 2s;
+    -ms-animation-timing-function: linear; 
+    -ms-animation-delay: .6s;
+    -ms-animation-fill-mode: both;
+    -o-animation-name: greentowhite;
+    -o-animation-duration: 2s;
+    -o-animation-timing-function: linear; 
+    -o-animation-delay: .6s;
+    -o-animation-fill-mode: both;
+    animation-name: greentowhite;
+    animation-duration: 2s;
+    animation-timing-function: linear; 
+    animation-delay: .6s;
+    animation-fill-mode: both;
+}

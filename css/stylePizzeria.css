@@ -1457,6 +1457,7 @@ background: rgba(248, 255, 197, 0.5);
     width: 100%!important;
     font-size:0.7em!important;
     /*display: inline-block !important;*/
+    overflow: auto;
     background-color: rgba(255, 255, 255, 1);
     padding: 0.7em 0.3em 0.3em 0.3em;
     margin: 3em 0;
@@ -1671,7 +1672,7 @@ div#ajouter_produit_div_etablissement {
     border: 1px solid rgba(192, 185, 185, 1);
     background-color: rgba(238, 236, 236, 1);
 }
-}
+
 
 .ajouter_produit_div_etablissement_head_p_structure {
     display: inline-block;
@@ -1748,7 +1749,6 @@ div#ajouter_produit_div_etablissement {
 .footer_tarif_personalize{
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
-
 }
 
 
@@ -1758,27 +1758,4 @@ div#ajouter_produit_div_etablissement {
     top: 22em;
     right: 34%;
 }
-
-/*_____________________________MODE EXPERT_______________________________*/
-
-
-.etablissemend_added {
-    background-color: #3ACF88;
-    -webkit-transition: background-color .5s ease;
-         -moz-transition: background-color .5s ease;
-         -ms-transition: background-color .5s ease;
-         -o-transition: background-color .5s ease;
-         transition: background-color .5s ease;
 }
-
-.etablissemend_added:active {
-    
-}
-
-
-
-
-
-/*.content_list_categorie_personalize li:first-child:hover {
-border-bottom-left-radius: 5px;
-}*/
