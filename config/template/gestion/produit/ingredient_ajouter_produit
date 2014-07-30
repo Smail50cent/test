@@ -1,7 +1,7 @@
 
 <div id="div_search_ingred_id" class="div_search_ingred_structure div_search_ingred_personalize">
-<label id="label_search_ingred_id" class="label_search_ingred_structure label_search_ingred_personalize"> Tapez ici le nom de l'ingrédient </label> 
-<input type="text" id="autocomplete_ingredient_id" class="autocomplete_ingredient_structure autocomplete_ingredient_personalize">
+<label id="label_search_ingred_id" class="label_search_ingred_structure label_search_ingred_personalize"> Recherche : </label> 
+<input type="text" title="entrez ici le nom de l'ingrédient" id="autocomplete_ingredient_id" class="autocomplete_ingredient_structure autocomplete_ingredient_personalize tooltip">
 </div>
 
 <div id="select_ingredient_id" class="select_ingredient_structure select_ingredient_personalize">

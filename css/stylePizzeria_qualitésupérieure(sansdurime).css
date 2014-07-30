@@ -1241,9 +1241,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 @media all and (min-width: 980px) {
 
     body {
-        /*background-image: url(../img/oldpaper_texture.jpg);*/
+        background-image: url(../img/oldpaper_texture.jpg);
         background-repeat: no-repeat;
-        background-image: url(../img/oldpaper_texture2.jpg);
         background-size: cover;
         background-repeat-y: initial;
 }
