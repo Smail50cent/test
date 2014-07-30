@@ -63,6 +63,7 @@
         width:16em;
         height:12em;
         border:solid 1px #c0c0c0;
+        overflow: auto;
     }
 
     .select_ingredient_structure label, .select_option_structure label, .select_possibilite_structure label {

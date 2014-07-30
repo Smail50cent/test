@@ -79,7 +79,8 @@ function productPage() {
                 $("#dialog_add_produit_id").empty();
                 $("#dialog_add_opt_ingred_id").empty();
                 loadViewsForAddProduit();
-            }});
+            }
+        });
         // Instantiate Produit Object
         produit = new Produit();
         var divadd = getDivAddProduit();
@@ -88,11 +89,11 @@ function productPage() {
         var page1show = getPage1ShowAddProduit();
         $('#content_add_produit_zone_input_id').html(page1input);
         $('#content_produit_zone_id').html(page1show);
+        var position = {my: 'left center', at: 'right+10 center'};
+        $(".tooltip").tooltip();
+        $(".tooltip").tooltip("option", "position", position);
         LoadCatSousCat();
-
     });
-
-
 }
 
 function submit_productPage() {
@@ -166,6 +167,12 @@ function LoadCatSousCat() {
 function ingredientPage() {
     $('.ui-dialog-title').html("Ajouter les Ingrédients");
     $('#content_produit_description_id').empty();
+    var ingredDiv = getPageIngredAddProduit();
+    $('#dialog_add_produit_id').html(ingredDiv);
+    var position = {my: 'left center', at: 'right+10 center'};
+    $(".tooltip").tooltip();
+    $(".tooltip").tooltip("option", "position", position);
+
     var cbox = getIngredCheckBoxAddProduit();
     var ingredCB;
     var listIngredient = new Array();
@@ -177,16 +184,7 @@ function ingredientPage() {
             $('#select_ingredient_id').append(ingredId);
             listIngredient.push(Ingredients[i].nom);
         }
-        $('.ingredient_checkbox').change(function() {
-            if (this.checked || $(this).prop("checked")) {
-                var listIngred = getIngredLiAddProduit();
-                var valLi = paramValue(listIngred, "ingred_val", this.value);
-                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
-                $('#content_produit_description_id').append(hashLi);
-            } else {
-                $("#" + this.value.hashCode()).parent().remove();
-            }
-        });
+
         $('#autocomplete_ingredient_id').autocomplete({
             source: listIngredient,
             select: function(event, ui) {
@@ -201,15 +199,96 @@ function ingredientPage() {
                     var valLi = paramValue(listIngred, "ingred_val", ui.item.value);
                     var hashLi = paramValue(valLi, "hash_ingred", ui.item.value.hashCode());
                     $('#content_produit_description_id').append(hashLi);
-                }else {
+                } else {
                     $("#" + ui.item.value.hashCode()).parent().remove();
                 }
                 ui.item.value = "";
             }
         });
+        $('#autocomplete_ingredient_id').keyup(function() {
+            if ($.inArray(this.value, listIngredient) == -1 && this.value.length > 0) {
+                $(".tooltip").tooltip("open");
+                $(".tooltip").tooltip("option", "content", "cette ingrédient n'existe pas, tapez entrer pour l'ajouter");
+
+                $('#autocomplete_ingredient_id').keypress(function() {
+                    var keycode = (event.keyCode ? event.keyCode : event.which);
+                    if (keycode == '13') {
+                        var newIngred = this.value;
+                        $('#confirm_dialog_produit_id').dialog({
+                            modal: true,
+                            title: 'Voulez vous l\'ajouter ?',
+                            autoOpen: true,
+                            position: 'center',
+                            buttons: {
+                                Yes: function() {
+                                    $(this).dialog("destroy");
+                                    $('#confirm_dialog_produit_id').empty();
+                                    var list = new Array();
+                                    var ingredient = new Ingredient();
+                                    ingredient.setNom(newIngred);
+                                    list.push(ingredient);
+                                    getConnexion().addIngredient(result, list);
+                                    function result(Id) {
+                                        console.log(Id);
+                                        var checkNew = getIngredCheckBoxAddProduit();
+                                        var checkId = paramValue(checkNew, "id_obj", Id);
+                                        var checkVal = paramValue(checkId, "ingredient_nom", newIngred);
+                                        $("#select_ingredient_id").prepend(checkVal);
+
+                                        $("input:checkbox[value=\"" + newIngred + "\"]").prop("checked", true);
+                                        var scrollto = $("input:checkbox[value=\"" + newIngred + "\"]");
+                                        var container = $("#select_ingredient_id");
+                                        container.animate({
+                                            scrollTop: scrollto.offset().top - container.offset().top + container.scrollTop()
+                                        });
+                                        var listIngred = getIngredLiAddProduit();
+                                        var valLi = paramValue(listIngred, "ingred_val", newIngred);
+                                        var hashLi = paramValue(valLi, "hash_ingred", newIngred.hashCode());
+                                        $('#content_produit_description_id').append(hashLi);
+
+                                        $('.ingredient_checkbox').change(function() {
+                                            if (this.checked) {
+                                                var listIngred = getIngredLiAddProduit();
+                                                var valLi = paramValue(listIngred, "ingred_val", this.value);
+                                                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+                                                $('#content_produit_description_id').append(hashLi);
+                                            } else {
+                                                $("#" + this.value.hashCode()).parent().remove();
+                                            }
+                                        });
+                                    }
+
+
+                                },
+                                No: function() {
+                                    $(this).dialog("destroy");
+                                    $('#confirm_dialog_produit_id').empty();
+                                }
+                            },
+                            close: function(event, ui) {
+                                $(this).dialog("destroy");
+                                $('#confirm_dialog_produit_id').empty();
+                            }
+                        });
+                    }
+                });
+
+            } else {
+                $(".tooltip").tooltip("option", "content", "entrez ici le nom de l'ingrédient");
+            }
+        });
+        $('.ingredient_checkbox').change(function() {
+            if (this.checked) {
+                var listIngred = getIngredLiAddProduit();
+                var valLi = paramValue(listIngred, "ingred_val", this.value);
+                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+                $('#content_produit_description_id').append(hashLi);
+            } else {
+                $("#" + this.value.hashCode()).parent().remove();
+            }
+        });
     }
-    var ingredDiv = getPageIngredAddProduit();
-    $('#dialog_add_produit_id').html(ingredDiv);
+
 
 }
 
@@ -388,6 +467,7 @@ function prixPage() {
                 }
             });
             $("input#input_defaut_prix_id").on("keyup", function() {
+                $("#label_prixttc_id").text("PrixTTC : " + $(this).val());
                 var valPrix = $(this).val();
                 $('.input_zone_prix').each(function() {
                     var idzone = $(this).parent().attr('parentId');
@@ -401,30 +481,22 @@ function prixPage() {
                 });
             });
 
-            var reset = false;
             $('.tva_produit ').change(function() {
-                if (reset == false) {
-                    reset = true;
-                    if ($(this).val() != 0) {
-                        var selectId = $(this).attr("tvaid");
-                        var selectVal = $(this).val();
-                        $(".input_zone_prix, .input_defaut_prix").each(function() {
-                            var prix = $(this).val();
-                            if ($(this).attr('id_inputprix') == selectId) {
-                                if ($(this).val() != 0) {
-                                    var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
-                                    $(this).val(prixTVA.toFixed(2));
-                                }
-                            }
-                        });
-                    }
-                } else {
+                if ($(this).val() != 0) {
+                    var selectId = $(this).attr("tvaid");
+                    var selectVal = $(this).val();
                     $(".input_zone_prix, .input_defaut_prix").each(function() {
-                        $(this).val("");
+                        var prix = $(this).val();
+                        if ($(this).attr('id_inputprix') == selectId) {
+                            if ($(this).val() != 0) {
+                                var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
+                                $("#label_prixttc_id").text("PrixTTC : " + prixTVA.toFixed(2));
+                            }
+                        }
                     });
-                    reset = false;
+                } else {
+                    $("#label_prixttc_id").text("PrixTTC : " + $("#input_defaut_prix_id").val());
                 }
-
             });
         }
     });
@@ -432,7 +504,7 @@ function prixPage() {
 
 function submit_prixPage() {
     var list = new Array();
-    var prix = $("#input_defaut_prix_id").val();
+    var prix = $("#label_prixttc_id").text();
     var objprix = {prix: prix};
     var Tva = $("#tva_1").val();
     var associationPrixProduit = new AssociationProduitPrix();
@@ -645,6 +717,7 @@ function formInsertOption() {
             $("#list_possib_id").empty();
         }
     });
+    nbrPossib = 1;
 }
 
 function insertPossib() {
@@ -654,12 +727,18 @@ function insertPossib() {
         text: txtPossib
     }));
     $("#insert_possib_id").val("");
+    nbrPossib++;
+    $("#label_insert_possib_id").text("Possibilité N° " + nbrPossib);
 }
 
 function removePossib() {
+    var nbrRmv = 0;
     $("#list_possib_id :selected").each(function() {
         $(this).remove();
+        nbrRmv++;
     });
+    nbrPossib -= nbrRmv;
+    $("#label_insert_possib_id").text("Possibilité N° " + (nbrPossib));
 }
 
 function insertOptionDB() {
