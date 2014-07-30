@@ -298,8 +298,8 @@ function submit_ingredientPage() {
         var ingredient = new Ingredient();
         ingredient.setId($(this).attr('id'));
         list.push(ingredient);
-        produit.setIdsIngredients(list);
     });
+    produit.setIdsIngredients(list);
     optionPage();
 }
 function formInsertIngredient() {
@@ -423,8 +423,8 @@ function submit_optionPage() {
         var option = new Option();
         option.setId($(this).attr('id'));
         list.push(option);
-        produit.setOptions(list);
     });
+    produit.setOptions(list);
     prixPage();
 
 }
