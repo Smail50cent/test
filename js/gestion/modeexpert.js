@@ -108,6 +108,7 @@ function loadGestionSites() {
     }
 }
 var groupex = null;
+var stylesIn = null;
 function addEtablissement() {
     if ($("#myModal")) {
         $("#myModal").remove();
@@ -140,6 +141,14 @@ function addEtablissement() {
     $("#add_site_telephone_id").text(strings.getString("label.gererlessites.table.modal.label.telephone"));
     $("#add_site_message_id").text(strings.getString("label.gererlessites.table.modal.label.message"));
     $("#add_site_slogan_id").text(strings.getString("label.gererlessites.table.modal.label.slogan"));
+    getConnexion().getAllStyles(function(styles, param) {
+        stylesIn = styles;
+        $("#add_site_style_value").html("");
+        for (var i = 0; i < styles.length; i++) {
+//            console.log(styles[i]);
+            $("#add_site_style_value").append("<option value=" + styles[i].url + ">" + styles[i].nom + "</option>");
+        }
+    }, null);
     $('#myModal').modal('show');
 }
 var idEtabToUpdate = "";
@@ -181,10 +190,22 @@ function updateEtablissement(id) {
         $("#add_site_nom_value").val(etablissement.nom);
         $("#add_site_style_value").val(etablissement.style);
         $("#add_site_logo_value").val(etablissement.logo);
-        $("#add_site_adresse_value").val(etablissement.adresseSiege);
+        $("#add_site_adresse_value").val(etablissement.adresseEtab);
         $("#add_site_telephone_value").val(etablissement.telephone);
         $("#add_site_message_value").val(etablissement.message);
         $("#add_site_slogan_value").val(etablissement.slogan);
+        getConnexion().getAllStyles(function(styles, param) {
+            stylesIn = styles;
+            $("#add_site_style_value").html("");
+            for (var i = 0; i < styles.length; i++) {
+                console.log(styles[i]);
+                $("#add_site_style_value").append("<option value=" + styles[i].url + ">" + styles[i].nom + "</option>");
+            }
+            var text1 = etablissement.style;
+            $("select option").filter(function() {
+                return $(this).val() == text1;
+            }).prop('selected', true);
+        }, null);
         $('#myModal').modal('show');
     }
 }
@@ -226,8 +247,9 @@ function validerUpdateEtablissement() {
     etablissement.groupe = parseInt(config.getConfig("client.application.groupe.id"));
     getConnexion().updateEtablissement(function(data, param) {
         $('#myModal').modal('hide');
+        var etablissement = param;
         var htmlTbody = getGererlesSitesTableTbodyTr();
-        if (data.id != 0) {
+        if (etablissement.id != 0) {
             if (etablissement.nom != null) {
             } else {
                 etablissement.nom = groupex.nom;
@@ -256,19 +278,15 @@ function validerUpdateEtablissement() {
             } else {
                 etablissement.message = groupex.message;
             }
-//            var litbody = htmlTbody;
-//            litbody = paramValue(litbody, "nom", etablissement.nom);
-//            litbody = paramValue(litbody, "logo", etablissement.logo);
-//            litbody = paramValue(litbody, "style", etablissement.style);
-//            litbody = paramValue(litbody, "adresseEtab", etablissement.adresseEtab);
-//            litbody = paramValue(litbody, "telephone", etablissement.telephone);
-//            litbody = paramValue(litbody, "message", etablissement.message);
-//            litbody = paramValue(litbody, "slogan", etablissement.slogan);
-//            litbody = paramValue(litbody, "idetab", data.id);
-//            litbody = paramValue(litbody, "groupe", groupex.nom);
-//            $("#table_gererlessites_all").append(litbody);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='nom']").text(etablissement.nom);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='logo']").text(etablissement.logo);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='adresseEtab']").text(etablissement.adresseEtab);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='style']").text(etablissement.style);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='slogan']").text(etablissement.slogan);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='telephone']").text(etablissement.telephone);
+            $("p[idetablissement='" + etablissement.id + "'][typelabel='message']").text(etablissement.message);
         }
-    }, etablissement, null);
+    }, etablissement, etablissement);
 
 }
 function removeEtablissement(id) {
@@ -358,6 +376,12 @@ function valderAjoutEtablissement() {
                 litbody = paramValue(litbody, "idetab", data.id);
                 litbody = paramValue(litbody, "groupe", groupex.nom);
                 $("#table_gererlessites_all").append(litbody);
+                $("tr[idetablissement='" + data.id + "']").addClass("etablissemend_added");
+//                $("tr[idetablissement='" + data.id + "']").css("background-color", "green");
+//                console.log($("tr[idetablissement='" + data.id + "']"));
+                window.setTimeout(function() {
+                    $("tr[idetablissement='" + data.id + "']").css("background-color", "transparent");
+                }, 3000);
             }
         }, etablissement, null);
     }

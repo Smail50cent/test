@@ -6,7 +6,7 @@
     <div id="ajouter_produit_div_etablissement">
     
     </div>
-    <input id="valider_produit_id" type="button" value="{inputVal}" onclick="validerProduit();" ></input>
+    <input id="valider_produit_id" class="btn_validation_ajout_produit btn_validation_ajout_produit_structure btn_validation_ajout_produit_personalize" type="button" value="{inputVal}" onclick="validerProduit();" ></input>
 
     <div class="next_prev_div_structure next_prev_div_personalize">
     <div onclick="prixPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">

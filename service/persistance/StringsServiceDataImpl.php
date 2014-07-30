@@ -60,4 +60,10 @@ class StringsServiceDataImpl implements StringsServiceData {
         return $stringss;
     }
 
+    public function add(\Strings $String) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("INSERT INTO `strings`( `lang`, `value`, `key_lang`) VALUES ('".$String->getLang()."','".$String->getValue()."','".$String->getKey_lang()."')");
+        
+    }
+
 }

@@ -19,4 +19,12 @@ class ZoneTableServiceImpl implements ZoneTableService {
         return $this->zoneTableSrv->getAll();
     }
 
+    public function getByIdEtablissement($id) {
+        $ret=null;
+        if($id!=null){
+           $ret= $this->zoneTableSrv->getByIdEtablissement($id);
+        }
+        return $ret;
+    }
+
 }

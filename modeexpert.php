@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-f" content="IE=edge,chrome=1">
         <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>
         <script type="text/javascript" src="./js/scripts.js" defer></script>
+        <link  rel="stylesheet" type="text/css" href="./css/mode_expert.css">
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -23,9 +24,9 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Mode simple</a></li>
+                        <li><a onclick="goGestionApplication();">Mode simple</a></li>
                         <li><a href="#">Votre compte</a></li>
-                        <li><a href="#">Déconnexion</a></li>
+                        <li><a onclick="deconexion();">Déconnexion</a></li>
                     </ul>
                 </div>
             </div>
