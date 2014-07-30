@@ -1,3 +1,22 @@
 /**
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
+
+
+
+.select_style_structure {
+    width: 180px;
+}
+.section_update_structure {
+    display: inherit;
+}
+.header_buttonadd_etabl_structure {
+    float: right;
+    margin-top: 15px;
+}
+.sub-header_etablissements_structure {
+    float: left;
+}
+.modal_body_tbody_addetab_personalize tr td:nth-child(2) input, .modal_body_tbody_addetab_personalize tr td:nth-child(2) select {
+    margin-left: 67px;
+}

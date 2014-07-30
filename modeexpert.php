@@ -24,7 +24,7 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#">Mode simple</a></li>
+                        <li><a onclick="goGestionApplication();">Mode simple</a></li>
                         <li><a href="#">Votre compte</a></li>
                         <li><a onclick="deconexion();">Déconnexion</a></li>
                     </ul>
