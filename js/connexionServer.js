@@ -1260,4 +1260,53 @@ function ConnexionServer() {
             }
         });
     };
+    this.getAllStyles = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceGetAllStyles"),
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    var liste = new Array();
+                    data = data.data;
+                    for (var i = 0; i < data.length; i++) {
+                        liste.push(new Styles(data[i].id, data[i].nom, data[i].url, data[i].actif));
+                    }
+                    if (method != null) {
+                        method(liste, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.addNewString = function(method, key, fr, en, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceAddString") + "?key=" + key + 
+                    "&en=" +en+ "&fr="+fr,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    data = data.data;
+                    if (method != null) {
+                        method(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
 }
