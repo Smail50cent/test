@@ -81,14 +81,15 @@ function controller(entreprise) {
             break;
         case "paramCommande":
             method = function() {
-//                var useComptes = entreprise.getUseComptes();
                 var tables;
                 if (getParameterByName("table") == "") {
                     tables = null;
                 } else {
                     tables = getParameterByName("table");
                 }
-                onLoadParamCommande(15, tables, entreprise.langue);
+                getConnexion().getParametreApplicationByNom(function(paramApp, param) {
+                    onLoadParamCommande(15, tables, paramApp.valeur_parametre);
+                }, "ask.user.for.language.paramcommande", null);
             };
             break;
         case "reglement":

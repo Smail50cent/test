@@ -51,6 +51,11 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
             $paramapp->setEtablissement($ligne->etablissement_id);
             $paramapp->setNom_parametre($ligne->nom_parametre);
             $paramapp->setValeur_parametre($ligne->valeur_parametre);
+            if($ligne->valeur_parametre=="true" ){
+                $paramapp->setValeur_parametre(true);
+            }else if($ligne->valeur_parametre=="false"){
+                $paramapp->setValeur_parametre(false);
+            }
             array_push($liste, $paramapp);
         }
         if (count($liste) == 1) {

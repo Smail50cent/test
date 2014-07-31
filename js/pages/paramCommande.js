@@ -17,7 +17,7 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
     } else {
         var htmlOp = getOptionInChooseTable();
         var langs = getLangagesSupported();
-        var itemFirst = htmlOp;
+        var itemFirst = htmlOp; 
         itemFirst = paramValue(itemFirst, "OptionName", strings.getString("label.select.one.lang"));
         itemFirst = paramValue(itemFirst, "OptionValue", "no");
         $("#select_lang").append(itemFirst);
@@ -135,7 +135,7 @@ function chooseIfOpCompte(paramApp, param) {
 
     var test = JSON.parse(paramApp.getValeur_parametre());
     console.log(test);
-    if (test == true) {
+    if (paramApp.getValeur_parametre() == true) {
         console.log("load compte");
         onLoadCompte(true, null, "-17", null);
     } else {
