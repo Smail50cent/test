@@ -1,3 +1,4 @@
+<div class="col-sm-5 col-md-5 main">
 <div class="header_perso_langues_structure header_perso_langues_personalize">
 <h2 class="sub-header sub-header_langues_structure sub-header_langues_personalize">{title}</h2>
 <div class="header_buttonadd_langues_structure header_buttonadd_langues_personalize">
@@ -14,3 +15,5 @@ border-style: double;">
     Anglais : <input id="en_val" type="text"></input><br>
     <input type="button" onclick="addStr();" value="Ajouter"></input>
 </div>
+                  
+                </div>

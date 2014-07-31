@@ -127,4 +127,7 @@ function ConnexionLocalWebSQL() {
     this.getZonesTablesByEtablissement = function(method, id, param) {
         console.log("TO DO");
     };
+    this.getAllLangues = function(method, param) {
+        console.log("TO DO");
+    };
 }
