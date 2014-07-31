@@ -573,6 +573,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         /*overflow-y: scroll;*/
     }
 
+    .produit_cat_structure:last-child {
+        margin-bottom: 1em;
+    }
 
     
         /*-------------------------------------------------------------------------------------------*/
@@ -954,10 +957,15 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         }
 
         .menu_or_card_structure, .recapitulatif_commande_structure {
-            margin-top:-2em;
-            height: auto;
-            position: relative;
-            /*float:left;*/
+            margin-top: -3em;
+            max-height: 400px;
+            padding-right: 1em;
+            width: 100%;
+            overflow: overlay;
+        }
+
+        .produit_cat_structure:first-child {
+            margin-top: 1em;
         }
 
         .recapitulatif_commande_structure {
