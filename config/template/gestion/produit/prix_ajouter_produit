@@ -1,11 +1,11 @@
 <div class="dialog_ajouter_produit_ajouterprix_structure dialog_ajouter_produit_ajouterprix_personalize">
     <div id="div_defaut_prix_id" class="div_defaut_prix_structure div_defaut_prix_personalize">
-    <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">Prix </label> 
-    <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix input_defaut_prix_structure input_defaut_prix_personalize " Id_inputPrix="{zone_prix_id}">
+    <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">PrixTTC </label> 
+    <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix input_defaut_prix_structure input_defaut_prix_personalize " Id_inputPrix="0">
     <label class="label_tva_structure label_tva_personalize"> TVA </label>
-    <select id="tva_{zone_prix_id}" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="{zone_prix_id}">
+    <select id="tva_0" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="0">
     </select>
-    <label id="label_prixttc_id" class="label_prixttc_structure label_prixttc_personalize"> PrixTTC : </label>
+    <label id="label_prixttc_id" class="label_prixttc_structure label_prixttc_personalize"> PrixHT: </label>
     <label id="label_val_prixttc_id" class="label_val_prixttc_structure label_val_prixttc_personalize"> </label>
     </div>
 
