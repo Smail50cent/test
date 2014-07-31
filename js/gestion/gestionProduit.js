@@ -38,9 +38,9 @@ function loadViewsForAddProduit() {
 function ModifyProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
     $("#alert_error_id").freeow("Modification", "n'est pas encore disponible", {
-        classes: ["smokey","pushpin"],
-        hideStyle : { opacity: 0,left: "400px"},
-        showStyle : { opacity: 1,left: 0}
+        classes: ["smokey", "pushpin"],
+        hideStyle: {opacity: 0, left: "400px"},
+        showStyle: {opacity: 1, left: 0}
     });
 
 }
@@ -117,17 +117,17 @@ function submit_productPage() {
         ingredientPage();
     } else {
         $("#alert_error_id").freeow("Produit", "Ajouter un nom à votre produit", {
-        classes: ["smokey","notice"],
-        hideStyle : { opacity: 0,left: "400px"},
-        showStyle : { opacity: 1,left: 0},
-        hideDuration : 8000
-    });
-    $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
-        classes: ["smokey","notice"],
-        hideStyle : { opacity: 0,left: "400px"},
-        showStyle : { opacity: 1,left: 0},
-        hideDuration : 8000
-    });
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
     }
 
 }
@@ -571,8 +571,18 @@ function submit_prixPage() {
 //    });
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
-    $("#produit_zone_right_prix_id").html(fntp(calculPrixWithTVA(prix, Tva)));
-    onLoadEtablissementPage();
+    if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
+        $("#alert_error_id").freeow("Prix", "Vous devez fournir un prix avant de continuer", {
+            classes: ["smokey", "error"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+    } else {
+        $("#produit_zone_right_prix_id").html(fntp(calculPrixWithTVA(prix, Tva)));
+        onLoadEtablissementPage();
+    }
+
 }
 
 function onLoadEtablissementPage() {
