@@ -34,6 +34,7 @@ include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php
 include_once $path . 'service/logique/option/OptionServiceImpl.php';
 include_once $path . 'service/logique/tauxTva/TauxTvaServiceImpl.php';
 include_once $path . 'service/logique/style/StyleServiceImpl.php';
+include_once $path . 'service/logique/langues/LanguesServiceImpl.php';
 
 class LogiqueFactory {
 
@@ -66,7 +67,18 @@ class LogiqueFactory {
     private static $optSrv = null;
     private static $tauxTvaSrv = null;
     private static $styleSrv = null;
+    private static $languesSrv = null;
 
+    /**
+     * 
+     * @return LanguesService
+     */
+    public static function getLanguesService() {
+        if (LogiqueFactory::$languesSrv == null) {
+            LogiqueFactory::$languesSrv = new LanguesServiceImpl();
+        }
+        return LogiqueFactory::$languesSrv;
+    }
     /**
      * 
      * @return StyleService

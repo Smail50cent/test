@@ -38,9 +38,10 @@
                     <ul id="nav_menu_right_ul_detail_id" class="nav nav-pills nav-stacked">
                     </ul>
                 </div>
-                <div class="col-sm-10 col-md-10 main">
-                    <div id="new_container"></div>
+                <div id="new_container">
+                    
                 </div>
+                
             </div>
         </div>
     </body>

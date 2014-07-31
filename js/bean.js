@@ -933,3 +933,10 @@ function Styles(id, nom, url, actif) {
     this.url = url;
     this.actif = actif;
 }
+
+function Langues(id, label, gmt_level, actif) {
+    this.id = id;
+    this.label = label;
+    this.gmt_level = gmt_level;
+    this.actif = actif;
+}

@@ -295,3 +295,9 @@ function getAddSiteModalBody(){
 function getPageGererLangues(){
     return templates.getTemplate("gestion/modeexpert/gererlesLangues/page_gerer_langues");
 }
+function getLangueTableHead(){
+    return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_thead");
+}
+function getLangueTableTrBody(){
+    return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_tbody_tr");
+}

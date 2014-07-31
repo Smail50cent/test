@@ -17,7 +17,7 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
     } else {
         var htmlOp = getOptionInChooseTable();
         var langs = getLangagesSupported();
-        var itemFirst = htmlOp;
+        var itemFirst = htmlOp; 
         itemFirst = paramValue(itemFirst, "OptionName", strings.getString("label.select.one.lang"));
         itemFirst = paramValue(itemFirst, "OptionValue", "no");
         $("#select_lang").append(itemFirst);

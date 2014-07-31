@@ -58,17 +58,22 @@ if (isset($_POST['produit'])) {
     $prodPhp->setTauxTva($produit->tauxTva);
 
     $listeEtabZone = array();
-    for ($i = 0; $i < count($produit->etablissements); $i++) {
-        $etablissement = new Etablissement();
-        $etablissement->setId($produit->etablissements[$i]->id);
-        if (strlen($produit->etablissements[$i]->zones) == 0) {
-            $etablissement->setZones("null");
-        } else {
-            $etablissement->setZones($produit->etablissements[$i]->zones);
+    if (count($produit->etablissements) == 0) {
+        $prodPhp->setEtablissements(null);
+    } else {
+        for ($i = 0; $i < count($produit->etablissements); $i++) {
+            $etablissement = new Etablissement();
+            $etablissement->setId($produit->etablissements[$i]->id);
+            if (strlen($produit->etablissements[$i]->zones) == 0) {
+                $etablissement->setZones("null");
+            } else {
+                $etablissement->setZones($produit->etablissements[$i]->zones);
+            }
+            array_push($listeEtabZone, $etablissement);
         }
-        array_push($listeEtabZone, $etablissement);
+        $prodPhp->setEtablissements($listeEtabZone);
     }
-    $prodPhp->setEtablissements($listeEtabZone);
+
     $produitSrv = LogiqueFactory::getProduitService();
     echo $produitSrv->add($prodPhp);
 }
