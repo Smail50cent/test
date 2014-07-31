@@ -289,7 +289,9 @@ function getGererlesSitesTableTbodyTr() {
 function getBootstrapModal(){
     return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal");
 }
-
 function getAddSiteModalBody(){
     return templates.getTemplate("gestion/modeexpert/gererlessites/add_site_modal_body");
+}
+function getPageGererLangues(){
+    return templates.getTemplate("gestion/modeexpert/gererlesLangues/page_gerer_langues");
 }

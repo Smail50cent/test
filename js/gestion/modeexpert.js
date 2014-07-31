@@ -13,49 +13,48 @@ function loadMenus() {
     var htmlLi = getBootstrapNavPillLi();
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "loadGestionSites();");
     li = paramValue(li, "class", "active");
     li = paramValue(li, "name", "Gérer les sites");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Gérer les catégories");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Gérer les comptes utilisateurs");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "loadGestionLangues();");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Gérer les langues disponibles");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Gérer les conseils de produits");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Tables et zones de tables");
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "href", "");
+    li = paramValue(li, "onclick", "");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Paramètres de l'application");
     $("#nav_menu_right_ul_detail_id").append(li);
 }
 function loadGestionSites() {
-
     var htmlGererLesSites = getGererlesSites();
     htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les sites");
     $("#new_container").html(htmlGererLesSites);
@@ -386,3 +385,19 @@ function valderAjoutEtablissement() {
         }, etablissement, null);
     }
 }
+
+
+// GESTION LANGUES
+
+function loadGestionLangues() {
+    var htmlGererLesSites = getPageGererLangues();
+    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les langues");
+    $("#new_container").html(htmlGererLesSites);
+    //table_gererleslangues_all
+}
+function addStr() {
+    var valEn = $("#en_val").val();
+    var valFr = $("#fr_val").val();
+    var valKey = $("#key_val").val();
+    getConnexionServeur().addNewString(null, valKey, valFr, valEn, null);
+} 

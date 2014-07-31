@@ -212,7 +212,7 @@ function ingredientPage() {
 
                 $('#autocomplete_ingredient_id').keypress(function() {
                     var keycode = (event.keyCode ? event.keyCode : event.which);
-                    if (keycode == '13') {
+                    if (keycode == '13' && this.value.length > 0) {
                         var newIngred = this.value;
                         $('#confirm_dialog_produit_id').dialog({
                             modal: true,
@@ -233,7 +233,8 @@ function ingredientPage() {
                                         var checkNew = getIngredCheckBoxAddProduit();
                                         var checkId = paramValue(checkNew, "id_obj", Id);
                                         var checkVal = paramValue(checkId, "ingredient_nom", newIngred);
-                                        $("#select_ingredient_id").prepend(checkVal);
+                                        var checkClass = paramValue(checkVal, "addclass", "new_Ingred");
+                                        $("#select_ingredient_id").prepend(checkClass);
 
                                         $("input:checkbox[value=\"" + newIngred + "\"]").prop("checked", true);
                                         var scrollto = $("input:checkbox[value=\"" + newIngred + "\"]");
@@ -246,7 +247,7 @@ function ingredientPage() {
                                         var hashLi = paramValue(valLi, "hash_ingred", newIngred.hashCode());
                                         $('#content_produit_description_id').append(hashLi);
 
-                                        $('.ingredient_checkbox').change(function() {
+                                        $('.new_Ingred').change(function() {
                                             if (this.checked) {
                                                 var listIngred = getIngredLiAddProduit();
                                                 var valLi = paramValue(listIngred, "ingred_val", this.value);
@@ -473,8 +474,8 @@ function prixPage() {
                     var idzone = $(this).parent().attr('parentId');
                     var taux = $("#tva_" + idzone).val();
                     if (taux != 0) {
-                        var prixTVA = parseFloat(valPrix) + parseFloat(valPrix) * parseFloat(taux) / 100;
-                        $(this).val(parseFloat(prixTVA));
+                        var prixHT = parseFloat(valPrix) - parseFloat(valPrix) * parseFloat(taux) / 100;
+                        $(this).val(parseFloat(prixHT));
                     } else {
                         $(this).val(parseFloat(valPrix));
                     }
@@ -484,18 +485,17 @@ function prixPage() {
             $('.tva_produit ').change(function() {
                 if ($(this).val() != 0) {
                     var selectId = $(this).attr("tvaid");
-                    var selectVal = $(this).val();
+                    var selectTVA = $(this).val();
                     $(".input_zone_prix, .input_defaut_prix").each(function() {
                         var prix = $(this).val();
                         if ($(this).attr('id_inputprix') == selectId) {
                             if ($(this).val() != 0) {
-                                var prixTVA = parseFloat(prix) + parseFloat(prix) * parseFloat(selectVal) / 100;
-                                $("#label_val_prixttc_id").text(prixTVA.toFixed(2));
+                                $("#label_val_prixttc_id").text(calculPrixWithoutTVA(prix,selectTVA));
                             }
                         }
                     });
                 } else {
-                    $("#label_prixttc_id").text("PrixTTC : " + $("#input_defaut_prix_id").val());
+                    $("#label_val_prixttc_id").text($("#input_defaut_prix_id").val());
                 }
             });
         }
@@ -506,7 +506,7 @@ function submit_prixPage() {
     var list = new Array();
     var prix = $("#label_val_prixttc_id").text();
     var objprix = {prix: prix};
-    var Tva = $("#tva_1").val();
+    var Tva = $("#tva_0").val();
     var associationPrixProduit = new AssociationProduitPrix();
     associationPrixProduit.setDatedebut(null);
     associationPrixProduit.setDatefin(null);
@@ -555,8 +555,7 @@ function submit_prixPage() {
 //    });
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
-    var prixTTC = getPrixHtInAssociation(list, produit.getTauxTva());
-    $("#produit_zone_right_prix_id").html(fntp(prixTTC));
+    $("#produit_zone_right_prix_id").html(fntp(calculPrixWithTVA(prix,Tva)));
     onLoadEtablissementPage();
 }
 

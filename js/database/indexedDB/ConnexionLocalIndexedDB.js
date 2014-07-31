@@ -168,4 +168,7 @@ function ConnexionLocalIndexedDB() {
     this.updateEtablissement = function(method, etablissement, param) {
         console.log("TO DO");
     };
+    this.getZonesTablesByEtablissement = function(method, id, param) {
+        console.log("TO DO");
+    };
 }

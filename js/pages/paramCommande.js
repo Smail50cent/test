@@ -43,11 +43,6 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         $("#nbPersonnes").change(function() {
             var connexion = getConnexion();
             connexion.getParametreApplicationByNom(chooseIfOpCompte, config.getConfig("parametre.app.gestion.utilisateurs"), null);
-//            var person = strings.getString("label.personne.auth");
-//            $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
-//            $('div#auth_popup_id').bind('dialogclose', function(event) {
-//                AuthToCommande();
-//            });
         });
     } else {
         loadDataPersonnes(nbMaxPersonnes);
@@ -84,7 +79,8 @@ function loadDataTables(tables) {
     });
     var htmlOptionTable = getOptionInChooseTable();
     var connexion = getConnexion();
-    connexion.getAllZoneTables(printTables, null);
+    var idet = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+    connexion.getZonesTablesByEtablissement(printTables, idet, null);
     function printTables(zoneTable, param) {
         zoneTables = zoneTable;
         for (var i = 0; i < zoneTable.length; i++) {
@@ -135,11 +131,12 @@ function startCommande(numTable, nbPersonne) {
 }
 function chooseIfOpCompte(paramApp, param) {
     console.log(paramApp);
-    
-    
-   var test= JSON.parse(paramApp.getValeur_parametre());
-   console.log(test);
-    if (test == true) {console.log("load compte");
+
+
+    var test = JSON.parse(paramApp.getValeur_parametre());
+    console.log(test);
+    if (test == true) {
+        console.log("load compte");
         onLoadCompte(true, null, "-17", null);
     } else {
         var personnes = new Array();

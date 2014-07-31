@@ -1,1 +1,1 @@
-<label><input type="checkbox" value="{ingredient_nom}" class="ingredient_checkbox ingredient_checkbox_structure ingredient_checkbox_personalize" id="{id_obj}" "/>{ingredient_nom}</label>
+<label><input type="checkbox" value="{ingredient_nom}" class="ingredient_checkbox ingredient_checkbox_structure ingredient_checkbox_personalize {addclass}" id="{id_obj}" "/>{ingredient_nom}</label>

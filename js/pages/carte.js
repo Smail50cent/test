@@ -657,7 +657,7 @@ function printProduits(index) {
                 if (lenCurrent == lenToGo) {
                     //si on a fini de charger les produits on charge les scripts de swipe
                     scripts.loadScripts("swipe");
-                    if(nom=="gestionProduit"){
+                    if (nom == "gestionProduit") {
                         onLoadGP();
                     }
                     hideLoading();
@@ -812,29 +812,31 @@ function onRecapitulatifProduitClicked(produitID, qopid) {
             var description = $("#content_produit_description_recap_id_" + qopid);
 
             var optionHtml = getItemOption();
-            for (var i = 0; i < produit.options.length; i++) {
-                var optionItem = optionHtml;
-                optionItem = paramValue(optionItem, "label", produit.options[i].label);
-                optionItem = paramValue(optionItem, "optionId", produit.options[i].id);
-                optionItem = paramValue(optionItem, "qopId", qopid);
-                optionItem = paramValue(optionItem, "idselect", "option_id_" + produit.options[i].id + "_produit_" + produit.id);
-                description.append(optionItem);
-                var id = "option_id_" + produit.options[i].id + "_produit_" + produit.id;
-                for (var j = 0; j < produit.options[i].possibilites.length; j++) {
-                    $("#" + id).append("<option value=\"" + produit.options[i].possibilites[j].id + "\">" + produit.options[i].possibilites[j].nom + "</option>");
-                }
-                $("#" + id).change(function() {
-                    var idItemSelected = $(this).val();
-                    var optionId = $(this).attr("optionId");
-                    var qopId = $(this).attr("qopId");
-                    for (var x = 0; x < currentTicket.getQuantityOfProduct().length; x++) {
-                        for (var y = 0; y < currentTicket.getQuantityOfProduct()[x].product.options.length; y++) {
-                            if (parseInt(currentTicket.getQuantityOfProduct()[x].product.options[y].id) == parseInt(optionId)) {
-                                currentTicket.getQuantityOfProduct()[x].product.options[y].possibilites = idItemSelected;
+            if (produit.options != null) {
+                for (var i = 0; i < produit.options.length; i++) {
+                    var optionItem = optionHtml;
+                    optionItem = paramValue(optionItem, "label", produit.options[i].label);
+                    optionItem = paramValue(optionItem, "optionId", produit.options[i].id);
+                    optionItem = paramValue(optionItem, "qopId", qopid);
+                    optionItem = paramValue(optionItem, "idselect", "option_id_" + produit.options[i].id + "_produit_" + produit.id);
+                    description.append(optionItem);
+                    var id = "option_id_" + produit.options[i].id + "_produit_" + produit.id;
+                    for (var j = 0; j < produit.options[i].possibilites.length; j++) {
+                        $("#" + id).append("<option value=\"" + produit.options[i].possibilites[j].id + "\">" + produit.options[i].possibilites[j].nom + "</option>");
+                    }
+                    $("#" + id).change(function() {
+                        var idItemSelected = $(this).val();
+                        var optionId = $(this).attr("optionId");
+                        var qopId = $(this).attr("qopId");
+                        for (var x = 0; x < currentTicket.getQuantityOfProduct().length; x++) {
+                            for (var y = 0; y < currentTicket.getQuantityOfProduct()[x].product.options.length; y++) {
+                                if (parseInt(currentTicket.getQuantityOfProduct()[x].product.options[y].id) == parseInt(optionId)) {
+                                    currentTicket.getQuantityOfProduct()[x].product.options[y].possibilites = idItemSelected;
+                                }
                             }
                         }
-                    }
-                });
+                    });
+                }
             }
             function MyParam(i, len) {
                 this.i = i;

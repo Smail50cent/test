@@ -62,6 +62,7 @@ class StringsServiceDataImpl implements StringsServiceData {
 
     public function add(\Strings $String) {
         $bdd = new ConnexionBDD();
+        $String->setValue(str_replace("'", "\'", $String->getValue()));
         $bdd->executeGeneric("INSERT INTO `strings`( `lang`, `value`, `key_lang`) VALUES ('".$String->getLang()."','".$String->getValue()."','".$String->getKey_lang()."')");
         
     }

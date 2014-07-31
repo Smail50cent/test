@@ -687,7 +687,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             }
         }
         if ($reqSql != "") {
-            echo $reqSql;
+            //echo $reqSql;
             $bdd = new ConnexionBDD();
             $bdd->executeGeneric($reqSql);
         }
