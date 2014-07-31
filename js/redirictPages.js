@@ -83,10 +83,31 @@ function redirictWhereFinishParamCommande() {
     redirct(new RedirictPages("carte", null, null, "choixDateHeure", "carte"));
 }
 function redirictWhereFinishCarte() {
-    redirct(new RedirictPages("choixEnvoieCuisine", null, null, null, "choixEnvoieCuisine"));
+    var personneLis = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
+    if (personneLis.length == 1) {
+        if (personneLis[0].produitspriotite.length == 1) {
+            setLocalStorageValue("reste.a.regler", getPrixHtInAssociation(personneLis[0].produitspriotite[0].produit.associationPrixProduit, personneLis[0].produitspriotite[0].produit.tauxTva).toString());
+            redirictPay();
+        } else {
+            redirct(new RedirictPages("choixEnvoieCuisine", null, null, null, "choixEnvoieCuisine"));
+        }
+    } else {
+        redirct(new RedirictPages("choixEnvoieCuisine", null, null, null, "choixEnvoieCuisine"));
+    }
 }
 function redirictWhereFinishChoixEnvoieCuisine() {
-    redirct(new RedirictPages("choixPaimentPersonnes", null, null, null, "choixPaimentPersonnes"));
+    var personneLis = JSON.parse(getLocalStorageValue("personnesProduitsListe"));
+    if (personneLis.length == 1) {
+        var prix = null;
+        for (var i = 0; i < personneLis[0].produitspriotite.length; i++) {
+            prix = prix + getPrixHtInAssociation(personneLis[0].produitspriotite[i].produit.associationPrixProduit, personneLis[0].produitspriotite[0].produit.tauxTva);
+        }
+        setLocalStorageValue("reste.a.regler", prix.toString());
+        redirictPay();
+        redirct(new RedirictPages("reglement", null, null, null, "reglement"));
+    } else {
+        redirct(new RedirictPages("choixPaimentPersonnes", null, null, null, "choixPaimentPersonnes"));
+    }
 }
 function goServeurAcces() {
     setLocalStorageValue("personnes.couverts", "");
@@ -120,7 +141,7 @@ function goGestionCompteUtilisateur() {
 function goExpertMode() {
     redirct(new RedirictPages("modeexpert", "modeexpert", "modeexpert", "modeexpert", "modeexpert"));
 }
-function deconexion(){
+function deconexion() {
     removeLocalStorageItem("personnes.serveur");
     redirct(new RedirictPages("index", "index", "index", "index", "index"));
 }
