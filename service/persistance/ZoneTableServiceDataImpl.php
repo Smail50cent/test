@@ -17,6 +17,7 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
         $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke");
         return $this->parseZoneTable($resultSet);
     }
+    
 
     private function parseZoneTable($resultSet) {
         $idProdAfter = null;

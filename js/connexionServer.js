@@ -42,7 +42,6 @@ function ConnexionServer() {
 //                }
 //            });
 //        }
-
     };
     this.getEntreprise = function(methodToExecuteAfter) {
         var ret = null;
@@ -1286,10 +1285,10 @@ function ConnexionServer() {
             }
         });
     };
-    this.addNewString = function(method, key, fr, en, param) {
+    this.addNewString = function(method, key, fr, en, param) {//fonction dev
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddString") + "?key=" + key + 
-                    "&en=" +en+ "&fr="+fr,
+            url: getServicePath("serveur.clientaccess.serviceAddString") + "?key=" + key +
+                    "&en=" + en + "&fr=" + fr,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -1309,4 +1308,36 @@ function ConnexionServer() {
             }
         });
     };
+
+    this.getZonesTablesByEtablissement = function(method, id, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceZoneTablesGetByIdEtablissment") + "?idetablissement=" + id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    data = data.data;
+                     var liste = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        var tables = new Array();
+                        for (var j = 0; j < data [i].tables.length; j++) {
+                            tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
+                        }
+                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
+                    }
+                    if (method != null) {
+                        method(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+
 }

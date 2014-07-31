@@ -60,6 +60,7 @@
         <variable name="serveur.clientaccess.serviceAddEtablissements">etablissement/add</variable>
         <variable name="serveur.clientaccess.serviceRemoveEtablissements">etablissement/remove</variable>
         <variable name="serveur.clientaccess.serviceUpdateEtablissements">etablissement/update</variable>
+        <variable name="serveur.clientaccess.serviceZoneTablesGetByIdEtablissment">zoneTables/getByIdEtablissement</variable>
         <variable name="serveur.clientaccess.serviceGetAllStyles">style/getAll</variable>
         <variable name="serveur.clientaccess.serviceAddString">strings/add</variable>
         <variable name="tableNameMajTables">majTables</variable>

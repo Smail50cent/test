@@ -15,5 +15,5 @@ if (isset($_GET["idetablissement"])) {
     } catch (Exception $exc) {
         $ret->error = true;
     }
-    echo json_encode($result);
+    echo json_encode($ret);
 }
