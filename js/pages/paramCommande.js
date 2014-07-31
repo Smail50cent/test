@@ -135,7 +135,7 @@ function chooseIfOpCompte(paramApp, param) {
 
     var test = JSON.parse(paramApp.getValeur_parametre());
     console.log(test);
-    if (test == true) {
+    if (paramApp.getValeur_parametre() == true) {
         console.log("load compte");
         onLoadCompte(true, null, "-17", null);
     } else {
