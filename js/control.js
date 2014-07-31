@@ -359,8 +359,12 @@ function sendPendingsDatas() {
     }, null);
 }
 function calculPrixWithTVA(prixHT, tauxTVA) {
-    var tauxTVA = parseFloat(tauxTVA);
-    return ((tauxTVA / 100) * prixHT) + prixHT;
+    var prix = parseFloat(prixHT)/(1-(parseFloat(tauxTVA)/100));
+    return prix;
+}
+function calculPrixWithoutTVA(prixHT, tauxTVA) {
+    var prix = parseFloat(prixHT) - parseFloat(prixHT) * parseFloat(tauxTVA) / 100;
+    return prix.toFixed(2);
 }
 function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
     var prixHt = 0;
@@ -400,7 +404,7 @@ function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
     } else {
         prixHt = 0;
     }
-    return calculPrixWithTVA(parseFloat(prixHt), tauxTva);
+    return calculPrixWithTVA(prixHt, tauxTva);
 }
 function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, minutesFin) {
     var ret = false;
