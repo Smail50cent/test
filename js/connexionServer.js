@@ -1365,5 +1365,49 @@ function ConnexionServer() {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
+    }; 
+    this.setLangEnable = function(method, id,param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceSetLangEnable")+"?idlang="+id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    data = data.data;
+                    if (method != null) {
+                        method(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.setLangDiable = function(method, id,param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.servicesetLangDiable")+"?idlang="+id,
+            type: 'GET',
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    data = data.data;
+                    if (method != null) {
+                        method(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
     };
 }

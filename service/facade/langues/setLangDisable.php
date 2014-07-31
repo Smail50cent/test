@@ -10,7 +10,7 @@ include_once $path . 'service/logique/LogiqueFactory.php';
 try {
     if (isset($idlang)) {
         $optSrv = LogiqueFactory::getLanguesService();
-        $optSrv->setLangActif($idlang);
+        $optSrv->setLangDiable($idlang);
         $ret->data = null;
     }
 } catch (Exception $exc) {

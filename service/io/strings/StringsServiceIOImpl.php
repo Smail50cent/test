@@ -16,13 +16,13 @@ class StringsServiceIOImpl implements StringsServiceIO {
         $xmlFileContentEnd = "</strings>";
         $xmlFileContent = "";
         for ($i = 0; $i < count($strings); $i++) {
-            $xmlFileContent = $xmlFileContent.$this->updateEntityToXmlElement($strings[$i]);
+            $xmlFileContent = $xmlFileContent . $this->updateEntityToXmlElement($strings[$i]);
         }
-        $this->generateFile($filename, $xmlFileContentStart.$xmlFileContent.$xmlFileContentEnd);
+        $this->generateFile($filename, $xmlFileContentStart . $xmlFileContent . $xmlFileContentEnd);
     }
 
     private function updateEntityToXmlElement(Strings $string) {
-        return $xmlItemContent = "\t<string key=\"".$string->getKey_lang()."\">".$string->getValue()."</string>\n";
+        return $xmlItemContent = "\t<string key=\"" . $string->getKey_lang() . "\">" . $string->getValue() . "</string>\n";
     }
 
     private function generateFile($fileName, $content) {
@@ -36,4 +36,15 @@ class StringsServiceIOImpl implements StringsServiceIO {
         }
         fclose($fichier);
     }
+
+    public function deleteFilesInStringsFolder() {
+        $dossierTempo = "../../../config/strings/";
+        $handle = opendir($dossierTempo);
+        while (false !== ($fichier = readdir($handle))) {
+            if (($fichier != ".") && ($fichier != "..")) {
+                unlink($dossierTempo . $fichier);
+            }
+        }
+    }
+
 }

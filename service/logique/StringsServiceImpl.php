@@ -33,6 +33,7 @@ class StringsServiceImpl implements StringsService {
 
     public function generateXMLFileFor($langues) {
         $srvIO = PhysiqueIOFactory::getStringsService();
+        $srvIO->deleteFilesInStringsFolder();
         if (!is_array($langues)) {
             $langues = array($langues);
         }
@@ -44,6 +45,7 @@ class StringsServiceImpl implements StringsService {
 
     public function addNewString($key, $en, $fr) {
         if ($key != null && $en != null & $fr != null) {
+            
             $strFr = new Strings();
             $strFr->setKey_lang($key);
             $strFr->setLang("fr_FR");

@@ -410,7 +410,10 @@ function loadGestionLangues() {
             myDiv = paramValue(myDiv, "idLang", langs[i].id);
             if (langs[i].actif == true) {
                 myDiv = paramValue(myDiv, "addClass", "glyphicon glyphicon-ok");
+                myDiv = paramValue(myDiv, "onclick", "setLangActif("+langs[i].id+");");
+                
             } else {
+                myDiv = paramValue(myDiv, "onclick", "setLangDisable("+langs[i].id+");");
                 myDiv = paramValue(myDiv, "addClass", "glyphicon glyphicon-minus");
             }
             $("#table_gererleslangues_all").append(myDiv);
@@ -418,8 +421,8 @@ function loadGestionLangues() {
     }
 }
 function setLangActif(id) {
-    
+    getConnexion().setLangDiable(null, id, null);
 }
 function setLangDisable(id) {
-
+    getConnexion().setLangEnable(null, id, null);
 }
