@@ -171,7 +171,7 @@ function controller(entreprise) {
         case "modeexpert":
             method = function() {
                 hideLoading();
-                gestionAdmininistrateurConnected(onModeExpertLoaded());                
+                gestionAdmininistrateurConnected(onModeExpertLoaded());
             };
             break;
         default :
@@ -191,15 +191,17 @@ if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
 // Manifest identique.
 }
 function onTemplateLoadStart() {
-    var connexion = getConnexion();
-    var id;
-    if (getLocalStorageValue("client.application.etablissement.id") == null) {
-        id = parseInt(config.getConfig("client.application.etablissement.id"));
-        setLocalStorageValue("client.application.etablissement.id", id);
-    } else {
-        id = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-    }
-    connexion.getEtablissementById(onTemplateLoadFinish, id, null);
+    scripts.loadScripts("alertFreeow", function() {
+        var connexion = getConnexion();
+        var id;
+        if (getLocalStorageValue("client.application.etablissement.id") == null) {
+            id = parseInt(config.getConfig("client.application.etablissement.id"));
+            setLocalStorageValue("client.application.etablissement.id", id);
+        } else {
+            id = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+        }
+        connexion.getEtablissementById(onTemplateLoadFinish, id, null);
+    });
 }
 function onTemplateLoadFinish(etablissement) {
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
@@ -359,7 +361,7 @@ function sendPendingsDatas() {
     }, null);
 }
 function calculPrixWithTVA(prixHT, tauxTVA) {
-    var prix = parseFloat(prixHT)/(1-(parseFloat(tauxTVA)/100));
+    var prix = parseFloat(prixHT) / (1 - (parseFloat(tauxTVA) / 100));
     return prix;
 }
 function calculPrixWithoutTVA(prixHT, tauxTVA) {

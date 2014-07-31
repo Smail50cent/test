@@ -45,6 +45,9 @@
     <script for="bootstrapall">lib/bootstrapAll/docs/assets/js/ie10-viewport-bug-workaround.js</script>
     <script for="bootstrapall">lib/bootstrapAll/docs/assets/js/ie10-viewport-bug-workaround.js</script>
     <script for="bootstrapall">lib/bootstrapAll/dist/js/bootstrap.min.js</script>
+    
+    <script for="alertFreeow">lib/alertFreeow/jquery.freeow.min.js</script>
+    <style for="alertFreeow">./js/lib/alertFreeow/style/freeow/freeow.css</style>
      
     <script for="swipe">lib/jquery.event.move.js</script>
     <script for="swipe">lib/jquery.event.swipe.js</script>
