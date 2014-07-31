@@ -212,7 +212,7 @@ function ingredientPage() {
 
                 $('#autocomplete_ingredient_id').keypress(function() {
                     var keycode = (event.keyCode ? event.keyCode : event.which);
-                    if (keycode == '13') {
+                    if (keycode == '13' && this.value.length > 0) {
                         var newIngred = this.value;
                         $('#confirm_dialog_produit_id').dialog({
                             modal: true,
@@ -233,7 +233,8 @@ function ingredientPage() {
                                         var checkNew = getIngredCheckBoxAddProduit();
                                         var checkId = paramValue(checkNew, "id_obj", Id);
                                         var checkVal = paramValue(checkId, "ingredient_nom", newIngred);
-                                        $("#select_ingredient_id").prepend(checkVal);
+                                        var checkClass = paramValue(checkVal, "addclass", "new_Ingred");
+                                        $("#select_ingredient_id").prepend(checkClass);
 
                                         $("input:checkbox[value=\"" + newIngred + "\"]").prop("checked", true);
                                         var scrollto = $("input:checkbox[value=\"" + newIngred + "\"]");
@@ -246,7 +247,7 @@ function ingredientPage() {
                                         var hashLi = paramValue(valLi, "hash_ingred", newIngred.hashCode());
                                         $('#content_produit_description_id').append(hashLi);
 
-                                        $('.ingredient_checkbox').change(function() {
+                                        $('.new_Ingred').change(function() {
                                             if (this.checked) {
                                                 var listIngred = getIngredLiAddProduit();
                                                 var valLi = paramValue(listIngred, "ingred_val", this.value);
