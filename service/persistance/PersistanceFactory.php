@@ -36,6 +36,7 @@ include_once $path . 'service/persistance/etablissement/EtablissementServiceData
 include_once $path . 'service/persistance/option/OptionServiceDataImpl.php';
 include_once $path . 'service/persistance/TauxTvaServiceDataImpl.php';
 include_once $path . 'service/persistance/style/StyleServiceDataImpl.php';
+include_once $path . 'service/persistance/langues/LanguesServiceDataImpl.php';
 
 class PersistanceFactory {
 
@@ -70,7 +71,18 @@ class PersistanceFactory {
     private static $optSrv = null;
     private static $etablissementSrv = null;
     private static $styleSrv = null;
+    private static $languesSrv = null;
 
+    /**
+     * 
+     * @return LanguesServiceData
+     */
+    public static function getLanguesService() {
+        if (PersistanceFactory::$languesSrv == null) {
+            PersistanceFactory::$languesSrv = new LanguesServiceDataImpl();
+        }
+        return PersistanceFactory::$languesSrv;
+    }
     /**
      * 
      * @return StyleServiceDataImpl

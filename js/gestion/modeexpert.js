@@ -388,16 +388,38 @@ function valderAjoutEtablissement() {
 
 
 // GESTION LANGUES
-
-function loadGestionLangues() {
-    var htmlGererLesSites = getPageGererLangues();
-    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les langues");
-    $("#new_container").html(htmlGererLesSites);
-    //table_gererleslangues_all
-}
 function addStr() {
     var valEn = $("#en_val").val();
     var valFr = $("#fr_val").val();
     var valKey = $("#key_val").val();
     getConnexionServeur().addNewString(null, valKey, valFr, valEn, null);
-} 
+}
+function loadGestionLangues() {
+    var htmlGererLesSites = getPageGererLangues();
+    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les langues");
+    $("#new_container").html(htmlGererLesSites);
+    getConnexion().getAllLangues(printLangues, null);
+    function printLangues(langs, param) {
+        var htmlTableHead = getLangueTableHead();
+        $("#table_gererleslangues_all").html("");
+        $("#table_gererleslangues_all").append(htmlTableHead);
+        var htmlTrBody = getLangueTableTrBody();
+        for (var i = 0; i < langs.length; i++) {
+            var myDiv = htmlTrBody;
+            myDiv = paramValue(myDiv, "langue", langs[i].label);
+            myDiv = paramValue(myDiv, "idLang", langs[i].id);
+            if (langs[i].actif == true) {
+                myDiv = paramValue(myDiv, "addClass", "glyphicon glyphicon-ok");
+            } else {
+                myDiv = paramValue(myDiv, "addClass", "glyphicon glyphicon-minus");
+            }
+            $("#table_gererleslangues_all").append(myDiv);
+        }
+    }
+}
+function setLangActif(id) {
+    
+}
+function setLangDisable(id) {
+
+}
