@@ -71,7 +71,7 @@ class LogiqueFactory {
 
     /**
      * 
-     * @return StyleService
+     * @return LanguesService
      */
     public static function getLanguesService() {
         if (LogiqueFactory::$languesSrv == null) {

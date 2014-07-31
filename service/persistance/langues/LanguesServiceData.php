@@ -7,5 +7,11 @@
  */
 interface LanguesServiceData {
 
+    public function setDisable($id);
+
+    public function setEnable($id);
+
     public function getAll();
+
+    public function getByActif();
 }

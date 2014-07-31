@@ -13,7 +13,7 @@ class LanguesServiceDataImpl implements LanguesServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif` FROM `langues`");
+        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type`  FROM `langues`");
         return $this->parseLangue($result);
     }
 
@@ -29,8 +29,26 @@ class LanguesServiceDataImpl implements LanguesServiceData {
             }
             $langue->setLabel($ligne->label);
             $langue->setGmtLevel($ligne->gmt_level);
+            $langue->setType($ligne->type);
             array_push($langues, $langue);
         }
         return $langues;
     }
+
+    public function setDisable($id) {
+        $bdd = new ConnexionBDD();
+        $result = $bdd->executeGeneric("UPDATE `langues` SET `actif`= 0 WHERE `id`= ".$id);
+    }
+
+    public function setEnable($id) {
+        $bdd = new ConnexionBDD();
+        $result = $bdd->executeGeneric("UPDATE `langues` SET `actif`= 1 WHERE `id`= ".$id);
+    }
+
+    public function getByActif() {
+        $bdd = new ConnexionBDD();
+        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type` FROM `langues` WHERE actif=1");
+        return $this->parseLangue($result);
+    }
+
 }

@@ -11,7 +11,16 @@ class Langue {
     public $label;
     public $gmt_level;
     public $actif;
-    
+    public $type;
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function setType($type) {
+        $this->type = $type;
+    }
+
     public function getId() {
         return $this->id;
     }
@@ -43,6 +52,5 @@ class Langue {
     public function setActif($actif) {
         $this->actif = $actif;
     }
-
 
 }
