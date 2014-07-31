@@ -1335,6 +1335,7 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

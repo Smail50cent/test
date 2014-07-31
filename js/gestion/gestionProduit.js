@@ -246,16 +246,16 @@ function ingredientPage() {
                                         var hashLi = paramValue(valLi, "hash_ingred", newIngred.hashCode());
                                         $('#content_produit_description_id').append(hashLi);
 
-                                        $('.ingredient_checkbox').change(function() {
-                                            if (this.checked) {
-                                                var listIngred = getIngredLiAddProduit();
-                                                var valLi = paramValue(listIngred, "ingred_val", this.value);
-                                                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
-                                                $('#content_produit_description_id').append(hashLi);
-                                            } else {
-                                                $("#" + this.value.hashCode()).parent().remove();
-                                            }
-                                        });
+//                                        $('.ingredient_checkbox').change(function() {
+//                                            if (this.checked) {
+//                                                var listIngred = getIngredLiAddProduit();
+//                                                var valLi = paramValue(listIngred, "ingred_val", this.value);
+//                                                var hashLi = paramValue(valLi, "hash_ingred", this.value.hashCode());
+//                                                $('#content_produit_description_id').append(hashLi);
+//                                            } else {
+//                                                $("#" + this.value.hashCode()).parent().remove();
+//                                            }
+//                                        });
                                     }
 
 
