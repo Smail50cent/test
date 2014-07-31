@@ -88,7 +88,7 @@ function controller(entreprise) {
                 } else {
                     tables = getParameterByName("table");
                 }
-                onLoadParamCommande(15, tables, entreprise.langue);
+                onLoadParamCommande(15, tables, true);
             };
             break;
         case "reglement":
