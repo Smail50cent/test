@@ -1,5 +1,5 @@
 <li class="{class} li_nav_menu_structure li_nav_menu_personalize" >
-    <a href="{href}" class="a_nav_menu_structure a_nav_menu_personalize">
+    <a onclick="{onclick}" class="a_nav_menu_structure a_nav_menu_personalize">
         <span class="badge pull-right pull-right_nav_strucutre pull-right_nav_personalize">{nbNotification}</span>
         {name}
     </a>

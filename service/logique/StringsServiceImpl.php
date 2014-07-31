@@ -33,12 +33,29 @@ class StringsServiceImpl implements StringsService {
 
     public function generateXMLFileFor($langues) {
         $srvIO = PhysiqueIOFactory::getStringsService();
-        if(!is_array($langues)){
+        if (!is_array($langues)) {
             $langues = array($langues);
         }
         for ($i = 0; $i < count($langues); $i++) {
             $strings = $this->getByLang($langues[$i]);
-            $srvIO->sendDataToNewFile("string_".$strings[0]->getLang().".xml", $strings);
+            $srvIO->sendDataToNewFile("string_" . $strings[0]->getLang() . ".xml", $strings);
         }
     }
+
+    public function addNewString($key, $en, $fr) {
+        if ($key != null && $en != null & $fr != null) {
+            $strFr = new Strings();
+            $strFr->setKey_lang($key);
+            $strFr->setLang("fr_FR");
+            $strFr->setValue($fr);
+            $this->stringsSrv->add($strFr);
+            $strEn = new Strings();
+            $strEn->setKey_lang($key);
+            $strEn->setLang("en_US");
+            $strEn->setValue($en);
+            $this->stringsSrv->add($strEn);
+            $this->generateXMLFileFor(array("fr_FR", "en_US"));
+        }
+    }
+
 }
