@@ -12,6 +12,7 @@
 	<string key="footer.buttonswitch.recapitulatif">Récapitulatif de votre commande</string>
 	<string key="footer.buttonswitch.lacarte">La carte</string>
 	<string key="info.interdiction.choose.min.one.produit">Vous devez choisir au moins un produit.</string>
+	<string key="info.interdiction.commande.where.paramcommande">Vous devez d'abord rentrer les informations liées votre commande. Vous allez être redirigé.</string>
 	<string key="label.choose.table.option">Faîtes votre choix</string>
 	<string key="label.choose.table.option.genreic">Table</string>
 	<string key="label.choose.table.option.personneSing">personne</string>
@@ -24,7 +25,11 @@
 	<string key="label.info.confirm.valider.commande">êtes-vous sûr de valider cette commande ?</string>
 	<string key="label.recapitulatif.button.ajouter.ingredient">Ajouter ingrédient</string>
 	<string key="label.categorie.souscategorie.voirtout">Voir tout</string>
+	<string key="label.error.indexedDB.acces.inpossible">Impossible d'accèder à la base de données.</string>
+	<string key="label.error.email.exist">Ce compte n'existe pas !</string>
+	<string key="label.error.connexion.serveur">Impossible d'accèder au serveur.</string>
 	<string key="label.info.etape.suivante">Etape suivante</string>
+	<string key="label.info.confirm.etape.suivante">Etes-vous sur de vouloir passer à l'étape suivante ?</string>
 	<string key="label.mode.de.reglement.valider">Valider</string>
 	<string key="label.mode.de.reglement.titre1">Vous avez :</string>
 	<string key="label.mode.de.reglement.titre2">à régler. Avec quel mode de paiment ? </string>
@@ -50,6 +55,7 @@
 	<string key="label.retour">Retour</string>
 	<string key="label.valider">Valider</string>
 	<string key="label.auth.login">Se connecter</string>
+	<string key="label.auth.inscription">S'inscrire</string>
 	<string key="label.auth.pseudo">Login</string>
 	<string key="label.auth.visitor">Visiteur</string>
 	<string key="label.error.redirict.statut.incorrect">Impossible de récupérer le type de commande</string>
@@ -58,6 +64,8 @@
 	<string key="label.index.li.livraison">Se faire livrer</string>
 	<string key="label.index.li.reservation">Réserver une table</string>
 	<string key="label.connexion.serveur.titre">Connectez-vous pour accèder à la prise de commande</string>
+	<string key="label.connexion.error.login">Le login entré n'est pas le bon.</string>
+	<string key="label.connexion.error.mdp">Le mot de passe entré n'est pas le bon.</string>
 	<string key="label.index.li.accesserveur">Accès serveur</string>
 	<string key="label.interfaceventeacces.newCommande">Nouvelle commande</string>
 	<string key="label.menu.favori">Favori</string>
@@ -68,9 +76,12 @@
 	<string key="label.choix.prisedecommande">Passer commande maintenant</string>
 	<string key="label.choix.finreservation">Passer commande plus tard</string>
 	<string key="label.choix.table.choix.zone.label.option">Zone : </string>
+	<string key="label.option.choose.etablissement">Choisisez l'établissement où faire votre commande</string>
 	<string key="gestion.produit.ajout.etablissement.labelselectall">Séléctionnez tous les établissements</string>
 	<string key="gestion.produit.ajout.etablissement.labelvaliderproduit">Ajouter le produit</string>
 	<string key="gestion.produit.ajout.etablissement.dialog.titre">Ajouter les établissements</string>
+	<string key="label.interfaceacces.gestionapp">Gestion de l'application</string>
+	<string key="connexion.users.acces.interdit">Vous n'avez pas les droits nécessaires pour accéder à cette page.</string>
 	<string key="gestion.dropdwon.item1">Mode expert</string>
 	<string key="gestion.dropdwon.itemdeconnexion">Déconnexion</string>
 	<string key="gestion.dropdwon.itemdegestioncompte">Gestion de votre compte</string>
@@ -87,14 +98,5 @@
 	<string key="label.fermer">Fermer</string>
 	<string key="label.error.nom.required">Le nom est requis pour un nouvel établissement</string>
 	<string key="label.confirm.remove.etablissement">Etes-vous sûr de vouloir supprimer cet établissement ?</string>
-	<string key="er">er</string>
-	<string key="rt">yrty</string>
-	<string key="rt">yrty</string>
-	<string key="rt">dernier test</string>
-	<string key="rt">dernier test</string>
-	<string key="rt">dernier test</string>
-	<string key="rt">dernier test</string>
-	<string key="maclé">dernier test 1</string>
-	<string key="maclé2">dernier test 2</string>
-	<string key="monlabel.error">mon petit label</string>
+	<string key="error.label.errror.action.serveur">Le serveur n'a pas réussi à éffectuer l'action.</string>
 </strings>

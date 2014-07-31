@@ -393,6 +393,7 @@ function loadGestionLangues() {
     var htmlGererLesSites = getPageGererLangues();
     htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les langues");
     $("#new_container").html(htmlGererLesSites);
+    //table_gererleslangues_all
 }
 function addStr() {
     var valEn = $("#en_val").val();
