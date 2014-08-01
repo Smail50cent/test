@@ -104,7 +104,6 @@ function getLocalStorageValue(key) {
         key = encodeString(key);
     }
     if (key in localStorage) {
-//        return decodeString(localStorage.getItem(key));
         return (localStorage.getItem(key));
     } else {
         return null;

@@ -25,21 +25,13 @@ class LanguesServiceImpl implements LanguesService {
     public function setLangActif($id) {
         $this->languesSrv->setEnable($id);
         $actifs = $this->languesSrv->getByActif();
-        $types = array();
-        for ($i = 0; $i < count($actifs); $i++) {
-            array_push($types, $actifs[$i]->type);
-        }
-        $this->stringsSrv->generateXMLFileFor($types);
+        $this->stringsSrv->generateXMLFileFor($actifs);
     }
 
     public function setLangDiable($id) {
         $this->languesSrv->setDisable($id);
         $actifs = $this->languesSrv->getByActif();
-        $types = array();
-        for ($i = 0; $i < count($actifs); $i++) {
-            array_push($types, $actifs[$i]->type);
-        }
-        $this->stringsSrv->generateXMLFileFor($types);
+        $this->stringsSrv->generateXMLFileFor($actifs);
     }
 
     public function getByActif() {

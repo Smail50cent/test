@@ -207,7 +207,7 @@ function socialNetworkButtonAuth() {
     connexion.getAllParamApps(enableButton);
     function enableButton(paramapps) {
         for (var i = 0; i < paramapps.length; i++) { 
-            console.log(paramapps[i].valeur_parametre+"+ ");
+            //console.log(paramapps[i].valeur_parametre+"+ ");
             if (parseInt(paramapps[i].valeur_parametre) == 1) {
                 if (paramapps[i].nom_parametre === "Facebook") {
                     var html = getButtonFacebookAuth();

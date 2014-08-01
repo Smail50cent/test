@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languages>
+	<language>
+		<id>1</id>
+		<label>Français</label>
+		<actif>1</actif>
+		<navigatorVar>fr</navigatorVar>
+		<type>fr_FR</type>
+		<gmtLevel>1</gmtLevel>
+	</language>
+</languages>

@@ -22,9 +22,9 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         itemFirst = paramValue(itemFirst, "OptionValue", "no");
         $("#select_lang").append(itemFirst);
         for (var i = 0; i < langs.length; i++) {
-            var itemOther = htmlOp;
-            itemOther = paramValue(itemOther, "OptionName", langs[i][1]);
-            itemOther = paramValue(itemOther, "OptionValue", langs[i][0]);
+            var itemOther = htmlOp;console.log(langs);
+            itemOther = paramValue(itemOther, "OptionName", langs[i].label);
+            itemOther = paramValue(itemOther, "OptionValue", langs[i].id);
             $("#select_lang").append(itemOther);
         }
         $("#select_lang").change(function() {
@@ -130,11 +130,11 @@ function startCommande(numTable, nbPersonne) {
     redirictWhereFinishParamCommande();
 }
 function chooseIfOpCompte(paramApp, param) {
-    console.log(paramApp);
+    //console.log(paramApp);
 
 
     var test = JSON.parse(paramApp.getValeur_parametre());
-    console.log(test);
+    //console.log(test);
     if (paramApp.getValeur_parametre() == true) {
         console.log("load compte");
         onLoadCompte(true, null, "-17", null);
