@@ -8,12 +8,4 @@
 		<type>fr_FR</type>
 		<gmtLevel>1</gmtLevel>
 	</language>
-	<language>
-		<id>2</id>
-		<label>Anglais</label>
-		<actif>1</actif>
-		<navigatorVar>en</navigatorVar>
-		<type>en_US</type>
-		<gmtLevel>0</gmtLevel>
-	</language>
 </languages>

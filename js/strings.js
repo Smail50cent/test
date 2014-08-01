@@ -62,6 +62,9 @@ strings.getString = function(key) {
             break;
         }
     }
+    if (url == "") {
+        url = "./config/strings/string_" + alllangs[0].type + ".xml";
+    }
     $.ajax({
         type: "GET",
         url: url,
