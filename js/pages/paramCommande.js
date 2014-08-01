@@ -130,11 +130,11 @@ function startCommande(numTable, nbPersonne) {
     redirictWhereFinishParamCommande();
 }
 function chooseIfOpCompte(paramApp, param) {
-    console.log(paramApp);
+    //console.log(paramApp);
 
 
     var test = JSON.parse(paramApp.getValeur_parametre());
-    console.log(test);
+    //console.log(test);
     if (paramApp.getValeur_parametre() == true) {
         console.log("load compte");
         onLoadCompte(true, null, "-17", null);

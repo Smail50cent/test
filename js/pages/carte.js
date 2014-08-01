@@ -699,6 +699,7 @@ function recapitulatifClick() {
     }
 }
 function etapeSuivante() {
+    var one = false;
     var qop = currentTicket.getQuantityOfProduct();
     var ask = confirm(strings.getString("label.info.confirm.etape.suivante"));
     if (ask) {
@@ -706,31 +707,42 @@ function etapeSuivante() {
         var selectInItemHtml = getSelectInItem();
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         for (var i = 0; i < qop.length; i++) {
-            $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
-            $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
-            var select = selectInItemHtml;
-            select = paramValue(select, "id", qop[i].getId());
-            $("#content_produit_zone_recap_id_" + qop[i].getId()).append(select);
-            $("#select_item_etape_" + qop[i].getId()).change(function() {
-                var qopId = ($(this).attr("qopId"));
-                var choosedVal = ($(this).val());
-                currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qopId)].personne = choosedVal;
-            });
-            function addItemToSelect(html, value, label) {
-                var optionStart = html;
-                optionStart = paramValue(optionStart, "optionLabel", label);
-                optionStart = paramValue(optionStart, "value", value);
-                $("#select_item_etape_" + qop[i].getId()).append(optionStart);
-            }
-            addItemToSelect(optionSelectItem, "no", strings.getString("label.choose.table.option"));
-            for (var j = 0; j < personnes.length; j++) {
-                addItemToSelect(optionSelectItem, personnes[j].id, personnes[j].prenom + " " + personnes[j].nom);
+            if (personnes.length > 1) {
+                $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
+                $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
+                var select = selectInItemHtml;
+                select = paramValue(select, "id", qop[i].getId());
+                $("#content_produit_zone_recap_id_" + qop[i].getId()).append(select);
+                $("#select_item_etape_" + qop[i].getId()).change(function() {
+                    var qopId = ($(this).attr("qopId"));
+                    var choosedVal = ($(this).val());
+                    currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qopId)].personne = choosedVal;
+                });
+                function addItemToSelect(html, value, label) {
+                    var optionStart = html;
+                    optionStart = paramValue(optionStart, "optionLabel", label);
+                    optionStart = paramValue(optionStart, "value", value);
+                    $("#select_item_etape_" + qop[i].getId()).append(optionStart);
+                }
+                addItemToSelect(optionSelectItem, "no", strings.getString("label.choose.table.option"));
+                for (var j = 0; j < personnes.length; j++) {
+                    addItemToSelect(optionSelectItem, personnes[j].id, personnes[j].prenom + " " + personnes[j].nom);
+                }
+
+            } else {
+                one = true;
+                currentTicket.getQuantityOfProduct()[currentTicket.getIndexOfQuantityOfProductById(qop[i].getId())].personne = personnes[0].id;
             }
         }
-        var html = getFooterWhereAffecterProduit();
-        html = paramValue(html, "value", strings.getString("label.footer.recap.valider"));
-        html = paramValue(html, "onclick", "validerCommande();");
-        $("#footer_id").html(html);
+        if (one) {
+            validerCommande();
+        } else {
+            var html = getFooterWhereAffecterProduit();
+            html = paramValue(html, "value", strings.getString("label.footer.recap.valider"));
+            html = paramValue(html, "onclick", "validerCommande();");
+            $("#footer_id").html(html);
+        }
+
     }
 }
 /**
