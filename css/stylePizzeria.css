@@ -32,6 +32,407 @@
 
        
 
+.name_prod_structure {
+    width: 68%;
+}
+
+.ui-dialog .ui-dialog-content {
+    padding: 1.5em 1em;
+}
+
+.div_gestion_dropdown_structure.div_gestion_dropdown_personalize {          /* bouton Drop Down*/
+    position: absolute;
+    right: 0.3em;
+    top: 0.3em;
+    z-index: 10000;
+}
+
+.ui-widget input {   /* bouton Se connecter*/
+    font-size: 0.9em;
+}
+
+    /* Bouton Gestion de l'application _____ Bouton Nouvelle commande */
+
+.btn_choice_interfacesrv_structure li {
+    -moz-box-shadow: 0 1px 0 1px #666666;
+    -webkit-box-shadow: 0 1px 0 1px #666666;
+    box-shadow: 0 1px 0 1px #666666;
+    box-shadow: 0px 1px 0px 0px #666666;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+    background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+    /* background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+    background-color: #f9f9f9;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    color: #666666;
+    font-family: Trebuchet MS;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 1px 1px 16px #ffffff;
+    width: 200px;
+    margin: 0 auto;
+    text-align: -webkit-center;
+    margin-bottom: 2em;
+} 
+
+
+.btn_choice_interfacesrv_structure li a {
+    border: none;
+    background: none;
+    font-size: 0.9em;
+    color: #565656;
+    box-shadow: none;
+    cursor: pointer;
+    /* width: 150px; */
+    margin: 0.8em auto 0.8em auto;
+    display: block;
+    /*padding: 3px 4px;*/
+}
+
+.btn_choice_interfacesrv_structure {
+    margin-top: 5em;
+}
+
+.li_zones_etablissement_structure {
+    width: 110%;
+    display: inline-block;
+    margin-left: -2em;
+}
+
+.div_gestion_dropdown_button_personalize {
+    border: none;
+    border: 1px solid grey;
+    border-radius: 5px;
+    padding: 0.3em 0.7em; 
+}
+
+.ui-dialog-content {
+    width: 100%;
+}
+
+.dialog-ajout-produit {
+    width: 495px !important;
+    position: absolute !important;
+    top: 9em !important;
+    right: 9em !important;
+    box-shadow: 1px 1px 15px #000;
+    z-index: 1000;
+}
+
+.select_ingredient_structure, .select_option_structure {
+    width: 100%!important;
+    font-size:0.7em!important;
+    /*display: inline-block !important;*/
+    overflow: auto;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.7em 0.3em 0.3em 0.3em;
+    margin: 3em 0;
+
+}
+
+.select_option_structure, .select_possibilite_structure {
+    /*width: 45% !important;*/
+    float: left;
+    margin: 2em 0 2em 0;
+}
+
+.select_option_structure {
+    width: 100%;
+    margin-right: 9%
+}
+
+.select_ingredient_structure label, .select_option_structure label {
+    margin-left: 0.5em;
+}
+
+.div_zone label, .defaut_prix {
+    font-size: 0.8em;
+    display: inline-block;
+    width: 40%;
+}
+
+/*________________ bouton + ________________*/
+
+.show_insert_dialog_structure {
+    width: 35%;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid rgb(196, 196, 196);
+    padding: 0.5em;
+    margin: 0 60% 0 0;
+    float: left;
+    cursor: pointer;
+    -webkit-transition: all 0.3s linear;
+    -moz-transition: all 0.3s linear;
+    -ms-transition: all 0.3s linear;
+    -o-transition: all 0.3s linear;
+    transition:all 0.3s linear;
+}
+
+.show_insert_dialog_structure:hover, .show_insert_dialog_structure:visited, .label_ajout_option_personalize:hover, .label_ajout_option_personalize:visited {
+    background-color: #EAF897;
+    color: rgb(54, 54, 54);
+    text-shadow: 2px 3px 6px #FFFFFF;
+}
+
+a.link_add_product {                    
+    display: inline-block;
+    margin-top: 8px;
+    margin-left: 0.5em;
+}
+
+.label_ajout_ingred_personalize, .label_ajout_option_structure {
+    float: right;
+    margin-right: 1em;
+    margin-top: 0.2em;
+}
+
+.div_gestion_dropdown_menu_structure {
+    width: 230px;
+    margin-left: -6.1em;
+}
+
+.div_gestion_dropdown_item_structure {
+    margin-bottom: 0.8em
+}
+
+.div_gestion_dropdown_item_structure a {
+    text-align: center;
+}
+
+/*__________________________________________*/
+
+
+/*________________________CONTENT________________________*/
+
+
+.menu_or_card_structure, .recapitulatif_commande_structure {
+    max-height: none;
+    padding-right: 0;
+}
+
+/*__________________________________________*/
+
+
+.div_zone input {
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+div.prev_page_structure+div.prev_page_structure {
+    display: inline;
+    margin-left: 0;
+}
+
+.label_uncheck_personalize, .label_ajout_ingred_personalize, .label_ajout_option_personalize {
+    font-size: 0.8em;
+}
+
+
+
+.name_prod_personalize, .liste_categorie_personalize, .liste_souscategorie_personalize {
+    font-size: 0.8em !important;
+}
+
+.dialog_add_produit .product_spec_structure {
+    float: left;
+    margin: 0;
+}
+
+.dialog_add_produit .product_spec_souscat_structure {
+    float: left;
+    margin: 0 0 0 1.5em;
+}
+
+.select_ingredient_structure label input, .select_option_structure label input {
+    vertical-align: middle;
+    margin-right: 1em;
+}
+
+/*____________________FLECHES____________________*/
+
+.prev_page_structure {
+    display: inline-block;
+    float: left;
+    margin: 1em 0 0.5em 0;
+    z-index: 508;
+    cursor: pointer;
+}
+
+.next_page_structure {
+    float: right;
+    margin: 1em 0 0.5em 0;
+    cursor: pointer;
+}
+
+/*____________________AJOUT OPTIONS____________________*/
+
+.label_uncheck_personalize {
+    float: left;
+    width: 100%;
+    display: inline-block;
+}
+
+.label_uncheck_personalize input {
+    margin: 0 0.8em;
+    vertical-align: middle;
+}
+
+.uncheck_all_ingredient_structure input {
+    margin-right: 1em;
+}
+
+
+/*____________________Page prix intérieur extérieur____________________*/
+
+.prix_definition_prix_personalize {
+    font-size: 0.75em;
+}
+
+hr{
+    width:100%;
+}
+
+.datetime_structure  {
+    width: 100%;
+    display: inline-block;
+}
+
+.datetime_structure p {
+    width: 50%;
+    float: left;
+}
+
+.datetime_structure p input {
+    width: 57%;
+    float: right;
+    margin-right: 2.2em;
+}
+
+.datetime_structure p label {
+    width: 31%;
+
+}
+
+.zone_extprix_tva_structure {
+    width: 50%;
+    float: left;
+}
+
+.zone_extprix_tva_structure input, .tva_produit_structure {
+    margin: 0 2.2em 0 0;
+    float: right;
+}
+
+
+/*___________________Ajouter les prix____________________*/
+
+
+.dialog_ajouter_produit_ajouterprix_personalize label {
+    width: 10%;
+    display: inline-block;
+}
+
+.label_tva_structure {
+    margin-left: 3em;
+}
+
+label.defaut_prix_structure {
+    margin-right: 20px;
+}
+
+.show_insert_dialog_personalize .label_ajout_periode_structure {
+width: 75%;
+float: right;
+}
+
+
+/*___________________Ajouter les établissements____________________*/
+
+div#ajouter_produit_div_etablissement {
+    overflow: auto;
+    height: 470px;
+    border: 1px solid rgba(192, 185, 185, 1);
+    background-color: rgba(238, 236, 236, 1);
+}
+
+
+.ajouter_produit_div_etablissement_head_p_structure {
+    display: inline-block;
+    width: 78.8%;
+    margin: 0;
+}
+
+.etablissement_div_header_titre_structure {
+    display: inline-block;
+    width: 78.4%;
+    margin: 0;
+}
+
+.li_zones_etablissement_checkbox_structure {
+    float: right;
+    margin: 0.5em 0.5em 0 0;
+}
+
+.etablissement_div_header_structure {
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.etablissement_div_personalize {
+    width: 100%!important;
+    font-size: 0.7em!important;
+    /* display: inline-block !important; */
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.7em 0.3em 0.3em 0.3em;
+    margin: 2em 0;
+    border-top: 1px solid rgba(196, 196, 196, 1);
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+}
+
+.etablissement_div_header_titre_personalize {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 1em;
+}
+
+.li_zones_etablissement_structure {
+    width: 40%;
+    display: inline-block;
+}
+
+.li_zones_etablissement_structure:nth-child(even){
+    margin-left:10%;
+}
+
+.li_zones_etablissement_structure input {
+    margin:0;
+}
+
+
+
+.li_zones_etablissement_titrezone_structure {
+    vertical-align: middle;
+    margin: 0 0 1em 0;
+}
+
+.btn_validation_ajout_produit_structure {
+    float: right;
+    margin-top: 2em;
+}
+
+
+/*______________________________________________________________________________*/
+
+
 /*____________________________POP UP FB, & AUTRES ______________________________*/
 
     .auth_form_personalize {
@@ -1360,393 +1761,6 @@ background: rgba(248, 255, 197, 0.5);
 
 /*____________________GESTION DE PRODUITS_____________________*/
 
-.name_prod_structure {
-    width: 68%;
-}
-
-.ui-dialog .ui-dialog-content {
-    padding: 1.5em 1em;
-}
-
-.div_gestion_dropdown_structure.div_gestion_dropdown_personalize {          /* bouton Drop Down*/
-    position: absolute;
-    right: 0.3em;
-    top: 0.3em;
-    z-index: 10000;
-}
-
-.ui-widget input {   /* bouton Se connecter*/
-    font-size: 0.9em;
-}
-
-    /* Bouton Gestion de l'application _____ Bouton Nouvelle commande */
-
-.btn_choice_interfacesrv_structure li {
-    -moz-box-shadow: 0 1px 0 1px #666666;
-    -webkit-box-shadow: 0 1px 0 1px #666666;
-    box-shadow: 0 1px 0 1px #666666;
-    box-shadow: 0px 1px 0px 0px #666666;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
-    background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-    background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-    background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-    background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
-    /* background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
-    background-color: #f9f9f9;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    border: 1px solid #dcdcdc;
-    cursor: pointer;
-    color: #666666;
-    font-family: Trebuchet MS;
-    font-weight: bold;
-    text-decoration: none;
-    text-shadow: 1px 1px 16px #ffffff;
-    width: 200px;
-    margin: 0 auto;
-    text-align: -webkit-center;
-    margin-bottom: 2em;
-} 
-
-
-.btn_choice_interfacesrv_structure li a {
-    border: none;
-    background: none;
-    font-size: 0.9em;
-    color: #565656;
-    box-shadow: none;
-    cursor: pointer;
-    /* width: 150px; */
-    margin: 0.8em auto 0.8em auto;
-    display: block;
-    /*padding: 3px 4px;*/
-}
-
-.btn_choice_interfacesrv_structure {
-    margin-top: 5em;
-}
-
-.li_zones_etablissement_structure {
-    width: 110%;
-    display: inline-block;
-    margin-left: -2em;
-}
-
-.div_gestion_dropdown_button_personalize {
-    border: none;
-    border: 1px solid grey;
-    border-radius: 5px;
-    padding: 0.3em 0.7em; 
-}
-
-.ui-dialog-content {
-    width: 100%;
-}
-
-.dialog-ajout-produit {
-    width: 495px !important;
-    position: absolute !important;
-    top: 14em !important;
-    right: 9em !important;
-    box-shadow: 1px 1px 15px #000;
-    z-index: 1000;
-}
-
-.select_ingredient_structure, .select_option_structure {
-    width: 100%!important;
-    font-size:0.7em!important;
-    /*display: inline-block !important;*/
-    overflow: auto;
-    background-color: rgba(255, 255, 255, 1);
-    padding: 0.7em 0.3em 0.3em 0.3em;
-    margin: 3em 0;
-
-}
-
-.select_option_structure, .select_possibilite_structure {
-    /*width: 45% !important;*/
-    float: left;
-    margin: 2em 0 2em 0;
-}
-
-.select_option_structure {
-    width: 100%;
-    margin-right: 9%
-}
-
-.select_ingredient_structure label, .select_option_structure label {
-    margin-left: 0.5em;
-}
-
-.div_zone label, .defaut_prix {
-    font-size: 0.8em;
-    display: inline-block;
-    width: 40%;
-}
-
-/*________________ bouton + ________________*/
-
-.show_insert_dialog_structure {
-    width: 35%;
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid rgb(196, 196, 196);
-    padding: 0.5em;
-    margin: 0 60% 0 0;
-    float: left;
-    cursor: pointer;
-    -webkit-transition: all 0.3s linear;
-    -moz-transition: all 0.3s linear;
-    -ms-transition: all 0.3s linear;
-    -o-transition: all 0.3s linear;
-    transition:all 0.3s linear;
-}
-
-.show_insert_dialog_structure:hover, .show_insert_dialog_structure:visited, .label_ajout_option_personalize:hover, .label_ajout_option_personalize:visited {
-    background-color: #EAF897;
-    color: rgb(54, 54, 54);
-    text-shadow: 2px 3px 6px #FFFFFF;
-}
-
-a.link_add_product {                    
-    display: inline-block;
-    margin-top: 8px;
-    margin-left: 0.5em;
-}
-
-.label_ajout_ingred_personalize, .label_ajout_option_structure {
-    float: right;
-    margin-right: 1em;
-    margin-top: 0.2em;
-}
-
-.div_gestion_dropdown_menu_structure {
-    width: 230px;
-    margin-left: -6.1em;
-}
-
-.div_gestion_dropdown_item_structure {
-    margin-bottom: 0.8em
-}
-
-.div_gestion_dropdown_item_structure a {
-    text-align: center;
-}
-
-/*__________________________________________*/
-
-
-/*________________________CONTENT________________________*/
-
-
-.menu_or_card_structure, .recapitulatif_commande_structure {
-    max-height: none;
-    padding-right: 0;
-}
-
-/*__________________________________________*/
-
-
-.div_zone input {
-    font-size: 0.8em;
-    display: inline-block;
-}
-
-div.prev_page_structure+div.prev_page_structure {
-    display: inline;
-    margin-left: 0;
-}
-
-.label_uncheck_personalize, .label_ajout_ingred_personalize, .label_ajout_option_personalize {
-    font-size: 0.8em;
-}
-
-
-
-.name_prod_personalize, .liste_categorie_personalize, .liste_souscategorie_personalize {
-    font-size: 0.8em !important;
-}
-
-.dialog_add_produit .product_spec_structure {
-    float: left;
-    margin: 0;
-}
-
-.dialog_add_produit .product_spec_souscat_structure {
-    float: left;
-    margin: 0 0 0 1.5em;
-}
-
-.select_ingredient_structure label input, .select_option_structure label input {
-    vertical-align: middle;
-    margin-right: 1em;
-}
-
-/*____________________FLECHES____________________*/
-
-.prev_page_structure {
-    display: inline-block;
-    float: left;
-    margin: 1em 0 0.5em 0;
-    z-index: 508;
-    cursor: pointer;
-}
-
-.next_page_structure {
-    float: right;
-    margin: 1em 0 0.5em 0;
-    cursor: pointer;
-}
-
-/*____________________AJOUT OPTIONS____________________*/
-
-.label_uncheck_personalize {
-    float: left;
-    width: 100%;
-    display: inline-block;
-}
-
-.label_uncheck_personalize input {
-    margin: 0 0.8em;
-    vertical-align: middle;
-}
-
-.uncheck_all_ingredient_structure input {
-    margin-right: 1em;
-}
-
-
-/*____________________Page prix intérieur extérieur____________________*/
-
-.prix_definition_prix_personalize {
-    font-size: 0.75em;
-}
-
-hr{
-    width:100%;
-}
-
-.datetime_structure  {
-    width: 100%;
-    display: inline-block;
-}
-
-.datetime_structure p {
-    width: 50%;
-    float: left;
-}
-
-.datetime_structure p input {
-    width: 57%;
-    float: right;
-    margin-right: 2.2em;
-}
-
-.datetime_structure p label {
-    width: 31%;
-
-}
-
-.zone_extprix_tva_structure {
-    width: 50%;
-    float: left;
-}
-
-.zone_extprix_tva_structure input, .tva_produit_structure {
-    margin: 0 2.2em 0 0;
-    float: right;
-}
-
-
-/*___________________Ajouter les prix____________________*/
-
-
-.dialog_ajouter_produit_ajouterprix_personalize label {
-    width: 10%;
-    display: inline-block;
-}
-
-.label_tva_structure {
-    margin-left: 3em;
-}
-
-
-/*___________________Ajouter les établissements____________________*/
-
-div#ajouter_produit_div_etablissement {
-    overflow: auto;
-    height: 470px;
-    border: 1px solid rgba(192, 185, 185, 1);
-    background-color: rgba(238, 236, 236, 1);
-}
-
-
-.ajouter_produit_div_etablissement_head_p_structure {
-    display: inline-block;
-    width: 78.8%;
-    margin: 0;
-}
-
-.etablissement_div_header_titre_structure {
-    display: inline-block;
-    width: 78.4%;
-    margin: 0;
-}
-
-.li_zones_etablissement_checkbox_structure {
-    float: right;
-    margin: 0.5em 0.5em 0 0;
-}
-
-.etablissement_div_header_structure {
-    border-bottom: 1px solid rgba(196, 196, 196, 1);
-    margin-bottom: 0.5em;
-    padding-bottom: 0.5em;
-}
-
-.etablissement_div_personalize {
-    width: 100%!important;
-    font-size: 0.7em!important;
-    /* display: inline-block !important; */
-    background-color: rgba(255, 255, 255, 1);
-    padding: 0.7em 0.3em 0.3em 0.3em;
-    margin: 2em 0;
-    border-top: 1px solid rgba(196, 196, 196, 1);
-    border-bottom: 1px solid rgba(196, 196, 196, 1);
-}
-
-.etablissement_div_header_titre_personalize {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-left: 1em;
-}
-
-.li_zones_etablissement_structure {
-    width: 40%;
-    display: inline-block;
-}
-
-.li_zones_etablissement_structure:nth-child(even){
-    margin-left:10%;
-}
-
-.li_zones_etablissement_structure input {
-    margin:0;
-}
-
-
-
-.li_zones_etablissement_titrezone_structure {
-    vertical-align: middle;
-    margin: 0 0 1em 0;
-}
-
-.btn_validation_ajout_produit_structure {
-    float: right;
-    margin-top: 2em;
-}
 
 /*___________________Choix restaurant____________________*/
 
