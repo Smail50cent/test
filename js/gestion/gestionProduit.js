@@ -325,6 +325,9 @@ function submit_ingredientPage() {
         });
         produit.setIdsIngredients(list);
         optionPage();
+    } else {
+        produit.setIdsIngredients(list);
+        optionPage();
     }
 }
 function formInsertIngredient() {
@@ -456,6 +459,9 @@ function submit_optionPage() {
             showStyle: {opacity: 1, left: 0},
             hideDuration: 8000
         });
+        produit.setOptions(list);
+        prixPage();
+    } else {
         produit.setOptions(list);
         prixPage();
     }

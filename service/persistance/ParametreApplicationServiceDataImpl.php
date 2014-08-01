@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 include_once $path . 'service/persistance/ParametreApplicationServiceData.php';
 include_once $path . 'service/persistance/ConnexionBDD.php';
 include_once $path . 'service/logique/entity/ParametreApplication.php';
@@ -15,10 +9,9 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
     public function getAll($etablissementid) {
         $bdd = new ConnexionBDD();
         $return;
-        if($etablissementid != null){
-          
-            $return = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
-        }else{
+        if ($etablissementid != null) {
+            $return = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE ((etablissement_id = " . $etablissementid . ") OR (etablissement_id IS NULL))");
+        } else {
             $return = $bdd->executeGeneric("SELECT * FROM parametre_application ");
         }
         return $this->parseParametreApplication($return);
@@ -30,15 +23,14 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
         return $this->parseParametreApplication($retour);
     }
 
-    public function getByNomParametre($nom,$etablissementid) {
+    public function getByNomParametre($nom, $etablissementid) {
         $bdd = new ConnexionBDD();
         $retour;
-        if($etablissementid!=null){
-            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."' AND  ((etablissement_id = ".$etablissementid.") OR (etablissement_id IS NULL))");
-        }else{
-            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom."'");
+        if ($etablissementid != null) {
+            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom . "' AND  ((etablissement_id = " . $etablissementid . ") OR (etablissement_id IS NULL))");
+        } else {
+            $retour = $bdd->executeGeneric("SELECT * FROM parametre_application WHERE nom_parametre ='" . $nom . "'");
         }
-        
         return $this->parseParametreApplication($retour);
     }
 
@@ -51,9 +43,9 @@ class ParametreApplicationServiceDataImpl implements ParametreApplicationService
             $paramapp->setEtablissement($ligne->etablissement_id);
             $paramapp->setNom_parametre($ligne->nom_parametre);
             $paramapp->setValeur_parametre($ligne->valeur_parametre);
-            if($ligne->valeur_parametre=="true" ){
+            if ($ligne->valeur_parametre == "true") {
                 $paramapp->setValeur_parametre(true);
-            }else if($ligne->valeur_parametre=="false"){
+            } else if ($ligne->valeur_parametre == "false") {
                 $paramapp->setValeur_parametre(false);
             }
             array_push($liste, $paramapp);
