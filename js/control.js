@@ -482,3 +482,11 @@ function gestionAdmininistrateurConnected(method) {
         }
     }
 }
+getServicePath = function(serviceKeyName) {
+    var ret = "";
+    ret += "./";
+    ret += config.getConfig("serveur.clientaccess.servicesAccess") + "/";
+    ret += config.getConfig(serviceKeyName);
+    ret += config.getConfig("serveur.clientaccess.serviceSufixe");
+    return ret;
+};
