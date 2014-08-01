@@ -316,8 +316,19 @@ function submit_ingredientPage() {
         ingredient.setId($(this).attr('id'));
         list.push(ingredient);
     });
-    produit.setIdsIngredients(list);
-    optionPage();
+    if (list.length == 0) {
+        $("#alert_error_id").freeow("Ingrédient", "Attention vous n'avez pas choisie d'Ingrédient", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setIdsIngredients(list);
+        optionPage();
+    } else {
+        produit.setIdsIngredients(list);
+        optionPage();
+    }
 }
 function formInsertIngredient() {
 
@@ -441,9 +452,19 @@ function submit_optionPage() {
         option.setId($(this).attr('id'));
         list.push(option);
     });
-    produit.setOptions(list);
-    prixPage();
-
+    if (list.length == 0) {
+        $("#alert_error_id").freeow("Option", "Attention vous n'avez pas choisie d'Option", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setOptions(list);
+        prixPage();
+    } else {
+        produit.setOptions(list);
+        prixPage();
+    }
 }
 
 var dates = new Array();
@@ -572,7 +593,7 @@ function submit_prixPage() {
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
     if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
-        $("#alert_error_id").freeow("Prix", "Vous devez fournir un prix avant de continuer", {
+        $("#alert_error_id").freeow("Prix", "Vous devez entrer un prix avant de continuer", {
             classes: ["smokey", "error"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -586,6 +607,7 @@ function submit_prixPage() {
 }
 
 function onLoadEtablissementPage() {
+    clickValider = 0;
     $("#ui-id-1").text(strings.getString("gestion.produit.ajout.etablissement.dialog.titre"));
     $("#dialog_add_produit_id").html("");
     var htmlAll = getAjouterProduitSelectEtablissements();
@@ -696,16 +718,45 @@ function submitEtablissements() {
     produit.setEtablissements(listeEtabZone);
     //setLocalStorageValue("gestion.add.produit.etablissemnts", JSON.stringify(listeEtabZone));
 }
+
 function validerProduit() {
     submitEtablissements();
-    console.log(produit);
-    getConnexion().addProduit(insertP, produit);
-    function insertP(data) {
-        produit.setId(data);
-        $("#dialog_add_produit_id").dialog("destroy");
-        $(".produit_info").remove();
-        $("#dialog_add_produit_id").empty();
-        loadNewProduit();
+    if (clickValider == 0) {
+        if (produit.etablissements.length == 0) {
+            $("#alert_error_id").freeow("Etablissement", "Cliquez une deuxième pour continuer quand meme", {
+                classes: ["smokey", "notice"],
+                hideStyle: {opacity: 0, left: "400px"},
+                showStyle: {opacity: 1, left: 0},
+                hideDuration: 8000
+            });
+            $("#alert_error_id").freeow("Etablissement", "Attention Vous n'avez pas choisie un établissement ", {
+                classes: ["smokey", "notice"],
+                hideStyle: {opacity: 0, left: "400px"},
+                showStyle: {opacity: 1, left: 0},
+                hideDuration: 8000
+            });
+            clickValider++;
+        } else {
+            console.log(produit);
+            getConnexion().addProduit(insertP, produit);
+            function insertP(data) {
+                produit.setId(data);
+                $("#dialog_add_produit_id").dialog("destroy");
+                $(".produit_info").remove();
+                $("#dialog_add_produit_id").empty();
+                loadNewProduit();
+            }
+        }
+    } else {
+        console.log(produit);
+        getConnexion().addProduit(insertP, produit);
+        function insertP(data) {
+            produit.setId(data);
+            $("#dialog_add_produit_id").dialog("destroy");
+            $(".produit_info").remove();
+            $("#dialog_add_produit_id").empty();
+            loadNewProduit();
+        }
     }
 }
 

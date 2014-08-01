@@ -1448,8 +1448,8 @@ background: rgba(248, 255, 197, 0.5);
 .dialog-ajout-produit {
     width: 495px !important;
     position: absolute !important;
-    top: 3em !important;
-    right: -12em !important;
+    top: 14em !important;
+    right: 9em !important;
     box-shadow: 1px 1px 15px #000;
     z-index: 1000;
 }
@@ -1538,7 +1538,15 @@ a.link_add_product {
 /*__________________________________________*/
 
 
+/*________________________CONTENT________________________*/
 
+
+.menu_or_card_structure, .recapitulatif_commande_structure {
+    max-height: none;
+    padding-right: 0;
+}
+
+/*__________________________________________*/
 
 
 .div_zone input {
