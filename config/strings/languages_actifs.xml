@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<languages>
+    <language>
+        <id>1</id>
+        <label>Français</label>
+        <actif>true</actif>
+        <navigatorVar>fr</navigatorVar>
+        <type>fr_FR</type>
+    </language>
+    <language>
+        <id>2</id>
+        <label>Anglais</label>
+        <actif>true</actif>
+        <navigatorVar>en</navigatorVar>
+        <type>en_US</type>
+    </language>
+</languages>

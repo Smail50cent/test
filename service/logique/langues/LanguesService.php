@@ -7,4 +7,6 @@ interface LanguesService {
     public function setLangActif($id);
 
     public function setLangDiable($id);
+
+    public function getByActif();
 }

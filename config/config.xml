@@ -65,7 +65,9 @@
         <variable name="serveur.clientaccess.serviceAddString">strings/add</variable>
         <variable name="serveur.clientaccess.serviceGetAllLangues">langues/getAll</variable>
         <variable name="serveur.clientaccess.serviceSetLangEnable">langues/setLangActif</variable>
-        <variable name="serveur.clientaccess.servicesetLangDiable">langues/setLangDisable</variable>      
+        <variable name="serveur.clientaccess.servicesetLangDiable">langues/setLangDisable</variable>    
+        <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
+            
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
         <variable name="tableNameCategorie">categories</variable>

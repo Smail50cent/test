@@ -939,4 +939,5 @@ function Langues(id, label, gmt_level, actif) {
     this.label = label;
     this.gmt_level = gmt_level;
     this.actif = actif;
+    this.navigatorVar;
 }

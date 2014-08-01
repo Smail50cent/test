@@ -160,7 +160,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TODO");
     };
     this.sendNewEtablissement = function(method, etablissement, param) {
-        console.log("TO DO")
+        console.log("TO DO");
     };
     this.removeEtablissement = function(method, id, param) {
         console.log("TO DO");
@@ -173,5 +173,14 @@ function ConnexionLocalIndexedDB() {
     };
     this.getAllLangues = function(method, param) {
         console.log("TO DO");
+    };
+    this.setLangEnable = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.setLangDiable = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.getLangByActif = function(method, param) {
+        console.log("TO DO VITE");
     };
 }

@@ -1,4 +1,8 @@
 function ConnexionServer() {
+    this.getMethod = "GET";
+    this.postMethod = "POST";
+
+    this.typeReq = this.getMethod;
     this.getMajTable = function(conftableName) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
@@ -1357,7 +1361,7 @@ function ConnexionServer() {
                         liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
                     }
                     if (method != null) {
-                        method(data, param);
+                        method(liste, param);
                     }
                 }
             },
@@ -1365,10 +1369,10 @@ function ConnexionServer() {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
-    }; 
-    this.setLangEnable = function(method, id,param) {
+    };
+    this.setLangEnable = function(method, id, param) {
         $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceSetLangEnable")+"?idlang="+id,
+            url: getServicePath("serveur.clientaccess.serviceSetLangEnable") + "?idlang=" + id,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -1388,9 +1392,9 @@ function ConnexionServer() {
             }
         });
     };
-    this.setLangDiable = function(method, id,param) {
+    this.setLangDiable = function(method, id, param) {
         $.ajax({
-            url: getServicePath("serveur.clientaccess.servicesetLangDiable")+"?idlang="+id,
+            url: getServicePath("serveur.clientaccess.servicesetLangDiable") + "?idlang=" + id,
             type: 'GET',
             dataType: 'json',
             async: true,
@@ -1402,6 +1406,32 @@ function ConnexionServer() {
                     data = data.data;
                     if (method != null) {
                         method(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    this.getLangByActif = function(method, param) {
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceLangGetByActif"),
+            type: this.typeReq,
+            dataType: 'json',
+            async: true,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (method != null) {
+                    data = data.data;
+                    var liste = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
+                    }
+                    if (method != null) {
+                        method(liste, param);
                     }
                 }
             },

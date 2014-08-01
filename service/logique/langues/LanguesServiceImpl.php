@@ -42,4 +42,8 @@ class LanguesServiceImpl implements LanguesService {
         $this->stringsSrv->generateXMLFileFor($types);
     }
 
+    public function getByActif() {
+        return $this->languesSrv->getByActif();
+    }
+
 }

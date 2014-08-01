@@ -10,7 +10,7 @@ class ManifestGenerator {
     public static $manifestFileName = "site.manifest";
 
     private function getDirToIgnore() {
-        return array("service", "nbproject");
+        return array("service", "nbproject", "dev", "nocache", "old");
     }
 
     private function getAllFiles() {
@@ -28,12 +28,13 @@ class ManifestGenerator {
         array_push($fichiersToCache, "./config/config.xml");
         array_push($fichiersToCache, "./config/pages.xml");
         array_push($fichiersToCache, "./config/scriptsToLoad.xml");
-        array_push($fichiersToCache, "./config/string_en_US.xml");
-        array_push($fichiersToCache, "./config/string_fr_FR.xml");
         array_push($fichiersToCache, "./js/scripts.js");
         array_push($fichiersToCache, "./js/control.js");
-        array_push($fichiersToCache, "./css/appli_caisse_pizza_structure.css");
         array_push($fichiersToCache, "./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css");
+        $strings = $this->getFilesInFolder("../../config/strings/");
+        for ($i = 0; $i < count($strings); $i++) {
+            array_push($fichiersToCache, $strings[$i]);
+        }
         $templatePath = "../../config/template/";
         $allFiles = $this->getFilesInFolder($templatePath);
         $cssFiles = $this->getFilesInFolder("../../css/");
