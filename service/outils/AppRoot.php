@@ -8,8 +8,9 @@
 
 class AppRoot {
 
-    public $isAppRoot = true;
-    public $NameApp = "appcaisse";
+    private $isAppRoot = true;
+    private $NameApp = "appcaisse";
+    private $isGet = true;
 
     public function getPATH() {
         if ($this->isAppRoot) {
@@ -19,15 +20,23 @@ class AppRoot {
         }
     }
 
-}
+    public function isGet() {
+        return $this->isGet;
+    }
 
+}
 class Retour {
 
     public $data;
     public $error = false;
 
 }
-
 $root = new AppRoot();
 static $path;
+if ($root->isGet()) {
+    extract($_GET);
+} else {
+    extract($_POST);
+}
+$ret = new Retour();
 $path = $root->getPATH();

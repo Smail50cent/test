@@ -47,4 +47,45 @@ class StringsServiceIOImpl implements StringsServiceIO {
         }
     }
 
+    public function createFilesWithLanguagesEnable($langues) {
+        $ret = null;
+
+        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<languages>\n";
+        for ($i = 0; $i < count($langues); $i++) {
+            $content = "\t<language>\n";
+            $content = "\t\t<id>".$langues[$i]->getId()."</id>\n";
+            $content = "\t\t<label>".$langues[$i]->getLabel()."</label>\n";
+            $content = "\t\t<actif>".$langues[$i]->getActif()."</actif>\n";
+            $content = "\t\t<navigatorVar>".$langues[$i]->getNavigatorVar()."</navigatorVar>\n";
+            $content = "\t\t<type>".$langues[$i]->getType()."</type>\n";
+            $content = "\t\t<gmtLevel>".$langues[$i]->getGmtLevel()."</gmtLevel>\n";
+            $content = "\t</language>\n";
+        }  
+        $content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<languages>\n";
+        $strOfFile = $content;
+        $fichier = fopen("../../../config/strings/languages_actifs.xml", "w+");
+        if (fwrite($fichier, $strOfFile)) {
+            $ret = true;
+        } else {
+            $ret = false;
+        }
+        fclose($fichier);
+        /* <languages>
+          <language>
+          
+          
+          
+          
+          
+          
+          <language>
+          <id>2</id>
+          <label>Anglais</label>
+          <actif>true</actif>
+          <navigatorVar>en</navigatorVar>
+          <type>en_US</type>
+          </language>
+          </languages> */
+    }
+
 }

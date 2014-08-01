@@ -12,6 +12,15 @@ class Langue {
     public $gmt_level;
     public $actif;
     public $type;
+    public $navigatorVar;
+
+    public function getNavigatorVar() {
+        return $this->navigatorVar;
+    }
+
+    public function setNavigatorVar($navigatorVar) {
+        $this->navigatorVar = $navigatorVar;
+    }
 
     public function getType() {
         return $this->type;
