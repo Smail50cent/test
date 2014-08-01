@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <languages>
-    <language>
-        <id>1</id>
-        <label>Français</label>
-        <actif>true</actif>
-        <navigatorVar>fr</navigatorVar>
-        <type>fr_FR</type>
-    </language>
-    <language>
-        <id>2</id>
-        <label>Anglais</label>
-        <actif>true</actif>
-        <navigatorVar>en</navigatorVar>
-        <type>en_US</type>
-    </language>
+	<language>
+		<id>1</id>
+		<label>Français</label>
+		<actif>1</actif>
+		<navigatorVar>fr</navigatorVar>
+		<type>fr_FR</type>
+		<gmtLevel>1</gmtLevel>
+	</language>
+	<language>
+		<id>2</id>
+		<label>Anglais</label>
+		<actif>1</actif>
+		<navigatorVar>en</navigatorVar>
+		<type>en_US</type>
+		<gmtLevel>0</gmtLevel>
+	</language>
 </languages>
