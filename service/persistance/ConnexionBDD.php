@@ -15,7 +15,7 @@ class ConnexionBDD {
         $ret[1] = array("192.168.170.66", "mysql", "bar", "preCaisse", "alfa");
         $ret[2] = array("192.168.170.66", "mysql", "dupappcaisse", "preCaisse", "alfa");
         $ret[3] = array("192.168.170.66", "mysql", "migration_appcaisse", "preCaisse", "alfa");
-        $ret[3] = array("192.168.170.61", "mysql", "migration_appcaisse", "root", "fmoz6po");
+        $ret[4] = array("192.168.170.61", "mysql", "migration_appcaisse", "root", "fmoz6po");
         return $ret;
     }
 
