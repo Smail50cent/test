@@ -1,3 +1,12 @@
+
+function Langues(id, label, gmtLevel, isActif, navigatorVar, type) {
+    this.id = id;
+    this.label = label;
+    this.gmt_level = gmtLevel;
+    this.actif = isActif;
+    this.type = type;
+    this.navigatorVar = navigatorVar;
+}
 function Entreprise() {
     this.nom;
     this.adresse;
@@ -932,12 +941,4 @@ function Styles(id, nom, url, actif) {
     this.nom = nom;
     this.url = url;
     this.actif = actif;
-}
-
-function Langues(id, label, gmt_level, actif) {
-    this.id = id;
-    this.label = label;
-    this.gmt_level = gmt_level;
-    this.actif = actif;
-    this.navigatorVar;
 }

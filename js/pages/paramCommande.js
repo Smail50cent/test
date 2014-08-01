@@ -22,9 +22,9 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
         itemFirst = paramValue(itemFirst, "OptionValue", "no");
         $("#select_lang").append(itemFirst);
         for (var i = 0; i < langs.length; i++) {
-            var itemOther = htmlOp;
-            itemOther = paramValue(itemOther, "OptionName", langs[i][1]);
-            itemOther = paramValue(itemOther, "OptionValue", langs[i][0]);
+            var itemOther = htmlOp;console.log(langs);
+            itemOther = paramValue(itemOther, "OptionName", langs[i].label);
+            itemOther = paramValue(itemOther, "OptionValue", langs[i].id);
             $("#select_lang").append(itemOther);
         }
         $("#select_lang").change(function() {
