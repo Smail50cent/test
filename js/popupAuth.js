@@ -8,11 +8,19 @@ var isServeur;
 function onLoadCompte(showVisiteurs, titre, topvalue, method, isServeusr) {//To DO an object
     isServeur = isServeusr;
     methodToLoadAfter = method;
+    if($('#auth_popup_id').length) {
+        $('#auth_popup_id').remove();
+    }
     var htmlDialog = getDialogAccesCompte();
     $("body").append(htmlDialog);
     $("head").append("<style>.ui-dialog{        top: " + topvalue + "em !important;  }</style>");
     scripts.loadScripts("lib.dialog", function() {
-        $('#auth_popup_id').dialog({autoOpen: true, modal: true});
+        $('#auth_popup_id').dialog({autoOpen: true, modal: true,
+            close: function(event, ui) {
+                $(this).dialog("destroy");
+                $('#auth_popup_id').remove();
+            }
+        });
         var html = getAuthCompte();
         if (titre != null) {
             $('#nbr_personne_id').html(titre);
