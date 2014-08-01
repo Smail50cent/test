@@ -18,7 +18,7 @@ interface StringsService {
      * 
      * @param array 
      */
-    public function generateXMLFileFor($langues);
+    public function generateXMLFileFor($actifs);
 
     public function addNewString($key, $en, $fr);
 }

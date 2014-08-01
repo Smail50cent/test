@@ -13,7 +13,7 @@ class LanguesServiceDataImpl implements LanguesServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type`  FROM `langues`");
+        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type`,`navigator_var`  FROM `langues`");
         return $this->parseLangue($result);
     }
 
@@ -27,6 +27,7 @@ class LanguesServiceDataImpl implements LanguesServiceData {
             }else{
                 $langue->setActif(false);
             }
+            $langue->setNavigatorVar($ligne->navigator_var);
             $langue->setLabel($ligne->label);
             $langue->setGmtLevel($ligne->gmt_level);
             $langue->setType($ligne->type);
@@ -47,7 +48,7 @@ class LanguesServiceDataImpl implements LanguesServiceData {
 
     public function getByActif() {
         $bdd = new ConnexionBDD();
-        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type` FROM `langues` WHERE actif=1");
+        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type`,`navigator_var` FROM `langues` WHERE actif=1");
         return $this->parseLangue($result);
     }
 
