@@ -7,6 +7,7 @@
     <td class="section_tr_message_structure section_tr_message_personalize"><p idetablissement="{idetab}" typelabel="message">{message}</p></td>
     <td class="section_tr_slogan_structure section_tr_slogan_personalize"><p idetablissement="{idetab}" typelabel="slogan">{slogan}</p></td>
     <td class="section_tr_groupe_structure section_tr_groupe_personalize" ><p idetablissement="{idetab}" typelabel="groupe">{groupe}</p></td>
+    <td class="section_tr_zones_structure section_tr_zones_personalize" ><div idetablissement="{idetab}" typelabel="zones">{zones}</div></td>
     <td class="section_tr_actions_structure section_tr_actions_personalize" >
         <div class="section_update_structure section_update_personalize">
             <button type="button" onclick="removeEtablissement({idetab});" class="btn btn-default btn-sm section_remove_update_button_personalize section_remove_update_button_strucutre">

@@ -48,9 +48,11 @@ class StringsServiceImpl implements StringsService {
         }
     }
 
+    /**
+     * DEV FUNCTION !
+     */
     public function addNewString($key, $en, $fr) {
         if ($key != null && $en != null & $fr != null) {
-
             $strFr = new Strings();
             $strFr->setKey_lang($key);
             $strFr->setLang("fr_FR");
@@ -61,7 +63,9 @@ class StringsServiceImpl implements StringsService {
             $strEn->setLang("en_US");
             $strEn->setValue($en);
             $this->stringsSrv->add($strEn);
-            $this->generateXMLFileFor(array("fr_FR", "en_US"));
+            $languesSrv = PersistanceFactory::getLanguesService();
+            $actifs = $languesSrv->getByActif();
+            $this->generateXMLFileFor($actifs);
         }
     }
 

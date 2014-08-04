@@ -20,6 +20,7 @@ if (isset($_GET["etablissement"])) {
     $newEtab->setSlogan($etablissement->slogan);
     $newEtab->setStyle($etablissement->style);
     $newEtab->setTelephone($etablissement->telephone);
+    $newEtab->setZones($etablissement->zones);
     $etabSrv = LogiqueFactory::getEtablissementService();
     $ret = new ToRet1();
     $ret->id = $etabSrv->add($newEtab);

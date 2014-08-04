@@ -27,4 +27,8 @@ class ZoneTableServiceImpl implements ZoneTableService {
         return $ret;
     }
 
+    public function getByEtablissementNull() {
+        return $this->zoneTableSrv->getByEtablissementNull();
+    }
+
 }

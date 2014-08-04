@@ -53,6 +53,7 @@
         <variable name="serveur.clientaccess.serviceGetAllTauxTva">tauxTva/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetGroupeById">groupe/getById</variable>
         <variable name="serveur.clientaccess.serviceGetAllEtablissementsWithZones">etablissement/getAllWithZones</variable>
+        <variable name="serveur.clientaccess.serviceZoneTablesGetByEtablissementNull">zoneTables/getByEtablissementNull</variable>
         <variable name="serveur.clientaccess.serviceSufixe">.php</variable>
         <variable name="tableNameOptions">options</variable>
         <variable name="serveur.clientaccess.serviceGetAllEtablissements">etablissement/getAll</variable>

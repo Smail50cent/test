@@ -10,4 +10,6 @@ interface ZoneTableService {
     public function getAll();
 
     public function getByIdEtablissement($id);
+
+    public function getByEtablissementNull();
 }

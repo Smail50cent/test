@@ -10,9 +10,10 @@ function loadGestionSites() {
     $("#table_gererlessites_all").append(getGererlesSitesTableThead());
     var htmlTbody = getGererlesSitesTableTbodyTr();
     $("#tr_actions_tablesites").text(strings.getString("label.gererlessites.table.head.action.tr"));
-    getConnexion().getAllEtablissements(addItems, null);
+    getConnexion().getAllEtablissementsWithZones(addItems, null);
     function addItems(etablissements, param) {
         for (var i = 0; i < etablissements.length; i++) {
+            ;
             if (etablissements[i].nom != null) {
             } else {
                 etablissements[i].nom = etablissements[i].groupe.nom;
@@ -51,6 +52,15 @@ function loadGestionSites() {
             litbody = paramValue(litbody, "slogan", etablissements[i].slogan);
             litbody = paramValue(litbody, "idetab", etablissements[i].id);
             litbody = paramValue(litbody, "groupe", etablissements[i].groupe.nom);
+            var htmlZone = "";
+            for (var j = 0; j < etablissements[i].zones.length; j++) {
+                if (etablissements[i].zones.length - 1 == j) {
+                    htmlZone += "<p class=\"a_zone_structure a_zone_personalize\">" + etablissements[i].zones[j].nom + "</p>";
+                } else {
+                    htmlZone += "<p class=\"a_zone_structure a_zone_personalize\">" + etablissements[i].zones[j].nom + ",</p>";
+                }
+            }
+            litbody = paramValue(litbody, "zones", htmlZone);
             $("#table_gererlessites_all").append(litbody);
         }
     }
@@ -58,9 +68,11 @@ function loadGestionSites() {
 var groupex = null;
 var stylesIn = null;
 function addEtablissement() {
+    //<input class="li_select_zone_input_structure li_select_zone_input_personalize" type="checkbox" idzone="1" method="addMenu">
     if ($("#myModal")) {
         $("#myModal").remove();
     }
+
     var htmlModel = getBootstrapModal();
     htmlModel = paramValue(htmlModel, "titre", strings.getString("label.gererlessites.table.modal.title"));
     htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
@@ -82,6 +94,7 @@ function addEtablissement() {
     var htmlBodyModal = getAddSiteModalBody();
     $("#bootstrap_modal_body").html('');
     $("#bootstrap_modal_body").append(htmlBodyModal);
+    $("#a_help_add_new_zone").text(strings.getString("label.addsite.addzoneinsite.pas.presente"));
     $("#add_site_nom_id").text(strings.getString("label.gererlessites.table.modal.label.nom"));
     $("#add_site_style_id").text(strings.getString("label.gererlessites.table.modal.label.style"));
     $("#add_site_logo_id").text(strings.getString("label.gererlessites.table.modal.label.logo"));
@@ -93,8 +106,16 @@ function addEtablissement() {
         stylesIn = styles;
         $("#add_site_style_value").html("");
         for (var i = 0; i < styles.length; i++) {
-//            console.log(styles[i]);
             $("#add_site_style_value").append("<option value=" + styles[i].url + ">" + styles[i].nom + "</option>");
+        }
+    }, null);
+    var htmlLiZone = getGererSitesLiSelectZone();
+    getConnexion().getZoneTablesWhereEtablissementNull(function(zones, param) {
+        for (var i = 0; i < zones.length; i++) {
+            var myLi = htmlLiZone;
+            myLi = paramValue(myLi, "zoneName", zones[i].nom);
+            myLi = paramValue(myLi, "idZone", zones[i].id);
+            $("#add_site_zone_value").append(myLi);
         }
     }, null);
     $('#myModal').modal('show');
@@ -280,6 +301,16 @@ function valderAjoutEtablissement() {
             etablissement.slogan = null;
         }
         etablissement.groupe = parseInt(config.getConfig("client.application.groupe.id"));
+        etablissement.zones = new Array();
+        $("input[method='addEtabl']").each(function() {
+            var idZone = $(this).attr("idzone");
+            var checked = $(this).is(":checked");
+            if (checked) {
+                var zone = ZoneTable();
+                zone.id = parseInt(idZone);
+                etablissement.zones.push(zone);
+            }
+        });
         getConnexion().sendNewEtablissement(function(data, param) {
             $('#myModal').modal('hide');
             data = JSON.parse(data);

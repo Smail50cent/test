@@ -55,7 +55,7 @@ function DeleteProduct(id) {
             position: 'center',
             buttons: {
                 Yes: function() {
-                    var connexion = getConnexion();
+                    var connexion = getConnexionServeur();
                     connexion.deleteProduit(idprod);
                     getImplOfConnexionLocal().deleteProduit(idprod);
                     id.parent().parent().parent().remove();
@@ -603,7 +603,6 @@ function submit_prixPage() {
         $("#produit_zone_right_prix_id").html(fntp(calculPrixWithTVA(prix, Tva)));
         onLoadEtablissementPage();
     }
-
 }
 
 function onLoadEtablissementPage() {

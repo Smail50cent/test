@@ -99,4 +99,5 @@
 	<string key="label.error.nom.required">Le nom est requis pour un nouvel établissement</string>
 	<string key="label.confirm.remove.etablissement">Etes-vous sûr de vouloir supprimer cet établissement ?</string>
 	<string key="error.label.errror.action.serveur">Le serveur n'a pas réussi à effectuer l'action.</string>
+	<string key="label.addsite.addzoneinsite.pas.presente">La zone souhaité n'est pas présente. Ajoutez en une nouvelle.</string>
 </strings>
