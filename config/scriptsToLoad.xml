@@ -74,4 +74,8 @@
     <style for="gestionProduit">./js/lib/bootstrapDropdown/css/bootstrap-theme.min.css</style>
     
     <script for="modeexpert" priority="1">gestion/modeexpert.js</script>
+    <script for="modeexpert" priority="2">gestion/modeexpert_etablissement.js</script>
+    <script for="modeexpert" priority="3">gestion/modeexpert_langues.js</script>
+    <script for="modeexpert" priority="4">gestion/modeexpert_tables.js</script>
+    <style for="modeexpert">./css/mode_expert.css</style>
 </files>
