@@ -42,10 +42,17 @@ class MajTablesServiceDataImpl implements MajTablesServiceData {
         return $this->parseMAJTables($retour);
     }
 
-    public function haveMAJ($tableName,$level) {
+    public function haveMAJ($tableName, $level) {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT * FROM MAJ_TABLES WHERE nomTable='" . $tableName . "' ");
         return $this->parseMAJTables($retour);
+    }
+
+    public function updateLevel($type) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT level+1 AS 'level' FROM `MAJ_TABLES` WHERE `nomTable` = '".$type."' ;
+          UPDATE MAJ_TABLES SET level = level +1 WHERE `nomTable` = '".$type."' ;");
+        return intval($retour->fetch()->level);
     }
 
 }

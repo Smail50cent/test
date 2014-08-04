@@ -50,6 +50,10 @@ class MajTablesServiceImpl implements MajTablesService {
         }
     }
 
+    public function updateLevel($type) {
+        return $this->majtableSrv->updateLevel($type);
+    }
+
 }
 
 class ToRet {

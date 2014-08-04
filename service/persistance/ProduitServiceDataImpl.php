@@ -553,7 +553,8 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id WHERE 
 
     public function DeleteProduit($id) {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("DELETE FROM produit WHERE ID=" . $id);
+        $retour = $bdd->executeGeneric("DELETE FROM produit WHERE ID= ".$id." ;"
+                . "UPDATE MAJ_TABLES SET `level` = (SELECT MAX(level) as 'level' FROM produit) WHERE `nomTable` = 'produits' ");
         return $retour;
     }
 
@@ -634,11 +635,11 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $categorieId = $produit->getCategorie()->getId();
         $souscategorieId = $produit->getSousCategorie()->getId();
         $tauxTvaid = $this->getTauxTvaId($produit->getTauxTva());
-        $level = 1;
+        $level = $produit->getLevel();
         $bdd = new ConnexionBDD();
         $produitId = $bdd->executeGeneric("INSERT INTO `produit`"
                 . "(`NOM`, `CATEGORIE_ID`, `sousCategorie`, `TVA`, `level`) VALUES "
-                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",1)");
+                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",".$level.")");
         if ($assoPrixProduit != null) {
             for ($i = 0; $i < count($assoPrixProduit); $i++) {
                 $prixHt = $assoPrixProduit[$i]->getPrixHt();

@@ -130,6 +130,7 @@
     width: 60% !important;
     position: absolute !important;
     box-shadow: 1px 1px 15px #000;
+    top: 0px;
     z-index: 1000;
 }
 
