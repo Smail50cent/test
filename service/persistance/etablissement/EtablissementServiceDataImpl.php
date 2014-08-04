@@ -56,10 +56,14 @@ etablissement.telephone AS etablissement_adresseEtab,
 etablissement.telephone AS etablissement_telephone,
 etablissement.message AS etablissement_message,
 zone_table.id AS zone_table_id,
-zone_table.nom AS zone_table_nom
+zone_table.nom AS zone_table_nom,
+tables.id AS tables_id,
+tables.numero AS tables_numero,
+tables.zone_table_ke AS tables_zone_table_ke
 FROM `etablissement`
 LEFT JOIN groupe ON groupe.id = `id_groupe`
-LEFT JOIN zone_table ON zone_table.etablissement_id = etablissement.id");
+LEFT JOIN zone_table ON zone_table.etablissement_id = etablissement.id
+LEFT JOIN tables ON tables.zone_table_ke = zone_table.id");
         return $this->parse($retour);
     }
 
@@ -145,6 +149,15 @@ etablissement.message AS etablissement_message
                 if ($assoZone != null) {
                     $etablissement->addZone($assoZone);
                 }
+                $assoTable = $this->testsForTables($ligne, $etablissement);
+                if ($assoTable != null) {
+                    $zones = $etablissement->getZones();
+                    for($j= 0 ; $j < count($zones); $j++ ){
+                        if($zones[$j]->id == $assoTable->getZone() ){
+                            $zones[$j]->addTable($assoTable);
+                        }
+                    }
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->etablissement_id != $lignes[$i + 1]->etablissement_id) {
                         array_push($liste, $etablissement);
@@ -159,6 +172,15 @@ etablissement.message AS etablissement_message
                 if ($assoZone != null) {
                     $etablissement->addZone($assoZone);
                 }
+                $assoTable = $this->testsForTables($ligne, $etablissement);
+                if ($assoTable != null) {
+                    $zones = $etablissement->getZones();
+                    for($j= 0 ; $j < count($zones); $j++ ){
+                        if($zones[$j]->id == $assoTable->getZone() ){
+                            $zones[$j]->addTable($assoTable);
+                        }
+                    }
+                }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->etablissement_id != $lignes[$i + 1]->etablissement_id) {
                         array_push($liste, $etablissement);
@@ -171,6 +193,15 @@ etablissement.message AS etablissement_message
                 $assoZone = $this->testsForListeZones($ligne, $etablissement);
                 if ($assoZone != null) {
                     $etablissement->addZone($assoZone);
+                }
+                $assoTable = $this->testsForTables($ligne, $etablissement);
+                if ($assoTable != null) {
+                    $zones = $etablissement->getZones();
+                    for($j= 0 ; $j < count($zones); $j++ ){
+                        if($zones[$j]->id == $assoTable->getZone() ){
+                            $zones[$j]->addTable($assoTable);
+                        }
+                    }
                 }
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->etablissement_id != $lignes[$i + 1]->etablissement_id) {
@@ -209,6 +240,34 @@ etablissement.message AS etablissement_message
                 $zoneTable->setEtablissement_id($ligne->etablissement_id);
             }
             return $zoneTable;
+        } else {
+            return null;
+        }
+    }
+  
+    private function testsForTables($ligne, Etablissement $etablissement) {
+        $isHerePrix = false;
+        for ($j = 0; $j < count($etablissement->getZones()); $j++) {
+            $cats = $etablissement->getZones();
+            for ($x = 0; $x < count($cats[$j]->getTables()); $x++) {
+                if (intval($cats[$j]->tables[$x]->id) == intval($ligne->tables_id)) {
+                    $isHerePrix = true;
+                    break;
+                }
+            }
+            if ($isHerePrix) {
+                break;
+            }
+        }
+        if (!$isHerePrix) {
+            $table = null;
+            if ($ligne->tables_id != null) {
+                $table = new Table();
+                $table->setId($ligne->tables_id);
+                $table->setNumero($ligne->tables_numero);
+                $table->setZone($ligne->tables_zone_table_ke);
+            }
+            return $table;
         } else {
             return null;
         }
@@ -257,8 +316,7 @@ etablissement.message AS etablissement_message
                 . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
                 . "," . $style . "," . $adresse . ","
                 . "" . $telephone . "," . $message . ","
-                . "" . $slogan . "," . $etablissement->getGroupe() . ")");
-
+                . "" . $slogan . "," . $etablissement->getGroupe() . ");");
         return $id;
     }
 
@@ -306,9 +364,9 @@ etablissement.message AS etablissement_message
             $slogan = "'" . $etablissement->getSlogan() . "'";
         }
         $bdd->executeGeneric("UPDATE `etablissement` "
-                . "SET `nom`='".$etablissement->getNom()."',`logo`= ".$logo." ,"
-                . "`style`= ".$style.",`adresseEtab`=".$adresse.","
-                . "`telephone`=".$telephone.",`message`=".$message.",`slogan`=".$slogan." WHERE `id` = ".$etablissement->getId());
+                . "SET `nom`='" . $etablissement->getNom() . "',`logo`= " . $logo . " ,"
+                . "`style`= " . $style . ",`adresseEtab`=" . $adresse . ","
+                . "`telephone`=" . $telephone . ",`message`=" . $message . ",`slogan`=" . $slogan . " WHERE `id` = " . $etablissement->getId());
     }
 
 }

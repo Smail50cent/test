@@ -382,6 +382,9 @@ function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
                 var startDate = new Date(associationPrixProduit[i].dateDebut).getTime();
                 var endDate = new Date(associationPrixProduit[i].dateFin).getTime();
                 if (nom == "gestionProduit") {
+                    if (table == null) {
+                        var table = {"zone": 0};
+                    }
                     table.zone = 0;
                 }
                 if (startDate == 0 && endDate == 0 && (associationPrixProduit[i].zoneTable.id) == null) {
@@ -493,3 +496,58 @@ getServicePath = function(serviceKeyName) {
     ret += config.getConfig("serveur.clientaccess.serviceSufixe");
     return ret;
 };
+this.getMethod = "GET";
+this.postMethod = "POST";
+
+this.typeReq = this.getMethod;
+
+/**
+ * Personal Ajax
+ * @param {type} method
+ * @param {type} config
+ * @returns {undefined}
+ */
+function pAjax(methodParseData, config, methodExecute, param) {
+    var dataType = 'json';
+    var async = true;
+    var type = "GET";//POST
+    var service = "";
+    if (config.hasOwnProperty("type")) {
+        type = config.type;
+    }
+    if (config.hasOwnProperty("async")) {
+        async = config.async;
+    }
+    if (config.hasOwnProperty("dataType")) {
+        dataType = config.dataType;
+    }
+    if (!config.hasOwnProperty("service")) {
+        console.error("Erreur : entrez le chemin pour l'URL.");
+    } else {
+        service = config.service;
+        $.ajax({
+            url: getServicePath(service),
+            type: type,
+            dataType: dataType,
+            async: async,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (methodExecute != null || methodParseData != null) {
+                    data = data.data;
+                    if (methodParseData != null) {
+                        methodParseData(data, param, methodExecute);
+                    } else {
+                        methodExecute(param, methodExecute);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+
+                console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    }
+}

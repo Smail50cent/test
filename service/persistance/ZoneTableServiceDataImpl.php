@@ -11,13 +11,13 @@ include_once $path . 'service/logique/entity/Table.php';
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 class ZoneTableServiceDataImpl implements ZoneTableServiceData {
+
 //
     public function getAll() {
         $bdd = new ConnexionBDD();
         $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke");
         return $this->parseZoneTable($resultSet);
     }
-    
 
     private function parseZoneTable($resultSet) {
         $idProdAfter = null;
@@ -47,16 +47,22 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
                 }
             } else if ($i == 0) {
                 $table = $this->testsForTable($ligne, $zoneTable);
-                if ($table != null) { 
+                if ($table != null) {
                     $zoneTable->addTable($table);
                 }
-                if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
+                if (count($lignes) < $i + 1){
+                   if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
+                        array_push($liste, $zoneTable);
+                        $zoneTable = new ZoneTable();
+                    } 
+                }else{
                     array_push($liste, $zoneTable);
-                    $zoneTable = new ZoneTable();
+                        $zoneTable = new ZoneTable();
                 }
+                    
             } else if ($ligne->table_id != $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
-                if ($table != null) { 
+                if ($table != null) {
                     $zoneTable->addTable($table);
                 }
                 if (count($lignes) != ($i + 1)) {
@@ -71,18 +77,18 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
             }
             $idProdAfter = $ligne->zone_table_id;
         }
-        if (count($liste) == 1) {
-            $ret = $liste[0];
-        } else {
-            $ret = $liste;
-        }
-        return $ret;
+//        if (count($liste) == 1) {
+////            $ret = $liste[0];
+//        } else {
+//            $ret = $liste;
+//        }
+        return $liste;
     }
 
     private function testsForTable($ligne, ZoneTable $zonetable) {
         $isHere = false;
         for ($j = 0; $j < count($zonetable->getTables()); $j++) {
-           $tables =  $zonetable->getTables();
+            $tables = $zonetable->getTables();
             if ($tables[$j]->id == $ligne->table_id) {
                 $isHere = true;
                 break;
@@ -100,7 +106,13 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
 
     public function getByIdEtablissement($id) {
         $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke WHERE  `etablissement_id` =".$id);
+        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke WHERE  `etablissement_id` =" . $id);
+        return $this->parseZoneTable($resultSet);
+    }
+
+    public function getByEtablissementNull() {
+        $bdd = new ConnexionBDD();
+        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke WHERE `etablissement_id` IS NULL");
         return $this->parseZoneTable($resultSet);
     }
 

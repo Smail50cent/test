@@ -286,18 +286,25 @@ function getGererlesSitesTableThead() {
 function getGererlesSitesTableTbodyTr() {
     return templates.getTemplate("gestion/modeexpert/gererlessites/table_tbody_tr");
 }
-function getBootstrapModal(){
+function getBootstrapModal() {
     return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal");
 }
-function getAddSiteModalBody(){
+function getAddSiteModalBody() {
     return templates.getTemplate("gestion/modeexpert/gererlessites/add_site_modal_body");
 }
-function getPageGererLangues(){
+function getPageGererLangues() {
     return templates.getTemplate("gestion/modeexpert/gererlesLangues/page_gerer_langues");
 }
-function getLangueTableHead(){
+function getLangueTableHead() {
     return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_thead");
 }
-function getLangueTableTrBody(){
+function getLangueTableTrBody() {
     return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_tbody_tr");
 }
+function getGererSitesLiSelectZone() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/li_select_zone");
+}
+function getGererSitesLiAddZone() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/li_add_zone");
+}
+

@@ -1,8 +1,4 @@
 function ConnexionServer() {
-    this.getMethod = "GET";
-    this.postMethod = "POST";
-
-    this.typeReq = this.getMethod;
     this.getMajTable = function(conftableName) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
@@ -1139,7 +1135,7 @@ function ConnexionServer() {
                     e.groupe = data[i].groupe;
                     e.zones = new Array();
                     for (var j = 0; j < data[i].zones.length; j++) {
-                        e.zones.push(new ZoneTable(data [i].zones[j].id, data [i].zones[j].nom, null, data [i].zones[j].etablissement_id));
+                        e.zones.push(new ZoneTable(data [i].zones[j].id, data [i].zones[j].nom, data [i].zones[j].tables, data [i].zones[j].etablissement_id));
                     }
                     etablissements.push(e);
                 }
@@ -1440,4 +1436,20 @@ function ConnexionServer() {
             }
         });
     };
+    this.getZoneTablesWhereEtablissementNull = function(method, param) {
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var tables = new Array();
+                for (var j = 0; j < data [i].tables.length; j++) {
+                    tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
+                }
+                liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
+            }
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceZoneTablesGetByEtablissementNull"}, method, param);
+    };
 }
+

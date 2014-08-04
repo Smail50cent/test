@@ -3,30 +3,30 @@
  */
 
 @-webkit-keyframes greentowhite  { 
-                        0%   { background-color: rgba(44, 176, 240,1);}
-                        50%  { background-color: rgba(44, 176, 240,0.5);}
-                        100% { background-color: rgba(44, 176, 240,0);}
-                        } 
-    @-moz-keyframes greentowhite { 
-                        0%   { background-color: rgba(44, 176, 240,1);}
-                        50%  { background-color: rgba(44, 176, 240,0.5);}
-                        100% { background-color: rgba(44, 176, 240,0);}
-                        } 
-     @-ms-keyframes greentowhite { 
-                        0%   { background-color: rgba(44, 176, 240,1);}
-                        50%  { background-color: rgba(44, 176, 240,0.5);}
-                        100% { background-color: rgba(44, 176, 240,0);}
-                        }   
-      @-o-keyframes greentowhite { 
-                        0%   { background-color: rgba(44, 176, 240,1);}
-                        50%  { background-color: rgba(44, 176, 240,0.5);}
-                        100% { background-color: rgba(44, 176, 240,0);}
-                        }   
-         @keyframes greentowhite { 
-                        0%   { background-color: rgba(44, 176, 240,1);}
-                        50%  { background-color: rgba(44, 176, 240,0.5);}
-                        100% { background-color: rgba(44, 176, 240,0);}
-                        } 
+    0%   { background-color: rgba(44, 176, 240,1);}
+    50%  { background-color: rgba(44, 176, 240,0.5);}
+    100% { background-color: rgba(44, 176, 240,0);}
+} 
+@-moz-keyframes greentowhite { 
+    0%   { background-color: rgba(44, 176, 240,1);}
+    50%  { background-color: rgba(44, 176, 240,0.5);}
+    100% { background-color: rgba(44, 176, 240,0);}
+} 
+@-ms-keyframes greentowhite { 
+    0%   { background-color: rgba(44, 176, 240,1);}
+    50%  { background-color: rgba(44, 176, 240,0.5);}
+    100% { background-color: rgba(44, 176, 240,0);}
+}   
+@-o-keyframes greentowhite { 
+    0%   { background-color: rgba(44, 176, 240,1);}
+    50%  { background-color: rgba(44, 176, 240,0.5);}
+    100% { background-color: rgba(44, 176, 240,0);}
+}   
+@keyframes greentowhite { 
+    0%   { background-color: rgba(44, 176, 240,1);}
+    50%  { background-color: rgba(44, 176, 240,0.5);}
+    100% { background-color: rgba(44, 176, 240,0);}
+} 
 
 
 .etablissemend_added{
@@ -73,4 +73,21 @@
 }
 .modal_body_tbody_addetab_personalize tr td:nth-child(2) input, .modal_body_tbody_addetab_personalize tr td:nth-child(2) select {
     margin-left: 67px;
+}
+p.a_zone_structure {
+    display: inline;
+}
+td.section_tr_zones_structure {
+    max-width: 150px;
+}
+.img_manage_tables_in_zone_structure {
+    display: inline;
+    height: 30px;
+    width: 30px;
+}
+.li_select_zone_inputtxt_structure {
+    margin-left: -15px !important;
+}
+.addetab_tabzone_ul_structure {
+    list-style: none;
 }

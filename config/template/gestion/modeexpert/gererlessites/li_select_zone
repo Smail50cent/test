@@ -1,0 +1,4 @@
+<li class="li_select_zone_structure li_select_zone_personalize">
+    <input class="li_select_zone_input_structure li_select_zone_input_personalize" type="checkbox" idzone="{idZone}" method="addEtabl"/>
+    <p  class="li_select_zone_p_structure li_select_zone_p_personalize">{zoneName}</p>
+</li>
