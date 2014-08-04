@@ -1,8 +1,4 @@
 function ConnexionServer() {
-    this.getMethod = "GET";
-    this.postMethod = "POST";
-
-    this.typeReq = this.getMethod;
     this.getMajTable = function(conftableName) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetMajTablesByNom") + "?nomTable=" + conftableName,
