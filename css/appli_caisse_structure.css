@@ -431,7 +431,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .btn_choice_structure, .choix_mode_calcul_structure  {
         width:70%;
-        margin:8em 15% 0 15%;
+        margin:5em 15% 0 15%;
 }
 
     .btn_choice_structure li p, .choix_mode_calcul_structure p {
@@ -860,7 +860,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
         /*---------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
         .recapitulatif_commande_structure li:first-child {
-            margin-top: 1.1em;
+            margin-top: 4.1em;
         }
 
         /*.content_produit_zone_left, .content_produit_zone_right{
