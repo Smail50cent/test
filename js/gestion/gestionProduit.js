@@ -48,7 +48,7 @@ function ModifyProduct(id) {
         modal: true,
         title: "Modifier le produit",
         autoOpen: true,
-        position: 'center',
+        position: 'top',
         dialogClass: 'dialog-modif-produit',
         buttons: {
             valider: function() {
