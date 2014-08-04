@@ -69,7 +69,9 @@
     .select_ingredient_structure label, .select_option_structure label, .select_possibilite_structure label {
         display:block;
     }
-
+    .second_dialog {
+        z-index: 7000;
+    }
     /*    .select_ingredient-on {
             color:#ffffff;
             background-color:#000099;
