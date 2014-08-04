@@ -496,6 +496,11 @@ getServicePath = function(serviceKeyName) {
     ret += config.getConfig("serveur.clientaccess.serviceSufixe");
     return ret;
 };
+this.getMethod = "GET";
+this.postMethod = "POST";
+
+this.typeReq = this.getMethod;
+
 /**
  * Personal Ajax
  * @param {type} method
@@ -505,7 +510,7 @@ getServicePath = function(serviceKeyName) {
 function pAjax(methodParseData, config, methodExecute, param) {
     var dataType = 'json';
     var async = true;
-    var type = this.typeReq;
+    var type = "GET";//POST
     var service = "";
     if (config.hasOwnProperty("type")) {
         type = config.type;
@@ -533,13 +538,13 @@ function pAjax(methodParseData, config, methodExecute, param) {
                     data = data.data;
                     if (methodParseData != null) {
                         methodParseData(data, param, methodExecute);
-                    }else{
+                    } else {
                         methodExecute(param, methodExecute);
                     }
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                
+
                 console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
