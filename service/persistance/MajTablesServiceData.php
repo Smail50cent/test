@@ -11,4 +11,5 @@ interface MajTablesServiceData {
     public function getAll();
     public function getBynomTable($nom);
     public function haveMAJ($tableName,$level);
+    public function updateLevel($type);
 }

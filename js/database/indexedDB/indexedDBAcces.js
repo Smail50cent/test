@@ -12,14 +12,7 @@ var processOnupgradeneeded = true;
 var lockedEntreprise = false;
 var entitysFinsh = new Array();
 setEntityFinishTo(false);
-getServicePath = function(serviceKeyName) {
-    var ret = "";
-    ret += "./";
-    ret += config.getConfig("serveur.clientaccess.servicesAccess") + "/";
-    ret += config.getConfig(serviceKeyName);
-    ret += config.getConfig("serveur.clientaccess.serviceSufixe");
-    return ret;
-};
+
 myStorage.indexedDB.load = function() {
     indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
             IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,

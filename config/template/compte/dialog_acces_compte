@@ -1,10 +1,10 @@
-<div id="auth_popup_id" class="auth_popup" title="Login">
-        <div id="nbr_personne_id" class="nbr_personne"></div>
-        <div id="auth_form_id" class="auth_form">
+<div id="auth_popup_id" class="auth_popup auth_popup_structure auth_popup_personalize" title="Login">
+        <div id="nbr_personne_id" class="nbr_personne nbr_personne_structure nbr_personne_personalize"></div>
+        <div id="auth_form_id" class="auth_form auth_form_structure auth_form_personalize">
         </div>
-        <div id="all_snbutton_id" class="all_snbutton">
-            <div id ="button_facebook_id" class ="button_facebook"></div>
-            <div id ="button_twitter_id" class ="button_twitter"></div>
-            <div id ="button_googleplus_id" class ="button_googleplus"></div>
+        <div id="all_snbutton_id" class="all_snbutton all_snbutton_structure all_snbutton_personalize">
+            <div id ="button_facebook_id" class ="button_facebook button_facebook_strucutre button_facebook_personalize"></div>
+            <div id ="button_twitter_id" class ="button_twitter button_twitter_structure button_twitter_personalize"></div>
+            <div id ="button_googleplus_id" class ="button_googleplus button_googleplus_strucutre button_googleplus_personalize"></div>
         </div>
     </div>
