@@ -304,3 +304,7 @@ function getLangueTableTrBody() {
 function getGererSitesLiSelectZone() {
     return templates.getTemplate("gestion/modeexpert/gererlessites/li_select_zone");
 }
+function getGererSitesLiAddZone() {
+    return templates.getTemplate("gestion/modeexpert/gererlessites/li_add_zone");
+}
+

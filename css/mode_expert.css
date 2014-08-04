@@ -80,3 +80,14 @@ p.a_zone_structure {
 td.section_tr_zones_structure {
     max-width: 150px;
 }
+.img_manage_tables_in_zone_structure {
+    display: inline;
+    height: 30px;
+    width: 30px;
+}
+.li_select_zone_inputtxt_structure {
+    margin-left: -15px !important;
+}
+.addetab_tabzone_ul_structure {
+    list-style: none;
+}

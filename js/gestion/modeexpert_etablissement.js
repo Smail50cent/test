@@ -68,11 +68,9 @@ function loadGestionSites() {
 var groupex = null;
 var stylesIn = null;
 function addEtablissement() {
-    //<input class="li_select_zone_input_structure li_select_zone_input_personalize" type="checkbox" idzone="1" method="addMenu">
     if ($("#myModal")) {
         $("#myModal").remove();
     }
-
     var htmlModel = getBootstrapModal();
     htmlModel = paramValue(htmlModel, "titre", strings.getString("label.gererlessites.table.modal.title"));
     htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
@@ -102,6 +100,8 @@ function addEtablissement() {
     $("#add_site_telephone_id").text(strings.getString("label.gererlessites.table.modal.label.telephone"));
     $("#add_site_message_id").text(strings.getString("label.gererlessites.table.modal.label.message"));
     $("#add_site_slogan_id").text(strings.getString("label.gererlessites.table.modal.label.slogan"));
+
+
     getConnexion().getAllStyles(function(styles, param) {
         stylesIn = styles;
         $("#add_site_style_value").html("");
@@ -117,8 +117,21 @@ function addEtablissement() {
             myLi = paramValue(myLi, "idZone", zones[i].id);
             $("#add_site_zone_value").append(myLi);
         }
+        var htmlGerer = getGererSitesLiAddZone();
+        var myGererSiteLiZone = htmlGerer;
+        myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
+        nbzone++;
+        $("#add_site_zone_value").append(myGererSiteLiZone);
     }, null);
     $('#myModal').modal('show');
+}
+var nbzone = 1;
+function appendNewZone() {
+    var htmlGerer = getGererSitesLiAddZone();
+    var myGererSiteLiZone = htmlGerer;
+    myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
+    nbzone++;
+    $("#add_site_zone_value").append(myGererSiteLiZone);
 }
 var idEtabToUpdate = "";
 function updateEtablissement(id) {
