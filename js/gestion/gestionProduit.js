@@ -106,7 +106,7 @@ function DeleteProduct(id) {
         position: 'center',
         buttons: {
             Yes: function() {
-                var connexion = getConnexion();
+                var connexion = getConnexionServeur();
                 connexion.deleteProduit(idprod);
                 getImplOfConnexionLocal().deleteProduit(idprod);
                 id.parent().parent().parent().remove();

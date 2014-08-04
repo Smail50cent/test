@@ -539,6 +539,8 @@ function pAjax(methodParseData, config, methodExecute, param) {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
+                
+                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });

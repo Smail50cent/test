@@ -77,12 +77,12 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
             }
             $idProdAfter = $ligne->zone_table_id;
         }
-        if (count($liste) == 1) {
-            $ret = $liste[0];
-        } else {
-            $ret = $liste;
-        }
-        return $ret;
+//        if (count($liste) == 1) {
+////            $ret = $liste[0];
+//        } else {
+//            $ret = $liste;
+//        }
+        return $liste;
     }
 
     private function testsForTable($ligne, ZoneTable $zonetable) {
