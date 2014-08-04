@@ -37,12 +37,32 @@ function loadViewsForAddProduit() {
 
 function ModifyProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
-    $("#alert_error_id").freeow("Modification", "n'est pas encore disponible", {
+    $("#alert_error_id").freeow("Modification", "n'est pas encore disponible " + idprod, {
         classes: ["smokey", "pushpin"],
         hideStyle: {opacity: 0, left: "400px"},
         showStyle: {opacity: 1, left: 0}
     });
-
+    $("#dialog_add_produit_id").dialog({
+        modal: true,
+        title: "Modifier le produit",
+        autoOpen: true,
+        position: 'center',
+        dialogClass: 'dialog-modif-produit',
+        buttons: {
+                valider: function() {
+                    $(this).dialog("destroy");
+                    $('#dialog_add_produit_id').empty();
+                },
+                annuler: function() {
+                    $(this).dialog("destroy");
+                    $('#dialog_add_produit_id').empty();
+                }
+            },
+            close: function(event, ui) {
+                $(this).dialog("destroy");
+                $('#dialog_add_produit_id').empty();
+            }
+    });
 }
 
 function DeleteProduct(id) {
@@ -333,7 +353,7 @@ function submit_ingredientPage() {
 function formInsertIngredient() {
 
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter un Ingrédient', autoOpen: true, position: 'right',
+            {modal: true, title: 'Ajouter un Ingrédient', autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
                     annuler: function() {
                         $(this).dialog("destroy");
@@ -764,7 +784,7 @@ var tailleItem = new Array("small-item-structure small-item-personalize",
         "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right',
+            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
                     annuler: function() {
                         $(this).dialog("destroy");
