@@ -381,7 +381,7 @@ function getPrixHtInAssociation(associationPrixProduit, tauxTva) {
             for (var i = 0; i < associationPrixProduit.length; i++) {
                 var startDate = new Date(associationPrixProduit[i].dateDebut).getTime();
                 var endDate = new Date(associationPrixProduit[i].dateFin).getTime();
-                if (nom != "gestionProduit") {
+                if (nom == "gestionProduit") {
                     table.zone = 0;
                 }
                 if (startDate == 0 && endDate == 0 && (associationPrixProduit[i].zoneTable.id) == null) {
