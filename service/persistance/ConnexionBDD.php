@@ -8,7 +8,8 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-    public $acces = null;
+    public $acces;
+    
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse2", "preCaisse", "alfa");
@@ -23,7 +24,11 @@ class ConnexionBDD {
         $t = $this->getDatabasesInfo();
         return $t[3];
     }
-
+    
+    function __construct() {
+        $this->acces = getConnexion();
+    }
+    
     public function getConnexion() {
         $databaseInfo = $this->getCurrentDatabaseInfo();
         try {
@@ -31,7 +36,7 @@ class ConnexionBDD {
             $options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
             );
-            $this->acces = new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
+            return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
             echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
