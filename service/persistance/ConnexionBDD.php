@@ -8,7 +8,7 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-
+    public $acces = null;
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse2", "preCaisse", "alfa");
@@ -31,24 +31,32 @@ class ConnexionBDD {
             $options = array(
                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
             );
-            return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
+            $this->acces = new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
             echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
         }
     }
-
+    
+    public function commitTransaction() {
+        $this->acces->commit();
+    }
+    
+    public function rollbackTransaction() {
+        $this->acces->rollBack();
+    }
+    
     private function executeQuery($query) {
-        $acces = $this->getConnexion();
         try {
-            $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $acces->beginTransaction();
-            $selection = $acces->query($query);
+            $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if($this->acces == null) {
+                $this->acces->beginTransaction();
+            }
+            $selection = $this->acces->query($query);
             $selection->setFetchMode(PDO::FETCH_OBJ);
-            $acces->commit();
             return $selection;
         } catch (Exception $ex) {
-            $acces->rollBack();
+            $this->acces->rollBack();
             echo "Erreur Requete MySQL : ", $ex->getMessage();
             die();
         }
@@ -63,15 +71,15 @@ class ConnexionBDD {
     }
 
     private function executeExec($query) {
-        $acces = $this->getConnexion();
         try {
-            $acces->beginTransaction();
-            $acces->exec($query);
-            $id = $acces->lastInsertId();
-            $acces->commit();
+            if(!$this->acces) {
+                $this->acces->beginTransaction();
+            }
+            $this->acces->exec($query);
+            $id = $this->acces->lastInsertId();
             return $id;
         } catch (Exception $ex) {
-            $acces->rollBack();
+            $this->acces->rollBack();
             echo "Erreur Requete MySQL : ", $ex->getMessage();
             die();
         }
