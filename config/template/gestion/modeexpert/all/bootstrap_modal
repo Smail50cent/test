@@ -1,4 +1,4 @@
-<div class="modal fade modal_structure modal_personalize" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade modal_structure modal_personalize" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog modal-dialog_structure modal-dialog_personalize">
     <div class="modal-content modal-content_structure modal-content_personalize">
       <div class="modal-header modal-header_structure modal-header_personalize">

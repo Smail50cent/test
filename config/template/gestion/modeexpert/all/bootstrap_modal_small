@@ -1,3 +1,6 @@
-<div id="dialog" title="Basic dialog">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+<div id="dialog" title="Ajout des tables" style="z-index: 100000000;" class="ajout_tables_all_in_zone_personalize ajout_tables_all_in_zone_structure">
+  <div class="ajout_tables_all_in_zone_div_strucutre ajout_tables_all_in_zone_div_personalize">
+    <ul id="ajout_a_table" class="ajout_tables_all_in_zone_ul_strucutre ajout_tables_all_in_zone_ul_personalize"></ul>
+    <p id="add_a_table_in_liste_id" onclick="addTableInArray();" class="ajout_tables_all_in_zone_p_strucutre ajout_tables_all_in_zone_p_personalize"></p>
+  </div>
 </div>

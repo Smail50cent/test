@@ -2,6 +2,7 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
+var addedTablesAndZones = new Array();
 function loadGestionSites() {
     updateActivedLi(1);
     var htmlGererLesSites = getGererlesSites();
@@ -376,10 +377,29 @@ function valderAjoutEtablissement() {
         }, etablissement, null);
     }
 }
+var htmlLi = getGererTablesLiAddTableInDiv();
+var idtableGlob = 1;
 function showDialogAddTable() {
     scripts.loadScripts("lib.dialog", function() {
         var htmlModal = getbootstrapModalSmall();
         $("head").append(htmlModal);
-        $("#dialog").dialog();
+        $("#add_a_table_in_liste_id").text(strings.getString("label.dialog.addtable.append.table"));
+        $("#dialog").dialog({dialogClass: "dialog_add_produit"});
+        addLiTable(false, 1, 1);
     });
+}
+function addLiTable(append, idzone, idtable) {
+    var newLii = htmlLi;
+    newLii = paramValue(newLii, "idzone", idzone);
+    newLii = paramValue(newLii, "placeholder", strings.getString("label.input.add.table"));
+    newLii = paramValue(newLii, "idtable", idtableGlob);
+    idtableGlob++;
+    if (append) {
+        $("#ajout_a_table").append(newLii);
+    } else {
+        $("#ajout_a_table").html(newLii);
+    }
+}
+function addTableInArray() {
+    addLiTable(true, 1, 1);
 }

@@ -310,3 +310,9 @@ function getGererSitesLiAddZone() {
 function getbootstrapModalSmall(){
     return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal_small");
 }
+function getGererTablesLiAddTableInDiv(){
+    return templates.getTemplate("gestion/modeexpert/gererlestables/li_add_table_in_div");
+}
+
+
+//

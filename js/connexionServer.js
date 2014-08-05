@@ -933,6 +933,7 @@ function ConnexionServer() {
             });
         }
     };
+ 
     this.getEtablissementById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetByIdEtablissements") + "?id=" + id,
