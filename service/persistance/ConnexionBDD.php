@@ -46,12 +46,13 @@ class ConnexionBDD {
         $this->acces->rollBack();
     }
     
+    public function beginTTransaction() {
+        $this->acces->beginTransaction();
+    }
+    
     private function executeQuery($query) {
         try {
             $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            if($this->acces == null) {
-                $this->acces->beginTransaction();
-            }
             $selection = $this->acces->query($query);
             $selection->setFetchMode(PDO::FETCH_OBJ);
             return $selection;
@@ -72,9 +73,6 @@ class ConnexionBDD {
 
     private function executeExec($query) {
         try {
-            if(!$this->acces) {
-                $this->acces->beginTransaction();
-            }
             $this->acces->exec($query);
             $id = $this->acces->lastInsertId();
             return $id;
