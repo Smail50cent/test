@@ -639,7 +639,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $bdd = new ConnexionBDD();
         $produitId = $bdd->executeGeneric("INSERT INTO `produit`"
                 . "(`NOM`, `CATEGORIE_ID`, `sousCategorie`, `TVA`, `level`) VALUES "
-                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",".$level.")");
+                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",".$level.");");
         if ($assoPrixProduit != null) {
             for ($i = 0; $i < count($assoPrixProduit); $i++) {
                 $prixHt = $assoPrixProduit[$i]->getPrixHt();
@@ -684,7 +684,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             for ($i = 0; $i < count($options); $i++) {
                 $reqSql = $reqSql . "INSERT INTO `association_produit_options`"
                         . "(`produit_id`, `option_id`) VALUES "
-                        . "(" . $produitId . "," . $options[$i]->getId() . ")";
+                        . "(" . $produitId . "," . $options[$i]->getId() . ");";
             }
         }
         if ($reqSql != "") {
