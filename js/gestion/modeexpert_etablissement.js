@@ -369,12 +369,17 @@ function valderAjoutEtablissement() {
                 litbody = paramValue(litbody, "groupe", groupex.nom);
                 $("#table_gererlessites_all").append(litbody);
                 $("tr[idetablissement='" + data.id + "']").addClass("etablissemend_added");
-//                $("tr[idetablissement='" + data.id + "']").css("background-color", "green");
-//                console.log($("tr[idetablissement='" + data.id + "']"));
                 window.setTimeout(function() {
                     $("tr[idetablissement='" + data.id + "']").css("background-color", "transparent");
                 }, 3000);
             }
         }, etablissement, null);
     }
+}
+function showDialogAddTable() {
+    scripts.loadScripts("lib.dialog", function() {
+        var htmlModal = getbootstrapModalSmall();
+        $("head").append(htmlModal);
+        $("#dialog").dialog();
+    });
 }
