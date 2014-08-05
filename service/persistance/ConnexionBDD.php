@@ -68,7 +68,7 @@ class ConnexionBDD {
             $acces->beginTransaction();
             $acces->exec($query);
             $id = $acces->lastInsertId();
-            $acces->commitTransaction();
+            $acces->commit();
             return $id;
         } catch (Exception $ex) {
             $acces->rollBack();
