@@ -40,10 +40,18 @@ class ConnexionBDD {
 
     private function executeQuery($query) {
         $acces = $this->getConnexion();
-        $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $selection = $acces->query($query);
-        $selection->setFetchMode(PDO::FETCH_OBJ);
-        return $selection;
+        try {
+            $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $acces->beginTransaction();
+            $selection = $acces->query($query);
+            $selection->setFetchMode(PDO::FETCH_OBJ);
+            $acces->commit();
+            return $selection;
+        } catch (Exception $ex) {
+            $acces->rollBack();
+            echo "Erreur Requete MySQL : ", $ex->getMessage();
+            die();
+        }
     }
 
     public function executeGeneric($query) {
@@ -54,12 +62,20 @@ class ConnexionBDD {
         }
     }
 
-    public function executeExec($query) {
+    private function executeExec($query) {
         $acces = $this->getConnexion();
-        $acces->exec($query);
-        $id = $acces->lastInsertId();
-//        $acces = null;
-        return $id;
+        try {
+            $acces->beginTransaction();
+            $acces->exec($query);
+            $id = $acces->lastInsertId();
+            $acces->commit();
+            return $id;
+        } catch (Exception $ex) {
+            $acces->rollBack();
+            echo "Erreur Requete MySQL : ", $ex->getMessage();
+            die();
+        }
+//        $acces = null;       
     }
 
 }

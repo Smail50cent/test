@@ -52,8 +52,11 @@ function ModifyProduct(id) {
         dialogClass: 'dialog-modif-produit',
         buttons: {
             valider: function() {
-                $(this).dialog("destroy");
-                $('#dialog_add_produit_id').empty();
+                if (updateProduct()) {
+                    $(this).dialog("destroy");
+                    $('#dialog_add_produit_id').empty();
+                }
+
             },
             annuler: function() {
                 $(this).dialog("destroy");
@@ -91,10 +94,177 @@ function ModifyProduct(id) {
     htmlAll = paramValue(htmlAll, "inputVal", strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#content_add_produit_zone_input_id").append(htmlAll);
     loadEtablissement();
-    
+
+    getConnexion().getProduitByIdGeneric(produitById, idprod);
+    function produitById(data) {
+        //console.log(data);
+        $('#name_prod_Id').val(data.nom);
+        $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
+        $('#liste_souscategorie_id').append($('<option>', {
+            value: data.id_sousCategorie.id,
+            text: data.id_sousCategorie.nom
+        }));
+        $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
+        if (data.ids_ingredients != null) {
+            for (var i = 0; i < data.ids_ingredients.length; i++) {
+                $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
+            }
+        }
+        if (data.options != null) {
+            for (var i = 0; i < data.options.length; i++) {
+                $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
+            }
+        }
+        var prixHt, TVA;
+        for (var i = 0; i < data.associationPrixProduit.length; i++) {
+            if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
+                prixHt = data.associationPrixProduit[i].prixHt.prix;
+                TVA = data.tauxTva;
+                break;
+            }
+        }
+        var prixTTC = calculPrixWithTVA(prixHt, TVA);
+        $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
+        $("#label_val_prixttc_id").text(prixHt);
+
+        if (data.zones != null) {
+            for (var i = 0; i < data.zones.length; i++) {
+                $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
+            }
+        }
+
+        for (var i = 0; i < data.etablissements.length; i++) {
+            var zoneChecked = false;
+            $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                if (this.checked) {
+                    zoneChecked = true;
+                }
+            });
+            if (!zoneChecked) {
+                $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
+                $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                    this.disabled = true;
+                    this.checked = true;
+                });
+            }
+        }
+    }
+
     $('.prev_page_structure, .next_page_structure, .btn_validation_ajout_produit_structure').each(function() {
         $(this).remove();
     });
+}
+
+function updateProduct() {
+    var produit = new Produit();
+    var categorie = new Categorie();
+    var souscategorie = new SousCategorie();
+
+    var idCat = $("#liste_categorie_id :selected").val();
+    var idSousCat = $("#liste_souscategorie_id :selected").val();
+    var nomProduit = $("#name_prod_Id").val();
+    if (idCat != 0 && idSousCat != 0 && nomProduit != "") {
+        produit.setNom(nomProduit);
+        categorie.setId(idCat);
+        souscategorie.setId(idSousCat);
+        produit.setCategorie(categorie);
+        produit.setSousCategorie(souscategorie);
+    } else {
+        $("#alert_error_id").freeow("Produit", "Ajouter un nom à votre produit", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        return false;
+    }
+    var list = new Array();
+    $(".ingredient_checkbox:checked").each(function() {
+        var ingredient = new Ingredient();
+        ingredient.setId($(this).attr('id'));
+        list.push(ingredient);
+    });
+    if (list.length == 0) {
+        $("#alert_error_id").freeow("Ingrédient", "Attention vous n'avez pas choisie d'Ingrédient", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setIdsIngredients(list);
+    }
+    var list2 = new Array();
+    $(".option_checkbox:checked").each(function() {
+        var option = new Option();
+        option.setId($(this).attr('id'));
+        list2.push(option);
+    });
+    if (list2.length == 0) {
+        $("#alert_error_id").freeow("Option", "Attention vous n'avez pas choisie d'Option", {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setOptions(list2);
+    }
+
+    var list3 = new Array();
+    var prix = $("#label_val_prixttc_id").text();
+    var objprix = {prix: prix};
+    var Tva = $("#tva_0").val();
+    var associationPrixProduit = new AssociationProduitPrix();
+    associationPrixProduit.setDatedebut(null);
+    associationPrixProduit.setDatefin(null);
+    associationPrixProduit.setPrixHt(objprix);
+    associationPrixProduit.setZonetable(null);
+    list3.push(associationPrixProduit);
+    produit.setAssociationPrixProduit(list3);
+    produit.setTauxTva(Tva);
+    if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
+        $("#alert_error_id").freeow("Prix", "Vous devez entrer un prix avant de continuer", {
+            classes: ["smokey", "error"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        return false;
+    }
+
+    var listeEtabZone = new Array();
+    $('input[type=checkbox]').each(function() {
+        if ($(this).attr("selectallzoneInEtablissement")) {
+            var isChecked = $(this).is(":checked");
+            var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            if (isChecked == true) {
+                var etabZone = new Etablissement();
+                etabZone.setId(id);
+                etabZone.setZones(null);
+                listeEtabZone.push(etabZone);
+            }
+            //console.log($(this).attr("id"), isChecked);
+        } else if ($(this).attr("idetablissement")) {
+            var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var idZone = parseInt($(this).attr("idzone"));
+            var isChecked = $(this).is(":checked");
+            var isEnabled = $(this).is(":enabled");
+            if (isChecked == true && isEnabled) {
+                var etabZone = new Etablissement();
+                etabZone.setId(idEtablissement);
+                etabZone.setZones(idZone);
+                listeEtabZone.push(etabZone);
+            }
+        }
+    });
+    produit.setEtablissements(listeEtabZone);
+    console.log(produit);
+    return true;
 }
 
 function DeleteProduct(id) {

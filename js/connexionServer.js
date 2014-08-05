@@ -347,6 +347,7 @@ function ConnexionServer() {
             dataType: 'json',
             async: true,
             success: function(data, textStatus, xhr) {
+                //console.log(data);
                 var produit = new Produit();
                 produit.setNom(data.nom);
                 produit.setId(data.id);
@@ -361,6 +362,8 @@ function ConnexionServer() {
                 produit.setIdsIngredients(data.ingredients);
                 produit.setAssociationPrixProduit(data.associationPrixProduit);
                 produit.setOptions(data.options);
+                produit.setEtablissements(data.etablissements);
+                produit.setZones(data.zones);
                 if (method != null) {//Nous avons besoin de l'executer.
                     method(produit, param);
                 }
@@ -959,7 +962,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var options = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -1008,7 +1011,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllEtablissements"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var etablissements = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -1070,7 +1073,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var list = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -1120,7 +1123,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllEtablissementsWithZones"),
             type: 'GET',
             dataType: 'json',
-            async: true,
+            async: false,
             success: function(data, textStatus, xhr) {
                 var etablissements = new Array();
                 for (var i = 0; i < data.length; i++) {
