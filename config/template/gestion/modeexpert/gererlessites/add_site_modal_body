@@ -64,7 +64,7 @@
             <td>
                 <div class="addetab_tabzone_div_structure addetab_tabzone_div_personalize">
                     <ul id="add_site_zone_value" class="addetab_tabzone_ul_structure addetab_tabzone_ul_personalize"></ul>
-                    <a id="a_help_add_new_zone" ></a>
+                    <a id="a_help_add_new_zone" onclick="appendNewZone();"></a>
                 </div>
             </td>
         </tr>
