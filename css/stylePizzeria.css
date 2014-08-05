@@ -356,7 +356,6 @@ margin-top: 1em;
 }
 
 .dialog_ajouter_produit_ajouterprix_personalize label {
-    width: 10%;
     display: inline-block;
 }
 
@@ -735,9 +734,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         margin-top: 4.15em;  
 }
 
-    .choose_lang_personalize {
-            margin-top:4em;
-}
+    /*.choose_lang_personalize {
+        margin-top:4em;
+}*/
 
     .choose_lang_personalize p {
 }
