@@ -26,7 +26,7 @@ class ConnexionBDD {
     }
     
     function __construct() {
-        $this->acces = getConnexion();
+        $this->acces = $this->getConnexion();
     }
     
     public function getConnexion() {
