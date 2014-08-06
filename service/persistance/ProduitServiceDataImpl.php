@@ -250,13 +250,13 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id");
             return $op;
         } else {
             $isHerePos = false;
-            $op=$produit->getOptions();
-           $o=$op [$i];
+            $op = $produit->getOptions();
+            $o = $op [$i];
             for ($j = 0; $j < count($o->getPossibilite()); $j++) {
                 $prod = $produit->getOptions();
-                $pr=$o->getPossibilite();
-               
-                if ( $pr[$j]->id == $ligne->option_possibilite_id) {
+                $pr = $o->getPossibilite();
+
+                if ($pr[$j]->id == $ligne->option_possibilite_id) {
                     $isHerePos = true;
                     break;
                 }
@@ -553,7 +553,7 @@ LEFT JOIN option_possibilite ON option_possibilite.id_option = options.id WHERE 
 
     public function DeleteProduit($id) {
         $bdd = new ConnexionBDD();
-        $retour = $bdd->executeGeneric("DELETE FROM produit WHERE ID= ".$id." ;"
+        $retour = $bdd->executeGeneric("DELETE FROM produit WHERE ID= " . $id . " ;"
                 . "UPDATE MAJ_TABLES SET `level` = (SELECT MAX(level) as 'level' FROM produit) WHERE `nomTable` = 'produits' ");
         return $retour;
     }
@@ -639,24 +639,24 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $bdd = new ConnexionBDD();
         $produitId = $bdd->executeGeneric("INSERT INTO `produit`"
                 . "(`NOM`, `CATEGORIE_ID`, `sousCategorie`, `TVA`, `level`) VALUES "
-                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . ",".$level.");");
+                . "('" . $produitNom . "'," . $categorieId . "," . $souscategorieId . "," . $tauxTvaid . "," . $level . ");");
         if ($assoPrixProduit != null) {
             for ($i = 0; $i < count($assoPrixProduit); $i++) {
                 $prixHt = $assoPrixProduit[$i]->getPrixHt();
                 $idPrixHT = $this->addPrix($prixHt);
                 $dateDebut = $assoPrixProduit[$i]->getDateDebut();
-                if($dateDebut == ""){
-                    $dateDebut="null";
+                if ($dateDebut == "") {
+                    $dateDebut = "null";
                 }
                 $dateFin = $assoPrixProduit[$i]->getDateFin();
-                if($dateFin == ""){
-                    $dateFin="null";
+                if ($dateFin == "") {
+                    $dateFin = "null";
                 }
                 $idZoneTable = null;
-                if($assoPrixProduit[$i]->getZoneTable()!=null){
+                if ($assoPrixProduit[$i]->getZoneTable() != null) {
                     $idZoneTable = $assoPrixProduit[$i]->getZoneTable()->getId();
-                }else{
-                    $idZoneTable ="null";
+                } else {
+                    $idZoneTable = "null";
                 }
                 $reqSql = $reqSql . " INSERT INTO `association_produit_prix`"
                         . "(`heureDebut`, `heureFin`, `produit_id`, `prixht_id`, `zone_table_id`) VALUES "
@@ -668,7 +668,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             for ($i = 0; $i < count($etablissements); $i++) {
                 $reqSql = $reqSql . "INSERT INTO `association_etablissement_produit`"
                         . "( `id_produit`, `id_etablissement`, `id_zone`) VALUES "
-                        . "(" . $produitId . "," . $etablissements[$i]->getId() . ",".$etablissements[$i]->getZones().");";
+                        . "(" . $produitId . "," . $etablissements[$i]->getId() . "," . $etablissements[$i]->getZones() . ");";
             }
         }
         $ingredients = $produit->getIngredients();
@@ -695,4 +695,170 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         return $produitId;
     }
 
+    public function update(Produit $produit) {
+        $oldproduit = $this->getById($produit->getId());
+        $bdd = new ConnexionBDD();
+        try {
+            $bdd->beginTTransaction();
+            updateProduit($produit, $oldproduit, $bdd);
+            updateAssociationProduitPrix($produit, $oldproduit, $bdd);
+            updateEtablissementsProduit($produit, $oldproduit, $bdd);
+            updateProduitIngredient($produit, $oldproduit, $bdd);
+            updateProduitOptions($produit, $oldproduit, $bdd);
+            $bdd->commitTransaction();
+        } catch (Exception $ex) {
+            $bdd->rollbackTransaction();
+            echo "Error During Produit UPDATE" . $ex->getMessage();
+        }
+    }
+
+    public function updateProduit($produit, $oldproduit, $bdd) {
+
+        $produitNom = $oldproduit->getNom();
+        $categorieId = $oldproduit->getCategorie()->getId();
+        $souscategorieId = $oldproduit->getSousCategorie()->getId();
+        $tauxTvaid = $this->getTauxTvaId($oldproduit->getTauxTva());
+        $level = $oldproduit->getLevel();
+
+        $produitId = $produit->getId();
+
+        $newproduitNom = $produit->getNom();
+        $newcategorieId = $produit->getCategorie()->getId();
+        $newsouscategorieId = $produit->getSousCategorie()->getId();
+        $newtauxTvaid = $this->getTauxTvaId($produit->getTauxTva());
+        $newlevel = $produit->getLevel();
+
+        if (strcmp($newproduitNom, $produitNom) !== 0 || strcmp($newcategorieId, $categorieId) !== 0 || strcmp($newsouscategorieId, $souscategorieId) !== 0 || strcmp($newtauxTvaid, $tauxTvaid) !== 0 || strcmp($newlevel, $level) !== 0) {
+            $bdd->executeGeneric("UPDATE produit(`NOM`,`CATEGORIE_ID`,`sousCategorie`,`TVA`,`level`)
+            SET `NOM` = '$newproduitNom',
+            `CATEGORIE_ID` = '$newcategorieId',
+            `sousCategorie` = '$newsouscategorieId',
+            `TVA` = '$newtauxTvaid',
+            `level` = '$newlevel'
+            WHERE `ID` = '$produitId' ");
+        }
+    }
+
+    public function updateAssociationProduitPrix($produit, $oldproduit, $bdd) {
+
+        $assoPrixProduit = $oldproduit->getAssociationPrixProduit();
+        $newassoPrixProduit = $produit->getAssociationPrixProduit();
+        $idOldprixHT = $assoPrixProduit[0]->getPrixHt();
+
+        if ($assoPrixProduit != null && $newassoPrixProduit != null) {
+            if ($assoPrixProduit[0]->getPrixHt() != $newassoPrixProduit[0]->getPrixHt()) {
+                $idNewprixHT = $this->addPrix($newassoPrixProduit[0]->getPrixHt());
+            }
+
+            $bdd->executeGeneric("UPDATE association_produit_prix(`prixht_id`)
+                SET `prixht_id` ='$idNewprixHT' ,
+                WHERE `prixht_id` = '$idOldprixHT'");
+
+            $bdd->executeGeneric("DELETE FROM `prixHt` WHERE `id` = '$idOldprixHT' ");
+        }
+    }
+
+    public function updateEtablissementsProduit($produit, $oldproduit, $bdd) {
+
+        $etablissements = $oldproduit->getEtablissements();
+        $newetablissements = $produit->getEtablissements();
+        $produitId = $produit->getId();
+        $state = 0;
+        $oldEtab = array();
+
+        for ($j = 0; $j < count($etablissements); $j++) {
+            array_push($oldEtab, $etablissements[$j]);
+        }
+
+        if ($etablissements != null && $newetablissements != null) {
+            for ($i = 0; $i < count($newetablissements); $i++) {
+                for ($j = 0; $j < count($oldEtab); $j++) {
+                    if ($newetablissements[$i]->getId() == $oldEtab[$j]->etablissements->getId() && $newetablissements[$i]->getZones() == $oldEtab[$j]->etablissements->getZones()) {
+                        $state = 1;
+                        array_pop($oldEtab, $etablissements[$j]);
+                        break;
+                    }
+                }
+                if ($state == 0) {
+                    $bdd->executeGeneric("INSERT INTO `association_etablissement_produit`"
+                            . "( `id_produit`, `id_etablissement`, `id_zone`) VALUES "
+                            . "(" . $produitId . "," . $newetablissements[$i]->getId() . "," . $newetablissements[$i]->getZones() . ")");
+                }
+            }
+            for ($j = 0; $j < count($oldEtab); $j++) {
+                $bdd->executeGeneric("DELETE FROM `association_etablissement_produit` WHERE `id_etablissement` = '" . $oldEtab[$j]->etablissements->getId() . "' AND"
+                        . "  `id_zone` = '" . $oldEtab[$j]->etablissements->getZones() . "' ");
+            }
+        }
+    }
+
+    public function updateProduitIngredient($produit, $oldproduit, $bdd) {
+
+        $ingredients = $oldproduit->getIngredients();
+        $newingredients = $produit->getIngredients();
+        $produitId = $produit->getId();
+        $state = 0;
+        $oldIngred = array();
+
+        for ($i = 0; $i < count($ingredients); $i++) {
+            array_push($oldIngred, $ingredients[$i]);
+        }
+
+        if ($ingredients != null && $newingredients != null) {
+            for ($i = 0; $i < count($newingredients); $i++) {
+                for ($j = 0; $j < count($oldIngred); $j++) {
+                    if ($newingredients[$i]->getId() == $oldIngred[$j]->ingredients->getId()) {
+                        $state = 1;
+                        array_pop($oldIngred, $ingredients[$j]);
+                        break;
+                    }
+                }
+                if ($state == 0) {
+                    $bdd->executeGeneric("INSERT INTO `association_produit_ingredient`"
+                            . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
+                            . "(" . $produitId . "," . $newingredients [$i]->getId() . ",1,0,1,0)");
+                }
+            }
+            for ($j = 0; $j < count($oldIngred); $j++) {
+                $bdd->executeGeneric("DELETE FROM `association_produit_ingredient`"
+                        . "WHERE `id_produit` = '".$produitId."' "
+                        . "AND `id_ingredient` = '".$oldIngred[$j]->ingredients->getId()."'");
+            }
+        }
+    }
+    
+    public function updateProduitOptions($produit, $oldproduit, $bdd) {
+
+        $options = $oldproduit->getOptions();
+        $newoptions = $produit->getOptions();
+        $produitId = $produit->getId();
+        $state = 0;
+        $oldOptions = array();
+
+        for ($i = 0; $i < count($options); $i++) {
+            array_push($oldOptions, $options[$i]);
+        }
+
+        if ($options != null && $newoptions != null) {
+            for ($i = 0; $i < count($newoptions); $i++) {
+                for ($j = 0; $j < count($oldOptions); $j++) {
+                    if ($newoptions[$i]->getId() == $oldOptions[$j]->options->getId()) {
+                        $state = 1;
+                        array_pop($oldOptions, $options[$j]);
+                        break;
+                    }
+                }
+                if ($state == 0) {
+                    $bdd->executeGeneric("INSERT INTO `association_produit_options`"
+                        . "(`produit_id`, `option_id`) VALUES "
+                        . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
+                }
+            }
+            for ($j = 0; $j < count($oldOptions); $j++) {
+                $bdd->executeGeneric("DELETE FROM `association_produit_options`"
+                        . "WHERE `produit_id` = '".$produitId."' "
+                        . "AND `option_id` = '".$oldOptions[$j]->options->getId()."'");
+            }
+        }
+    }
 }

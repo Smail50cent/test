@@ -9,7 +9,7 @@ class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
     public $acces;
-    
+
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse2", "preCaisse", "alfa");
@@ -24,11 +24,11 @@ class ConnexionBDD {
         $t = $this->getDatabasesInfo();
         return $t[3];
     }
-    
+
     function __construct() {
         $this->acces = $this->getConnexion();
     }
-    
+
     public function getConnexion() {
         $databaseInfo = $this->getCurrentDatabaseInfo();
         try {
@@ -42,30 +42,24 @@ class ConnexionBDD {
             die();
         }
     }
-    
+
     public function commitTransaction() {
         $this->acces->commit();
     }
-    
+
     public function rollbackTransaction() {
         $this->acces->rollBack();
     }
-    
+
     public function beginTTransaction() {
         $this->acces->beginTransaction();
     }
-    
+
     private function executeQuery($query) {
-        try {
-            $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $selection = $this->acces->query($query);
-            $selection->setFetchMode(PDO::FETCH_OBJ);
-            return $selection;
-        } catch (Exception $ex) {
-            $this->acces->rollBack();
-            echo "Erreur Requete MySQL : ", $ex->getMessage();
-            die();
-        }
+        $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $selection = $this->acces->query($query);
+        $selection->setFetchMode(PDO::FETCH_OBJ);
+        return $selection;
     }
 
     public function executeGeneric($query) {
@@ -77,16 +71,9 @@ class ConnexionBDD {
     }
 
     private function executeExec($query) {
-        try {
-            $this->acces->exec($query);
-            $id = $this->acces->lastInsertId();
-            return $id;
-        } catch (Exception $ex) {
-            $this->acces->rollBack();
-            echo "Erreur Requete MySQL : ", $ex->getMessage();
-            die();
-        }
-//        $acces = null;       
+        $this->acces->exec($query);
+        $id = $this->acces->lastInsertId();
+        return $id;
     }
 
 }

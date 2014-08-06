@@ -25,4 +25,6 @@ interface ProduitService {
      * @param Produit $produit
      */
     public function add(Produit $produit);
+    
+    public function update(Produit $produit);
 }
