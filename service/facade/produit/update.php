@@ -76,6 +76,6 @@ if (isset($_POST['produit'])) {
     }
 
     $produitSrv = LogiqueFactory::getProduitService();
-    echo $produitSrv->add($prodPhp);
+    echo $produitSrv->update($prodPhp);
 }
 
