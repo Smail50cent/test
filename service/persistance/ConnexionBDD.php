@@ -8,7 +8,7 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-    public $acces = null;
+    public $acces;
 
     private function getDatabasesInfo() {
         $ret = array();
@@ -57,17 +57,10 @@ class ConnexionBDD {
     }
 
     private function executeQuery($query) {
-        try {
-            $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $selection = $this->acces->query($query);
-            $selection->setFetchMode(PDO::FETCH_OBJ);
-            return $selection;
-        } catch (Exception $ex) {
-            $this->acces->rollBack();
-            throw new Exception("Execution requête impossible", 451, 0);
-            echo "Erreur Requete MySQL : ", $ex->getMessage();
-            die();
-        }
+        $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $selection = $this->acces->query($query);
+        $selection->setFetchMode(PDO::FETCH_OBJ);
+        return $selection;
     }
 
     public function executeGeneric($query) {
@@ -79,17 +72,9 @@ class ConnexionBDD {
     }
 
     private function executeExec($query) {
-        try {
-            $this->acces->exec($query);
-            $id = $this->acces->lastInsertId();
-            return $id;
-        } catch (Exception $ex) {
-            $this->acces->rollBack();
-            throw new Exception("Execution requête impossible", 451, 0);
-            echo "Erreur Requete MySQL : ", $ex->getMessage();
-            die();
-        }
-//        $acces = null;       
+        $this->acces->exec($query);
+        $id = $this->acces->lastInsertId();
+        return $id;
     }
 
 }

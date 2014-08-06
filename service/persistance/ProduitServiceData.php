@@ -22,4 +22,6 @@ interface ProduitServiceData {
     public function getByCategorieAndEtablissentAndZone($idcategorie,$idetablissement,$idzone);
     
     public function add(Produit $produit);
+    
+    public function update(Produit $produit);
 }

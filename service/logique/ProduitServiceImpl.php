@@ -3,6 +3,7 @@
 include_once $path . 'service/logique/ProduitService.php';
 include_once $path . 'service/logique/entity/AssociationProduitIngredients.php';
 include_once $path . 'service/persistance/PersistanceFactory.php';
+include_once $path . 'service/logique/entity/Produit.php';
 
 /**
  * Description of CategorieServiceImpl
@@ -55,6 +56,10 @@ class ProduitServiceImpl implements ProduitService {
             $produit->setLevel(PersistanceFactory::getMajTablesService()->updateLevel("produits"));
             return $this->produitSrv->add($produit);
         }        
+    }
+
+    public function update(Produit $produit) {
+        
     }
 
 }
