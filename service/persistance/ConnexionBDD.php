@@ -8,8 +8,8 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-    public $acces;
-    
+    public $acces = null;
+
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse2", "preCaisse", "alfa");
@@ -24,11 +24,11 @@ class ConnexionBDD {
         $t = $this->getDatabasesInfo();
         return $t[3];
     }
-    
+
     function __construct() {
         $this->acces = $this->getConnexion();
     }
-    
+
     public function getConnexion() {
         $databaseInfo = $this->getCurrentDatabaseInfo();
         try {
@@ -38,23 +38,24 @@ class ConnexionBDD {
             );
             return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
+            throw new Exception("Connexion Impossible", 451, 0);
             echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
         }
     }
-    
+
     public function commitTransaction() {
         $this->acces->commit();
     }
-    
+
     public function rollbackTransaction() {
         $this->acces->rollBack();
     }
-    
+
     public function beginTTransaction() {
         $this->acces->beginTransaction();
     }
-    
+
     private function executeQuery($query) {
         try {
             $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -63,6 +64,7 @@ class ConnexionBDD {
             return $selection;
         } catch (Exception $ex) {
             $this->acces->rollBack();
+            throw new Exception("Execution requête impossible", 451, 0);
             echo "Erreur Requete MySQL : ", $ex->getMessage();
             die();
         }
@@ -83,6 +85,7 @@ class ConnexionBDD {
             return $id;
         } catch (Exception $ex) {
             $this->acces->rollBack();
+            throw new Exception("Execution requête impossible", 451, 0);
             echo "Erreur Requete MySQL : ", $ex->getMessage();
             die();
         }

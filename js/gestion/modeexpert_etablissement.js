@@ -129,7 +129,8 @@ function addEtablissement() {
 var nbzone = 0;
 function appendNewZone() {
     var htmlGerer = getGererSitesLiAddZone();
-    var myGererSiteLiZone = htmlGerer; nbzone++;
+    var myGererSiteLiZone = htmlGerer;
+    nbzone++;
     myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
     $("#add_site_zone_value").append(myGererSiteLiZone);
 }
@@ -319,24 +320,30 @@ function valderAjoutEtablissement() {
             var idZone = $(this).attr("idzone");
             var checked = $(this).is(":checked");
             if (checked) {
-                var zone = ZoneTable();
+                var zone = new ZoneTable();
                 zone.id = parseInt(idZone);
                 etablissement.zones.push(zone);
             }
         });
         $("input[method='addEtablZone']").each(function() {
             var nbzone = $(this).attr("nbzone");
-            if (checked) {
-                var zone = ZoneTable();
-                zone.id = parseInt(nbzone);
-                etablissement.zones.push(zone);
+            var zone = new ZoneTable();
+            zone.id = parseInt(nbzone);
+            zone.nom = $(this).val();
+            var tables2 = new Array();
+            for (var j = 1; j < $("ul[nbzone='" + nbzone + "'] li").length +1; j++) {
+                var nom = $("input[nbzone='" + nbzone + "'][nbtable='" + j + "']").val();
+                tables2.push(nom);
             }
+            zone.tables = tables2;
+            etablissement.zones.push(zone);
         });
         getConnexion().sendNewEtablissement(function(data, param) {
             $('#myModal').modal('hide');
-            data = JSON.parse(data);
+            console.log(data);
+//            data = JSON.parse(data);
             var htmlTbody = getGererlesSitesTableTbodyTr();
-            if (data.id != 0) {
+            if (data != 0) {
                 if (etablissement.nom != null) {
                 } else {
                     etablissement.nom = groupex.nom;

@@ -503,17 +503,22 @@ this.typeReq = this.getMethod;
 
 /**
  * Personal Ajax
- * @param {type} method
- * @param {type} config
- * @returns {undefined}
+ * @param Function methodParseData
+ * @param String config
+ * @param Function methodExecute
+ * @param Object param
  */
 function pAjax(methodParseData, config, methodExecute, param) {
     var dataType = 'json';
     var async = true;
     var type = "GET";//POST
     var service = "";
+    var mydata = null;
     if (config.hasOwnProperty("type")) {
         type = config.type;
+    }
+    if (config.hasOwnProperty("data")) {
+        mydata = config.data;
     }
     if (config.hasOwnProperty("async")) {
         async = config.async;
@@ -530,6 +535,7 @@ function pAjax(methodParseData, config, methodExecute, param) {
             type: type,
             dataType: dataType,
             async: async,
+            data: mydata,
             success: function(data) {
                 if (data.error == true) {
                     showErrorMessage(strings.getString("error.label.errror.action.serveur"));
@@ -539,12 +545,11 @@ function pAjax(methodParseData, config, methodExecute, param) {
                     if (methodParseData != null) {
                         methodParseData(data, param, methodExecute);
                     } else {
-                        methodExecute(param, methodExecute);
+                        methodExecute(data, param);
                     }
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-
                 console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
