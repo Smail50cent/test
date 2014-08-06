@@ -313,6 +313,3 @@ function getbootstrapModalSmall(){
 function getGererTablesLiAddTableInDiv(){
     return templates.getTemplate("gestion/modeexpert/gererlestables/li_add_table_in_div");
 }
-
-
-//

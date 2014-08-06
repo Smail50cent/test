@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-f" content="IE=edge,chrome=1">
         <script type="text/javascript" src="./js/lib/jquery.js" defer ></script>
         <script type="text/javascript" src="./js/scripts.js" defer></script>
+        <link href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">

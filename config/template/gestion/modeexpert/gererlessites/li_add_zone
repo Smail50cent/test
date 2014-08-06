@@ -1,6 +1,11 @@
 <li class="li_select_zone_structure li_select_zone_personalize">
-    <input class="li_select_zone_inputtxt_structure li_select_zone_inputtxt_personalize" type="text" method="addEtablZone"/>
-    <span isFor="button_gestion_tables" nbzone"{nbZone}">
-        <img onclick="showDialogAddTable();" class="img_manage_tables_in_zone_structure img_manage_tables_in_zone_personalize " src="./img/icon_table_addZone.ico"></img>
-    </span>
+    <div class="gestion_nom_table_structure gestion_nom_table_personalize">
+    <input nbzone="{nbZone}" class="li_select_zone_inputtxt_structure li_select_zone_inputtxt_personalize" type="text" method="addEtablZone"/>
+        <span isFor="button_gestion_tables" nbzone="{nbZone}">
+            <img onclick="showDialogAddTable({nbZone});" class="img_manage_tables_in_zone_structure img_manage_tables_in_zone_personalize " src="./img/icon_table_addZone.ico"></img>
+        </span>
+    </div>
+    <div class="gestion_numeros_table_structure gestion_numeros_table_personalize">
+        <ul nbzone="{nbZone}" class="gestion_all_numeros_tables_strucutre gestion_all_numeros_tables_personalize"></ul>
+    </div>
 </li>

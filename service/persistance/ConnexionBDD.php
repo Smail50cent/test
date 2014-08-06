@@ -8,7 +8,7 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
-
+ 
     private function getDatabasesInfo() {
         $ret = array();
         $ret[0] = array("192.168.170.61", "mysql", "appcaisse2", "preCaisse", "alfa");
