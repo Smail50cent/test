@@ -38,6 +38,7 @@ class ConnexionBDD {
             );
             return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
+            throw new Exception("Connexion Impossible", 451, 0);
             echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
         }
