@@ -2,6 +2,7 @@
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
+var addedTablesAndZones = new Array();
 function loadGestionSites() {
     updateActivedLi(1);
     var htmlGererLesSites = getGererlesSites();
@@ -78,6 +79,7 @@ function addEtablissement() {
     htmlModel = paramValue(htmlModel, "primaryLabel", strings.getString("label.valider"));
     htmlModel = paramValue(htmlModel, "onclick", "valderAjoutEtablissement();");
     $("body").append(htmlModel);
+
     getConnexion().getGroupeById(updatePlaceHolder, config.getConfig("client.application.groupe.id"), null);
     function updatePlaceHolder(groupe, param) {
         groupex = groupe;
@@ -100,8 +102,7 @@ function addEtablissement() {
     $("#add_site_telephone_id").text(strings.getString("label.gererlessites.table.modal.label.telephone"));
     $("#add_site_message_id").text(strings.getString("label.gererlessites.table.modal.label.message"));
     $("#add_site_slogan_id").text(strings.getString("label.gererlessites.table.modal.label.slogan"));
-
-
+    $("#add_td_tabzone").remove();
     getConnexion().getAllStyles(function(styles, param) {
         stylesIn = styles;
         $("#add_site_style_value").html("");
@@ -120,17 +121,16 @@ function addEtablissement() {
         var htmlGerer = getGererSitesLiAddZone();
         var myGererSiteLiZone = htmlGerer;
         myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
-        nbzone++;
+
         $("#add_site_zone_value").append(myGererSiteLiZone);
     }, null);
     $('#myModal').modal('show');
 }
-var nbzone = 1;
+var nbzone = 0;
 function appendNewZone() {
     var htmlGerer = getGererSitesLiAddZone();
-    var myGererSiteLiZone = htmlGerer;
+    var myGererSiteLiZone = htmlGerer; nbzone++;
     myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
-    nbzone++;
     $("#add_site_zone_value").append(myGererSiteLiZone);
 }
 var idEtabToUpdate = "";
@@ -324,6 +324,14 @@ function valderAjoutEtablissement() {
                 etablissement.zones.push(zone);
             }
         });
+        $("input[method='addEtablZone']").each(function() {
+            var nbzone = $(this).attr("nbzone");
+            if (checked) {
+                var zone = ZoneTable();
+                zone.id = parseInt(nbzone);
+                etablissement.zones.push(zone);
+            }
+        });
         getConnexion().sendNewEtablissement(function(data, param) {
             $('#myModal').modal('hide');
             data = JSON.parse(data);
@@ -376,10 +384,27 @@ function valderAjoutEtablissement() {
         }, etablissement, null);
     }
 }
-function showDialogAddTable() {
-    scripts.loadScripts("lib.dialog", function() {
-        var htmlModal = getbootstrapModalSmall();
-        $("head").append(htmlModal);
-        $("#dialog").dialog();
-    });
+var htmlLi = getGererTablesLiAddTableInDiv();
+var idtableGlob = 1;//  
+function showDialogAddTable(nbzone) {
+    var htmlLiAddTable = getGererTablesLiAddTableInDiv();
+    htmlLiAddTable = paramValue(htmlLiAddTable, "nbzone", nbzone);
+    htmlLiAddTable = paramValue(htmlLiAddTable, "nbtable", idtableGlob);
+    idtableGlob++;
+    $("ul[nbzone='" + nbzone + "'").append(htmlLiAddTable);
+}
+function addLiTable(append, idzone, idtable) {
+    var newLii = htmlLi;
+    newLii = paramValue(newLii, "idzone", idzone);
+    newLii = paramValue(newLii, "placeholder", strings.getString("label.input.add.table"));
+    newLii = paramValue(newLii, "idtable", idtableGlob);
+    idtableGlob++;
+    if (append) {
+        $("#ajout_a_table").append(newLii);
+    } else {
+        $("#ajout_a_table").html(newLii);
+    }
+}
+function addTableInArray() {
+//    addLiTable(true, 1, 1);
 }

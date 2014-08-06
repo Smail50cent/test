@@ -91,3 +91,13 @@ td.section_tr_zones_structure {
 .addetab_tabzone_ul_structure {
     list-style: none;
 }
+/*.ui-dialog { z-index: 100000000 !important ;}*/
+.ui-front { z-index: 100000000 !important; }
+
+.dialog_add_produit {
+    position: fixed!important;
+    top: 50% !important;
+    left: 75.8% !important;
+    z-index: 10000000000 !important;
+    margin-right: 0px !important;
+}

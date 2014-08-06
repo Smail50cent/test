@@ -33,6 +33,8 @@
     <script for="lib" priority="2">lib/jquery-1.2.6.min.js</script>
     <script for="lib" priority="1">lib/jquery.js</script>
     <script for="lib.dialog" priority="1">lib/jqueryui/js/jquery-ui-1.10.4.custom.js</script>
+    
+   
     <script for="lib.social" priority="2">lib/socialNetwork.js</script>
     <script for="lib.social" priority="3">lib/all.js</script>
     <script for="lib.crypt">lib/SHA512.js</script>

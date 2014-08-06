@@ -76,4 +76,6 @@
 	<string key="label.choix.table.choix.zone.label.option">Area : </string>
 	<string key="label.option.choose.etablissement">Select the appropriate establishment where you placed your order</string>
 	<string key="label.addsite.addzoneinsite.pas.presente">New area</string>
+	<string key="label.dialog.addtable.append.table">Add a table</string>
+	<string key="label.input.add.table">Table number</string>
 </strings>
