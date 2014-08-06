@@ -99,6 +99,7 @@ function ModifyProduct(id) {
     function produitById(data) {
         //console.log(data);
         $('#name_prod_Id').val(data.nom);
+        $('#name_prod_Id').attr("idproduit",data.id);
         $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
         $('#liste_souscategorie_id').append($('<option>', {
             value: data.id_sousCategorie.id,
@@ -163,7 +164,9 @@ function updateProduct() {
     var idCat = $("#liste_categorie_id :selected").val();
     var idSousCat = $("#liste_souscategorie_id :selected").val();
     var nomProduit = $("#name_prod_Id").val();
+    var idproduit = $("#name_prod_Id").attr("idproduit");
     if (idCat != 0 && idSousCat != 0 && nomProduit != "") {
+        produit.setId(idproduit);
         produit.setNom(nomProduit);
         categorie.setId(idCat);
         souscategorie.setId(idSousCat);

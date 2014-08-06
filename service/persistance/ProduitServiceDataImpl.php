@@ -706,6 +706,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             updateProduitIngredient($produit, $oldproduit, $bdd);
             updateProduitOptions($produit, $oldproduit, $bdd);
             $bdd->commitTransaction();
+            return true;
         } catch (Exception $ex) {
             $bdd->rollbackTransaction();
             echo "Error During Produit UPDATE" . $ex->getMessage();
@@ -821,12 +822,12 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             }
             for ($j = 0; $j < count($oldIngred); $j++) {
                 $bdd->executeGeneric("DELETE FROM `association_produit_ingredient`"
-                        . "WHERE `id_produit` = '".$produitId."' "
-                        . "AND `id_ingredient` = '".$oldIngred[$j]->ingredients->getId()."'");
+                        . "WHERE `id_produit` = '" . $produitId . "' "
+                        . "AND `id_ingredient` = '" . $oldIngred[$j]->ingredients->getId() . "'");
             }
         }
     }
-    
+
     public function updateProduitOptions($produit, $oldproduit, $bdd) {
 
         $options = $oldproduit->getOptions();
@@ -850,15 +851,16 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
                 }
                 if ($state == 0) {
                     $bdd->executeGeneric("INSERT INTO `association_produit_options`"
-                        . "(`produit_id`, `option_id`) VALUES "
-                        . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
+                            . "(`produit_id`, `option_id`) VALUES "
+                            . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
                 }
             }
             for ($j = 0; $j < count($oldOptions); $j++) {
                 $bdd->executeGeneric("DELETE FROM `association_produit_options`"
-                        . "WHERE `produit_id` = '".$produitId."' "
-                        . "AND `option_id` = '".$oldOptions[$j]->options->getId()."'");
+                        . "WHERE `produit_id` = '" . $produitId . "' "
+                        . "AND `option_id` = '" . $oldOptions[$j]->options->getId() . "'");
             }
         }
     }
+
 }

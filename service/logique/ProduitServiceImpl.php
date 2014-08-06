@@ -59,7 +59,9 @@ class ProduitServiceImpl implements ProduitService {
     }
 
     public function update(Produit $produit) {
-        
+        if($produit != null) {
+            return $this->produitSrv->update($produit);
+        }
     }
 
 }
