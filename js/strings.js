@@ -23,34 +23,39 @@ function setLanguage(lang) {
 function getLanguage() {
     return getLocalStorageValue(cookieLangName);
 }
+var fileLangSupported = null;
 function getLangagesSupported() {
     var ret = new Array();
     var url = "config/strings/languages_actifs.xml";
-    $.ajaxSetup({cache: true});
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "xml",
-        async: false,
-        success: function(xml) {
-            var unit = $(xml).find("language");
-            unit.each(function() {
-                var id = ($(this).children("id").text());
-                var isActif = ($(this).children("actif").text());
-                var navigatorVar = ($(this).children("navigatorVar").text());
-                var type = ($(this).children("type").text());
-                var gmtLevel = ($(this).children("gmtLevel").text());
-                var label = ($(this).children("label").text());
-                var langue = {"id": id, "label": label, "gmt_level": gmtLevel, "actif": isActif, "type": type, "navigatorVar": navigatorVar};
-                ret.push(langue);
-            });
-        }
+    if (fileLangSupported == null) {
+        $.ajaxSetup({cache: true});
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "xml",
+            async: false,
+            success: function(xml) {
+                fileLangSupported = xml;
+            }
+        });
+        $.ajaxSetup({cache: false});
+    }
+    var unit = $(fileLangSupported).find("language");
+    unit.each(function() {
+        var id = ($(this).children("id").text());
+        var isActif = ($(this).children("actif").text());
+        var navigatorVar = ($(this).children("navigatorVar").text());
+        var type = ($(this).children("type").text());
+        var gmtLevel = ($(this).children("gmtLevel").text());
+        var label = ($(this).children("label").text());
+        var langue = {"id": id, "label": label, "gmt_level": gmtLevel, "actif": isActif, "type": type, "navigatorVar": navigatorVar};
+        ret.push(langue);
     });
-    $.ajaxSetup({cache: false});
     return ret;
 }
 
-
+var oldUrl = null;
+var fileStrings = null;
 strings.getString = function(key) {
     var ret = "no result";
     var url = "";
@@ -59,22 +64,32 @@ strings.getString = function(key) {
     for (var i = 0; i < alllangs.length; i++) {
         if (parseInt(alllangs[i].id) == parseInt(getLanguage())) {
             url = "./config/strings/string_" + alllangs[i].type + ".xml";
+            if (oldUrl == null || oldUrl != url) {
+                oldUrl = url;
+            }
             break;
         }
     }
     if (url == "") {
         url = "./config/strings/string_" + alllangs[0].type + ".xml";
-    }
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "xml",
-        async: false,
-        success: function(xml) {
-            var unit = $(xml).find('strings').find("string[key='" + key + "']");
-            ret = unit.text();
+        if (oldUrl == null) {
+            oldUrl = url;
         }
-    });
+    }
+    var xmlTo;
+    if (fileStrings == null || oldUrl != url) {
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: "xml",
+            async: false,
+            success: function(xml) {
+                fileStrings = xml;
+            }
+        });
+    }
+    var unit = $(fileStrings).find('strings').find("string[key='" + key + "']");
+    ret = unit.text();
     return ret;
 }
 ;
