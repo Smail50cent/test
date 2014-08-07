@@ -19,8 +19,17 @@ class Produit {
     public $level;
     public $etablissements = array();
     public $zones = array();
+    public $assocEtabZone = array();
+    
+    public function getAssocEtabZone() {
+        return $this->assocEtabZone;
+    }
 
-    public function getZones() {
+    public function setAssocEtabZone($assocEtabZone) {
+        $this->assocEtabZone = $assocEtabZone;
+    }
+
+        public function getZones() {
         return $this->zones;
     }
 

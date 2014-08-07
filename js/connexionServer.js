@@ -1162,6 +1162,22 @@ function ConnexionServer() {
             }
         });
     };
+    this.updateProduit = function(method, produit, param) {
+        produit = JSON.stringify(produit);
+        $.ajax({
+            url: getServicePath("serveur.clientaccess.serviceUpdateProduit"),
+            type: 'POST',
+            data: {produit: produit},
+            async: false,
+            success: function(data) {
+                method(data, param);
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    };
+    
     this.getGroupeById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetGroupeById") + "?id=" + id,
