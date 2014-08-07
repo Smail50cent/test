@@ -20,18 +20,26 @@ if (isset($etablissement)) {
         $newEtab->setSlogan($etablissement->slogan);
         $newEtab->setStyle($etablissement->style);
         $newEtab->setTelephone($etablissement->telephone);
-        $zonesTables = array();
-        for ($i = 0; $i < count($etablissement->zones); $i++) {
-            $zoneTables = new ZoneTable();
-            $zoneTables->setNom($etablissement->zones[$i]->nom);
-            for ($j = 0; $j < count($etablissement->zones[$i]->tables); $j++) {
-                $table = new Table();
-                $table->setNumero($etablissement->zones[$i]->tables[$j]);
-                $zoneTables->addTable($table);
+        if (count($etablissement->zones) != 0) {
+            $zonesTables = array();
+            for ($i = 0; $i < count($etablissement->zones); $i++) {
+                $zoneTables = new ZoneTable();
+                if (isset($etablissement->zones[$i]->id)) {
+                    $zoneTables->setId($etablissement->zones[$i]->id);
+                } else if (isset($etablissement->zones[$i]->nom)) {
+                    $zoneTables->setNom($etablissement->zones[$i]->nom);
+                    for ($j = 0; $j < count($etablissement->zones[$i]->tables); $j++) {
+                        $table = new Table();
+                        $table->setNumero($etablissement->zones[$i]->tables[$j]);
+                        $zoneTables->addTable($table);
+                    }
+                }
+                array_push($zonesTables, $zoneTables);
             }
-            array_push($zonesTables, $zoneTables);
+            $newEtab->setZones($zonesTables);
+        } else {
+            $newEtab->setZones(null);
         }
-        $newEtab->setZones($zonesTables);
         $etabSrv = LogiqueFactory::getEtablissementService();
         $mydata = new MyData();
         $mydata->id = $etabSrv->add($newEtab);

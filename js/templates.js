@@ -1,5 +1,5 @@
 var templates = {};
-
+var allTemplatesLoaded = new Array();
 templates.getTemplate = function(name) {
     var ret = null;
     var url = "config/template/" + name;
@@ -41,9 +41,12 @@ function paramValue(string, paramName, value) {
     }
     return string;
 }
-
+var dialog_message_error = null;
 function getDialogErrorMessage() {
-    return html = templates.getTemplate("all/other/dialog_message_error");
+    if (dialog_message_error == null) {
+        dialog_message_error = templates.getTemplate("all/other/dialog_message_error");
+    }
+    return dialog_message_error;
 }
 function getHeaderCategorieItem() {
     return templates.getTemplate("carte/produits/header_categorie_item");
@@ -270,46 +273,155 @@ function getLiDropDown() {
 function getLiDropDownDivider() {
     return templates.getTemplate("gestion/all/li_dropdown_divider");
 }
+var gestionallli_dropdown_img = null;
 function getLiDropDownImg() {
-    return templates.getTemplate("gestion/all/li_dropdown_img");
+    if (gestionallli_dropdown_img == null) {
+        gestionallli_dropdown_img = templates.getTemplate("gestion/all/li_dropdown_img");
+    }
+    var mygestionallli_dropdown_img = gestionallli_dropdown_img;
+    return mygestionallli_dropdown_img;
 }
+var gestionmodeexpertallli_nav_pill =null;
 function getBootstrapNavPillLi() {
-    return templates.getTemplate("gestion/modeexpert/all/li_nav_pill");
+    if (gestionmodeexpertallli_nav_pill == null) {
+        gestionmodeexpertallli_nav_pill = templates.getTemplate("gestion/modeexpert/all/li_nav_pill");
+    }
+    var mygestionmodeexpertallli_nav_pill = gestionmodeexpertallli_nav_pill;
+    return mygestionmodeexpertallli_nav_pill;
 }
-
+var gestionmodeexpertgererlessitespage_gerer_sites= null;
 function getGererlesSites() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
+    if (gestionmodeexpertgererlessitespage_gerer_sites == null) {
+        gestionmodeexpertgererlessitespage_gerer_sites = templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
+    }
+    var mygestionmodeexpertgererlessitespage_gerer_sites = gestionmodeexpertgererlessitespage_gerer_sites;
+    return mygestionmodeexpertgererlessitespage_gerer_sites;
 }
+var gestionmodeexpertgererlessitestable_thead = null;
 function getGererlesSitesTableThead() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/table_thead");
+    if (gestionmodeexpertgererlessitestable_thead == null) {
+        gestionmodeexpertgererlessitestable_thead = templates.getTemplate("gestion/modeexpert/gererlessites/table_thead");
+    }
+    var mygestionmodeexpertgererlessitestable_thead = gestionmodeexpertgererlessitestable_thead;
+    return mygestionmodeexpertgererlessitestable_thead;
 }
+var gestionmodeexpertgererlessitestable_tbody_tr = null;
 function getGererlesSitesTableTbodyTr() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/table_tbody_tr");
+    if (gestionmodeexpertgererlessitestable_tbody_tr == null) {
+        gestionmodeexpertgererlessitestable_tbody_tr = templates.getTemplate("gestion/modeexpert/gererlessites/table_tbody_tr");
+    }
+    var mygestionmodeexpertgererlessitestable_tbody_tr = gestionmodeexpertgererlessitestable_tbody_tr;
+    return mygestionmodeexpertgererlessitestable_tbody_tr;
 }
+var gestionmodeexpertallbootstrap_modal = null;
 function getBootstrapModal() {
-    return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal");
+    if (gestionmodeexpertallbootstrap_modal == null) {
+        gestionmodeexpertallbootstrap_modal = templates.getTemplate("gestion/modeexpert/all/bootstrap_modal");
+    }
+    var mygestionmodeexpertallbootstrap_modal = gestionmodeexpertallbootstrap_modal;
+    return mygestionmodeexpertallbootstrap_modal;
 }
+var gestionmodeexpertgererlessitesadd_site_modal_body = null;
 function getAddSiteModalBody() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/add_site_modal_body");
+    if (gestionmodeexpertgererlessitesadd_site_modal_body == null) {
+        gestionmodeexpertgererlessitesadd_site_modal_body = templates.getTemplate("gestion/modeexpert/gererlessites/add_site_modal_body");
+    }
+    var mygestionmodeexpertgererlessitesadd_site_modal_body = gestionmodeexpertgererlessitesadd_site_modal_body;
+    return mygestionmodeexpertgererlessitesadd_site_modal_body;
 }
+var gestionmodeexpertgererlesLanguespage_gerer_langues = null;
 function getPageGererLangues() {
-    return templates.getTemplate("gestion/modeexpert/gererlesLangues/page_gerer_langues");
+    if (gestionmodeexpertgererlesLanguespage_gerer_langues == null) {
+        gestionmodeexpertgererlesLanguespage_gerer_langues = templates.getTemplate("gestion/modeexpert/gererlesLangues/page_gerer_langues");
+    }
+    var mygestionmodeexpertgererlesLanguespage_gerer_langues = gestionmodeexpertgererlesLanguespage_gerer_langues;
+    return mygestionmodeexpertgererlesLanguespage_gerer_langues;
 }
+var gestionmodeexpertgererlesLanguestable_thead = null;
 function getLangueTableHead() {
-    return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_thead");
+    if (gestionmodeexpertgererlesLanguestable_thead == null) {
+        gestionmodeexpertgererlesLanguestable_thead = templates.getTemplate("gestion/modeexpert/gererlesLangues/table_thead");
+    }
+    var mygestionmodeexpertgererlesLanguestable_thead = gestionmodeexpertgererlesLanguestable_thead;
+    return mygestionmodeexpertgererlesLanguestable_thead;
 }
+var gestionmodeexpertgererlesLanguestable_tbody_tr = null;
 function getLangueTableTrBody() {
-    return templates.getTemplate("gestion/modeexpert/gererlesLangues/table_tbody_tr");
+    if (gestionmodeexpertgererlesLanguestable_tbody_tr == null) {
+        gestionmodeexpertgererlesLanguestable_tbody_tr = templates.getTemplate("gestion/modeexpert/gererlesLangues/table_tbody_tr");
+    }
+    var mygestionmodeexpertgererlesLanguestable_tbody_tr = gestionmodeexpertgererlesLanguestable_tbody_tr;
+    return mygestionmodeexpertgererlesLanguestable_tbody_tr;
 }
+var gestionmodeexpertgererlessitesli_select_zone = null;
 function getGererSitesLiSelectZone() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/li_select_zone");
+    if (gestionmodeexpertgererlessitesli_select_zone == null) {
+        gestionmodeexpertgererlessitesli_select_zone = templates.getTemplate("gestion/modeexpert/gererlessites/li_select_zone");
+    }
+    var mygestionmodeexpertgererlessitesli_select_zone = gestionmodeexpertgererlessitesli_select_zone;
+    return mygestionmodeexpertgererlessitesli_select_zone;
 }
+var gestionmodeexpertgererlessitesli_add_zone = null;
 function getGererSitesLiAddZone() {
-    return templates.getTemplate("gestion/modeexpert/gererlessites/li_add_zone");
+    if (gestionmodeexpertgererlessitesli_add_zone == null) {
+        gestionmodeexpertgererlessitesli_add_zone = templates.getTemplate("gestion/modeexpert/gererlessites/li_add_zone");
+    }
+    var mugestionmodeexpertgererlessitesli_add_zone = gestionmodeexpertgererlessitesli_add_zone;
+    return mugestionmodeexpertgererlessitesli_add_zone;
 }
-function getbootstrapModalSmall(){
-    return templates.getTemplate("gestion/modeexpert/all/bootstrap_modal_small");
+var gestionmodeexpertallbootstrap_modal_small = null;
+function getbootstrapModalSmall() {
+    if (gestionmodeexpertallbootstrap_modal_small == null) {
+        gestionmodeexpertallbootstrap_modal_small = templates.getTemplate("gestion/modeexpert/all/bootstrap_modal_small");
+    }
+    var mygestionmodeexpertallbootstrap_modal_small = gestionmodeexpertallbootstrap_modal_small;
+    return mygestionmodeexpertallbootstrap_modal_small;
 }
-function getGererTablesLiAddTableInDiv(){
-    return templates.getTemplate("gestion/modeexpert/gererlestables/li_add_table_in_div");
+var gestionmodeexpertgererlestablesli_add_table_in_div = null;
+function getGererTablesLiAddTableInDiv() {
+    if (gestionmodeexpertgererlestablesli_add_table_in_div == null) {
+        gestionmodeexpertgererlestablesli_add_table_in_div = templates.getTemplate("gestion/modeexpert/gererlestables/li_add_table_in_div");
+    }
+    var mygestionmodeexpertgererlestablesli_add_table_in_div = gestionmodeexpertgererlestablesli_add_table_in_div;
+    return mygestionmodeexpertgererlestablesli_add_table_in_div;
+}
+var gestionmodeexpertallalert_danger = null;
+function getAlertDanger() {
+    if (gestionmodeexpertallalert_danger == null) {
+        gestionmodeexpertallalert_danger = templates.getTemplate("gestion/modeexpert/all/alert_danger");
+    }
+    var mygestionmodeexpertallalert_danger = gestionmodeexpertallalert_danger;
+    return mygestionmodeexpertallalert_danger;
+}
+var gestionmodeexpertallalert_info = null;
+function getAlertInfo() {
+    if (gestionmodeexpertallalert_info == null) {
+        gestionmodeexpertallalert_info = templates.getTemplate("gestion/modeexpert/all/alert_info");
+    }
+    var mygestionmodeexpertallalert_info = gestionmodeexpertallalert_info;
+    return mygestionmodeexpertallalert_info;
+}
+var gestionmodeexpertallalert_primary = null;
+function getAlertPrimary() {
+    if (gestionmodeexpertallalert_primary == null) {
+        gestionmodeexpertallalert_primary = templates.getTemplate("gestion/modeexpert/all/alert_primary");
+    }
+    var mygestionmodeexpertallalert_primary = gestionmodeexpertallalert_primary;
+    return mygestionmodeexpertallalert_primary;
+}
+var gestionmodeexpertallalert_warning = null;
+function getAlertWarning() {
+    if (gestionmodeexpertallalert_warning == null) {
+        gestionmodeexpertallalert_warning = templates.getTemplate("gestion/modeexpert/all/alert_warning");
+    }
+    var mygestionmodeexpertallalert_warning = gestionmodeexpertallalert_warning;
+    return mygestionmodeexpertallalert_warning;
+}
+var gererTablespage_gerer_tables = null;
+function getGererTablesPageGererTables() {
+    if (gererTablespage_gerer_tables == null) {
+        gererTablespage_gerer_tables = templates.getTemplate("gestion/modeexpert/gererlestables/page_gerer_tables");
+    }
+    var mygererTablespage_gerer_tables = gererTablespage_gerer_tables;
+    return mygererTablespage_gerer_tables;
 }

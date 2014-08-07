@@ -287,8 +287,6 @@ etablissement.message AS etablissement_message
         } else {
             $zones = "null";
         }
-        //throw new Exception("éfd", 12);
-
         $logo = "";
         if ($etablissement->getLogo() == null) {
             $logo = "null";
@@ -319,24 +317,35 @@ etablissement.message AS etablissement_message
         } else {
             $slogan = "'" . $etablissement->getSlogan() . "'";
         }
-        $id = $bdd->executeGeneric("INSERT INTO `etablissement`"
-                . "(`nom`, `logo`, `style`, `adresseEtab`, `telephone`, `message`, `slogan`, `id_groupe`) "
-                . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
-                . "," . $style . "," . $adresse . ","
-                . "" . $telephone . "," . $message . ","
-                . "" . $slogan . "," . $etablissement->getGroupe() . ");");
-        $zones = "";
-        if ($etablissement->getZones() != null) {
-            $zones = $etablissement->getZones();
-            for ($i = 0; $i < count($zones); $i++) {
-                $zone = $zones[$i];
-                $id2 = $bdd->executeGeneric("INSERT INTO `zone_table`(`nom`, `etablissement_id`) VALUES ('" . $zone->nom . "'," . $id . ");");
-                $tables = $zone->getTables();
-                for ($j = 0; $j < count($tables); $j++) {
-                    $table = $tables[$j];
-                    $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $table->getNumero() . ",".$id2.")");
+        $id = 0;
+        try {
+            $bdd->beginTTransaction();
+            $id = $bdd->executeGeneric("INSERT INTO `etablissement`"
+                    . "(`nom`, `logo`, `style`, `adresseEtab`, `telephone`, `message`, `slogan`, `id_groupe`) "
+                    . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
+                    . "," . $style . "," . $adresse . ","
+                    . "" . $telephone . "," . $message . ","
+                    . "" . $slogan . "," . $etablissement->getGroupe() . ");");
+            $zones = "";
+            if ($etablissement->getZones() != null) {
+                $zones = $etablissement->getZones();
+                for ($i = 0; $i < count($zones); $i++) {
+                    $zone = $zones[$i];
+                    if (isset($zone->nom)) {
+                        $id2 = $bdd->executeGeneric("INSERT INTO `zone_table`(`nom`, `etablissement_id`) VALUES ('" . $zone->nom . "'," . $id . ");");
+                        $tables = $zone->getTables();
+                        for ($j = 0; $j < count($tables); $j++) {
+                            $table = $tables[$j];
+                            $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $table->getNumero() . "," . $id2 . ")");
+                        }
+                    } else if (isset($zone->id)) {
+                        $bdd->executeGeneric("UPDATE `zone_table` SET `etablissement_id`=" . $id . " WHERE `id`=" . $zone->id);
+                    }
                 }
             }
+            $bdd->commitTransaction();
+        } catch (Exception $exc) {
+            $bdd->rollbackTransaction();
         }
         return $id;
     }

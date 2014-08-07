@@ -96,10 +96,14 @@
 	<string key="label.gererlessites.table.modal.label.message">Message qui sera affiché à gauche de la page</string>
 	<string key="label.gererlessites.table.modal.label.slogan">Votre slogan</string>
 	<string key="label.fermer">Fermer</string>
-	<string key="label.error.nom.required">Le nom est requis pour un nouvel établissement</string>
+	<string key="label.error.nom.required"> Le nom est requis pour un nouvel établissement</string>
 	<string key="label.confirm.remove.etablissement">Etes-vous sûr de vouloir supprimer cet établissement ?</string>
 	<string key="error.label.errror.action.serveur">Le serveur n'a pas réussi à effectuer l'action.</string>
 	<string key="label.addsite.addzoneinsite.pas.presente">Nouvelle zone</string>
 	<string key="label.dialog.addtable.append.table">Ajouter une table</string>
 	<string key="label.input.add.table">Numéro de table</string>
+	<string key="label.add.etablissement.zone.addzone.input.placeholder">Nom zone de tables</string>
+	<string key="label.add.etablissement.zone.addtable.input.placeholde">Numéro de table</string>
+	<string key="label.addzonetable.button">Ajouter une zone</string>
+	<string key="title.div.all.zonestables">Gestion des zones de tables</string>
 </strings>

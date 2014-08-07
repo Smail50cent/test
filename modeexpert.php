@@ -33,15 +33,17 @@
         </div>
         <div class="container-fluid">
             <br><br><br>
+            <div id="error_liste" class="error_liste_strucutre error_liste_personalize" ></div>
+
             <div class="row">
                 <div class="col-sm-2 col-md-2 sidebar">
                     <ul id="nav_menu_right_ul_detail_id" class="nav nav-pills nav-stacked">
                     </ul>
                 </div>
                 <div id="new_container">
-                    
+
                 </div>
-                
+
             </div>
         </div>
     </body>

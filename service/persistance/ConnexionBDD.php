@@ -16,7 +16,7 @@ class ConnexionBDD {
         $ret[1] = array("192.168.170.61", "mysql", "bar", "preCaisse", "alfa");
         $ret[2] = array("192.168.170.61", "mysql", "dupappcaisse", "preCaisse", "alfa");
         $ret[3] = array("192.168.170.61", "mysql", "migration_appcaisse", "preCaisse", "alfa");
-        $ret[4] = array("192.168.170.61", "mysql", "migration_appcaisse", "root", "fmoz6po");
+        $ret[4] = array("192.168.170.192", "mysql", "migration_appcaisse", "root", "fmoz6po");
         return $ret;
     }
 
@@ -38,8 +38,8 @@ class ConnexionBDD {
             );
             return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
-            throw new Exception("Connexion Impossible", 451, 0);
-            echo "Connection à MySQL impossible : ", $e->getMessage();
+            throw new Exception("Connection à MySQL impossible", 451, 0);
+//            echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
         }
     }

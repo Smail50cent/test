@@ -825,30 +825,24 @@ function ConnexionServer() {
         });
     };
     this.getAllZoneTables = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllZoneTables"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var liste = new Array();
-                if (data != null) {
-                    for (var i = 0; i < data.length; i++) {
-                        var tables = new Array();
-                        for (var j = 0; j < data [i].tables.length; j++) {
-                            tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
-                        }
-                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
+        pAjax(function(data, param, methodexecute) {
+            var liste = new Array();
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    var tables = new Array();
+                    for (var j = 0; j < data [i].tables.length; j++) {
+                        tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
                     }
+                    liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
                 }
-                if (method != null) {
-                    method(liste, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
-        });
+            if (methodexecute != null) {
+                methodexecute(liste, param);
+            }
+        }, {
+            service: "serveur.clientaccess.serviceGetAllZoneTables"
+        }, method, param);
+
     };
     this.deleteProduit = function(id) {
         $.ajax({
@@ -1186,7 +1180,6 @@ function ConnexionServer() {
     };
     this.sendNewEtablissement = function(method, etablissement, param) {
         etablissement = JSON.stringify(etablissement);
-        console.log(etablissement);
         pAjax(null,
                 {service: "serveur.clientaccess.serviceAddEtablissements",
                     data: {etablissement: etablissement}
@@ -1195,14 +1188,14 @@ function ConnexionServer() {
     this.removeEtablissement = function(method, id, param) {
         pAjax(null,
                 {service: "serveur.clientaccess.serviceRemoveEtablissements",
-                    data: {id: id}
+                    data: {id: id}, ifErrorSendAllDatas: true
                 }, method, param);
     };
     this.updateEtablissement = function(method, etablissement, param) {
         etablissement = JSON.stringify(etablissement);
-        pAjax(null,{service: "serveur.clientaccess.serviceUpdateEtablissements",
-                    data: {etablissement: etablissement}
-                }, method, param);
+        pAjax(null, {service: "serveur.clientaccess.serviceUpdateEtablissements",
+            data: {etablissement: etablissement}
+        }, method, param);
     };
     this.getAllStyles = function(method, param) {
         $.ajax({
@@ -1409,6 +1402,7 @@ function ConnexionServer() {
     };
     this.getZoneTablesWhereEtablissementNull = function(method, param) {
         pAjax(function(data, param, methodExecute) {
+            console.log(data);
             var liste = new Array();
             for (var i = 0; i < data.length; i++) {
                 var tables = new Array();

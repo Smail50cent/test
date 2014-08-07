@@ -78,4 +78,8 @@
 	<string key="label.addsite.addzoneinsite.pas.presente">New area</string>
 	<string key="label.dialog.addtable.append.table">Add a table</string>
 	<string key="label.input.add.table">Table number</string>
+	<string key="label.add.etablissement.zone.addzone.input.placeholder">Name field tables</string>
+	<string key="label.add.etablissement.zone.addtable.input.placeholde">Table number</string>
+	<string key="label.addzonetable.button">Add a area</string>
+	<string key="title.div.all.zonestables">Area management tables</string>
 </strings>

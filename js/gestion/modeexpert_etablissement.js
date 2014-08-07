@@ -112,16 +112,19 @@ function addEtablissement() {
     }, null);
     var htmlLiZone = getGererSitesLiSelectZone();
     getConnexion().getZoneTablesWhereEtablissementNull(function(zones, param) {
+        console.log(zones);
         for (var i = 0; i < zones.length; i++) {
             var myLi = htmlLiZone;
             myLi = paramValue(myLi, "zoneName", zones[i].nom);
             myLi = paramValue(myLi, "idZone", zones[i].id);
+
+
             $("#add_site_zone_value").append(myLi);
         }
         var htmlGerer = getGererSitesLiAddZone();
         var myGererSiteLiZone = htmlGerer;
         myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
-
+        myGererSiteLiZone = paramValue(myGererSiteLiZone, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
         $("#add_site_zone_value").append(myGererSiteLiZone);
     }, null);
     $('#myModal').modal('show');
@@ -132,6 +135,7 @@ function appendNewZone() {
     var myGererSiteLiZone = htmlGerer;
     nbzone++;
     myGererSiteLiZone = paramValue(myGererSiteLiZone, "nbZone", nbzone);
+    myGererSiteLiZone = paramValue(myGererSiteLiZone, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
     $("#add_site_zone_value").append(myGererSiteLiZone);
 }
 var idEtabToUpdate = "";
@@ -142,7 +146,6 @@ function updateEtablissement(id) {
     idEtabToUpdate = id;
     getConnexion().getEtablissementById(showEtbById, id, null);
     function showEtbById(etablissement, param) {
-        console.log("etablissement", etablissement);
         var htmlModel = getBootstrapModal();
         htmlModel = paramValue(htmlModel, "titre", strings.getString("label.gererlessites.table.modal.title"));
         htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
@@ -274,13 +277,23 @@ function validerUpdateEtablissement() {
 }
 function removeEtablissement(id) {
     if (confirm(strings.getString("label.confirm.remove.etablissement"))) {
-        getConnexion().removeEtablissement(null, id, null);
-        $("tr[idetablissement='" + id + "']").remove();
+        getConnexion().removeEtablissement(function(data, param) {
+            if (data == null) {
+                $("tr[idetablissement='" + id + "']").remove();
+            } else {
+                if (!data.hasOwnProperty("error")) {
+                    $("tr[idetablissement='" + id + "']").remove();
+                }
+            }
+        }, id, null);
     }
 }
 function valderAjoutEtablissement() {
     if ($("#add_site_nom_value").val() == "") {
-        showInfoMessage(strings.getString("label.error.nom.required"));
+        var html = htmlInfoBootsrapMessage;
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", strings.getString("label.error.nom.required"));
+        $("#error_liste_modal").append(html);
     } else {
         var etablissement = new Etablissement();
         etablissement.nom = $("#add_site_nom_value").val();
@@ -322,6 +335,7 @@ function valderAjoutEtablissement() {
             if (checked) {
                 var zone = new ZoneTable();
                 zone.id = parseInt(idZone);
+                console.log($("p[idzone='" + idZone.trim() + "'][method='addEtabl']"));
                 etablissement.zones.push(zone);
             }
         });
@@ -331,17 +345,20 @@ function valderAjoutEtablissement() {
             zone.id = parseInt(nbzone);
             zone.nom = $(this).val();
             var tables2 = new Array();
-            for (var j = 1; j < $("ul[nbzone='" + nbzone + "'] li").length +1; j++) {
+            for (var j = 1; j < $("ul[nbzone='" + nbzone + "'] li").length + 1; j++) {
                 var nom = $("input[nbzone='" + nbzone + "'][nbtable='" + j + "']").val();
                 tables2.push(nom);
             }
             zone.tables = tables2;
-            etablissement.zones.push(zone);
+            if (zone.nom != "") {
+                etablissement.zones.push(zone);
+            }
         });
+        if (etablissement.zones.length == 0) {
+            etablissement.zones = null;
+        }
         getConnexion().sendNewEtablissement(function(data, param) {
             $('#myModal').modal('hide');
-            console.log(data);
-//            data = JSON.parse(data);
             var htmlTbody = getGererlesSitesTableTbodyTr();
             if (data != 0) {
                 if (etablissement.nom != null) {
@@ -382,6 +399,17 @@ function valderAjoutEtablissement() {
                 litbody = paramValue(litbody, "slogan", etablissement.slogan);
                 litbody = paramValue(litbody, "idetab", data.id);
                 litbody = paramValue(litbody, "groupe", groupex.nom);
+                var htmlZone = "";
+                if (etablissement.zones != null) {
+                    for (var j = 0; j < etablissement.zones.length; j++) {
+                        if (etablissement.zones.length - 1 == j) {
+                            htmlZone += "<p class=\"a_zone_structure a_zone_personalize\">" + etablissement.zones[j].nom + "</p>";
+                        } else {
+                            htmlZone += "<p class=\"a_zone_structure a_zone_personalize\">" + etablissement.zones[j].nom + ",</p>";
+                        }
+                    }
+                    litbody = paramValue(litbody, "zones", htmlZone);
+                }
                 $("#table_gererlessites_all").append(litbody);
                 $("tr[idetablissement='" + data.id + "']").addClass("etablissemend_added");
                 window.setTimeout(function() {
@@ -397,13 +425,14 @@ function showDialogAddTable(nbzone) {
     var htmlLiAddTable = getGererTablesLiAddTableInDiv();
     htmlLiAddTable = paramValue(htmlLiAddTable, "nbzone", nbzone);
     htmlLiAddTable = paramValue(htmlLiAddTable, "nbtable", idtableGlob);
+    htmlLiAddTable = paramValue(htmlLiAddTable, "placeholder", strings.getString("label.add.etablissement.zone.addtable.input.placeholde"));
     idtableGlob++;
     $("ul[nbzone='" + nbzone + "'").append(htmlLiAddTable);
 }
 function addLiTable(append, idzone, idtable) {
     var newLii = htmlLi;
     newLii = paramValue(newLii, "idzone", idzone);
-    newLii = paramValue(newLii, "placeholder", strings.getString("label.input.add.table"));
+    newLii = paramValue(newLii, "placeholder", strings.getString("label.add.etablissement.zone.addtable.input.placeholde"));
     newLii = paramValue(newLii, "idtable", idtableGlob);
     idtableGlob++;
     if (append) {
