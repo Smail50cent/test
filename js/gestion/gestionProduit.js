@@ -272,10 +272,10 @@ function updateProduct() {
     });
     produit.setEtablissements(listeEtabZone);
     console.log(produit);
-//    getConnexion().updateProduit(updateProd,produit);
-//    function updateProd(data) {
-//        console.log(data);
-//    }
+    getConnexion().updateProduit(updateProd,produit);
+    function updateProd(data) {
+        console.log(data);
+    }
     
     return true;
 }
