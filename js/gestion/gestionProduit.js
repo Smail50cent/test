@@ -74,6 +74,13 @@ function loadModifiedProduct(produit) {
                 $(this).removeClass("active");
             }
         });
+        
+        $("#alert_error_id").freeow("Produit", "Votre produit a été modifié avec succés", {
+            classes: ["smokey", "pushpin"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
     }
 }
 
