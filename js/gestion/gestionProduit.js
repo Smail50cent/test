@@ -73,11 +73,6 @@ function loadModifiedProduct(produit) {
 
 function ModifyProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
-    $("#alert_error_id").freeow("Modification", "n'est pas encore disponible " + idprod, {
-        classes: ["smokey", "pushpin"],
-        hideStyle: {opacity: 0, left: "400px"},
-        showStyle: {opacity: 1, left: 0}
-    });
     $("#dialog_add_produit_id").dialog({
         modal: true,
         title: "Modifier le produit",
