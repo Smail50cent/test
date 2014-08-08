@@ -296,7 +296,6 @@ function ConnexionServer() {
                             produit.setId(data[i].id);
                             produit.setTauxTva(data[i].tauxTva);
                             var categorie = new Categorie();
-
                             categorie.setNom(data[i].categorie.nom);
                             categorie.setId(data[i].categorie.id);
                             categorie.setPriorite(data[i].categorie.priorite);
@@ -458,7 +457,6 @@ function ConnexionServer() {
             data: {ticket: monTicket},
             async: false,
             success: function(data, textStatus, xhr) {
-                console.log(data);
                 data = JSON.parse(data);
                 setLocalStorageValue("id.last.created.ticket", data.id);
                 if (method != null) {
@@ -551,7 +549,7 @@ function ConnexionServer() {
             type: 'GET',
             async: false,
             success: function(data) {
-                console.log(data);
+
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
@@ -568,7 +566,6 @@ function ConnexionServer() {
                 method(data, param);
             },
             error: function(xhr, textStatus, errorThrown) {
-//                console.log(errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -683,7 +680,6 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -724,7 +720,6 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -760,7 +755,6 @@ function ConnexionServer() {
                         cpfs.push(cpf);
                     }
                 }
-                console.log(data);
                 if (method != null) {
                     method(cpfs, param);
                 }
@@ -842,7 +836,6 @@ function ConnexionServer() {
         }, {
             service: "serveur.clientaccess.serviceGetAllZoneTables"
         }, method, param);
-
     };
     this.deleteProduit = function(id) {
         $.ajax({
@@ -852,8 +845,6 @@ function ConnexionServer() {
             data: {ID: id},
             async: true,
             success: function(data, textStatus, xhr) {
-                console.log(data);
-                console.log("ON DELETE SUCCESS !");
             },
             error: function(xhr, textStatus, errorThrown) {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
@@ -892,7 +883,6 @@ function ConnexionServer() {
                             if (countProduitHaveUpdate == typeCommandes.length) {
                                 if (method != null) {
                                     getImplOfConnexionLocal().getAllTypeCommandes(method, null);
-
                                 }
                             }
                         }
@@ -930,7 +920,6 @@ function ConnexionServer() {
             });
         }
     };
-
     this.getEtablissementById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetByIdEtablissements") + "?id=" + id,
@@ -1045,7 +1034,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addIngredient = function(method, ingredient, param) {
         ingredient = JSON.stringify(ingredient);
         $.ajax({
@@ -1061,7 +1049,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllIngredients = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
@@ -1085,7 +1072,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getAllSousCategories = function(method, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetAllSousCategories"),
@@ -1146,7 +1132,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.addProduit = function(method, produit, param) {
         produit = JSON.stringify(produit);
         $.ajax({
@@ -1177,7 +1162,6 @@ function ConnexionServer() {
             }
         });
     };
-    
     this.getGroupeById = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceGetGroupeById") + "?id=" + id,
@@ -1288,7 +1272,6 @@ function ConnexionServer() {
             }
         });
     };
-
     this.getZonesTablesByEtablissement = function(method, id, param) {
         $.ajax({
             url: getServicePath("serveur.clientaccess.serviceZoneTablesGetByIdEtablissment") + "?idetablissement=" + id,
@@ -1315,7 +1298,6 @@ function ConnexionServer() {
                 }
             },
             error: function(xhr, textStatus, errorThrown) {
-                console.log(xhr, textStatus, errorThrown);
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
@@ -1418,7 +1400,6 @@ function ConnexionServer() {
     };
     this.getZoneTablesWhereEtablissementNull = function(method, param) {
         pAjax(function(data, param, methodExecute) {
-            console.log(data);
             var liste = new Array();
             for (var i = 0; i < data.length; i++) {
                 var tables = new Array();
@@ -1431,6 +1412,10 @@ function ConnexionServer() {
                 methodExecute(liste, param);
             }
         }, {"service": "serveur.clientaccess.serviceZoneTablesGetByEtablissementNull"}, method, param);
+    };
+    this.removeZoneTable = function(method, id1, param) {
+        pAjax(null,
+                {service: "serveur.clientaccess.serviceremoveZoneTable", data: {id: id1}}, method, param);
     };
 }
 

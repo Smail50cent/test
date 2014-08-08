@@ -796,3 +796,20 @@ function getGererTablesPageGererTables() {
     var mygererTablespage_gerer_tables = gererTablespage_gerer_tables;
     return mygererTablespage_gerer_tables;
 }
+
+var gestionmodeexpertgererlestablestable_afficher_all_zones_thead = null;
+function getGererLesTablesTableAfficherAllZonesThead() {
+    if (gestionmodeexpertgererlestablestable_afficher_all_zones_thead == null) {
+        gestionmodeexpertgererlestablestable_afficher_all_zones_thead = templates.getTemplate("gestion/modeexpert/gererlestables/table_afficher_all_zones_thead");
+    }
+    var mygestionmodeexpertgererlestablestable_afficher_all_zones_thead = gestionmodeexpertgererlestablestable_afficher_all_zones_thead;
+    return mygestionmodeexpertgererlestablestable_afficher_all_zones_thead;
+}
+var gestionmodeexpertgererlestablestable_afficher_all_zones_tbody = null;
+function getGererLesTablesTableAfficherAllZonesTBody() {
+    if (gestionmodeexpertgererlestablestable_afficher_all_zones_tbody == null) {
+        gestionmodeexpertgererlestablestable_afficher_all_zones_tbody = templates.getTemplate("gestion/modeexpert/gererlestables/table_afficher_all_zones_tbody");
+    }
+    var mygestionmodeexpertgererlestablestable_afficher_all_zones_tbody = gestionmodeexpertgererlestablestable_afficher_all_zones_tbody;
+    return mygestionmodeexpertgererlestablestable_afficher_all_zones_tbody;
+}

@@ -266,14 +266,21 @@ function hideFooter() {
 }
 
 function showErrorMessage(message) {
-    var element = $("#dialog_error_content_message_id");
-    if (element.length) {
-        $("#dialog_error_content_message_id").text(message);
+    if (nom != "modeexpert") {
+        var element = $("#dialog_error_content_message_id");
+        if (element.length) {
+            $("#dialog_error_content_message_id").text(message);
+        } else {
+            var html = getDialogErrorMessage(message);
+            html = paramValue(html, "message", message);
+            $("body").append(html);
+            $("#dialog_error_id").show();
+        }
     } else {
-        var html = getDialogErrorMessage(message);
-        html = paramValue(html, "message", message);
-        $("body").append(html);
-        $("#dialog_error_id").show();
+        var html = getAlertDanger();
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", message);
+        $("#error_liste").append(html);
     }
 }
 function closeErreurDialog(id) {
@@ -513,12 +520,12 @@ this.typeReq = this.getMethod;
 /**
  * Personal Ajax
  * <code>
-    if (methodParseData != null) {
-        methodParseData(data, param, methodExecute);
-    } else {
-        methodExecute(data, param);
-    }
-</code>                                                                   
+ if (methodParseData != null) {
+ methodParseData(data, param, methodExecute);
+ } else {
+ methodExecute(data, param);
+ }
+ </code>                                                                   
  * @param Function methodParseData
  * @param String config
  * @param Function methodExecute

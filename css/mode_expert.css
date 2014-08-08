@@ -199,3 +199,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
     vertical-align: middle;
     float: left;
 }
+.section_update_structure {
+    padding-left: 5px;
+}

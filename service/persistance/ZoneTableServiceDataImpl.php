@@ -4,6 +4,7 @@ include_once $path . 'service/persistance/ZoneTableServiceData.php';
 include_once $path . 'service/persistance/ConnexionBDD.php';
 include_once $path . 'service/logique/entity/ZoneTable.php';
 include_once $path . 'service/logique/entity/Table.php';
+include_once $path . 'service/logique/entity/Etablissement.php';
 
 /**
  * Description of ZoneTableServiceData
@@ -15,7 +16,21 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
 //
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke");
+        $resultSet = $bdd->executeGeneric("SELECT 
+ zone_table.etablissement_id, tables.id AS table_id,
+ tables.numero AS table_numero,
+ zone_table.nom AS zone_table_nom,
+ zone_table.id AS zone_table_id ,
+etablissement.nom AS etablissement_nom,
+etablissement.logo AS etablissement_logo,
+etablissement.style AS etablissement_style,
+etablissement.adresseEtab AS etablissement_adresseEtab,
+etablissement.telephone AS etablissement_telephone,
+etablissement.message AS etablissement_message,
+etablissement.slogan AS etablissement_slogan
+FROM  `zone_table`
+LEFT JOIN tables ON zone_table.id = tables.zone_table_ke
+LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
         return $this->parseZoneTable($resultSet);
     }
 
@@ -30,7 +45,15 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
             $ligne = $lignes[$i];
             $zoneTable->setId(intval($ligne->zone_table_id));
             $zoneTable->setNom($ligne->zone_table_nom);
-            $zoneTable->setEtablissement_id($ligne->etablissement_id);
+            $etablissement = new Etablissement();
+            $etablissement->setAdresseEtab($ligne->etablissement_adresseEtab);
+            $etablissement->setLogo($ligne->etablissement_logo);
+            $etablissement->setMessage($ligne->etablissement_message);
+            $etablissement->setNom($ligne->etablissement_nom);
+            $etablissement->setSlogan($ligne->etablissement_slogan);
+            $etablissement->setStyle($ligne->etablissement_style);
+            $etablissement->setTelephone($ligne->etablissement_telephone);
+            $zoneTable->setEtablissement_id($etablissement);
             if ($ligne->zone_table_id == $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
                 if ($table != null) {
@@ -50,16 +73,15 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
                 if ($table != null) {
                     $zoneTable->addTable($table);
                 }
-                if (count($lignes) < $i + 1){
-                   if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
+                if (count($lignes) < $i + 1) {
+                    if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
                         array_push($liste, $zoneTable);
                         $zoneTable = new ZoneTable();
-                    } 
-                }else{
+                    }
+                } else {
                     array_push($liste, $zoneTable);
-                        $zoneTable = new ZoneTable();
+                    $zoneTable = new ZoneTable();
                 }
-                    
             } else if ($ligne->table_id != $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
                 if ($table != null) {
@@ -77,11 +99,6 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
             }
             $idProdAfter = $ligne->zone_table_id;
         }
-//        if (count($liste) == 1) {
-////            $ret = $liste[0];
-//        } else {
-//            $ret = $liste;
-//        }
         return $liste;
     }
 
@@ -94,11 +111,15 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
                 break;
             }
         }if (!$isHere) {
-            $table = new Table();
-            $table->setId($ligne->table_id);
-            $table->setNumero($ligne->table_numero);
-            $table->setZone($ligne->zone_table_id);
-            return $table;
+            if ($ligne->table_numero) {
+                $table = new Table();
+                $table->setId($ligne->table_id);
+                $table->setNumero($ligne->table_numero);
+                $table->setZone($ligne->zone_table_id);
+                return $table;
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
@@ -106,14 +127,49 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
 
     public function getByIdEtablissement($id) {
         $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke WHERE  `etablissement_id` =" . $id);
+        $resultSet = $bdd->executeGeneric("SELECT 
+ zone_table.etablissement_id, tables.id AS table_id,
+ tables.numero AS table_numero,
+ zone_table.nom AS zone_table_nom,
+ zone_table.id AS zone_table_id ,
+etablissement.nom AS etablissement_nom,
+etablissement.logo AS etablissement_logo,
+etablissement.style AS etablissement_style,
+etablissement.adresseEtab AS etablissement_adresseEtab,
+etablissement.telephone AS etablissement_telephone,
+etablissement.message AS etablissement_message,
+etablissement.slogan AS etablissement_slogan
+FROM  `zone_table`
+LEFT JOIN tables ON zone_table.id = tables.zone_table_ke
+LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id` WHERE  `etablissement_id` =" . $id);
         return $this->parseZoneTable($resultSet);
     }
 
     public function getByEtablissementNull() {
         $bdd = new ConnexionBDD();
-        $resultSet = $bdd->executeGeneric("SELECT  zone_table.etablissement_id, tables.id AS table_id, tables.numero AS table_numero, zone_table.nom AS zone_table_nom, zone_table.id AS zone_table_id FROM  `zone_table` LEFT JOIN tables ON zone_table.id = tables.zone_table_ke WHERE `etablissement_id` IS NULL");
+        $resultSet = $bdd->executeGeneric("SELECT 
+ zone_table.etablissement_id, tables.id AS table_id,
+ tables.numero AS table_numero,
+ zone_table.nom AS zone_table_nom,
+ zone_table.id AS zone_table_id ,
+etablissement.nom AS etablissement_nom,
+etablissement.logo AS etablissement_logo,
+etablissement.style AS etablissement_style,
+etablissement.adresseEtab AS etablissement_adresseEtab,
+etablissement.telephone AS etablissement_telephone,
+etablissement.message AS etablissement_message,
+etablissement.slogan AS etablissement_slogan
+FROM  `zone_table`
+LEFT JOIN tables ON zone_table.id = tables.zone_table_ke
+LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id` WHERE `etablissement_id` IS NULL");
         return $this->parseZoneTable($resultSet);
     }
 
+    public function remove($id) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("DELETE FROM `zone_table` WHERE `id`=" . $id);
+    }
+
 }
+
+//

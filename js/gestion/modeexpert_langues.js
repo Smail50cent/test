@@ -8,6 +8,9 @@ function addStr() {
     var valFr = $("#fr_val").val();
     var valKey = $("#key_val").val();
     getConnexionServeur().addNewString(null, valKey, valFr, valEn, null);
+    $("#en_val").val("");
+    $("#fr_val").val("");
+    $("#key_val").val("");
 }
 function loadGestionLangues() {
     updateActivedLi(4);
