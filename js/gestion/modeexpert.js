@@ -50,7 +50,7 @@ function loadMenus() {
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "onclick", "");
+    li = paramValue(li, "onclick", "onLoadGestionTables();");
     li = paramValue(li, "idli", "6");
     li = paramValue(li, "class", "");
     li = paramValue(li, "name", "Tables et zones de tables");

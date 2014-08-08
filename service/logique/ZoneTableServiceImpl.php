@@ -31,4 +31,10 @@ class ZoneTableServiceImpl implements ZoneTableService {
         return $this->zoneTableSrv->getByEtablissementNull();
     }
 
+    public function remove($id) {
+        if($id!=null){
+           $ret= $this->zoneTableSrv->remove($id);
+        }
+    }
+
 }

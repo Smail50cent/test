@@ -13,50 +13,54 @@ function Style(url, fors) {
     this.url = url;
     this.for = fors;
 }
+var fileScripts = null;
 scripts.loadScripts = function(forpage, method) {
     load(getScripts(forpage), method);
     function getScripts(forpage) {
         var abonements = new Array();
         var styles = new Array();
         var url = "./config/scriptsToLoad.xml";
-        $.ajaxSetup({cache: true});
-        $.ajax({
-            type: "GET",
-            url: url,
-            dataType: "xml",
-            async: false,
-            success: function(xml) {
-                var unit = $(xml).find("script[for='" + forpage + "']");
-                unit.each(function() {
-                    var priorite = parseInt($(this).attr('priority'));
-                    var fors = $(this).attr('for');
-                    abonements.push(new Script($(this).text(), priorite, fors));
-                });
-                function compare(a, b) {
-                    if (a.priority < b.priority)
-                        return -1;
-                    if (a.priority > b.priority)
-                        return 1;
-                    return 0;
+        if (fileScripts == null) {
+            $.ajaxSetup({cache: true});
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "xml",
+                async: false,
+                success: function(xml) {
+                    fileScripts = xml;
                 }
-                abonements = abonements.sort(compare);
-                var unitStyle = $(xml).find("style[for='" + forpage + "']");
-                unitStyle.each(function() {
-                    var fors = $(this).attr('for');
-                    styles.push(new Style($(this).text(), fors));
-                    
-                });
-                loadStyle(styles);
-            }
+            });
+        }
+        var unit = $(fileScripts).find("script[for='" + forpage + "']");
+        unit.each(function() {
+            var priorite = parseInt($(this).attr('priority'));
+            var fors = $(this).attr('for');
+            abonements.push(new Script($(this).text(), priorite, fors));
         });
+        function compare(a, b) {
+            if (a.priority < b.priority)
+                return -1;
+            if (a.priority > b.priority)
+                return 1;
+            return 0;
+        }
+        abonements = abonements.sort(compare);
+        var unitStyle = $(fileScripts).find("style[for='" + forpage + "']");
+        unitStyle.each(function() {
+            var fors = $(this).attr('for');
+            styles.push(new Style($(this).text(), fors));
+
+        });
+        loadStyle(styles);
         return abonements;
     }
-    function loadStyle(styles){
-        for(var i = 0 ; i < styles.length ; i++){
-            $("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\""+styles[i].url+"\">");
+    function loadStyle(styles) {
+        for (var i = 0; i < styles.length; i++) {
+            $("head").append("<link rel=\"stylesheet\" type=\"text/css\" href=\"" + styles[i].url + "\">");
         }
     }
-    
+
     function load(abonements, method) {
         var finish = true;
 

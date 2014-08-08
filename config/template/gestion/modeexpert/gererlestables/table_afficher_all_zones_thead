@@ -1,0 +1,8 @@
+<thead class="section_gererzones_thead_structure section_gererzones_thead_personalize">
+    <tr class="section_tableausites_thead_tr_structure section_tableausites_thead_tr_personalize">
+        <th class="section_gererzones_thead_nom_structure section_gererzones_thead_nom_personalize">{nom}</th>
+        <th class="section_gererzones_thead_etablissement_structure section_gererzones_thead_etablissement_personalize">{etablissement}</th>
+        <th class="section_gererzones_thead_tables_structure section_gererzones_thead_tables_personalize">{tables}</th>
+        <th class="section_actions_thead_tables_structure section_actions_thead_tables_personalize">{actions}</th>
+    </tr>
+</thead>

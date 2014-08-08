@@ -1,3 +1,4 @@
+<div id="error_liste_modal" class="error_liste_modal_strucutre error_liste_modal_personalize" ></div>
 <table class="modal_body_table_addetab_structure modal_body_table_addetab_personalize">
     <tbody class="modal_body_tbody_addetab_structure modal_body_tbody_addetab_personalize">
         <tr class="addetab_tabnom_structure addetab_tabnom_personalize">

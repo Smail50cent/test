@@ -266,33 +266,49 @@ function hideFooter() {
 }
 
 function showErrorMessage(message) {
-    var element = $("#dialog_error_content_message_id");
-    if (element.length) {
-        $("#dialog_error_content_message_id").text(message);
+    if (nom != "modeexpert") {
+        var element = $("#dialog_error_content_message_id");
+        if (element.length) {
+            $("#dialog_error_content_message_id").text(message);
+        } else {
+            var html = getDialogErrorMessage(message);
+            html = paramValue(html, "message", message);
+            $("body").append(html);
+            $("#dialog_error_id").show();
+        }
     } else {
-        var html = getDialogErrorMessage(message);
-        html = paramValue(html, "message", message);
-        $("body").append(html);
-        $("#dialog_error_id").show();
+        var html = getAlertDanger();
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", message);
+        $("#error_liste").append(html);
     }
 }
 function closeErreurDialog(id) {
     $("#" + id).remove();
 }
+var htmlInfoMessage = getDialogMessageInfo();
+var htmlInfoBootsrapMessage = getAlertInfo();
 /**
  * Use this function to standarise the method to show an info
  * @param {String} message
  * 
  */
 function showInfoMessage(message) {
-    var element = $("#dialog_info_id");
-    if (element.length) {
-        $("#dialog_info_content_message_id").text(message);
+    if (nom != "modeexpert") {
+        var element = $("#dialog_info_id");
+        if (element.length) {
+            $("#dialog_info_content_message_id").text(message);
+        } else {
+            var html = htmlInfoMessage;
+            html = paramValue(html, "message", message);
+            $("body").append(html);
+            $("#dialog_info_id").show();
+        }
     } else {
-        var html = getDialogMessageInfo(message);
-        html = paramValue(html, "message", message);
-        $("body").append(html);
-        $("#dialog_info_id").show();
+        var html = htmlInfoBootsrapMessage;
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", message);
+        $("#error_liste").append(html);
     }
 }
 function postRedirict(url, args) {
@@ -503,6 +519,13 @@ this.typeReq = this.getMethod;
 
 /**
  * Personal Ajax
+ * <code>
+ if (methodParseData != null) {
+ methodParseData(data, param, methodExecute);
+ } else {
+ methodExecute(data, param);
+ }
+ </code>                                                                   
  * @param Function methodParseData
  * @param String config
  * @param Function methodExecute
@@ -514,8 +537,12 @@ function pAjax(methodParseData, config, methodExecute, param) {
     var type = "GET";//POST
     var service = "";
     var mydata = null;
+    var ifErrorSendAllDatas = false;
     if (config.hasOwnProperty("type")) {
         type = config.type;
+    }
+    if (config.hasOwnProperty("ifErrorSendAllDatas")) {
+        ifErrorSendAllDatas = config.ifErrorSendAllDatas;
     }
     if (config.hasOwnProperty("data")) {
         mydata = config.data;
@@ -541,7 +568,13 @@ function pAjax(methodParseData, config, methodExecute, param) {
                     showErrorMessage(strings.getString("error.label.errror.action.serveur"));
                 }
                 if (methodExecute != null || methodParseData != null) {
-                    data = data.data;
+                    if (ifErrorSendAllDatas) {
+                        if (!data.error) {
+                            data = data.data;
+                        }
+                    } else {
+                        data = data.data;
+                    }
                     if (methodParseData != null) {
                         methodParseData(data, param, methodExecute);
                     } else {
