@@ -45,14 +45,14 @@ function loadModifiedProduct(produit) {
         var categorie = produit.getCategorie().id;
         var idsousCat = produit.getSousCategorie().id;
         var idCat = "categorie" + categorie;
-        
-        $("li[produitid="+produit.getId()+"]").removeClass();
-        $("li[produitid="+produit.getId()+"]").addClass("produitcat"+categorie+"_sscat"+idsousCat+" produit"+produit.getId()+" produit_cat_structure produit_cat_personalize ");
-        var divmod = $(".produit"+produit.getId());
+
+        $("li[produitid=" + produit.getId() + "]").removeClass();
+        $("li[produitid=" + produit.getId() + "]").addClass("produitcat" + categorie + "_sscat" + idsousCat + " produit" + produit.getId() + " produit_cat_structure produit_cat_personalize ");
+        var divmod = $(".produit" + produit.getId());
         console.log(divmod);
-        $(".produit"+produit.getId()).remove();
-        $("ul[categorieid="+categorie+"]").append(divmod);
-        
+        $(".produit" + produit.getId()).remove();
+        $("ul[categorieid=" + categorie + "]").append(divmod);
+
         $(".genreicClassSlide").each(function() {
             if ($(this).attr('id') == idCat) {
                 $(this).addClass("active");
@@ -132,6 +132,7 @@ function ModifyProduct(id) {
     getConnexion().getProduitByIdGeneric(produitById, idprod);
     function produitById(data) {
         //console.log(data);
+        $("#tva_0 option[value=\""+parseFloat(data.tauxTva)+"\"]").prop("selected", true);
         $('#name_prod_Id').val(data.nom);
         $('#name_prod_Id').attr("idproduit", data.id);
         $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
