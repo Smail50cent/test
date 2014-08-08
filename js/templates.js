@@ -56,7 +56,7 @@ function getHeaderCategorieItem() {
     var mycarteproduitsheader_categorie_item = carteproduitsheader_categorie_item;
     return mycarteproduitsheader_categorie_item;
 }
-var carteproduitsheader_categorie_souscategorie_liste =null;
+var carteproduitsheader_categorie_souscategorie_liste = null;
 function getHeaderCategorieSousCategorieListe() {
     if (carteproduitsheader_categorie_souscategorie_liste == null) {
         carteproduitsheader_categorie_souscategorie_liste = templates.getTemplate("carte/produits/header_categorie_souscategorie_liste");
@@ -64,7 +64,7 @@ function getHeaderCategorieSousCategorieListe() {
     var mycarteproduitsheader_categorie_souscategorie_liste = carteproduitsheader_categorie_souscategorie_liste;
     return mycarteproduitsheader_categorie_souscategorie_liste;
 }
-var carteproduitsheader_categorie_souscategorie_item =null;
+var carteproduitsheader_categorie_souscategorie_item = null;
 function getHeaderCategorieSousCategorieItem() {
     if (carteproduitsheader_categorie_souscategorie_item == null) {
         carteproduitsheader_categorie_souscategorie_item = templates.getTemplate("carte/produits/header_categorie_souscategorie_item");
@@ -72,7 +72,7 @@ function getHeaderCategorieSousCategorieItem() {
     var mycarteproduitsheader_categorie_souscategorie_item = carteproduitsheader_categorie_souscategorie_item;
     return mycarteproduitsheader_categorie_souscategorie_item;
 }
-var allotherdialog_message_info=null;
+var allotherdialog_message_info = null;
 function getDialogMessageInfo() {
     if (allotherdialog_message_info == null) {
         allotherdialog_message_info = templates.getTemplate("all/other/dialog_message_info");
@@ -88,7 +88,7 @@ function getTestConnexionIconImg() {
     var myallheadertest_connexion_icon_img = allheadertest_connexion_icon_img;
     return myallheadertest_connexion_icon_img;
 }
-var carterecapitulatifrecapitulatif_produit_item =null;
+var carterecapitulatifrecapitulatif_produit_item = null;
 function getRecapitulatifProduitItem() {
     if (carterecapitulatifrecapitulatif_produit_item == null) {
         carterecapitulatifrecapitulatif_produit_item = templates.getTemplate("carte/recapitulatif/recapitulatif_produit_item");
@@ -96,7 +96,7 @@ function getRecapitulatifProduitItem() {
     var mycarterecapitulatifitem_recap_description_item = carterecapitulatifrecapitulatif_produit_item;
     return mycarterecapitulatifitem_recap_description_item;
 }
-var carterecapitulatifitem_recap_description_item =null;
+var carterecapitulatifitem_recap_description_item = null;
 function getItemRecapDescriptionItem() {
     if (carterecapitulatifitem_recap_description_item == null) {
         carterecapitulatifitem_recap_description_item = templates.getTemplate("carte/recapitulatif/item_recap_description_item");
@@ -104,7 +104,7 @@ function getItemRecapDescriptionItem() {
     var mycarterecapitulatifitem_recap_description_item = carterecapitulatifitem_recap_description_item;
     return mycarterecapitulatifitem_recap_description_item;
 }
-var carterecapitulatifitem_option =null;
+var carterecapitulatifitem_option = null;
 function getItemOption() {
     if (carterecapitulatifitem_option == null) {
         carterecapitulatifitem_option = templates.getTemplate("carte/recapitulatif/item_option");
@@ -112,7 +112,7 @@ function getItemOption() {
     var mycarterecapitulatifitem_option = carterecapitulatifitem_option;
     return mycarterecapitulatifitem_option;
 }
-var carterecapitulatifbuttonAjouterIngInProduitRecap =null;
+var carterecapitulatifbuttonAjouterIngInProduitRecap = null;
 function getButtonAjouterIngInProduitRecap() {
     if (carterecapitulatifbuttonAjouterIngInProduitRecap == null) {
         carterecapitulatifbuttonAjouterIngInProduitRecap = templates.getTemplate("carte/recapitulatif/buttonAjouterIngInProduitRecap");
@@ -120,7 +120,7 @@ function getButtonAjouterIngInProduitRecap() {
     var mycarterecapitulatifbuttonAjouterIngInProduitRecap = carterecapitulatifbuttonAjouterIngInProduitRecap;
     return mycarterecapitulatifbuttonAjouterIngInProduitRecap;
 }
-var carteproduitsfooter_where_carte= null;
+var carteproduitsfooter_where_carte = null;
 function getFooterWhereCarte() {
     if (carteproduitsfooter_where_carte == null) {
         carteproduitsfooter_where_carte = templates.getTemplate("carte/produits/footer_where_carte");
@@ -136,7 +136,7 @@ function getFooterWhereRecapitulatif() {
     var mycarterecapitulatiffooter_where_recapitulatif = carterecapitulatiffooter_where_recapitulatif;
     return mycarterecapitulatiffooter_where_recapitulatif;
 }
-var cartemenubutton_valider_in_menu =null;
+var cartemenubutton_valider_in_menu = null;
 function getButtonValiderInMenu() {
     if (cartemenubutton_valider_in_menu == null) {
         cartemenubutton_valider_in_menu = templates.getTemplate("carte/menu/button_valider_in_menu");
@@ -144,7 +144,7 @@ function getButtonValiderInMenu() {
     var mycartemenubutton_valider_in_menu = cartemenubutton_valider_in_menu;
     return mycartemenubutton_valider_in_menu;
 }
-var carterecapitulatifdialog_info_prix =null;
+var carterecapitulatifdialog_info_prix = null;
 function getDialogInfoPrix() {
     if (carterecapitulatifdialog_info_prix == null) {
         carterecapitulatifdialog_info_prix = templates.getTemplate("carte/recapitulatif/dialog_info_prix");
@@ -152,7 +152,7 @@ function getDialogInfoPrix() {
     var mycarterecapitulatifdialog_info_prix = carterecapitulatifdialog_info_prix;
     return mycarterecapitulatifdialog_info_prix;
 }
-var cartemenumenu_detail_produit_item =null;
+var cartemenumenu_detail_produit_item = null;
 function getMenuDetailProduitItem() {
     if (cartemenumenu_detail_produit_item == null) {
         cartemenumenu_detail_produit_item = templates.getTemplate("carte/menu/menu_detail_produit_item");
@@ -160,7 +160,7 @@ function getMenuDetailProduitItem() {
     var mycartemenumenu_detail_produit_item = cartemenumenu_detail_produit_item;
     return mycartemenumenu_detail_produit_item;
 }
-var cartemenumenu_detail_produit_item_title=null;
+var cartemenumenu_detail_produit_item_title = null;
 function getMenuDetailProduitItemTitle() {
     if (cartemenumenu_detail_produit_item_title == null) {
         cartemenumenu_detail_produit_item_title = templates.getTemplate("carte/menu/menu_detail_produit_item_title");
@@ -176,7 +176,7 @@ function getDivSlides() {
     var mycartediv_slides = cartediv_slides;
     return mycartediv_slides;
 }
-var cartediv_slide=null;
+var cartediv_slide = null;
 function getDivSlide() {
     if (cartediv_slide == null) {
         cartediv_slide = templates.getTemplate("carte/div_slide");
@@ -193,7 +193,7 @@ function getContentSlideMenu() {
     return mycartemenucontent_slide_menu;
 }
 
-var cartemenuitem_liste_menus=null;
+var cartemenuitem_liste_menus = null;
 function getItemListeMenu() {
     if (cartemenuitem_liste_menus == null) {
         cartemenuitem_liste_menus = templates.getTemplate("carte/menu/item_liste_menus");
@@ -201,7 +201,7 @@ function getItemListeMenu() {
     var mycartemenuitem_liste_menus = cartemenuitem_liste_menus;
     return mycartemenuitem_liste_menus;
 }
-var carteproduitscontent_produit= null;
+var carteproduitscontent_produit = null;
 function getContentProduit() {
     if (carteproduitscontent_produit == null) {
         carteproduitscontent_produit = templates.getTemplate("carte/produits/content_produit");
@@ -217,7 +217,7 @@ function getContentProduitItem() {
     var mycarteproduitscontent_produit_item = carteproduitscontent_produit_item;
     return mycarteproduitscontent_produit_item;
 }
-var carterecapitulatifliste_recapitulatif =null;
+var carterecapitulatifliste_recapitulatif = null;
 function getListeRecapitulatif() {
     if (carterecapitulatifliste_recapitulatif == null) {
         carterecapitulatifliste_recapitulatif = templates.getTemplate("carte/recapitulatif/liste_recapitulatif");
@@ -225,7 +225,7 @@ function getListeRecapitulatif() {
     var mycarterecapitulatifliste_recapitulatif = carterecapitulatifliste_recapitulatif;
     return mycarterecapitulatifliste_recapitulatif;
 }
-var carterecapitulatifmodal_ajouter_ingredient =null;
+var carterecapitulatifmodal_ajouter_ingredient = null;
 function getModalAjouterIngredient() {
     if (carterecapitulatifmodal_ajouter_ingredient == null) {
         carterecapitulatifmodal_ajouter_ingredient = templates.getTemplate("carte/recapitulatif/modal_ajouter_ingredient");
@@ -233,7 +233,7 @@ function getModalAjouterIngredient() {
     var mycarterecapitulatifmodal_ajouter_ingredient = carterecapitulatifmodal_ajouter_ingredient;
     return mycarterecapitulatifmodal_ajouter_ingredient;
 }
-var carterecapitulatifmodal_ajouter_ingredient_item =null;
+var carterecapitulatifmodal_ajouter_ingredient_item = null;
 function getModalAjouterIngredientItem() {
     if (carterecapitulatifmodal_ajouter_ingredient_item == null) {
         carterecapitulatifmodal_ajouter_ingredient_item = templates.getTemplate("carte/recapitulatif/modal_ajouter_ingredient_item");
@@ -249,7 +249,7 @@ function getOptionInChooseTable() {
     var myparamCommandeoption_in_choose_table = paramCommandeoption_in_choose_table;
     return myparamCommandeoption_in_choose_table;
 }
-var allotherloading_pict =null;
+var allotherloading_pict = null;
 function getLoadingPict() {
     if (allotherloading_pict == null) {
         allotherloading_pict = templates.getTemplate("all/other/loading_pict");
@@ -257,7 +257,7 @@ function getLoadingPict() {
     var myallotherloading_pict = allotherloading_pict;
     return myallotherloading_pict;
 }
-var carteetape_affecter_produit_personnefooter_where_affecter_produit =null;
+var carteetape_affecter_produit_personnefooter_where_affecter_produit = null;
 function getFooterWhereAffecterProduit() {
     if (carteetape_affecter_produit_personnefooter_where_affecter_produit == null) {
         carteetape_affecter_produit_personnefooter_where_affecter_produit = templates.getTemplate("carte/etape_affecter_produit_personne/footer_where_affecter_produit");
@@ -265,7 +265,7 @@ function getFooterWhereAffecterProduit() {
     var mycarteetape_affecter_produit_personnefooter_where_affecter_produit = carteetape_affecter_produit_personnefooter_where_affecter_produit;
     return mycarteetape_affecter_produit_personnefooter_where_affecter_produit;
 }
-var carteetape_affecter_produit_personnelect_in_item =null;
+var carteetape_affecter_produit_personnelect_in_item = null;
 function getSelectInItem() {
     if (carteetape_affecter_produit_personnelect_in_item == null) {
         carteetape_affecter_produit_personnelect_in_item = templates.getTemplate("carte/etape_affecter_produit_personne/select_in_item");
@@ -273,7 +273,7 @@ function getSelectInItem() {
     var mycarteetape_affecter_produit_personnelect_in_item = carteetape_affecter_produit_personnelect_in_item;
     return mycarteetape_affecter_produit_personnelect_in_item;
 }
-var cartetape_affecter_produit_personnoption_in_select_item =null;
+var cartetape_affecter_produit_personnoption_in_select_item = null;
 function getOptionInSelectItem() {
     if (cartetape_affecter_produit_personnoption_in_select_item == null) {
         cartetape_affecter_produit_personnoption_in_select_item = templates.getTemplate("carte/etape_affecter_produit_personne/option_in_select_item");
@@ -281,7 +281,7 @@ function getOptionInSelectItem() {
     var mycartetape_affecter_produit_personnoption_in_select_item = cartetape_affecter_produit_personnoption_in_select_item;
     return mycartetape_affecter_produit_personnoption_in_select_item;
 }
-var allheaderhead =null;
+var allheaderhead = null;
 function getHead() {
     if (allheaderhead == null) {
         allheaderhead = templates.getTemplate("all/header/head");
@@ -289,7 +289,7 @@ function getHead() {
     var myallheaderhead = allheaderhead;
     return myallheaderhead;
 }
-var reglementitem_liste_reglement =null;
+var reglementitem_liste_reglement = null;
 function getItemListeReglement() {
     if (reglementitem_liste_reglement == null) {
         reglementitem_liste_reglement = templates.getTemplate("reglement/item_liste_reglement");
@@ -297,7 +297,7 @@ function getItemListeReglement() {
     var myreglementitem_liste_reglement = reglementitem_liste_reglement;
     return myreglementitem_liste_reglement;
 }
-var choixPaimentPersonnesitem_paiment_personnes=null;
+var choixPaimentPersonnesitem_paiment_personnes = null;
 function getItemPaimentPersonnes() {
     if (choixPaimentPersonnesitem_paiment_personnes == null) {
         choixPaimentPersonnesitem_paiment_personnes = templates.getTemplate("choixPaimentPersonnes/item_paiment_personnes");
@@ -305,7 +305,7 @@ function getItemPaimentPersonnes() {
     var mychoixPaimentPersonnesitem_paiment_personnes = choixPaimentPersonnesitem_paiment_personnes;
     return mychoixPaimentPersonnesitem_paiment_personnes;
 }
-var choixPaimentPersonneoption_produit_non_attribue=null;
+var choixPaimentPersonneoption_produit_non_attribue = null;
 function getOptionProduitNonAttribue() {
     if (choixPaimentPersonneoption_produit_non_attribue == null) {
         choixPaimentPersonneoption_produit_non_attribue = templates.getTemplate("choixPaimentPersonnes/option_produit_non_attribue");
@@ -313,7 +313,7 @@ function getOptionProduitNonAttribue() {
     var mychoixPaimentPersonneoption_produit_non_attribue = choixPaimentPersonneoption_produit_non_attribue;
     return mychoixPaimentPersonneoption_produit_non_attribue;
 }
-var choixPaimentPersonnesattribution_produit=null;
+var choixPaimentPersonnesattribution_produit = null;
 function getAttributionProduit() {
     if (choixPaimentPersonnesattribution_produit == null) {
         choixPaimentPersonnesattribution_produit = templates.getTemplate("choixPaimentPersonnes/attribution_produit");
@@ -321,7 +321,7 @@ function getAttributionProduit() {
     var mychoixPaimentPersonnesattribution_produit = choixPaimentPersonnesattribution_produit;
     return mychoixPaimentPersonnesattribution_produit;
 }
-var compteauth_compte_form =null;
+var compteauth_compte_form = null;
 function getAuthCompte() {
     if (compteauth_compte_form == null) {
         compteauth_compte_form = templates.getTemplate("compte/auth_compte_form");
@@ -353,7 +353,7 @@ function getSocialNetworkForm() {
     var mycomptesocialNetwork_compte_form = comptesocialNetwork_compte_form;
     return mycomptesocialNetwork_compte_form;
 }
-var compteimage_socialNetwork_user=null;
+var compteimage_socialNetwork_user = null;
 function getImageSocialNetworkUser() {
     if (compteimage_socialNetwork_user == null) {
         compteimage_socialNetwork_user = templates.getTemplate("compte/image_socialNetwork_user");
@@ -369,7 +369,7 @@ function getButtonFacebookAuth() {
     var mycomptebutton_facebook_auth_form_user = comptebutton_facebook_auth_form_user;
     return mycomptebutton_facebook_auth_form_user;
 }
-var comptebutton_twitter_auth_form_user= null;
+var comptebutton_twitter_auth_form_user = null;
 function getButtonTwitterAuth() {
     if (comptebutton_twitter_auth_form_user == null) {
         comptebutton_twitter_auth_form_user = templates.getTemplate("compte/button_twitter_auth_form_user");
@@ -385,7 +385,7 @@ function getButtonGoogleAuth() {
     var mycomptebutton_googleplus_auth_form_user = comptebutton_googleplus_auth_form_user;
     return mycomptebutton_googleplus_auth_form_user;
 }
-var comptegenerated_form_inscription= null;
+var comptegenerated_form_inscription = null;
 function getGeneratedInscriForm() {
     if (comptegenerated_form_inscription == null) {
         comptegenerated_form_inscription = templates.getTemplate("compte/generated_form_inscription");
@@ -401,7 +401,7 @@ function getOptionPersonnes() {
     var mychoixEnvoieCuisineoption_personnes = choixEnvoieCuisineoption_personnes;
     return mychoixEnvoieCuisineoption_personnes;
 }
-var choixEnvoieCuisineli_produit=null;
+var choixEnvoieCuisineli_produit = null;
 function getLiProduit() {
     if (choixEnvoieCuisineli_produit == null) {
         choixEnvoieCuisineli_produit = templates.getTemplate("choixEnvoieCuisine/li_produit");
@@ -409,7 +409,7 @@ function getLiProduit() {
     var mychoixEnvoieCuisineli_produit = choixEnvoieCuisineli_produit;
     return mychoixEnvoieCuisineli_produit;
 }
-var compteButton_back_to_auth_form =null;
+var compteButton_back_to_auth_form = null;
 function getButtonBackToAuth() {
     if (compteButton_back_to_auth_form == null) {
         compteButton_back_to_auth_form = templates.getTemplate("compte/Button_back_to_auth_form");
@@ -425,7 +425,7 @@ function getInscriFormUser() {
     var mycompteinscri_form_user = compteinscri_form_user;
     return mycompteinscri_form_user;
 }
-var cartemenucontent_slide_favorite =null;
+var cartemenucontent_slide_favorite = null;
 function getContentSlideFavorite() {
     if (cartemenucontent_slide_favorite == null) {
         cartemenucontent_slide_favorite = templates.getTemplate("carte/menu/content_slide_favorite");
@@ -433,7 +433,7 @@ function getContentSlideFavorite() {
     var mycartemenucontent_slide_favorite = cartemenucontent_slide_favorite;
     return mycartemenucontent_slide_favorite;
 }
-var cartemenuitem_select_type_favorite =null;
+var cartemenuitem_select_type_favorite = null;
 function getItemSelectFavorite() {
     if (cartemenuitem_select_type_favorite == null) {
         cartemenuitem_select_type_favorite = templates.getTemplate("carte/menu/item_select_type_favorite");
@@ -441,7 +441,7 @@ function getItemSelectFavorite() {
     var mycartemenuitem_select_type_favorite = cartemenuitem_select_type_favorite;
     return mycartemenuitem_select_type_favorite;
 }
-var choixDateHeureoption_select_date =null;
+var choixDateHeureoption_select_date = null;
 function getDateHeureOptionDate() {
     if (choixDateHeureoption_select_date == null) {
         choixDateHeureoption_select_date = templates.getTemplate("choixDateHeure/option_select_date");
@@ -449,7 +449,7 @@ function getDateHeureOptionDate() {
     var mychoixDateHeureoption_select_date = choixDateHeureoption_select_date;
     return mychoixDateHeureoption_select_date;
 }
-var gestionproduitdiv_modifier_produit= null;
+var gestionproduitdiv_modifier_produit = null;
 function getDivModifProduit() {
     if (gestionproduitdiv_modifier_produit == null) {
         gestionproduitdiv_modifier_produit = templates.getTemplate("gestion/produit/div_modifier_produit");
@@ -457,7 +457,7 @@ function getDivModifProduit() {
     var mygestionproduitdiv_modifier_produit = gestionproduitdiv_modifier_produit;
     return mygestionproduitdiv_modifier_produit;
 }
-var gestionproduitdiv_supprimer_produit =null;
+var gestionproduitdiv_supprimer_produit = null;
 function getDivSuppProduit() {
     if (gestionproduitdiv_supprimer_produit == null) {
         gestionproduitdiv_supprimer_produit = templates.getTemplate("gestion/produit/div_supprimer_produit");
@@ -485,19 +485,27 @@ var gestionproduitpage1_input_ajouter_produit = null;
 function getPage1AddProduit() {
     if (gestionproduitpage1_input_ajouter_produit == null) {
         gestionproduitpage1_input_ajouter_produit = templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
+        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit,"titleInput",strings.getString("add.produit.page.input.produit.nom.title"));
+        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1,"placeHInput",strings.getString("add.produit.page.input.produit.nom.placeholder"));
+        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2,"categorie",strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3,"souscat",strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit4;
     }
     var mygestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit;
     return mygestionproduitpage1_input_ajouter_produit;
 }
-var gestionproduitpage1_show_ajouter_produit =null;
+var gestionproduitpage1_show_ajouter_produit = null;
 function getPage1ShowAddProduit() {
     if (gestionproduitpage1_show_ajouter_produit == null) {
         gestionproduitpage1_show_ajouter_produit = templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
+        gestionproduitpage1_show_ajouter_produit1 = paramValue(gestionproduitpage1_show_ajouter_produit, "categorie", strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_show_ajouter_produit2 = paramValue(gestionproduitpage1_show_ajouter_produit1, "sousCateg", strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_show_ajouter_produit = gestionproduitpage1_show_ajouter_produit2;
     }
     var mygestionproduitpage1_show_ajouter_produit = gestionproduitpage1_show_ajouter_produit;
     return mygestionproduitpage1_show_ajouter_produit;
 }
-var gestionproduitingredient_ajouter_produit= null;
+var gestionproduitingredient_ajouter_produit = null;
 function getPageIngredAddProduit() {
     if (gestionproduitingredient_ajouter_produit == null) {
         gestionproduitingredient_ajouter_produit = templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
@@ -505,7 +513,7 @@ function getPageIngredAddProduit() {
     var mygestionproduitingredient_ajouter_produit = gestionproduitingredient_ajouter_produit;
     return mygestionproduitingredient_ajouter_produit;
 }
-var gestionproduitingredient_checkbox_ajouter_produit =null;
+var gestionproduitingredient_checkbox_ajouter_produit = null;
 function getIngredCheckBoxAddProduit() {
     if (gestionproduitingredient_checkbox_ajouter_produit == null) {
         gestionproduitingredient_checkbox_ajouter_produit = templates.getTemplate("gestion/produit/ingredient_checkbox_ajouter_produit");
@@ -513,7 +521,7 @@ function getIngredCheckBoxAddProduit() {
     var mygestionproduitingredient_checkbox_ajouter_produit = gestionproduitingredient_checkbox_ajouter_produit;
     return mygestionproduitingredient_checkbox_ajouter_produit;
 }
-var gestionproduitoption_checkbox_ajouter_produit= null;
+var gestionproduitoption_checkbox_ajouter_produit = null;
 function getOptionCheckBoxAddProduit() {
     if (gestionproduitoption_checkbox_ajouter_produit == null) {
         gestionproduitoption_checkbox_ajouter_produit = templates.getTemplate("gestion/produit/option_checkbox_ajouter_produit");
@@ -521,7 +529,7 @@ function getOptionCheckBoxAddProduit() {
     var mygestionproduitoption_checkbox_ajouter_produit = gestionproduitoption_checkbox_ajouter_produit;
     return mygestionproduitoption_checkbox_ajouter_produit;
 }
-var gestionproduitingredOpt_li_ajouter_produit =null;
+var gestionproduitingredOpt_li_ajouter_produit = null;
 function getIngredLiAddProduit() {
     if (gestionproduitingredOpt_li_ajouter_produit == null) {
         gestionproduitingredOpt_li_ajouter_produit = templates.getTemplate("gestion/produit/ingredOpt_li_ajouter_produit");
@@ -545,7 +553,7 @@ function getPrixAddProduit() {
     var mygestionproduitprix_ajouter_produit = gestionproduitprix_ajouter_produit;
     return mygestionproduitprix_ajouter_produit;
 }
-var gestionproduitprix_zone_ajouter_produit =null;
+var gestionproduitprix_zone_ajouter_produit = null;
 function getPrixZoneAddProduit() {
     if (gestionproduitprix_zone_ajouter_produit == null) {
         gestionproduitprix_zone_ajouter_produit = templates.getTemplate("gestion/produit/prix_zone_ajouter_produit");
@@ -553,7 +561,7 @@ function getPrixZoneAddProduit() {
     var mygestionproduitprix_zone_ajouter_produit = gestionproduitprix_zone_ajouter_produit;
     return mygestionproduitprix_zone_ajouter_produit;
 }
-var gestionproduitdiv_ajouter_option=null;
+var gestionproduitdiv_ajouter_option = null;
 function getDivAddOption() {
     if (gestionproduitdiv_ajouter_option == null) {
         gestionproduitdiv_ajouter_option = templates.getTemplate("gestion/produit/div_ajouter_option");
@@ -561,7 +569,7 @@ function getDivAddOption() {
     var mygestionproduitdiv_ajouter_option = gestionproduitdiv_ajouter_option;
     return mygestionproduitdiv_ajouter_option;
 }
-var gestionproduitdiv_ajouter_ingredient=null;
+var gestionproduitdiv_ajouter_ingredient = null;
 function getDivAddIngredient() {
     if (gestionproduitdiv_ajouter_ingredient == null) {
         gestionproduitdiv_ajouter_ingredient = templates.getTemplate("gestion/produit/div_ajouter_ingredient");
@@ -572,7 +580,7 @@ function getDivAddIngredient() {
 //function getAjouterProduitSelectEtablissements() {
 //    return templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements")
 //}
-var gestionproduitajouter_produit_select_etablissements =null;
+var gestionproduitajouter_produit_select_etablissements = null;
 function getAjouterProduitSelectEtablissements() {
     if (gestionproduitajouter_produit_select_etablissements == null) {
         gestionproduitajouter_produit_select_etablissements = templates.getTemplate("gestion/produit/ajouter_produit_select_etablissements");
@@ -580,7 +588,7 @@ function getAjouterProduitSelectEtablissements() {
     var mygestionproduitajouter_produit_select_etablissements = gestionproduitajouter_produit_select_etablissements;
     return mygestionproduitajouter_produit_select_etablissements;
 }
-var gestionproduitdiv_show_etblissements_and_zone =null;
+var gestionproduitdiv_show_etblissements_and_zone = null;
 function getDivShowEtblissementsAndZone() {
     if (gestionproduitdiv_show_etblissements_and_zone == null) {
         gestionproduitdiv_show_etblissements_and_zone = templates.getTemplate("gestion/produit/div_show_etblissements_and_zone");
@@ -604,7 +612,7 @@ function getPossibiliteLabelAddProduit() {
     var mygestionproduitpossibilite_label_ajouter_produit = gestionproduitpossibilite_label_ajouter_produit;
     return mygestionproduitpossibilite_label_ajouter_produit;
 }
-var gestionproduitoption_select_ajouter_produit =null;
+var gestionproduitoption_select_ajouter_produit = null;
 function getOptionPossibSelectAddProduit() {
     if (gestionproduitoption_select_ajouter_produit == null) {
         gestionproduitoption_select_ajouter_produit = templates.getTemplate("gestion/produit/option_select_ajouter_produit");
@@ -612,7 +620,7 @@ function getOptionPossibSelectAddProduit() {
     var mygestionproduitoption_select_ajouter_produit = gestionproduitoption_select_ajouter_produit;
     return mygestionproduitoption_select_ajouter_produit;
 }
-var gestionalldiv_gestion_dropdown =null;
+var gestionalldiv_gestion_dropdown = null;
 function getDivGestionDropdown() {
     if (gestionalldiv_gestion_dropdown == null) {
         gestionalldiv_gestion_dropdown = templates.getTemplate("gestion/all/div_gestion_dropdown");
@@ -628,7 +636,7 @@ function getLiAccesInterface() {
     var myinterfaceVenteAccesli_acces_interface = interfaceVenteAccesli_acces_interface;
     return myinterfaceVenteAccesli_acces_interface;
 }
-var gestionallli_dropdown =null;
+var gestionallli_dropdown = null;
 function getLiDropDown() {
     if (gestionallli_dropdown == null) {
         gestionallli_dropdown = templates.getTemplate("gestion/all/li_dropdown");
@@ -652,7 +660,7 @@ function getLiDropDownImg() {
     var mygestionallli_dropdown_img = gestionallli_dropdown_img;
     return mygestionallli_dropdown_img;
 }
-var gestionmodeexpertallli_nav_pill =null;
+var gestionmodeexpertallli_nav_pill = null;
 function getBootstrapNavPillLi() {
     if (gestionmodeexpertallli_nav_pill == null) {
         gestionmodeexpertallli_nav_pill = templates.getTemplate("gestion/modeexpert/all/li_nav_pill");
@@ -660,7 +668,7 @@ function getBootstrapNavPillLi() {
     var mygestionmodeexpertallli_nav_pill = gestionmodeexpertallli_nav_pill;
     return mygestionmodeexpertallli_nav_pill;
 }
-var gestionmodeexpertgererlessitespage_gerer_sites= null;
+var gestionmodeexpertgererlessitespage_gerer_sites = null;
 function getGererlesSites() {
     if (gestionmodeexpertgererlessitespage_gerer_sites == null) {
         gestionmodeexpertgererlessitespage_gerer_sites = templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
@@ -831,8 +839,6 @@ function getGererLesTablesDivAddZone() {
     return mygestionmodeexpertgererlestablesdiv_add_zone;
 }
 
-
-
 var gestionmodeexpertgererlestablesmodal_body_update_zone = null;
 function getGererLesTablesModalBodyUpdateZone() {
     if (gestionmodeexpertgererlestablesmodal_body_update_zone == null) {
@@ -840,4 +846,13 @@ function getGererLesTablesModalBodyUpdateZone() {
     }
     var mygestionmodeexpertgererlestablesmodal_body_update_zone = gestionmodeexpertgererlestablesmodal_body_update_zone;
     return mygestionmodeexpertgererlestablesmodal_body_update_zone;
+}
+
+var gestionmodeexpertpagegerercategories = null;
+function getGererLesCategorie() {
+    if (gestionmodeexpertpagegerercategories == null) {
+        gestionmodeexpertpagegerercategories = templates.getTemplate("gestion/modeexpert/gererlesCatégories/page_gerer_categories");
+    }
+    var mygestionmodeexpertpagegerercategories = gestionmodeexpertpagegerercategories;
+    return mygestionmodeexpertpagegerercategories;
 }

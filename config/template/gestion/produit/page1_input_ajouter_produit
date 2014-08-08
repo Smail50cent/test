@@ -1,14 +1,14 @@
 
-<p><input type="text" title="entrez ici le nom du produit" id="name_prod_Id" class="name_prod_structure name_prod_personalize tooltip" placeholder="Nom du Produit"></p>
+<p><input type="text" title="{titleInput}" id="name_prod_Id" class="name_prod_structure name_prod_personalize tooltip" placeholder="{placeHInput}"></p>
 
 <p>
 <select id="liste_categorie_id" class="product_spec_structure product_spec_personalize">
-<option value=0 selected disabled>Catégorie </option>
+<option value=0 selected disabled>{categorie} </option>
 </select></p>
 
 <p>
 <select id="liste_souscategorie_id" class="product_spec_structure product_spec_personalize product_spec_souscat_structure product_spec_souscat_personalize">
-<option value=0 selected disabled> Sous Catégorie</option>
+<option value=0 selected disabled>{souscat}</option>
 </select></p>
 
 
