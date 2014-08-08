@@ -589,3 +589,6 @@ function pAjax(methodParseData, config, methodExecute, param) {
         });
     }
 }
+function isInt(n) {
+   return n % 1 === 0;
+}

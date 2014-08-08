@@ -14,4 +14,8 @@ interface ZoneTableService {
     public function getByEtablissementNull();
 
     public function remove($id);
+    
+    public function getById($id);
+    
+    public function add(ZoneTable $zoneTable);
 }

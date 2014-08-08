@@ -1,6 +1,6 @@
 <?php
 
-include_once $path . 'service/persistance/ZoneTableServiceData.php';
+include_once $path . 'service/persistance/zonestables/ZoneTableServiceData.php';
 include_once $path . 'service/persistance/ConnexionBDD.php';
 include_once $path . 'service/logique/entity/ZoneTable.php';
 include_once $path . 'service/logique/entity/Table.php';
@@ -170,6 +170,36 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id` WHER
         $bdd->executeGeneric("DELETE FROM `zone_table` WHERE `id`=" . $id);
     }
 
-}
+    public function add(ZoneTable $zoneTable) {
+        $bdd = new ConnexionBDD();
+        $id = $bdd->executeGeneric("INSERT INTO `zone_table`(`nom`) VALUES ('" . $zoneTable->nom . "');");
+        $tables = $zoneTable->getTables();
+        for ($j = 0; $j < count($tables); $j++) {
+            $table = $tables[$j];
+            $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $table->getNumero() . "," . $id . ")");
+        }
+        return $id;
+    }
 
-//
+    public function getById($id) {
+        $bdd = new ConnexionBDD();
+        $resultSet = $bdd->executeGeneric("SELECT 
+ zone_table.etablissement_id, tables.id AS table_id,
+ tables.numero AS table_numero,
+ zone_table.nom AS zone_table_nom,
+ zone_table.id AS zone_table_id ,
+etablissement.nom AS etablissement_nom,
+etablissement.logo AS etablissement_logo,
+etablissement.style AS etablissement_style,
+etablissement.adresseEtab AS etablissement_adresseEtab,
+etablissement.telephone AS etablissement_telephone,
+etablissement.message AS etablissement_message,
+etablissement.slogan AS etablissement_slogan
+FROM  `zone_table`
+LEFT JOIN tables ON zone_table.id = tables.zone_table_ke
+LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`
+WHERE tables.id = ".$id);
+        return $this->parseZoneTable($resultSet);
+    }
+
+}

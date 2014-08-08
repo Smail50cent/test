@@ -202,3 +202,15 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 .section_update_structure {
     padding-left: 5px;
 }
+div#bootstrap_modal_body {
+    height: auto;
+    min-height: 150px;
+    max-height: 389px;
+}
+.gestion_nom_table_structure.gestion_nom_table_personalize {
+    float: left;
+}
+.gestion_numeros_table_structure.gestion_numeros_table_personalize {
+    float: bottom;
+    margin-right: 96px;
+} 

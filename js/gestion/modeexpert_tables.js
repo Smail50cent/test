@@ -9,7 +9,7 @@ function onLoadGestionTables() {
     html = paramValue(html, "title", strings.getString("title.div.all.zonestables"));
     html = paramValue(html, "labelButtonAdd", strings.getString("label.addzonetable.button"));
     $("#new_container").html(html);
-    printTableau();
+    printTableau();//getGererLesTablesModalBodyUpdateZone
 }
 
 function printTableau() {
@@ -20,7 +20,6 @@ function printTableau() {
     htmlHead = paramValue(htmlHead, "actions", strings.getString("label.thead.zonetable.actions"));
     $("#table_zonestables_all").html(htmlHead);
     getConnexion().getAllZoneTables(function(data, param) {
-        console.log(data);
         for (var i = 0; i < data.length; i++) {
             var htmlBody = getGererLesTablesTableAfficherAllZonesTBody();
             htmlBody = paramValue(htmlBody, "idzoneTable", data[i].id);
@@ -33,7 +32,6 @@ function printTableau() {
             var labelTab = "";
             var virgule = ",";
             if (data[i].tables != null) {
-                console.log(data[i]);
                 for (var j = 0; j < data[i].tables.length; j++) {
                     if (j == data[i].tables.length - 1) {
                         virgule = "";
@@ -51,12 +49,12 @@ function printTableau() {
 }
 function removeZoneTable(id) {
     getConnexion().removeZoneTable(function(data, param) {
-        if(data==null){
-            $("tr [idzonetable='" + id + "']").remove();
+        if (data == null) {
+            $("tr[idzonetable='" + id + "']").remove();
         }
     }, id, null);
 }
-function addZoneTable (){
+function addZoneTable() {
     if ($("#myModal")) {
         $("#myModal").remove();
     }
@@ -64,7 +62,7 @@ function addZoneTable (){
     htmlModel = paramValue(htmlModel, "titre", strings.getString("title.modal.add.zone.tables"));
     htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
     htmlModel = paramValue(htmlModel, "primaryLabel", strings.getString("label.valider"));
-    htmlModel = paramValue(htmlModel, "onclick", "valderAjoutEtablissement();");
+    htmlModel = paramValue(htmlModel, "onclick", "validerAddZoneTable();");
     $("body").append(htmlModel);
     getConnexion().getGroupeById(updatePlaceHolder, config.getConfig("client.application.groupe.id"), null);
     function updatePlaceHolder(groupe, param) {
@@ -77,6 +75,58 @@ function addZoneTable (){
         $("#add_site_message_value").attr("placeholder", groupe.message);
         $("#add_site_slogan_value").attr("placeholder", groupe.slogan);
     }
-    $("#bootstrap_modal_body").html('');
+    var modalBody = getGererLesTablesDivAddZone();
+    modalBody = paramValue(modalBody, "nbZone", 1);
+    modalBody = paramValue(modalBody, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
+    $("#bootstrap_modal_body").html(modalBody);
     $('#myModal').modal('show');
+}
+
+function validerAddZoneTable() {
+    var input = $("input[method='addEtablZone']");
+    var nbzone = input.attr("nbzone");
+    var zone = new ZoneTable();
+    zone.id = parseInt(nbzone);
+    zone.nom = input.val();
+    var tables2 = new Array();
+    for (var j = 1; j < $("ul[nbzone='" + nbzone + "'] li").length + 1; j++) {
+        var nom = $("input[nbzone='" + nbzone + "'][nbtable='" + j + "']").val();
+        var is = isInt(nom);
+        if (is) {
+            tables2.push(parseInt(nom));
+        }
+    }
+    zone.tables = tables2;
+    if (zone.nom != "") {
+        getConnexion().addZoneTable(function(data, param) {
+            $('#myModal').modal('hide');
+            if (data != null) {
+                if (data.hasOwnProperty("error")) {
+                }
+                if (data.hasOwnProperty("id")) {
+                    var htmlBody = getGererLesTablesTableAfficherAllZonesTBody();
+                    htmlBody = paramValue(htmlBody, "idzoneTable", data.id);
+                    var etab = null;
+                    if (etab == null) {
+                        etab = strings.getString("label.etablissement.non.affecte.in.table");
+                    }
+                    htmlBody = paramValue(htmlBody, "etablissement", etab);
+                    htmlBody = paramValue(htmlBody, "nom", param.nom);
+                    var labelTab = "";
+                    var virgule = ",";
+                    if (param.tables != null) {
+                        for (var j = 0; j < param.tables.length; j++) {
+                            if (j == param.tables.length - 1) {
+                                virgule = "";
+                            }
+                            labelTab = labelTab + param.tables[j] + virgule;
+
+                        }
+                        htmlBody = paramValue(htmlBody, "tables", labelTab);
+                    }
+                    $("#table_zonestables_all").append(htmlBody);
+                }
+            }
+        }, zone, zone);
+    }
 }
