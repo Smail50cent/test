@@ -427,10 +427,6 @@ function submit_productPage() {
 
 }
 function loadCatSousCat(method) {
-//    $("#name_prod_Id").val(produit.getNom());
-//    $('#label_categorie_prod_id').text(produit.getCategorie());
-//    $('#label_souscat_prod_id').text(produit.getSousCategorie());
-
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
