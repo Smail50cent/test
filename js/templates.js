@@ -856,3 +856,15 @@ function getGererLesCategorie() {
     var mygestionmodeexpertpagegerercategories = gestionmodeexpertpagegerercategories;
     return mygestionmodeexpertpagegerercategories;
 }
+var gestionmodeexpertgererlestablesshow_tables_already_in_zone_table = null;
+/**
+ * idzonetable Id de la zone de tables<br/>
+ * idtable Id de la table
+ */
+function getGererLesTablesShowTablesAlreadyInZoneTable() {
+    if (gestionmodeexpertgererlestablesshow_tables_already_in_zone_table == null) {
+        gestionmodeexpertgererlestablesshow_tables_already_in_zone_table = templates.getTemplate("gestion/modeexpert/gererlestables/show_tables_already_in_zone_table");
+    }
+    var mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table = gestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
+    return mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
+}
