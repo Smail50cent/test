@@ -37,6 +37,40 @@ function loadViewsForAddProduit() {
     $('#liste_souscategorie_id').hide();
 }
 
+function loadModifiedProduct(produit) {
+    if (produit != "undefined") {
+        $("#content_produit_titre_id_" + produit.getId()).html(produit.getNom());
+        var prix = produit.getAssociationPrixProduit()[0].getPrixHt().prix;
+        $("#content_produit_zone_right_prix_id_" + produit.getId()).html(fntp(calculPrixWithTVA(prix, produit.getTauxTva())));
+        var categorie = produit.getCategorie().id;
+        var idsousCat = produit.getSousCategorie().id;
+        var idCat = "categorie" + categorie;
+        
+        $("li[produitid="+produit.getId()+"]").removeClass();
+        $("li[produitid="+produit.getId()+"]").addClass("produitcat"+categorie+"_sscat"+idsousCat+" produit"+produit.getId()+" produit_cat_structure produit_cat_personalize ");
+        var divmod = $(".produit"+produit.getId());
+        console.log(divmod);
+        $(".produit"+produit.getId()).remove();
+        $("ul[categorieid="+categorie+"]").append(divmod);
+        
+        $(".genreicClassSlide").each(function() {
+            if ($(this).attr('id') == idCat) {
+                $(this).addClass("active");
+                $(".produit_cat_structure").each(function() {
+                    if ($(this).hasClass("produitcat" + categorie + "_sscat" + idsousCat)) {
+                        $(this).css("display", "inline-table");
+                    } else
+                    if (!$(this).hasClass("produit_info")) {
+                        $(this).css("display", "none");
+                    }
+                });
+            } else {
+                $(this).removeClass("active");
+            }
+        });
+    }
+}
+
 function ModifyProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
     $("#alert_error_id").freeow("Modification", "n'est pas encore disponible " + idprod, {
@@ -99,7 +133,7 @@ function ModifyProduct(id) {
     function produitById(data) {
         //console.log(data);
         $('#name_prod_Id').val(data.nom);
-        $('#name_prod_Id').attr("idproduit",data.id);
+        $('#name_prod_Id').attr("idproduit", data.id);
         $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
         $('#liste_souscategorie_id').append($('<option>', {
             value: data.id_sousCategorie.id,
@@ -201,10 +235,10 @@ function updateProduct() {
             hideDuration: 8000
         });
         produit.setIdsIngredients(list);
-    }else {
+    } else {
         produit.setIdsIngredients(list);
     }
-    
+
     var list2 = new Array();
     $(".option_checkbox:checked").each(function() {
         var option = new Option();
@@ -219,7 +253,7 @@ function updateProduct() {
             hideDuration: 8000
         });
         produit.setOptions(list2);
-    }else {
+    } else {
         produit.setOptions(list2);
     }
 
@@ -256,7 +290,6 @@ function updateProduct() {
                 etabZone.setZones(null);
                 listeEtabZone.push(etabZone);
             }
-            //console.log($(this).attr("id"), isChecked);
         } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var idZone = parseInt($(this).attr("idzone"));
@@ -271,12 +304,15 @@ function updateProduct() {
         }
     });
     produit.setEtablissements(listeEtabZone);
-    console.log(produit);
-    getConnexion().updateProduit(updateProd,produit);
-    function updateProd(data) {
-        console.log(data);
+    getConnexion().updateProduit(updateProd, produit, produit);
+    function updateProd(data, param) {
+//        if (data) {
+        loadModifiedProduct(param);
+        console.log(param);
+//            (param);
+//        }
     }
-    
+
     return true;
 }
 

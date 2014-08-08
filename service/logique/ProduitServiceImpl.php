@@ -60,6 +60,7 @@ class ProduitServiceImpl implements ProduitService {
 
     public function update(Produit $produit) {
         if($produit != null) {
+            $produit->setLevel(PersistanceFactory::getMajTablesService()->updateLevel("produits"));
             return $this->produitSrv->update($produit);
         }
     }

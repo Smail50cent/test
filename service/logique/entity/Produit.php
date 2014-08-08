@@ -26,7 +26,7 @@ class Produit {
     }
 
     public function setAssocEtabZone($assocEtabZone) {
-        $this->assocEtabZone = $assocEtabZone;
+        array_push($this->assocEtabZone, $assocEtabZone);
     }
 
         public function getZones() {
