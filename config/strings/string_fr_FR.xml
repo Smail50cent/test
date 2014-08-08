@@ -114,4 +114,18 @@
 	<string key="title.modal.add.zone.tables">Ajouter une zone de tables</string>
 	<string key="eds">dfs</string>
 	<string key="label.titre.gerer.les.categories.mode.expert">Gérer les caégories</string>
+	<string key="mode.expert.label.ajouter.categorie">Ajouter une Catégorie</string>
+	<string key="mode.expert.label.gerer.categories">Gérer les Catégories</string>
+	<string key="add.produit.page.show.label.categorie">Catégorie</string>
+	<string key="add.produit.page.show.label.souscategorie">Sous Catégorie</string>
+	<string key="add.produit.page.input.produit.nom.title">entrez ici le nom du produit</string>
+	<string key="add.produit.page.input.produit.nom.placeholder">Nom du Produit</string>
+	<string key="menu.modeexpert.gererlessites">Gérer les sites</string>
+	<string key="modeexpert.menu.gerer.lescategories">Gérer les catégories</string>
+	<string key="modeexpert.gererleslangues.menu">Gérer les comptes utilisateurs</string>
+	<string key="add.produit.main.title">Gestion des Produits</string>
+	<string key="modeexpert.menu.gererleslanguesdisponible">Gérer les langues disponibles</string>
+	<string key="modeexpert.menu.gererconseildeproduits">Gérer les conseils de produits</string>
+	<string key="modeexpert.menu.tablesandarea">Tables et zones de tables</string>
+	<string key="modeexpert.menu.parametreapplication">Paramètres de l'application</string>
 </strings>

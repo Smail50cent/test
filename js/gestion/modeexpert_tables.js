@@ -141,9 +141,7 @@ function updateZoneTable(id) {
             var htmlTabAlreadyExsist = getGererLesTablesShowTablesAlreadyInZoneTable();
             htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idzonetable", data.id);
             htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idtable", data.table[i].id);
-            
         }
-
     }, id, null);
 
 }
