@@ -945,7 +945,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
                 var options = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -970,7 +970,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllTauxTva"),
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
                 var TVA = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -994,7 +994,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllEtablissements"),
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
                 var etablissements = new Array();
                 for (var i = 0; i < data.length; i++) {
@@ -1054,7 +1054,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
             type: 'GET',
             dataType: 'json',
-            async: false,
+            async: true,
             success: function(data, textStatus, xhr) {
                 var list = new Array();
                 for (var i = 0; i < data.length; i++) {

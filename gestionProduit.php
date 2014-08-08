@@ -82,6 +82,12 @@
         margin-right: 50%;
         float: none;
     }
+    .content_produit_zone_default:hover {
+        opacity: 1;
+    }
+    .content_produit_zone_default {
+        opacity: 0.6;
+    }
 </style>
 </body>
 </html> 

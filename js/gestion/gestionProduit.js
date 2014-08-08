@@ -1,3 +1,9 @@
+var loadCategorieForGestion = false;
+var loadIngredientForGestion = false;
+var loadOptionsForGestion = false;
+var loadPrixForGestion = false;
+var loadEtablissementForGestion = false;
+
 
 function onLoadGP() {
     scripts.loadScripts("lib.dialog", function() {
@@ -68,10 +74,23 @@ function loadModifiedProduct(produit) {
                 $(this).removeClass("active");
             }
         });
+        
+        $("#alert_error_id").freeow("Produit", "Votre produit a été modifié avec succés", {
+            classes: ["smokey", "pushpin"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
     }
 }
 
 function ModifyProduct(id) {
+    loadCategorieForGestion = false;
+    loadIngredientForGestion = false;
+    loadOptionsForGestion = false;
+    loadPrixForGestion = false;
+    loadEtablissementForGestion = false;
+
     var idprod = id.parent().parent().parent().attr('produitid');
     $("#dialog_add_produit_id").dialog({
         modal: true,
@@ -124,66 +143,79 @@ function ModifyProduct(id) {
     $("#content_add_produit_zone_input_id").append(htmlAll);
     loadEtablissement();
 
-    getConnexion().getProduitByIdGeneric(produitById, idprod);
-    function produitById(data) {
-        //console.log(data);
-        $("#tva_0 option[value=\""+parseFloat(data.tauxTva)+"\"]").prop("selected", true);
-        $('#name_prod_Id').val(data.nom);
-        $('#name_prod_Id').attr("idproduit", data.id);
-        $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
-        $('#liste_souscategorie_id').append($('<option>', {
-            value: data.id_sousCategorie.id,
-            text: data.id_sousCategorie.nom
-        }));
-        $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
-        if (data.ids_ingredients != null) {
-            for (var i = 0; i < data.ids_ingredients.length; i++) {
-                $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
-            }
-        }
-        if (data.options != null) {
-            for (var i = 0; i < data.options.length; i++) {
-                $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
-            }
-        }
-        var prixHt, TVA;
-        for (var i = 0; i < data.associationPrixProduit.length; i++) {
-            if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
-                prixHt = data.associationPrixProduit[i].prixHt.prix;
-                TVA = data.tauxTva;
-                break;
-            }
-        }
-        var prixTTC = calculPrixWithTVA(prixHt, TVA);
-        $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
-        $("#label_val_prixttc_id").text(prixHt);
-
-        if (data.zones != null) {
-            for (var i = 0; i < data.zones.length; i++) {
-                $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
-            }
-        }
-
-        for (var i = 0; i < data.etablissements.length; i++) {
-            var zoneChecked = false;
-            $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
-                if (this.checked) {
-                    zoneChecked = true;
-                }
-            });
-            if (!zoneChecked) {
-                $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
-                $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
-                    this.disabled = true;
-                    this.checked = true;
-                });
-            }
-        }
-    }
-
     $('.prev_page_structure, .next_page_structure, .btn_validation_ajout_produit_structure').each(function() {
         $(this).remove();
     });
+    function mafunct(){
+        getConnexion().getProduitByIdGeneric(produitById, idprod);
+            function produitById(data) {
+                //console.log(data);
+                $("#tva_0 option[value=\"" + parseFloat(data.tauxTva) + "\"]").prop("selected", true);
+                $('#name_prod_Id').val(data.nom);
+                $('#name_prod_Id').attr("idproduit", data.id);
+                $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
+                $('#liste_souscategorie_id').append($('<option>', {
+                    value: data.id_sousCategorie.id,
+                    text: data.id_sousCategorie.nom
+                }));
+                $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
+                if (data.ids_ingredients != null) {
+                    for (var i = 0; i < data.ids_ingredients.length; i++) {
+                        $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
+                    }
+                }
+                if (data.options != null) {
+                    for (var i = 0; i < data.options.length; i++) {
+                        $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
+                    }
+                }
+                var prixHt, TVA;
+                for (var i = 0; i < data.associationPrixProduit.length; i++) {
+                    if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
+                        prixHt = data.associationPrixProduit[i].prixHt.prix;
+                        TVA = data.tauxTva;
+                        break;
+                    }
+                }
+                var prixTTC = calculPrixWithTVA(prixHt, TVA);
+                $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
+                $("#label_val_prixttc_id").text(prixHt);
+
+                if (data.zones != null) {
+                    for (var i = 0; i < data.zones.length; i++) {
+                        $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
+                    }
+                }
+
+                for (var i = 0; i < data.etablissements.length; i++) {
+                    var zoneChecked = false;
+                    $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                        if (this.checked) {
+                            zoneChecked = true;
+                        }
+                    });
+                    if (!zoneChecked) {
+                        $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
+                        $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                            this.disabled = true;
+                            this.checked = true;
+                        });
+                    }
+                }
+            }
+    }
+    threadd();
+    function threadd(){
+        window.setTimeout(function() {
+        if (loadCategorieForGestion && loadIngredientForGestion && loadOptionsForGestion && loadPrixForGestion && loadEtablissementForGestion) {
+            console.log("Finished Loading");
+            mafunct();
+        } else {
+            threadd();
+        }
+    }, 10);
+    }
+    
 }
 
 function updateProduct() {
@@ -395,10 +427,6 @@ function submit_productPage() {
 
 }
 function loadCatSousCat(method) {
-//    $("#name_prod_Id").val(produit.getNom());
-//    $('#label_categorie_prod_id').text(produit.getCategorie());
-//    $('#label_souscat_prod_id').text(produit.getSousCategorie());
-
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
@@ -410,6 +438,7 @@ function loadCatSousCat(method) {
                 text: categorie[i].nom
             }));
         }
+        loadCategorieForGestion = true;
     }
     $('#liste_categorie_id').change(function() {
         $('#liste_souscategorie_id').empty();
@@ -570,6 +599,7 @@ function loadIngredient() {
                 $("#" + this.value.hashCode()).parent().remove();
             }
         });
+        loadIngredientForGestion = true;
     }
 }
 
@@ -709,6 +739,7 @@ function loadOptions() {
             }
         });
         UncheckAllBoxIngredOpt("#uncheck_all_option_id");
+        loadOptionsForGestion = true;
     }
 }
 
@@ -751,59 +782,60 @@ function loadPrix() {
             for (var i = 0; i < TVA.length; i++) {
                 AllTva.push(TVA[i]);
             }
-        }
-        // A NOTER : REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
-        getConnexion().getAllZoneTables(getZones);
-        function getZones(zones) {
-            var id_etab = getLocalStorageValue("client.application.etablissement.id");
-            for (var i = 0; i < zones.length; i++) {
-                if (zones[i].etablissement_id == id_etab) {
-                    var zonePrix = getPrixZoneAddProduit();
-                    var zoneName = paramValue(zonePrix, "zone_name", zones[i].nom);
-                    var zoneId = paramValue(zoneName, "zone_prix_id", zones[i].id);
-                    $('#div_zone_id').append(zoneId);
+            // A NOTER : REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
+            getConnexion().getAllZoneTables(getZones);
+            function getZones(zones) {
+                var id_etab = getLocalStorageValue("client.application.etablissement.id");
+                for (var i = 0; i < zones.length; i++) {
+                    if (zones[i].etablissement_id == id_etab) {
+                        var zonePrix = getPrixZoneAddProduit();
+                        var zoneName = paramValue(zonePrix, "zone_name", zones[i].nom);
+                        var zoneId = paramValue(zoneName, "zone_prix_id", zones[i].id);
+                        $('#div_zone_id').append(zoneId);
+                    }
                 }
-            }
-            $("#div_zone_id").hide();
-            $(".tva_produit").each(function() {
-                for (var j = 0; j < AllTva.length; j++) {
-                    $(this).append($('<option>', {
-                        value: AllTva[j].taux,
-                        text: parseFloat(AllTva[j].taux)
-                    }));
-                }
-            });
-            $("input#input_defaut_prix_id").on("keyup", function() {
-                $("#label_val_prixttc_id").text($(this).val());
-                var valPrix = $(this).val();
-                $('.input_zone_prix').each(function() {
-                    var idzone = $(this).parent().attr('parentId');
-                    var taux = $("#tva_" + idzone).val();
-                    if (taux != 0) {
-                        var prixHT = parseFloat(valPrix) - parseFloat(valPrix) * parseFloat(taux) / 100;
-                        $(this).val(parseFloat(prixHT));
-                    } else {
-                        $(this).val(parseFloat(valPrix));
+                $("#div_zone_id").hide();
+                $(".tva_produit").each(function() {
+                    for (var j = 0; j < AllTva.length; j++) {
+                        $(this).append($('<option>', {
+                            value: AllTva[j].taux,
+                            text: parseFloat(AllTva[j].taux)
+                        }));
                     }
                 });
-            });
-
-            $('.tva_produit ').change(function() {
-                if ($(this).val() != 0) {
-                    var selectId = $(this).attr("tvaid");
-                    var selectTVA = $(this).val();
-                    $(".input_zone_prix, .input_defaut_prix").each(function() {
-                        var prix = $(this).val();
-                        if ($(this).attr('id_inputprix') == selectId) {
-                            if ($(this).val() != 0) {
-                                $("#label_val_prixttc_id").text(calculPrixWithoutTVA(prix, selectTVA));
-                            }
+                $("input#input_defaut_prix_id").on("keyup", function() {
+                    $("#label_val_prixttc_id").text($(this).val());
+                    var valPrix = $(this).val();
+                    $('.input_zone_prix').each(function() {
+                        var idzone = $(this).parent().attr('parentId');
+                        var taux = $("#tva_" + idzone).val();
+                        if (taux != 0) {
+                            var prixHT = parseFloat(valPrix) - parseFloat(valPrix) * parseFloat(taux) / 100;
+                            $(this).val(parseFloat(prixHT));
+                        } else {
+                            $(this).val(parseFloat(valPrix));
                         }
                     });
-                } else {
-                    $("#label_val_prixttc_id").text($("#input_defaut_prix_id").val());
-                }
-            });
+                });
+
+                $('.tva_produit ').change(function() {
+                    if ($(this).val() != 0) {
+                        var selectId = $(this).attr("tvaid");
+                        var selectTVA = $(this).val();
+                        $(".input_zone_prix, .input_defaut_prix").each(function() {
+                            var prix = $(this).val();
+                            if ($(this).attr('id_inputprix') == selectId) {
+                                if ($(this).val() != 0) {
+                                    $("#label_val_prixttc_id").text(calculPrixWithoutTVA(prix, selectTVA));
+                                }
+                            }
+                        });
+                    } else {
+                        $("#label_val_prixttc_id").text($("#input_defaut_prix_id").val());
+                    }
+                });
+                loadPrixForGestion = true;
+            }
         }
     });
 }
@@ -952,7 +984,7 @@ function loadEtablissement() {
             }
 
         });
-
+        loadEtablissementForGestion = true;
     }
 
 }
