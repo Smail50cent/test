@@ -1198,205 +1198,72 @@ function ConnexionServer() {
         }, method, param);
     };
     this.getAllStyles = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllStyles"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    var liste = new Array();
-                    data = data.data;
-                    for (var i = 0; i < data.length; i++) {
-                        liste.push(new Styles(data[i].id, data[i].nom, data[i].url, data[i].actif));
-                    }
-                    if (method != null) {
-                        method(liste, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                liste.push(new Styles(data[i].id, data[i].nom, data[i].url, data[i].actif));
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceGetAllStyles"}, method, param);
     };
     this.getAllStyles = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllStyles"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    var liste = new Array();
-                    data = data.data;
-                    for (var i = 0; i < data.length; i++) {
-                        liste.push(new Styles(data[i].id, data[i].nom, data[i].url, data[i].actif));
-                    }
-                    if (method != null) {
-                        method(liste, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                liste.push(new Styles(data[i].id, data[i].nom, data[i].url, data[i].actif));
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceGetAllStyles"}, method, param);
     };
     this.addNewString = function(method, key, fr, en, param) {//fonction dev
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddString") + "?key=" + key +
-                    "&en=" + en + "&fr=" + fr,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    data = data.data;
-                    if (method != null) {
-                        method(data, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
+        pAjax(null, {"service": "serveur.clientaccess.serviceAddString", data: {key: key, en: en, fr: fr}}, method, param);
     };
     this.getZonesTablesByEtablissement = function(method, id, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceZoneTablesGetByIdEtablissment") + "?idetablissement=" + id,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var tables = new Array();
+                for (var j = 0; j < data [i].tables.length; j++) {
+                    tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
                 }
-                if (method != null) {
-                    data = data.data;
-                    var liste = new Array();
-                    for (var i = 0; i < data.length; i++) {
-                        var tables = new Array();
-                        for (var j = 0; j < data [i].tables.length; j++) {
-                            tables.push(new Table(data [i].tables[j].id, data [i].tables[j].numero, data [i].tables[j].zone));
-                        }
-                        liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
-                    }
-                    if (method != null) {
-                        method(data, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                liste.push(new ZoneTable(data [i].id, data[i].nom, tables, data [i].etablissement_id));
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(data, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceZoneTablesGetByIdEtablissment", data: {idetablissement: id}}, method, param);
     };
     this.getAllLangues = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllLangues"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    data = data.data;
-                    var liste = new Array();
-                    for (var i = 0; i < data.length; i++) {
-                        liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
-                    }
-                    if (method != null) {
-                        method(liste, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceGetAllLangues"}, method, param);
     };
     this.setLangEnable = function(method, id, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceSetLangEnable") + "?idlang=" + id,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    data = data.data;
-                    if (method != null) {
-                        method(data, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
+        pAjax(null, {"service": "serveur.clientaccess.serviceSetLangEnable", data: {idlang: id}}, method, param);
     };
     this.setLangDiable = function(method, id, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.servicesetLangDiable") + "?idlang=" + id,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    data = data.data;
-                    if (method != null) {
-                        method(data, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
+        pAjax(null, {"service": "serveur.clientaccess.servicesetLangDiable", data: {idlang: id}}, method, param);
     };
     this.getLangByActif = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceLangGetByActif"),
-            type: this.typeReq,
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (method != null) {
-                    data = data.data;
-                    var liste = new Array();
-                    for (var i = 0; i < data.length; i++) {
-                        liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
-                    }
-                    if (method != null) {
-                        method(liste, param);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            for (var i = 0; i < data.length; i++) {
+                liste.push(new Langues(data[i].id, data[i].label, data[i].gmt_level, data[i].actif));
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceLangGetByActif"}, method, param);
     };
     this.getZoneTablesWhereEtablissementNull = function(method, param) {
         pAjax(function(data, param, methodExecute) {
@@ -1420,6 +1287,14 @@ function ConnexionServer() {
     this.addZoneTable = function(method, zone, param) {
         pAjax(null,
                 {service: "serveur.clientaccess.serviceAddZoneTable", data: {zone: JSON.stringify(zone)}}, method, param);
+    };
+    this.getZoneTableById = function(method, id, param) {
+        pAjax(function(data, param, methodExecute) {
+            data = data[0];
+            if (methodExecute != null) {
+                methodExecute(data, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetZoneTableById", data: {id: id}}, method, param);
     };
 }
 

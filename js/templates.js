@@ -831,8 +831,6 @@ function getGererLesTablesDivAddZone() {
     return mygestionmodeexpertgererlestablesdiv_add_zone;
 }
 
-
-
 var gestionmodeexpertgererlestablesmodal_body_update_zone = null;
 function getGererLesTablesModalBodyUpdateZone() {
     if (gestionmodeexpertgererlestablesmodal_body_update_zone == null) {
@@ -840,4 +838,17 @@ function getGererLesTablesModalBodyUpdateZone() {
     }
     var mygestionmodeexpertgererlestablesmodal_body_update_zone = gestionmodeexpertgererlestablesmodal_body_update_zone;
     return mygestionmodeexpertgererlestablesmodal_body_update_zone;
+}
+
+var gestionmodeexpertgererlestablesshow_tables_already_in_zone_table = null;
+/**
+ * idzonetable Id de la zone de tables<br/>
+ * idtable Id de la table
+ */
+function getGererLesTablesShowTablesAlreadyInZoneTable() {
+    if (gestionmodeexpertgererlestablesshow_tables_already_in_zone_table == null) {
+        gestionmodeexpertgererlestablesshow_tables_already_in_zone_table = templates.getTemplate("gestion/modeexpert/gererlestables/show_tables_already_in_zone_table");
+    }
+    var mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table = gestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
+    return mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
 }

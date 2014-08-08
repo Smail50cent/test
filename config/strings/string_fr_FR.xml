@@ -112,4 +112,6 @@
 	<string key="label.thead.zonetable.actions">Actions</string>
 	<string key="label.etablissement.non.affecte.in.table">Pas d'établissement affecté</string>
 	<string key="title.modal.add.zone.tables">Ajouter une zone de tables</string>
+	<string key="eds">dfs</string>
+	<string key="label.titre.gerer.les.categories.mode.expert">Gérer les caégories</string>
 </strings>

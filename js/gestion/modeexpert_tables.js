@@ -64,17 +64,6 @@ function addZoneTable() {
     htmlModel = paramValue(htmlModel, "primaryLabel", strings.getString("label.valider"));
     htmlModel = paramValue(htmlModel, "onclick", "validerAddZoneTable();");
     $("body").append(htmlModel);
-    getConnexion().getGroupeById(updatePlaceHolder, config.getConfig("client.application.groupe.id"), null);
-    function updatePlaceHolder(groupe, param) {
-        groupex = groupe;
-        $("#add_site_nom_value").attr("required", true);
-        $("#add_site_style_value").attr("placeholder", groupe.style);
-        $("#add_site_logo_value").attr("placeholder", groupe.logo);
-        $("#add_site_adresse_value").attr("placeholder", groupe.adresseSiege);
-        $("#add_site_telephone_value").attr("placeholder", groupe.telephone);
-        $("#add_site_message_value").attr("placeholder", groupe.message);
-        $("#add_site_slogan_value").attr("placeholder", groupe.slogan);
-    }
     var modalBody = getGererLesTablesDivAddZone();
     modalBody = paramValue(modalBody, "nbZone", 1);
     modalBody = paramValue(modalBody, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
@@ -129,4 +118,32 @@ function validerAddZoneTable() {
             }
         }, zone, zone);
     }
+}
+function updateZoneTable(id) {
+    if ($("#myModal")) {
+        $("#myModal").remove();
+    }
+    getConnexion().getZoneTableById(function(data, param) {
+        var htmlModel = getBootstrapModal();
+        htmlModel = paramValue(htmlModel, "titre", strings.getString("title.modal.add.zone.tables"));
+        htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
+        htmlModel = paramValue(htmlModel, "primaryLabel", strings.getString("label.valider"));
+        htmlModel = paramValue(htmlModel, "onclick", "validerAddZoneTable();");
+        $("body").append(htmlModel);
+        var modalBody = getGererLesTablesModalBodyUpdateZone();
+        modalBody = paramValue(modalBody, "nbZone", 1);
+        modalBody = paramValue(modalBody, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
+        $("#bootstrap_modal_body").html(modalBody);
+        $('#myModal').modal('show');
+        console.log(data);
+        $("input[nbzone='1'][method='updateZone']").val(data.nom);
+        for (var i = 0; i < data.tables.length; i++) {
+            var htmlTabAlreadyExsist = getGererLesTablesShowTablesAlreadyInZoneTable();
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idzonetable", data.id);
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idtable", data.table[i].id);
+            
+        }
+
+    }, id, null);
+
 }

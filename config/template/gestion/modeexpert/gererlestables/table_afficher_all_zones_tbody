@@ -9,7 +9,7 @@
             </button>
         </div>
         <div class="section_update_structure section_update_personalize">
-            <button type="button" onclick="updateEtablissement({idzoneTable});" class="btn btn-default btn-sm section_update_button_structure section_update_button_personalize">
+            <button type="button" onclick="updateZoneTable({idzoneTable});" class="btn btn-default btn-sm section_update_button_structure section_update_button_personalize">
                 <span class="glyphicon glyphicon-pencil" class="section_update_span_structure section_update_span_personalize"></span>
             </button>
         </div>

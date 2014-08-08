@@ -6,7 +6,7 @@ include_once '../../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 try {
     $zoneTableSrv = LogiqueFactory::getZoneTableService();
-    $ret->data = $zoneTableSrv->getAll();
+    $ret->data = $zoneTableSrv->getById($id);
 } catch (Exception $exc) {
     $ret->error = true;
 }

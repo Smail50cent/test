@@ -88,4 +88,6 @@
 	<string key="label.thead.zonetable.actions">Stocks</string>
 	<string key="label.etablissement.non.affecte.in.table">No establishment affected</string>
 	<string key="title.modal.add.zone.tables">Add a zone of tables</string>
+	<string key="eds">fdfdf</string>
+	<string key="label.titre.gerer.les.categories.mode.expert">Gérer les caégories</string>
 </strings>
