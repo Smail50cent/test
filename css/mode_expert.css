@@ -211,6 +211,6 @@ div#bootstrap_modal_body {
     float: left;
 }
 .gestion_numeros_table_structure.gestion_numeros_table_personalize {
-    float: right;
+    float: bottom;
     margin-right: 96px;
 } 

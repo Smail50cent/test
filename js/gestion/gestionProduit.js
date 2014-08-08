@@ -394,7 +394,7 @@ function submit_productPage() {
     }
 
 }
-function loadCatSousCat() {
+function loadCatSousCat(method) {
 //    $("#name_prod_Id").val(produit.getNom());
 //    $('#label_categorie_prod_id').text(produit.getCategorie());
 //    $('#label_souscat_prod_id').text(produit.getSousCategorie());
@@ -437,7 +437,6 @@ function loadCatSousCat() {
             }
         }
     });
-
     $('#liste_souscategorie_id').change(function() {
         $('#label_souscat_prod_id').text($(this).find(":selected").text());
     });
