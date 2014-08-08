@@ -1417,5 +1417,9 @@ function ConnexionServer() {
         pAjax(null,
                 {service: "serveur.clientaccess.serviceremoveZoneTable", data: {id: id1}}, method, param);
     };
+    this.addZoneTable = function(method, zone, param) {
+        pAjax(null,
+                {service: "serveur.clientaccess.serviceAddZoneTable", data: {zone: JSON.stringify(zone)}}, method, param);
+    };
 }
 

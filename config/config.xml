@@ -69,6 +69,7 @@
         <variable name="serveur.clientaccess.serviceSetLangEnable">langues/setLangActif</variable>
         <variable name="serveur.clientaccess.servicesetLangDiable">langues/setLangDisable</variable>    
         <variable name="serveur.clientaccess.serviceremoveZoneTable">zoneTables/remove</variable>  
+        <variable name="serveur.clientaccess.serviceAddZoneTable">zoneTables/add</variable> 
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>

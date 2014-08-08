@@ -1,6 +1,6 @@
 <?php
 
-include_once $path . 'service/persistance/ZoneTableServiceData.php';
+include_once $path . 'service/persistance/zonestables/ZoneTableServiceData.php';
 include_once $path . 'service/persistance/ConnexionBDD.php';
 include_once $path . 'service/logique/entity/ZoneTable.php';
 include_once $path . 'service/logique/entity/Table.php';
@@ -170,6 +170,14 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id` WHER
         $bdd->executeGeneric("DELETE FROM `zone_table` WHERE `id`=" . $id);
     }
 
+    public function add(ZoneTable $zoneTable) {
+        $bdd = new ConnexionBDD();
+        $id = $bdd->executeGeneric("INSERT INTO `zone_table`(`nom`) VALUES ('" . $zoneTable->nom . "');");
+        $tables = $zoneTable->getTables();
+        for ($j = 0; $j < count($tables); $j++) {
+            $table = $tables[$j];
+            $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $table->getNumero() . "," . $id . ")");
+        }
+        return $id;
+    }
 }
-
-//

@@ -813,3 +813,31 @@ function getGererLesTablesTableAfficherAllZonesTBody() {
     var mygestionmodeexpertgererlestablestable_afficher_all_zones_tbody = gestionmodeexpertgererlestablestable_afficher_all_zones_tbody;
     return mygestionmodeexpertgererlestablestable_afficher_all_zones_tbody;
 }
+var gestionmodeexpertgererlestableli_add_table_in_div = null;
+function getGererLesTablesLiAddTableInDiv() {
+    if (gestionmodeexpertgererlestableli_add_table_in_div == null) {
+        gestionmodeexpertgererlestableli_add_table_in_div = templates.getTemplate("gestion/modeexpert/gererlestables/li_add_table_in_div");
+    }
+    var mygestionmodeexpertgererlestableli_add_table_in_div = gestionmodeexpertgererlestableli_add_table_in_div;
+    return mygestionmodeexpertgererlestableli_add_table_in_div;
+}
+
+var gestionmodeexpertgererlestablesdiv_add_zone = null;
+function getGererLesTablesDivAddZone() {
+    if (gestionmodeexpertgererlestablesdiv_add_zone == null) {
+        gestionmodeexpertgererlestablesdiv_add_zone = templates.getTemplate("gestion/modeexpert/gererlestables/div_add_zone");
+    }
+    var mygestionmodeexpertgererlestablesdiv_add_zone = gestionmodeexpertgererlestablesdiv_add_zone;
+    return mygestionmodeexpertgererlestablesdiv_add_zone;
+}
+
+
+
+var gestionmodeexpertgererlestablesmodal_body_update_zone = null;
+function getGererLesTablesModalBodyUpdateZone() {
+    if (gestionmodeexpertgererlestablesmodal_body_update_zone == null) {
+        gestionmodeexpertgererlestablesmodal_body_update_zone = templates.getTemplate("gestion/modeexpert/gererlestables/modal_body_update_zone");
+    }
+    var mygestionmodeexpertgererlestablesmodal_body_update_zone = gestionmodeexpertgererlestablesmodal_body_update_zone;
+    return mygestionmodeexpertgererlestablesmodal_body_update_zone;
+}

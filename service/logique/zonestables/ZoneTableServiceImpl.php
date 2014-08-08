@@ -1,6 +1,6 @@
 <?php
 
-include_once $path . 'service/logique/ZoneTableService.php';
+include_once $path . 'service/logique/zonestables/ZoneTableService.php';
 
 /**
  * Description of ZoneTableServiceData
@@ -20,9 +20,9 @@ class ZoneTableServiceImpl implements ZoneTableService {
     }
 
     public function getByIdEtablissement($id) {
-        $ret=null;
-        if($id!=null){
-           $ret= $this->zoneTableSrv->getByIdEtablissement($id);
+        $ret = null;
+        if ($id != null) {
+            $ret = $this->zoneTableSrv->getByIdEtablissement($id);
         }
         return $ret;
     }
@@ -32,9 +32,17 @@ class ZoneTableServiceImpl implements ZoneTableService {
     }
 
     public function remove($id) {
-        if($id!=null){
-           $ret= $this->zoneTableSrv->remove($id);
+        if ($id != null) {
+            $ret = $this->zoneTableSrv->remove($id);
         }
+    }
+
+    public function add(\ZoneTable $zoneTable) {
+        $ret = null;
+        if ($zoneTable != null) {
+            $ret = $this->zoneTableSrv->add($zoneTable);
+        }
+        return $ret;
     }
 
 }

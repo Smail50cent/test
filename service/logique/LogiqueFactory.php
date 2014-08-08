@@ -27,7 +27,7 @@ include_once $path . 'service/logique/ProduitSuggereriServiceImpl.php';
 include_once $path . 'service/logique/ReservationDateDisponibleServiceImpl.php';
 include_once $path . 'service/logique/ReservationServiceImpl.php';
 include_once $path . 'service/logique/MajTablesServiceImpl.php';
-include_once $path . 'service/logique/ZoneTableServiceImpl.php';
+include_once $path . 'service/logique/zonestables/ZoneTableServiceImpl.php';
 include_once $path . 'service/logique/TypeCommandeServiceImpl.php';
 include_once $path . 'service/logique/groupe/GroupeServiceImpl.php';
 include_once $path . 'service/logique/etablissement/EtablissementServiceImpl.php';

@@ -112,13 +112,10 @@ function addEtablissement() {
     }, null);
     var htmlLiZone = getGererSitesLiSelectZone();
     getConnexion().getZoneTablesWhereEtablissementNull(function(zones, param) {
-        console.log(zones);
         for (var i = 0; i < zones.length; i++) {
             var myLi = htmlLiZone;
             myLi = paramValue(myLi, "zoneName", zones[i].nom);
             myLi = paramValue(myLi, "idZone", zones[i].id);
-
-
             $("#add_site_zone_value").append(myLi);
         }
         var htmlGerer = getGererSitesLiAddZone();
