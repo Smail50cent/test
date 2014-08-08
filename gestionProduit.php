@@ -8,7 +8,7 @@
         <div id="content_titre_categorie_left_id" class="content_titre_categorie_left content_titre_categorie_left_structure content_titre_categorie_left_personalize"></div>
         <div id="content_titre_categorie_center_id" class="content_titre_categorie_center content_titre_categorie_center_structure content_titre_categorie_center_personalize"><p id="titre_categorie_id"></p></div>
         <div id="content_titre_categorie_right_id" class="content_titre_categorie_right content_titre_categorie_right_structure content_titre_categorie_right_personalize"></div>
-        
+
         <div id="confirm_dialog_produit_id" class="confirm_dialog_produit"></div>
         <div id="dialog_add_opt_ingred_id" class="dialog_add_opt_ingred"></div>
         <div id="dialog_add_produit_id" class="dialog_add_produit"></div>
@@ -76,7 +76,12 @@
             color:#ffffff;
             background-color:#000099;
         }*/
-
+    img.link_add_product_img_structure.link_add_product_img_personalize {
+        margin-left: 46%;
+        margin-top: 1.5%;
+        margin-right: 50%;
+        float: none;
+    }
 </style>
 </body>
 </html> 

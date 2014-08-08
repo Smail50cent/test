@@ -1153,7 +1153,7 @@ function ConnexionServer() {
             url: getServicePath("serveur.clientaccess.serviceUpdateProduit"),
             type: 'POST',
             data: {produit: produit},
-            async: false,
+            async: true,
             success: function(data) {
                 method(data, param);
             },
