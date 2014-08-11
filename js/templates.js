@@ -509,6 +509,10 @@ var gestionproduitingredient_ajouter_produit = null;
 function getPageIngredAddProduit() {
     if (gestionproduitingredient_ajouter_produit == null) {
         gestionproduitingredient_ajouter_produit = templates.getTemplate("gestion/produit/ingredient_ajouter_produit");
+        gestionproduitingredient_ajouter_produit1 = paramValue(gestionproduitingredient_ajouter_produit,"addIng",strings.getString("add.produit.dialog.title.ingredient"));
+        gestionproduitingredient_ajouter_produit2 = paramValue(gestionproduitingredient_ajouter_produit1,"recherche",strings.getString("add.produit.label.ingredient.recherche"));
+        gestionproduitingredient_ajouter_produit3 = paramValue(gestionproduitingredient_ajouter_produit2,"titleInput",strings.getString("add.produit.input.ingredient.title"));
+        gestionproduitingredient_ajouter_produit = gestionproduitingredient_ajouter_produit3;
     }
     var mygestionproduitingredient_ajouter_produit = gestionproduitingredient_ajouter_produit;
     return mygestionproduitingredient_ajouter_produit;
@@ -541,6 +545,9 @@ var gestionproduitoption_ajouter_produit = null;
 function getOptionAddProduit() {
     if (gestionproduitoption_ajouter_produit == null) {
         gestionproduitoption_ajouter_produit = templates.getTemplate("gestion/produit/option_ajouter_produit");
+        gestionproduitoption_ajouter_produit1 = paramValue(gestionproduitoption_ajouter_produit,"check",strings.getString("add.produit.label.options.cocher"));
+        gestionproduitoption_ajouter_produit2 = paramValue(gestionproduitoption_ajouter_produit1,"addOpt",strings.getString("add.produit.label.options.add"));
+        gestionproduitoption_ajouter_produit = gestionproduitoption_ajouter_produit2;
     }
     var mygestionproduitoption_ajouter_produit = gestionproduitoption_ajouter_produit;
     return mygestionproduitoption_ajouter_produit;
@@ -549,6 +556,10 @@ var gestionproduitprix_ajouter_produit = null;
 function getPrixAddProduit() {
     if (gestionproduitprix_ajouter_produit == null) {
         gestionproduitprix_ajouter_produit = templates.getTemplate("gestion/produit/prix_ajouter_produit");
+        gestionproduitprix_ajouter_produit1 = paramValue(gestionproduitprix_ajouter_produit,"PrixTTC",strings.getString("add.produit.label.prix.ttc"));
+        gestionproduitprix_ajouter_produit2 = paramValue(gestionproduitprix_ajouter_produit1,"TVA",strings.getString("add.produit.label.prix.tva"));
+        gestionproduitprix_ajouter_produit3 = paramValue(gestionproduitprix_ajouter_produit2,"PrixHT",strings.getString("add.produit.label.prix.ht"));
+        gestionproduitprix_ajouter_produit = gestionproduitprix_ajouter_produit3;
     }
     var mygestionproduitprix_ajouter_produit = gestionproduitprix_ajouter_produit;
     return mygestionproduitprix_ajouter_produit;
@@ -565,6 +576,9 @@ var gestionproduitdiv_ajouter_option = null;
 function getDivAddOption() {
     if (gestionproduitdiv_ajouter_option == null) {
         gestionproduitdiv_ajouter_option = templates.getTemplate("gestion/produit/div_ajouter_option");
+        gestionproduitdiv_ajouter_option1 = paramValue(gestionproduitdiv_ajouter_option,"nameOpt",strings.getString("add.produit.label.options.add.name"));
+        gestionproduitdiv_ajouter_option2 = paramValue(gestionproduitdiv_ajouter_option1,"possOpt",strings.getString("add.produit.label.options.add.possibilite"));
+        gestionproduitdiv_ajouter_option = gestionproduitdiv_ajouter_option2;
     }
     var mygestionproduitdiv_ajouter_option = gestionproduitdiv_ajouter_option;
     return mygestionproduitdiv_ajouter_option;
@@ -573,6 +587,8 @@ var gestionproduitdiv_ajouter_ingredient = null;
 function getDivAddIngredient() {
     if (gestionproduitdiv_ajouter_ingredient == null) {
         gestionproduitdiv_ajouter_ingredient = templates.getTemplate("gestion/produit/div_ajouter_ingredient");
+        gestionproduitdiv_ajouter_ingredient1 = paramValue(gestionproduitdiv_ajouter_ingredient,"nomIng",strings.getString("add.produit.label.add.ingredient.name")) ;
+        gestionproduitdiv_ajouter_ingredient = gestionproduitdiv_ajouter_ingredient1;
     }
     var mygestionproduitdiv_ajouter_ingredient = gestionproduitdiv_ajouter_ingredient;
     return mygestionproduitdiv_ajouter_ingredient;
