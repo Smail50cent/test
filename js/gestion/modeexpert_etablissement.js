@@ -6,7 +6,7 @@ var addedTablesAndZones = new Array();
 function loadGestionSites() {
     updateActivedLi(1);
     var htmlGererLesSites = getGererlesSites();
-    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les sites");
+    htmlGererLesSites = paramValue(htmlGererLesSites, "title", strings.getString("title.modeexpert.gererlessite.title"));
     $("#new_container").html(htmlGererLesSites);
     $("#table_gererlessites_all").append(getGererlesSitesTableThead());
     var htmlTbody = getGererlesSitesTableTbodyTr();
@@ -405,8 +405,8 @@ function valderAjoutEtablissement() {
                             htmlZone += "<p class=\"a_zone_structure a_zone_personalize\">" + etablissement.zones[j].nom + ",</p>";
                         }
                     }
-                    litbody = paramValue(litbody, "zones", htmlZone);
-                }
+                    
+                }litbody = paramValue(litbody, "zones", htmlZone);
                 $("#table_gererlessites_all").append(litbody);
                 $("tr[idetablissement='" + data.id + "']").addClass("etablissemend_added");
                 window.setTimeout(function() {

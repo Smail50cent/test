@@ -1281,12 +1281,10 @@ function ConnexionServer() {
         }, {"service": "serveur.clientaccess.serviceZoneTablesGetByEtablissementNull"}, method, param);
     };
     this.removeZoneTable = function(method, id1, param) {
-        pAjax(null,
-                {service: "serveur.clientaccess.serviceremoveZoneTable", data: {id: id1}}, method, param);
+        pAjax(null, {service: "serveur.clientaccess.serviceremoveZoneTable", data: {id: id1}}, method, param);
     };
     this.addZoneTable = function(method, zone, param) {
-        pAjax(null,
-                {service: "serveur.clientaccess.serviceAddZoneTable", data: {zone: JSON.stringify(zone)}}, method, param);
+        pAjax(null, {service: "serveur.clientaccess.serviceAddZoneTable", data: {zone: JSON.stringify(zone)}}, method, param);
     };
     this.getZoneTableById = function(method, id, param) {
         pAjax(function(data, param, methodExecute) {
@@ -1296,5 +1294,10 @@ function ConnexionServer() {
             }
         }, {service: "serveur.clientaccess.serviceGetZoneTableById", data: {id: id}}, method, param);
     };
+    this.removeTable = function(method, id, param) {
+        pAjax(null, {service: "serveur.clientaccess.serviceRemoveTable", data: {id: id}}, method, param);
+    };
+    this.addNewTable = function(method, numero, idzoneTable, param) {
+        pAjax(null, {service: "serveur.clientaccess.serviceAddTable", data: {idzonetable: idzoneTable, numero: numero}}, method, param);
+    };
 }
-

@@ -20,13 +20,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Mode expert</a>
+                    <a id="modeexpert_title_right" class="navbar-brand" href="#"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a onclick="goGestionApplication();">Mode simple</a></li>
-                        <li><a href="#">Votre compte</a></li>
-                        <li><a onclick="deconexion();">Déconnexion</a></li>
+                        <li><a id="modeexpert_gomodesimple" onclick="goGestionApplication();"></a></li>
+                        <li><a id="modeexpert_govotrecompte"  href="#"></a></li>
+                        <li><a id="modeexpert_godeconnexion" onclick="deconexion();"></a></li>
                     </ul>
                 </div>
             </div>

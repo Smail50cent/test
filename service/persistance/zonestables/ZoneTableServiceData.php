@@ -14,8 +14,12 @@ interface ZoneTableServiceData {
     public function getByEtablissementNull();
 
     public function remove($id);
-    
+
     public function add(ZoneTable $zoneTable);
-    
+
     public function getById($id);
+
+    public function removeTable($id);
+
+    public function addTable($numero, $zone);
 }

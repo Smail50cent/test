@@ -13,7 +13,6 @@ include_once $path . 'service/logique/entity/Etablissement.php';
  */
 class ZoneTableServiceDataImpl implements ZoneTableServiceData {
 
-//
     public function getAll() {
         $bdd = new ConnexionBDD();
         $resultSet = $bdd->executeGeneric("SELECT 
@@ -79,8 +78,11 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                         $zoneTable = new ZoneTable();
                     }
                 } else {
-                    array_push($liste, $zoneTable);
-                    $zoneTable = new ZoneTable();
+//                    if(count($lignes) <= $i + 1)
+//                    if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
+                        array_push($liste, $zoneTable);
+                        $zoneTable = new ZoneTable();
+//                    }
                 }
             } else if ($ligne->table_id != $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
@@ -111,7 +113,7 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                 break;
             }
         }if (!$isHere) {
-            if ($ligne->table_numero) {
+            if ($ligne->table_numero != null) {
                 $table = new Table();
                 $table->setId($ligne->table_id);
                 $table->setNumero($ligne->table_numero);
@@ -198,8 +200,18 @@ etablissement.slogan AS etablissement_slogan
 FROM  `zone_table`
 LEFT JOIN tables ON zone_table.id = tables.zone_table_ke
 LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`
-WHERE tables.id = ".$id);
+WHERE zone_table.id = " . $id);
         return $this->parseZoneTable($resultSet);
+    }
+
+    public function removeTable($id) {
+        $bdd = new ConnexionBDD();
+        $id = $bdd->executeGeneric("UPDATE `tables` SET `zone_table_ke`= NULL WHERE `id`=" . $id);
+    }
+
+    public function addTable($numero, $zone) {
+        $bdd = new ConnexionBDD();
+        return $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $numero . "," . $zone . ")");
     }
 
 }

@@ -53,4 +53,18 @@ class ZoneTableServiceImpl implements ZoneTableService {
         return $ret;
     }
 
+    public function removeTable($id) {
+        if ($id != null) {
+            $this->zoneTableSrv->removeTable($id);
+        }
+    }
+
+    public function addTable($numero, $zone) {
+        $ret = null;
+        if ($numero != null && $zone != null) {
+            $ret = $this->zoneTableSrv->addTable($numero,$zone);
+        }
+        return $ret;
+    }
+
 }

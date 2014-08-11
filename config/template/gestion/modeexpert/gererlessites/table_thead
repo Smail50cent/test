@@ -1,14 +1,14 @@
 <thead class="section_tableausites_thead_structure section_tableausites_thead_personalize">
     <tr class="section_tableausites_thead_tr_structure section_tableausites_thead_tr_personalize">
-        <th class="section_tableausites_thead_nom_structure section_tableausites_thead_nom_personalize">Nom</th>
-        <th class="section_tableausites_thead_logo_structure section_tableausites_thead_logo_personalize">Logo</th>
-        <th class="section_tableausites_thead_style_structure section_tableausites_thead_style_personalize">style</th>
-        <th class="section_tableausites_thead_adresse_structure section_tableausites_thead_adresse_personalize">Adresse</th>
-        <th class="section_tableausites_thead_telephone_structure section_tableausites_thead_telephone_personalize">Téléphone</th>
-        <th class="section_tableausites_thead_message_structure section_tableausites_thead_message_personalize">Message</th>
-        <th class="section_tableausites_thead_slogan_structure section_tableausites_thead_slogan_personalize">Slogan</th>
-        <th class="section_tableausites_thead_groupe_structure section_tableausites_thead_groupe_personalize">Groupe</th>
-        <th class="section_tableausites_thead_zones_structure section_tableausites_thead_zones_personalize">Zones</th>
+        <th class="section_tableausites_thead_nom_structure section_tableausites_thead_nom_personalize">{nom}</th>
+        <th class="section_tableausites_thead_logo_structure section_tableausites_thead_logo_personalize">{logo}</th>
+        <th class="section_tableausites_thead_style_structure section_tableausites_thead_style_personalize">{style}</th>
+        <th class="section_tableausites_thead_adresse_structure section_tableausites_thead_adresse_personalize">{adresse}</th>
+        <th class="section_tableausites_thead_telephone_structure section_tableausites_thead_telephone_personalize">{telephone}</th>
+        <th class="section_tableausites_thead_message_structure section_tableausites_thead_message_personalize">{message}</th>
+        <th class="section_tableausites_thead_slogan_structure section_tableausites_thead_slogan_personalize">{slogan}</th>
+        <th class="section_tableausites_thead_groupe_structure section_tableausites_thead_groupe_personalize">{groupe}</th>
+        <th class="section_tableausites_thead_zones_structure section_tableausites_thead_zones_personalize">{zones}</th>
         <th id="tr_actions_tablesites" class="section_tableausites_thead_actions_structure section_tableausites_thead_actions_personalize"></th>
     </tr>
 </thead>

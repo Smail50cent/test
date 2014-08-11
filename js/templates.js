@@ -485,10 +485,10 @@ var gestionproduitpage1_input_ajouter_produit = null;
 function getPage1AddProduit() {
     if (gestionproduitpage1_input_ajouter_produit == null) {
         gestionproduitpage1_input_ajouter_produit = templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
-        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit,"titleInput",strings.getString("add.produit.page.input.produit.nom.title"));
-        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1,"placeHInput",strings.getString("add.produit.page.input.produit.nom.placeholder"));
-        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2,"categorie",strings.getString("add.produit.page.show.label.categorie"));
-        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3,"souscat",strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit, "titleInput", strings.getString("add.produit.page.input.produit.nom.title"));
+        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1, "placeHInput", strings.getString("add.produit.page.input.produit.nom.placeholder"));
+        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2, "categorie", strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3, "souscat", strings.getString("add.produit.page.show.label.souscategorie"));
         gestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit4;
     }
     var mygestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit;
@@ -690,6 +690,9 @@ function getGererlesSites() {
         gestionmodeexpertgererlessitespage_gerer_sites = templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
     }
     var mygestionmodeexpertgererlessitespage_gerer_sites = gestionmodeexpertgererlessitespage_gerer_sites;
+    mygestionmodeexpertgererlessitespage_gerer_sites = paramValue(mygestionmodeexpertgererlessitespage_gerer_sites, "addetablabel", strings.getString("label.gererlesetab.button.add.etab"));
+
+//    Ajouter un établissement 
     return mygestionmodeexpertgererlessitespage_gerer_sites;
 }
 var gestionmodeexpertgererlessitestable_thead = null;
@@ -698,6 +701,15 @@ function getGererlesSitesTableThead() {
         gestionmodeexpertgererlessitestable_thead = templates.getTemplate("gestion/modeexpert/gererlessites/table_thead");
     }
     var mygestionmodeexpertgererlessitestable_thead = gestionmodeexpertgererlessitestable_thead;
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "zones", strings.getString("gererlessites.table.zone"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "groupe", strings.getString("gererlessites.table.groupe"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "slogan", strings.getString("gererlessites.table.slogan"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "message", strings.getString("gererlessites.table.message"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "telephone", strings.getString("gererlessites.table.telephone"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "adresse", strings.getString("gererlessites.table.adresse"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "style", strings.getString("gererlessites.table.style"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "logo", strings.getString("gererlessites.table.logo"));
+    mygestionmodeexpertgererlessitestable_thead = paramValue(mygestionmodeexpertgererlessitestable_thead, "nom", strings.getString("gererlessites.table.nom"));
     return mygestionmodeexpertgererlessitestable_thead;
 }
 var gestionmodeexpertgererlessitestable_tbody_tr = null;
@@ -738,6 +750,9 @@ function getLangueTableHead() {
         gestionmodeexpertgererlesLanguestable_thead = templates.getTemplate("gestion/modeexpert/gererlesLangues/table_thead");
     }
     var mygestionmodeexpertgererlesLanguestable_thead = gestionmodeexpertgererlesLanguestable_thead;
+    mygestionmodeexpertgererlesLanguestable_thead = paramValue(mygestionmodeexpertgererlesLanguestable_thead, "langues", strings.getString("gererleslangues.table.lang"));
+    mygestionmodeexpertgererlesLanguestable_thead = paramValue(mygestionmodeexpertgererlesLanguestable_thead, "actions", strings.getString("gererleslangues.table.action"));
+
     return mygestionmodeexpertgererlesLanguestable_thead;
 }
 var gestionmodeexpertgererlesLanguestable_tbody_tr = null;
@@ -883,4 +898,17 @@ function getGererLesTablesShowTablesAlreadyInZoneTable() {
     }
     var mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table = gestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
     return mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
+}
+var gestionmodeexpertgererlestableli_update_add_new_table = null;
+/**
+ * idzonetable<br/>
+ * placeholder <br/>  
+ * idtable <br/>
+ */
+function getGererLesTablesLiUpdateAddNewTable() {
+    if (gestionmodeexpertgererlestableli_update_add_new_table == null) {
+        gestionmodeexpertgererlestableli_update_add_new_table = templates.getTemplate("gestion/modeexpert/gererlestables/li_update_add_new_table");
+    }
+    var mygestionmodeexpertgererlestableli_update_add_new_table = gestionmodeexpertgererlestableli_update_add_new_table;
+    return mygestionmodeexpertgererlestableli_update_add_new_table;
 }
