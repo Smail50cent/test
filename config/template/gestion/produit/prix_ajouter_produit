@@ -1,30 +1,30 @@
 <div class="dialog_ajouter_produit_ajouterprix_structure dialog_ajouter_produit_ajouterprix_personalize">
     <div id="div_defaut_prix_id" class="div_defaut_prix_structure div_defaut_prix_personalize">
-    <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize">PrixTTC </label> 
+    <label id="defaut_prix_id" class="defaut_prix_structure defaut_prix_personalize"> {PrixTTC} </label> 
     <input min=0.00 size=2 type="number" id="input_defaut_prix_id" class="input_defaut_prix input_defaut_prix_structure input_defaut_prix_personalize " Id_inputPrix="0">
-    <label class="label_tva_structure label_tva_personalize"> TVA </label>
+    <label class="label_tva_structure label_tva_personalize"> {TVA} </label>
     <select id="tva_0" class="tva_produit tva_produit_structure tva_produit_personalize" tvaId="0">
     </select>
-    <label id="label_prixttc_id" class="label_prixttc_structure label_prixttc_personalize"> PrixHT: </label>
+    <label id="label_prixttc_id" class="label_prixttc_structure label_prixttc_personalize"> {PrixHT}: </label>
     <label id="label_val_prixttc_id" class="label_val_prixttc_structure label_val_prixttc_personalize"> </label>
     </div>
 
     <hr width=50% align="center" class="bar_central_ajouterprix_structure bar_central_ajouterprix_personalize">
 
-    <div class="show_insert_dialog_structure show_insert_dialog_personalize">
+    <!--div class="show_insert_dialog_structure show_insert_dialog_personalize">
     <label id="label_ajout_periode_id" class="label_ajout_periode_structure label_ajout_periode_personalize"> ajout periode </label> 
     <div onclick="ajoutPeriode()" type="button" id="add_periode_id" class="add_periode_structure add_periode_personalize">
     <img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalize"></div>
     </div>
 
-    <div id="div_zone_id" class="div_zone_personalize div_zone_structure"> </div>
+    <div id="div_zone_id" class="div_zone_personalize div_zone_structure"> </div-->
 
-<div class="next_prev_div_structure next_prev_div_personalize">
+    <div class="next_prev_div_structure next_prev_div_personalize">
     <div onclick="optionPage();" type="button" id="prev_page_id" class="prev_page_structure prev_page_personalize">
     <img src="img/gestion/produit/left.png" width="40" height="40" class="img_left_structure img_left_personalize"></div>
 
     <div onclick="submit_prixPage();" type="button" id="next_page_id" class="next_page_structure next_page_personalize">
     <img src="img/gestion/produit/right.png" width="40" height="40" class="img_right_structure img_right_personalize"></div>
-</div>
+    </div>
 <div>
 

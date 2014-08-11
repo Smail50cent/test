@@ -74,8 +74,8 @@ function loadModifiedProduct(produit) {
                 $(this).removeClass("active");
             }
         });
-        
-        $("#alert_error_id").freeow("Produit", "Votre produit a été modifié avec succés", {
+
+        $("#alert_error_id").freeow("Produit", strings.getString("add.produit.alert.modifier.produit"), {
             classes: ["smokey", "pushpin"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -92,9 +92,10 @@ function ModifyProduct(id) {
     loadEtablissementForGestion = false;
 
     var idprod = id.parent().parent().parent().attr('produitid');
+    var dialogTitle = strings.getString("add.produit.dialog.title.modifier.produit");
     $("#dialog_add_produit_id").dialog({
         modal: true,
-        title: "Modifier le produit",
+        title: dialogTitle,
         autoOpen: true,
         position: 'top',
         dialogClass: 'dialog-modif-produit',
@@ -146,76 +147,76 @@ function ModifyProduct(id) {
     $('.prev_page_structure, .next_page_structure, .btn_validation_ajout_produit_structure').each(function() {
         $(this).remove();
     });
-    function mafunct(){
+    function mafunct() {
         getConnexion().getProduitByIdGeneric(produitById, idprod);
-            function produitById(data) {
-                //console.log(data);
-                $("#tva_0 option[value=\"" + parseFloat(data.tauxTva) + "\"]").prop("selected", true);
-                $('#name_prod_Id').val(data.nom);
-                $('#name_prod_Id').attr("idproduit", data.id);
-                $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
-                $('#liste_souscategorie_id').append($('<option>', {
-                    value: data.id_sousCategorie.id,
-                    text: data.id_sousCategorie.nom
-                }));
-                $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
-                if (data.ids_ingredients != null) {
-                    for (var i = 0; i < data.ids_ingredients.length; i++) {
-                        $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
-                    }
-                }
-                if (data.options != null) {
-                    for (var i = 0; i < data.options.length; i++) {
-                        $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
-                    }
-                }
-                var prixHt, TVA;
-                for (var i = 0; i < data.associationPrixProduit.length; i++) {
-                    if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
-                        prixHt = data.associationPrixProduit[i].prixHt.prix;
-                        TVA = data.tauxTva;
-                        break;
-                    }
-                }
-                var prixTTC = calculPrixWithTVA(prixHt, TVA);
-                $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
-                $("#label_val_prixttc_id").text(prixHt);
-
-                if (data.zones != null) {
-                    for (var i = 0; i < data.zones.length; i++) {
-                        $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
-                    }
-                }
-
-                for (var i = 0; i < data.etablissements.length; i++) {
-                    var zoneChecked = false;
-                    $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
-                        if (this.checked) {
-                            zoneChecked = true;
-                        }
-                    });
-                    if (!zoneChecked) {
-                        $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
-                        $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
-                            this.disabled = true;
-                            this.checked = true;
-                        });
-                    }
+        function produitById(data) {
+            //console.log(data);
+            $("#tva_0 option[value=\"" + parseFloat(data.tauxTva) + "\"]").prop("selected", true);
+            $('#name_prod_Id').val(data.nom);
+            $('#name_prod_Id').attr("idproduit", data.id);
+            $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
+            $('#liste_souscategorie_id').append($('<option>', {
+                value: data.id_sousCategorie.id,
+                text: data.id_sousCategorie.nom
+            }));
+            $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
+            if (data.ids_ingredients != null) {
+                for (var i = 0; i < data.ids_ingredients.length; i++) {
+                    $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
                 }
             }
+            if (data.options != null) {
+                for (var i = 0; i < data.options.length; i++) {
+                    $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
+                }
+            }
+            var prixHt, TVA;
+            for (var i = 0; i < data.associationPrixProduit.length; i++) {
+                if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
+                    prixHt = data.associationPrixProduit[i].prixHt.prix;
+                    TVA = data.tauxTva;
+                    break;
+                }
+            }
+            var prixTTC = calculPrixWithTVA(prixHt, TVA);
+            $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
+            $("#label_val_prixttc_id").text(prixHt);
+
+            if (data.zones != null) {
+                for (var i = 0; i < data.zones.length; i++) {
+                    $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
+                }
+            }
+
+            for (var i = 0; i < data.etablissements.length; i++) {
+                var zoneChecked = false;
+                $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                    if (this.checked) {
+                        zoneChecked = true;
+                    }
+                });
+                if (!zoneChecked) {
+                    $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
+                    $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                        this.disabled = true;
+                        this.checked = true;
+                    });
+                }
+            }
+        }
     }
     threadd();
-    function threadd(){
+    function threadd() {
         window.setTimeout(function() {
-        if (loadCategorieForGestion && loadIngredientForGestion && loadOptionsForGestion && loadPrixForGestion && loadEtablissementForGestion) {
-            console.log("Finished Loading");
-            mafunct();
-        } else {
-            threadd();
-        }
-    }, 10);
+            if (loadCategorieForGestion && loadIngredientForGestion && loadOptionsForGestion && loadPrixForGestion && loadEtablissementForGestion) {
+                console.log("Finished Loading");
+                mafunct();
+            } else {
+                threadd();
+            }
+        }, 10);
     }
-    
+
 }
 
 function updateProduct() {
@@ -235,13 +236,13 @@ function updateProduct() {
         produit.setCategorie(categorie);
         produit.setSousCategorie(souscategorie);
     } else {
-        $("#alert_error_id").freeow("Produit", "Ajouter un nom à votre produit", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.produit.name"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
             hideDuration: 8000
         });
-        $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.categorie"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -256,7 +257,7 @@ function updateProduct() {
         list.push(ingredient);
     });
     if (list.length == 0) {
-        $("#alert_error_id").freeow("Ingrédient", "Attention vous n'avez pas choisie d'Ingrédient", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.ingredient"), strings.getString("add.produit.alert.verify.ingredient"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -274,7 +275,7 @@ function updateProduct() {
         list2.push(option);
     });
     if (list2.length == 0) {
-        $("#alert_error_id").freeow("Option", "Attention vous n'avez pas choisie d'Option", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.options"), strings.getString("add.produit.alert.verify.options"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -298,7 +299,7 @@ function updateProduct() {
     produit.setAssociationPrixProduit(list3);
     produit.setTauxTva(Tva);
     if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
-        $("#alert_error_id").freeow("Prix", "Vous devez entrer un prix avant de continuer", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.prix"), strings.getString("add.produit.alert.verify.prix"), {
             classes: ["smokey", "error"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -346,9 +347,10 @@ function updateProduct() {
 
 function DeleteProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
+    var dialogTitle = strings.getString("add.produit.dialog.title.produit.delete");
     $('#confirm_dialog_produit_id').dialog({
         modal: true,
-        title: 'Voulez vous supprimer ce produit ?',
+        title: dialogTitle,
         autoOpen: true,
         position: 'center',
         buttons: {
@@ -412,13 +414,13 @@ function submit_productPage() {
         produit.setSousCategorie(souscategorie);
         ingredientPage();
     } else {
-        $("#alert_error_id").freeow("Produit", "Ajouter un nom à votre produit", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.produit.name"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
             hideDuration: 8000
         });
-        $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.categorie"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -473,7 +475,7 @@ function loadCatSousCat(method) {
 }
 
 function ingredientPage() {
-    $('.ui-dialog-title').html("Ajouter les Ingrédients");
+    $('.ui-dialog-title').html(strings.getString("add.produit.dialog.title.ingredient"));
     $('#content_produit_description_id').empty();
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
@@ -520,7 +522,7 @@ function loadIngredient() {
         $('#autocomplete_ingredient_id').keyup(function() {
             if ($.inArray(this.value, listIngredient) == -1 && this.value.length > 0) {
                 $(".tooltip").tooltip("open");
-                $(".tooltip").tooltip("option", "content", "cette ingrédient n'existe pas, tapez entrer pour l'ajouter");
+                $(".tooltip").tooltip("option", "content", strings.getString("add.produit.input.ingredient.title.notfound"));
 
                 $('#autocomplete_ingredient_id').keypress(function() {
                     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -587,7 +589,7 @@ function loadIngredient() {
                 });
 
             } else {
-                $(".tooltip").tooltip("option", "content", "entrez ici le nom de l'ingrédient");
+                $(".tooltip").tooltip("option", "content", strings.getString("add.produit.input.ingredient.title"));
             }
         });
         $('.ingredient_checkbox').change(function() {
@@ -612,7 +614,7 @@ function submit_ingredientPage() {
         list.push(ingredient);
     });
     if (list.length == 0) {
-        $("#alert_error_id").freeow("Ingrédient", "Attention vous n'avez pas choisie d'Ingrédient", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.ingredient"), strings.getString("add.produit.alert.verify.ingredient"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -626,15 +628,17 @@ function submit_ingredientPage() {
     }
 }
 function formInsertIngredient() {
-
+    var dialogTitle = strings.getString("add.produit.dialog.title.ingredient");
+    var btnCancel = strings.getString("add.produit.button.dialog.add.ingredient.cancel");
+    var btnSubmit = strings.getString("add.produit.button.dialog.add.ingredient.submit");
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter un Ingrédient', autoOpen: true, position: 'right', dialogClass: "second_dialog",
+            {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
-                    annuler: function() {
+                    btnCancel: function() {
                         $(this).dialog("destroy");
                         $("#dialog_add_opt_ingred_id").empty();
                     },
-                    valider: function() {
+                    btnSubmit: function() {
                         insertIngredDB();
                         $(this).dialog("destroy");
                         $("#dialog_add_opt_ingred_id").empty();
@@ -697,7 +701,8 @@ function UncheckAllBoxIngredOpt(id) {
 }
 
 function optionPage() {
-    $('.ui-dialog-title').html("Ajouter les Options");
+    var dialogTitle = strings.getString("add.produit.dialog.title.options");
+    $('.ui-dialog-title').html(dialogTitle);
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     loadOptions();
@@ -752,7 +757,7 @@ function submit_optionPage() {
         list.push(option);
     });
     if (list.length == 0) {
-        $("#alert_error_id").freeow("Option", "Attention vous n'avez pas choisie d'Option", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.options"), strings.getString("add.produit.alert.verify.options"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -895,7 +900,7 @@ function submit_prixPage() {
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
     if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
-        $("#alert_error_id").freeow("Prix", "Vous devez entrer un prix avant de continuer", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.prix"), strings.getString("add.produit.alert.verify.prix"), {
             classes: ["smokey", "error"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -1027,13 +1032,13 @@ function validerProduit() {
     submitEtablissements();
     if (clickValider == 0) {
         if (produit.etablissements.length == 0) {
-            $("#alert_error_id").freeow("Etablissement", "Cliquez une deuxième pour continuer quand meme", {
+            $("#alert_error_id").freeow(strings.getString("add.produit.alert.etablissement"), strings.getString("add.produit.alert.etablissement.click"), {
                 classes: ["smokey", "notice"],
                 hideStyle: {opacity: 0, left: "400px"},
                 showStyle: {opacity: 1, left: 0},
                 hideDuration: 8000
             });
-            $("#alert_error_id").freeow("Etablissement", "Attention Vous n'avez pas choisie un établissement ", {
+            $("#alert_error_id").freeow(strings.getString("add.produit.alert.etablissement"), strings.getString("add.produit.alert.etablissement.verify"), {
                 classes: ["smokey", "notice"],
                 hideStyle: {opacity: 0, left: "400px"},
                 showStyle: {opacity: 1, left: 0},
@@ -1067,8 +1072,9 @@ function validerProduit() {
 var tailleItem = new Array("small-item-structure small-item-personalize",
         "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
+    var dialogTitle = strings.getString("add.produit.dialog.title.options.add");
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right', dialogClass: "second_dialog",
+            {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
                     annuler: function() {
                         $(this).dialog("destroy");
