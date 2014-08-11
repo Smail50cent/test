@@ -634,11 +634,11 @@ function formInsertIngredient() {
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
-                    btnCancel: function() {
+                    Cancel: function() {
                         $(this).dialog("destroy");
                         $("#dialog_add_opt_ingred_id").empty();
                     },
-                    btnSubmit: function() {
+                    Submit: function() {
                         insertIngredDB();
                         $(this).dialog("destroy");
                         $("#dialog_add_opt_ingred_id").empty();
