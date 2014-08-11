@@ -154,4 +154,27 @@
 	<string key="gererlessites.table.logo">Logo</string>
 	<string key="gererlessites.table.nom">Name</string>
 	<string key="label.gererlesetab.button.add.etab">Add a business</string>
+	<string key="add.produit.label.options.cocher">All check / uncheck</string>
+	<string key="add.produit.label.options.add">Add Option</string>
+	<string key="add.produit.dialog.title.options">Add Options</string>
+	<string key="add.produit.dialog.title.options.add">Add an option</string>
+	<string key="add.produit.label.options.add.name">Option name</string>
+	<string key="add.produit.label.options.add.possibilite">Possibility N° 1</string>
+	<string key="label.updatezonetable.addnewTable">Add a new table</string>
+	<string key="add.produit.label.prix.ttc">Price incl Tax</string>
+	<string key="add.produit.label.prix.tva">VAT</string>
+	<string key="add.produit.label.prix.ht">Price excl Tax</string>
+	<string key="add.produit.alert.modifier.produit">Product successfully modified</string>
+	<string key="add.produit.dialog.title.modifier.produit">Modify product</string>
+	<string key="add.produit.alert.produit">Product</string>
+	<string key="add.produit.alert.verify.produit.name">Choose a name for your product</string>
+	<string key="add.produit.alert.verify.categorie">Choose a Category and a SubCategory</string>
+	<string key="add.produit.alert.ingredient">Ingredient</string>
+	<string key="add.produit.alert.verify.ingredient">Carefull you didn't choose an Ingredient</string>
+	<string key="add.produit.alert.options">Options</string>
+	<string key="add.produit.alert.verify.options">Carefull you didn't choose an Option</string>
+	<string key="add.produit.alert.prix">Price</string>
+	<string key="add.produit.alert.verify.prix">You must enter a price before continue</string>
+	<string key="add.produit.dialog.title.produit.delete">Do you want to delete this product</string>
+	<string key="label.confirm.removing.zonetable">Are you sure you want to delete this area?</string>
 </strings>

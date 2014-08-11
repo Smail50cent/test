@@ -7,5 +7,8 @@
     </div>
     <div class="gestion_numeros_table_structure gestion_numeros_table_personalize">
         <ul nbzone="{nbZone}" class="gestion_all_numeros_tables_strucutre gestion_all_numeros_tables_personalize"></ul>
-    </div>
+        <div id="add_a_new_table" class="gestion_numeros_add_table_structure gestion_numeros_add_table_personalize">
+        
+        </div>
+</div>
 </div>

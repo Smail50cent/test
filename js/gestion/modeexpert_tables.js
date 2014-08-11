@@ -37,22 +37,21 @@ function printTableau() {
                         virgule = "";
                     }
                     labelTab = labelTab + data[i].tables[j].numero + virgule;
-
                 }
-
                 htmlBody = paramValue(htmlBody, "tables", labelTab);
             }
-
             $("#table_zonestables_all").append(htmlBody);
         }
     }, null);
 }
 function removeZoneTable(id) {
-    getConnexion().removeZoneTable(function(data, param) {
-        if (data == null) {
-            $("tr[idzonetable='" + id + "']").remove();
-        }
-    }, id, null);
+    if (confirm(strings.getString("label.confirm.removing.zonetable"))) {
+        getConnexion().removeZoneTable(function(data, param) {
+            if (data == null) {
+                $("tr[idzonetable='" + id + "']").remove();
+            }
+        }, id, null);
+    }
 }
 function addZoneTable() {
     if ($("#myModal")) {
@@ -119,7 +118,10 @@ function validerAddZoneTable() {
         }, zone, zone);
     }
 }
+var updateZone = null;
+var nbTables = 1;
 function updateZoneTable(id) {
+    updateZone = id;
     if ($("#myModal")) {
         $("#myModal").remove();
     }
@@ -135,13 +137,51 @@ function updateZoneTable(id) {
         modalBody = paramValue(modalBody, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
         $("#bootstrap_modal_body").html(modalBody);
         $('#myModal').modal('show');
-        console.log(data);
         $("input[nbzone='1'][method='updateZone']").val(data.nom);
         for (var i = 0; i < data.tables.length; i++) {
             var htmlTabAlreadyExsist = getGererLesTablesShowTablesAlreadyInZoneTable();
             htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idzonetable", data.id);
-            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idtable", data.table[i].id);
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idtable", data.tables[i].id);
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "numero", data.tables[i].numero);
+            $("ul[nbzone='1']").append(htmlTabAlreadyExsist);
+        }
+        nbTables++;
+        var htmlNewTable = getGererLesTablesLiUpdateAddNewTable();
+        htmlNewTable = paramValue(htmlNewTable, "idzonetable", data.id);
+        htmlNewTable = paramValue(htmlNewTable, "placeholder", strings.getString("label.updatezonetable.addnewTable"));
+        htmlNewTable = paramValue(htmlNewTable, "idtable", nbTables);
+        $("#add_a_new_table").append(htmlNewTable);
+    }, id, null);
+}
+
+function removeTable(id) {
+
+    getConnexion().removeTable(function(data, param) {
+        if (data != null) {
+            if (!data.hasOwnProperty("error")) {
+                console.log("Error");
+            }
+        } else {
+            $("li[idzonetable='" + updateZone + "'][idtable='" + id + "']").remove();
         }
     }, id, null);
+}
 
+function addNewTable() {
+    var numerotable = $("input[nbtable='" + nbTables + "'][idzonetable='" + updateZone + "']").val();
+    console.log(numerotable);
+    getConnexion().addNewTable(function(data, param) {
+        if (data == null) {
+            if (data.hasOwnProperty("error")) {
+                console.log("Error");
+            }
+        } else {
+            console.log(data);
+            var htmlTabAlreadyExsist = getGererLesTablesShowTablesAlreadyInZoneTable();
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idzonetable", updateZone);
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idtable", data.id);
+            htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "numero", numerotable);
+            $("ul[nbzone='" + updateZone + "']").append(htmlTabAlreadyExsist);
+        }
+    }, numerotable, updateZone, null);
 }

@@ -485,10 +485,10 @@ var gestionproduitpage1_input_ajouter_produit = null;
 function getPage1AddProduit() {
     if (gestionproduitpage1_input_ajouter_produit == null) {
         gestionproduitpage1_input_ajouter_produit = templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
-        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit,"titleInput",strings.getString("add.produit.page.input.produit.nom.title"));
-        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1,"placeHInput",strings.getString("add.produit.page.input.produit.nom.placeholder"));
-        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2,"categorie",strings.getString("add.produit.page.show.label.categorie"));
-        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3,"souscat",strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit, "titleInput", strings.getString("add.produit.page.input.produit.nom.title"));
+        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1, "placeHInput", strings.getString("add.produit.page.input.produit.nom.placeholder"));
+        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2, "categorie", strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3, "souscat", strings.getString("add.produit.page.show.label.souscategorie"));
         gestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit4;
     }
     var mygestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit;
@@ -674,8 +674,8 @@ function getGererlesSites() {
         gestionmodeexpertgererlessitespage_gerer_sites = templates.getTemplate("gestion/modeexpert/gererlessites/page_gerer_sites");
     }
     var mygestionmodeexpertgererlessitespage_gerer_sites = gestionmodeexpertgererlessitespage_gerer_sites;
-    mygestionmodeexpertgererlessitespage_gerer_sites = paramValue(mygestionmodeexpertgererlessitespage_gerer_sites,"addetablabel",strings.getString("label.gererlesetab.button.add.etab"));
-    
+    mygestionmodeexpertgererlessitespage_gerer_sites = paramValue(mygestionmodeexpertgererlessitespage_gerer_sites, "addetablabel", strings.getString("label.gererlesetab.button.add.etab"));
+
 //    Ajouter un établissement 
     return mygestionmodeexpertgererlessitespage_gerer_sites;
 }
@@ -882,4 +882,17 @@ function getGererLesTablesShowTablesAlreadyInZoneTable() {
     }
     var mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table = gestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
     return mygestionmodeexpertgererlestablesshow_tables_already_in_zone_table;
+}
+var gestionmodeexpertgererlestableli_update_add_new_table = null;
+/**
+ * idzonetable<br/>
+ * placeholder <br/>  
+ * idtable <br/>
+ */
+function getGererLesTablesLiUpdateAddNewTable() {
+    if (gestionmodeexpertgererlestableli_update_add_new_table == null) {
+        gestionmodeexpertgererlestableli_update_add_new_table = templates.getTemplate("gestion/modeexpert/gererlestables/li_update_add_new_table");
+    }
+    var mygestionmodeexpertgererlestableli_update_add_new_table = gestionmodeexpertgererlestableli_update_add_new_table;
+    return mygestionmodeexpertgererlestableli_update_add_new_table;
 }
