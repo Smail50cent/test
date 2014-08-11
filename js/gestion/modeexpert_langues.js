@@ -18,7 +18,7 @@ function addStr() {
 function loadGestionLangues() {
     updateActivedLi(4);
     var htmlGererLesSites = getPageGererLangues();
-    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les langues");
+    htmlGererLesSites = paramValue(htmlGererLesSites, "title", strings.getString("title.modeexpert.page.gererlangues"));
     $("#new_container").html(htmlGererLesSites);
     getConnexion().getAllLangues(printLangues, null);
     function printLangues(langs, param) {

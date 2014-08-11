@@ -3,6 +3,10 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 function onModeExpertLoaded() {
+    $("#modeexpert_title_right").text(strings.getString("title.modeexpert.modeexpert"));
+    $("#modeexpert_gomodesimple").text(strings.getString("modeexpert.titlebar.modesimple"));
+    $("#modeexpert_govotrecompte").text(strings.getString("modeexpert.titlebar.votrecompte"));
+    $("#modeexpert_godeconnexion").text(strings.getString("modeexpert.deconnexion"));
     scripts.loadScripts("bootstrapall", loadAll());
 }
 function loadAll() {

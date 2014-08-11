@@ -6,7 +6,7 @@ var addedTablesAndZones = new Array();
 function loadGestionSites() {
     updateActivedLi(1);
     var htmlGererLesSites = getGererlesSites();
-    htmlGererLesSites = paramValue(htmlGererLesSites, "title", "Gérer les sites");
+    htmlGererLesSites = paramValue(htmlGererLesSites, "title", strings.getString("title.modeexpert.gererlessite.title"));
     $("#new_container").html(htmlGererLesSites);
     $("#table_gererlessites_all").append(getGererlesSitesTableThead());
     var htmlTbody = getGererlesSitesTableTbodyTr();

@@ -9,7 +9,7 @@ function onLoadGestionTables() {
     html = paramValue(html, "title", strings.getString("title.div.all.zonestables"));
     html = paramValue(html, "labelButtonAdd", strings.getString("label.addzonetable.button"));
     $("#new_container").html(html);
-    printTableau();//getGererLesTablesModalBodyUpdateZone
+    printTableau();
 }
 
 function printTableau() {
