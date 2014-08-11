@@ -31,7 +31,7 @@ function onLoadGP() {
 }
 
 function loadViewsForAddProduit() {
-    $('#content_titre_id').html("Gestion des Produits");
+    $('#content_titre_id').html(strings.getString("add.produit.main.title"));
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
     var modifdiv = getDivModifProduit();
@@ -373,7 +373,8 @@ function DeleteProduct(id) {
 }
 
 function productPage() {
-    $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
+    var dialogTitle = strings.getString("add.produit.dialog.title");
+    $('#dialog_add_produit_id').dialog({modal: false, title: dialogTitle, autoOpen: true, dialogClass: "dialog-ajout-produit",
         close: function(event, ui) {
             $(this).dialog("destroy");
             $(".produit_info").remove();

@@ -26,7 +26,7 @@ function loadMenus() {
     $("#nav_menu_right_ul_detail_id").append(li);
     var li = htmlLi;
     li = paramValue(li, "nbNotification", "");
-    li = paramValue(li, "onclick", "");
+    li = paramValue(li, "onclick", "LoadGestionCatégories();");
     li = paramValue(li, "idli", "2");
     li = paramValue(li, "class", "");//
     li = paramValue(li, "name", strings.getString("modeexpert.menu.gerer.lescategories"));

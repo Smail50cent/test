@@ -485,6 +485,11 @@ var gestionproduitpage1_input_ajouter_produit = null;
 function getPage1AddProduit() {
     if (gestionproduitpage1_input_ajouter_produit == null) {
         gestionproduitpage1_input_ajouter_produit = templates.getTemplate("gestion/produit/page1_input_ajouter_produit");
+        gestionproduitpage1_input_ajouter_produit1 = paramValue(gestionproduitpage1_input_ajouter_produit,"titleInput",strings.getString("add.produit.page.input.produit.nom.title"));
+        gestionproduitpage1_input_ajouter_produit2 = paramValue(gestionproduitpage1_input_ajouter_produit1,"placeHInput",strings.getString("add.produit.page.input.produit.nom.placeholder"));
+        gestionproduitpage1_input_ajouter_produit3 = paramValue(gestionproduitpage1_input_ajouter_produit2,"categorie",strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_input_ajouter_produit4 = paramValue(gestionproduitpage1_input_ajouter_produit3,"souscat",strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit4;
     }
     var mygestionproduitpage1_input_ajouter_produit = gestionproduitpage1_input_ajouter_produit;
     return mygestionproduitpage1_input_ajouter_produit;
@@ -493,6 +498,9 @@ var gestionproduitpage1_show_ajouter_produit = null;
 function getPage1ShowAddProduit() {
     if (gestionproduitpage1_show_ajouter_produit == null) {
         gestionproduitpage1_show_ajouter_produit = templates.getTemplate("gestion/produit/page1_show_ajouter_produit");
+        gestionproduitpage1_show_ajouter_produit1 = paramValue(gestionproduitpage1_show_ajouter_produit, "categorie", strings.getString("add.produit.page.show.label.categorie"));
+        gestionproduitpage1_show_ajouter_produit2 = paramValue(gestionproduitpage1_show_ajouter_produit1, "sousCateg", strings.getString("add.produit.page.show.label.souscategorie"));
+        gestionproduitpage1_show_ajouter_produit = gestionproduitpage1_show_ajouter_produit2;
     }
     var mygestionproduitpage1_show_ajouter_produit = gestionproduitpage1_show_ajouter_produit;
     return mygestionproduitpage1_show_ajouter_produit;
@@ -855,6 +863,14 @@ function getGererLesTablesModalBodyUpdateZone() {
     return mygestionmodeexpertgererlestablesmodal_body_update_zone;
 }
 
+var gestionmodeexpertpagegerercategories = null;
+function getGererLesCategorie() {
+    if (gestionmodeexpertpagegerercategories == null) {
+        gestionmodeexpertpagegerercategories = templates.getTemplate("gestion/modeexpert/gererlesCatégories/page_gerer_categories");
+    }
+    var mygestionmodeexpertpagegerercategories = gestionmodeexpertpagegerercategories;
+    return mygestionmodeexpertpagegerercategories;
+}
 var gestionmodeexpertgererlestablesshow_tables_already_in_zone_table = null;
 /**
  * idzonetable Id de la zone de tables<br/>
