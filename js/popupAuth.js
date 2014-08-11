@@ -255,7 +255,7 @@ function TestEmptyFields(field) {
         }
     });
     if (empty) {
-        alert("Remplissez tout les champs avant de valider !");
+        alert(strings.getString("remplir.all.champs"));
     }
     return empty;
 }

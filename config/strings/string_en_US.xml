@@ -177,4 +177,11 @@
 	<string key="add.produit.alert.verify.prix">You must enter a price before continue</string>
 	<string key="add.produit.dialog.title.produit.delete">Do you want to delete this product</string>
 	<string key="label.confirm.removing.zonetable">Are you sure you want to delete this area?</string>
+	<string key="add.produit.alert.etablissement">Establishment</string>
+	<string key="add.produit.alert.etablissement.verify">Carefull you didn't choose an establishment</string>
+	<string key="add.produit.alert.etablissement.click">Click a second time to continue</string>
+	<string key="remplir.all.champs">Fill in all the fields before submitting !</string>
+	<string key="plz.upgrade.browser">Please upgrade your browser, because your current browser lacks some new features we need!</string>
+	<string key="img.too.big">Size Image is Too big !</string>
+	<string key="type.file.notsupported">Unsupported file type !</string>
 </strings>

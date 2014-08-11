@@ -177,4 +177,11 @@
 	<string key="add.produit.alert.verify.prix">Vous devez entrer un prix avant de continuer</string>
 	<string key="add.produit.dialog.title.produit.delete">Voulez vous supprimer ce produit ?</string>
 	<string key="label.confirm.removing.zonetable">Etes-vous sûr de vouloir supprimer cet zone ?</string>
+	<string key="add.produit.alert.etablissement">Etablissement</string>
+	<string key="add.produit.alert.etablissement.verify">Attention Vous n'avez pas choisie un établissement</string>
+	<string key="add.produit.alert.etablissement.click">Cliquez une deuxième fois pour continuer</string>
+	<string key="remplir.all.champs">Remplissez tout les champs avant de valider !</string>
+	<string key="plz.upgrade.browser">S'il vous plaît mettre à jour votre navigateur, car votre navigateur actuel manque quelques nouvelles fonctionnalités dont nous avons besoin!</string>
+	<string key="img.too.big">L'image est trop grande !</string>
+	<string key="type.file.notsupported">Type du fichier non supporté !</string>
 </strings>

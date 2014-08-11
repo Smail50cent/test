@@ -78,11 +78,8 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                         $zoneTable = new ZoneTable();
                     }
                 } else {
-//                    if(count($lignes) <= $i + 1)
-//                    if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
-                        array_push($liste, $zoneTable);
-                        $zoneTable = new ZoneTable();
-//                    }
+                    array_push($liste, $zoneTable);
+                    $zoneTable = new ZoneTable();
                 }
             } else if ($ligne->table_id != $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
