@@ -17,8 +17,8 @@ function onLoadCompte(showVisiteurs, titre, topvalue, method, isServeusr) {//To 
     scripts.loadScripts("lib.dialog", function() {
         $('#auth_popup_id').dialog({autoOpen: true, modal: true,
             close: function(event, ui) {
-                $(this).dialog("destroy");
-                $('#auth_popup_id').remove();
+                $(this).dialog("close");
+                //$('#auth_popup_id').remove();
             }
         });
         var html = getAuthCompte();
@@ -84,8 +84,8 @@ function authenCompte() {
                                     methodToLoadAfter();
                                 }
                                 $('#auth_popup_id').dialog("close");
-                                $("#auth_popup_id").remove();
-
+                                //$("#auth_popup_id").remove();
+                                AuthToCommande();
                             }
                         } else {
                             showErrorMessage(strings.getString("label.connexion.error.mdp"));
@@ -162,6 +162,7 @@ function ValiderInscri() {
                         listePersonnes.push(personne);
                         setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                         $('#auth_popup_id').dialog("close");
+                        AuthToCommande();
                     }
                 }
             });
@@ -237,7 +238,7 @@ function AuthToCommande() {
     if (listePersonnes.length == $("#nbPersonnes").val()) {
         startCommande($("#numTable").val(), $("#nbPersonnes").val());
     } else {
-        $('#auth_compte_id input[type="text"] , #auth_compte_id input[type="password"], #auth_form_id input[type="text"], #auth_form_id input[type="date"], #auth_form_id input[type="file"], #auth_form_id input[type="email"], #auth_form_id input[type="tel"], #auth_form_id textarea, #auth_form_id input[type="password"]').val('');
+        //$('#auth_compte_id input[type="text"] , #auth_compte_id input[type="password"], #auth_form_id input[type="text"], #auth_form_id input[type="date"], #auth_form_id input[type="file"], #auth_form_id input[type="email"], #auth_form_id input[type="tel"], #auth_form_id textarea, #auth_form_id input[type="password"]').val('');
         window.setTimeout(function() {
             var person = strings.getString("label.personne.auth");
             $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
