@@ -186,4 +186,8 @@
 	<string key="type.file.notsupported">Type du fichier non supporté !</string>
 	<string key="add.produit.button.dialog.delete.yes">Oui</string>
 	<string key="add.produit.button.dialog.delete.no">Non</string>
+	<string key="modeexpert.label.value.nom">Nom</string>
+	<string key="modeexpert.label.value.priorite">Priorite</string>
+	<string key="modeexpert.placeholder.value.nom">nom</string>
+	<string key="modeexpert.placeholder.value.priorite">priorite</string>
 </strings>

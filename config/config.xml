@@ -73,6 +73,7 @@
         <variable name="serveur.clientaccess.serviceRemoveTable">zoneTables/removeTable</variable> 
         <variable name="serveur.clientaccess.serviceGetZoneTableById">zoneTables/getById</variable> 
         <variable name="serveur.clientaccess.serviceAddTable">zoneTables/addTable</variable>
+        <variable name="serveur.clientaccess.serviceAddCategorie">categorie/add</variable>
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>

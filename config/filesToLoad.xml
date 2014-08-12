@@ -79,6 +79,6 @@
     <script for="modeexpert" priority="2">gestion/modeexpert_etablissement.js</script>
     <script for="modeexpert" priority="3">gestion/modeexpert_langues.js</script>
     <script for="modeexpert" priority="4">gestion/modeexpert_tables.js</script>
-    <script for="modeexpert" priority="4">gestion/modeexpert_catégorie.js</script>
+    <script for="modeexpert" priority="4">gestion/modeexpert_categorie.js</script>
     <style for="modeexpert">./css/mode_expert.css</style>
 </files>

@@ -8,6 +8,6 @@
 interface CategorieServiceData {
     public function getAll();
     public function getById($id);
-    public function addData();
+    public function add(Categorie $categorie);
     public function getByEtablissementAndZone($etablissement,$zone);
 }

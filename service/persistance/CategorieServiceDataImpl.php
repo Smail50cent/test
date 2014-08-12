@@ -40,11 +40,10 @@ LEFT JOIN association_etablissement_categorie ON association_etablissement_categ
         return $categorie;
     }
 
-    public function addData() {
+    public function add(Categorie $categorie) {
         $bdd = new ConnexionBDD();
-        $bdd->executeGeneric("INSERT INTO dupappcaisse.categorie (nom,priorite) "
-                . " SELECT FP.FA_LIBELLE, FP.FA_ORDRE "
-                . " FROM prod_bacchus.BAR_FAMILLE_PRODUIT FP ");
+        return $bdd->executeGeneric("INSERT INTO categorie(nom,priorite) VALUES('".$categorie->nom."','".$categorie->priorite."')");
+
     }
 
     public function getByEtablissementAndZone($etablissement, $zone) {
