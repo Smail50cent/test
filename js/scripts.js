@@ -19,7 +19,7 @@ scripts.loadScripts = function(forpage, method) {
     function getScripts(forpage) {
         var abonements = new Array();
         var styles = new Array();
-        var url = "./config/scriptsToLoad.xml";
+        var url = "./config/filesToLoad.xml";
         if (fileScripts == null) {
             $.ajaxSetup({cache: true});
             $.ajax({
