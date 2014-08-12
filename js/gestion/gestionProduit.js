@@ -631,7 +631,6 @@ function formInsertIngredient() {
     var dialogTitle = strings.getString("add.produit.dialog.title.ingredient");
     var btnCancel = strings.getString("add.produit.button.dialog.add.ingredient.cancel");
     var btnSubmit = strings.getString("add.produit.button.dialog.add.ingredient.submit");
-    alert(btnCancel + " " + btnSubmit);
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
