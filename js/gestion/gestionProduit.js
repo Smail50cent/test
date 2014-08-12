@@ -631,6 +631,7 @@ function formInsertIngredient() {
     var dialogTitle = strings.getString("add.produit.dialog.title.ingredient");
     var btnCancel = strings.getString("add.produit.button.dialog.add.ingredient.cancel");
     var btnSubmit = strings.getString("add.produit.button.dialog.add.ingredient.submit");
+    alert(btnCancel + " " + btnSubmit);
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
@@ -639,10 +640,12 @@ function formInsertIngredient() {
                         $("#dialog_add_opt_ingred_id").empty();
                     },
                     Submit: function() {
-                        insertIngredDB();
-                        $(this).dialog("destroy");
-                        $("#dialog_add_opt_ingred_id").empty();
-                        ingredientPage();
+                        if ($("#list_ingred_id").length > 0) {
+                            insertIngredDB();
+                            $(this).dialog("destroy");
+                            $("#dialog_add_opt_ingred_id").empty();
+                            ingredientPage();
+                        }
                     }
                 },
                 close: function() {
@@ -672,7 +675,6 @@ function removeIngred() {
 function insertIngredDB() {
     if ($("select").has('option').length > 0) {
         var list = new Array();
-        var ingredient = new Ingredient();
         $("#list_ingred_id option").each(function() {
             var ingredient = new Ingredient();
             ingredient.setNom($(this).val());
@@ -703,6 +705,7 @@ function UncheckAllBoxIngredOpt(id) {
 function optionPage() {
     var dialogTitle = strings.getString("add.produit.dialog.title.options");
     $('.ui-dialog-title').html(dialogTitle);
+    $("li[optionid]").remove();
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     loadOptions();
