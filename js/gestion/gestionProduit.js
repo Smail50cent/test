@@ -392,7 +392,7 @@ function productPage() {
     var page1input = getPage1AddProduit();
     var page1show = getPage1ShowAddProduit();
     $('#content_add_produit_zone_input_id').html(page1input);
-    $('#content_produit_zone_id').html(page1show);
+    $('.content_produit_zone_show').html(page1show);
     var position = {my: 'left center', at: 'right+10 center'};
     $(".tooltip").tooltip();
     $(".tooltip").tooltip("option", "position", position);
