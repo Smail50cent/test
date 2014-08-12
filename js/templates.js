@@ -912,3 +912,29 @@ function getGererLesTablesLiUpdateAddNewTable() {
     var mygestionmodeexpertgererlestableli_update_add_new_table = gestionmodeexpertgererlestableli_update_add_new_table;
     return mygestionmodeexpertgererlestableli_update_add_new_table;
 }
+var gestionmodeexpertgererlesCategoriestable_tbody_tr = null;
+function getGererlesCategoriesTableTbodyTr() {
+    if (gestionmodeexpertgererlesCategoriestable_tbody_tr == null) {
+        gestionmodeexpertgererlesCategoriestable_tbody_tr = templates.getTemplate("gestion/modeexpert/gererlesCatégories/table_tbody_tr");
+    }
+    var mygestionmodeexpertgererlesCategoriestable_tbody_tr = gestionmodeexpertgererlesCategoriestable_tbody_tr;
+    return mygestionmodeexpertgererlesCategoriestable_tbody_tr;
+}
+var gestionmodeexpertgererlescategoriestable_thead = null;
+function getGererlesCategoriesTableThead() {
+    if (gestionmodeexpertgererlescategoriestable_thead == null) {
+        gestionmodeexpertgererlescategoriestable_thead = templates.getTemplate("gestion/modeexpert/gererlesCatégories/table_thead");
+    }
+    var mygestionmodeexpertgererlescategoriestable_thead = gestionmodeexpertgererlescategoriestable_thead;
+    mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "nom", strings.getString("modeexpert.label.value.nom"));
+    mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "priorite", strings.getString("modeexpert.label.value.priorite"));
+    return mygestionmodeexpertgererlescategoriestable_thead;
+}
+var gestionmodeexpertgererlescategoriesadd_site_modal_body = null;
+function getAddCategorieModalBody() {
+    if (gestionmodeexpertgererlescategoriesadd_site_modal_body == null) {
+        gestionmodeexpertgererlescategoriesadd_site_modal_body = templates.getTemplate("gestion/modeexpert/gererlesCatégories/add_categorie_modal_body");
+    }
+    var mygestionmodeexpertgererlescategoriesadd_site_modal_body = gestionmodeexpertgererlescategoriesadd_site_modal_body;
+    return mygestionmodeexpertgererlescategoriesadd_site_modal_body;
+}

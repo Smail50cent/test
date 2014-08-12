@@ -1302,4 +1302,9 @@ function ConnexionServer() {
     this.addNewTable = function(method, numero, idzoneTable, param) {
         pAjax(null, {service: "serveur.clientaccess.serviceAddTable", data: {idzonetable: idzoneTable, numero: numero}}, method, param);
     };
+
+    this.addCategorie = function(method, categorie, param) {
+        categorie = JSON.stringify(categorie);
+        pAjax(null, {service: "serveur.clientaccess.serviceAddCategorie", data: {categorie: categorie}}, method, param);
+    };
 }

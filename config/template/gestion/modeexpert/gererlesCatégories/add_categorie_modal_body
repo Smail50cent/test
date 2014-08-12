@@ -1,0 +1,22 @@
+<div id="error_liste_modal" class="error_liste_modal_strucutre error_liste_modal_personalize" ></div>
+<table class="modal_body_table_addcat_structure modal_body_table_addcat_personalize">
+    <tbody class="modal_body_tbody_addcat_structure modal_body_tbody_addcat_personalize">
+        <tr class="addcat_tabnom_structure addcat_tabnom_personalize">
+            <td>
+                <p id="add_categorie_nom_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_categorie_nom_value" ></input>
+            </td>
+        </tr>
+        <tr class="addcat_tabpriorite_structure addcat_tabpriorite_personalize">
+            <td>
+                <p id="add_categorie_priorite_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_categorie_priorite_value" ></input>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

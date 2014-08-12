@@ -1,0 +1,7 @@
+<thead class="section_tableaucategories_thead_structure section_tableaucategories_thead_personalize">
+    <tr class="section_tableaucategories_thead_tr_structure section_tableaucategories_thead_tr_personalize">
+        <th class="section_tableaucategories_thead_nom_structure section_tableaucategories_thead_nom_personalize">{nom}</th>
+        <th class="section_tableaucategories_thead_priorite_structure section_tableaucategories_thead_priorite_personalize">{priorite}</th>
+        <th id="tr_actions_tablecategories" class="section_tableaucategories_thead_actions_structure section_tableaucategories_thead_actions_personalize"></th>
+    </tr>
+</thead>

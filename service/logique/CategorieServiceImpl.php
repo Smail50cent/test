@@ -1,6 +1,7 @@
 <?php
 
 include_once $path.'service/logique/CategorieService.php';
+include_once $path . 'service/logique/entity/Categorie.php';
 
 /**
  * Description of CategorieServiceImpl
@@ -18,8 +19,8 @@ class CategorieServiceImpl implements CategorieService {
         return $this->categorieSrv->getAll();
     }
 
-    public function addData() {
-        $this->categorieSrv->addData();
+    public function add(Categorie $categorie) {
+        return $this->categorieSrv->add($categorie);
     }
 
     public function getByEtablissementAndZone($etablissement, $zone) {

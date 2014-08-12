@@ -139,4 +139,7 @@ function ConnexionLocalWebSQL() {
     this.getLangByActif = function(method, param) {
         console.log("TO DO");
     };
+    this.addCategorie = function(method, categorie, param) {
+        console.log("TO DO");
+    };
 }

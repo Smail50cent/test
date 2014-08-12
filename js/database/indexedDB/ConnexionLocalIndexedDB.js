@@ -183,4 +183,7 @@ function ConnexionLocalIndexedDB() {
     this.getLangByActif = function(method, param) {
         console.log("TO DO VITE");
     };
+    this.addCategorie = function(method, categorie, param) {
+        console.log("TO DO");
+    };
 }

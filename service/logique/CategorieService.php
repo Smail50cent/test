@@ -9,7 +9,7 @@ interface CategorieService {
 
     public function getAll();
 
-    public function addData();
+    public function add(Categorie $categorie);
 
     public function getByEtablissementAndZone($etablissement, $zone);
 }
