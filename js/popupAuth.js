@@ -5,22 +5,23 @@
 var listePersonnes = new Array();
 var methodToLoadAfter;
 var isServeur;
+var options = {autoOpen: true, modal: true,
+                close: function(event, ui) {
+                    $(this).dialog("destroy");
+                    $('#auth_popup_id').hide();
+                }
+            };
 function onLoadCompte(showVisiteurs, titre, topvalue, method, isServeusr) {//To DO an object
     isServeur = isServeusr;
     methodToLoadAfter = method;
-    if($('#auth_popup_id').length) {
+    if ($('#auth_popup_id').length) {
         $('#auth_popup_id').remove();
     }
     var htmlDialog = getDialogAccesCompte();
     $("body").append(htmlDialog);
     $("head").append("<style>.ui-dialog{        top: " + topvalue + "em !important;  }</style>");
     scripts.loadScripts("lib.dialog", function() {
-        $('#auth_popup_id').dialog({autoOpen: true, modal: true,
-            close: function(event, ui) {
-                $(this).dialog("destroy");
-                $('#auth_popup_id').remove();
-            }
-        });
+        $('#auth_popup_id').dialog(options);
         var html = getAuthCompte();
         if (titre != null) {
             $('#nbr_personne_id').html(titre);
@@ -84,8 +85,8 @@ function authenCompte() {
                                     methodToLoadAfter();
                                 }
                                 $('#auth_popup_id').dialog("close");
-                                $("#auth_popup_id").remove();
-
+                                $("#auth_popup_id").hide();
+                                AuthToCommande();
                             }
                         } else {
                             showErrorMessage(strings.getString("label.connexion.error.mdp"));
@@ -162,6 +163,8 @@ function ValiderInscri() {
                         listePersonnes.push(personne);
                         setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                         $('#auth_popup_id').dialog("close");
+                        $('#auth_popup_id').hide();
+                        AuthToCommande();
                     }
                 }
             });
@@ -197,6 +200,7 @@ function AjoutVisiteur() {
                 listePersonnes.push(personne);
                 setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                 $('#auth_popup_id').dialog("close");
+                $('#auth_popup_id').hide();
                 AuthToCommande();
             }
         });
@@ -214,7 +218,7 @@ function socialNetworkButtonAuth() {
     var connexion = getConnexion();
     connexion.getAllParamApps(enableButton);
     function enableButton(paramapps) {
-        for (var i = 0; i < paramapps.length; i++) { 
+        for (var i = 0; i < paramapps.length; i++) {
             //console.log(paramapps[i].valeur_parametre+"+ ");
             if (parseInt(paramapps[i].valeur_parametre) == 1) {
                 if (paramapps[i].nom_parametre === "Facebook") {
@@ -241,6 +245,7 @@ function AuthToCommande() {
         window.setTimeout(function() {
             var person = strings.getString("label.personne.auth");
             $('#nbr_personne_id').html(person + " n° " + (listePersonnes.length + 1));
+            $('#auth_popup_id').dialog(options);
             $('#auth_popup_id').dialog("open");
         }, 500);
     }
