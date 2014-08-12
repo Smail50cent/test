@@ -27,7 +27,7 @@ class ManifestGenerator {
         }
         array_push($fichiersToCache, "./config/config.xml");
         array_push($fichiersToCache, "./config/pages.xml");
-        array_push($fichiersToCache, "./config/scriptsToLoad.xml");
+        array_push($fichiersToCache, "./config/filesToLoad.xml");
         array_push($fichiersToCache, "./js/scripts.js");
         array_push($fichiersToCache, "./js/control.js");
         array_push($fichiersToCache, "./js/lib/jqueryui/css/cupertino/jquery-ui-1.10.4.custom.css");
