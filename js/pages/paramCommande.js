@@ -83,6 +83,7 @@ function loadDataTables(tables) {
     connexion.getZonesTablesByEtablissement(printTables, idet, null);
     function printTables(zoneTable, param) {
         zoneTables = zoneTable;
+        console.log(zoneTable);
         for (var i = 0; i < zoneTable.length; i++) {
             var itemOptionTable = htmlOptionTable;
             itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choix.table.choix.zone.label.option") + zoneTable[i].nom);
@@ -113,7 +114,7 @@ function printTableByIdZone(index, zonetables) {
     for (var i = 0; i < zonetables[index].tables.length; i++) {
         var itemOptionTable = htmlOptionTable;
         itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + zonetables[index].tables[i].numero);
-        itemOptionTable = paramValue(itemOptionTable, "OptionValue", zonetables[0].tables[i].id);
+        itemOptionTable = paramValue(itemOptionTable, "OptionValue", zonetables[index].tables[i].id);
         $("#numTable").append(itemOptionTable);
     }
     setLocalStorageValue("tables", JSON.stringify(zonetables[index].tables));
