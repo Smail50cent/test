@@ -117,6 +117,8 @@ function ModifyProduct(id) {
             $('#dialog_add_produit_id').empty();
         }
     });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var divadd = getDivAddProduit();
     $("#dialog_add_produit_id").html(divadd);
     // Name, Categorie, SousCategorie
@@ -372,6 +374,8 @@ function DeleteProduct(id) {
             $('#confirm_dialog_produit_id').empty();
         }
     });
+    $('.ui-button-text:contains(Yes)').text(strings.getString("add.produit.button.dialog.delete.yes"));
+    $('.ui-button-text:contains(No)').text(strings.getString("add.produit.button.dialog.delete.no"));
 }
 
 function productPage() {
@@ -629,8 +633,6 @@ function submit_ingredientPage() {
 }
 function formInsertIngredient() {
     var dialogTitle = strings.getString("add.produit.dialog.title.ingredient");
-    var btnCancel = strings.getString("add.produit.button.dialog.add.ingredient.cancel");
-    var btnSubmit = strings.getString("add.produit.button.dialog.add.ingredient.submit");
     $("#dialog_add_opt_ingred_id").dialog(
             {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
@@ -652,6 +654,8 @@ function formInsertIngredient() {
                     $("#dialog_add_opt_ingred_id").empty();
                 }
             });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var ingredDiv = getDivAddIngredient();
     $("#dialog_add_opt_ingred_id").html(ingredDiv);
 }
@@ -1094,6 +1098,8 @@ function formInsertOption() {
                     $("#dialog_add_opt_ingred_id").empty();
                 }
             });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var divOpt = getDivAddOption();
     $("#dialog_add_opt_ingred_id").html(divOpt);
     $('#insert_option_id').keyup(function() {
