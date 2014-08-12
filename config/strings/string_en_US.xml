@@ -184,4 +184,6 @@
 	<string key="plz.upgrade.browser">Please upgrade your browser, because your current browser lacks some new features we need!</string>
 	<string key="img.too.big">Size Image is Too big !</string>
 	<string key="type.file.notsupported">Unsupported file type !</string>
+	<string key="add.produit.button.dialog.delete.yes">Yes</string>
+	<string key="add.produit.button.dialog.delete.no">No</string>
 </strings>
