@@ -10,3 +10,4 @@ try {
 }
 echo json_encode($ret);
 
+?>
