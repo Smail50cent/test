@@ -1,5 +1,5 @@
 <li class="produit_info produit_cat_structure produit_cat_personalize ">
-    <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_default content_produit_zone_structure content_produit_zone_personalize">
+    <div class="content_produit_zone_show content_produit_zone_default content_produit_zone_structure content_produit_zone_personalize">
         <a id="link_add_product_id" class="link_add_product_structure link_add_product_personalize" href="#" onclick="productPage($(this))">
             <img src="img/gestion/produit/add_produit.png" class="link_add_product_img_structure link_add_product_img_personalize" width="41" height="41" style="position:center;"> 
         </a>

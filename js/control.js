@@ -118,6 +118,7 @@ function controller(entreprise) {
                 if (!testIfAdminConnected()) {
                     $("body").html("");
                     showErrorMessage(strings.getString("connexion.users.acces.interdit"));
+                    connexionDunServeur();
                 } else {
                     printProduits(0);
                     var connexion = getConnexion();

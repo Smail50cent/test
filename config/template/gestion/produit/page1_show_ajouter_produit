@@ -4,7 +4,7 @@
         <p class="categorie_p content_produit_titre_structure content_produit_titre_personalize">{categorie} : <label id="label_categorie_prod_id" class="label_categorie_prod_structure label_categorie_prod_personalize"> </label></p>
         <p class="souscat_p content_produit_titre_structure content_produit_titre_personalize">{sousCateg} : <label id="label_souscat_prod_id" class="label_souscat_prod_structure label_souscat_prod_personalize"> </label></p>
     </div>
-    <div id="content_produit_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
+    <div id="content_produit_descrip_zone_id" class="content_produit_zone content_produit_zone_structure content_produit_zone_personalize">
 
         <p id="produit_zone_right_prix_id" class="content_produit_zone_right_prix content_produit_zone_right_prix_structure content_produit_zone_right_prix_personalize"> 0.00 €</p>  
         <label id="content_produit_titre_id" class="content_produit_titre content_produit_titre_structure content_produit_titre_personalize"> </label>       

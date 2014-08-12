@@ -392,7 +392,7 @@ function productPage() {
     var page1input = getPage1AddProduit();
     var page1show = getPage1ShowAddProduit();
     $('#content_add_produit_zone_input_id').html(page1input);
-    $('#content_produit_zone_id').html(page1show);
+    $('.content_produit_zone_show').html(page1show);
     var position = {my: 'left center', at: 'right+10 center'};
     $(".tooltip").tooltip();
     $(".tooltip").tooltip("option", "position", position);
@@ -639,10 +639,12 @@ function formInsertIngredient() {
                         $("#dialog_add_opt_ingred_id").empty();
                     },
                     Submit: function() {
-                        insertIngredDB();
-                        $(this).dialog("destroy");
-                        $("#dialog_add_opt_ingred_id").empty();
-                        ingredientPage();
+                        if ($("#list_ingred_id").length > 0) {
+                            insertIngredDB();
+                            $(this).dialog("destroy");
+                            $("#dialog_add_opt_ingred_id").empty();
+                            ingredientPage();
+                        }
                     }
                 },
                 close: function() {
@@ -672,7 +674,6 @@ function removeIngred() {
 function insertIngredDB() {
     if ($("select").has('option').length > 0) {
         var list = new Array();
-        var ingredient = new Ingredient();
         $("#list_ingred_id option").each(function() {
             var ingredient = new Ingredient();
             ingredient.setNom($(this).val());
@@ -703,6 +704,7 @@ function UncheckAllBoxIngredOpt(id) {
 function optionPage() {
     var dialogTitle = strings.getString("add.produit.dialog.title.options");
     $('.ui-dialog-title').html(dialogTitle);
+    $("li[optionid]").remove();
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     loadOptions();
