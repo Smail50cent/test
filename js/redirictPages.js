@@ -28,7 +28,7 @@ function redirct(redirictpages) {
         case 4://typecommande.reservation
             getRedirict(getPage(redirictpages.reservation), null);
             break;
-        case 5://typecommande.reservation
+        case 5://typecommande.serveur ou admin 
             getRedirict(getPage(redirictpages.serveur), null);
             break;
         default :

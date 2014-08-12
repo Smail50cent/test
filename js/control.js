@@ -519,7 +519,7 @@ this.postMethod = "POST";
 this.typeReq = this.getMethod;
 
 /**
- * Personal Ajax
+ * Personalize Ajax
  * <code>
  if (methodParseData != null) {
  methodParseData(data, param, methodExecute);
@@ -528,7 +528,7 @@ this.typeReq = this.getMethod;
  }
  </code>                                                                   
  * @param Function methodParseData
- * @param String config
+ * @param Object config
  * @param Function methodExecute
  * @param Object param
  */

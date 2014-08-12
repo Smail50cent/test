@@ -1237,6 +1237,7 @@ function ConnexionServer() {
             }
         }, {"service": "serveur.clientaccess.serviceZoneTablesGetByIdEtablissment", data: {idetablissement: id}}, method, param);
     };
+    
     this.getAllLangues = function(method, param) {
         pAjax(function(data, param, methodExecute) {
             var liste = new Array();
@@ -1248,6 +1249,7 @@ function ConnexionServer() {
             }
         }, {"service": "serveur.clientaccess.serviceGetAllLangues"}, method, param);
     };
+    
     this.setLangEnable = function(method, id, param) {
         pAjax(null, {"service": "serveur.clientaccess.serviceSetLangEnable", data: {idlang: id}}, method, param);
     };
