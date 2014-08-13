@@ -105,6 +105,6 @@
         <variable name="tableNameTypeCommande">typeCommandes</variable>
         <variable name="tableNameParamApplication">parametresApplication</variable>
         <variable name="tableNameZoneTables">zonesTables</variable>
-        <variable name="indexedDB.database.version">5</variable>
+        <variable name="indexedDB.database.version">1</variable>
     </variables>
 </application>
