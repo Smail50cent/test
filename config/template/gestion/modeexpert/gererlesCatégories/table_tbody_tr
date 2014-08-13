@@ -1,6 +1,8 @@
 <tr class="section_tableausites_structure section_tableausites_personalize" idcategorie="{idcat}">
     <td class="section_tr_nom_structure section_tr_nom_personalize"><p idcategorie="{idcat}" typelabel="nom">{nom}</p></td>
     <td class="section_tr_priorite_structure section_tr_priorite_personalize"><p idcategorie="{idcat}" typelabel="priorite">{priorite}</p></td>
+    <td class="section_tr_etablissement_structure section_tr_etablissement_personalize"><p idcategorie="{idcat}" typelabel="nom">{etablissement}</p></td>
+    <td class="section_tr_zone_structure section_tr_zone_personalize"><p idcategorie="{idcat}" typelabel="priorite">{zone}</p></td>
     <td class="section_tr_actions_structure section_tr_actions_personalize" >
         <div class="section_update_structure section_update_personalize">
             <button type="button" onclick="removeCategorie({idcat});" class="btn btn-default btn-sm section_remove_update_button_personalize section_remove_update_button_strucutre">
