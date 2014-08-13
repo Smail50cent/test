@@ -192,4 +192,5 @@
 	<string key="modeexpert.placeholder.value.priorite">priorite</string>
 	<string key="modeexpert.label.value.etablissement">Etablissement</string>
 	<string key="modeexpert.label.value.zone">Zone</string>
+	<string key="label.zone.table.update.title">Mettre à jour une zone de table </string>
 </strings>
