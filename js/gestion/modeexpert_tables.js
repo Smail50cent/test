@@ -23,7 +23,7 @@ function printTableau() {
         for (var i = 0; i < data.length; i++) {
             var htmlBody = getGererLesTablesTableAfficherAllZonesTBody();
             htmlBody = paramValue(htmlBody, "idzoneTable", data[i].id);
-            var etab = data[i].etablissement_id.nom;
+            var etab = data[i].etablissement_id;
             if (etab == null) {
                 etab = strings.getString("label.etablissement.non.affecte.in.table");
             }

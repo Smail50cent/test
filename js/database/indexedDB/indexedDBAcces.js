@@ -60,11 +60,9 @@ function verifyFinish() {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameEtablissements")] == true) {
         finish = true;
-    }
-    else if (entitysFinsh[config.getConfig("tableNameModeDeReglement")]== true) {
+    } else if (entitysFinsh[config.getConfig("tableNameModeDeReglement")] == true) {
         finish = true;
     }
-    
     return finish;
 }
 function printOrNorLoading() {
@@ -81,13 +79,11 @@ printOrNorLoading();
 
 myStorage.indexedDB.create = function() {
     verifyFinish();
-    console.log("myStorage.indexedDB.create");
     myStorage.indexedDB.load();
     delay = delayOnupgradeneeded;
     var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     setEntityFinishTo(true);
     request.onupgradeneeded = function(e) {
-        console.log("onupgradeneeded");
         delay = delayOnupgradeneeded;
         var db = e.target.result;
         lockedEntreprise = true;
