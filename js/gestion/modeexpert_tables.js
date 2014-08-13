@@ -127,10 +127,10 @@ function updateZoneTable(id) {
     }
     getConnexion().getZoneTableById(function(data, param) {
         var htmlModel = getBootstrapModal();
-        htmlModel = paramValue(htmlModel, "titre", strings.getString("title.modal.add.zone.tables"));
+        htmlModel = paramValue(htmlModel, "titre", strings.getString("label.zone.table.update.title"));
         htmlModel = paramValue(htmlModel, "closeLabel", strings.getString("label.fermer"));
         htmlModel = paramValue(htmlModel, "primaryLabel", strings.getString("label.valider"));
-        htmlModel = paramValue(htmlModel, "onclick", "validerAddZoneTable();");
+        htmlModel = paramValue(htmlModel, "onclick", "validerUpdateTable();");
         $("body").append(htmlModel);
         var modalBody = getGererLesTablesModalBodyUpdateZone();
         modalBody = paramValue(modalBody, "nbZone", 1);
@@ -153,9 +153,12 @@ function updateZoneTable(id) {
         $("#add_a_new_table").append(htmlNewTable);
     }, id, null);
 }
-
+function validerUpdateTable() {
+//    updateZone
+    
+    var nomZone = $("input[nbzone='"+updateZone+"'][method='updateZone']").val();
+}
 function removeTable(id) {
-
     getConnexion().removeTable(function(data, param) {
         if (data != null) {
             if (!data.hasOwnProperty("error")) {
