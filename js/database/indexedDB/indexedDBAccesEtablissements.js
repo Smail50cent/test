@@ -21,7 +21,7 @@ myStorage.indexedDB.addFirstEtablissements = function() {
     });
     function addEtablissement(etablissement) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEtablissements")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -58,9 +58,8 @@ myStorage.indexedDB.getEtablissementById = function(method, id, param) {
         }
     }, delay);
     function impl(method, id, param) {
-        
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEtablissements")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -79,6 +78,54 @@ myStorage.indexedDB.getEtablissementById = function(method, id, param) {
             request.onerror = function(e) {
                 showErrorMessage(strings.getString("label.error.indexedDB.acces.inpossible"));
             };
+        };
+        request.onerror = myStorage.indexedDB.onerror;
+    }
+};
+myStorage.indexedDB.getAllEtablissements = function(methodToExecuteAfter, param) {
+    window.setTimeout(function() {
+        if (entitysFinsh[config.getConfig("tableNameEtablissements")] == false) {
+            impl(methodToExecuteAfter, param);
+        } else {
+            myStorage.indexedDB.getAllEtablissements(methodToExecuteAfter, param);
+        }
+    }, delay);
+    function impl(methodToExecuteAfter, param) {
+        myStorage.indexedDB.load();
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
+        request.onsuccess = function(e) {
+            var db = e.target.result;
+            var trans = db.transaction([config.getConfig("tableNameEtablissements")], myStorage.IDBTransactionModes.READ_WRITE);
+            var store = trans.objectStore(config.getConfig("tableNameEtablissements"));
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+            var etablissements = new Array();
+            cursorRequest.onsuccess = function(e) {
+                var option = new Option();
+                var result = e.target.result;
+                if (!!result == false) {
+                    return;
+                }
+                var e = new Etablissement();
+                e.id = result.value.id;
+                e.nom = result.value.nom;
+                e.logo = result.value.logo;
+                e.style = result.value.style;
+                e.adresseEtab = result.value.adresseEtab;
+                e.telephone = result.value.telephone;
+                e.message = result.value.message;
+                e.slogan = result.value.slogan;
+                e.groupe = result.value.groupe;
+                etablissements.push(e);
+                result.continue();
+            };
+            trans.oncomplete = function(e) {
+                if (methodToExecuteAfter != null) {
+                    methodToExecuteAfter(etablissements, param);
+                }
+                db.close();
+            };
+            cursorRequest.onerror = myStorage.indexedDB.onerror;
         };
         request.onerror = myStorage.indexedDB.onerror;
     }

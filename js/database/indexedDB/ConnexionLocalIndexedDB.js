@@ -142,7 +142,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllEtablissements = function(method, param) {
-        console.log("TO DO ");
+        myStorage.indexedDB.getAllEtablissements(method, param);
     };
     this.addOption = function(method, Option, param) {
         console.log("TO DO");
@@ -169,7 +169,8 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getZonesTablesByEtablissement = function(method, id, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllZoneTablesByIdEtablissement(method, id, param);
+//        console.log("TO DO");
     };
     this.getAllLangues = function(method, param) {
         console.log("TO DO");

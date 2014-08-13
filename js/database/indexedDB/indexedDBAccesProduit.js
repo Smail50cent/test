@@ -8,7 +8,7 @@ myStorage.indexedDB.getProduitByIdForDetailMenu = function(method, isexecute, pr
     }, delay);
     function impl(method, isexecute, produitid, i, produits) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -59,7 +59,7 @@ myStorage.indexedDB.getProduitByIdCategorieForPrintProduits = function(method, i
     }, delay);
     function impl(method, idcat) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
             var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
@@ -136,7 +136,7 @@ myStorage.indexedDB.getProduitByIdGeneric = function(method, produitID, param) {
     }, delay);
     function impl(method, produitID, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")],
@@ -184,7 +184,7 @@ myStorage.indexedDB.updateProduit = function(method, newProduit) {
         }
     }, delay);
     function impl(method, newProduit) {
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -229,7 +229,7 @@ myStorage.indexedDB.countProduits = function(method, param) {
     impl(method, param);
     function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -259,7 +259,7 @@ myStorage.indexedDB.countProduits = function(method, param) {
 };
 myStorage.indexedDB.deleteProduit = function(id) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), 3);
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         console.log("succes ", id);
         var db = e.target.result;
@@ -279,7 +279,7 @@ myStorage.indexedDB.deleteProduit = function(id) {
 };
 myStorage.indexedDB.addProduit = function(method, produit, param) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);

@@ -20,7 +20,7 @@ myStorage.indexedDB.addFistTables = function() {
     });
     function addTable(table) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameTable")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -48,7 +48,7 @@ myStorage.indexedDB.getAllTables = function(method) {
     }, delay);
     function impl(method) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameTable")], myStorage.IDBTransactionModes.READ_ONLY);

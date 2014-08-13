@@ -112,19 +112,91 @@ function getLocalStorageValue(key) {
 function removeLocalStorageItem(key) {
     localStorage.removeItem(key);
 }
-//function ajax(method, path, type,param) {
-//    $.ajax({
-//        url: path,
-//        type: 'GET',
-//        dataType: 'json',
-//        async: true,
-//        success: function(data, textStatus, xhr) {
-//            if(method!=null){
-//                method(data,param);
-//            }
-//        },
-//        error: function(xhr, textStatus, errorThrown) {
-//            showErrorMessage(strings.getString("label.error.connexion.serveur"));
-//        }
-//    });
-//}
+getServicePath = function(serviceKeyName) {
+    var ret = "";
+    ret += "./";
+    ret += config.getConfig("serveur.clientaccess.servicesAccess") + "/";
+    ret += config.getConfig(serviceKeyName);
+    ret += config.getConfig("serveur.clientaccess.serviceSufixe");
+    return ret;
+};
+this.getMethod = "GET";
+this.postMethod = "POST";
+
+this.typeReq = this.getMethod;
+
+/**
+ * Personalize Ajax
+ * <code>
+ if (methodParseData != null) {
+ methodParseData(data, param, methodExecute);
+ } else {
+ methodExecute(data, param);
+ }
+ </code>                                                                   
+ * @param Function methodParseData
+ * @param Object config
+ * @param Function methodExecute
+ * @param Object param
+ */
+function pAjax(methodParseData, config, methodExecute, param) {
+    var dataType = 'json';
+    var async = true;
+    var type = "GET";//POST
+    var service = "";
+    var mydata = null;
+    var ifErrorSendAllDatas = false;
+    if (config.hasOwnProperty("type")) {
+        type = config.type;
+    }
+    if (config.hasOwnProperty("ifErrorSendAllDatas")) {
+        ifErrorSendAllDatas = config.ifErrorSendAllDatas;
+    }
+    if (config.hasOwnProperty("data")) {
+        mydata = config.data;
+    }
+    if (config.hasOwnProperty("async")) {
+        async = config.async;
+    }
+    if (config.hasOwnProperty("dataType")) {
+        dataType = config.dataType;
+    }
+    if (!config.hasOwnProperty("service")) {
+        console.error("Erreur : entrez le chemin pour l'URL.");
+    } else {
+        service = config.service;
+        $.ajax({
+            url: getServicePath(service),
+            type: type,
+            dataType: dataType,
+            async: async,
+            data: mydata,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (methodExecute != null || methodParseData != null) {
+                    if (ifErrorSendAllDatas) {
+                        if (!data.error) {
+                            data = data.data;
+                        }
+                    } else {
+                        data = data.data;
+                    }
+                    if (methodParseData != null) {
+                        methodParseData(data, param, methodExecute);
+                    } else {
+                        methodExecute(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    }
+}
+function isInt(n) {
+   return n % 1 === 0;
+}

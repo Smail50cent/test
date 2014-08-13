@@ -7,7 +7,7 @@ myStorage.indexedDB.addFistTypesCommandes = function() {
     connexion.getAllTypeCommandes(addTypeCommande, {impllocal: false});
     function addTypeCommande(typesCommandes, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameTypeCommande")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -42,7 +42,7 @@ myStorage.indexedDB.getAllTypeCommande = function(method, param) {
     }, delay);
     function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameTypeCommande")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -55,8 +55,10 @@ myStorage.indexedDB.getAllTypeCommande = function(method, param) {
                 if (!!result == false) {
                     return;
                 }
-                var typesCommande = new TypeCommande(result.value.id, result.value.label, result.value.labelMenu, result.value.isActif, result.value.idInPageHtml);
-                typesCommandes.push(typesCommande);
+                if (result != null) {
+                    var typesCommande = new TypeCommande(result.value.id, result.value.label, result.value.labelMenu, result.value.isActif, result.value.idInPageHtml);
+                    typesCommandes.push(typesCommande);
+                }
                 result.continue();
             };
             trans.oncomplete = function(e) {
@@ -82,7 +84,7 @@ myStorage.indexedDB.updateTypeCommande = function(method, typeCommande) {
         }
     }, delay);
     function impl(method, typeCommande) {
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameTypeCommande")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -121,7 +123,7 @@ myStorage.indexedDB.updateTypeCommande = function(method, typeCommande) {
 };
 myStorage.indexedDB.addTypeCommande = function(method, typesCommande, param) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([config.getConfig("tableNameTypeCommande")], myStorage.IDBTransactionModes.READ_WRITE);

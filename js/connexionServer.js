@@ -572,29 +572,66 @@ function ConnexionServer() {
     };
     this.getAllParamApps = function(method, param) {
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllParamApps") + "?idetablissement=" + idetablissement,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var paramapps = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var paramapp = new ParamApp();
-                    paramapp.setId(data[i].id);
-                    paramapp.setNom_parametre(data[i].nom_parametre);
-                    paramapp.setValeur_parametre(data[i].valeur_parametre);
-                    paramapp.setEtablissement(data[i].etablissement);
-                    paramapps.push(paramapp);
+        if (param != null) {
+            if (param.hasOwnProperty("impllocal")) {
+                if (param.impllocal == false) {
+                    $.ajax({
+                        url: getServicePath("serveur.clientaccess.serviceGetAllParamApps"),
+                        type: 'GET',
+                        dataType: 'json',
+                        async: true,
+                        success: function(data, textStatus, xhr) {
+                            var paramapps = new Array();
+                            for (var i = 0; i < data.length; i++) {
+                                var paramapp = new ParamApp();
+                                paramapp.setId(data[i].id);
+                                paramapp.setNom_parametre(data[i].nom_parametre);
+                                paramapp.setValeur_parametre(data[i].valeur_parametre);
+                                paramapp.setEtablissement(data[i].etablissement);
+                                paramapps.push(paramapp);
+                            }
+                            if (method != null) {
+                                method(paramapps, param);
+                            }
+                        },
+                        error: function(xhr, textStatus, errorThrown) {
+                            showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                        }
+                    });
+                }else{
+                    withet();
                 }
-                if (method != null) {
-                    method(paramapps, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }else{
+                withet();
             }
-        });
+        }else{
+            withet();
+        }
+        function withet() {
+            $.ajax({
+                url: getServicePath("serveur.clientaccess.serviceGetAllParamApps") + "?idetablissement=" + idetablissement,
+                type: 'GET',
+                dataType: 'json',
+                async: true,
+                success: function(data, textStatus, xhr) {
+                    var paramapps = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        var paramapp = new ParamApp();
+                        paramapp.setId(data[i].id);
+                        paramapp.setNom_parametre(data[i].nom_parametre);
+                        paramapp.setValeur_parametre(data[i].valeur_parametre);
+                        paramapp.setEtablissement(data[i].etablissement);
+                        paramapps.push(paramapp);
+                    }
+                    if (method != null) {
+                        method(paramapps, param);
+                    }
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                }
+            });
+        }
     };
     this.getCompteById = function(method, id, param) {
         $.ajax({
@@ -1237,7 +1274,7 @@ function ConnexionServer() {
             }
         }, {"service": "serveur.clientaccess.serviceZoneTablesGetByIdEtablissment", data: {idetablissement: id}}, method, param);
     };
-    
+
     this.getAllLangues = function(method, param) {
         pAjax(function(data, param, methodExecute) {
             var liste = new Array();
@@ -1249,7 +1286,7 @@ function ConnexionServer() {
             }
         }, {"service": "serveur.clientaccess.serviceGetAllLangues"}, method, param);
     };
-    
+
     this.setLangEnable = function(method, id, param) {
         pAjax(null, {"service": "serveur.clientaccess.serviceSetLangEnable", data: {idlang: id}}, method, param);
     };
