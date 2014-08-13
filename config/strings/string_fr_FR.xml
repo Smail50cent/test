@@ -190,4 +190,6 @@
 	<string key="modeexpert.label.value.priorite">Priorite</string>
 	<string key="modeexpert.placeholder.value.nom">nom</string>
 	<string key="modeexpert.placeholder.value.priorite">priorite</string>
+	<string key="modeexpert.label.value.etablissement">Etablissement</string>
+	<string key="modeexpert.label.value.zone">Zone</string>
 </strings>

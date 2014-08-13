@@ -9,14 +9,18 @@ function LoadGestionCategories() {
     var htmlTbody = getGererlesCategoriesTableTbodyTr();
     $("#tr_actions_tablecategories").text(strings.getString("label.gererlessites.table.head.action.tr"));
 
-    getConnexion().getCategoriesForContentCategorie(allCat);
+    getConnexion().getAllCategories(allCat);
     function allCat(categorie) {
-        for (var i = 0; i < categorie.length; i++) {
-            var litbody = htmlTbody;
-            litbody = paramValue(litbody, "nom", categorie[i].nom);
-            litbody = paramValue(litbody, "priorite", categorie[i].priorite);
-            $("#table_gererlescategories_all").append(litbody);
-        }
+        console.log(categorie);
+//        for (var i = 0; i < categorie.length; i++) {
+//            var litbody = htmlTbody;
+//            litbody = paramValue(litbody, "nom", categorie[i].nom);
+//            litbody = paramValue(litbody, "priorite", categorie[i].priorite);
+//            litbody = paramValue(litbody, "etablissement", categorie[i].etablissement);
+//            litbody = paramValue(litbody, "zone", categorie[i].zone);
+//            litbody = paramValue(litbody, "idcat", categorie[i].id);
+//            $("#table_gererlescategories_all").append(litbody);
+//        }
     }
 }
 

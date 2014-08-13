@@ -928,6 +928,8 @@ function getGererlesCategoriesTableThead() {
     var mygestionmodeexpertgererlescategoriestable_thead = gestionmodeexpertgererlescategoriestable_thead;
     mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "nom", strings.getString("modeexpert.label.value.nom"));
     mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "priorite", strings.getString("modeexpert.label.value.priorite"));
+    mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "etablissement", strings.getString("modeexpert.label.value.etablissement"));
+    mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "zone", strings.getString("modeexpert.label.value.zone"));
     return mygestionmodeexpertgererlescategoriestable_thead;
 }
 var gestionmodeexpertgererlescategoriesadd_site_modal_body = null;
