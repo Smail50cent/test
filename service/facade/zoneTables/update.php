@@ -8,11 +8,15 @@
 include_once '../../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 try {
-    if (isset($id)) {//idzonetable nom
+    if (isset($idzonetable) && isset($nom)) {
         $zoneTableSrv = LogiqueFactory::getZoneTableService();
-        $ret->data = $zoneTableSrv->removeTable($id);
+        $zoneTable = new ZoneTable();
+        $zoneTable->setId($idzonetable);
+        $zoneTable->setNom($nom);
+        $ret->data = $zoneTableSrv->update($zoneTable);
     }
 } catch (Exception $exc) {
     $ret->error = true;
 }
 echo json_encode($ret);
+ 

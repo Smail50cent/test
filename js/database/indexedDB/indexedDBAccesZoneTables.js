@@ -14,7 +14,6 @@ myStorage.indexedDB.addFirstZoneTables = function() {
             var store = trans.objectStore(config.getConfig("tableNameZoneTables"));
             var request;
             for (var i = 0; i < zonesTables.length; i++) {
-                console.log(zonesTables  [i]);
                 request = store.put({"nom": zonesTables[i].nom, "id": zonesTables[i].id,
                     "tables": zonesTables[i].tables, "etablissement": zonesTables[i].etablissement_id});
             }

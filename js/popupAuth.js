@@ -77,7 +77,7 @@ function authenCompte() {
                                 personne.setId(idcompte);
                                 listePersonnes.push(personne);
                                 if (isServeur) {
-                                    setLocalStorageValue("personnes.serveur", JSON.stringify(personne));
+                                    setSessionStorageValue("personnes.serveur", JSON.stringify(personne));
                                 } else {
                                     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 }

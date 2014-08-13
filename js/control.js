@@ -478,7 +478,7 @@ function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, 
 }
 function testIfIsServeurConnected() {
     var isConnected = false;
-    var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+    var serveur = JSON.parse(getSessionStorageValue("personnes.serveur"));
     var typeCommande = getLocalStorageValue("type.commande");
     if (serveur != null) {
         if (parseInt(serveur.role.level) == 2 && typeCommande == 5) {
@@ -489,7 +489,7 @@ function testIfIsServeurConnected() {
 }
 function testIfAdminConnected() {
     var ret = false;
-    var personne = getLocalStorageValue("personnes.serveur");
+    var personne = getSessionStorageValue("personnes.serveur");
     if (personne != null) {
         personne = JSON.parse(personne);
         var level = parseInt(personne.role.level);

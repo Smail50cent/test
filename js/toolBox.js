@@ -90,12 +90,12 @@ function clone(obj) {
     return copy;
 }
 function toEncoded() {
-    return false;
+    return true;
 }
 function setLocalStorageValue(key, value) {
     if (toEncoded()) {
         key = encodeString(key);
-//        value = encodeString(value);
+        value = encodeURIComponent(value);
     }
     localStorage.setItem(key, value);
 }
@@ -104,13 +104,33 @@ function getLocalStorageValue(key) {
         key = encodeString(key);
     }
     if (key in localStorage) {
-        return (localStorage.getItem(key));
+        if (toEncoded()) {
+            return decodeURIComponent(localStorage.getItem(key));
+        }else{
+            return (localStorage.getItem(key));
+        }
     } else {
         return null;
     }
 }
 function removeLocalStorageItem(key) {
     localStorage.removeItem(key);
+}
+function setSessionStorageValue(key, value) {
+    key = encodeString(key);
+    value = encodeURIComponent(value);
+    sessionStorage.setItem(key, value);
+}
+function getSessionStorageValue(key) {
+    key = encodeString(key);
+    if (key in sessionStorage) {
+        return decodeURIComponent(sessionStorage.getItem(key));
+    } else {
+        return null;
+    }
+}
+function removeSessionStorageItem(key) {
+    sessionStorage.removeItem(key);
 }
 getServicePath = function(serviceKeyName) {
     var ret = "";
@@ -135,7 +155,7 @@ this.typeReq = this.getMethod;
  }
  </code>                                                                   
  * @param Function methodParseData
- * @param Object config
+ * @param Object config dispo : type
  * @param Function methodExecute
  * @param Object param
  */
@@ -154,6 +174,7 @@ function pAjax(methodParseData, config, methodExecute, param) {
     }
     if (config.hasOwnProperty("data")) {
         mydata = config.data;
+        console.log(mydata);
     }
     if (config.hasOwnProperty("async")) {
         async = config.async;
@@ -198,5 +219,5 @@ function pAjax(methodParseData, config, methodExecute, param) {
     }
 }
 function isInt(n) {
-   return n % 1 === 0;
+    return n % 1 === 0;
 }

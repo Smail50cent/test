@@ -23,7 +23,10 @@ function printTableau() {
         for (var i = 0; i < data.length; i++) {
             var htmlBody = getGererLesTablesTableAfficherAllZonesTBody();
             htmlBody = paramValue(htmlBody, "idzoneTable", data[i].id);
-            var etab = data[i].etablissement_id;
+            var etab = null;
+            if (data[i].etablissement_id != null) {
+                etab = data[i].etablissement_id.nom;
+            }
             if (etab == null) {
                 etab = strings.getString("label.etablissement.non.affecte.in.table");
             }
@@ -133,11 +136,11 @@ function updateZoneTable(id) {
         htmlModel = paramValue(htmlModel, "onclick", "validerUpdateTable();");
         $("body").append(htmlModel);
         var modalBody = getGererLesTablesModalBodyUpdateZone();
-        modalBody = paramValue(modalBody, "nbZone", 1);
+        modalBody = paramValue(modalBody, "nbZone", id);
         modalBody = paramValue(modalBody, "placeholder", strings.getString("label.add.etablissement.zone.addzone.input.placeholder"));
         $("#bootstrap_modal_body").html(modalBody);
         $('#myModal').modal('show');
-        $("input[nbzone='1'][method='updateZone']").val(data.nom);
+        $("input[nbzone='"+id+"'][method='updateZone']").val(data.nom);
         for (var i = 0; i < data.tables.length; i++) {
             var htmlTabAlreadyExsist = getGererLesTablesShowTablesAlreadyInZoneTable();
             htmlTabAlreadyExsist = paramValue(htmlTabAlreadyExsist, "idzonetable", data.id);
@@ -154,9 +157,11 @@ function updateZoneTable(id) {
     }, id, null);
 }
 function validerUpdateTable() {
-//    updateZone
-    
-    var nomZone = $("input[nbzone='"+updateZone+"'][method='updateZone']").val();
+    var nomZone = $("input[nbzone='" + updateZone + "'][method='updateZone']").val();
+    console.log("nomZone = ",nomZone);
+    getConnexion().updateZoneTable(function(data,param) {
+        $("p[idzonetable='"+updateZone+"'][typelabel='nom'']").text(nomZone);
+    }, nomZone, parseInt(updateZone), null);
 }
 function removeTable(id) {
     getConnexion().removeTable(function(data, param) {

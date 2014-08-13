@@ -84,7 +84,6 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                         $zoneTable = new ZoneTable();
                     }
                 } else {
-                    echo 'pusk';
                     array_push($liste, $zoneTable);
                     $zoneTable = new ZoneTable();
                 }
@@ -216,6 +215,10 @@ WHERE zone_table.id = " . $id);
     public function addTable($numero, $zone) {
         $bdd = new ConnexionBDD();
         return $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $numero . "," . $zone . ")");
+    }
+    public function update(ZoneTable $zoneTable) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("UPDATE `zone_table` SET `nom`='".$zoneTable->getNom()."' WHERE `id`=".$zoneTable->getId());
     }
 
 }
