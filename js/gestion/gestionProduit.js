@@ -72,7 +72,6 @@ function ModifyProduct(id) {
     loadOptionsForGestion = false;
     loadPrixForGestion = false;
     loadEtablissementForGestion = false;
-
     var idprod = id.parent().parent().parent().attr('produitid');
     var dialogTitle = strings.getString("add.produit.dialog.title.modifier.produit");
     $("#dialog_add_produit_id").dialog({
@@ -87,7 +86,6 @@ function ModifyProduct(id) {
                     $(this).dialog("destroy");
                     $('#dialog_add_produit_id').empty();
                 }
-
             },
             annuler: function() {
                 $(this).dialog("destroy");
