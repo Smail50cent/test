@@ -133,6 +133,7 @@ function controller(entreprise) {
             };
             break;
         case "pageConnexionServeur":
+            console.log("cds");
             method = function() {
                 onLoadPageConnexionServeur();
                 hideLoading();
@@ -185,6 +186,14 @@ function controller(entreprise) {
             break;
     }
     scripts.loadScripts(nom, method);
+console.log(getParameterByName("indexeddbsupport") );
+    if (getParameterByName("indexeddbsupport") != "") {
+        if (isIndexedDBSupported()) {
+            alert("La base indexedDB est supporté par se navigateur.");
+        } else {
+            alert("Pas de support de la base indexedDB par se navigateur.");
+        }
+    }
 }
 // TEST IF THE CACHE ARE UP TO DATE
 if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
@@ -215,7 +224,7 @@ function onTemplateLoadFinish(etablissement) {
     }, "app.use.cache", null);
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
 //        if (paramapp != null) {
-            useMenus = paramapp.getValeur_parametre;
+        useMenus = paramapp.getValeur_parametre;
 //        }
     }, "gestionDesUtilisateurs", null);
     if (etablissement.nom != null) {

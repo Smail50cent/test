@@ -90,7 +90,7 @@ function clone(obj) {
     return copy;
 }
 function toEncoded() {
-    return true;
+    return false;
 }
 function setLocalStorageValue(key, value) {
     if (toEncoded()) {
@@ -106,7 +106,7 @@ function getLocalStorageValue(key) {
     if (key in localStorage) {
         if (toEncoded()) {
             return decodeURIComponent(localStorage.getItem(key));
-        }else{
+        } else {
             return (localStorage.getItem(key));
         }
     } else {
@@ -130,6 +130,7 @@ function getSessionStorageValue(key) {
     }
 }
 function removeSessionStorageItem(key) {
+    key = encodeString(key);
     sessionStorage.removeItem(key);
 }
 getServicePath = function(serviceKeyName) {
@@ -220,4 +221,25 @@ function pAjax(methodParseData, config, methodExecute, param) {
 }
 function isInt(n) {
     return n % 1 === 0;
+}
+function loadOtherParameterForEmployee() {
+    var htmlDivdrop = getDivGestionDropdown();
+    htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
+    $("#header_id").append(htmlDivdrop);
+    var htmlLi = getLiDropDownImg();
+    var liDropdown = htmlLi;
+    liDropdown = paramValue(liDropdown, "src", "./img/albert.png");
+    liDropdown = paramValue(liDropdown, "onclick", "goExpertMode();");
+    liDropdown = paramValue(liDropdown, "name", strings.getString("gestion.dropdwon.item1"));
+    $("#ul_dropdown_gestion").append(liDropdown);
+    var liDropdown2 = htmlLi;
+    liDropdown2 = paramValue(liDropdown2, "src", "./img/gestioncompte.gif");
+    liDropdown2 = paramValue(liDropdown2, "onclick", "goGestionCompteUtilisateur();");
+    liDropdown2 = paramValue(liDropdown2, "name", strings.getString("gestion.dropdwon.itemdegestioncompte"));
+    $("#ul_dropdown_gestion").append(liDropdown2);
+    $("#ul_dropdown_gestion").append(getLiDropDownDivider());
+    var liDropdown3 = getLiDropDown();
+    liDropdown3 = paramValue(liDropdown3, "onclick", "deconexion();");
+    liDropdown3 = paramValue(liDropdown3, "name", strings.getString("gestion.dropdwon.itemdeconnexion"));
+    $("#ul_dropdown_gestion").append(liDropdown3);
 }
