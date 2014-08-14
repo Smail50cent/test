@@ -67,4 +67,10 @@ class ZoneTableServiceImpl implements ZoneTableService {
         return $ret;
     }
 
+    public function update(\ZoneTable $zoneTable) {
+        if ($zoneTable != null) {
+            $this->zoneTableSrv->update($zoneTable);
+        }
+    }
+
 }

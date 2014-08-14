@@ -20,7 +20,7 @@ myStorage.indexedDB.addFistModesDeReglement = function() {
     });
     function addModeDeReglement(modeDeReglement) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameModeDeReglement")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -40,16 +40,16 @@ myStorage.indexedDB.addFistModesDeReglement = function() {
 };
 
 myStorage.indexedDB.getAllModesDeReglement = function(method, param) {
-    window.setTimeout(function() {
+    window.setTimeout(function() {console.log("in thread");
         if (entitysFinsh[config.getConfig("tableNameModeDeReglement")] == false) {
             impl(method, param);
         } else {
             myStorage.indexedDB.getAllModesDeReglement(method, param);
         }
     }, delay);
-    function impl() {
+    function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameModeDeReglement")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -71,8 +71,8 @@ myStorage.indexedDB.getAllModesDeReglement = function(method, param) {
                 result.continue();
             };
             trans.oncomplete = function(e) {
-                if (methodToExecuteAfter != null) {//Nous avons besoin de l'executer.
-                    methodToExecuteAfter(modesDeReglements, param);
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(modesDeReglements, param);
                 }
                 db.close();
             };
@@ -94,7 +94,7 @@ myStorage.indexedDB.getModeDeReglementById = function(method, id, param) {
     }, delay);
     function impl(method, id, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameModeDeReglement")], myStorage.IDBTransactionModes.READ_ONLY);

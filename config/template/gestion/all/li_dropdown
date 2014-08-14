@@ -1,1 +1,1 @@
-<li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" href="{href}">{name}</a></li>
+<li role="presentation" class="div_gestion_dropdown_item_structure div_gestion_dropdown_item_personalize"><a role="menuitem" tabindex="-1" onclick="{onclick}">{name}</a></li>

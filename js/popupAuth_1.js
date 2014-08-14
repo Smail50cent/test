@@ -6,11 +6,11 @@ var listePersonnes = new Array();
 var methodToLoadAfter;
 var isServeur;
 var options = {autoOpen: true, modal: true,
-                close: function(event, ui) {
-                    $(this).dialog("destroy");
-                    $('#auth_popup_id').hide();
-                }
-            };
+    close: function(event, ui) {
+        $(this).dialog("destroy");
+        $('#auth_popup_id').hide();
+    }
+};
 function onLoadCompte(showVisiteurs, titre, topvalue, method, isServeusr) {//To DO an object
     isServeur = isServeusr;
     methodToLoadAfter = method;
@@ -77,7 +77,7 @@ function authenCompte() {
                                 personne.setId(idcompte);
                                 listePersonnes.push(personne);
                                 if (isServeur) {
-                                    setSessionStorageValue("personnes.serveur", JSON.stringify(personne));
+                                    setLocalStorageValue("personnes.serveur", JSON.stringify(personne));
                                 } else {
                                     setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
                                 }

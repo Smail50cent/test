@@ -73,7 +73,7 @@
         <variable name="serveur.clientaccess.serviceAddZoneTable">zoneTables/add</variable> 
         <variable name="serveur.clientaccess.serviceRemoveTable">zoneTables/removeTable</variable> 
         <variable name="serveur.clientaccess.serviceGetZoneTableById">zoneTables/getById</variable> 
-        <variable name="serveur.clientaccess.serviceAddTable">zoneTables/addTable</variable>
+        <variable name="serveur.clientaccess.serviceUpdateZone">zoneTables/update</variable>
         <variable name="serveur.clientaccess.serviceAddCategorie">categorie/add</variable>
         <variable name="serveur.clientaccess.serviceDeleteCategorie">categorie/delete</variable>
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
@@ -107,5 +107,6 @@
         <variable name="tableNameTypeCommande">typeCommandes</variable>
         <variable name="tableNameParamApplication">parametresApplication</variable>
         <variable name="tableNameZoneTables">zonesTables</variable>
+        <variable name="indexedDB.database.version">1</variable>
     </variables>
 </application>

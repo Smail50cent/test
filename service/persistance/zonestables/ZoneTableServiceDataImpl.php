@@ -16,7 +16,8 @@ class ZoneTableServiceDataImpl implements ZoneTableServiceData {
     public function getAll() {
         $bdd = new ConnexionBDD();
         $resultSet = $bdd->executeGeneric("SELECT 
- zone_table.etablissement_id, tables.id AS table_id,
+ zone_table.etablissement_id , 
+ tables.id AS table_id,
  tables.numero AS table_numero,
  zone_table.nom AS zone_table_nom,
  zone_table.id AS zone_table_id ,
@@ -44,21 +45,26 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
             $ligne = $lignes[$i];
             $zoneTable->setId(intval($ligne->zone_table_id));
             $zoneTable->setNom($ligne->zone_table_nom);
-            $etablissement = new Etablissement();
-            $etablissement->setAdresseEtab($ligne->etablissement_adresseEtab);
-            $etablissement->setLogo($ligne->etablissement_logo);
-            $etablissement->setMessage($ligne->etablissement_message);
-            $etablissement->setNom($ligne->etablissement_nom);
-            $etablissement->setSlogan($ligne->etablissement_slogan);
-            $etablissement->setStyle($ligne->etablissement_style);
-            $etablissement->setTelephone($ligne->etablissement_telephone);
-            $zoneTable->setEtablissement_id($etablissement);
+            if ($ligne->etablissement_id != null) {
+                $etablissement = new Etablissement();
+                $etablissement->setId($ligne->etablissement_id);
+                $etablissement->setAdresseEtab($ligne->etablissement_adresseEtab);
+                $etablissement->setLogo($ligne->etablissement_logo);
+                $etablissement->setMessage($ligne->etablissement_message);
+                $etablissement->setNom($ligne->etablissement_nom);
+                $etablissement->setSlogan($ligne->etablissement_slogan);
+                $etablissement->setStyle($ligne->etablissement_style);
+                $etablissement->setTelephone($ligne->etablissement_telephone);
+                $zoneTable->setEtablissement_id($etablissement);
+            } else {
+                $zoneTable->setEtablissement_id(null);
+            }
             if ($ligne->zone_table_id == $idProdAfter) {
                 $table = $this->testsForTable($ligne, $zoneTable);
                 if ($table != null) {
                     $zoneTable->addTable($table);
                 }
-               if ($i + 1 <count($lignes) ) {
+                if ($i + 1 < count($lignes)) {
                     if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
                         array_push($liste, $zoneTable);
                         $zoneTable = new ZoneTable();
@@ -72,13 +78,12 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                 if ($table != null) {
                     $zoneTable->addTable($table);
                 }
-                if ($i + 1 <count($lignes) ) {
+                if ($i + 1 < count($lignes)) {
                     if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
                         array_push($liste, $zoneTable);
                         $zoneTable = new ZoneTable();
                     }
                 } else {
-                                        echo 'pusk';
                     array_push($liste, $zoneTable);
                     $zoneTable = new ZoneTable();
                 }
@@ -86,8 +91,8 @@ LEFT JOIN etablissement ON etablissement.id = zone_table.`etablissement_id`");
                 $table = $this->testsForTable($ligne, $zoneTable);
                 if ($table != null) {
                     $zoneTable->addTable($table);
-                } 
-                if ($i + 1 <count($lignes) ) {
+                }
+                if ($i + 1 < count($lignes)) {
                     if ($ligne->zone_table_id != $lignes[$i + 1]->zone_table_id) {
                         array_push($liste, $zoneTable);
                         $zoneTable = new ZoneTable();
@@ -210,6 +215,10 @@ WHERE zone_table.id = " . $id);
     public function addTable($numero, $zone) {
         $bdd = new ConnexionBDD();
         return $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $numero . "," . $zone . ")");
+    }
+    public function update(ZoneTable $zoneTable) {
+        $bdd = new ConnexionBDD();
+        $bdd->executeGeneric("UPDATE `zone_table` SET `nom`='".$zoneTable->getNom()."' WHERE `id`=".$zoneTable->getId());
     }
 
 }

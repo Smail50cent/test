@@ -124,6 +124,7 @@
     right: 9em !important;
     box-shadow: 1px 1px 15px #000;
     z-index: 1000;
+    left: 50% !important;
 }
 
 .dialog-modif-produit {
@@ -303,7 +304,7 @@ div.prev_page_structure+div.prev_page_structure {
 }
 
 
-/*____________________Page prix intÃ©rieur extÃ©rieur____________________*/
+/*____________________Page prix intérieur extérieur____________________*/
 
 .prix_definition_prix_personalize {
     font-size: 0.75em;
@@ -373,7 +374,7 @@ float: right;
 }
 
 
-/*___________________Ajouter les Ã©tablissements____________________*/
+/*___________________Ajouter les établissements____________________*/
 
 div#ajouter_produit_div_etablissement {
     overflow: auto;
@@ -1876,7 +1877,7 @@ background: rgba(248, 255, 197, 0.5);
 }
 
 
-/*________________________FenÃªtre erreur_____________________*/
+/*________________________Fenêtre erreur_____________________*/
 .dialog_error.dialog_error_structure.dialog_error_personalize {
     position: absolute;
     top: 22em;

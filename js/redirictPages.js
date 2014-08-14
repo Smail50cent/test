@@ -132,7 +132,7 @@ function goGestionApplication() {
     redirct(new RedirictPages(("gestionProduit"), ("gestionProduit"), ("gestionProduit"), ("gestionProduit"), ("gestionProduit")));
 }
 function disconnectUser() {
-    removeLocalStorageItem("personnes.serveur");
+    removeSessionStorageItem("personnes.serveur");
     redirct(new RedirictPages("index", "index", "index", "index", "index"));
 }
 function goGestionCompteUtilisateur() {
@@ -142,6 +142,6 @@ function goExpertMode() {
     redirct(new RedirictPages("modeexpert", "modeexpert", "modeexpert", "modeexpert", "modeexpert"));
 }
 function deconexion() {
-    removeLocalStorageItem("personnes.serveur");
+    removeSessionStorageItem("personnes.serveur");
     redirct(new RedirictPages("index", "index", "index", "index", "index"));
 }

@@ -7,25 +7,7 @@ var loadEtablissementForGestion = false;
 
 function onLoadGP() {
     scripts.loadScripts("lib.dialog", function() {
-        var htmlDivdrop = getDivGestionDropdown();
-        htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
-        $("#header_id").append(htmlDivdrop);
-        var htmlLi = getLiDropDownImg();
-        var liDropdown = htmlLi;
-        liDropdown = paramValue(liDropdown, "src", "./img/albert.png");
-        liDropdown = paramValue(liDropdown, "onclick", "goExpertMode();");
-        liDropdown = paramValue(liDropdown, "name", strings.getString("gestion.dropdwon.item1"));
-        $("#ul_dropdown_gestion").append(liDropdown);
-        var liDropdown2 = htmlLi;
-        liDropdown2 = paramValue(liDropdown2, "src", "./img/gestioncompte.gif");
-        liDropdown2 = paramValue(liDropdown2, "onclick", "goGestionCompteUtilisateur();");
-        liDropdown2 = paramValue(liDropdown2, "name", strings.getString("gestion.dropdwon.itemdegestioncompte"));
-        $("#ul_dropdown_gestion").append(liDropdown2);
-        $("#ul_dropdown_gestion").append(getLiDropDownDivider());
-        var liDropdown3 = getLiDropDown();
-        liDropdown3 = paramValue(liDropdown3, "onclick", "disconnectUser();");
-        liDropdown3 = paramValue(liDropdown3, "name", strings.getString("gestion.dropdwon.itemdeconnexion"));
-        $("#ul_dropdown_gestion").append(liDropdown3);
+        loadOtherParameterForEmployee();
         loadViewsForAddProduit();
     });
 }
@@ -90,7 +72,6 @@ function ModifyProduct(id) {
     loadOptionsForGestion = false;
     loadPrixForGestion = false;
     loadEtablissementForGestion = false;
-
     var idprod = id.parent().parent().parent().attr('produitid');
     var dialogTitle = strings.getString("add.produit.dialog.title.modifier.produit");
     $("#dialog_add_produit_id").dialog({
@@ -105,7 +86,6 @@ function ModifyProduct(id) {
                     $(this).dialog("destroy");
                     $('#dialog_add_produit_id').empty();
                 }
-
             },
             annuler: function() {
                 $(this).dialog("destroy");

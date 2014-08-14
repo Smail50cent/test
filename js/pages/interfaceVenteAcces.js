@@ -3,8 +3,9 @@
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 function onLoadInterfaceVenteAcces() {
+    loadOtherParameterForEmployee();
     var htmlLi = getLiAccesInterface();
-    var personne = JSON.parse(getLocalStorageValue("personnes.serveur"));
+    var personne = JSON.parse(getSessionStorageValue("personnes.serveur"));
     personne.role.level = parseInt(personne.role.level);
     if (personne != null) {
         switch (personne.role.level) {

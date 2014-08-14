@@ -12,7 +12,7 @@ myStorage.indexedDB.getSousCategorieById = function(id, methodToExecuteAfter) {
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -52,7 +52,7 @@ myStorage.indexedDB.getSousCategorieByIdForContentSousCat = function(methodToExe
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -92,7 +92,7 @@ myStorage.indexedDB.getAllCategories = function(methodToExecuteAfter) {
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
             var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
@@ -162,7 +162,7 @@ myStorage.indexedDB.getAllSousCategories = function(methodToExecuteAfter) {
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -209,7 +209,7 @@ myStorage.indexedDB.getSousCategorieByIdCat = function(methodToExecuteAfter, idC
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_ONLY);

@@ -22,4 +22,6 @@ interface ZoneTableService {
     public function removeTable($id);
 
     public function addTable($numero, $zone);
+    
+    public function update(ZoneTable $zoneTable);
 }

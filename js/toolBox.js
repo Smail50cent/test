@@ -95,7 +95,7 @@ function toEncoded() {
 function setLocalStorageValue(key, value) {
     if (toEncoded()) {
         key = encodeString(key);
-//        value = encodeString(value);
+        value = encodeURIComponent(value);
     }
     localStorage.setItem(key, value);
 }
@@ -104,7 +104,11 @@ function getLocalStorageValue(key) {
         key = encodeString(key);
     }
     if (key in localStorage) {
-        return (localStorage.getItem(key));
+        if (toEncoded()) {
+            return decodeURIComponent(localStorage.getItem(key));
+        } else {
+            return (localStorage.getItem(key));
+        }
     } else {
         return null;
     }
@@ -112,19 +116,130 @@ function getLocalStorageValue(key) {
 function removeLocalStorageItem(key) {
     localStorage.removeItem(key);
 }
-//function ajax(method, path, type,param) {
-//    $.ajax({
-//        url: path,
-//        type: 'GET',
-//        dataType: 'json',
-//        async: true,
-//        success: function(data, textStatus, xhr) {
-//            if(method!=null){
-//                method(data,param);
-//            }
-//        },
-//        error: function(xhr, textStatus, errorThrown) {
-//            showErrorMessage(strings.getString("label.error.connexion.serveur"));
-//        }
-//    });
-//}
+function setSessionStorageValue(key, value) {
+    key = encodeString(key);
+    value = encodeURIComponent(value);
+    sessionStorage.setItem(key, value);
+}
+function getSessionStorageValue(key) {
+    key = encodeString(key);
+    if (key in sessionStorage) {
+        return decodeURIComponent(sessionStorage.getItem(key));
+    } else {
+        return null;
+    }
+}
+function removeSessionStorageItem(key) {
+    key = encodeString(key);
+    sessionStorage.removeItem(key);
+}
+getServicePath = function(serviceKeyName) {
+    var ret = "";
+    ret += "./";
+    ret += config.getConfig("serveur.clientaccess.servicesAccess") + "/";
+    ret += config.getConfig(serviceKeyName);
+    ret += config.getConfig("serveur.clientaccess.serviceSufixe");
+    return ret;
+};
+this.getMethod = "GET";
+this.postMethod = "POST";
+
+this.typeReq = this.getMethod;
+
+/**
+ * Personalize Ajax
+ * <code>
+ if (methodParseData != null) {
+ methodParseData(data, param, methodExecute);
+ } else {
+ methodExecute(data, param);
+ }
+ </code>                                                                   
+ * @param Function methodParseData
+ * @param Object config dispo : type
+ * @param Function methodExecute
+ * @param Object param
+ */
+function pAjax(methodParseData, config, methodExecute, param) {
+    var dataType = 'json';
+    var async = true;
+    var type = "GET";//POST
+    var service = "";
+    var mydata = null;
+    var ifErrorSendAllDatas = false;
+    if (config.hasOwnProperty("type")) {
+        type = config.type;
+    }
+    if (config.hasOwnProperty("ifErrorSendAllDatas")) {
+        ifErrorSendAllDatas = config.ifErrorSendAllDatas;
+    }
+    if (config.hasOwnProperty("data")) {
+        mydata = config.data;
+        console.log(mydata);
+    }
+    if (config.hasOwnProperty("async")) {
+        async = config.async;
+    }
+    if (config.hasOwnProperty("dataType")) {
+        dataType = config.dataType;
+    }
+    if (!config.hasOwnProperty("service")) {
+        console.error("Erreur : entrez le chemin pour l'URL.");
+    } else {
+        service = config.service;
+        $.ajax({
+            url: getServicePath(service),
+            type: type,
+            dataType: dataType,
+            async: async,
+            data: mydata,
+            success: function(data) {
+                if (data.error == true) {
+                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
+                }
+                if (methodExecute != null || methodParseData != null) {
+                    if (ifErrorSendAllDatas) {
+                        if (!data.error) {
+                            data = data.data;
+                        }
+                    } else {
+                        data = data.data;
+                    }
+                    if (methodParseData != null) {
+                        methodParseData(data, param, methodExecute);
+                    } else {
+                        methodExecute(data, param);
+                    }
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                console.log(xhr, textStatus, errorThrown);
+                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+            }
+        });
+    }
+}
+function isInt(n) {
+    return n % 1 === 0;
+}
+function loadOtherParameterForEmployee() {
+    var htmlDivdrop = getDivGestionDropdown();
+    htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
+    $("#header_id").append(htmlDivdrop);
+    var htmlLi = getLiDropDownImg();
+    var liDropdown = htmlLi;
+    liDropdown = paramValue(liDropdown, "src", "./img/albert.png");
+    liDropdown = paramValue(liDropdown, "onclick", "goExpertMode();");
+    liDropdown = paramValue(liDropdown, "name", strings.getString("gestion.dropdwon.item1"));
+    $("#ul_dropdown_gestion").append(liDropdown);
+    var liDropdown2 = htmlLi;
+    liDropdown2 = paramValue(liDropdown2, "src", "./img/gestioncompte.gif");
+    liDropdown2 = paramValue(liDropdown2, "onclick", "goGestionCompteUtilisateur();");
+    liDropdown2 = paramValue(liDropdown2, "name", strings.getString("gestion.dropdwon.itemdegestioncompte"));
+    $("#ul_dropdown_gestion").append(liDropdown2);
+    $("#ul_dropdown_gestion").append(getLiDropDownDivider());
+    var liDropdown3 = getLiDropDown();
+    liDropdown3 = paramValue(liDropdown3, "onclick", "deconexion();");
+    liDropdown3 = paramValue(liDropdown3, "name", strings.getString("gestion.dropdwon.itemdeconnexion"));
+    $("#ul_dropdown_gestion").append(liDropdown3);
+}
