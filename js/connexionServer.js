@@ -876,18 +876,17 @@ function ConnexionServer() {
         }, method, param);
     };
     this.deleteProduit = function(id) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceDeleteProduit"),
-            type: 'POST',
-            dataType: 'text',
-            data: {ID: id},
-            async: true,
-            success: function(data, textStatus, xhr) {
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste = new Array();
+            if (data != null) {
+                for (var i = 0; i < data.length; i++) {
+                    liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
+                }
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {service: "serveur.clientaccess.serviceDeleteProduitV2", data: {ID: id}}, null, null);
     };
     this.getAllTypeCommandes = function(method, param) {
         if (param != null) {
@@ -936,84 +935,45 @@ function ConnexionServer() {
             }
         }
         function pullWebServiceData(method, param) {
-            $.ajax({
-                url: getServicePath("serveur.clientaccess.serviceGetAllTypeCommande"),
-                type: 'GET',
-                dataType: 'json',
-                async: true,
-                success: function(data, textStatus, xhr) {
-                    var liste = new Array();
-                    if (data != null) {
-                        for (var i = 0; i < data.length; i++) {
-                            liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
-                        }
+            pAjax(function(data, param, methodExecute) {
+                var liste = new Array();
+                if (data != null) {
+                    for (var i = 0; i < data.length; i++) {
+                        liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
                     }
-                    if (method != null) {
-                        method(liste, param);
-                    }
-                },
-                error: function(xhr, textStatus, errorThrown) {
-                    showErrorMessage(strings.getString("label.error.connexion.serveur"));
                 }
-            });
+                if (methodExecute != null) {
+                    methodExecute(liste, param);
+                }
+            }, {service: "serveur.clientaccess.serviceGetAllTypeCommande"}, method, null);
         }
     };
     this.getEtablissementById = function(method, id, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetByIdEtablissements") + "?id=" + id,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var liste;
-                if (data != null) {
-                    liste = new Etablissement(data[0].id, data[0].nom, data[0].logo, data[0].style, data[0].adresseEtab, data[0].telephone, data[0].message, data[0].slogan, data[0].groupe);
-                }
-                if (method != null) {
-                    method(liste, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var liste;
+            if (data != null) {
+                liste = new Etablissement(data[0].id, data[0].nom, data[0].logo, data[0].style, data[0].adresseEtab, data[0].telephone, data[0].message, data[0].slogan, data[0].groupe);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(liste, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetByIdEtablissements", data: {id: id}}, method, null);
     };
     this.getAllOptions = function(method) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllOptions"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var options = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var option = new Option();
-                    option.setId(data[i].id);
-                    option.setNom(data[i].nom);
-                    option.setLabel(data[i].label);
-                    option.setPossibilites(data[i].possibilites);
-                    options.push(option);
-                }
-                if (method != null) {
-                    method(options);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var options = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var option = new Option();
+                option.setId(data[i].id);
+                option.setNom(data[i].nom);
+                option.setLabel(data[i].label);
+                option.setPossibilites(data[i].possibilites);
+                options.push(option);
             }
-        });
-//        pAjax(function(data, param, methodExecute) {
-//            var TVA = new Array();
-//            for (var i = 0; i < data.length; i++) {
-//                var tauxtva = new TauxTva();
-//                tauxtva.setId(data[i].id_tva);
-//                tauxtva.setTaux(data[i].taux_tva);
-//                TVA.push(tauxtva);
-//            }
-//            if (methodExecute != null) {
-//                methodExecute(TVA, param);
-//            }
-//        }, {service: "serveur.clientaccess.serviceGetAllTauxTva"}, method, param);
+            if (methodExecute != null) {
+                methodExecute(options, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllOptions"}, method, null);
     };
     this.getAllTauxTva = function(method, param) {
         pAjax(function(data, param, methodExecute) {
