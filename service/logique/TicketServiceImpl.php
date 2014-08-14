@@ -43,8 +43,10 @@ class TicketServiceImpl implements TicketService {
                 $options = $qop[$i]->getProduct()->getOptions();
                 if (is_array($options)) {
                     for ($j = 0; $j < count($options); $j++) {
-                        if (is_array($options[$j]->possibilites)) {
-                            $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites[0]->id, $idCommandeProduit);
+                        if (is_array($options[$j]->possibilites) ) {
+                            if(count($options[$j]->possibilites)>0){
+                                $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites[0]->id, $idCommandeProduit);
+                            }
                         } else {
                             $this->ticketSrv->addOptionCommande($options[$j]->id, $options[$j]->possibilites, $idCommandeProduit);
                         }

@@ -806,6 +806,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background-color: rgba(0, 0, 0, 0.6);
             box-shadow: 0 3px 5px #000000;
             min-height: 66px;
+            max-height: 66px;
             border-radius: 5px;
             background-image: url(../img/textured_pper.png);
         }
