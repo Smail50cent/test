@@ -167,7 +167,7 @@ function removeCategorie(id) {
     modalConfirm = paramValue(modalConfirm, "confirm", strings.getString("modeexpert.modal.confirm.buttonConf.categorie.delete"));
     modalConfirm = paramValue(modalConfirm, "cancel", strings.getString("modeexpert.modal.confirm.buttonCanc.categorie.delete"));
     modalConfirm = paramValue(modalConfirm, "messageWarning", strings.getString("modeexpert.modal.confirm.warningMsg.categorie.delete"));
-    modalConfirm = paramValue(modalConfirm, "methodConf", "confirmDeleteCategorie("+id+")");
+    modalConfirm = paramValue(modalConfirm, "methodConf", "confirmDeleteCategorie(" + id + ")");
     modalConfirm = paramValue(modalConfirm, "methodCanc", "cancelDeleteCategorie()");
 
 
@@ -179,10 +179,15 @@ function removeCategorie(id) {
 function confirmDeleteCategorie(id) {
     getConnexion().DeleteCategorie(del, id);
     function del(data) {
-        console.log(data);
-        LoadGestionCategories();
-        $("#modalConf").remove();
-        $(".modal-backdrop").remove();
+        if (data != null) {
+            if (!data.hasOwnProperty("error")) {
+                console.log("error");
+            }
+        } else {
+            LoadGestionCategories();
+            $("#modalConf").remove();
+            $(".modal-backdrop").remove();
+        }
     }
 }
 

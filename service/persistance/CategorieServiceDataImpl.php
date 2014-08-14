@@ -266,7 +266,7 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
 
     public function delete($id) {
         $bdd = new ConnexionBDD();
-        return $bdd->executeGeneric("DELETE FROM categorie WHERE id=".$id);
+        $bdd->executeGeneric("DELETE FROM categorie WHERE id=".$id);
     }
 
 }
