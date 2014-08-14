@@ -27,4 +27,8 @@ class CategorieServiceImpl implements CategorieService {
         return $this->categorieSrv->getByEtablissementAndZone($etablissement, $zone);
     }
 
+    public function delete($id) {
+        return $this->categorieSrv->delete($id);
+    }
+
 }

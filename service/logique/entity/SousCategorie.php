@@ -17,6 +17,7 @@ class SousCategorie {
     public $categorie;
     public $priorite;
     public $nom;
+    public $taux_tva;
 
     public function setId($id) {
         $this->id = $id;
@@ -49,5 +50,12 @@ class SousCategorie {
     public function getNom() {
         return $this->nom;
     }
-  
+    public function getTaux_tva() {
+        return $this->taux_tva;
+    }
+
+    public function setTaux_tva($taux_tva) {
+        $this->taux_tva = $taux_tva;
+    }
+
 }

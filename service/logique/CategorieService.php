@@ -12,4 +12,6 @@ interface CategorieService {
     public function add(Categorie $categorie);
 
     public function getByEtablissementAndZone($etablissement, $zone);
+    
+    public function delete($id);
 }

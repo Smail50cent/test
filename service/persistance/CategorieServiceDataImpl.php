@@ -15,6 +15,7 @@ class CategorieServiceDataImpl implements CategorieServiceData {
     public function getAll() {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT
+etablissement.nom as etablissement_nom,
 categorie.id AS categorie_id,
 categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
@@ -25,7 +26,9 @@ association_etablissement_categorie.id_etablissement AS association_etablissemen
 association_etablissement_categorie.id_zone AS association_etablissement_categorie_id_zone
 FROM `categorie`
 LEFT JOIN souscategorie ON souscategorie.categorie_id = categorie.id
-LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id");
+LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id
+LEFT JOIN etablissement ON etablissement.id = association_etablissement_categorie.id_etablissement
+ORDER BY association_etablissement_categorie_id_etablissement ASC, categorie_priorite ASC");
         return $this->parse($retour);
     }
 
@@ -42,13 +45,41 @@ LEFT JOIN association_etablissement_categorie ON association_etablissement_categ
 
     public function add(Categorie $categorie) {
         $bdd = new ConnexionBDD();
-        return $bdd->executeGeneric("INSERT INTO categorie(nom,priorite) VALUES('".$categorie->nom."','".$categorie->priorite."')");
+        try {
+            $bdd->beginTTransaction();
+            $idCategorie = $bdd->executeGeneric("INSERT INTO categorie(nom,priorite) VALUES('" . $categorie->nom . "',0)");
+            if ($categorie->getEtablissements() != null) {
+                for ($i = 0; $i < count($categorie->getEtablissements()); $i++) {
+                    if ($categorie->getEtablissements()[$i]->getZones() != null) {
+                        $bdd->executeGeneric("INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone) "
+                                . "VALUES('" . $idCategorie . "','" . $categorie->getEtablissements()[$i]->getId() . "','" . $categorie->getEtablissements()[$i]->getZones() . "')");
+                    } else {
+                        $bdd->executeGeneric("INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone) "
+                                . "VALUES('" . $idCategorie . "','" . $categorie->getEtablissements()[$i]->getId() . "',NULL)");
+                    }
+                }
+            }
+            if ($categorie->getSousCategories() != null) {
+                for ($i = 0; $i < count($categorie->getSousCategories()); $i++) {
+                    $bdd->executeGeneric("INSERT INTO souscategorie(NOM,categorie_id,priorite,tauxDeTva)"
+                            . "VALUES('" . $categorie->getSousCategories()[$i]->getNom() . "',"
+                            . " '" . $idCategorie . "', '" . $categorie->getSousCategories()[$i]->getPriorite() . "',"
+                            . " '" . $categorie->getSousCategories()[$i]->getTaux_tva() . "' ) ");
+                }
+            }
 
+            $bdd->commitTransaction();
+            return $idCategorie;
+        } catch (Exception $ex) {
+            $bdd->rollbackTransaction();
+            echo "Error During Categorie INSERT" . $ex->getMessage();
+        }
     }
 
     public function getByEtablissementAndZone($etablissement, $zone) {
         $bdd = new ConnexionBDD();
         $retour = $bdd->executeGeneric("SELECT
+etablissement.nom as etablissement_nom,
 categorie.id AS categorie_id,
 categorie.nom AS categorie_nom,
 categorie.priorite AS categorie_priorite,
@@ -60,6 +91,7 @@ association_etablissement_categorie.id_zone AS association_etablissement_categor
 FROM `categorie`
 LEFT JOIN souscategorie ON souscategorie.categorie_id = categorie.id
 LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id
+LEFT JOIN etablissement ON etablissement.id = association_etablissement_categorie.id_etablissement
 WHERE association_etablissement_categorie.id_etablissement = " . $etablissement . " 
 AND ((association_etablissement_categorie.`id_zone` = " . $zone . ")
 OR (association_etablissement_categorie.`id_zone` IS NULL))");
@@ -111,6 +143,13 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 if ($assoZones != null) {
                     $categorie->addZone($assoZones);
                 }
+                if ($assoEtablissements != null) {
+                    $etablissement = new Etablissement();
+                    $etablissement->setId($assoEtablissements);
+                    $etablissement->setNom($ligne->etablissement_nom);
+                    $categorie->setAssocEtabZone($etablissement);
+                }
+
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
                         array_push($liste, $categorie);
@@ -132,6 +171,13 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 if ($assoZones != null) {
                     $categorie->addZone($assoZones);
                 }
+                if ($assoEtablissements != null) {
+                    $etablissement = new Etablissement();
+                    $etablissement->setId($assoEtablissements);
+                    $etablissement->setNom($ligne->etablissement_nom);
+                    $categorie->setAssocEtabZone($etablissement);
+                }
+
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
                         array_push($liste, $categorie);
@@ -216,6 +262,11 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
             $sousCategorie->setCategorie(intval($ligne->categorie_id));
         }
         return $sousCategorie;
+    }
+
+    public function delete($id) {
+        $bdd = new ConnexionBDD();
+        return $bdd->executeGeneric("DELETE FROM categorie WHERE id=".$id);
     }
 
 }

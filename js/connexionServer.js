@@ -1308,10 +1308,30 @@ function ConnexionServer() {
     };
     this.getAllCategories = function(method, param) {
         pAjax(function(data, param, methodExecute) {
-            console.log(data);
-            if (methodExecute != null) {
-                methodExecute(data, param);
+            var categories = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var etablissements = new Array();
+                var categorie = new Categorie();
+                categorie.setId(data[i].id);
+                categorie.setNom(data[i].nom);
+                categorie.setPriorite(data[i].priorite);
+                for (var j = 0; j < data[i].assocEtabZone.length; j++) {
+                    var etablissement = new Etablissement();
+                    etablissement.setId(data[i].assocEtabZone[j].id);
+                    etablissement.setNom(data[i].assocEtabZone[j].nom);
+                    etablissements.push(etablissement);
+                }
+                categorie.setEtablissement(etablissements);
+                categorie.setZone(data[i].zones);
+                categorie.setSousCategorie(data[i].souscategorie);
+                categories.push(categorie);
             }
-        }, {service: "serveur.clientaccess.serviceGetAllCategories"}, method, param);
+            if (methodExecute != null) {
+                methodExecute(categories, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllCategoriesWF"}, method, param);
+    };
+    this.DeleteCategorie = function(method, id, param) {
+        pAjax(null, {service: "serveur.clientaccess.serviceDeleteCategorie", data: {id: id}}, method, param);
     };
 }
