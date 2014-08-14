@@ -28,7 +28,7 @@ class CategorieServiceImpl implements CategorieService {
     }
 
     public function delete($id) {
-        return $this->categorieSrv->delete($id);
+        $this->categorieSrv->delete($id);
     }
 
 }
