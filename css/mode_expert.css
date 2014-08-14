@@ -214,3 +214,152 @@ div#bootstrap_modal_body {
     float: bottom;
     margin-right: 96px;
 } 
+
+/*___________________Ajouter les établissements____________________*/
+
+div#ajouter_produit_div_etablissement {
+    overflow: auto;
+    //height: 470px;
+    border: 1px solid rgba(192, 185, 185, 1);
+    background-color: rgba(238, 236, 236, 1);
+}
+
+
+.ajouter_produit_div_etablissement_head_p_structure {
+    display: inline-block;
+    width: 78.8%;
+    margin: 0;
+}
+
+.etablissement_div_header_titre_structure {
+    display: inline-block;
+    width: 78.4%;
+    margin: 0;
+}
+
+.li_zones_etablissement_checkbox_structure {
+    float: right;
+    margin: 0.5em 0.5em 0 0;
+}
+
+.etablissement_div_header_structure {
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+    margin-bottom: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.etablissement_div_personalize {
+    width: 100%!important;
+    font-size: 0.7em!important;
+    /* display: inline-block !important; */
+    background-color: rgba(255, 255, 255, 1);
+    padding: 0.7em 0.3em 0.3em 0.3em;
+    margin: 2em 0;
+    border-top: 1px solid rgba(196, 196, 196, 1);
+    border-bottom: 1px solid rgba(196, 196, 196, 1);
+}
+
+.etablissement_div_header_titre_personalize {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-left: 1em;
+}
+
+.li_zones_etablissement_structure {
+    width: 40%;
+    display: inline-block;
+}
+
+.li_zones_etablissement_structure:nth-child(even){
+    margin-left:10%;
+}
+
+.li_zones_etablissement_structure input {
+    margin:0;
+}
+
+
+
+.li_zones_etablissement_titrezone_structure {
+    vertical-align: middle;
+    margin: 0 0 1em 0;
+}
+
+/*___________________Modal confirm_________________*/
+
+.modal-open .modal {
+overflow-x: hidden;
+overflow-y: auto;
+}
+.modal.in .modal-dialog {
+-webkit-transform: translate3d(0,0,0);
+transform: translate3d(0,0,0);
+}
+.modal--report .modal-content {
+padding: 40px 40px 0;
+}
+.modal--report .modal-body {
+padding: 0;
+}
+.modal-body {
+position: relative;
+padding: 15px;
+}
+.modal-content {
+-webkit-box-shadow: none;
+box-shadow: none;
+border-radius: 4px;
+}
+.row {
+margin-left: -15px;
+margin-right: -15px;
+}
+.col-md-offset-2 {
+margin-left: 16.6666666667%;
+}
+.col-md-4 {
+width: 33.3333333333%;
+}
+img.responsive {
+display: block;
+height: auto;
+max-width: 100%;
+}
+.modal--report .moda-report__preview {
+margin-top: 20px;
+}
+.modal--report .modal-body .btn {
+text-align: center;
+margin-top: 20px;
+margin-bottom: 10px;
+}
+.modal--report .modal-body h1 {
+text-align: center;
+font-size: 48px;
+font-family: "proxima-nova-semibold";
+color: #65c6c3;
+}
+.modal--report .modal-body h2, .modal--report .modal-body p {
+text-align: center;
+color: #8a8f99;
+}
+.modal--report .modal-body p {
+text-align: center;
+color: #8a8f99;
+}
+.modal--report .modal-body h2 {
+padding-top: 15px;
+font-family: "proxima_novalight";
+font-size: 20px;
+line-height: 24px;
+margin: 0 auto;
+}
+.modal-backdrop {
+position: fixed;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 1040;
+background-color: #000;
+}

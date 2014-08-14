@@ -9,6 +9,7 @@
         <variable name="serveur.clientaccess.applicationName">appcaisse</variable>
         <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
         <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetAllCategoriesWF">categorie/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
         <variable name="serveur.clientaccess.serviceGetAllMenus">getAllMenus</variable>
         <variable name="serveur.clientaccess.serviceGetAllIngredients">getAllIngredients</variable>
@@ -74,6 +75,7 @@
         <variable name="serveur.clientaccess.serviceGetZoneTableById">zoneTables/getById</variable> 
         <variable name="serveur.clientaccess.serviceUpdateZone">zoneTables/update</variable>
         <variable name="serveur.clientaccess.serviceAddCategorie">categorie/add</variable>
+        <variable name="serveur.clientaccess.serviceDeleteCategorie">categorie/delete</variable>
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>

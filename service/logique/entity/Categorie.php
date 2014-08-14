@@ -13,6 +13,15 @@ class Categorie {
     public $souscategorie = array();
     public $etablissements = array();
     public $zones = array();
+    public $assocEtabZone = array();
+
+    public function getAssocEtabZone() {
+        return $this->assocEtabZone;
+    }
+
+    public function setAssocEtabZone($assocEtabZone) {
+        array_push($this->assocEtabZone, $assocEtabZone);
+    }
 
     public function getZones() {
         return $this->zones;

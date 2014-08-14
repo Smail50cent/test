@@ -940,3 +940,11 @@ function getAddCategorieModalBody() {
     var mygestionmodeexpertgererlescategoriesadd_site_modal_body = gestionmodeexpertgererlescategoriesadd_site_modal_body;
     return mygestionmodeexpertgererlescategoriesadd_site_modal_body;
 }
+var gestionmodeexpertallbootstrap_modal_confirm = null;
+function getBootstrapModalConfirm() {
+    if (gestionmodeexpertallbootstrap_modal_confirm == null) {
+        gestionmodeexpertallbootstrap_modal_confirm = templates.getTemplate("gestion/modeexpert/all/bootstrap_modal_confirm");
+    }
+    var mygestionmodeexpertallbootstrap_modal_confirm = gestionmodeexpertallbootstrap_modal_confirm;
+    return mygestionmodeexpertallbootstrap_modal_confirm;
+}

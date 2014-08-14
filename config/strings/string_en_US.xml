@@ -193,4 +193,12 @@
 	<string key="modeexpert.label.value.etablissement">Establishment</string>
 	<string key="modeexpert.label.value.zone">Zone</string>
 	<string key="label.zone.table.update.title">Update a area of tables</string>
+	<string key="modeexpert.label.value.nonaffected">Not affected</string>
+	<string key="modeexpert.label.value.souscategorie">Subcategory</string>
+	<string key="modeexpert.placeholder.value.souscategorie">subcategory</string>
+	<string key="modeexpert.modal.confirm.title.categorie.delete">Delete this category</string>
+	<string key="modeexpert.modal.confirm.message.categorie.delete">Are you sure you want to delete this category</string>
+	<string key="modeexpert.modal.confirm.buttonConf.categorie.delete">Yes</string>
+	<string key="modeexpert.modal.confirm.buttonCanc.categorie.delete">No</string>
+	<string key="modeexpert.modal.confirm.warningMsg.categorie.delete">Warning ! This action is irreversible !</string>
 </strings>

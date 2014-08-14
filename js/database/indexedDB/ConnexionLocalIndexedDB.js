@@ -190,4 +190,7 @@ function ConnexionLocalIndexedDB() {
     this.getAllCategories = function(method, param) {
         console.log("TO DO");
     };
+    this.DeleteCategorie = function(method, id, param) {
+        console.log("TO DO");
+    };
 }
