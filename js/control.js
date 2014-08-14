@@ -133,7 +133,6 @@ function controller(entreprise) {
             };
             break;
         case "pageConnexionServeur":
-            console.log("cds");
             method = function() {
                 onLoadPageConnexionServeur();
                 hideLoading();
@@ -186,7 +185,6 @@ function controller(entreprise) {
             break;
     }
     scripts.loadScripts(nom, method);
-console.log(getParameterByName("indexeddbsupport") );
     if (getParameterByName("indexeddbsupport") != "") {
         if (isIndexedDBSupported()) {
             alert("La base indexedDB est supporté par se navigateur.");
@@ -355,7 +353,7 @@ function getRedirict(page, args) {
 function log(message) {
     var isDev = true;
     if (isDev) {
-        console.log(message);
+//        console.log(message);
     }
 }
 String.prototype.hashCode = function() {

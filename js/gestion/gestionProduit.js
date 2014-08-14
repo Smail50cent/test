@@ -37,7 +37,7 @@ function loadModifiedProduct(produit) {
         $("li[produitid=" + produit.getId() + "]").removeClass();
         $("li[produitid=" + produit.getId() + "]").addClass("produitcat" + categorie + "_sscat" + idsousCat + " produit" + produit.getId() + " produit_cat_structure produit_cat_personalize ");
         var divmod = $(".produit" + produit.getId());
-        console.log(divmod);
+//        console.log(divmod);
         $(".produit" + produit.getId()).remove();
         $("ul[categorieid=" + categorie + "]").append(divmod);
 

@@ -711,11 +711,11 @@ function etapeSuivante() {
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         for (var i = 0; i < qop.length; i++) {
             if (personnes.length > 1) {
-                $("#content_produit_zone_left_id_" + qop[i].getId()).remove();
-                $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();
+                $("#content_produit_zone_left_id_" + qop[i].getId()).remove();//console.log("1");
+                $("#content_produit_zone_right_qop_" + qop[i].getId()).remove();//console.log("2");
                 var select = selectInItemHtml;
                 select = paramValue(select, "id", qop[i].getId());
-                $("#content_produit_zone_recap_id_" + qop[i].getId()).append(select);
+                $("#content_produit_zone_recap_id_" + qop[i].getId()).append(select);//console.log("3");
                 $("#select_item_etape_" + qop[i].getId()).change(function() {
                     var qopId = ($(this).attr("qopId"));
                     var choosedVal = ($(this).val());
@@ -725,9 +725,12 @@ function etapeSuivante() {
                     var optionStart = html;
                     optionStart = paramValue(optionStart, "optionLabel", label);
                     optionStart = paramValue(optionStart, "value", value);
-                    $("#select_item_etape_" + qop[i].getId()).append(optionStart);
+                    
+                    $("#select_item_etape_" + qop[i].getId()).append(optionStart);//console.log("4");
+                    console.log($("#select_item_etape_" + qop[i].getId()).html());
                 }
                 addItemToSelect(optionSelectItem, "no", strings.getString("label.choose.table.option"));
+                
                 for (var j = 0; j < personnes.length; j++) {
                     addItemToSelect(optionSelectItem, personnes[j].id, personnes[j].prenom + " " + personnes[j].nom);
                 }
@@ -1158,16 +1161,17 @@ function ProduitPriorite(produit, priorite) {
 }
 function validerCommande() {
     var ask = confirm(strings.getString("label.info.confirm.valider.commande"));
-    if (ask) {
+    if (ask) {console.log("ok");
         window.onbeforeunload = null;
         var prixparPersonnes = new Array();
+        
         var personnes = JSON.parse(getLocalStorageValue("personnes.couverts"));
         var testsQop = clone(currentTicket.getQuantityOfProduct());
         var personnesProduitsListe = new Array();
         for (var i = 0; i < personnes.length; i++) {
             var personne = null;
             var produits = new Array();
-            var totalPersonne = 0;
+            var totalPersonne = 0;console.log("ok1");
             for (var j = 0; j < (currentTicket.getQuantityOfProduct().length); j++) {
                 if (parseInt(currentTicket.getQuantityOfProduct()[j].personne) == personnes[i].id) {
                     personne = personnes[i];
@@ -1177,24 +1181,24 @@ function validerCommande() {
                     } else {
                         totalPersonne += getPrixHtInAssociation(currentTicket.getQuantityOfProduct()[j].product.associationPrixProduit, currentTicket.getQuantityOfProduct()[j].product.tauxTva);
                     }
-
+console.log("ok2");
                     var index = testsQop.indexOf(currentTicket.getQuantityOfProduct()[j]);
                     testsQop.splice(index, 1);
                 }
             }
-            if (personne != null) {
+            if (personne != null) {console.log("ok3");
                 var personneProduit = new PersonneProduits(personne, produits);
                 personnesProduitsListe.push(personneProduit);
                 prixparPersonnes.push(new PrixParPersonne(personnes[i], totalPersonne));
             }
-        }
+        }console.log("ok4");
         for (var i = 0; i < testsQop.length; i++) {
             prixparPersonnes.push(new ProduitNonAttribue(testsQop[i].product, testsQop[i].id));
         }
         var numTable = getLocalStorageValue("paramCommande.numTable");
         currentTicket.table = numTable;
         var typecommande = getLocalStorageValue("type.commande");
-        currentTicket.type_commande = typecommande;
+        currentTicket.type_commande = typecommande;console.log("ok5");
         envoyerTicketServeur(currentTicket);
         setLocalStorageValue("personnesProduitsListe", JSON.stringify(personnesProduitsListe));
         setLocalStorageValue("reste.personnes.paiment", JSON.stringify(prixparPersonnes));
