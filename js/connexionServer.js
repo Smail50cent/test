@@ -599,13 +599,13 @@ function ConnexionServer() {
                             showErrorMessage(strings.getString("label.error.connexion.serveur"));
                         }
                     });
-                }else{
+                } else {
                     withet();
                 }
-            }else{
+            } else {
                 withet();
             }
-        }else{
+        } else {
             withet();
         }
         function withet() {
@@ -1002,219 +1002,146 @@ function ConnexionServer() {
                 showErrorMessage(strings.getString("label.error.connexion.serveur"));
             }
         });
+//        pAjax(function(data, param, methodExecute) {
+//            var TVA = new Array();
+//            for (var i = 0; i < data.length; i++) {
+//                var tauxtva = new TauxTva();
+//                tauxtva.setId(data[i].id_tva);
+//                tauxtva.setTaux(data[i].taux_tva);
+//                TVA.push(tauxtva);
+//            }
+//            if (methodExecute != null) {
+//                methodExecute(TVA, param);
+//            }
+//        }, {service: "serveur.clientaccess.serviceGetAllTauxTva"}, method, param);
     };
     this.getAllTauxTva = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllTauxTva"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var TVA = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var tauxtva = new TauxTva();
-                    tauxtva.setId(data[i].id_tva);
-                    tauxtva.setTaux(data[i].taux_tva);
-                    TVA.push(tauxtva);
-                }
-
-                if (method != null) {
-                    method(TVA, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var TVA = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var tauxtva = new TauxTva();
+                tauxtva.setId(data[i].id_tva);
+                tauxtva.setTaux(data[i].taux_tva);
+                TVA.push(tauxtva);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(TVA, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllTauxTva"}, method, param);
     };
     this.getAllEtablissements = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllEtablissements"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var etablissements = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var e = new Etablissement();
-                    e.id = data[i].id;
-                    e.nom = data[i].nom;
-                    e.logo = data[i].logo;
-                    e.style = data[i].style;
-                    e.adresseEtab = data[i].adresseEtab;
-                    e.telephone = data[i].telephone;
-                    e.message = data[i].message;
-                    e.slogan = data[i].slogan;
-                    e.groupe = data[i].groupe;
-                    etablissements.push(e);
-                }
-                if (method != null) {
-                    method(etablissements, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var etablissements = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var e = new Etablissement();
+                e.id = data[i].id;
+                e.nom = data[i].nom;
+                e.logo = data[i].logo;
+                e.style = data[i].style;
+                e.adresseEtab = data[i].adresseEtab;
+                e.telephone = data[i].telephone;
+                e.message = data[i].message;
+                e.slogan = data[i].slogan;
+                e.groupe = data[i].groupe;
+                etablissements.push(e);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(etablissements, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllEtablissements"}, method, param);
     };
     this.addOption = function(method, option, param) {
         option = JSON.stringify(option);
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddAllOptions"),
-            type: 'POST',
-            data: {option: option},
-            async: false,
-            success: function(data) {
-                method(data, param);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
+        pAjax(null, {service: "serveur.clientaccess.serviceAddAllOptions", data: {option: option}, async: false}, method, param);
     };
     this.addIngredient = function(method, ingredient, param) {
         ingredient = JSON.stringify(ingredient);
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddAllIngredient"),
-            type: 'POST',
-            data: {ingredient_nom: ingredient},
-            async: false,
-            success: function(data) {
-                method(data, param);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
+        pAjax(null, {service: "serveur.clientaccess.serviceAddAllIngredient", data: {ingredient_nom: ingredient}}, method, param);
     };
     this.getAllIngredients = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllIngredients"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var list = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var ingredient = new Ingredient();
-                    ingredient.setId(data[i].id);
-                    ingredient.setNom(data[i].nom);
-                    list.push(ingredient);
-                }
-                if (method != null) {
-                    method(list, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var list = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var ingredient = new Ingredient();
+                ingredient.setId(data[i].id);
+                ingredient.setNom(data[i].nom);
+                list.push(ingredient);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(list, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllIngredientsV2"}, method, param);
     };
     this.getAllSousCategories = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllSousCategories"),
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data, textStatus, xhr) {
-                var list = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var souscategorie = new SousCategorie();
-                    souscategorie.setId(data[i].ID);
-                    souscategorie.setNom(data[i].NOM);
-                    souscategorie.setPriorite(data[i].priorite);
-                    souscategorie.setCategorie(data[i].categorie_id);
-                    souscategorie.setTauxTva(data[i].taux_tva);
-                    list.push(souscategorie);
-                }
-                if (method != null) {
-                    method(list, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var list = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var souscategorie = new SousCategorie();
+                souscategorie.setId(data[i].ID);
+                souscategorie.setNom(data[i].NOM);
+                souscategorie.setPriorite(data[i].priorite);
+                souscategorie.setCategorie(data[i].categorie_id);
+                souscategorie.setTauxTva(data[i].taux_tva);
+                list.push(souscategorie);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(list, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetAllSousCategoriesV2"}, method, param);
     };
     this.getAllEtablissementsWithZones = function(method, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetAllEtablissementsWithZones"),
-            type: 'GET',
-            dataType: 'json',
-            async: false,
-            success: function(data, textStatus, xhr) {
-                var etablissements = new Array();
-                for (var i = 0; i < data.length; i++) {
-                    var e = new Etablissement();
-                    e.id = data[i].id;
-                    e.nom = data[i].nom;
-                    e.logo = data[i].logo;
-                    e.style = data[i].style;
-                    e.adresseEtab = data[i].adresseEtab;
-                    e.telephone = data[i].telephone;
-                    e.message = data[i].message;
-                    e.slogan = data[i].slogan;
-                    e.groupe = data[i].groupe;
-                    e.zones = new Array();
-                    for (var j = 0; j < data[i].zones.length; j++) {
-                        e.zones.push(new ZoneTable(data [i].zones[j].id, data [i].zones[j].nom, data [i].zones[j].tables, data [i].zones[j].etablissement_id));
-                    }
-                    etablissements.push(e);
+        pAjax(function(data, param, methodExecute) {
+            var etablissements = new Array();
+            for (var i = 0; i < data.length; i++) {
+                var e = new Etablissement();
+                e.id = data[i].id;
+                e.nom = data[i].nom;
+                e.logo = data[i].logo;
+                e.style = data[i].style;
+                e.adresseEtab = data[i].adresseEtab;
+                e.telephone = data[i].telephone;
+                e.message = data[i].message;
+                e.slogan = data[i].slogan;
+                e.groupe = data[i].groupe;
+                e.zones = new Array();
+                for (var j = 0; j < data[i].zones.length; j++) {
+                    e.zones.push(new ZoneTable(data [i].zones[j].id, data [i].zones[j].nom, data [i].zones[j].tables, data [i].zones[j].etablissement_id));
                 }
-                if (method != null) {
-                    method(etablissements, param);
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+                etablissements.push(e);
             }
-        });
+            if (methodExecute != null) {
+                methodExecute(etablissements, param);
+            }
+        }, {"service": "serveur.clientaccess.serviceGetAllEtablissementsWithZones", async: false}, method, param);
     };
     this.addProduit = function(method, produit, param) {
         produit = JSON.stringify(produit);
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceAddProduit"),
-            type: 'POST',
-            data: {produit: produit},
-            async: false,
-            success: function(data) {
-                method(data, param);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var groupe = new Groupe(data.id, data.nom, data.style, data.adresseSiege, data.slogan, data.message,
+                    data.telephone, data.logo);
+            if (methodExecute != null) {
+                methodExecute(groupe, param);
             }
-        });
+        }, {"service": "serveur.clientaccess.serviceAddProduit", data: {produit: produit}}, method, param);
     };
     this.updateProduit = function(method, produit, param) {
         produit = JSON.stringify(produit);
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceUpdateProduit"),
-            type: 'POST',
-            data: {produit: produit},
-            async: true,
-            success: function(data) {
-                method(data, param);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var groupe = new Groupe(data.id, data.nom, data.style, data.adresseSiege, data.slogan, data.message,
+                    data.telephone, data.logo);
+            if (methodExecute != null) {
+                methodExecute(groupe, param);
             }
-        });
+        }, {"service": "serveur.clientaccess.serviceUpdateProduit", data: {produit: produit}}, method, param);
     };
     this.getGroupeById = function(method, id, param) {
-        $.ajax({
-            url: getServicePath("serveur.clientaccess.serviceGetGroupeById") + "?id=" + id,
-            type: 'GET',
-            dataType: 'json',
-            async: true,
-            success: function(data) {
-                var groupe = new Groupe(data.id, data.nom, data.style, data.adresseSiege, data.slogan, data.message,
-                        data.telephone, data.logo);
-                method(groupe, param);
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
+        pAjax(function(data, param, methodExecute) {
+            var groupe = new Groupe(data.id, data.nom, data.style, data.adresseSiege, data.slogan, data.message,
+                    data.telephone, data.logo);
+            if (methodExecute != null) {
+                methodExecute(groupe, param);
             }
-        });
+        }, {"service": "serveur.clientaccess.serviceGetGroupeById", data: {id: id}}, method, param);
     };
     this.sendNewEtablissement = function(method, etablissement, param) {
         etablissement = JSON.stringify(etablissement);
@@ -1340,7 +1267,7 @@ function ConnexionServer() {
     this.addNewTable = function(method, numero, idzoneTable, param) {
         pAjax(null, {service: "serveur.clientaccess.serviceAddTable", data: {idzonetable: idzoneTable, numero: numero}}, method, param);
     };
-    
+
     this.addCategorie = function(method, categorie, param) {
         categorie = JSON.stringify(categorie);
         pAjax(null, {service: "serveur.clientaccess.serviceAddCategorie", data: {categorie: categorie}}, method, param);

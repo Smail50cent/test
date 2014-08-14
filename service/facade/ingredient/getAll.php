@@ -1,18 +1,16 @@
 <?php
 
 /**
- * Description of getById
+ * Description of getAll
  *
  * @author Damien Chesneau <contact@damienchesneau.fr>
  */
 include_once '../../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 try {
-    if (isset($id)) {
-        $produitSrv = LogiqueFactory::getGroupeService();
-        $ret->data = $produitSrv->getById($id);
-    }
+    $ingredientSrv = LogiqueFactory::getIngredientService();
+    $ret->data = $ingredientSrv->getAll();
 } catch (Exception $exc) {
-   $ret->error = true;
+    $ret->error = true;
 }
 echo json_encode($ret);

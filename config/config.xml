@@ -13,8 +13,10 @@
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
         <variable name="serveur.clientaccess.serviceGetAllMenus">getAllMenus</variable>
         <variable name="serveur.clientaccess.serviceGetAllIngredients">getAllIngredients</variable>
+        <variable name="serveur.clientaccess.serviceGetAllIngredientsV2">ingredient/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduits">getAllProduits</variable>
         <variable name="serveur.clientaccess.serviceGetAllSousCategories">getAllSousCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetAllSousCategoriesV2">souscategories/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllTables">getAllTables</variable>
         <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
