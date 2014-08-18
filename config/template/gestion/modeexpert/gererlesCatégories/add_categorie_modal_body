@@ -15,7 +15,6 @@
             </td>
             <td>
                 <input type="text" id="add_categorie_souscategorie_value" ></input>
-                <select id="taux_tva_id"> </select>
             </td>
         </tr>
         <tr class="addcat_tabsouscategorie_structure addcat_tabsouscategorie_personalize">

@@ -61,10 +61,9 @@ ORDER BY association_etablissement_categorie_id_etablissement ASC, categorie_pri
             }
             if ($categorie->getSousCategories() != null) {
                 for ($i = 0; $i < count($categorie->getSousCategories()); $i++) {
-                    $bdd->executeGeneric("INSERT INTO souscategorie(NOM,categorie_id,priorite,tauxDeTva)"
+                    $bdd->executeGeneric("INSERT INTO souscategorie(NOM,categorie_id,priorite)"
                             . "VALUES('" . $categorie->getSousCategories()[$i]->getNom() . "',"
-                            . " '" . $idCategorie . "', '" . $categorie->getSousCategories()[$i]->getPriorite() . "',"
-                            . " '" . $categorie->getSousCategories()[$i]->getTaux_tva() . "' ) ");
+                            . " '" . $idCategorie . "', '" . $categorie->getSousCategories()[$i]->getPriorite() . "') ");
                 }
             }
 

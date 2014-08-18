@@ -18,7 +18,7 @@ try {
                 $souscategorie = new SousCategorie();
                 $souscategorie->setNom($categorie->souscategorie[$i]->nom);
                 $souscategorie->setPriorite($categorie->souscategorie[$i]->priorite);
-                $souscategorie->setTaux_tva($categorie->souscategorie[$i]->taux_tva);
+                //$souscategorie->setTaux_tva($categorie->souscategorie[$i]->taux_tva);
                 array_push($souscategories, $souscategorie);
             }
             $categoriephp->setSousCategories($souscategories);

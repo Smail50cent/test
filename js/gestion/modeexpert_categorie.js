@@ -5,14 +5,20 @@ function LoadGestionCategories() {
     htmlGererLesCategories = paramValue(htmlGererLesCategories, "title", strings.getString("mode.expert.label.gerer.categories"));
     var htmlGererLesCategoriesbutton = paramValue(htmlGererLesCategories, "labelButtonAdd", strings.getString("mode.expert.label.ajouter.categorie"));
     $("#new_container").html(htmlGererLesCategoriesbutton);
-    $("#table_gererlescategories_all").append(getGererlesCategoriesTableThead());
     var htmlTbody = getGererlesCategoriesTableTbodyTr();
     $("#tr_actions_tablecategories").text(strings.getString("label.gererlessites.table.head.action.tr"));
 
     getConnexion().getAllCategories(allCat);
     function allCat(categorie) {
         //console.log(categorie);
+        var idetab = null;
         for (var i = 0; i < categorie.length; i++) {
+            if (categorie[i].etablissement[0].id != idetab) {
+                var table = getGererlesCategoriesTableTbody();
+                table = paramValue(table, "id_etab", categorie[i].etablissement[0].id);
+                $(".table-responsive").append(table);
+                $("#table_gererlescategories_all_"+categorie[i].etablissement[0].id).append(getGererlesCategoriesTableThead());
+            }
             var litbody = htmlTbody;
             litbody = paramValue(litbody, "idcat", categorie[i].id);
             litbody = paramValue(litbody, "nom", categorie[i].nom);
@@ -20,22 +26,17 @@ function LoadGestionCategories() {
             if (categorie[i].etablissement.length == 0) {
                 litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
             } else {
-                var etab = "";
-                for (var j = 0; j < categorie[i].etablissement.length; j++) {
-                    etab += categorie[i].etablissement[j].nom + " ";
-                }
+                var etab = categorie[i].etablissement[0].nom;
+                idetab = categorie[i].etablissement[0].id;
                 litbody = paramValue(litbody, "etablissement", etab);
             }
             if (categorie[i].zone.length == 0) {
                 litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
             } else {
-                var zone = "";
-                for (var j = 0; j < categorie[i].zone.length; j++) {
-                    zone += categorie[i].zone[j] + " ";
-                }
+                var zone = categorie[i].zone[0];
                 litbody = paramValue(litbody, "zone", zone);
             }
-            $("#table_gererlescategories_all").append(litbody);
+            $("#table_gererlescategories_all_"+categorie[i].etablissement[0].id).append(litbody);
         }
     }
 }
@@ -62,15 +63,15 @@ function addCategorie() {
     $("#add_categorie_nom_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.nom"));
     $("#add_categorie_priorite_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.priorite"));
     $("#add_categorie_souscategorie_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.souscategorie"));
-    getConnexion().getAllTauxTva(getTva);
-    function getTva(tva) {
-        for (var i = 0; i < tva.length; i++) {
-            $("#taux_tva_id").append($('<option>', {
-                value: tva[i].taux + " " + tva[i].id,
-                text: tva[i].taux
-            }));
-        }
-    }
+//    getConnexion().getAllTauxTva(getTva);
+//    function getTva(tva) {
+//        for (var i = 0; i < tva.length; i++) {
+//            $("#taux_tva_id").append($('<option>', {
+//                value: tva[i].taux + " " + tva[i].id,
+//                text: tva[i].taux
+//            }));
+//        }
+//    }
     loadEtablissmentInModal();
     $('#myModal').modal('show');
 }
@@ -82,10 +83,10 @@ function validerAjoutCategorie() {
     var i = 1;
     $("#list_SousCat_id option").each(function() {
         var valsouCat = $(this).val();
-        var Nomtaux = valsouCat.split(" ");
+        //var Nomtaux = valsouCat.split(" ");
         var sousCat = new SousCategorie();
-        sousCat.setNom(Nomtaux[0]);
-        sousCat.setTauxTva(Nomtaux[1]);
+        sousCat.setNom(valsouCat);
+        //sousCat.setTauxTva(Nomtaux[1]);
         sousCat.setPriorite(i);
         souscategories.push(sousCat);
         i++;
@@ -95,21 +96,25 @@ function validerAjoutCategorie() {
         if ($(this).attr("selectallzoneInEtablissement")) {
             var isChecked = $(this).is(":checked");
             var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            var nom = $("p[id=etablissement_div_" + id + "]").text();
             if (isChecked == true) {
                 var etabZone = new Etablissement();
                 etabZone.setId(id);
+                etabZone.setNom(nom);
                 etabZone.setZones(null);
                 listeEtabZone.push(etabZone);
             }
             //console.log($(this).attr("id"), isChecked);
         } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var nomEtablissement = $("p[id=etablissement_div_" + idEtablissement + "]").text();
             var idZone = parseInt($(this).attr("idzone"));
             var isChecked = $(this).is(":checked");
             var isEnabled = $(this).is(":enabled");
             if (isChecked == true && isEnabled) {
                 var etabZone = new Etablissement();
                 etabZone.setId(idEtablissement);
+                etabZone.setNom(nomEtablissement);
                 etabZone.setZones(idZone);
                 listeEtabZone.push(etabZone);
             }
@@ -122,18 +127,45 @@ function validerAjoutCategorie() {
     console.log(categorie);
     getConnexion().addCategorie(addcat, categorie);
     function addcat(data) {
-        console.log(data);
-        $('#myModal').modal('hide');
-        LoadGestionCategories();
+        if (data != null) {
+            if (data.hasOwnProperty("error")) {
+                console.log("error");
+            } else {
+                if (categorie.getEtablissement() != null) {
+                    for (var j = 0; j < categorie.etablissement.length; j++) {
+                        var litbody = getGererlesCategoriesTableTbodyTr();
+                        litbody = paramValue(litbody, "idcat", data.id);
+                        litbody = paramValue(litbody, "nom", categorie.getNom());
+                        litbody = paramValue(litbody, "priorite", 0);
+                        litbody = paramValue(litbody, "etablissement", categorie.etablissement[j].nom);
+                        if (categorie.getEtablissement()[j].getZones() != null) {
+                            litbody = paramValue(litbody, "zone", categorie.etablissement[j].zones);
+                        } else {
+                            litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
+                        }
+                        $("#table_gererlescategories_all").prepend(litbody);
+                    }
+                } else {
+                    var litbody = getGererlesCategoriesTableTbodyTr();
+                    litbody = paramValue(litbody, "idcat", data.id);
+                    litbody = paramValue(litbody, "nom", categorie.getNom());
+                    litbody = paramValue(litbody, "priorite", 0);
+                    litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
+                }
+            }
+            $('#myModal').modal('hide');
+        }
     }
+
+    // LoadGestionCategories();
 }
 
 function insertSousCat() {
     var txtsousCat = $("#add_categorie_souscategorie_value").val();
-    var taux_tva = $("#taux_tva_id").val();
-    var idTva = taux_tva.split(" ");
+//    var taux_tva = $("#taux_tva_id").val();
+//    var idTva = taux_tva.split(" ");
     $("#list_SousCat_id").append($('<option>', {
-        value: txtsousCat + " " + idTva[1],
+        value: txtsousCat,
         text: txtsousCat
     }));
     $("#add_categorie_souscategorie_value").val("");
@@ -184,7 +216,10 @@ function confirmDeleteCategorie(id) {
                 console.log("error");
             }
         } else {
-            LoadGestionCategories();
+            $("tr[idcategorie=" + id + "]").each(function() {
+                $(this).remove();
+            });
+            //LoadGestionCategories();
             $("#modalConf").remove();
             $(".modal-backdrop").remove();
         }

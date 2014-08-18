@@ -948,3 +948,11 @@ function getBootstrapModalConfirm() {
     var mygestionmodeexpertallbootstrap_modal_confirm = gestionmodeexpertallbootstrap_modal_confirm;
     return mygestionmodeexpertallbootstrap_modal_confirm;
 }
+var gestionmodeexpertgererlesCategoriestable_tbody = null;
+function getGererlesCategoriesTableTbody() {
+    if (gestionmodeexpertgererlesCategoriestable_tbody == null) {
+        gestionmodeexpertgererlesCategoriestable_tbody = templates.getTemplate("gestion/modeexpert/gererlesCatégories/table_tbody");
+    }
+    var mygestionmodeexpertgererlesCategoriestable_tbody = gestionmodeexpertgererlesCategoriestable_tbody;
+    return mygestionmodeexpertgererlesCategoriestable_tbody;
+}
