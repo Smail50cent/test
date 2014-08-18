@@ -31,4 +31,8 @@ class CategorieServiceImpl implements CategorieService {
         $this->categorieSrv->delete($id);
     }
 
+    public function getPriorite($id) {
+        return $this->categorieSrv->getPriorite($id);
+    }
+
 }

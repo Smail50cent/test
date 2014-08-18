@@ -1263,4 +1263,7 @@ function ConnexionServer() {
     this.updateZoneTable = function(method, nom, idzoneTable, param) {
         pAjax(null, {service: "serveur.clientaccess.serviceUpdateZone", data: {idzonetable: idzoneTable, nom: nom}}, method, param);
     };
+    this.getPrioriteByEtablissment = function(method, id, param) {
+        pAjax(null, {service: "serveur.clientaccess.serviceGetPrioriteCategorie", data: {idCat: id}}, method, param);
+    };
 }

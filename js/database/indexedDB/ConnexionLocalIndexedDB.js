@@ -193,4 +193,7 @@ function ConnexionLocalIndexedDB() {
     this.DeleteCategorie = function(method, id, param) {
         console.log("TO DO");
     };
+    this.getPrioriteByEtablissment = function(method, id, param) {
+        console.log("TO DO");
+    };
 }

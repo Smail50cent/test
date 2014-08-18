@@ -38,17 +38,11 @@ try {
         }
 
         $categorieSrv = LogiqueFactory::getCategorieService();
-        $rett = new retid();
-        $rett->id = $categorieSrv->add($categoriephp);
-        $ret->data = $rett;
+        $ret->data = $categorieSrv->add($categoriephp);
+
     }
 } catch (Exception $exc) {
     $ret->error = true;
 }
 echo json_encode($ret);
 
-class retid {
-
-    public $id;
-
-}

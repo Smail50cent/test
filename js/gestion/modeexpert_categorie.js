@@ -1,44 +1,50 @@
 
 function LoadGestionCategories() {
-    updateActivedLi(2);
-    var htmlGererLesCategories = getGererLesCategorie();
-    htmlGererLesCategories = paramValue(htmlGererLesCategories, "title", strings.getString("mode.expert.label.gerer.categories"));
-    var htmlGererLesCategoriesbutton = paramValue(htmlGererLesCategories, "labelButtonAdd", strings.getString("mode.expert.label.ajouter.categorie"));
-    $("#new_container").html(htmlGererLesCategoriesbutton);
-    var htmlTbody = getGererlesCategoriesTableTbodyTr();
-    $("#tr_actions_tablecategories").text(strings.getString("label.gererlessites.table.head.action.tr"));
+    scripts.loadScripts("lib.dialog", function() {
+        updateActivedLi(2);
+        var htmlGererLesCategories = getGererLesCategorie();
+        htmlGererLesCategories = paramValue(htmlGererLesCategories, "title", strings.getString("mode.expert.label.gerer.categories"));
+        var htmlGererLesCategoriesbutton = paramValue(htmlGererLesCategories, "labelButtonAdd", strings.getString("mode.expert.label.ajouter.categorie"));
+        $("#new_container").html(htmlGererLesCategoriesbutton);
+        var htmlTbody = getGererlesCategoriesTableTbodyTr();
+        $("#tr_actions_tablecategories").text(strings.getString("label.gererlessites.table.head.action.tr"));
 
-    getConnexion().getAllCategories(allCat);
-    function allCat(categorie) {
-        //console.log(categorie);
-        var idetab = null;
-        for (var i = 0; i < categorie.length; i++) {
-            if (categorie[i].etablissement[0].id != idetab) {
-                var table = getGererlesCategoriesTableTbody();
-                table = paramValue(table, "id_etab", categorie[i].etablissement[0].id);
-                $(".table-responsive").append(table);
-                $("#table_gererlescategories_all_"+categorie[i].etablissement[0].id).append(getGererlesCategoriesTableThead());
+        getConnexion().getAllCategories(allCat);
+        function allCat(categorie) {
+            //console.log(categorie);
+            var idetab = null;
+            for (var i = 0; i < categorie.length; i++) {
+                if (categorie[i].etablissement[0].id != idetab) {
+                    var table = getGererlesCategoriesTableTbody();
+                    table = paramValue(table, "id_etab", categorie[i].etablissement[0].id);
+                    $(".table-responsive").append(table);
+                    $("#table_gererlescategories_all_" + categorie[i].etablissement[0].id).append(getGererlesCategoriesTableThead());
+                }
+                var litbody = htmlTbody;
+                litbody = paramValue(litbody, "idcat", categorie[i].id);
+                litbody = paramValue(litbody, "nom", categorie[i].nom);
+                litbody = paramValue(litbody, "priorite", categorie[i].priorite);
+                if (categorie[i].etablissement.length == 0) {
+                    litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
+                } else {
+                    var etab = categorie[i].etablissement[0].nom;
+                    idetab = categorie[i].etablissement[0].id;
+                    litbody = paramValue(litbody, "etablissement", etab);
+                }
+                if (categorie[i].zone.length == 0) {
+                    litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
+                } else {
+                    var zone = categorie[i].zone[0];
+                    litbody = paramValue(litbody, "zone", zone);
+                }
+                $("#table_gererlescategories_all_" + categorie[i].etablissement[0].id).append(litbody);
             }
-            var litbody = htmlTbody;
-            litbody = paramValue(litbody, "idcat", categorie[i].id);
-            litbody = paramValue(litbody, "nom", categorie[i].nom);
-            litbody = paramValue(litbody, "priorite", categorie[i].priorite);
-            if (categorie[i].etablissement.length == 0) {
-                litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
-            } else {
-                var etab = categorie[i].etablissement[0].nom;
-                idetab = categorie[i].etablissement[0].id;
-                litbody = paramValue(litbody, "etablissement", etab);
-            }
-            if (categorie[i].zone.length == 0) {
-                litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
-            } else {
-                var zone = categorie[i].zone[0];
-                litbody = paramValue(litbody, "zone", zone);
-            }
-            $("#table_gererlescategories_all_"+categorie[i].etablissement[0].id).append(litbody);
+            $(".table tbody").sortable({stop: function(evt, ui) {
+                    console.log("stop");
+                }
+            }).disableSelection();
         }
-    }
+    });
 }
 
 function addCategorie() {
@@ -131,26 +137,29 @@ function validerAjoutCategorie() {
             if (data.hasOwnProperty("error")) {
                 console.log("error");
             } else {
-                if (categorie.getEtablissement() != null) {
-                    for (var j = 0; j < categorie.etablissement.length; j++) {
-                        var litbody = getGererlesCategoriesTableTbodyTr();
-                        litbody = paramValue(litbody, "idcat", data.id);
-                        litbody = paramValue(litbody, "nom", categorie.getNom());
-                        litbody = paramValue(litbody, "priorite", 0);
-                        litbody = paramValue(litbody, "etablissement", categorie.etablissement[j].nom);
-                        if (categorie.getEtablissement()[j].getZones() != null) {
-                            litbody = paramValue(litbody, "zone", categorie.etablissement[j].zones);
-                        } else {
-                            litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
+                getConnexion().getPrioriteByEtablissment(association, data);
+                function association(priorite) {
+                    console.log(data);
+                    if (categorie.getEtablissement() != null) {
+                        for (var j = 0; j < categorie.etablissement.length; j++) {
+                            var litbody = getGererlesCategoriesTableTbodyTr();
+                            litbody = paramValue(litbody, "idcat", data);
+                            litbody = paramValue(litbody, "nom", categorie.getNom());
+                            for (var i = 0; i < priorite.length; i++) {
+                                if(priorite[i].etablissement_id == categorie.etablissement[j].id) {
+                                    litbody = paramValue(litbody, "priorite", priorite[i].priorite);
+                                    break;
+                                }
+                            }
+                            litbody = paramValue(litbody, "etablissement", categorie.etablissement[j].nom);
+                            if (categorie.getEtablissement()[j].getZones() != null) {
+                                litbody = paramValue(litbody, "zone", categorie.etablissement[j].zones);
+                            } else {
+                                litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
+                            }
+                            $("#table_gererlescategories_all_" + categorie.etablissement[j].id).append(litbody);
                         }
-                        $("#table_gererlescategories_all").prepend(litbody);
                     }
-                } else {
-                    var litbody = getGererlesCategoriesTableTbodyTr();
-                    litbody = paramValue(litbody, "idcat", data.id);
-                    litbody = paramValue(litbody, "nom", categorie.getNom());
-                    litbody = paramValue(litbody, "priorite", 0);
-                    litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
                 }
             }
             $('#myModal').modal('hide');
