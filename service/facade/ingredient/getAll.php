@@ -8,10 +8,9 @@
 include_once '../../outils/AppRoot.php';
 include_once $path . 'service/logique/LogiqueFactory.php';
 try {
-    $typeCommandeSrv = LogiqueFactory::getTypeCommandeService();
-    $ret->data = $typeCommandeSrv->getAll();
-} catch (Exception $ex) {
+    $ingredientSrv = LogiqueFactory::getIngredientService();
+    $ret->data = $ingredientSrv->getAll();
+} catch (Exception $exc) {
     $ret->error = true;
 }
-
 echo json_encode($ret);
