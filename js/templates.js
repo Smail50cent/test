@@ -921,7 +921,7 @@ function getGererlesCategoriesTableTbodyTr() {
     return mygestionmodeexpertgererlesCategoriestable_tbody_tr;
 }
 var gestionmodeexpertgererlescategoriestable_thead = null;
-function getGererlesCategoriesTableThead() {
+function getGererlesCategoriesTableThead(idEtab) {
     if (gestionmodeexpertgererlescategoriestable_thead == null) {
         gestionmodeexpertgererlescategoriestable_thead = templates.getTemplate("gestion/modeexpert/gererlesCatégories/table_thead");
     }
@@ -930,6 +930,7 @@ function getGererlesCategoriesTableThead() {
     mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "priorite", strings.getString("modeexpert.label.value.priorite"));
     mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "etablissement", strings.getString("modeexpert.label.value.etablissement"));
     mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "zone", strings.getString("modeexpert.label.value.zone"));
+    mygestionmodeexpertgererlescategoriestable_thead = paramValue(mygestionmodeexpertgererlescategoriestable_thead, "idetab", idEtab);
     return mygestionmodeexpertgererlescategoriestable_thead;
 }
 var gestionmodeexpertgererlescategoriesadd_site_modal_body = null;

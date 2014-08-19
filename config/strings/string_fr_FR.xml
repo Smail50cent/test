@@ -167,7 +167,7 @@
 	<string key="add.produit.alert.modifier.produit">Votre produit a été modifié avec succés</string>
 	<string key="add.produit.dialog.title.modifier.produit">Modifier le produit</string>
 	<string key="add.produit.alert.produit">Produit</string>
-	<string key="add.produit.alert.verify.produit.name">Choisissez un nom à votre produit</string>
+	<string key="add.produit.alert.verify.produit.name">Choisissez un nom pour votre produit</string>
 	<string key="add.produit.alert.verify.categorie">Choisissez une Catégorie et une Sous Catégorie</string>
 	<string key="add.produit.alert.ingredient">Ingrédient</string>
 	<string key="add.produit.alert.verify.ingredient">Attention vous n'avez pas choisie d'Ingrédient</string>

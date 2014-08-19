@@ -16,13 +16,16 @@ function LoadGestionCategories() {
             for (var i = 0; i < categorie.length; i++) {
                 if (categorie[i].etablissement[0].id != idetab) {
                     var table = getGererlesCategoriesTableTbody();
-                    table = paramValue(table, "id_etab", categorie[i].etablissement[0].id);
+                    var etablissementID = categorie[i].etablissement[0].id;
+                    table = paramValue(table, "id_etab", etablissementID);
                     $(".table-responsive").append(table);
-                    $("#table_gererlescategories_all_" + categorie[i].etablissement[0].id).append(getGererlesCategoriesTableThead());
+                    $("#table_gererlescategories_all_" + etablissementID).append(getGererlesCategoriesTableThead(etablissementID));
                 }
                 var litbody = htmlTbody;
                 litbody = paramValue(litbody, "idcat", categorie[i].id);
                 litbody = paramValue(litbody, "nom", categorie[i].nom);
+                litbody = paramValue(litbody, "order", categorie[i].priorite);
+                litbody = paramValue(litbody, "etablissement_id", etablissementID);
                 litbody = paramValue(litbody, "priorite", categorie[i].priorite);
                 if (categorie[i].etablissement.length == 0) {
                     litbody = paramValue(litbody, "etablissement", strings.getString("modeexpert.label.value.nonaffected"));
@@ -37,10 +40,10 @@ function LoadGestionCategories() {
                     var zone = categorie[i].zone[0];
                     litbody = paramValue(litbody, "zone", zone);
                 }
-                $("#table_gererlescategories_all_" + categorie[i].etablissement[0].id).append(litbody);
+                $("#table_gererlescategories_all_" + etablissementID).append(litbody);
             }
             $(".table tbody").sortable({stop: function(evt, ui) {
-                    console.log("stop");
+                    reOrderRows();
                 }
             }).disableSelection();
         }
@@ -69,15 +72,7 @@ function addCategorie() {
     $("#add_categorie_nom_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.nom"));
     $("#add_categorie_priorite_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.priorite"));
     $("#add_categorie_souscategorie_value").attr("placeholder", strings.getString("modeexpert.placeholder.value.souscategorie"));
-//    getConnexion().getAllTauxTva(getTva);
-//    function getTva(tva) {
-//        for (var i = 0; i < tva.length; i++) {
-//            $("#taux_tva_id").append($('<option>', {
-//                value: tva[i].taux + " " + tva[i].id,
-//                text: tva[i].taux
-//            }));
-//        }
-//    }
+
     loadEtablissmentInModal();
     $('#myModal').modal('show');
 }
@@ -110,7 +105,6 @@ function validerAjoutCategorie() {
                 etabZone.setZones(null);
                 listeEtabZone.push(etabZone);
             }
-            //console.log($(this).attr("id"), isChecked);
         } else if ($(this).attr("idetablissement")) {
             var idEtablissement = parseInt($(this).attr("idetablissement"));
             var nomEtablissement = $("p[id=etablissement_div_" + idEtablissement + "]").text();
@@ -146,7 +140,7 @@ function validerAjoutCategorie() {
                             litbody = paramValue(litbody, "idcat", data);
                             litbody = paramValue(litbody, "nom", categorie.getNom());
                             for (var i = 0; i < priorite.length; i++) {
-                                if(priorite[i].etablissement_id == categorie.etablissement[j].id) {
+                                if (priorite[i].etablissement_id == categorie.etablissement[j].id) {
                                     litbody = paramValue(litbody, "priorite", priorite[i].priorite);
                                     break;
                                 }
@@ -165,8 +159,6 @@ function validerAjoutCategorie() {
             $('#myModal').modal('hide');
         }
     }
-
-    // LoadGestionCategories();
 }
 
 function insertSousCat() {
@@ -228,7 +220,6 @@ function confirmDeleteCategorie(id) {
             $("tr[idcategorie=" + id + "]").each(function() {
                 $(this).remove();
             });
-            //LoadGestionCategories();
             $("#modalConf").remove();
             $(".modal-backdrop").remove();
         }
@@ -238,4 +229,53 @@ function confirmDeleteCategorie(id) {
 function cancelDeleteCategorie() {
     $("#modalConf").remove();
     $(".modal-backdrop").remove();
+}
+
+function reOrderRows() {
+
+    $(".table ").each(function() {
+        var idetab = $(this).attr("idetablissement");
+        var i = 1;
+        $(this).find("tr[idetab=" + idetab + "]").each(function() {
+            $(this).attr("order", i++);
+        });
+    });
+}
+
+function saveEtablissementCategorie(idEtab) {
+    var catPriorites = new Array();
+    $(".table[idetablissement=" + idEtab + "]").each(function() {
+        $(this).find("tr[idetab=" + idEtab + "]").each(function() {
+            if ($(this).attr("order") != $(this).attr("priorite")) {
+                var idcat = $(this).attr("idcategorie");
+                var priorite = $(this).attr("order");
+                var catPr = new Categorie();
+                catPr.setId(idcat);
+                catPr.setPriorite(priorite);
+                catPr.setEtablissement(idEtab);
+                catPriorites.push(catPr);
+            }
+        });
+    });
+    //console.log(catPriorites);
+    if (catPriorites.length > 0) {
+        getConnexion().updatePriority(allUp, catPriorites);
+        function allUp(data) {
+            if (data != null) {
+                if (data.hasOwnProperty("error")) {
+                    console.log("error");
+                    alert("error");
+                } else {
+                    console.log(data);
+                    for (var i = 0; i < catPriorites.length; i++) {
+                        var ordre = $("tr[idcategorie=" + catPriorites[i].getId() + "]").attr("order");
+                        $("tr[idcategorie=" + catPriorites[i].getId() + "]").attr("priorite", ordre);
+                        $("tr[idcategorie=" + catPriorites[i].getId() + "] td p[typelabel=priorite]").text(ordre);
+                    }
+                }
+            }
+        }
+    } else {
+        alert("nothing to update!");
+    }
 }

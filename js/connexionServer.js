@@ -1266,4 +1266,8 @@ function ConnexionServer() {
     this.getPrioriteByEtablissment = function(method, id, param) {
         pAjax(null, {service: "serveur.clientaccess.serviceGetPrioriteCategorie", data: {idCat: id}}, method, param);
     };
+    this.updatePriority = function(method, categorie, param) {
+        categorie = JSON.stringify(categorie);
+        pAjax(null, {service: "serveur.clientaccess.serviceUpdatePrioriteCategorie", data: {categorie: categorie}}, method, param);
+    };
 }

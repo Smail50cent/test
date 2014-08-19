@@ -151,4 +151,7 @@ function ConnexionLocalWebSQL() {
     this.getPrioriteByEtablissment = function(method, id, param) {
         console.log("TO DO");
     };
+    this.updatePriority = function(method, categorie, param) {
+        console.log("TO DO");
+    };
 }

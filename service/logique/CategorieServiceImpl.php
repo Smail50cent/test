@@ -1,6 +1,6 @@
 <?php
 
-include_once $path.'service/logique/CategorieService.php';
+include_once $path . 'service/logique/CategorieService.php';
 include_once $path . 'service/logique/entity/Categorie.php';
 
 /**
@@ -33,6 +33,10 @@ class CategorieServiceImpl implements CategorieService {
 
     public function getPriorite($id) {
         return $this->categorieSrv->getPriorite($id);
+    }
+
+    public function updatePriority($categories) {
+        return $this->categorieSrv->updatePriority($categories);
     }
 
 }

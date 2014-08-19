@@ -290,4 +290,15 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
         return $assoc;
     }
 
+    public function updatePriority($categories) {
+        $bdd = new ConnexionBDD();
+        for ($i = 0; $i < count($categories); $i++) {
+            $bdd->executeGeneric("UPDATE association_etablissement_categorie "
+                    . "SET priorite = '" . $categories[$i]->getPriorite() . "' "
+                    . "WHERE id_categorie = '" . $categories[$i]->getId() . "' "
+                    . "AND id_etablissement = '" . $categories[$i]->getEtablissements()[0]->getId() . "' ");
+        }
+        return true;
+    }
+
 }
