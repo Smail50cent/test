@@ -124,6 +124,7 @@
     right: 9em !important;
     box-shadow: 1px 1px 15px #000;
     z-index: 1000;
+    left: 50% !important
 }
 
 .dialog-modif-produit {
@@ -1194,6 +1195,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background-color: rgba(0, 0, 0, 0.6);
             box-shadow: 0 3px 5px #000000;
             min-height: 55px;
+            max-height: 55px;
             border-radius: 5px;
         }
 
@@ -1921,6 +1923,15 @@ background: rgba(248, 255, 197, 0.5);
 .footer_tarif_personalize {
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
+}
+
+
+
+/*________________________Fen�tre erreur_____________________*/
+.dialog_error.dialog_error_structure.dialog_error_personalize {
+    position: absolute;
+    top: 22em;
+    right: 34%;
 }
 }
 }
