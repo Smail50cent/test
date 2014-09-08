@@ -7,7 +7,6 @@ $("#nbpersonnes_label").text(strings.getString("label.paramcommande.question.nbc
 $("#numerotable_label").text(strings.getString("label.paramcommande.question.choosetable"));
 $('#all_snbutton_id').hide();
 function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
-//    if (zoneTable) {
     var typeCommande = parseInt(getLocalStorageValue("type.commande"));
     if (typeCommande == 5) {
 
@@ -17,12 +16,12 @@ function onLoadParamCommande(nbMaxPersonnes, tables, chooseLang) {
     } else {
         var htmlOp = getOptionInChooseTable();
         var langs = getLangagesSupported();
-        var itemFirst = htmlOp; 
+        var itemFirst = htmlOp;
         itemFirst = paramValue(itemFirst, "OptionName", strings.getString("label.select.one.lang"));
         itemFirst = paramValue(itemFirst, "OptionValue", "no");
         $("#select_lang").append(itemFirst);
         for (var i = 0; i < langs.length; i++) {
-            var itemOther = htmlOp;console.log(langs);
+            var itemOther = htmlOp;
             itemOther = paramValue(itemOther, "OptionName", langs[i].label);
             itemOther = paramValue(itemOther, "OptionValue", langs[i].id);
             $("#select_lang").append(itemOther);
@@ -113,7 +112,7 @@ function printTableByIdZone(index, zonetables) {
     for (var i = 0; i < zonetables[index].tables.length; i++) {
         var itemOptionTable = htmlOptionTable;
         itemOptionTable = paramValue(itemOptionTable, "OptionName", strings.getString("label.choose.table.option.genreic") + " " + zonetables[index].tables[i].numero);
-        itemOptionTable = paramValue(itemOptionTable, "OptionValue", zonetables[0].tables[i].id);
+        itemOptionTable = paramValue(itemOptionTable, "OptionValue", zonetables[index].tables[i].id);
         $("#numTable").append(itemOptionTable);
     }
     setLocalStorageValue("tables", JSON.stringify(zonetables[index].tables));
@@ -130,35 +129,33 @@ function startCommande(numTable, nbPersonne) {
     redirictWhereFinishParamCommande();
 }
 function chooseIfOpCompte(paramApp, param) {
-    //console.log(paramApp);
-
-
-    var test = JSON.parse(paramApp.getValeur_parametre());
-    //console.log(test);
-    if (paramApp.getValeur_parametre() == true) {
-        console.log("load compte");
-        onLoadCompte(true, null, "-17", null);
-    } else {
-        var personnes = new Array();
-        for (var i = 0; i < parseInt($("#nbPersonnes").val()); i++) {
-            var connexion = getConnexion();
-            connexion.addCompte(insertFromLastId, "Visiteur", 3, {"i": i});
-            function insertFromLastId(LastId, param) {
-                var prenom = strings.getString("label.where.gestion.user.disable");
-                var nom = (i + 1);
-                connexion.addAttributCompte(2, nom, 1, LastId);
-                connexion.addAttributCompte(3, prenom, 1, LastId);
-                var personne = new Personne();
-                personne.setId(LastId);
-                personne.setNom(nom);
-                personne.setPrenom(prenom);
-                listePersonnes.push(personne);
-                setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
-                if ((param.i + 1) == parseInt($("#nbPersonnes").val())) {
-                    startCommande($("#numTable").val(), $("#nbPersonnes").val());
+    if (paramApp != null) {
+        var test = JSON.parse(paramApp.getValeur_parametre());
+        if (paramApp.getValeur_parametre() == true) {
+            onLoadCompte(true, null, "-17", null);
+        } else {
+            var personnes = new Array();
+            for (var i = 0; i < parseInt($("#nbPersonnes").val()); i++) {
+                var connexion = getConnexion();
+                connexion.addCompte(insertFromLastId, "Visiteur", 3, {"i": i});
+                function insertFromLastId(LastId, param) {
+                    var prenom = strings.getString("label.where.gestion.user.disable");
+                    var nom = (i + 1);
+                    connexion.addAttributCompte(2, nom, 1, LastId);
+                    connexion.addAttributCompte(3, prenom, 1, LastId);
+                    var personne = new Personne();
+                    personne.setId(LastId);
+                    personne.setNom(nom);
+                    personne.setPrenom(prenom);
+                    listePersonnes.push(personne);
+                    setLocalStorageValue("personnes.couverts", JSON.stringify(listePersonnes));
+                    if ((param.i + 1) == parseInt($("#nbPersonnes").val())) {
+                        startCommande($("#numTable").val(), $("#nbPersonnes").val());
+                    }
                 }
             }
-        }
 //        redirictWhereFinishParamCommande();
+        }
     }
+
 }

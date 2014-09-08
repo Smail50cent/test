@@ -1,11 +1,11 @@
 
  <label id="label_uncheck_opt_id" class="label_uncheck_structure label_uncheck_personalize">
-<input id="uncheck_all_option_id" type="checkbox" name="option[]" />Tout cocher / décocher</label>
+<input id="uncheck_all_option_id" type="checkbox" name="option[]" />{check}</label>
 <div id="select_option_id" class="select_option select_option_structure select_ingredient_personalize">
 </div>
 
 <div class="show_insert_dialog_structure show_insert_dialog_personalize">
-<label id="label_ajout_option_id" class="label_ajout_option_structure label_ajout_option_personalize"> Ajout Option </label> 
+<label id="label_ajout_option_id" class="label_ajout_option_structure label_ajout_option_personalize"> {addOpt} </label> 
 <div onclick="formInsertOption();" type="button" id="insertOpt_id" class="insertOpt_structure insertOpt_personalize">
 <img src="img/gestion/produit/insert.png" width="22" height="22" id="insert_icon_id" class="insert_icon_structure insert_icon_personalize"></div>
 </div>

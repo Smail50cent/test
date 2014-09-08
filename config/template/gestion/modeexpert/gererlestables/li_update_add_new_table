@@ -1,0 +1,10 @@
+<li class="table_already_in_zone_li_strucutre table_already_in_zone_li_personalize" idzonetable="{idzonetable}" idtable="{idtable}">
+    <div class="table_already_in_zone_divp_strucutre table_already_in_zone_divp_personalize" type="divinput" idzonetable="{idzonetable}" idtable="{idtable}">
+        <input type="text" placeholder="{placeholder}" idzonetable="{idzonetable}" nbtable="{idtable}"></input>
+    </div>
+    <div class="table_already_in_zone_divcontol_strucutre table_already_in_zone_divcontol_personalize" type="divcontol" idzonetable="{idzonetable}" idtable="{idtable}">
+        <button type="button" onclick="addNewTable();" class="btn btn-default btn-sm section_remove_table_button_personalize section_remove_table_button_strucutre">
+            <span class="glyphicon glyphicon-plus section_remove_table_span_structure section_remove_table_span_personalize"></span>
+        </button>
+    </div>
+</li> 

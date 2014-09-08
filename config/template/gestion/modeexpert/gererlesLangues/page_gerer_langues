@@ -10,9 +10,9 @@
     </div>
     <div class="developpement_div_add_str" style="border-color: red;
     border-style: double;">
-        Clé : <input id="key_val" type="text"></input><br>
-        Français : <input id="fr_val" type="text"></input><br>
-        Anglais : <input id="en_val" type="text"></input><br>
+        Clé : <input id="key_val" type="text" style="width: 300px"></input><br>
+        Français : <input id="fr_val" type="text" style="width: 300px"></input><br>
+        Anglais : <input id="en_val" type="text" style="width: 300px"></input><br>
         <input type="button" onclick="addStr();" value="Ajouter"></input>
 </div>
 </div>

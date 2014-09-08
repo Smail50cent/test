@@ -1,31 +1,19 @@
+var loadCategorieForGestion = false;
+var loadIngredientForGestion = false;
+var loadOptionsForGestion = false;
+var loadPrixForGestion = false;
+var loadEtablissementForGestion = false;
+
 
 function onLoadGP() {
     scripts.loadScripts("lib.dialog", function() {
-        var htmlDivdrop = getDivGestionDropdown();
-        htmlDivdrop = paramValue(htmlDivdrop, "labelDropdown", strings.getString("label.dropdown.autreparam"));
-        $("#header_id").append(htmlDivdrop);
-        var htmlLi = getLiDropDownImg();
-        var liDropdown = htmlLi;
-        liDropdown = paramValue(liDropdown, "src", "./img/albert.png");
-        liDropdown = paramValue(liDropdown, "onclick", "goExpertMode();");
-        liDropdown = paramValue(liDropdown, "name", strings.getString("gestion.dropdwon.item1"));
-        $("#ul_dropdown_gestion").append(liDropdown);
-        var liDropdown2 = htmlLi;
-        liDropdown2 = paramValue(liDropdown2, "src", "./img/gestioncompte.gif");
-        liDropdown2 = paramValue(liDropdown2, "onclick", "goGestionCompteUtilisateur();");
-        liDropdown2 = paramValue(liDropdown2, "name", strings.getString("gestion.dropdwon.itemdegestioncompte"));
-        $("#ul_dropdown_gestion").append(liDropdown2);
-        $("#ul_dropdown_gestion").append(getLiDropDownDivider());
-        var liDropdown3 = getLiDropDown();
-        liDropdown3 = paramValue(liDropdown3, "onclick", "disconnectUser();");
-        liDropdown3 = paramValue(liDropdown3, "name", strings.getString("gestion.dropdwon.itemdeconnexion"));
-        $("#ul_dropdown_gestion").append(liDropdown3);
+        loadOtherParameterForEmployee();
         loadViewsForAddProduit();
     });
 }
 
 function loadViewsForAddProduit() {
-    $('#content_titre_id').html("Gestion des Produits");
+    $('#content_titre_id').html(strings.getString("add.produit.main.title"));
     $('.content_produit_zone_right_structure').empty();
     $('.content_produit_zone_left_structure').empty();
     var modifdiv = getDivModifProduit();
@@ -37,23 +25,67 @@ function loadViewsForAddProduit() {
     $('#liste_souscategorie_id').hide();
 }
 
+function loadModifiedProduct(produit) {
+    if (produit != "undefined") {
+        $("#content_produit_titre_id_" + produit.getId()).html(produit.getNom());
+        var prix = produit.getAssociationPrixProduit()[0].getPrixHt().prix;
+        $("#content_produit_zone_right_prix_id_" + produit.getId()).html(fntp(calculPrixWithTVA(prix, produit.getTauxTva())));
+        var categorie = produit.getCategorie().id;
+        var idsousCat = produit.getSousCategorie().id;
+        var idCat = "categorie" + categorie;
+
+        $("li[produitid=" + produit.getId() + "]").removeClass();
+        $("li[produitid=" + produit.getId() + "]").addClass("produitcat" + categorie + "_sscat" + idsousCat + " produit" + produit.getId() + " produit_cat_structure produit_cat_personalize ");
+        var divmod = $(".produit" + produit.getId());
+//        console.log(divmod);
+        $(".produit" + produit.getId()).remove();
+        $("ul[categorieid=" + categorie + "]").append(divmod);
+
+        $(".genreicClassSlide").each(function() {
+            if ($(this).attr('id') == idCat) {
+                $(this).addClass("active");
+                $(".produit_cat_structure").each(function() {
+                    if ($(this).hasClass("produitcat" + categorie + "_sscat" + idsousCat)) {
+                        $(this).css("display", "inline-table");
+                    } else
+                    if (!$(this).hasClass("produit_info")) {
+                        $(this).css("display", "none");
+                    }
+                });
+            } else {
+                $(this).removeClass("active");
+            }
+        });
+
+        $("#alert_error_id").freeow("Produit", strings.getString("add.produit.alert.modifier.produit"), {
+            classes: ["smokey", "pushpin"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+    }
+}
+
 function ModifyProduct(id) {
+    loadCategorieForGestion = false;
+    loadIngredientForGestion = false;
+    loadOptionsForGestion = false;
+    loadPrixForGestion = false;
+    loadEtablissementForGestion = false;
     var idprod = id.parent().parent().parent().attr('produitid');
-    $("#alert_error_id").freeow("Modification", "n'est pas encore disponible " + idprod, {
-        classes: ["smokey", "pushpin"],
-        hideStyle: {opacity: 0, left: "400px"},
-        showStyle: {opacity: 1, left: 0}
-    });
+    var dialogTitle = strings.getString("add.produit.dialog.title.modifier.produit");
     $("#dialog_add_produit_id").dialog({
         modal: true,
-        title: "Modifier le produit",
+        title: dialogTitle,
         autoOpen: true,
         position: 'top',
         dialogClass: 'dialog-modif-produit',
         buttons: {
             valider: function() {
-                $(this).dialog("destroy");
-                $('#dialog_add_produit_id').empty();
+                if (updateProduct()) {
+                    $(this).dialog("destroy");
+                    $('#dialog_add_produit_id').empty();
+                }
             },
             annuler: function() {
                 $(this).dialog("destroy");
@@ -65,6 +97,8 @@ function ModifyProduct(id) {
             $('#dialog_add_produit_id').empty();
         }
     });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var divadd = getDivAddProduit();
     $("#dialog_add_produit_id").html(divadd);
     // Name, Categorie, SousCategorie
@@ -91,17 +125,214 @@ function ModifyProduct(id) {
     htmlAll = paramValue(htmlAll, "inputVal", strings.getString("gestion.produit.ajout.etablissement.labelvaliderproduit"));
     $("#content_add_produit_zone_input_id").append(htmlAll);
     loadEtablissement();
-    
+
     $('.prev_page_structure, .next_page_structure, .btn_validation_ajout_produit_structure').each(function() {
         $(this).remove();
     });
+    function mafunct() {
+        getConnexion().getProduitByIdGeneric(produitById, idprod);
+        function produitById(data) {
+            //console.log(data);
+            $("#tva_0 option[value=\"" + parseFloat(data.tauxTva) + "\"]").prop("selected", true);
+            $('#name_prod_Id').val(data.nom);
+            $('#name_prod_Id').attr("idproduit", data.id);
+            $("#liste_categorie_id option[value=" + data.id_categorie.id + "]").prop("selected", true);
+            $('#liste_souscategorie_id').append($('<option>', {
+                value: data.id_sousCategorie.id,
+                text: data.id_sousCategorie.nom
+            }));
+            $("#liste_souscategorie_id option[value=" + data.id_sousCategorie.id + "]").prop("selected", true);
+            if (data.ids_ingredients != null) {
+                for (var i = 0; i < data.ids_ingredients.length; i++) {
+                    $(".ingredient_checkbox[id=" + data.ids_ingredients[i].ingredient + "]").prop("checked", true);
+                }
+            }
+            if (data.options != null) {
+                for (var i = 0; i < data.options.length; i++) {
+                    $(".option_checkbox[id=" + data.options[i].id + "]").prop("checked", true);
+                }
+            }
+            var prixHt, TVA;
+            for (var i = 0; i < data.associationPrixProduit.length; i++) {
+                if (data.associationPrixProduit[i].heureDebut == null && data.associationPrixProduit[i].heureFin == null && data.associationPrixProduit[i].zoneTable.id == null) {
+                    prixHt = data.associationPrixProduit[i].prixHt.prix;
+                    TVA = data.tauxTva;
+                    break;
+                }
+            }
+            var prixTTC = calculPrixWithTVA(prixHt, TVA);
+            $("#input_defaut_prix_id").val(parseFloat(prixTTC.toFixed(2)));
+            $("#label_val_prixttc_id").text(prixHt);
+
+            if (data.zones != null) {
+                for (var i = 0; i < data.zones.length; i++) {
+                    $(".li_zones_etablissement_checkbox_structure[idzone=" + data.zones[i] + "]").prop("checked", true);
+                }
+            }
+
+            for (var i = 0; i < data.etablissements.length; i++) {
+                var zoneChecked = false;
+                $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                    if (this.checked) {
+                        zoneChecked = true;
+                    }
+                });
+                if (!zoneChecked) {
+                    $(".etablissement_div_header_select_structure[selectallzoneinetablissement=" + data.etablissements[i] + "]").prop("checked", true);
+                    $(".li_zones_etablissement_checkbox_structure[idetablissement=" + data.etablissements[i] + "]").each(function() {
+                        this.disabled = true;
+                        this.checked = true;
+                    });
+                }
+            }
+        }
+    }
+    threadd();
+    function threadd() {
+        window.setTimeout(function() {
+            if (loadCategorieForGestion && loadIngredientForGestion && loadOptionsForGestion && loadPrixForGestion && loadEtablissementForGestion) {
+                console.log("Finished Loading");
+                mafunct();
+            } else {
+                threadd();
+            }
+        }, 10);
+    }
+
+}
+
+function updateProduct() {
+    var produit = new Produit();
+    var categorie = new Categorie();
+    var souscategorie = new SousCategorie();
+
+    var idCat = $("#liste_categorie_id :selected").val();
+    var idSousCat = $("#liste_souscategorie_id :selected").val();
+    var nomProduit = $("#name_prod_Id").val();
+    var idproduit = $("#name_prod_Id").attr("idproduit");
+    if (idCat != 0 && idSousCat != 0 && nomProduit != "") {
+        produit.setId(idproduit);
+        produit.setNom(nomProduit);
+        categorie.setId(idCat);
+        souscategorie.setId(idSousCat);
+        produit.setCategorie(categorie);
+        produit.setSousCategorie(souscategorie);
+    } else {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.produit.name"), {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.categorie"), {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        return false;
+    }
+    var list = new Array();
+    $(".ingredient_checkbox:checked").each(function() {
+        var ingredient = new Ingredient();
+        ingredient.setId($(this).attr('id'));
+        list.push(ingredient);
+    });
+    if (list.length == 0) {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.ingredient"), strings.getString("add.produit.alert.verify.ingredient"), {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setIdsIngredients(list);
+    } else {
+        produit.setIdsIngredients(list);
+    }
+
+    var list2 = new Array();
+    $(".option_checkbox:checked").each(function() {
+        var option = new Option();
+        option.setId($(this).attr('id'));
+        list2.push(option);
+    });
+    if (list2.length == 0) {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.options"), strings.getString("add.produit.alert.verify.options"), {
+            classes: ["smokey", "notice"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        produit.setOptions(list2);
+    } else {
+        produit.setOptions(list2);
+    }
+
+    var list3 = new Array();
+    var prix = $("#label_val_prixttc_id").text();
+    var objprix = {prix: prix};
+    var Tva = $("#tva_0").val();
+    var associationPrixProduit = new AssociationProduitPrix();
+    associationPrixProduit.setDatedebut(null);
+    associationPrixProduit.setDatefin(null);
+    associationPrixProduit.setPrixHt(objprix);
+    associationPrixProduit.setZonetable(null);
+    list3.push(associationPrixProduit);
+    produit.setAssociationPrixProduit(list3);
+    produit.setTauxTva(Tva);
+    if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.prix"), strings.getString("add.produit.alert.verify.prix"), {
+            classes: ["smokey", "error"],
+            hideStyle: {opacity: 0, left: "400px"},
+            showStyle: {opacity: 1, left: 0},
+            hideDuration: 8000
+        });
+        return false;
+    }
+
+    var listeEtabZone = new Array();
+    $('input[type=checkbox]').each(function() {
+        if ($(this).attr("selectallzoneInEtablissement")) {
+            var isChecked = $(this).is(":checked");
+            var id = parseInt($(this).attr("selectallzoneInEtablissement"));
+            if (isChecked == true) {
+                var etabZone = new Etablissement();
+                etabZone.setId(id);
+                etabZone.setZones(null);
+                listeEtabZone.push(etabZone);
+            }
+        } else if ($(this).attr("idetablissement")) {
+            var idEtablissement = parseInt($(this).attr("idetablissement"));
+            var idZone = parseInt($(this).attr("idzone"));
+            var isChecked = $(this).is(":checked");
+            var isEnabled = $(this).is(":enabled");
+            if (isChecked == true && isEnabled) {
+                var etabZone = new Etablissement();
+                etabZone.setId(idEtablissement);
+                etabZone.setZones(idZone);
+                listeEtabZone.push(etabZone);
+            }
+        }
+    });
+    produit.setEtablissements(listeEtabZone);
+    getConnexion().updateProduit(updateProd, produit, produit);
+    function updateProd(data, param) {
+//        if (data) {
+        loadModifiedProduct(param);
+        console.log(param);
+//            (param);
+//        }
+    }
+
+    return true;
 }
 
 function DeleteProduct(id) {
     var idprod = id.parent().parent().parent().attr('produitid');
+    var dialogTitle = strings.getString("add.produit.dialog.title.produit.delete");
     $('#confirm_dialog_produit_id').dialog({
         modal: true,
-        title: 'Voulez vous supprimer ce produit ?',
+        title: dialogTitle,
         autoOpen: true,
         position: 'center',
         buttons: {
@@ -123,10 +354,13 @@ function DeleteProduct(id) {
             $('#confirm_dialog_produit_id').empty();
         }
     });
+    $('.ui-button-text:contains(Yes)').text(strings.getString("add.produit.button.dialog.delete.yes"));
+    $('.ui-button-text:contains(No)').text(strings.getString("add.produit.button.dialog.delete.no"));
 }
 
 function productPage() {
-    $('#dialog_add_produit_id').dialog({modal: false, title: 'Ajouter un Produit', autoOpen: true, dialogClass: "dialog-ajout-produit",
+    var dialogTitle = strings.getString("add.produit.dialog.title");
+    $('#dialog_add_produit_id').dialog({modal: false, title: dialogTitle, autoOpen: true, dialogClass: "dialog-ajout-produit",
         close: function(event, ui) {
             $(this).dialog("destroy");
             $(".produit_info").remove();
@@ -142,7 +376,7 @@ function productPage() {
     var page1input = getPage1AddProduit();
     var page1show = getPage1ShowAddProduit();
     $('#content_add_produit_zone_input_id').html(page1input);
-    $('#content_produit_zone_id').html(page1show);
+    $('.content_produit_zone_show').html(page1show);
     var position = {my: 'left center', at: 'right+10 center'};
     $(".tooltip").tooltip();
     $(".tooltip").tooltip("option", "position", position);
@@ -164,13 +398,13 @@ function submit_productPage() {
         produit.setSousCategorie(souscategorie);
         ingredientPage();
     } else {
-        $("#alert_error_id").freeow("Produit", "Ajouter un nom à votre produit", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.produit.name"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
             hideDuration: 8000
         });
-        $("#alert_error_id").freeow("Produit", "Choisissez une Catégorie et une Sous Catégorie", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.produit"), strings.getString("add.produit.alert.verify.categorie"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -179,11 +413,7 @@ function submit_productPage() {
     }
 
 }
-function loadCatSousCat() {
-//    $("#name_prod_Id").val(produit.getNom());
-//    $('#label_categorie_prod_id').text(produit.getCategorie());
-//    $('#label_souscat_prod_id').text(produit.getSousCategorie());
-
+function loadCatSousCat(method) {
     $("input#name_prod_Id").on("keyup", function() {
         $('#content_produit_titre_id').text($(this).val());
     });
@@ -195,6 +425,7 @@ function loadCatSousCat() {
                 text: categorie[i].nom
             }));
         }
+        loadCategorieForGestion = true;
     }
     $('#liste_categorie_id').change(function() {
         $('#liste_souscategorie_id').empty();
@@ -222,14 +453,13 @@ function loadCatSousCat() {
             }
         }
     });
-
     $('#liste_souscategorie_id').change(function() {
         $('#label_souscat_prod_id').text($(this).find(":selected").text());
     });
 }
 
 function ingredientPage() {
-    $('.ui-dialog-title').html("Ajouter les Ingrédients");
+    $('.ui-dialog-title').html(strings.getString("add.produit.dialog.title.ingredient"));
     $('#content_produit_description_id').empty();
     var ingredDiv = getPageIngredAddProduit();
     $('#dialog_add_produit_id').html(ingredDiv);
@@ -276,7 +506,7 @@ function loadIngredient() {
         $('#autocomplete_ingredient_id').keyup(function() {
             if ($.inArray(this.value, listIngredient) == -1 && this.value.length > 0) {
                 $(".tooltip").tooltip("open");
-                $(".tooltip").tooltip("option", "content", "cette ingrédient n'existe pas, tapez entrer pour l'ajouter");
+                $(".tooltip").tooltip("option", "content", strings.getString("add.produit.input.ingredient.title.notfound"));
 
                 $('#autocomplete_ingredient_id').keypress(function() {
                     var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -343,7 +573,7 @@ function loadIngredient() {
                 });
 
             } else {
-                $(".tooltip").tooltip("option", "content", "entrez ici le nom de l'ingrédient");
+                $(".tooltip").tooltip("option", "content", strings.getString("add.produit.input.ingredient.title"));
             }
         });
         $('.ingredient_checkbox').change(function() {
@@ -356,6 +586,7 @@ function loadIngredient() {
                 $("#" + this.value.hashCode()).parent().remove();
             }
         });
+        loadIngredientForGestion = true;
     }
 }
 
@@ -367,7 +598,7 @@ function submit_ingredientPage() {
         list.push(ingredient);
     });
     if (list.length == 0) {
-        $("#alert_error_id").freeow("Ingrédient", "Attention vous n'avez pas choisie d'Ingrédient", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.ingredient"), strings.getString("add.produit.alert.verify.ingredient"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -381,19 +612,21 @@ function submit_ingredientPage() {
     }
 }
 function formInsertIngredient() {
-
+    var dialogTitle = strings.getString("add.produit.dialog.title.ingredient");
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter un Ingrédient', autoOpen: true, position: 'right', dialogClass: "second_dialog",
+            {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
-                    annuler: function() {
+                    Cancel: function() {
                         $(this).dialog("destroy");
                         $("#dialog_add_opt_ingred_id").empty();
                     },
-                    valider: function() {
-                        insertIngredDB();
-                        $(this).dialog("destroy");
-                        $("#dialog_add_opt_ingred_id").empty();
-                        ingredientPage();
+                    Submit: function() {
+                        if ($("#list_ingred_id").length > 0) {
+                            insertIngredDB();
+                            $(this).dialog("destroy");
+                            $("#dialog_add_opt_ingred_id").empty();
+                            ingredientPage();
+                        }
                     }
                 },
                 close: function() {
@@ -401,6 +634,8 @@ function formInsertIngredient() {
                     $("#dialog_add_opt_ingred_id").empty();
                 }
             });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var ingredDiv = getDivAddIngredient();
     $("#dialog_add_opt_ingred_id").html(ingredDiv);
 }
@@ -423,7 +658,6 @@ function removeIngred() {
 function insertIngredDB() {
     if ($("select").has('option').length > 0) {
         var list = new Array();
-        var ingredient = new Ingredient();
         $("#list_ingred_id option").each(function() {
             var ingredient = new Ingredient();
             ingredient.setNom($(this).val());
@@ -452,7 +686,9 @@ function UncheckAllBoxIngredOpt(id) {
 }
 
 function optionPage() {
-    $('.ui-dialog-title').html("Ajouter les Options");
+    var dialogTitle = strings.getString("add.produit.dialog.title.options");
+    $('.ui-dialog-title').html(dialogTitle);
+    $("li[optionid]").remove();
     var optProd = getOptionAddProduit();
     $('#dialog_add_produit_id').html(optProd);
     loadOptions();
@@ -495,6 +731,7 @@ function loadOptions() {
             }
         });
         UncheckAllBoxIngredOpt("#uncheck_all_option_id");
+        loadOptionsForGestion = true;
     }
 }
 
@@ -506,7 +743,7 @@ function submit_optionPage() {
         list.push(option);
     });
     if (list.length == 0) {
-        $("#alert_error_id").freeow("Option", "Attention vous n'avez pas choisie d'Option", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.options"), strings.getString("add.produit.alert.verify.options"), {
             classes: ["smokey", "notice"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -537,59 +774,60 @@ function loadPrix() {
             for (var i = 0; i < TVA.length; i++) {
                 AllTva.push(TVA[i]);
             }
-        }
-        // A NOTER : REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
-        getConnexion().getAllZoneTables(getZones);
-        function getZones(zones) {
-            var id_etab = getLocalStorageValue("client.application.etablissement.id");
-            for (var i = 0; i < zones.length; i++) {
-                if (zones[i].etablissement_id == id_etab) {
-                    var zonePrix = getPrixZoneAddProduit();
-                    var zoneName = paramValue(zonePrix, "zone_name", zones[i].nom);
-                    var zoneId = paramValue(zoneName, "zone_prix_id", zones[i].id);
-                    $('#div_zone_id').append(zoneId);
+            // A NOTER : REMPLACER getAllZoneTables par getZoneTableByIdEtablissement
+            getConnexion().getAllZoneTables(getZones);
+            function getZones(zones) {
+                var id_etab = getLocalStorageValue("client.application.etablissement.id");
+                for (var i = 0; i < zones.length; i++) {
+                    if (zones[i].etablissement_id == id_etab) {
+                        var zonePrix = getPrixZoneAddProduit();
+                        var zoneName = paramValue(zonePrix, "zone_name", zones[i].nom);
+                        var zoneId = paramValue(zoneName, "zone_prix_id", zones[i].id);
+                        $('#div_zone_id').append(zoneId);
+                    }
                 }
-            }
-            $("#div_zone_id").hide();
-            $(".tva_produit").each(function() {
-                for (var j = 0; j < AllTva.length; j++) {
-                    $(this).append($('<option>', {
-                        value: AllTva[j].taux,
-                        text: parseFloat(AllTva[j].taux)
-                    }));
-                }
-            });
-            $("input#input_defaut_prix_id").on("keyup", function() {
-                $("#label_val_prixttc_id").text($(this).val());
-                var valPrix = $(this).val();
-                $('.input_zone_prix').each(function() {
-                    var idzone = $(this).parent().attr('parentId');
-                    var taux = $("#tva_" + idzone).val();
-                    if (taux != 0) {
-                        var prixHT = parseFloat(valPrix) - parseFloat(valPrix) * parseFloat(taux) / 100;
-                        $(this).val(parseFloat(prixHT));
-                    } else {
-                        $(this).val(parseFloat(valPrix));
+                $("#div_zone_id").hide();
+                $(".tva_produit").each(function() {
+                    for (var j = 0; j < AllTva.length; j++) {
+                        $(this).append($('<option>', {
+                            value: AllTva[j].taux,
+                            text: parseFloat(AllTva[j].taux)
+                        }));
                     }
                 });
-            });
-
-            $('.tva_produit ').change(function() {
-                if ($(this).val() != 0) {
-                    var selectId = $(this).attr("tvaid");
-                    var selectTVA = $(this).val();
-                    $(".input_zone_prix, .input_defaut_prix").each(function() {
-                        var prix = $(this).val();
-                        if ($(this).attr('id_inputprix') == selectId) {
-                            if ($(this).val() != 0) {
-                                $("#label_val_prixttc_id").text(calculPrixWithoutTVA(prix, selectTVA));
-                            }
+                $("input#input_defaut_prix_id").on("keyup", function() {
+                    $("#label_val_prixttc_id").text($(this).val());
+                    var valPrix = $(this).val();
+                    $('.input_zone_prix').each(function() {
+                        var idzone = $(this).parent().attr('parentId');
+                        var taux = $("#tva_" + idzone).val();
+                        if (taux != 0) {
+                            var prixHT = parseFloat(valPrix) - parseFloat(valPrix) * parseFloat(taux) / 100;
+                            $(this).val(parseFloat(prixHT));
+                        } else {
+                            $(this).val(parseFloat(valPrix));
                         }
                     });
-                } else {
-                    $("#label_val_prixttc_id").text($("#input_defaut_prix_id").val());
-                }
-            });
+                });
+
+                $('.tva_produit ').change(function() {
+                    if ($(this).val() != 0) {
+                        var selectId = $(this).attr("tvaid");
+                        var selectTVA = $(this).val();
+                        $(".input_zone_prix, .input_defaut_prix").each(function() {
+                            var prix = $(this).val();
+                            if ($(this).attr('id_inputprix') == selectId) {
+                                if ($(this).val() != 0) {
+                                    $("#label_val_prixttc_id").text(calculPrixWithoutTVA(prix, selectTVA));
+                                }
+                            }
+                        });
+                    } else {
+                        $("#label_val_prixttc_id").text($("#input_defaut_prix_id").val());
+                    }
+                });
+                loadPrixForGestion = true;
+            }
         }
     });
 }
@@ -648,7 +886,7 @@ function submit_prixPage() {
     produit.setAssociationPrixProduit(list);
     produit.setTauxTva(Tva);
     if (!$("#label_val_prixttc_id").text().trim() || parseFloat(prix) < 0) {
-        $("#alert_error_id").freeow("Prix", "Vous devez entrer un prix avant de continuer", {
+        $("#alert_error_id").freeow(strings.getString("add.produit.alert.prix"), strings.getString("add.produit.alert.verify.prix"), {
             classes: ["smokey", "error"],
             hideStyle: {opacity: 0, left: "400px"},
             showStyle: {opacity: 1, left: 0},
@@ -738,7 +976,7 @@ function loadEtablissement() {
             }
 
         });
-
+        loadEtablissementForGestion = true;
     }
 
 }
@@ -780,13 +1018,13 @@ function validerProduit() {
     submitEtablissements();
     if (clickValider == 0) {
         if (produit.etablissements.length == 0) {
-            $("#alert_error_id").freeow("Etablissement", "Cliquez une deuxième pour continuer quand meme", {
+            $("#alert_error_id").freeow(strings.getString("add.produit.alert.etablissement"), strings.getString("add.produit.alert.etablissement.click"), {
                 classes: ["smokey", "notice"],
                 hideStyle: {opacity: 0, left: "400px"},
                 showStyle: {opacity: 1, left: 0},
                 hideDuration: 8000
             });
-            $("#alert_error_id").freeow("Etablissement", "Attention Vous n'avez pas choisie un établissement ", {
+            $("#alert_error_id").freeow(strings.getString("add.produit.alert.etablissement"), strings.getString("add.produit.alert.etablissement.verify"), {
                 classes: ["smokey", "notice"],
                 hideStyle: {opacity: 0, left: "400px"},
                 showStyle: {opacity: 1, left: 0},
@@ -820,8 +1058,9 @@ function validerProduit() {
 var tailleItem = new Array("small-item-structure small-item-personalize",
         "medium-item-structure medium-item-personalize", "large-item-structure large-item-personalize ");
 function formInsertOption() {
+    var dialogTitle = strings.getString("add.produit.dialog.title.options.add");
     $("#dialog_add_opt_ingred_id").dialog(
-            {modal: true, title: 'Ajouter une Option', autoOpen: true, position: 'right', dialogClass: "second_dialog",
+            {modal: true, title: dialogTitle, autoOpen: true, position: 'right', dialogClass: "second_dialog",
                 buttons: {
                     annuler: function() {
                         $(this).dialog("destroy");
@@ -839,6 +1078,8 @@ function formInsertOption() {
                     $("#dialog_add_opt_ingred_id").empty();
                 }
             });
+    $('.ui-button-text:contains(valider)').text(strings.getString("add.produit.button.dialog.add.ingredient.submit"));
+    $('.ui-button-text:contains(annuler)').text(strings.getString("add.produit.button.dialog.add.ingredient.cancel"));
     var divOpt = getDivAddOption();
     $("#dialog_add_opt_ingred_id").html(divOpt);
     $('#insert_option_id').keyup(function() {

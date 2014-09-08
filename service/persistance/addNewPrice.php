@@ -3,13 +3,17 @@
 include_once '../outils/AppRoot.php';
 include_once $path . 'service/persistance/PersistanceFactory.php';
 include_once $path . 'service/logique/entity/Strings.php';
-$fichier = '../../config/string_en_US.xml';
-$xml = simplexml_load_file($fichier);
 $srv = PersistanceFactory::getStringsService();
-for ($i = 0; $i < count($xml->string); $i++) {
-    $string = new Strings();
-    $string ->setKey_lang($xml->string[$i]['key']);
-    $string ->setValue($xml->string[$i]);
-    $string ->setLang("en_US");
-    $srv->add($string);
+$frs = $srv->getByLang('fr_FR');
+$uss = $srv->getByLang('en_US');
+for ($i = 0; $i < count($frs); $i++) {
+    $present = false;
+    for ($j = 0; $j < count($uss); $j++) {
+        if ($frs[$i]->getKey_lang() == $uss[$j]->getKey_lang()) {
+            $present = true;
+        }
+    }
+    if ($present == false) {
+        echo 'key_lang="' . $frs[$i]->getKey_lang(). '" value="' . $frs[$i]->getValue().'"<br>';
+    }
 }

@@ -9,11 +9,14 @@
         <variable name="serveur.clientaccess.applicationName">appcaisse</variable>
         <variable name="serveur.clientaccess.servicesAccess">service/facade</variable>
         <variable name="serveur.clientaccess.serviceGetAllCategories">getAllCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetAllCategoriesWF">categorie/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetEntreprise">getEntreprise</variable>
         <variable name="serveur.clientaccess.serviceGetAllMenus">getAllMenus</variable>
         <variable name="serveur.clientaccess.serviceGetAllIngredients">getAllIngredients</variable>
+        <variable name="serveur.clientaccess.serviceGetAllIngredientsV2">ingredient/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllProduits">getAllProduits</variable>
         <variable name="serveur.clientaccess.serviceGetAllSousCategories">getAllSousCategories</variable>
+        <variable name="serveur.clientaccess.serviceGetAllSousCategoriesV2">souscategories/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetAllTables">getAllTables</variable>
         <variable name="serveur.clientaccess.serviceGetAllComptes">getAllComptes</variable>
         <variable name="serveur.clientaccess.serviceGetAllParamForms">getAllParamForms</variable>
@@ -45,11 +48,13 @@
         <variable name="serveur.clientaccess.serviceGetParamAppByNom">getParamAppByNom</variable>
         <variable name="serveur.clientaccess.serviceGethaveMAJ">haveMAJ</variable>
         <variable name="serveur.clientaccess.serviceDeleteProduit">deleteProduit</variable>
+        <variable name="serveur.clientaccess.serviceDeleteProduitV2">produit/remove</variable>
         <variable name="serveur.clientaccess.serviceGetDateReservationWhereDateNull">reservation/getDateReservationWhereDateNull</variable>
         <variable name="serveur.clientaccess.serviceGetAllOptions">option/getAll</variable>
         <variable name="serveur.clientaccess.serviceAddAllOptions">option/addAll</variable>
         <variable name="serveur.clientaccess.serviceAddAllIngredient">ingredient/addAll</variable>
         <variable name="serveur.clientaccess.serviceAddProduit">produit/add</variable>
+        <variable name="serveur.clientaccess.serviceUpdateProduit">produit/update</variable>
         <variable name="serveur.clientaccess.serviceGetAllTauxTva">tauxTva/getAll</variable>
         <variable name="serveur.clientaccess.serviceGetGroupeById">groupe/getById</variable>
         <variable name="serveur.clientaccess.serviceGetAllEtablissementsWithZones">etablissement/getAllWithZones</variable>
@@ -67,6 +72,15 @@
         <variable name="serveur.clientaccess.serviceGetAllLangues">langues/getAll</variable>
         <variable name="serveur.clientaccess.serviceSetLangEnable">langues/setLangActif</variable>
         <variable name="serveur.clientaccess.servicesetLangDiable">langues/setLangDisable</variable>    
+        <variable name="serveur.clientaccess.serviceremoveZoneTable">zoneTables/remove</variable>  
+        <variable name="serveur.clientaccess.serviceAddZoneTable">zoneTables/add</variable> 
+        <variable name="serveur.clientaccess.serviceRemoveTable">zoneTables/removeTable</variable> 
+        <variable name="serveur.clientaccess.serviceGetZoneTableById">zoneTables/getById</variable> 
+        <variable name="serveur.clientaccess.serviceUpdateZone">zoneTables/update</variable>
+        <variable name="serveur.clientaccess.serviceAddCategorie">categorie/add</variable>
+        <variable name="serveur.clientaccess.serviceDeleteCategorie">categorie/delete</variable>
+        <variable name="serveur.clientaccess.serviceGetPrioriteCategorie">categorie/getPriorite</variable>
+        <variable name="serveur.clientaccess.serviceUpdatePrioriteCategorie">categorie/updatePriority</variable>
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>
@@ -98,5 +112,6 @@
         <variable name="tableNameTypeCommande">typeCommandes</variable>
         <variable name="tableNameParamApplication">parametresApplication</variable>
         <variable name="tableNameZoneTables">zonesTables</variable>
+        <variable name="indexedDB.database.version">1</variable>
     </variables>
 </application>

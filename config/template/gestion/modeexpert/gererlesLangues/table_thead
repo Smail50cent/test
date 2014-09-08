@@ -1,6 +1,6 @@
 <thead class="section_tableaulangues_thead_structure section_tableaulangues_thead_personalize">
     <tr class="section_tableaulangues_thead_tr_structure section_tableaulangues_thead_tr_personalize">
-        <th class="section_tableaulangues_thead_nom_structure section_tableaulangues_thead_nom_personalize">Langue</th>
-        <th class="section_tableaulangues_thead_logo_structure section_tableaulangues_thead_logo_personalize">Actions</th>
+        <th class="section_tableaulangues_thead_nom_structure section_tableaulangues_thead_nom_personalize">{langues}</th>
+        <th class="section_tableaulangues_thead_logo_structure section_tableaulangues_thead_logo_personalize">{actions}</th>
    </tr>
 </thead>

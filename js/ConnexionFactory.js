@@ -9,13 +9,8 @@ function getConnexion() {
     } else {
         if (isLocalBddSuppored()) {
             return getImplOfConnexionLocal();
-        }
-        else {
-            if (isMozilla()) {
-                return getConnexionServeur();
-            } else {
-                return getImplOfConnexionLocal();
-            }
+        } else {
+            return getConnexionServeur();
         }
     }
 }

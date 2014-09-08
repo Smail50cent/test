@@ -8,7 +8,7 @@ myStorage.indexedDB.getAllOptions = function(methodToExecuteAfter) {
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameOptions")], myStorage.IDBTransactionModes.READ_WRITE);

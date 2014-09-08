@@ -12,7 +12,7 @@ myStorage.indexedDB.addFirstParametreApplication = function() {
     }
     function addParamApplication2(paramApp) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -45,29 +45,40 @@ myStorage.indexedDB.getParametreApplicationByNom = function(method, nom, param) 
     }, delay);
     function impl(method, nom, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_ONLY);
             var store = trans.objectStore(config.getConfig("tableNameParamApplication"));
-            var index = store.index("nom_parametre");
-            var request = index.get(nom.toString());
-            request.onsuccess = function(e) {
+            var keyRange = IDBKeyRange.lowerBound(0);
+            var cursorRequest = store.openCursor(keyRange);
+            var parametreApplication = new Array();
+            cursorRequest.onsuccess = function(e) {
                 var result = e.target.result;
-                var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
-                var parametreApplication = null;
-                if (idetablissement == parseInt(result.etablissement) || result.etablissement == null) {
-                    parametreApplication = new ParametreApplication();
-                    parametreApplication.setId(result.id);
-                    parametreApplication.setNomParametre(result.nom_parametre);
-                    parametreApplication.setValeurParametre(parseInt(result.valeur_parametre));
-                    parametreApplication.setEtablissement(parseInt(result.etablissement));
+                if (!!result == false) {
+                    return;
                 }
-                if (method != null) {//Nous avons besoin de l'executer.
-                    method(parametreApplication, param);
+                if (nom == result.value.nom_parametre) {
+                    var myparametreApplication = new ParametreApplication();
+                    myparametreApplication.setId(result.value.id);
+                    myparametreApplication.setNomParametre(result.value.nom_parametre);
+                    myparametreApplication.setEtablissement(result.value.etablissement);
+                    myparametreApplication.setValeurParametre(result.value.valeur_parametre);
+                    parametreApplication.push(myparametreApplication);
                 }
+                result.continue();
             };
             trans.oncomplete = function(e) {
+                var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
+                var paramToSend = null;
+                for (var i = 0; i < parametreApplication.length; i++) {
+                    if (parametreApplication[i].getEtablissement() == idetablissement|| i == parametreApplication.length) {
+                        paramToSend = parametreApplication[i];
+                    }
+                }
+                if (method != null) {//Nous avons besoin de l'executer.
+                    method(paramToSend, param);
+                }
                 db.close();
             };
             request.onerror = function(e) {
@@ -90,7 +101,7 @@ myStorage.indexedDB.getAllParametreApplication = function(method, param) {
     function impl(method, param) {
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameParamApplication")], myStorage.IDBTransactionModes.READ_ONLY);

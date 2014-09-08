@@ -8,7 +8,7 @@ myStorage.indexedDB.getMenuByIdForDetailMenu = function(methodToExecuteAfter, id
     }, delay);
     function impl(methodToExecuteAfter, idmenu) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameMenu")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -50,7 +50,7 @@ myStorage.indexedDB.getAllMenuForDetailMenu = function(methodToExecuteAfter) {
         var idetablissement = parseInt(getLocalStorageValue("client.application.etablissement.id"));
         var idzone = JSON.parse(getLocalStorageValue("paramCommande.numTable")).zone;
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameMenu")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -117,7 +117,7 @@ myStorage.indexedDB.getMenuById = function(methodToExecuteAfter, idmenu, param) 
     }, delay);
     function impl(methodToExecuteAfter, idmenu, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameMenu")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -156,7 +156,7 @@ myStorage.indexedDB.countMenus = function(method, param) {
     }, delay);
     function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameMenu")], myStorage.IDBTransactionModes.READ_ONLY);

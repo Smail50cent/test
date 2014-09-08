@@ -12,7 +12,7 @@ myStorage.indexedDB.getEntreprise = function(methodToExecuteAfter) {
     }, delay);
     function impl(methodToExecuteAfter) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEntreprise")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -53,7 +53,7 @@ myStorage.indexedDB.updateEntreprise = function(method, newEntreprise) {
         }
     }, delay);
     function impl(method) {
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEntreprise")], myStorage.IDBTransactionModes.READ_WRITE);

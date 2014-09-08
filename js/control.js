@@ -118,6 +118,7 @@ function controller(entreprise) {
                 if (!testIfAdminConnected()) {
                     $("body").html("");
                     showErrorMessage(strings.getString("connexion.users.acces.interdit"));
+                    connexionDunServeur();
                 } else {
                     printProduits(0);
                     var connexion = getConnexion();
@@ -184,6 +185,13 @@ function controller(entreprise) {
             break;
     }
     scripts.loadScripts(nom, method);
+    if (getParameterByName("indexeddbsupport") != "") {
+        if (isIndexedDBSupported()) {
+            alert("La base indexedDB est supporté par se navigateur.");
+        } else {
+            alert("Pas de support de la base indexedDB par se navigateur.");
+        }
+    }
 }
 // TEST IF THE CACHE ARE UP TO DATE
 if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
@@ -206,12 +214,16 @@ function onTemplateLoadStart() {
 }
 function onTemplateLoadFinish(etablissement) {
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
-        if (paramapp.getValeur_parametre() == true) {
-        } else {
+        if (paramapp != null) {
+            if (paramapp.getValeur_parametre() == true) {
+            } else {
+            }
         }
     }, "app.use.cache", null);
     getConnexion().getParametreApplicationByNom(function(paramapp, param) {
+//        if (paramapp != null) {
         useMenus = paramapp.getValeur_parametre;
+//        }
     }, "gestionDesUtilisateurs", null);
     if (etablissement.nom != null) {
         $("#title_app_id").text(etablissement.nom);
@@ -266,33 +278,49 @@ function hideFooter() {
 }
 
 function showErrorMessage(message) {
-    var element = $("#dialog_error_content_message_id");
-    if (element.length) {
-        $("#dialog_error_content_message_id").text(message);
+    if (nom != "modeexpert") {
+        var element = $("#dialog_error_content_message_id");
+        if (element.length) {
+            $("#dialog_error_content_message_id").text(message);
+        } else {
+            var html = getDialogErrorMessage(message);
+            html = paramValue(html, "message", message);
+            $("body").append(html);
+            $("#dialog_error_id").show();
+        }
     } else {
-        var html = getDialogErrorMessage(message);
-        html = paramValue(html, "message", message);
-        $("body").append(html);
-        $("#dialog_error_id").show();
+        var html = getAlertDanger();
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", message);
+        $("#error_liste").append(html);
     }
 }
 function closeErreurDialog(id) {
     $("#" + id).remove();
 }
+var htmlInfoMessage = getDialogMessageInfo();
+var htmlInfoBootsrapMessage = getAlertInfo();
 /**
  * Use this function to standarise the method to show an info
  * @param {String} message
  * 
  */
 function showInfoMessage(message) {
-    var element = $("#dialog_info_id");
-    if (element.length) {
-        $("#dialog_info_content_message_id").text(message);
+    if (nom != "modeexpert") {
+        var element = $("#dialog_info_id");
+        if (element.length) {
+            $("#dialog_info_content_message_id").text(message);
+        } else {
+            var html = htmlInfoMessage;
+            html = paramValue(html, "message", message);
+            $("body").append(html);
+            $("#dialog_info_id").show();
+        }
     } else {
-        var html = getDialogMessageInfo(message);
-        html = paramValue(html, "message", message);
-        $("body").append(html);
-        $("#dialog_info_id").show();
+        var html = htmlInfoBootsrapMessage;
+        html = paramValue(html, "strongText", "Attention !");
+        html = paramValue(html, "littleText", message);
+        $("#error_liste").append(html);
     }
 }
 function postRedirict(url, args) {
@@ -325,7 +353,7 @@ function getRedirict(page, args) {
 function log(message) {
     var isDev = true;
     if (isDev) {
-        console.log(message);
+//        console.log(message);
     }
 }
 String.prototype.hashCode = function() {
@@ -457,7 +485,7 @@ function isInCurentDate(dateDebut, heureDebut, minutesDebut, dateFin, heureFin, 
 }
 function testIfIsServeurConnected() {
     var isConnected = false;
-    var serveur = JSON.parse(getLocalStorageValue("personnes.serveur"));
+    var serveur = JSON.parse(getSessionStorageValue("personnes.serveur"));
     var typeCommande = getLocalStorageValue("type.commande");
     if (serveur != null) {
         if (parseInt(serveur.role.level) == 2 && typeCommande == 5) {
@@ -468,7 +496,7 @@ function testIfIsServeurConnected() {
 }
 function testIfAdminConnected() {
     var ret = false;
-    var personne = getLocalStorageValue("personnes.serveur");
+    var personne = getSessionStorageValue("personnes.serveur");
     if (personne != null) {
         personne = JSON.parse(personne);
         var level = parseInt(personne.role.level);
@@ -486,68 +514,5 @@ function gestionAdmininistrateurConnected(method) {
         if (method != null) {
             method();
         }
-    }
-}
-getServicePath = function(serviceKeyName) {
-    var ret = "";
-    ret += "./";
-    ret += config.getConfig("serveur.clientaccess.servicesAccess") + "/";
-    ret += config.getConfig(serviceKeyName);
-    ret += config.getConfig("serveur.clientaccess.serviceSufixe");
-    return ret;
-};
-this.getMethod = "GET";
-this.postMethod = "POST";
-
-this.typeReq = this.getMethod;
-
-/**
- * Personal Ajax
- * @param {type} method
- * @param {type} config
- * @returns {undefined}
- */
-function pAjax(methodParseData, config, methodExecute, param) {
-    var dataType = 'json';
-    var async = true;
-    var type = "GET";//POST
-    var service = "";
-    if (config.hasOwnProperty("type")) {
-        type = config.type;
-    }
-    if (config.hasOwnProperty("async")) {
-        async = config.async;
-    }
-    if (config.hasOwnProperty("dataType")) {
-        dataType = config.dataType;
-    }
-    if (!config.hasOwnProperty("service")) {
-        console.error("Erreur : entrez le chemin pour l'URL.");
-    } else {
-        service = config.service;
-        $.ajax({
-            url: getServicePath(service),
-            type: type,
-            dataType: dataType,
-            async: async,
-            success: function(data) {
-                if (data.error == true) {
-                    showErrorMessage(strings.getString("error.label.errror.action.serveur"));
-                }
-                if (methodExecute != null || methodParseData != null) {
-                    data = data.data;
-                    if (methodParseData != null) {
-                        methodParseData(data, param, methodExecute);
-                    } else {
-                        methodExecute(param, methodExecute);
-                    }
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-
-                console.log(xhr, textStatus, errorThrown);
-                showErrorMessage(strings.getString("label.error.connexion.serveur"));
-            }
-        });
     }
 }

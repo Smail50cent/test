@@ -1,0 +1,14 @@
+<thead class="section_tableaucategories_thead_structure section_tableaucategories_thead_personalize">
+    <tr class="section_tableaucategories_thead_tr_structure section_tableaucategories_thead_tr_personalize">
+        <th class="section_tableaucategories_thead_nom_structure section_tableaucategories_thead_nom_personalize">{nom}</th>
+        <th class="section_tableaucategories_thead_priorite_structure section_tableaucategories_thead_priorite_personalize">{priorite}</th>
+        <th class="section_tableaucategories_thead_etablissement_structure section_tableaucategories_thead_etablissement_personalize">{etablissement}</th>
+        <th class="section_tableaucategories_thead_zone_structure section_tableaucategories_thead_zone_personalize">{zone}</th>
+        <th id="tr_actions_tablecategories" class="section_tableaucategories_thead_actions_structure section_tableaucategories_thead_actions_personalize"></th>
+        <th class="section_tableaucategories_thead_save_structure section_tableaucategories_save_zone_personalize">
+            <button type="button" onclick="saveEtablissementCategorie({idetab});" class="btn btn-default btn-sm section_remove_update_button_personalize section_remove_update_button_strucutre">
+                <span class="glyphicon glyphicon-floppy-save section_save_span_structure section_save_span_personalize"></span>
+            </button>
+        </th>
+    </tr>
+</thead>

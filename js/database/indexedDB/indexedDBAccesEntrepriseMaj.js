@@ -26,7 +26,7 @@ myStorage.indexedDB.getEntrepriseMajByTable = function(index, methodToExecuteAft
     }, delay);
     function impl(index, methodToExecuteAfter) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameEntrepriseMaj")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -51,7 +51,7 @@ myStorage.indexedDB.getEntrepriseMajByTable = function(index, methodToExecuteAft
     }
 };
 myStorage.indexedDB.updateLevel = function(index, newlevel) {
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([config.getConfig("tableNameEntrepriseMaj")], myStorage.IDBTransactionModes.READ_WRITE);

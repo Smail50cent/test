@@ -13,7 +13,8 @@ class LanguesServiceDataImpl implements LanguesServiceData {
 
     public function getAll() {
         $bdd = new ConnexionBDD();
-        $result = $bdd->executeGeneric("SELECT `id`, `label`, `gmt_level`, `actif`,`type`,`navigator_var`  FROM `langues`");
+        $result = $bdd->executeGeneric("SELECT "
+                . "`id`, `label`, `gmt_level`, `actif`,`type`,`navigator_var`  FROM `langues`");
         return $this->parseLangue($result);
     }
 

@@ -7,21 +7,17 @@ myStorage.indexedDB.addFirstZoneTables = function() {
     connexion.getAllZoneTables(addZoneTables, {impllocal: false});
     function addZoneTables(zonesTables, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameZoneTables")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameZoneTables"));
             var request;
-//            var levelMax = 0;
             for (var i = 0; i < zonesTables.length; i++) {
-//                if (zonesTables[i].level > levelMax) {
-//                    levelMax = zonesTables[i].level;
-//                }
-                request = store.put(zonesTables[i]);
+                request = store.put({"nom": zonesTables[i].nom, "id": zonesTables[i].id,
+                    "tables": zonesTables[i].tables, "etablissement": zonesTables[i].etablissement_id});
             }
             trans.oncomplete = function(e) {
-//                updateLevelOfTable(config.getConfig("tableNameTypeCommande"), levelMax);
                 entitysFinsh[config.getConfig("tableNameZoneTables")] = false;
                 db.close();
             };
@@ -43,7 +39,7 @@ myStorage.indexedDB.getAllZoneTables = function(method, param) {
     }, delay);
     function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameZoneTables")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -78,12 +74,12 @@ myStorage.indexedDB.getAllZoneTablesByIdEtablissement = function(method, id, par
         if (entitysFinsh[config.getConfig("tableNameZoneTables")] == false) {
             impl(method, param);
         } else {
-            myStorage.indexedDB.getAllZoneTablesByIdEtablissement(method,id, param);
+            myStorage.indexedDB.getAllZoneTablesByIdEtablissement(method, id, param);
         }
     }, delay);
     function impl(method, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameZoneTables")], myStorage.IDBTransactionModes.READ_ONLY);
@@ -96,8 +92,11 @@ myStorage.indexedDB.getAllZoneTablesByIdEtablissement = function(method, id, par
                 if (!!result == false) {
                     return;
                 }
-//                if()Filtrer resultats
-                zonesTables.push(result.value);
+                if (result.value.etablissement != null) {
+                    if (parseInt(result.value.etablissement.id) == parseInt(id)) {
+                        zonesTables.push(result.value);
+                    }
+                }
                 result.continue();
             };
             trans.oncomplete = function(e) {

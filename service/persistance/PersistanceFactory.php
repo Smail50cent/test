@@ -29,7 +29,7 @@ include_once $path . 'service/persistance/ProduitSuggererServiceDataImpl.php';
 include_once $path . 'service/persistance/ReservationDateDisponibleServiceDataImpl.php';
 include_once $path . 'service/persistance/ReservationServiceDataImpl.php';
 include_once $path . 'service/persistance/MajTablesServiceDataImpl.php';
-include_once $path . 'service/persistance/ZoneTableServiceDataImpl.php';
+include_once $path . 'service/persistance/zonestables/ZoneTableServiceDataImpl.php';
 include_once $path . 'service/persistance/TypeCommandeServiceDataImpl.php';
 include_once $path . 'service/persistance/groupe/GroupeServiceDataImpl.php';
 include_once $path . 'service/persistance/etablissement/EtablissementServiceDataImpl.php';

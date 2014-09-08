@@ -139,4 +139,19 @@ function ConnexionLocalWebSQL() {
     this.getLangByActif = function(method, param) {
         console.log("TO DO");
     };
+    this.addCategorie = function(method, categorie, param) {
+        console.log("TO DO");
+    };
+    this.getAllCategories = function(method, param) {
+        console.log("TO DO");
+    };
+    this.DeleteCategorie = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.getPrioriteByEtablissment = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.updatePriority = function(method, categorie, param) {
+        console.log("TO DO");
+    };
 }

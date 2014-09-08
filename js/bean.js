@@ -72,6 +72,21 @@ function Categorie() {
     this.nom;
     this.priorite;
     this.souscategorie; //array id souscategorie
+    this.etablissement;
+    this.zone;
+
+    this.setEtablissement = function(etablissement) {
+        this.etablissement = etablissement;
+    };
+    this.setZone = function(zone) {
+        this.zone = zone;
+    };
+    this.getEtablissement = function() {
+        return this.etablissement;
+    };
+    this.getZone = function() {
+        return this.zone;
+    };
     this.setId = function(id) {
         this.id = id;
     };
@@ -103,6 +118,7 @@ function SousCategorie() {
     this.nom;
     this.priorite;
     this.taux_tva;
+    
     this.setId = function(id) {
         this.id = id;
     };
@@ -841,6 +857,12 @@ function Etablissement(id, nom, logo, style, adresseEtab, telephone, message, sl
     };
     this.getId = function() {
         return this.id;
+    };
+    this.setNom = function(nom) {
+        this.nom = nom;
+    };
+    this.getNom = function() {
+        return this.nom;
     };
     this.setZones = function(zones) {
         this.zones = zones;

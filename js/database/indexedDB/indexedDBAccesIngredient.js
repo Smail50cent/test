@@ -8,7 +8,7 @@ myStorage.indexedDB.getIngredientById = function(method, id, param) {
     }, delay);
     function impl(method, id, param) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameIngredient")],
@@ -46,7 +46,7 @@ myStorage.indexedDB.getAllIngredients = function(methodToExecuteAfter) {
     }, delay);
     function impl() {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameIngredient")], myStorage.IDBTransactionModes.READ_WRITE);

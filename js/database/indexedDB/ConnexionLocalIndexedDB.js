@@ -142,7 +142,7 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getAllEtablissements = function(method, param) {
-        console.log("TO DO ");
+        myStorage.indexedDB.getAllEtablissements(method, param);
     };
     this.addOption = function(method, Option, param) {
         console.log("TO DO");
@@ -169,7 +169,8 @@ function ConnexionLocalIndexedDB() {
         console.log("TO DO");
     };
     this.getZonesTablesByEtablissement = function(method, id, param) {
-        console.log("TO DO");
+        myStorage.indexedDB.getAllZoneTablesByIdEtablissement(method, id, param);
+//        console.log("TO DO");
     };
     this.getAllLangues = function(method, param) {
         console.log("TO DO");
@@ -182,5 +183,20 @@ function ConnexionLocalIndexedDB() {
     };
     this.getLangByActif = function(method, param) {
         console.log("TO DO VITE");
+    };
+    this.addCategorie = function(method, categorie, param) {
+        console.log("TO DO");
+    };
+    this.getAllCategories = function(method, param) {
+        console.log("TO DO");
+    };
+    this.DeleteCategorie = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.getPrioriteByEtablissment = function(method, id, param) {
+        console.log("TO DO");
+    };
+    this.updatePriority = function(method, categorie, param) {
+        console.log("TO DO");
     };
 }

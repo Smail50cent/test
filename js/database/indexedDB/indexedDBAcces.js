@@ -32,6 +32,7 @@ function setEntityFinishTo(bool) {
     entitysFinsh[config.getConfig("tableNameZoneTables")] = bool;
     entitysFinsh[config.getConfig("tableNameOptions")] = bool;
     entitysFinsh[config.getConfig("tableNameEtablissements")] = bool;
+    entitysFinsh[config.getConfig("tableNameModeDeReglement")] = bool;
 }
 function verifyFinish() {
     var finish = false;
@@ -59,6 +60,8 @@ function verifyFinish() {
         finish = true;
     } else if (entitysFinsh[config.getConfig("tableNameEtablissements")] == true) {
         finish = true;
+    } else if (entitysFinsh[config.getConfig("tableNameModeDeReglement")] == true) {
+        finish = true;
     }
     return finish;
 }
@@ -78,7 +81,7 @@ myStorage.indexedDB.create = function() {
     verifyFinish();
     myStorage.indexedDB.load();
     delay = delayOnupgradeneeded;
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     setEntityFinishTo(true);
     request.onupgradeneeded = function(e) {
         delay = delayOnupgradeneeded;
@@ -219,7 +222,7 @@ myStorage.indexedDB.addFistMenus = function() {
     });
     function addMenu(menu) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameMenu")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -247,7 +250,7 @@ myStorage.indexedDB.addFistMenus = function() {
 };
 myStorage.indexedDB.addFistEntreprise = function() {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([config.getConfig("tableNameEntreprise")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -309,7 +312,7 @@ myStorage.indexedDB.addFistIngredients = function() {
     });
     function addIng(ingredient) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameIngredient")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -344,7 +347,7 @@ myStorage.indexedDB.addFistSousCategories = function() {
     });
     function addCat(souscategorie) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameSousCategorie")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -365,7 +368,6 @@ myStorage.indexedDB.addFistSousCategories = function() {
 var nbtotal = 0;
 myStorage.indexedDB.addFistProduits = function() {
     getConnexionServeur().getMajTable(config.getConfig("tableNameProduit"));
-
     $.ajax({
         url: getServicePath("serveur.clientaccess.serviceGetAllProduits"),
         type: 'GET',
@@ -383,13 +385,12 @@ myStorage.indexedDB.addFistProduits = function() {
     });
     function addProduit(produit) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameProduit")], myStorage.IDBTransactionModes.READ_WRITE);
             var store = trans.objectStore(config.getConfig("tableNameProduit"));
             var request;
-            console.log(produit);
             request = store.put({
                 "id": parseInt(produit.id),
                 "nom": produit.nom,
@@ -404,8 +405,6 @@ myStorage.indexedDB.addFistProduits = function() {
                 "zones": produit.zones
             });
             trans.oncomplete = function(e) {
-//                console.log("nbtotal="+nbtotal+" ",e);
-//                nbtotal++;
                 db.close();
                 entitysFinsh[config.getConfig("tableNameProduit")] = false;
             };
@@ -434,7 +433,7 @@ myStorage.indexedDB.addFirstOptions = function() {
     });
     function addOption(option) {
         myStorage.indexedDB.load();
-        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+        var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
         request.onsuccess = function(e) {
             var db = e.target.result;
             var trans = db.transaction([config.getConfig("tableNameOptions")], myStorage.IDBTransactionModes.READ_WRITE);
@@ -454,7 +453,7 @@ myStorage.indexedDB.addFirstOptions = function() {
 };
 myStorage.indexedDB.addTodo = function(todoText) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([tableNameEntreprise], myStorage.IDBTransactionModes.READ_WRITE);
@@ -481,7 +480,7 @@ myStorage.indexedDB.addTodo = function(todoText) {
 
 myStorage.indexedDB.deleteTodo = function(id) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([tableNameEntreprise], myStorage.IDBTransactionModes.READ_WRITE);
@@ -507,7 +506,7 @@ myStorage.indexedDB.deleteTodo = function(id) {
 
 myStorage.indexedDB.updateTodo = function(id, newText) {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([tableNameEntreprise], myStorage.IDBTransactionModes.READ_WRITE);
@@ -540,7 +539,7 @@ myStorage.indexedDB.updateTodo = function(id, newText) {
 
 myStorage.indexedDB.getAllTodoItems = function() {
     myStorage.indexedDB.load();
-    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"));
+    var request = indexedDB.open(config.getConfig("indexedDBDatabaseName"), parseInt(config.getConfig("indexedDB.database.version")));
     request.onsuccess = function(e) {
         var db = e.target.result;
         var trans = db.transaction([tableNameEntreprise], myStorage.IDBTransactionModes.READ_WRITE);
@@ -627,72 +626,72 @@ function logical_or(index1, keyRange1, index2, keyRange2, onfound, onfinish) {
         }
     }
 }
-function assert (assertion) {
-  // From: http://phpjs.org/functions
-  // +   original by: Brett Zamir (http://brett-zamir.me)
-  // %          note 1: Do not pass untrusted user input to assert() in string form (you can test it beforehand though)
-  // %          note 2: Does not provide perfect arguments to the assertion callback, as far as file location or line number
-  // *     example 1: assert('false === true');
-  // *     returns 1: false
+function assert(assertion) {
+    // From: http://phpjs.org/functions
+    // +   original by: Brett Zamir (http://brett-zamir.me)
+    // %          note 1: Do not pass untrusted user input to assert() in string form (you can test it beforehand though)
+    // %          note 2: Does not provide perfect arguments to the assertion callback, as far as file location or line number
+    // *     example 1: assert('false === true');
+    // *     returns 1: false
 
-  var result = false,
-    callback, retVal, err = undefined;
+    var result = false,
+            callback, retVal, err = undefined;
 
-  // BEGIN REDUNDANT
-  this.php_js = this.php_js || {};
-  this.php_js.ini = this.php_js.ini || {};
-  this.php_js.assert_values = this.php_js.assert_values || {};
-  // END REDUNDANT
+    // BEGIN REDUNDANT
+    this.php_js = this.php_js || {};
+    this.php_js.ini = this.php_js.ini || {};
+    this.php_js.assert_values = this.php_js.assert_values || {};
+    // END REDUNDANT
 
-  var getOption = function (value) {
-    if (this.php_js.assert_values[value]) {
-      return this.php_js.assert_values[value];
-    }
-    if (this.php_js.ini[value]) {
-      return this.php_js.ini[value].local_value;
-    }
-    switch (value) {
-    case 'assert.active':
-      return 1;
-    case 'assert.warning':
-      // Don't need this now
-      //return 1;
-      throw 'We have not yet implemented warnings in JavaScript (assert())';
-    case 'assert.bail':
-      return 0;
-    case 'assert.quiet_eval':
-      return 0;
-    case 'assert.callback':
-      return null;
-    default:
-      throw 'There was some problem';
-    }
-  };
+    var getOption = function(value) {
+        if (this.php_js.assert_values[value]) {
+            return this.php_js.assert_values[value];
+        }
+        if (this.php_js.ini[value]) {
+            return this.php_js.ini[value].local_value;
+        }
+        switch (value) {
+            case 'assert.active':
+                return 1;
+            case 'assert.warning':
+                // Don't need this now
+                //return 1;
+                throw 'We have not yet implemented warnings in JavaScript (assert())';
+            case 'assert.bail':
+                return 0;
+            case 'assert.quiet_eval':
+                return 0;
+            case 'assert.callback':
+                return null;
+            default:
+                throw 'There was some problem';
+        }
+    };
 
-  if (!getOption('assert.active')) {
-    return false; // is this correct? should callbacks still execute? Should still bail if on?
-  }
+    if (!getOption('assert.active')) {
+        return false; // is this correct? should callbacks still execute? Should still bail if on?
+    }
 
-  try { // Less overhead to use string when assertion checking is off, allows message of exact code to callback
-    result = typeof assertion === 'string' ? eval(assertion) : assertion;
-  } catch (e) {
-    if (!getOption('assert.quiet_eval')) {
-      throw e;
+    try { // Less overhead to use string when assertion checking is off, allows message of exact code to callback
+        result = typeof assertion === 'string' ? eval(assertion) : assertion;
+    } catch (e) {
+        if (!getOption('assert.quiet_eval')) {
+            throw e;
+        }
+        err = e;
+        result = false;
     }
-    err = e;
-    result = false;
-  }
-  retVal = result !== false; // return false if false, otherwise, return true
-  if (retVal === false) {
-    if (getOption('assert.bail')) { // Todo: Will the function bail before a callback or after?
-      throw 'Assertion bailed'; // No way to bail without throwing an exception (and there are no "warnings" in JavaScript for us to throw)
+    retVal = result !== false; // return false if false, otherwise, return true
+    if (retVal === false) {
+        if (getOption('assert.bail')) { // Todo: Will the function bail before a callback or after?
+            throw 'Assertion bailed'; // No way to bail without throwing an exception (and there are no "warnings" in JavaScript for us to throw)
+        }
+        callback = getOption('assert.callback');
+        if (typeof callback === 'string') {
+            callback = this.window[callback];
+        }
+        // Not perfect for file location (might also use __FILE__()) or line number
+        callback(this.window.location.href, err && err.lineNumber, (typeof assertion === 'string' ? assertion : '')); // From the docs, what does this mean?: "the third argument will contain the expression that failed (if any - literal values such as 1 or "two" will not be passed via this argument)"
     }
-    callback = getOption('assert.callback');
-    if (typeof callback === 'string') {
-      callback = this.window[callback];
-    }
-    // Not perfect for file location (might also use __FILE__()) or line number
-    callback(this.window.location.href, err && err.lineNumber, (typeof assertion === 'string' ? assertion : '')); // From the docs, what does this mean?: "the third argument will contain the expression that failed (if any - literal values such as 1 or "two" will not be passed via this argument)"
-  }
-  return retVal;
+    return retVal;
 }

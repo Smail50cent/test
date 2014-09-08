@@ -1,5 +1,5 @@
 <p>
-<label id="label_insert_ingredient_id" class="label_insert_ingredient_structure label_insert_ingredient_personalize"> Nom de l'ingrédient </label>
+<label id="label_insert_ingredient_id" class="label_insert_ingredient_structure label_insert_ingredient_personalize"> {nomIng} </label>
 <input type="text" id="insert_ingredient_id" class="insert_ingredient" test_empty=1> </p>
 
 <p>

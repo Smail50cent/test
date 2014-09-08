@@ -152,8 +152,8 @@ etablissement.message AS etablissement_message
                 $assoTable = $this->testsForTables($ligne, $etablissement);
                 if ($assoTable != null) {
                     $zones = $etablissement->getZones();
-                    for($j= 0 ; $j < count($zones); $j++ ){
-                        if($zones[$j]->id == $assoTable->getZone() ){
+                    for ($j = 0; $j < count($zones); $j++) {
+                        if ($zones[$j]->id == $assoTable->getZone()) {
                             $zones[$j]->addTable($assoTable);
                         }
                     }
@@ -175,8 +175,8 @@ etablissement.message AS etablissement_message
                 $assoTable = $this->testsForTables($ligne, $etablissement);
                 if ($assoTable != null) {
                     $zones = $etablissement->getZones();
-                    for($j= 0 ; $j < count($zones); $j++ ){
-                        if($zones[$j]->id == $assoTable->getZone() ){
+                    for ($j = 0; $j < count($zones); $j++) {
+                        if ($zones[$j]->id == $assoTable->getZone()) {
                             $zones[$j]->addTable($assoTable);
                         }
                     }
@@ -197,8 +197,8 @@ etablissement.message AS etablissement_message
                 $assoTable = $this->testsForTables($ligne, $etablissement);
                 if ($assoTable != null) {
                     $zones = $etablissement->getZones();
-                    for($j= 0 ; $j < count($zones); $j++ ){
-                        if($zones[$j]->id == $assoTable->getZone() ){
+                    for ($j = 0; $j < count($zones); $j++) {
+                        if ($zones[$j]->id == $assoTable->getZone()) {
                             $zones[$j]->addTable($assoTable);
                         }
                     }
@@ -244,7 +244,7 @@ etablissement.message AS etablissement_message
             return null;
         }
     }
-  
+
     private function testsForTables($ligne, Etablissement $etablissement) {
         $isHerePrix = false;
         for ($j = 0; $j < count($etablissement->getZones()); $j++) {
@@ -281,6 +281,12 @@ etablissement.message AS etablissement_message
         } else {
             $style = "'" . $etablissement->getStyle() . "'";
         }
+        $zones = "";
+        if ($etablissement->getZones() == null) {
+            $zones = "null";
+        } else {
+            $zones = "null";
+        }
         $logo = "";
         if ($etablissement->getLogo() == null) {
             $logo = "null";
@@ -311,12 +317,36 @@ etablissement.message AS etablissement_message
         } else {
             $slogan = "'" . $etablissement->getSlogan() . "'";
         }
-        $id = $bdd->executeGeneric("INSERT INTO `etablissement`"
-                . "(`nom`, `logo`, `style`, `adresseEtab`, `telephone`, `message`, `slogan`, `id_groupe`) "
-                . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
-                . "," . $style . "," . $adresse . ","
-                . "" . $telephone . "," . $message . ","
-                . "" . $slogan . "," . $etablissement->getGroupe() . ");");
+        $id = 0;
+        try {
+            $bdd->beginTTransaction();
+            $id = $bdd->executeGeneric("INSERT INTO `etablissement`"
+                    . "(`nom`, `logo`, `style`, `adresseEtab`, `telephone`, `message`, `slogan`, `id_groupe`) "
+                    . "VALUES ('" . $etablissement->getNom() . "'," . $logo . ""
+                    . "," . $style . "," . $adresse . ","
+                    . "" . $telephone . "," . $message . ","
+                    . "" . $slogan . "," . $etablissement->getGroupe() . ");");
+            $zones = "";
+            if ($etablissement->getZones() != null) {
+                $zones = $etablissement->getZones();
+                for ($i = 0; $i < count($zones); $i++) {
+                    $zone = $zones[$i];
+                    if (isset($zone->nom)) {
+                        $id2 = $bdd->executeGeneric("INSERT INTO `zone_table`(`nom`, `etablissement_id`) VALUES ('" . $zone->nom . "'," . $id . ");");
+                        $tables = $zone->getTables();
+                        for ($j = 0; $j < count($tables); $j++) {
+                            $table = $tables[$j];
+                            $bdd->executeGeneric("INSERT INTO `tables`(`numero`, `zone_table_ke`) VALUES (" . $table->getNumero() . "," . $id2 . ")");
+                        }
+                    } else if (isset($zone->id)) {
+                        $bdd->executeGeneric("UPDATE `zone_table` SET `etablissement_id`=" . $id . " WHERE `id`=" . $zone->id);
+                    }
+                }
+            }
+            $bdd->commitTransaction();
+        } catch (Exception $exc) {
+            $bdd->rollbackTransaction();
+        }
         return $id;
     }
 

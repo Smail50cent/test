@@ -1,0 +1,11 @@
+<div class="col-sm-10 col-md-10 main">
+<div class="header_perso_categories_structure header_perso_categories_personalize">
+<h2 class="sub-header sub-header_categories_structure sub-header_categories_personalize">{title}</h2>
+<div class="header_buttonadd_categories_structure header_buttonadd_categories_personalize">
+<button type="button" onclick="addCategorie();" class="btn btn-primary btn-md  btn-primary_addcategories_structure btn-primary_addcategories_personalize">
+    <span class="glyphicon glyphicon-plus glyphicon-plus_addcategories_stucture glyphicon-plus_addcategories_personbalize"></span>{labelButtonAdd}</button>
+</div>
+</div>
+<div class="table-responsive table-responsive_gerercategories_structure table-responsive_gerercategories_personalize">
+</div>
+</div>

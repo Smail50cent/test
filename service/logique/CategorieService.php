@@ -9,7 +9,13 @@ interface CategorieService {
 
     public function getAll();
 
-    public function addData();
+    public function add(Categorie $categorie);
 
     public function getByEtablissementAndZone($etablissement, $zone);
+
+    public function delete($id);
+
+    public function getPriorite($id);
+
+    public function updatePriority($categories);
 }

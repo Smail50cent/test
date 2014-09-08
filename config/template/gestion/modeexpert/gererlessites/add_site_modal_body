@@ -1,3 +1,4 @@
+<div id="error_liste_modal" class="error_liste_modal_strucutre error_liste_modal_personalize" ></div>
 <table class="modal_body_table_addetab_structure modal_body_table_addetab_personalize">
     <tbody class="modal_body_tbody_addetab_structure modal_body_tbody_addetab_personalize">
         <tr class="addetab_tabnom_structure addetab_tabnom_personalize">
@@ -58,7 +59,7 @@
             </td>
         </tr>
         <tr class="addetab_tabzone_structure addetab_tabzone_personalize">
-            <td>
+            <td id="add_td_tabzone">
                 <p id="add_site_tabzone_id"></p>
             </td>
             <td>
@@ -67,6 +68,7 @@
                     <a id="a_help_add_new_zone" onclick="appendNewZone();"></a>
                 </div>
             </td>
+
         </tr>
     </tbody>
 </table>

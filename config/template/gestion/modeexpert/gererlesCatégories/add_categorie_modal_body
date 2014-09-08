@@ -1,0 +1,33 @@
+<div id="error_liste_modal" class="error_liste_modal_strucutre error_liste_modal_personalize" ></div>
+<table class="modal_body_table_addcat_structure modal_body_table_addcat_personalize">
+    <tbody class="modal_body_tbody_addcat_structure modal_body_tbody_addcat_personalize">
+        <tr class="addcat_tabnom_structure addcat_tabnom_personalize">
+            <td>
+                <p id="add_categorie_nom_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_categorie_nom_value" ></input>
+            </td>
+        </tr>
+        <tr class="addcat_tabsouscategorie_structure addcat_tabsouscategorie_personalize">
+            <td>
+                <p id="add_categorie_souscategorie_id"></p>
+            </td>
+            <td>
+                <input type="text" id="add_categorie_souscategorie_value" ></input>
+            </td>
+        </tr>
+        <tr class="addcat_tabsouscategorie_structure addcat_tabsouscategorie_personalize">
+            <td>
+                <div onclick="insertSousCat();" type="button" id="insertSousCat_id" class="insertSousCat_structure insertSousCat_personalize">
+                <img src="img/gestion/categorie/insert.png" width="20" height="20" "></div>
+                <div onclick="removeSousCat();" type="button" id="removeSousCat_id" class="removeSousCat_structure removeSousCat_personalize">
+                <img src="img/gestion/categorie/remove.png" width="20" height="20" "></div></p>
+            </td>
+            <td>
+                <select id="list_SousCat_id" class="list_SousCat_structure list_SousCat_personalize test_empty" multiple>
+                </select>
+            </td>
+        </tr>
+    </tbody>
+</table>

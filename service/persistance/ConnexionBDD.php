@@ -8,6 +8,7 @@
 class ConnexionBDD {
 
     public static $param = array("start" => 0, "commit" => 1, "rollback" => 2);
+    public $acces;
 
     private function getDatabasesInfo() {
         $ret = array();
@@ -15,13 +16,17 @@ class ConnexionBDD {
         $ret[1] = array("192.168.170.61", "mysql", "bar", "preCaisse", "alfa");
         $ret[2] = array("192.168.170.61", "mysql", "dupappcaisse", "preCaisse", "alfa");
         $ret[3] = array("192.168.170.61", "mysql", "migration_appcaisse", "preCaisse", "alfa");
-        $ret[4] = array("192.168.170.61", "mysql", "migration_appcaisse", "root", "fmoz6po");
+        $ret[4] = array("192.168.170.192", "mysql", "migration_appcaisse", "root", "fmoz6po");
         return $ret;
     }
 
     private function getCurrentDatabaseInfo() {
         $t = $this->getDatabasesInfo();
         return $t[3];
+    }
+
+    function __construct() {
+        $this->acces = $this->getConnexion();
     }
 
     public function getConnexion() {
@@ -33,15 +38,27 @@ class ConnexionBDD {
             );
             return new PDO($path, $databaseInfo[3], $databaseInfo[4], $options);
         } catch (Exception $e) {
-            echo "Connection à MySQL impossible : ", $e->getMessage();
+            throw new Exception("Connection à MySQL impossible", 451, 0);
+//            echo "Connection à MySQL impossible : ", $e->getMessage();
             die();
         }
     }
 
+    public function commitTransaction() {
+        $this->acces->commit();
+    }
+
+    public function rollbackTransaction() {
+        $this->acces->rollBack();
+    }
+
+    public function beginTTransaction() {
+        $this->acces->beginTransaction();
+    }
+
     private function executeQuery($query) {
-        $acces = $this->getConnexion();
-        $acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $selection = $acces->query($query);
+        $this->acces->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $selection = $this->acces->query($query);
         $selection->setFetchMode(PDO::FETCH_OBJ);
         return $selection;
     }
@@ -54,11 +71,9 @@ class ConnexionBDD {
         }
     }
 
-    public function executeExec($query) {
-        $acces = $this->getConnexion();
-        $acces->exec($query);
-        $id = $acces->lastInsertId();
-//        $acces = null;
+    private function executeExec($query) {
+        $this->acces->exec($query);
+        $id = $this->acces->lastInsertId();
         return $id;
     }
 
