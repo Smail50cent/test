@@ -1918,8 +1918,9 @@ background: rgba(248, 255, 197, 0.5);
 
 /*____________________FOOTER____________________*/
 
-.footer_tarif_personalize{
+.footer_tarif_personalize {
     border-top-right-radius: 7px;
     border-top-left-radius: 7px;
+}
 }
 }
