@@ -419,6 +419,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         word-spacing: 0.15em;
         display: inline-block;
         width: 147%;
+		background-image: url(../img/logoSunriver.png);
 }
 
 
@@ -665,7 +666,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     p#header_right_logo_slogan {
         font-family: 'walkway_boldregular',Verdana, Trebuchet MS, sans_serif;
-        font-size: 1.4em;
+        font-size: 1.2em;
         font-weight: bold;
 }
 
