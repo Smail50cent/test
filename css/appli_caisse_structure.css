@@ -396,7 +396,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 
     .content_structure  {
         width: 100%;
-        margin-top: 3.9em;
+        margin-top: 4.7em;
         position:relative;
         height:auto;
 }
@@ -435,7 +435,8 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 
     .btn_choice_structure li p, .choix_mode_calcul_structure p {
-        margin: 0 2.1em;
+        margin: 0 0.5em;
+		padding: 0.5em 0;
 }
 
     .btn_choice_structure li a:link{
@@ -818,7 +819,6 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
             position: relative;
             margin-bottom: 15px;
             margin-top: 0px;
-			padding-bottom:0.1em;
             /*padding-bottom: 0.5em;*/
             /*float:left;*/
             /* display: inline-table; */

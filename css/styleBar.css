@@ -76,29 +76,6 @@ and open the template in the editor.
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'alusineoblique';
-    src: url('./font/alusine/aluso___-webfont.eot');
-    src: url('./font/alusine/aluso___-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./font/alusine/aluso___-webfont.woff2') format('woff2'),
-         url('./font/alusine/aluso___-webfont.woff') format('woff'),
-         url('./font/alusine/aluso___-webfont.ttf') format('truetype'),
-         url('./font/alusine/aluso___-webfont.svg#alusineoblique') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'alusineregular';
-    src: url('./font/alusine/alusrg__-webfont.eot');
-    src: url('./font/alusine/alusrg__-webfont.eot?#iefix') format('embedded-opentype'),
-         url('./font/alusine/alusrg__-webfont.woff2') format('woff2'),
-         url('./font/alusine/alusrg__-webfont.woff') format('woff'),
-         url('./font/alusine/alusrg__-webfont.ttf') format('truetype'),
-         url('./font/alusine/alusrg__-webfont.svg#alusineregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
 
 @font-face {
     font-family: 'lobster_tworegular';
@@ -110,7 +87,6 @@ and open the template in the editor.
          url('./font/lobster2/lobstertwo-regular-webfont.svg#lobster_tworegular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
@@ -123,7 +99,6 @@ and open the template in the editor.
          url('./font/lobster2/lobstertwo-bolditalic-webfont.svg#lobster_twobold_italic') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
@@ -136,7 +111,6 @@ and open the template in the editor.
          url('./font/lobster2/lobstertwo-italic-webfont.svg#lobster_twoitalic') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 @font-face {
@@ -149,7 +123,54 @@ and open the template in the editor.
          url('./font/lobster2/lobstertwo-bold-webfont.svg#lobster_twobold') format('svg');
     font-weight: normal;
     font-style: normal;
+}
 
+@font-face {
+    font-family: 'dream_orphansbold_italic';
+    src: url('./font/dream_orphans/dream_orphans_bd_it-webfont.eot');
+    src: url('./font/dream_orphans/dream_orphans_bd_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/dream_orphans/dream_orphans_bd_it-webfont.woff2') format('woff2'),
+         url('./font/dream_orphans/dream_orphans_bd_it-webfont.woff') format('woff'),
+         url('./font/dream_orphans/dream_orphans_bd_it-webfont.ttf') format('truetype'),
+         url('./font/dream_orphans/dream_orphans_bd_it-webfont.svg#dream_orphansbold_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dream_orphansitalic';
+    src: url('./font/dream_orphans/dream_orphans_it-webfont.eot');
+    src: url('./font/dream_orphans/dream_orphans_it-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/dream_orphans/dream_orphans_it-webfont.woff2') format('woff2'),
+         url('./font/dream_orphans/dream_orphans_it-webfont.woff') format('woff'),
+         url('./font/dream_orphans/dream_orphans_it-webfont.ttf') format('truetype'),
+         url('./font/dream_orphans/dream_orphans_it-webfont.svg#dream_orphansitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dream_orphansbold';
+    src: url('./font/dream_orphans/dream_orphans_bd-webfont.eot');
+    src: url('./font/dream_orphans/dream_orphans_bd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/dream_orphans/dream_orphans_bd-webfont.woff2') format('woff2'),
+         url('./font/dream_orphans/dream_orphans_bd-webfont.woff') format('woff'),
+         url('./font/dream_orphans/dream_orphans_bd-webfont.ttf') format('truetype'),
+         url('./font/dream_orphans/dream_orphans_bd-webfont.svg#dream_orphansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dream_orphansregular';
+    src: url('./font/dream_orphans/dream_orphans-webfont.eot');
+    src: url('./font/dream_orphans/dream_orphans-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./font/dream_orphans/dream_orphans-webfont.woff2') format('woff2'),
+         url('./font/dream_orphans/dream_orphans-webfont.woff') format('woff'),
+         url('./font/dream_orphans/dream_orphans-webfont.ttf') format('truetype'),
+         url('./font/dream_orphans/dream_orphans-webfont.svg#dream_orphansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 
@@ -373,23 +394,32 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }*/
 
     body { 
-        background-repeat: repeat;
-        background-image: url(../img/dark_wall.png);
+		background: rgb(30,0,15); /* Old browsers */
+		/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+		background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIxJSIgc3RvcC1jb2xvcj0iIzFlMDAwZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjIzJSIgc3RvcC1jb2xvcj0iIzQ5MDAzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjIzJSIgc3RvcC1jb2xvcj0iIzQ5MDAzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjQzJSIgc3RvcC1jb2xvcj0iIzg0MDA2YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjU3JSIgc3RvcC1jb2xvcj0iIzg0MDA2YyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc3JSIgc3RvcC1jb2xvcj0iIzQ5MDAzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMxZTAwMGYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background: -moz-linear-gradient(left,  rgba(30,0,15,1) 1%, rgba(73,0,48,1) 23%, rgba(73,0,48,1) 23%, rgba(132,0,108,1) 43%, rgba(132,0,108,1) 57%, rgba(73,0,48,1) 77%, rgba(30,0,15,1) 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, right top, color-stop(1%,rgba(30,0,15,1)), color-stop(23%,rgba(73,0,48,1)), color-stop(23%,rgba(73,0,48,1)), color-stop(43%,rgba(132,0,108,1)), color-stop(57%,rgba(132,0,108,1)), color-stop(77%,rgba(73,0,48,1)), color-stop(100%,rgba(30,0,15,1))); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(left,  rgba(30,0,15,1) 1%,rgba(73,0,48,1) 23%,rgba(73,0,48,1) 23%,rgba(132,0,108,1) 43%,rgba(132,0,108,1) 57%,rgba(73,0,48,1) 77%,rgba(30,0,15,1) 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(left,  rgba(30,0,15,1) 1%,rgba(73,0,48,1) 23%,rgba(73,0,48,1) 23%,rgba(132,0,108,1) 43%,rgba(132,0,108,1) 57%,rgba(73,0,48,1) 77%,rgba(30,0,15,1) 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(left,  rgba(30,0,15,1) 1%,rgba(73,0,48,1) 23%,rgba(73,0,48,1) 23%,rgba(132,0,108,1) 43%,rgba(132,0,108,1) 57%,rgba(73,0,48,1) 77%,rgba(30,0,15,1) 100%); /* IE10+ */
+		background: linear-gradient(to right,  rgba(30,0,15,1) 1%,rgba(73,0,48,1) 23%,rgba(73,0,48,1) 23%,rgba(132,0,108,1) 43%,rgba(132,0,108,1) 57%,rgba(73,0,48,1) 77%,rgba(30,0,15,1) 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e000f', endColorstr='#1e000f',GradientType=1 ); /* IE6-8 */
+
 }
     
 
     .header_personalize {
         width:100%;
-        background: #000000; /* Old browsers */
-        background: -moz-linear-gradient(top, #000000 0%, #731265 100%); /* FF3.6+ */
-        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#731265)); /* Chrome,Safari4+ */
-        background: -webkit-linear-gradient(top, #000000 0%,#731265 100%); /* Chrome10+,Safari5.1+ */
-        background: -o-linear-gradient(top, #000000 0%,#731265 100%); /* Opera 11.10+ */
-        background: -ms-linear-gradient(top, #000000 0%,#731265 100%); /* IE10+ */
-        background: linear-gradient(to bottom, #000000 0%,#731265 100%); /* W3C */
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e095f', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
-        /*border-bottom:1px solid white;*/
-        /*box-shadow: 0px 3px 7px #000;*/ 
+        background: #731265; /* Old browsers */
+        background: -moz-linear-gradient(top, #000000 0%, #B620A0 100%); /* FF3.6+ */
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#000000), color-stop(100%,#B620A0)); /* Chrome,Safari4+ */
+        background: -webkit-linear-gradient(top, #000000 0%,#B620A0 100%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(top, #000000 0%,#B620A0 100%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(top, #000000 0%,#B620A0 100%); /* IE10+ */
+        background: url(../img/cube_blanc.png), linear-gradient(to bottom, #000000 0%,#B620A0 100%); /* W3C */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#B620A0',GradientType=0 ); /* IE6-9 */
+        border-bottom:1px solid white;
+        box-shadow: 0px 3px 7px #000;
     }
 
     .header_right_personalize{
@@ -398,16 +428,20 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 
     .header_left_personalize {
-        width: 148px;
-        border-top: 75px solid #036672;
+        width: 100px;
+        border-top: 75px solid #049DB1;
         border-left: 0px solid transparent;
         border-right: 60px solid transparent;
+
 }
 
     .header_left_logo_personalize { 
+		background-image: url(../img/logoSunriver.png);
+		background-repeat: no-repeat;
         position:relative;
-        left:0em;
-        top:-6.1em;
+        left:0.2em;
+        top:-4.1em;
+		height:57px;
 }
 
     .logo_header_font_personalize {
@@ -419,9 +453,69 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         word-spacing: 0.15em;
         display: inline-block;
         width: 147%;
-		background-image: url(../img/logoSunriver.png);
+		
 }
 
+    .select_personalize, .product_spec_personalize, .select_lang_personalize, .button_inscri_compte, .btn_choix_mode_calcul_division_personalize, .btn_choix_mode_calcul_part_personalize, .validerPaimentSelection_personalize, .choix_paiment_personne_btn_valider_personalize, .select_item_etape_personalize, .button_authen_compte_personalize, .button_inscri_compte_personalize, .button_ajout_vclient_personalize, .auth_form_personalize input, .valider_produit_user_personalize, .select_user_personalize, .reglement_btn_valier_personalize {
+        -moz-box-shadow: 0 1px 0 1px #666666;
+        -webkit-box-shadow:  0 1px 0 1px #666666;
+        box-shadow: 0 1px 0 1px #666666;
+        box-shadow: 0px 1px 0px 0px #666666;
+        background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+        background:-moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+        background:-webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+        background:-o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+        background:-ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+        /* background:linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%); */
+        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+        background-color:#f9f9f9;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        border-radius:5px;
+        border:1px solid #dcdcdc;
+        cursor:pointer;
+        color:#666666;
+        font-family:Trebuchet MS;
+        font-size:13px;
+        font-weight:bold;
+        text-decoration:none;
+        text-shadow:1px 1px 16px #ffffff;
+		width: 150px;
+margin: 0.5em auto 0.8em auto;
+display: block;
+padding: 6px 4px;
+    }
+
+	.content_select_user_personalize {
+		color: white;
+		font-family: Verdana, "Trebuchet MS",Verdana,sans_serif;
+		font-size: 0.8em;
+		font-weight: normal;
+		text-align: center;
+	}
+	 
+	 	ul.mode_de_reglement_liste_personalize {
+		font-family: Trebuchet MS,Verdana,sans_serif !important;
+		width: 80%;
+		font-size: 0.9em;
+		margin: 0 auto;
+		color: white;
+		padding: 0.8em 0.5em;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 5px;
+}
+
+	.reglement_titre_personalize {
+		width: 80%;
+		margin: 1em auto;
+		padding: 0.5em;
+		font-family: Trebuchet MS,Verdana,sans_serif;
+		font-size: 0.9em;
+		text-align: center;
+		color: white;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 5px;
+}
 
     .header_left_logo p {    
         text-shadow: 2px 1px 1px rgba(0, 0, 0, 0.3);
@@ -449,32 +543,23 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .btn_choice_personalize li, .choix_mode_calcul_personalize  {
         font-family:  "Trebuchet MS", Verdana, Sans serif;
         font-size:1em;
-        font-weight: bold;
-        letter-spacing: -0.04em;
+        letter-spacing: 0.04em;
         text-align:center;
-        color:rgb(61, 80, 80);
+        color:white;
         border: 1px white solid;
         text-decoration:none;
         border-radius: 5px 5px;
         box-shadow: 0 2px 4px #000000;
         line-height: 128%;
-        /* text-shadow: 0 1px 1px #000000;*/
+        text-shadow: 0 1px 1px #000000;
 }
 
     p.header_left_logo_message_structure:last-child {
         position: absolute;
         bottom: -4.6em;
         /*left: 2.1em;*/ 
-        width: 160%
+        width: 160%;
     }
-
-    .btn_choice_personalize>li:first-child {
-        background-color: #C90912;
-}
-
-    .btn_choice_personalize>li:last-child {
-        background-color: #279b3e;
-}
 
     .nbpersonnes_item_personalize, .choix_mode_calcul_personalize {
         background-color: #248100;
@@ -498,40 +583,24 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         text-decoration: none;
     }
 
-    .btn_choice_personalize li:nth-child(odd) {
-        background-color:  #E4FDB8;
-        /*text-shadow: 1px 1px 2px rgba(150, 150, 150, 1);*/
-        cursor:pointer;
-        /*transition*/
-        -webkit-transition:all 1s ease;
-           -moz-transition:all 1s ease;
-             -o-transition:all 1s ease;
-                transition:all 1s ease;
-    }
-
-        .btn_choice_personalize li:nth-child(odd):hover, .btn_choice_personalize li:nth-child(odd):focus, .btn_choice_personalize li:nth-child(odd):active {
-        background-color:#fff;
-    }
-
-    .btn_choice_personalize li:nth-child(even){
-        background-color:#BEE27E;
+    .btn_choice_personalize li{
+        background-color:rgba(255, 255, 255, 0.25);
         /*text-shadow:1px 1px 2px rgba(150, 150, 150, 1);*/
         cursor:pointer;
         /*transition*/
-        -webkit-transition:all 0.4s ease;
-           -moz-transition:all 0.4s ease;
-             -o-transition:all 0.4s ease;
-                transition:all 0.4s ease;
+        -webkit-transition:all 0.6s ease;
+           -moz-transition:all 0.6s ease;
+             -o-transition:all 0.6s ease;
+                transition:all 0.6s ease;
     }
 
-    .btn_choice_personalize li:nth-child(even):hover, .btn_choice_personalize li:nth-child(even):focus, .btn_choice_personalize li:nth-child(even):active {
-        background-color:#DADADA;
+    .btn_choice_personalize li:hover, .btn_choice_personalize li:focus, .btn_choice_personalize li:active {
+        background-color:rgba(4, 194, 171, 0.68);
 
     }    
 
     a[onclick="connexionDunServeur();"] {
         font-size: 1.07em;
-        text-shadow: 1px 1px 2px rgba(255, 255, 255, 1);
         cursor:pointer;
         /*transition*/
         -webkit-transition:text-shadow 0.4s ease, font-size 0.2s ease-in;
@@ -549,6 +618,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
     .select_personalize, .product_spec_personalize, .select_lang_personalize, .button_inscri_compte, .btn_choix_mode_calcul_division_personalize, .btn_choix_mode_calcul_part_personalize, .validerPaimentSelection_personalize, .choix_paiment_personne_btn_valider_personalize, .select_item_etape_personalize, .button_authen_compte_personalize, .button_inscri_compte_personalize, .button_ajout_vclient_personalize, .auth_form_personalize input{
+		width:175px;
         -moz-box-shadow: 0 1px 0 1px #666666;
         -webkit-box-shadow:  0 1px 0 1px #666666;
         box-shadow: 0 1px 0 1px #666666;
@@ -620,12 +690,15 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .footer_tarif_personalize {
         color:white;
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgba(12, 172, 179, 0.15)
         font-family:  "Trebuchet MS", Verdana, Sans serif;
         font-size:1em; 
     }
 
     .footer_tarif_total_personalize, .footer_tarif_nbCouvert_personalize, .footer_tarif_totalparPersonne_personalize, .footer_tarif_votreTable_personalize {
+		font-family: walkway_condensed_boldregular;
+		font-size: 1.4em;
+		letter-spacing: 0.01em;
     }
 
     .footer_tarif_total_personalize, .footer_tarif_nbCouvert_personalize {
@@ -666,8 +739,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     p#header_right_logo_slogan {
         font-family: 'walkway_boldregular',Verdana, Trebuchet MS, sans_serif;
-        font-size: 1.2em;
+        font-size: 1em;
         font-weight: bold;
+		text-shadow: 1px 1px 2px black;
 }
 
     .header_left_logo_id_personalize{
@@ -686,7 +760,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .header_right_logo_personalize p {
         /*background-color: #C90912;*/
         border-radius: 0.4em 0 0 0;
-        top: 1.39em;
+        top: 2.69em;
     }
 
     .header_left_logo_message_personalize{
@@ -713,8 +787,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         /*-------------------------------------------------------------------------------------------*/
 
         .footer_personalize {
-            background-color: #2C2C2C;
-            background-image: url(../img/textured_pper_opacity.png);
+            background-color: #1E0024;
             box-sizing: border-box;
             border-top:1px solid white;
             box-shadow: 0px 3px 19px #000; 
@@ -750,7 +823,8 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             border-bottom: 1px solid white;
             /*background: linear-gradient(to top, rgba(217, 158, 66, 0.2) -10%, rgba(178, 101, 23, 0.5) 79%);*/
             /*box-shadow: 0px 2px 13px rgba(0,0,0,0.7);*/
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.2);
+			width:900px!important;
         }
 
         .content_personalize .sous_categorie_cat_personalize {
@@ -788,9 +862,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }*/
 
         .content_list_categorie_personalize li a {
-            font-family:'tangerineregular', cursive, Trebuchet MS, Verdana, Sans serif;
-            font-size: 1.5em;
-            padding-top: 0.3em;
+            font-family: "dream_orphansbold",Trebuchet MS,Verdana,sans_serif;
+            font-size: 1em;
+            padding-top: 0.6em;
             color: rgba(255, 255, 255, 1);
             text-decoration: none;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
@@ -828,16 +902,17 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .content_globlal_zone_personalize .content_globlal_zone_personalize li,.content_globlal_zone_personalize .content_produit_titre_personalize, .choose_menu_item_titre_personalize, .menu_content_titre_personalize, .content_produit_personalize p, .info_prix_content_couverts_content_personalize, .info_prix_content_couverts_label_personalize, .info_prix_content_table_label_personalize, .info_prix_content_table_content_personalize, .btn_ajout_personalize {
-            color: rgba(61, 80, 80, 1);
-        font-family: Verdana, "Trebuchet MS",Verdana,sans_serif;
+         color: rgba(255, 255, 255, 1);
+        font-family: walkway_condensed_boldregular, Verdana, "Trebuchet MS",sans_serif;
         font-size: 0.8em;
-         font-weight: normal; 
-            text-align: left;
+        font-weight: normal; 
+		letter-spacing: 0.9px;
+        text-align: left;
         }
 
 
         .content_globlal_zone_personalize .content_produit_titre_personalize {
-            text-shadow: 0px 1px 1px white;
+            text-shadow: 0px 1px 1px black;
         }
 
         .recapitulatif_liste_choice_personnes_personalize  {
@@ -919,11 +994,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
         .content_produit_zone_personalize, .menu_item_personalize {
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(50,49,49,0.4);
             box-shadow: 0 3px 5px #000000;
             min-height: 66px;
             border-radius: 5px;
-            background-image: url(../img/textured_pper.png);
         }
 
         .menu_item_personalize:nth-child(even) {
@@ -943,14 +1017,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         p.content_produit_zone_right_prix, .choose_menu_item_prix, .menu_content_prix  {
-            color: rgba(61, 80, 80, 1);
-            font-family: "Verdana",Trebuchet MS,Verdana,sans_serif;
+            color: rgba(255, 255, 255, 1);
+            font-family: Trebuchet MS,Verdana,sans_serif;
+			font-style:italic;
+			font-size:0.9em;
 
         }
 
         p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
-            right:2.6em;
-            top:2.5em;
+            right:3.3em;
+            top:2.8em;
         }
 
         .recapitulatif_commande_personalize li {
@@ -983,10 +1059,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .content_produit_zone_left_personalize{
             border-style: none;
             background-repeat: no-repeat;
-            background-color: rgba(88, 85, 10, 0.15);
-            border-bottom-left-radius: 5px;
-            border-top-left-radius: 5px;
-            border-right: 1px dotted rgba(88, 85, 10, 1);
+            background-color: #049DB1;
+            border-bottom-left-radius: 3px;
+            border-top-left-radius: 3px;
+            border-right: 1px dotted rgba(255, 255, 255, 1);
             display: inline-block;
             width: 37px;
             min-height: 50px;
@@ -995,17 +1071,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             left: 0;
             margin-bottom: 15px;
             padding-bottom: 1em;
-            min-height: 50px;
             margin-top: 0px;
         }
 
         .content_produit_zone_right_personalize{
             border-style: none;
             background-repeat: no-repeat;
-            background-color: rgba(88, 85, 10, 0.15);
-            border-bottom-right-radius: 5px;
-            border-top-right-radius: 5px;
-            border-left: 1px dotted rgba(88, 85, 10, 1);
+            background-color: rgba(236, 0, 140, 1);
+            border-bottom-right-radius: 3px;
+            border-top-right-radius: 3px;
+            border-left: 1px dotted rgba(255, 255, 255, 1);
             display: inline-block;
             width: 37px;
             position: absolute;
@@ -1021,7 +1096,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             font-family:"Trebuchet MS",Verdana,sans_serif;
             background:transparent;
             border-style:none;
-            color:#58550A;
+            color:rgba(255,255,255,1);
             font-weight:bold;
             font-style:italic;
         }
@@ -1029,14 +1104,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         .recapitulatif_liste .content_produit_btn_left_personalize, .recapitulatif_liste .content_produit_btn_right_personalize{
             background: transparent;
             border-style: none;
-            color:#58550A;
+            color:rgba(255,255,255,1);
             font-weight: bold;
             font-style:italic;
         }
 
         .content_produit_btn_left_personalize {
             cursor: pointer;
-            padding-top: 20px;
+            padding-top: 23px;
             padding-left: 14px;
             position: relative;
             z-index: 97;
@@ -1046,7 +1121,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .content_produit_btn_right_personalize {
             cursor: pointer;
-            padding-top: 20px;
+            padding-top: 23px;
             padding-left: 14px;
             position: relative;
             z-index: 97;
@@ -1054,20 +1129,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         }
 
         .btn_recapitulatif_commande_personalize, .btn_valider_commande_personalize {
-            border: 1px solid #FFFFFF;
+           
+            
+            font-family: dream_orphansbold, Trebuchet MS,Verdana,sans_serif;
+			color: white;
+			 border: none;
             border-radius: 6px;
             box-shadow: 0 3px 10px #343434;
-            color: #343434;
-            font-family: "Trebuchet MS",Verdana,sans_serif;
-            /*font-weight: 900;*/
+			background: #066E77;
             text-align: center;
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#74a81f", endColorstr="#17722d"); /* Pour IE seulement et mode gradient ? linear */
-            background: -webkit-gradient(linear, left top, left bottom, from(rgba(80, 89, 63, 0.8)), to(rgb(223, 240, 155)));
-            background: -webkit-linear-gradient (rgba(80, 89, 63, 0.8) -30%, rgb(223, 240, 155) 145%);
-            background: -moz-linear-gradient(rgba(80, 89, 63, 0.8) -30%, rgb(223, 240, 155) 145%);
-            background: -o-linear-gradient(rgba(80, 89, 63, 0.8) -30%, rgb(223, 240, 155) 145%);
-            background: -ms-linear-gradient(rgba(80, 89, 63, 0.8) -30%, rgb(223, 240, 155) 145%); 
-            background: linear-gradient(rgba(80, 89, 63, 0.8) -30%, rgb(223, 240, 155) 145%);
+			letter-spacing: 0.03em;
         }
 
         .btn_recapitulatif_commande_recapitulatif_personalize{
@@ -1303,9 +1374,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     
 
     .content_titre_personalize {
-        font-family: 'tangerineregular', cursive, Trebuchet MS, Verdana, Sans serif;
-        font-size: 2.5em;
-        /*padding-bottom: 0.3em;*/
+        font-family: 'walkway_boldregular',Verdana, Trebuchet MS, sans_serif;
+        font-size: 1.3em;
+        padding-bottom: 0.3em;
         /*font-weight: bold;*/
         text-shadow: 0px 1px 3px rgba(0, 0, 0, 1);
         color: rgba(255, 255, 255, 0.9);
