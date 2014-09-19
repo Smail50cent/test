@@ -259,7 +259,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .header_personalize {
         width:100%;
-        height: 5.7em;
         background: #bed536; /* Old browsers */
         background: -moz-linear-gradient(top, #bed536 0%, #279b3e 100%); /* FF3.6+ */
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bed536), color-stop(100%,#279b3e)); /* Chrome,Safari4+ */
@@ -359,8 +358,16 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         background-color: #279b3e;
 }
 
-    .nbpersonnes_item_personalize, .choix_mode_calcul_personalize {
-        background-color: #248100;
+    .nbpersonnes_item_personalize, .choix_mode_calcul_personalize{
+		font-family: Trebuchet MS,Verdana,sans_serif !important;
+		width: 80%;
+		font-size: 0.9em;
+		margin: 0 auto;
+		color: white;
+		padding: 0.8em 0.5em;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 5px;
+}
 }
 
     .btn_choice_personalize, .choix_mode_calcul_personalize  {
@@ -431,7 +438,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         text-align:center;
     }
 
-    .select_personalize, .product_spec_personalize, .select_lang_personalize, .button_inscri_compte, .btn_choix_mode_calcul_division_personalize, .btn_choix_mode_calcul_part_personalize, .validerPaimentSelection_personalize, .choix_paiment_personne_btn_valider_personalize, .select_item_etape_personalize, .button_authen_compte_personalize, .button_inscri_compte_personalize, .button_ajout_vclient_personalize, .auth_form_personalize input{
+    .select_personalize, .product_spec_personalize, .select_lang_personalize, .button_inscri_compte, .btn_choix_mode_calcul_division_personalize, .btn_choix_mode_calcul_part_personalize, .validerPaimentSelection_personalize, .choix_paiment_personne_btn_valider_personalize, .select_item_etape_personalize, .button_authen_compte_personalize, .button_inscri_compte_personalize, .button_ajout_vclient_personalize, .auth_form_personalize input, .valider_produit_user_personalize, .select_user_personalize, .reglement_btn_valier_personalize {
         -moz-box-shadow: 0 1px 0 1px #666666;
         -webkit-box-shadow:  0 1px 0 1px #666666;
         box-shadow: 0 1px 0 1px #666666;
@@ -517,7 +524,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     .footer_tarif_total_label_personalize_personalize, .footer_tarif_nbCouvert_label_personalize, .footer_tarif_nbCouvert_value_personalize,  .footer_tarif_totalparPersonne_label_personalize, .footer_tarif_totalparPersonne_value_personalize, .footer_tarif_votreTable_label_personalize, .footer_tarif_votreTable_value_personalize{
         font-size: 1em;
-        font-weight: bold;
+        /*font-weight: bold;*/
         /*font-style: italic;*/
     }
 
@@ -549,7 +556,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
     p#header_right_logo_slogan {
         font-family: 'tangerineregular', Verdana, Trebuchet MS, sans_serif;
-        font-size: 1.4em;
+        font-size: 1.6em;
         font-weight: bold;
 }
 
@@ -558,7 +565,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     }
 
     .header_right_personalize {
-        height: 7.1em;
+        height: 9.1em;
         text-align: right;
         position: absolute;
         background-image: url(../img/olivier.png);
@@ -570,7 +577,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .header_right_logo_personalize p {
         /*background-color: #C90912;*/
         border-radius: 0.4em 0 0 0;
-        top: 1.39em;
+        top: 0.9em;
     }
 
     .header_left_logo_message_personalize{
@@ -673,7 +680,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
         .content_list_categorie_personalize li a {
             font-family:'tangerineregular', cursive, Trebuchet MS, Verdana, Sans serif;
-            font-size: 1.6em;
+            font-size: 1.5em;
             padding-top: 0.3em;
             color: rgba(255, 255, 255, 1);
             text-decoration: none;
@@ -806,7 +813,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
             background-color: rgba(0, 0, 0, 0.6);
             box-shadow: 0 3px 5px #000000;
             min-height: 66px;
-            max-height: 66px;
             border-radius: 5px;
             background-image: url(../img/textured_pper.png);
         }
@@ -1225,7 +1231,120 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         background-size: 9px;
         background-repeat: no-repeat;
     }
+	
+		.content_select_user_personalize {
+			color: white;
+			font-family: Verdana, "Trebuchet MS",Verdana,sans_serif;
+			font-size: 0.8em;
+			font-weight: normal;
+			text-align: center;
+	}
+	
+		.content_select_user_personalize ul{
+			padding:1em 0;
+	}
+	
+	.mode_de_reglement_item_pict_personalize {
+height: 20%!important;
+width: 20%!important;
+padding: 0.2em;
+background-color: white;
+border-radius: 3px;
+margin: 0.5em;
+vertical-align: middle;
 }
+
+	ul.mode_de_reglement_liste_personalize {
+		font-family: Trebuchet MS,Verdana,sans_serif !important;
+		width: 80%;
+		font-size: 0.9em;
+		margin: 0 auto;
+		color: white;
+		padding: 0.8em 0.5em;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 5px;
+}
+
+	.reglement_titre_personalize {
+		width: 80%;
+		margin: 1em auto;
+		padding: 0.5em;
+		font-family: Trebuchet MS,Verdana,sans_serif;
+		font-size: 0.9em;
+		text-align: center;
+		color: white;
+		background-color: rgba(0,0,0,0.6);
+		border-radius: 5px;
+}
+
+	.button.reglement_btn_valier_structure {
+border: none;
+background: none;
+font-weight: 700;
+color: #565656;
+box-shadow: none;
+cursor: pointer;
+-moz-box-shadow: 0 1px 0 1px #666666;
+-webkit-box-shadow: 0 1px 0 1px #666666;
+box-shadow: 0 1px 0 1px #666666;
+box-shadow: 0px 1px 0px 0px #666666;
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #f9f9f9), color-stop(1, #e9e9e9));
+background: -moz-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+background: -webkit-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+background: -o-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+background: -ms-linear-gradient(top, #f9f9f9 5%, #e9e9e9 100%);
+background: linear-gradient(to bottom, #f9f9f9 5%, #e9e9e9 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0);
+background-color: #f9f9f9;
+-moz-border-radius: 5px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+border: 1px solid #dcdcdc;
+cursor: pointer;
+color: #666666;
+font-family: Trebuchet MS;
+padding: 0.5em 3em;
+width: 60%;
+margin: 1em 20%;
+/* text-align: center; */
+font-size: 13px;
+font-weight: bold;
+text-decoration: none;
+text-shadow: 1px 1px 16px #ffffff;
+}
+
+button.reglement_btn_valier_personalize {
+	width:20%;
+	margin: 2em 40%;
+}
+
+
+@media all and (min-width: 560px) {
+
+	.reglement_titre_personalize, 	ul.mode_de_reglement_liste_personalize {
+		width: 40%;
+}
+}
+
+@media all and (min-width: 768px) {
+	.content_structure ul {
+		border-bottom-left-radius: 7px;
+		border-bottom-right-radius: 7px;
+}
+
+	.content_list_categorie_personalize li a {
+		font-size: 1.6em;
+}
+
+	.content_personalize .sous_categorie_cat_personalize li:last-child:hover {
+		border-bottom-left-radius: 7px;
+		border-bottom-right-radius: 7px;
+}
+
+
+}
+
+
 
 
 @media all and (min-width: 768px) and (max-width: 979px) {
@@ -1276,6 +1395,26 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
     .menu_item_personalize:nth-child(even), .content_globlal_zone_personalize li:nth-child(even) {
 
     }
+	
+	.header_right_structure {
+		background-size: 211px;
+		right: 19px;
+		top: -59px;
+}
+
+   	.header_right_logo_personalize p   {
+		top: 2.1em;
+		font-size: 2.4em;
+}
+
+	p#header_right_logo_slogan {
+		font-size: 1.8em;
+
+}
+
+.header_left_logo_message_personalize {
+		letter-spacing: 0.28em;
+}
 }
 
 
@@ -1296,8 +1435,6 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         margin: 0 auto;
 }
 
-
-
 .header_left_personalize {
         border-top: 90px solid #726D07;
         border-left: 0px solid transparent;
@@ -1307,6 +1444,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 .logo_header_font_personalize {
         font-size:3.5em !important;
+		margin-top: 1.1em;
 }
 
 .header_right_logo_slogan_personalize{
@@ -1314,13 +1452,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 }
 
 .header_left_logo_message_personalize {
-        letter-spacing: 0.53em;
-}
-
-.header_right_structure{
-        background-size: 211px;
-        right: 19px;
-        top: -32px;
+        letter-spacing: 0.65em;
 }
 
 .content_list_categorie_personalize li {
@@ -1333,6 +1465,10 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         margin-left: 0%;
 }
 
+    .header_right_logo_personalize p {
+        top: 1em;
+    }
+
 /*________________________NAVIGATION________________________*/
 
     .content_structure ul {
@@ -1344,9 +1480,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
          border-bottom-left-radius: 7px;
 }   
 
-    .content_list_categorie_personalize li:last-child :active, .content_list_categorie_personalize li:last-child :hover, .content_list_categorie_personalize li:last-child :focus {
+    /*.content_list_categorie_personalize li:last-child :active, .content_list_categorie_personalize li:last-child :hover, .content_list_categorie_personalize li:last-child :focus {
          border-bottom-right-radius: 7px;
-}
+}*/
 
 .content_list_categorie_personalize li a {
         font-size: 2.25em;
@@ -1359,12 +1495,14 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 
 
 p.header_left_logo_message_structure:last-child {
-        top: 10em;
+        top: 11.5em;
         left: 0;
 }
 
 .header_right_structure {
         height: 9.1em;
+		top: -14px;
+		background-size: 171px;
 }
 
 /*________________________MESSAGE D'ERREUR________________________*/
@@ -1376,7 +1514,7 @@ p.header_left_logo_message_structure:last-child {
 
 /*______________________Content_____________________*/
 
-    .menu_or_card_personalize {
+    .menu_or_card_personalize,  .content_select_user_personalize {
         background-color: rgba(255,255,255,0.2);
         width: 980px;
         margin: 0 auto;
@@ -1385,6 +1523,10 @@ p.header_left_logo_message_structure:last-child {
         border-radius: 7px;
         box-shadow: 0px 4px 10px #000;
 }
+
+	.content_select_user_personalize {
+		 width: 70%;
+	}
 
 .content_personalize {
         width: 980px;
