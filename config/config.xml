@@ -81,6 +81,8 @@
         <variable name="serveur.clientaccess.serviceDeleteCategorie">categorie/delete</variable>
         <variable name="serveur.clientaccess.serviceGetPrioriteCategorie">categorie/getPriorite</variable>
         <variable name="serveur.clientaccess.serviceUpdatePrioriteCategorie">categorie/updatePriority</variable>
+        <variable name="serveur.clientaccess.serviceUpdateCategorie">categorie/update</variable>
+        <variable name="serveur.clientaccess.serviceGetByIdForUpdateCategorie">categorie/getByid</variable>
         <variable name="serveur.clientaccess.serviceLangGetByActif">langues/getByActif</variable>
         <variable name="tableNameMajTables">majTables</variable>
         <variable name="tableNameEntreprise">entreprises</variable>

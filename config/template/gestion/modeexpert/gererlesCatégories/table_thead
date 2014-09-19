@@ -6,9 +6,14 @@
         <th class="section_tableaucategories_thead_zone_structure section_tableaucategories_thead_zone_personalize">{zone}</th>
         <th id="tr_actions_tablecategories" class="section_tableaucategories_thead_actions_structure section_tableaucategories_thead_actions_personalize"></th>
         <th class="section_tableaucategories_thead_save_structure section_tableaucategories_save_zone_personalize">
-            <button type="button" onclick="saveEtablissementCategorie({idetab});" class="btn btn-default btn-sm section_remove_update_button_personalize section_remove_update_button_strucutre">
+            <button type="button" onclick="saveEtablissementCategorie({idetab});" class="btn btn-default btn-sm section_save_button_personalize section_save_button_structure" title="{title_save_pop}" data-placement="top">
                 <span class="glyphicon glyphicon-floppy-save section_save_span_structure section_save_span_personalize"></span>
             </button>
+        </th>
+        <th class="section_tableaucategories_thead_save_structure section_tableaucategories_save_zone_personalize">
+                <span class="categorie_help_span categorie_help_span_structure categorie_help_span_personalize" title="{title_pop}" data-content="{msg_pop}" data-placement="left">
+                    <img src="img/gestion/help_viewer.png" height=29 width=29 class="img_help_categorie_structure img_help_categorie_personalize">
+                </span>
         </th>
     </tr>
 </thead>

@@ -18,4 +18,8 @@ interface CategorieService {
     public function getPriorite($id);
 
     public function updatePriority($categories);
+    
+    public function getByIdForUpdate($id);
+    
+    public function update(Categorie $categorie);
 }

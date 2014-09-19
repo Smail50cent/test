@@ -39,4 +39,12 @@ class CategorieServiceImpl implements CategorieService {
         return $this->categorieSrv->updatePriority($categories);
     }
 
+    public function getByIdForUpdate($id) {
+        return $this->categorieSrv->getByIdForUpdate($id);
+    }
+
+    public function update(Categorie $categorie) {
+        return $this->categorieSrv->update($categorie);
+    }
+
 }

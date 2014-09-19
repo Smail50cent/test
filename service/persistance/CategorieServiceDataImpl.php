@@ -128,6 +128,16 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                 if ($assoZones != null) {
                     $categorie->addZone($assoZones);
                 }
+                if ($assoEtablissements != null) {
+                    $etablissement = new Etablissement();
+                    $etablissement->setId($assoEtablissements);
+                    $etablissement->setNom($ligne->etablissement_nom);
+                    if ($assoZones != null) {
+                        $etablissement->setZone($assoZones);
+                    }
+                    $categorie->setAssocEtabZone($etablissement);
+                }
+
                 if (count($lignes) != ($i + 1)) {
                     if ($ligne->categorie_id != $lignes[$i + 1]->categorie_id) {
                         array_push($liste, $categorie);
@@ -154,6 +164,9 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                     $etablissement = new Etablissement();
                     $etablissement->setId($assoEtablissements);
                     $etablissement->setNom($ligne->etablissement_nom);
+                    if ($assoZones != null) {
+                        $etablissement->setZone($assoZones);
+                    }
                     $categorie->setAssocEtabZone($etablissement);
                 }
 
@@ -182,6 +195,9 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                     $etablissement = new Etablissement();
                     $etablissement->setId($assoEtablissements);
                     $etablissement->setNom($ligne->etablissement_nom);
+                    if ($assoZones != null) {
+                        $etablissement->setZone($assoZones);
+                    }
                     $categorie->setAssocEtabZone($etablissement);
                 }
 
@@ -299,6 +315,168 @@ OR (association_etablissement_categorie.`id_zone` IS NULL))");
                     . "AND id_etablissement = '" . $categories[$i]->getEtablissements()[0]->getId() . "' ");
         }
         return true;
+    }
+
+    public function getByIdForUpdate($id) {
+        $bdd = new ConnexionBDD();
+        $retour = $bdd->executeGeneric("SELECT
+etablissement.nom as etablissement_nom,
+categorie.id AS categorie_id,
+categorie.nom AS categorie_nom,
+association_etablissement_categorie.priorite AS categorie_priorite,
+souscategorie.ID AS souscategorie_ID,
+souscategorie.NOM AS souscategorie_NOM,
+souscategorie.priorite AS souscategorie_priorite,
+association_etablissement_categorie.id_etablissement AS association_etablissement_categorie_id_etablissement,
+association_etablissement_categorie.id_zone AS association_etablissement_categorie_id_zone
+FROM `categorie`
+LEFT JOIN souscategorie ON souscategorie.categorie_id = categorie.id
+LEFT JOIN association_etablissement_categorie ON association_etablissement_categorie.id_categorie = categorie.id
+LEFT JOIN etablissement ON etablissement.id = association_etablissement_categorie.id_etablissement
+WHERE categorie.id =" . $id);
+        return $this->parse($retour);
+    }
+
+    public function update(Categorie $categorie) {
+        $oldCat = $this->getByIdForUpdate($categorie->getId());
+        $bdd = new ConnexionBDD();
+        $up = 0;
+        try {
+            $bdd->beginTTransaction();
+            $up += $this->updateCategorie($categorie, $oldCat, $bdd);
+            $up += $this->updateAssociationEtablissementCategorie($categorie, $oldCat, $bdd);
+            $up += $this->updateSousCategorie($categorie, $oldCat, $bdd);
+            $bdd->commitTransaction();
+            return $up;
+        } catch (Exception $ex) {
+            $bdd->rollbackTransaction();
+        }
+
+    }
+
+    public function updateCategorie(Categorie $categorie, $oldCat, $bdd) {
+        $oldnom = $oldCat->nom;
+        $nom = $categorie->getNom();
+        $id = $categorie->getId();
+        $up = 0;
+        if (strcmp($nom, $oldnom) !== 0) {
+            $bdd->executeGeneric("UPDATE categorie "
+                    . "SET nom = '" . $nom . "' "
+                    . "WHERE id = '" . $id . "' ");
+            $up = 1;
+        }
+        return $up;
+    }
+
+    public function updateAssociationEtablissementCategorie(Categorie $categorie, $oldCat, $bdd) {
+        $idCategorie = $categorie->getId();
+        $etab = $oldCat->assocEtabZone;
+        $newEtab = $categorie->getEtablissements();
+        $oldEtab = array();
+        $reqSql = "";
+        $up = 0;
+
+        for ($j = 0; $j < count($etab); $j++) {
+            array_push($oldEtab, $etab[$j]);
+        }
+        if ($etab != null && $newEtab != null) {
+            for ($i = 0; $i < count($newEtab); $i++) {
+                $state = 0;
+                for ($j = 0; $j < count($oldEtab); $j++) {
+                    if ($newEtab[$i]->getId() == $oldEtab[$j]->id && $newEtab[$i]->getZones() == $oldEtab[$j]->zone) {
+                        $state = 1;
+                        unset($oldEtab[$j]);
+                        $oldEtab = array_values($oldEtab);
+                        break;
+                    }
+                }
+                if ($state == 0) {
+                    if ($newEtab[$i]->getZones() != null) {
+                        $reqSql .= " INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                                . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "','" . $newEtab[$i]->getZones() . "',"
+                                . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;";
+                    } else {
+                        $reqSql .= " INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                                . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "',NULL,"
+                                . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;";
+                    }
+                }
+            }
+            for ($j = 0; $j < count($oldEtab); $j++) {
+                if (empty($oldEtab[$j]->zone)) {
+                    $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
+                            . "AND `id_zone` IS NULL "
+                            . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+                    $up = 1;
+                } else {
+                    $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
+                            . "AND `id_zone` = '" . $oldEtab[$j]->zone . "' "
+                            . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+                    $up = 1;
+                }
+            }
+            if ($reqSql != "") {
+                $bdd->executeGeneric($reqSql);
+                $up = 1;
+            }
+        }
+        return $up;
+    }
+
+    public function updateSousCategorie(Categorie $categorie, $oldCat, $bdd) {
+        $idCategorie = $categorie->getId();
+        $newSouscategorie = $categorie->getSousCategories();
+        $souscategorie = $oldCat->souscategorie;
+        $oldsousCat = array();
+        $up = 0;
+
+        if ($souscategorie != null) {
+            for ($j = 0; $j < count($souscategorie); $j++) {
+                array_push($oldsousCat, $souscategorie[$j]);
+            }
+            if ($newSouscategorie != null) {
+                for ($i = 0; $i < count($newSouscategorie); $i++) {
+                    $state = 0;
+                    for ($j = 0; $j < count($oldsousCat); $j++) {
+                        if ($newSouscategorie[$i]->getNom() == $oldsousCat[$j]->nom) {
+                            $state = 1;
+                            unset($oldsousCat[$j]);
+                            $oldsousCat = array_values($oldsousCat);
+                            break;
+                        }
+                    }
+                    if ($state == 0) {
+                        $bdd->executeGeneric("INSERT INTO souscategorie(NOM,categorie_id,priorite)"
+                                . "VALUES('" . $newSouscategorie[$i]->getNom() . "',"
+                                . " '" . $idCategorie . "', '" . $newSouscategorie[$i]->getPriorite() . "') ");
+                        $up = 1;
+                    }
+                }
+                for ($j = 0; $j < count($oldsousCat); $j++) {
+                    $bdd->executeGeneric("DELETE FROM `souscategorie`"
+                            . "WHERE `NOM` = '" . $oldsousCat[$j]->nom . "' "
+                            . "AND `categorie_id` = '" . $idCategorie . "'");
+                    $up = 1;
+                }
+            } else {
+                $bdd->executeGeneric("DELETE FROM `souscategorie`"
+                        . "WHERE `categorie_id` = '" . $idCategorie . "'");
+                $up = 1;
+            }
+        } else {
+            for ($i = 0; $i < count($newSouscategorie); $i++) {
+                $bdd->executeGeneric("INSERT INTO souscategorie(NOM,categorie_id,priorite)"
+                        . "VALUES('" . $newSouscategorie[$i]->getNom() . "',"
+                        . " '" . $idCategorie . "', '" . $newSouscategorie[$i]->getPriorite() . "') ");
+                $up = 1;
+            }
+        }
     }
 
 }

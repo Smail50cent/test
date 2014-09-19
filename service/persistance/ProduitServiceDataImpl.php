@@ -736,7 +736,6 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             return true;
         } catch (Exception $ex) {
             $bdd->rollbackTransaction();
-            echo "Error During Produit UPDATE" . $ex->getMessage();
         }
     }
 
@@ -751,15 +750,10 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $produitId = $produit->getId();
 
         $newproduitNom = $produit->getNom();
-        echo $newproduitNom."<br>";
         $newcategorieId = $produit->getCategorie()->getId();
-        echo $newcategorieId."<br>";
         $newsouscategorieId = $produit->getSousCategorie()->getId();
-        echo $newsouscategorieId."<br>";
         $newtauxTvaid = $this->getTauxTvaId($produit->getTauxTva());
-        echo $newtauxTvaid."<br>";
-        $newlevel = $level+1;
-        echo $newlevel  ."<br>";
+        $newlevel = $level + 1;
         if (strcmp($newproduitNom, $produitNom) !== 0 || strcmp($newcategorieId, $categorieId) !== 0 || strcmp($newsouscategorieId, $souscategorieId) !== 0 || strcmp($newtauxTvaid, $tauxTvaid) !== 0) {
             $bdd->executeGeneric("UPDATE produit
             SET `NOM` = '" . $newproduitNom . "',
@@ -768,7 +762,7 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
             `TVA` = '" . $newtauxTvaid . "',
             `level` = '" . $newlevel . "'
             WHERE `ID` = '" . $produitId . "' ");
-        }else {
+        } else {
             $bdd->executeGeneric("UPDATE produit
             SET `level` = '" . $newlevel . "'
             WHERE `ID` = '" . $produitId . "' ");
@@ -782,14 +776,13 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $produitId = $produit->getId();
         $OldprixHT = $assoPrixProduit[0]->getPrixHt()->prix;
         $idOldprixHT = $assoPrixProduit[0]->getPrixHt()->id;
-        echo "new prix : ".$newassoPrixProduit[0]->getPrixHt()." old prix : ".$OldprixHT."\r\t";
         if ($assoPrixProduit != null && $newassoPrixProduit != null) {
             if ($OldprixHT != $newassoPrixProduit[0]->getPrixHt()) {
                 $idNewprixHT = $this->addPrix($newassoPrixProduit[0]->getPrixHt());
 
                 $bdd->executeGeneric("UPDATE association_produit_prix
                 SET `prixht_id` ='" . $idNewprixHT . "' "
-                        . " WHERE `prixht_id` = '".$idOldprixHT."' "
+                        . " WHERE `prixht_id` = '" . $idOldprixHT . "' "
                         . " AND produit_id = " . $produitId . " ");
 
                 $bdd->executeGeneric("DELETE FROM `prixHt` WHERE `id` = " . $assoPrixProduit[0]->getPrixHt()->id . " ");
@@ -822,10 +815,6 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
                     $bdd->executeGeneric("INSERT INTO `association_etablissement_produit`"
                             . "( `id_produit`, `id_etablissement`, `id_zone`) VALUES "
                             . "(" . $produitId . "," . $newetablissements[$i]->getId() . "," . $newetablissements[$i]->getZones() . ")");
-                } elseif (empty($oldEtab) && $state == 0) {
-                    $bdd->executeGeneric("INSERT INTO `association_etablissement_produit`"
-                            . "( `id_produit`, `id_etablissement`, `id_zone`) VALUES "
-                            . "(" . $produitId . "," . $newetablissements[$i]->getId() . "," . $newetablissements[$i]->getZones() . ")");
                 }
             }
             for ($j = 0; $j < count($oldEtab); $j++) {
@@ -849,35 +838,42 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $produitId = $produit->getId();
         $oldIngred = array();
 
-        for ($i = 0; $i < count($ingredients); $i++) {
-            array_push($oldIngred, $ingredients[$i]);
-        }
+        if ($ingredients != null) {
+            for ($i = 0; $i < count($ingredients); $i++) {
+                array_push($oldIngred, $ingredients[$i]);
+            }
 
-        if ($ingredients != null && $newingredients != null) {
-            for ($i = 0; $i < count($newingredients); $i++) {
-                $state = 0;
-                for ($j = 0; $j < count($oldIngred); $j++) {
-                    if ($newingredients[$i]->getId() == $oldIngred[$j]->ingredient) {
-                        $state = 1;
-                        unset($oldIngred[$j]);
-                        $oldIngred = array_values($oldIngred);
-                        break;
+            if ($newingredients != null) {
+                for ($i = 0; $i < count($newingredients); $i++) {
+                    $state = 0;
+                    for ($j = 0; $j < count($oldIngred); $j++) {
+                        if ($newingredients[$i]->getId() == $oldIngred[$j]->ingredient) {
+                            $state = 1;
+                            unset($oldIngred[$j]);
+                            $oldIngred = array_values($oldIngred);
+                            break;
+                        }
+                    }
+                    if ($state == 0) {
+                        $bdd->executeGeneric("INSERT INTO `association_produit_ingredient`"
+                                . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
+                                . "(" . $produitId . "," . $newingredients [$i]->getId() . ",1,0,1,0)");
                     }
                 }
-                if ($state == 0) {
-                    $bdd->executeGeneric("INSERT INTO `association_produit_ingredient`"
-                            . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
-                            . "(" . $produitId . "," . $newingredients [$i]->getId() . ",1,0,1,0)");
-                } elseif (empty($oldIngred) && $state == 0) {
-                    $bdd->executeGeneric("INSERT INTO `association_produit_ingredient`"
-                            . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
-                            . "(" . $produitId . "," . $newingredients [$i]->getId() . ",1,0,1,0)");
+                for ($j = 0; $j < count($oldIngred); $j++) {
+                    $bdd->executeGeneric("DELETE FROM `association_produit_ingredient`"
+                            . "WHERE `id_produit` = '" . $produitId . "' "
+                            . "AND `id_ingredient` = '" . $oldIngred[$j]->ingredient . "'");
                 }
-            }
-            for ($j = 0; $j < count($oldIngred); $j++) {
+            } else {
                 $bdd->executeGeneric("DELETE FROM `association_produit_ingredient`"
-                        . "WHERE `id_produit` = '" . $produitId . "' "
-                        . "AND `id_ingredient` = '" . $oldIngred[$j]->ingredient . "'");
+                        . "WHERE `id_ingredient` = '" . $oldIngred[$j]->ingredient . "'");
+            }
+        } else {
+            for ($i = 0; $i < count($newingredients); $i++) {
+                $bdd->executeGeneric("INSERT INTO `association_produit_ingredient`"
+                        . "(`id_produit`, `id_ingredient`, `isAdded`, `surcout`, `supprimable`, `isIngredientSup`) VALUES "
+                        . "(" . $produitId . "," . $newingredients [$i]->getId() . ",1,0,1,0)");
             }
         }
     }
@@ -889,35 +885,42 @@ association_etablissement_produit.id_etablissement = " . $idetablissement . " AN
         $produitId = $produit->getId();
         $oldOptions = array();
 
-        for ($i = 0; $i < count($options); $i++) {
-            array_push($oldOptions, $options[$i]);
-        }
+        if ($options != null) {
+            for ($i = 0; $i < count($options); $i++) {
+                array_push($oldOptions, $options[$i]);
+            }
 
-        if ($options != null && $newoptions != null) {
-            for ($i = 0; $i < count($newoptions); $i++) {
-                $state = 0;
-                for ($j = 0; $j < count($oldOptions); $j++) {
-                    if ($newoptions[$i]->getId() == $oldOptions[$j]->id) {
-                        $state = 1;
-                        unset($oldOptions[$j]);
-                        $oldOptions = array_values($oldOptions);
-                        break;
+            if ($newoptions != null) {
+                for ($i = 0; $i < count($newoptions); $i++) {
+                    $state = 0;
+                    for ($j = 0; $j < count($oldOptions); $j++) {
+                        if ($newoptions[$i]->getId() == $oldOptions[$j]->id) {
+                            $state = 1;
+                            unset($oldOptions[$j]);
+                            $oldOptions = array_values($oldOptions);
+                            break;
+                        }
+                    }
+                    if ($state == 0 || empty($oldOptions)) {
+                        $bdd->executeGeneric("INSERT INTO `association_produit_options`"
+                                . "(`produit_id`, `option_id`) VALUES "
+                                . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
                     }
                 }
-                if ($state == 0 || empty($oldOptions)) {
-                    $bdd->executeGeneric("INSERT INTO `association_produit_options`"
-                            . "(`produit_id`, `option_id`) VALUES "
-                            . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
-                } elseif (empty($oldOptions) && $state == 0) {
-                    $bdd->executeGeneric("INSERT INTO `association_produit_options`"
-                            . "(`produit_id`, `option_id`) VALUES "
-                            . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
+                for ($j = 0; $j < count($oldOptions); $j++) {
+                    $bdd->executeGeneric("DELETE FROM `association_produit_options`"
+                            . "WHERE `produit_id` = '" . $produitId . "' "
+                            . "AND `option_id` = '" . $oldOptions[$j]->id . "'");
                 }
-            }
-            for ($j = 0; $j < count($oldOptions); $j++) {
+            } else {
                 $bdd->executeGeneric("DELETE FROM `association_produit_options`"
-                        . "WHERE `produit_id` = '" . $produitId . "' "
-                        . "AND `option_id` = '" . $oldOptions[$j]->id . "'");
+                        . "WHERE `option_id` = '" . $oldOptions[$j]->id . "'");
+            }
+        } else {
+            for ($i = 0; $i < count($newoptions); $i++) {
+                $bdd->executeGeneric("INSERT INTO `association_produit_options`"
+                        . "(`produit_id`, `option_id`) VALUES "
+                        . "(" . $produitId . "," . $newoptions[$i]->getId() . ")");
             }
         }
     }

@@ -248,7 +248,7 @@ function onTemplateLoadFinish(etablissement) {
     if (etablissement.message != null && etablissement.message != "") {
         $("#header_left_logo_message_id").text(etablissement.message);
     } else {
-        $("#header_left_logo_message_id").text(etablissement.groupe.message);
+        //$("#header_left_logo_message_id").text(etablissement.groupe.message);
     }
     controller(etablissement);
     choosePrintFooter();
