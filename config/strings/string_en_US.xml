@@ -201,4 +201,9 @@
 	<string key="modeexpert.modal.confirm.buttonConf.categorie.delete">Yes</string>
 	<string key="modeexpert.modal.confirm.buttonCanc.categorie.delete">No</string>
 	<string key="modeexpert.modal.confirm.warningMsg.categorie.delete">Warning ! This action is irreversible !</string>
+	<string key="modeexpert.modal.confirm.title.categorie.update.priority">Update priority</string>
+	<string key="modeexpert.modal.confirm.message.categorie.update.priority">Are you sure you want to change priorities ?</string>
+	<string key="modeexpert.popover.title.help">help</string>
+	<string key="modeexpert.popover.categorie.message">priority : categories display order in the menu</string>
+	<string key="modeexpert.popover.title.save">save</string>
 </strings>

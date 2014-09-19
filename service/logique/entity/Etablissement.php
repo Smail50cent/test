@@ -17,6 +17,7 @@ class Etablissement {
     public $groupe;
     public $slogan;
     public $zones = array();
+    public $zone;
 
     public function getZones() {
         return $this->zones;
@@ -100,6 +101,14 @@ class Etablissement {
 
     public function setMessage($message) {
         $this->message = $message;
+    }
+
+    public function getZone() {
+        return $this->zone;
+    }
+
+    public function setZone($zone) {
+        $this->zone = $zone;
     }
 
 }

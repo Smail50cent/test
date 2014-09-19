@@ -1245,6 +1245,7 @@ function ConnexionServer() {
                     var etablissement = new Etablissement();
                     etablissement.setId(data[i].assocEtabZone[j].id);
                     etablissement.setNom(data[i].assocEtabZone[j].nom);
+                    etablissement.setZones(data[i].assocEtabZone[j].zone);
                     etablissements.push(etablissement);
                 }
                 categorie.setEtablissement(etablissements);
@@ -1266,8 +1267,27 @@ function ConnexionServer() {
     this.getPrioriteByEtablissment = function(method, id, param) {
         pAjax(null, {service: "serveur.clientaccess.serviceGetPrioriteCategorie", data: {idCat: id}}, method, param);
     };
-    this.updatePriority = function(method, categorie, param) {
+    this.updatePriorityCategorie = function(method, categorie, param) {
         categorie = JSON.stringify(categorie);
         pAjax(null, {service: "serveur.clientaccess.serviceUpdatePrioriteCategorie", data: {categorie: categorie}}, method, param);
+    };
+    this.getByIdForUpdateCategorie = function(method, id, param) {
+        pAjax(function(data, param, methodExecute) {
+            console.log(data);
+            var categorie = new Categorie();
+            categorie.setId(data.id);
+            categorie.setNom(data.nom);
+            categorie.setPriorite(data.priorite);
+            categorie.setEtablissement(data.etablissements);
+            categorie.setZone(data.zones);
+            categorie.setSousCategorie(data.souscategorie);
+            if (methodExecute != null) {
+                methodExecute(categorie, param);
+            }
+        }, {service: "serveur.clientaccess.serviceGetByIdForUpdateCategorie", data: {id: id}}, method, param);
+    };
+    this.updateCategorie = function(method, categorie, param) {
+        categorie = JSON.stringify(categorie);
+        pAjax(null, {service: "serveur.clientaccess.serviceUpdateCategorie", data: {categorie: categorie}}, method, param);
     };
 }

@@ -167,7 +167,7 @@
 	<string key="add.produit.alert.modifier.produit">Votre produit a été modifié avec succés</string>
 	<string key="add.produit.dialog.title.modifier.produit">Modifier le produit</string>
 	<string key="add.produit.alert.produit">Produit</string>
-	<string key="add.produit.alert.verify.produit.name">Choisissez un nom pour votre produit</string>
+	<string key="add.produit.alert.verify.produit.name">Choisissez un nom à votre produit</string>
 	<string key="add.produit.alert.verify.categorie">Choisissez une Catégorie et une Sous Catégorie</string>
 	<string key="add.produit.alert.ingredient">Ingrédient</string>
 	<string key="add.produit.alert.verify.ingredient">Attention vous n'avez pas choisie d'Ingrédient</string>
@@ -201,4 +201,9 @@
 	<string key="modeexpert.modal.confirm.buttonConf.categorie.delete">Oui</string>
 	<string key="modeexpert.modal.confirm.buttonCanc.categorie.delete">Non</string>
 	<string key="modeexpert.modal.confirm.warningMsg.categorie.delete">Attention ! Cette action est irréversible !</string>
+	<string key="modeexpert.modal.confirm.title.categorie.update.priority">Changer la priorité</string>
+	<string key="modeexpert.modal.confirm.message.categorie.update.priority">Voulez-vous vraiment changer les priorités ?</string>
+	<string key="modeexpert.popover.title.help">aide</string>
+	<string key="modeexpert.popover.categorie.message">priorité : ordre d'affichage des catégories dans le menu</string>
+	<string key="modeexpert.popover.title.save">enregistrer</string>
 </strings>
