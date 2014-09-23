@@ -7,7 +7,54 @@ and open the template in the editor.
     Created on : 5 juin 2014, 10:43:52
     Author     : OPTIPLEX 745
 */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 @font-face {
     font-family: 'lobster_1.3regular';
     src: url('./font/lobster_1.3-webfont.eot');
@@ -306,7 +353,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 /*_____________________________LOADING____________________________'*/
 
 .loading_pict_img_personalize {
-
+position:absolute;
+left:50%;
+top:50%;
 }
 
 /*_____________________________MESSAGE D'INFO____________________________'*/
@@ -481,17 +530,34 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
         text-decoration:none;
         text-shadow:1px 1px 16px #ffffff;
 		width: 150px;
-margin: 0.5em auto 0.8em auto;
-display: block;
-padding: 6px 4px;
+		margin: 0.5em auto 0.8em auto;
+		display: block;
+		padding: 6px 4px;
     }
+	
+	.navbar {
+		position: absolute!important;
+		min-height: 50px;
+		margin-bottom: 20px;
+		border: 1px solid transparent;
+		top: 0;
+		right: 0;
+		z-index: 99;
+		width: 50%;
+		text-align: center;
+		border-bottom-left-radius: 5px;
+}
 
 	.content_select_user_personalize {
 		color: white;
 		font-family: Verdana, "Trebuchet MS",Verdana,sans_serif;
 		font-size: 0.8em;
 		font-weight: normal;
+		background: rgba(255,255,255,0.2);
 		text-align: center;
+		border-radius: 3px;
+		border: 1px solid rgba(255,255,255,0.5);
+		box-shadow: 0px 1px 7px rgba(0,0,0,1);
 	}
 	 
 	 	ul.mode_de_reglement_liste_personalize {
@@ -618,7 +684,7 @@ padding: 6px 4px;
     }
 
     .select_personalize, .product_spec_personalize, .select_lang_personalize, .button_inscri_compte, .btn_choix_mode_calcul_division_personalize, .btn_choix_mode_calcul_part_personalize, .validerPaimentSelection_personalize, .choix_paiment_personne_btn_valider_personalize, .select_item_etape_personalize, .button_authen_compte_personalize, .button_inscri_compte_personalize, .button_ajout_vclient_personalize, .auth_form_personalize input{
-		width:175px;
+		width:195px;
         -moz-box-shadow: 0 1px 0 1px #666666;
         -webkit-box-shadow:  0 1px 0 1px #666666;
         box-shadow: 0 1px 0 1px #666666;
@@ -690,7 +756,7 @@ padding: 6px 4px;
 
     .footer_tarif_personalize {
         color:white;
-        background-color: rgba(12, 172, 179, 0.15);
+        background-color: rgba(6, 95, 99, 0.7);
         font-family:  "Trebuchet MS", Verdana, Sans serif;
         font-size:1em; 
     }
@@ -863,11 +929,15 @@ padding: 6px 4px;
 
         .content_list_categorie_personalize li a {
             font-family: "dream_orphansbold",Trebuchet MS,Verdana,sans_serif;
-            font-size: 1em;
-            padding-top: 0.6em;
+            font-size: 0.9em;
+            padding-top: 0.1em;
             color: rgba(255, 255, 255, 1);
             text-decoration: none;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			height:34px!important;
         }
 
 
@@ -918,6 +988,14 @@ padding: 6px 4px;
         .recapitulatif_liste_choice_personnes_personalize  {
             text-align: center;
         }
+		
+		.recapitulatif_liste_choice_personnes_personalize .content_produit_zone_right_personalize, .recapitulatif_liste_choice_personnes_personalize .content_produit_zone_left_personalize {
+			min-height: 58px;
+		}
+		
+		.recapitulatif_liste_choice_personnes_personalize .content_produit_zone_personalize {
+			padding-bottom: 0.5em;
+		}
 
         .btn_ajout_personalize {
             font-style: normal;
@@ -1004,9 +1082,9 @@ padding: 6px 4px;
 
         }
 
-        .btn_more__left_personalize {
-            width:700%;         /*--------------------------------------ZONE DE CLIQUAGE----------------------------------------*/
-        }
+        /*.btn_more__left_personalize {
+            width:700%;        
+        }*/
 
         .content_produit_zone_right_personalize {
             -khtml-user-select: all;
@@ -1032,6 +1110,10 @@ padding: 6px 4px;
         .recapitulatif_commande_personalize li {
             list-style-type: none;
         }
+
+		.recapitulatif_liste_choice_personnes_personalize li:last-child {
+			margin-bottom: 12em;
+		}
 
         .menu_content_prix_personalize  {
 
@@ -1142,7 +1224,7 @@ padding: 6px 4px;
         }
 
         .btn_recapitulatif_commande_recapitulatif_personalize{
-
+			background: rgb(197, 0, 174);
         }
 
         .btn_valider_commande_recap_personalize{
@@ -1414,18 +1496,34 @@ padding: 6px 4px;
 }
 
 @media all and (min-width: 768px) {
+
+	.navbar {
+		position: relative!important;
+		width:100%;
+}
 	.content_structure ul {
 		border-bottom-left-radius: 7px;
 		border-bottom-right-radius: 7px;
+		width:100%!important;
 }
 
 	.content_list_categorie_personalize li a {
-		font-size: 1.6em;
+		font-size: 0.85em;
 }
 
 	.content_personalize .sous_categorie_cat_personalize li:last-child:hover {
 		border-bottom-left-radius: 7px;
 		border-bottom-right-radius: 7px;
+}
+
+.menu_or_card_personalize {
+width: 102%;
+overflow-x: hidden;
+}
+
+.content_titre_personalize {
+	font-size: 2.1em;
+	
 }
 }
 
@@ -1435,7 +1533,7 @@ padding: 6px 4px;
 
    
     .header_left_personalize {
-        width: 200px;
+        width: 150px;
     }
 
     .logo_header_font_personalize {
@@ -1444,8 +1542,8 @@ padding: 6px 4px;
 
     .header_left_logo_personalize {
         position: relative;
-        left: 0.4em;
-        top: -6.4em;
+        left: 1.4em;
+        top: -4.1em;
     }
 
     .content_globlal_zone_personalize{
@@ -1455,11 +1553,16 @@ padding: 6px 4px;
 
     }
     .img_slide_personalize li {
-
+		width: 47%;
     }
 
     .recapitulatif_liste_personalize .content_produit_zone_personalize {
-
+		bottom: 6px;
+		margin: 0 30%;
+		padding: 0.6em;
+		position: absolute;
+		width: 40%;
+		z-index: 951;
     }
 
     .img_slide_personalize li ul li{

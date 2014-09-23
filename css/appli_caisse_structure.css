@@ -254,12 +254,7 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 }
 /*_____________________________LOADING____________________________'*/
 
-.loading_pict_img_structure {
-    width:220px;
-    margin: auto;
-    position: fixed;
-    z-index: 2500;
-}
+
 
 /*_____________________________MESSAGE D'INFO____________________________'*/
 
@@ -335,12 +330,9 @@ p.dialog_error_header_titre_structure, .dialog_info_header_titre_structure{
 /*____________________________________LOADING PICS___________________________________________*/
 
 .loading_pict_structure {
-    /*display: inline-block;*/
-    margin: 0 auto;
-    margin-top: 30%;
-    /*position: fixed;*/
-    z-index: 1001;
-    top: 0;
+position:absolute!important;
+top:50%!important;
+left:50%!important;
 }
 
 
