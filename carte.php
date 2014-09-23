@@ -1,7 +1,21 @@
 <?php include_once './header.php'; ?>
+<div class="navbar navbar-inverse " role="navigation">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+    </div>
+<div class="navbar-collapse collapse">
+     <!--ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize-->
+ <ul id="content_list_categorie_id" class=" nav navbar-nav" style="margin-top: 0;">
+</div>
+</div>
+</div>   
 <div id="content_id" class="content content_structure content_personalize">
-
-    <ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize" style="margin-top: 0;">
         <!--li><button></button></li-->
     </ul><p id="content_titre_id" class="content_titre content_titre_structure content_titre_personalize"></p>
     <div id="content_titre_categorie_id" class="content_titre_categorie content_titre_categorie_structure content_titre_categorie_personalize" >
