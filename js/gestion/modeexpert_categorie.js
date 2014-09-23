@@ -143,32 +143,34 @@ function validerAjoutCategorie() {
             if (data.hasOwnProperty("error")) {
                 console.log("error");
             } else {
-                getConnexion().getPrioriteByEtablissment(association, data);
-                function association(priorite) {
-                    console.log(data);
-                    if (categorie.getEtablissement() != null) {
-                        for (var j = 0; j < categorie.etablissement.length; j++) {
-                            var litbody = getGererlesCategoriesTableTbodyTr();
-                            litbody = paramValue(litbody, "idcat", data);
-                            litbody = paramValue(litbody, "nom", categorie.getNom());
-                            for (var i = 0; i < priorite.length; i++) {
-                                if (priorite[i].etablissement_id == categorie.etablissement[j].id) {
-                                    litbody = paramValue(litbody, "priorite", priorite[i].priorite);
-                                    break;
-                                }
-                            }
-                            litbody = paramValue(litbody, "etablissement", categorie.etablissement[j].nom);
-                            if (categorie.getEtablissement()[j].getZones() != null) {
-                                litbody = paramValue(litbody, "zone", categorie.etablissement[j].zones);
-                            } else {
-                                litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
-                            }
-                            $("#table_gererlescategories_all_" + categorie.etablissement[j].id).append(litbody);
-                        }
-                    }
-                }
+//                getConnexion().getPrioriteByEtablissment(association, data);
+//                function association(priorite) {
+//                    console.log(data);
+//                    if (categorie.getEtablissement() != null) {
+//                        for (var j = 0; j < categorie.etablissement.length; j++) {
+//                            var litbody = getGererlesCategoriesTableTbodyTr();
+//                            litbody = paramValue(litbody, "idcat", data);
+//                            litbody = paramValue(litbody, "nom", categorie.getNom());
+//                            for (var i = 0; i < priorite.length; i++) {
+//                                if (priorite[i].etablissement_id == categorie.etablissement[j].id) {
+//                                    litbody = paramValue(litbody, "priorite", priorite[i].priorite);
+//                                    break;
+//                                }
+//                            }
+//                            litbody = paramValue(litbody, "etablissement", categorie.etablissement[j].nom);
+//                            if (categorie.getEtablissement()[j].getZones() != null) {
+//                                litbody = paramValue(litbody, "zone", categorie.etablissement[j].zones);
+//                            } else {
+//                                litbody = paramValue(litbody, "zone", strings.getString("modeexpert.label.value.nonaffected"));
+//                            }
+//                            $("#table_gererlescategories_all_" + categorie.etablissement[j].id).append(litbody);
+//                        }
+//                    }
+//                }
+                LoadGestionCategories();
             }
             $('#myModal').modal('hide');
+            
         }
     }
 }
@@ -368,13 +370,15 @@ function validerUpdateCategorie(id) {
             if (data.hasOwnProperty("error")) {
                 console.log("error");
             } else {
-                if (data > 0) {
-                    $(".main").empty();
-                    LoadGestionCategories();
-                }
+                LoadGestionCategories();
+//                if (data > 0) {
+//                    $(".main").empty();
+//                    LoadGestionCategories();
+//                }
             }
         }
         $('#myModal').modal('hide');
         $(".modal-backdrop").remove();
+        
     }
 }

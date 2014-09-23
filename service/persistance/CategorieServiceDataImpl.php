@@ -351,7 +351,6 @@ WHERE categorie.id =" . $id);
         } catch (Exception $ex) {
             $bdd->rollbackTransaction();
         }
-
     }
 
     public function updateCategorie(Categorie $categorie, $oldCat, $bdd) {
@@ -376,56 +375,81 @@ WHERE categorie.id =" . $id);
         $reqSql = "";
         $up = 0;
 
-        for ($j = 0; $j < count($etab); $j++) {
-            array_push($oldEtab, $etab[$j]);
-        }
-        if ($etab != null && $newEtab != null) {
-            for ($i = 0; $i < count($newEtab); $i++) {
-                $state = 0;
-                for ($j = 0; $j < count($oldEtab); $j++) {
-                    if ($newEtab[$i]->getId() == $oldEtab[$j]->id && $newEtab[$i]->getZones() == $oldEtab[$j]->zone) {
-                        $state = 1;
-                        unset($oldEtab[$j]);
-                        $oldEtab = array_values($oldEtab);
-                        break;
+        if ($etab != null) {
+            for ($j = 0; $j < count($etab); $j++) {
+                array_push($oldEtab, $etab[$j]);
+            }
+            if ($newEtab != null) {
+                for ($i = 0; $i < count($newEtab); $i++) {
+                    $state = 0;
+                    for ($j = 0; $j < count($oldEtab); $j++) {
+                        if ($newEtab[$i]->getId() == $oldEtab[$j]->id && $newEtab[$i]->getZones() == $oldEtab[$j]->zone) {
+                            $state = 1;
+                            unset($oldEtab[$j]);
+                            $oldEtab = array_values($oldEtab);
+                            break;
+                        }
+                    }
+                    if ($state == 0) {
+                        if ($newEtab[$i]->getZones() != null) {
+                            $bdd->executeGeneric(" INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                                    . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "','" . $newEtab[$i]->getZones() . "',"
+                                    . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;");
+                            $up = 1;
+                        } else {
+                            $bdd->executeGeneric(" INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                                    . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "',NULL,"
+                                    . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;");
+                            $up = 1;
+                        }
                     }
                 }
-                if ($state == 0) {
-                    if ($newEtab[$i]->getZones() != null) {
-                        $reqSql .= " INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
-                                . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "','" . $newEtab[$i]->getZones() . "',"
-                                . " MAX(priorite)+1 
-                                    FROM association_etablissement_categorie
-                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
-                                    GROUP BY id_etablissement;";
+                for ($j = 0; $j < count($oldEtab); $j++) {
+                    if (empty($oldEtab[$j]->zone)) {
+                        $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
+                                . "AND `id_zone` IS NULL "
+                                . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+                        $up = 1;
                     } else {
-                        $reqSql .= " INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
-                                . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "',NULL,"
-                                . " MAX(priorite)+1 
-                                    FROM association_etablissement_categorie
-                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
-                                    GROUP BY id_etablissement;";
+                        $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
+                                . "AND `id_zone` = '" . $oldEtab[$j]->zone . "' "
+                                . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+                        $up = 1;
                     }
                 }
             }
-            for ($j = 0; $j < count($oldEtab); $j++) {
-                if (empty($oldEtab[$j]->zone)) {
-                    $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
-                            . "AND `id_zone` IS NULL "
-                            . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+        } else {
+            for ($i = 0; $i < count($newEtab); $i++) {
+                if ($newEtab[$i]->getZones() != null) {
+                    $bdd->executeGeneric(" INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                            . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "','" . $newEtab[$i]->getZones() . "',"
+                            . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;");
                     $up = 1;
                 } else {
-                    $bdd->executeGeneric("DELETE FROM `association_etablissement_categorie` WHERE `id_etablissement` = '" . $oldEtab[$j]->id . "' "
-                            . "AND `id_zone` = '" . $oldEtab[$j]->zone . "' "
-                            . "AND  `id_categorie` = '" . $idCategorie . "'  ");
+                    $bdd->executeGeneric(" INSERT INTO association_etablissement_categorie(id_categorie,id_etablissement,id_zone,priorite) "
+                            . "SELECT '" . $idCategorie . "','" . $newEtab[$i]->getId() . "',NULL,"
+                            . " MAX(priorite)+1 
+                                    FROM association_etablissement_categorie
+                                    WHERE id_etablissement = '" . $newEtab[$i]->getId() . "' 
+                                    GROUP BY id_etablissement;");
                     $up = 1;
                 }
             }
-            if ($reqSql != "") {
-                $bdd->executeGeneric($reqSql);
-                $up = 1;
-            }
         }
+//            if ($reqSql != "") {
+//                $bdd->executeGeneric($reqSql);
+//                $up = 1;
+//            }
+
         return $up;
     }
 
