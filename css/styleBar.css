@@ -11,50 +11,160 @@ and open the template in the editor.
    v2.0 | 20110126
    License: none (public domain)
 */
+/* Switching box model for all elements */
+* {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+
+/* Responsive Navigation styles begin here */
+[id="toggle-nav"] {display: none}
+
+@media (max-width: 767px) {
+
+	/* Theming nav */	
+	[id=navigation] ul {
+		position: absolute;
+		width: 70%;
+		top: 0; 
+		z-index: 100;
+		
+		/* translate closed nav with hardware acceleration */
+		-webkit-transform: translateX(-110%) translateZ(0);
+		-ms-transform: translateX(-110%) translateZ(0);
+		        transform: translateX(-110%) translateZ(0);
+		-webkit-transition: -webkit-transform .3s cubic-bezier(.72,.89,.28,1.39);
+		        transition: transform .3s cubic-bezier(.72,.89,.28,1.39);
+
+		/* global styles */
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	[id=navigation] ul li {
+		height:20%;
+	
+	}
+	
+	
+	[id=navigation] a {
+		font-size: 0.9em;
+		font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+		display: block;
+		padding: 1.2rem;
+		color: #fff;
+		background: #180036;
+		text-decoration: none;
+		margin-bottom: 2px;
+	}
+	[id=navigation] a:hover, 
+	[id=navigation] a:focus,
+	[id=navigation] a:active
+	{
+		background: #04A3A3;
+	}
+	
+	/* Theming opened nav */
+	/* handling clic with CSS3 checked */
+	[id="toggle-nav"]:checked ~ ul {
+		-webkit-transform: translateX(0) translateZ(0);
+		-ms-transform: translateX(0) translateZ(0);
+		        transform: translateX(0) translateZ(0);
+		background: rgb(142, 230, 12);		
+	}
+
+	/* Global styling nav button */	
+	[for="toggle-nav"] {
+		position: absolute;
+		color: white;
+		top: .3rem;
+		right: .3rem;
+		z-index: 100;
+		height: 4rem;
+		width: 4rem;
+		background-color: rgba(18, 178, 185, 1);
+		padding: 0;
+		outline: 0;
+		border: 2px solid #FFF;
+		border-radius: 13%;
+		cursor: pointer;
+		-webkit-tap-highlight-color: rgba(0,0,0,0.8);
+		-webkit-transition: -webkit-transform .2s;
+		transition: transform .2s;
+		width:38px;
+		height:38px;
+/* color: white; */
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+	
+	[for="toggle-nav"]::after, [for="toggle-nav"]::before {
+		content: "";
+		position: absolute;
+		top: 15%; right: 40%; bottom: 15%; left: 40%;
+		background-color: white;
+		border-radius: 10px;
+		-webkit-transition: -webkit-transform .2s;
+		        transition: transform .2s;
+	}
+	[for="toggle-nav"]::before {
+		top: 40%; right: 15%; bottom: 40%; left: 15%;
+	}
+	
+	
+	/* Theming opened nav button */	
+	[id="toggle-nav"]:checked + label,
+	[id="toggle-nav"]:checked + label::before {
+		-webkit-transform: rotate(90deg) translateZ(0);
+		-ms-transform: rotate(90deg) translateZ(0);
+		        transform: rotate(90deg) translateZ(0);
+	}
+	
+
+	/* Hide alternate text except from screen readers */
+	.visually-hidden {
+		position: absolute !important;
+		clip: rect(1px, 1px, 1px, 1px);
+		overflow: hidden;
+		height: 1px;
+		width: 1px;
+	}
+	
 }
-body {
-	line-height: 1;
+
+
+
+
+
+
+
+
+/* BONUS deco */
+
+/* orientation */
+@media (orientation: landscape) and (max-device-width: 767px) {
+	html,
+	body {
+		-webkit-text-size-adjust: 100%;
+	}
 }
-ol, ul {
-	list-style: none;
+
+pre {
+	-moz-tab-size: 4;
+    -o-tab-size: 4;
+	     tab-size: 4;
+    padding: 1em;
+    margin: auto 1em;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,.1);
+    background: rgba(255,255,255,.6);
+    white-space: pre-wrap;
+	word-wrap: break-word;
+	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+	line-height: 1em;
 }
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+
 @font-face {
     font-family: 'lobster_1.3regular';
     src: url('./font/lobster_1.3-webfont.eot');
@@ -476,19 +586,18 @@ top:50%;
     }
 
 
-    .header_left_personalize {
-        width: 100px;
-        border-top: 75px solid #049DB1;
-        border-left: 0px solid transparent;
-        border-right: 60px solid transparent;
-
+	.header_left_personalize {
+		width: 50%;
+		border-top: 75px solid #049DB1;
+		border-left: 0px solid transparent;
+		border-right: 37px solid transparent;
 }
 
     .header_left_logo_personalize { 
 		background-image: url(../img/logoSunriver.png);
 		background-repeat: no-repeat;
         position:relative;
-        left:0.2em;
+        left:0.5em;
         top:-4.1em;
 		height:57px;
 }
@@ -826,7 +935,7 @@ top:50%;
     .header_right_logo_personalize p {
         /*background-color: #C90912;*/
         border-radius: 0.4em 0 0 0;
-        top: 2.69em;
+        top: 2.65em;
     }
 
     .header_left_logo_message_personalize{
@@ -1074,7 +1183,7 @@ top:50%;
         .content_produit_zone_personalize, .menu_item_personalize {
             background-color: rgba(50,49,49,0.4);
             box-shadow: 0 3px 5px #000000;
-            min-height: 66px;
+            min-height: 59px;
             border-radius: 5px;
         }
 
@@ -1104,7 +1213,7 @@ top:50%;
 
         p.content_produit_zone_right_prix_personalize, .choose_menu_item_prix{
             right:3.3em;
-            top:2.8em;
+            top:2.5em;
         }
 
         .recapitulatif_commande_personalize li {
@@ -1464,6 +1573,7 @@ top:50%;
         color: rgba(255, 255, 255, 0.9);
         text-align: center;
         z-index: 10;
+		margin: 4.5em auto 0 auto;
         /* text-decoration: underline; */
 }
 
@@ -1497,14 +1607,10 @@ top:50%;
 
 @media all and (min-width: 768px) {
 
-	.navbar {
-		position: relative!important;
-		width:100%;
-}
+
 	.content_structure ul {
 		border-bottom-left-radius: 7px;
 		border-bottom-right-radius: 7px;
-		width:100%!important;
 }
 
 	.content_list_categorie_personalize li a {

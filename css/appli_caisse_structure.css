@@ -357,6 +357,7 @@ left:50%!important;
         margin-top:0;
         position:fixed;
         top:0;
+		left:0;
         z-index:98;
     }
 
@@ -612,9 +613,11 @@ left:50%!important;
             z-index: 7;
         }
 
+		/* Theming nav */	
+
         /*-----------------------------------------------NAVIGATION-------------------------------------------*/
         
-        .content_list_categorie_structure     {
+      /*  .content_list_categorie_structure     {
             width:100%;
             z-index: 99;
         }
@@ -653,7 +656,7 @@ left:50%!important;
 
         .content_list_categorie_structure li+li{
 
-        }
+        }*/
 
         /*-----------------------------------------------PAGE A LA CARTE-----------------------------------------------------*/
         .scrooll{
@@ -957,10 +960,10 @@ left:50%!important;
 
         .menu_or_card_structure, .recapitulatif_commande_structure {
             margin-top: -3em;
-            max-height: 400px;
-            padding-right: 1em;
-            width: 100%;
-            overflow: overlay;
+			max-height: 400px;
+			margin-right: 9em;
+			width: 100%;
+			overflow-y: auto;
         }
 
         .produit_cat_structure:first-child {
