@@ -77,10 +77,10 @@
             background-color:#000099;
         }*/
     img.link_add_product_img_structure.link_add_product_img_personalize {
-        margin-left: 46%;
-        margin-top: 1.5%;
-        margin-right: 50%;
-        float: none;
+        height: 10%;
+        width: 10%;
+        margin-bottom: -2.3em;
+        margin-left: 15.8em;
     }
     .content_produit_zone_default:hover {
         opacity: 1;
