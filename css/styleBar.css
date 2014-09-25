@@ -1531,7 +1531,7 @@ nav#navigation {
         width: 98%;
         display: table;
         table-layout: auto;
-        margin: 0 1%;
+        /*margin: 0 1%;*/
         /* width: 98%; */
         text-align: center;
 
