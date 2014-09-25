@@ -3,7 +3,7 @@
 <input type="checkbox" id="toggle-nav" title="menu">
 <label for="toggle-nav" onclick></label>
      <!--ul id="content_list_categorie_id" class="content_list_categorie content_list_categorie_structure content_list_categorie_personalize-->
- <ul id="content_list_categorie_id" class=" nav navbar-nav" style="margin-top: 0;">
+ <ul id="content_list_categorie_id" class=" content_list_categorie content_list_categorie_structure content_list_categorie_personalize" style="margin-top: 0;">
  </nav>   
 <div id="content_id" class="content content_structure content_personalize">
         <!--li><button></button></li-->

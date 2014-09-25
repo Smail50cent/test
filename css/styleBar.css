@@ -52,7 +52,7 @@ and open the template in the editor.
 	
 	[id=navigation] a {
 		font-size: 0.9em;
-		font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+		font-family: verdana, consolas, 'DejaVu Sans Mono', courier, monospace;
 		display: block;
 		padding: 1.2rem;
 		color: #fff;
@@ -79,24 +79,24 @@ and open the template in the editor.
 	/* Global styling nav button */	
 	[for="toggle-nav"] {
 		position: absolute;
-		color: white;
-		top: .3rem;
-		right: .3rem;
-		z-index: 100;
-		height: 4rem;
-		width: 4rem;
-		background-color: rgba(18, 178, 185, 1);
-		padding: 0;
-		outline: 0;
-		border: 2px solid #FFF;
-		border-radius: 13%;
-		cursor: pointer;
-		-webkit-tap-highlight-color: rgba(0,0,0,0.8);
-		-webkit-transition: -webkit-transform .2s;
-		transition: transform .2s;
-		width:38px;
-		height:38px;
-/* color: white; */
+        color: white;
+        top: .3rem;
+        right: .3rem;
+        z-index: 100;
+        height: 4rem;
+        width: 4rem;
+        background: rgba(51, 51, 51, 1);
+        padding: 0;
+        outline: 0;
+        border: 2px solid #3D3D3D;
+        border-radius: 3px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0,0,0,0.8);
+        -webkit-transition: -webkit-transform .2s;
+        transition: transform .2s;
+        width: 38px;
+        height: 38px;
+        /* color: white; */
 }
 	
 	[for="toggle-nav"]::after, [for="toggle-nav"]::before {
@@ -333,15 +333,7 @@ pre {
 
 
 
-    .content_list_categorie_personalize li :active, .content_list_categorie_personalize li :hover, .content_list_categorie_personalize li :focus {
-         /*color: #473117;
-         background-color: #efdbc2;*/
-         -webkit-transition: background-color .5s ease;
-         -moz-transition: background-color .5s ease;
-         -ms-transition: background-color .5s ease;
-         -o-transition: background-color .5s ease;
-         transition: background-color .5s ease;
-}
+
 
        
 
@@ -708,12 +700,7 @@ top:50%;
     .choose_lang_personalize p {
 }
 
-    .content_list_categorie_personalize ul  {
-        list-style-type:none; 
-        padding : 0 0.4em 0 0;
-        margin: 0em auto 7em auto;
-        /*margin-right: -1em;*/
-}
+
 
     .btn_choice_personalize li, .choix_mode_calcul_personalize  {
         font-family:  "Trebuchet MS", Verdana, Sans serif;
@@ -990,17 +977,7 @@ top:50%;
 
         /*-----------------------------------------------NAVIGATION-------------------------------------------*/
        
-        .content_list_categorie_personalize     {
-            height:40px;
-            display:flex;
-            margin-top:4.8em !important;
-            /*border-top: 1px dotted white;*/
-            border-bottom: 1px solid white;
-            /*background: linear-gradient(to top, rgba(217, 158, 66, 0.2) -10%, rgba(178, 101, 23, 0.5) 79%);*/
-            /*box-shadow: 0px 2px 13px rgba(0,0,0,0.7);*/
-            background: rgba(255, 255, 255, 0.2);
-			width:900px!important;
-        }
+
 
         .content_personalize .sous_categorie_cat_personalize {
             background-color: #5A442A;
@@ -1020,40 +997,17 @@ top:50%;
         .content_personalize  .sous_categorie_cat_personalize li a{
         }
 
-        .content_list_categorie_personalize li {
-            text-align:center;  
-            cursor: pointer;   
-            height: 39px;
-            -webkit-transition: all .5s ease;
-            -moz-transition: all .5s ease;
-            -ms-transition: all .5s ease;
-            -o-transition: all .5s ease;
-            transition: all .5s ease; 
-        }
+
 
            /*#content_list_categorie_id li :active {
             color: #473117;
             background-color: #efdbc2;
         }*/
 
-        .content_list_categorie_personalize li a {
-            font-family: "dream_orphansbold",Trebuchet MS,Verdana,sans_serif;
-            font-size: 0.9em;
-            padding-top: 0.1em;
-            color: rgba(255, 255, 255, 1);
-            text-decoration: none;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-			display: flex;
-			justify-content: center;
-			flex-direction: column;
-			height:34px!important;
-        }
 
 
 
-        .content_list_categorie_personalize li+li{
-            border-left:1px dotted rgba(255, 255, 255, 0.3);
-        }
+
 
         /*-----------------------------------------------PAGE A LA CARTE-----------------------------------------------------*/
         .scrooll{
@@ -1460,43 +1414,7 @@ top:50%;
             padding-top: 0;
             margin-top: 1em;
         }*/
-
-        .content_list_categorie_personalize li:link {
-            color: #473117;
-            background-color: #efdbc2;
-}
         
-
-
-        .content_list_categorie_personalize li:hover, .content_list_categorie_personalize li:focus {
-            /*color: #473117;*/
-            background-color: rgba(255, 255, 255, 0.2);
-            -webkit-transition: background-color .5s ease;
-            -moz-transition: background-color .5s ease;
-             -ms-transition: background-color .5s ease;
-            -o-transition: background-color .5s ease;
-             transition: background-color .5s ease;
-        }
-
-        .content_list_categorie_personalize li:first-child:link, .content_list_categorie_personalize li:first-child:hover, .content_list_categorie_personalize li:first-child:focus {
-            /*border-bottom-left-radius: 7px;*/
-            -webkit-transition: background-color .5s ease;
-            -moz-transition: background-color .5s ease;
-             -ms-transition: background-color .5s ease;
-            -o-transition: background-color .5s ease;
-             transition: background-color .5s ease;
-        }
-
-        .content_list_categorie_personalize li:last-child:link, .content_list_categorie_personalize li:last-child:hover, .content_list_categorie_personalize li:last-child:focus {
-            /*border-bottom-right-radius: 7px;*/
-            -webkit-transition: background-color .5s ease;
-            -moz-transition: background-color .5s ease;
-             -ms-transition: background-color .5s ease;
-            -o-transition: background-color .5s ease;
-             transition: background-color .5s ease;
-        }
-        
-
         .choose_menu_item_produits_personalize p {
             color: #FFFFFF;
             font-family: Verdana, "Trebuchet MS",sans_serif;
@@ -1527,18 +1445,6 @@ top:50%;
     
 
    /* @media  all and (max-width: 420px) {*/
-
-        .content_list_categorie_personalize .slide_button:nth-child(3) {
-   
-        }
-        .content_list_categorie_personalize .slide_button:nth-child(4) {
-
-        }
-        .content_list_categorie_personalize .slide_button:nth-child(5) {
-
-        }
-
-
 
     .ajouter_ingredient_box_personalize ul{
 
@@ -1608,27 +1514,67 @@ top:50%;
 @media all and (min-width: 768px) {
 
 
+/*_________________________  NAVIGATION    NAVIGATION    NAVIGATION    NAVIGATION    NAVIGATION   NAVIGATION    NAVIGATION    NAVIGATION  ______________________________*/
+
+nav#navigation {
+		z-index: 1000;
+        position: absolute;
+        width: 100%;
+        margin: -4.5em auto 0 auto;
+}
+
+.content_list_categorie_personalize {
+		background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+        padding: 0;
+        position: inherit;
+        width: 98%;
+        display: table;
+        table-layout: auto;
+        margin: 0 1%;
+        /* width: 98%; */
+        text-align: center;
+
+}
+
+ul.content_list_categorie_personalize li {
+        list-style-type: none;
+        padding: 0.5em 0;
+        display: table-cell;
+        text-align: center;
+}
+
+
+ul.content_list_categorie_personalize li a {
+        font-family: dream_orphansregular;
+        font-size: .9em;
+        color: white;
+        text-decoration: blink;
+        vertical-align: middle;
+}
+
+
+
+/*____________________________________________________________________________________________________________________________________________________________________*/
 	.content_structure ul {
 		border-bottom-left-radius: 7px;
 		border-bottom-right-radius: 7px;
 }
 
-	.content_list_categorie_personalize li a {
-		font-size: 0.85em;
-}
+
 
 	.content_personalize .sous_categorie_cat_personalize li:last-child:hover {
 		border-bottom-left-radius: 7px;
 		border-bottom-right-radius: 7px;
 }
 
-.menu_or_card_personalize {
-width: 102%;
-overflow-x: hidden;
+    .menu_or_card_personalize {
+        width: 98%;
+        overflow-x: hidden;
 }
 
-.content_titre_personalize {
-	font-size: 2.1em;
+    .content_titre_personalize {
+    	font-size: 2.1em;
 	
 }
 }
@@ -1735,9 +1681,7 @@ overflow-x: hidden;
         top: -32px;
 }
 
-.content_list_categorie_personalize li {
-        padding-bottom: 5px;
-}
+
 
 .header_left_logo_structure {
         top:-8.7em;  
@@ -1752,22 +1696,15 @@ overflow-x: hidden;
         border-bottom-right-radius: 7px;
 }
 
-    .content_list_categorie_personalize li:first-child :active, .content_list_categorie_personalize li:first-child :hover, .content_list_categorie_personalize li:first-child :focus {
-         border-bottom-left-radius: 7px;
-}   
+
 
     /*.content_list_categorie_personalize li:last-child :active, .content_list_categorie_personalize li:last-child :hover, .content_list_categorie_personalize li:last-child :focus {
          border-bottom-right-radius: 7px;
 }*/
 
-.content_list_categorie_personalize li a {
-        font-size: 2.25em;
-        padding-top: 0.1em;
-}
 
-.content_list_categorie_personalize li {
-        height: 36px;
-}
+
+
 
 
 p.header_left_logo_message_structure:last-child {
@@ -1805,10 +1742,7 @@ p.header_left_logo_message_structure:last-child {
         margin: 0 auto;
 }
 
-.content_list_categorie_personalize {
-        width: 980px;
-        margin-top: 0!important;
-}
+
 
 .content_globlal_zone_structure .content_produit_titre {
         width: 80%;

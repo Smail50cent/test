@@ -345,12 +345,7 @@ left:50%!important;
     * {
     }
 
-    body {
-        width:100%;
-        padding: 0;
-        margin:0;
-        height:0;        
-    }
+
 
     .header_structure {
         box-sizing: border-box;
@@ -1053,7 +1048,7 @@ left:50%!important;
 
    /* @media  all and (max-width: 420px) {*/
 
-        .content_list_categorie_structure .slide_button:nth-child(3) {
+      /*  .content_list_categorie_structure .slide_button:nth-child(3) {
             width:15%!important;     
         }
         .content_list_categorie_structure .slide_button:nth-child(4) {
@@ -1065,7 +1060,7 @@ left:50%!important;
 
         .content_list_categorie_structure li a{
 
-        }
+        }*/
 
     .ajouter_ingredient_box_structure ul{
 
@@ -1419,9 +1414,9 @@ left:50%!important;
 	top:-0.9em !important;
 }
 
-.content_list_categorie_structure li a {
+/*.content_list_categorie_structure li a {
 height: 34px;
-}
+}*/
 
 
 
@@ -1622,23 +1617,7 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 /*________________________________________________________________*/
 
 
-/*_________________titre______________________*/
 
-
-
-
-
-
-/*Navigation*/
-
-
-.content_list_categorie_structure {
-    width: 974px;
-}
-
-.content_list_categorie_structure {
-    position: initial;
-}
 
 /*.content_list_categorie_structure li {
     padding: 0 0.5em;
@@ -1648,13 +1627,9 @@ p.dialog_error_header_titre_personalize, .dialog_info_header_titre_personalize{
 margin-left: 0.2em;
 }
 
-.content_list_categorie_structure {
-margin-top: 0!important;
-}
 
-.content_list_categorie_structure li a {
-    height: 38px;
-}
+
+
 
 /*Items*/
 
@@ -1664,17 +1639,18 @@ margin-top: 0!important;
 	margin-left:7px;
 }
 
-.content_list_categorie_structure, .content_list_categorie_structure li {
+/*.content_list_categorie_structure, .content_list_categorie_structure li {
     height: 41px;
-}
+}*/
 
-.content_list_categorie_structure>li:first-child {
+/*.content_list_categorie_structure>li:first-child {
     border-bottom-left-radius: 7px;
 }
+*/
 
-.content_list_categorie_structure>li:last-child {
+/*.content_list_categorie_structure>li:last-child {
     border-bottom-right-radius: 7px;
-}
+}*/
 
 
 
@@ -1742,12 +1718,6 @@ input[value="La carte"] {
 .btn_ajout_ingredient_structure {
      max-width: 150px;
 }
-
-
-
-
-
-
 }
 
 

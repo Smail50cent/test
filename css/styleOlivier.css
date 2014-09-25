@@ -1,3 +1,171 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 5 juin 2014, 10:43:52
+    Author     : OPTIPLEX 745
+*/
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/* Switching box model for all elements */
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+
+/* Responsive Navigation styles begin here */
+[id="toggle-nav"] {display: none}
+
+@media (max-width: 767px) {
+
+    /* Theming nav */   
+    [id=navigation] ul {
+        position: absolute;
+        width: 70%;
+        top: 0; 
+        z-index: 100;
+        
+        /* translate closed nav with hardware acceleration */
+        -webkit-transform: translateX(-110%) translateZ(0);
+        -ms-transform: translateX(-110%) translateZ(0);
+                transform: translateX(-110%) translateZ(0);
+        -webkit-transition: -webkit-transform .3s cubic-bezier(.72,.89,.28,1.39);
+                transition: transform .3s cubic-bezier(.72,.89,.28,1.39);
+
+        /* global styles */
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    [id=navigation] ul li {
+        height:20%;
+    
+    }
+    
+    
+    [id=navigation] a {
+        font-size: 0.9em;
+        font-family: verdana, consolas, 'DejaVu Sans Mono', courier, monospace;
+        display: block;
+        padding: 1.2rem;
+        color: #fff;
+        background: #180036;
+        text-decoration: none;
+        margin-bottom: 2px;
+    }
+    [id=navigation] a:hover, 
+    [id=navigation] a:focus,
+    [id=navigation] a:active
+    {
+        background: #04A3A3;
+    }
+    
+    /* Theming opened nav */
+    /* handling clic with CSS3 checked */
+    [id="toggle-nav"]:checked ~ ul {
+        -webkit-transform: translateX(0) translateZ(0);
+        -ms-transform: translateX(0) translateZ(0);
+                transform: translateX(0) translateZ(0);
+        background: rgb(142, 230, 12);      
+    }
+
+    /* Global styling nav button */ 
+    [for="toggle-nav"] {
+        position: absolute;
+        color: white;
+        top: .3rem;
+        right: .3rem;
+        z-index: 100;
+        height: 4rem;
+        width: 4rem;
+        background: rgba(51, 51, 51, 1);
+        padding: 0;
+        outline: 0;
+        border: 2px solid #3D3D3D;
+        border-radius: 3px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0,0,0,0.8);
+        -webkit-transition: -webkit-transform .2s;
+        transition: transform .2s;
+        width: 38px;
+        height: 38px;
+        /* color: white; */
+}
+    
+    [for="toggle-nav"]::after, [for="toggle-nav"]::before {
+        content: "";
+        position: absolute;
+        top: 15%; right: 40%; bottom: 15%; left: 40%;
+        background-color: white;
+        border-radius: 10px;
+        -webkit-transition: -webkit-transform .2s;
+                transition: transform .2s;
+    }
+    [for="toggle-nav"]::before {
+        top: 40%; right: 15%; bottom: 40%; left: 15%;
+    }
+    
+    
+    /* Theming opened nav button */ 
+    [id="toggle-nav"]:checked + label,
+    [id="toggle-nav"]:checked + label::before {
+        -webkit-transform: rotate(90deg) translateZ(0);
+        -ms-transform: rotate(90deg) translateZ(0);
+                transform: rotate(90deg) translateZ(0);
+    }
+    
+
+    /* Hide alternate text except from screen readers */
+    .visually-hidden {
+        position: absolute !important;
+        clip: rect(1px, 1px, 1px, 1px);
+        overflow: hidden;
+        height: 1px;
+        width: 1px;
+    }
+    
+}
+
+
+
+
+
+
+
+
+/* BONUS deco */
+
+/* orientation */
+@media (orientation: landscape) and (max-device-width: 767px) {
+    html,
+    body {
+        -webkit-text-size-adjust: 100%;
+    }
+}
+
+pre {
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+         tab-size: 4;
+    padding: 1em;
+    margin: auto 1em;
+    border-radius: 6px;
+    border: 1px solid rgba(0,0,0,.1);
+    background: rgba(255,255,255,.6);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
+    line-height: 1em;
+}
+
+
 @font-face {
     font-family: 'lobster_1.3regular';
     src: url('./font/lobster_1.3-webfont.eot');
@@ -1341,6 +1509,44 @@ button.reglement_btn_valier_personalize {
 		border-bottom-right-radius: 7px;
 }
 
+/*_________________________  NAVIGATION    NAVIGATION    NAVIGATION    NAVIGATION    NAVIGATION   NAVIGATION    NAVIGATION    NAVIGATION  ______________________________*/
+
+nav#navigation {
+        z-index: 1000;
+        position: absolute;
+        width: 100%;
+        margin: -4.5em auto 0 auto;
+}
+
+.content_list_categorie_personalize {
+        background: rgba(255,255,255,0.5);
+        border-radius: 5px;
+        padding: 0;
+        position: inherit;
+        width: 98%;
+        display: table;
+        table-layout: auto;
+        margin: 0 1%;
+        /* width: 98%; */
+        text-align: center;
+
+}
+
+ul.content_list_categorie_personalize li {
+        list-style-type: none;
+        padding: 0.5em 0;
+        display: table-cell;
+        text-align: center;
+}
+
+
+ul.content_list_categorie_personalize li a {
+        font-family: dream_orphansregular;
+        font-size: .9em;
+        color: white;
+        text-decoration: blink;
+        vertical-align: middle;
+}
 
 }
 
