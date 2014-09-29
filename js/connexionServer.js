@@ -877,14 +877,8 @@ function ConnexionServer() {
     };
     this.deleteProduit = function(id) {
         pAjax(function(data, param, methodExecute) {
-            var liste = new Array();
-            if (data != null) {
-                for (var i = 0; i < data.length; i++) {
-                    liste.push(new TypeCommande(data[i].id, data[i].label, data[i].labelMenu, data[i].isActif, data[i].idInPageHtml));
-                }
-            }
             if (methodExecute != null) {
-                methodExecute(liste, param);
+                methodExecute(data, param);
             }
         }, {service: "serveur.clientaccess.serviceDeleteProduitV2", data: {ID: id}}, null, null);
     };
